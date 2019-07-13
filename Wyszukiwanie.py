@@ -1,4 +1,3 @@
-import random
 
 def wyszukiwanie_liniowe(lista, x):
     for i in range(len(lista)):
