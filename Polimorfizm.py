@@ -1,21 +1,21 @@
-#polimorifzm pozwala w różnych klasach implementować metody
-#o tej samej nazwie
+#polimorfizm umozliwia uzycie metod tej samej nazwy w roznych klasach
 
 class Ksztalt:
     def __init__(self, nazwa='Ksztalt'):
         self.nazwa = nazwa
 
     def pole(self):
-        print('Brak danych')
+        print('Brak danych na temat ', self.nazwa)
 
 class Trojkat(Ksztalt):
-    def __init__(self, nazwa='Trojkat', wysokosc=2, podstawa=2):
+    def __init__(self, nazwa='Trojkat', a=2, h=2):
         super().__init__(nazwa)
-        self.wysokosc = wysokosc
-        self.podstawa = podstawa
+        self.a = a
+        self.h = h
 
     def pole(self):
-        print(int(self.wysokosc*self.podstawa/2))
+        print('Pole figury ', self.nazwa)
+        print(self.a*self.h/2)
 
 class Prostokat(Ksztalt):
     def __init__(self, nazwa='Prostokat', a=2, b=2):
@@ -24,27 +24,35 @@ class Prostokat(Ksztalt):
         self.b = b
 
     def pole(self):
-        print(int(self.a*self.b))
+        print('Pole figury ', self.nazwa)
+        print(self.a*self.b)
 
 class Kwadrat():
-    def __init__(self, nazwa='Kwadarat', a=5):
+    def __init__(self, nazwa='Kwadrat', a=3):
         self.nazwa = nazwa
         self.a = a
 
     def pole(self):
-        print(int(self.a**2))
+        print('Pole figury ', self.nazwa)
+        print(self.a**2)
+
+def wyswietl_pole(lista):
+    for x in lista:
+        x.pole()
 
 ksztalt = Ksztalt()
-trojkat = Trojkat(3,4)
-prostokat = Prostokat(2,5)
-kwadrat = Kwadrat(8)
-
+trojkat = Trojkat()
+prostokat = Prostokat()
+kwadrat = Kwadrat()
+'''
 for x in (ksztalt, trojkat, prostokat, kwadrat):
+    print(type(x))
     x.pole()
-
-
-
-        
+'''
+lista = [ksztalt, trojkat, prostokat, kwadrat]
+wyswietl_pole(lista)
 
     
+
+
     
