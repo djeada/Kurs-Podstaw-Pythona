@@ -1,36 +1,38 @@
 import math
 
-def isprime(num):
-    for i in range(2, int(math.sqrt(num))):
-        if (num % i) == 0:
+#naiwny test pierwszosci
+def czyPierwsza(x):
+    for i in range(2,int(math.sqrt(x))+1):
+        if x % i == 0:
             return False
     return True
 
-def gen_primes(max_number):
-    for num1 in range(2, max_number):
-        if isprime(num1):
-            yield num1
+#znajdujemy wszystkie liczby pierwsze do n
+def genPierwszych(n):
+    for i in range(2,n+1):
+        if czyPierwsza(i):
+            yield i
 
-print(list(gen_primes(333)))
+print(list(genPierwszych(100)))
 
-
-class itPierwszych():
+#rozwiazanie za pomoca iteratora
+class itPierwszych:
     def __init__(self, n):
-        self.i = 0
+        self.i = 1
         self.n = n
-        
+
     def __iter__(self):
         return self
 
     def __next__(self):
-        while True:
-            self.i+=1
+        while 1:
+            self.i += 1
             if self.i > self.n:
                 raise StopIteration
-            if isprime(self.i):
+            if czyPierwsza(self.i):
                 return self.i
 
-print(list(itPierwszych(333)))
+print(list(itPierwszych(100)))
 
-
-
+        
+    
