@@ -1,11 +1,11 @@
-#watki to czesci programu ktore dzialaja jednoczesnie
-#istnieje w obrebie jednego procesu
-#wspodziela zasoby danego procesu
+#watki to czesci programu ktore moga dzialac jednoczesnie
+#watki istnieja w obrebie danego procesu
+#wspoldziela zasoby
 
 from threading import Thread
 import time
 
-#wyswietlamy czas
+#wyswietla czas
 def licznik(nazwa, opoznienie, powtorzenia):
     print(nazwa, ' zostal uruchomiony')
     for i in range(powtorzenia):
@@ -15,8 +15,7 @@ def licznik(nazwa, opoznienie, powtorzenia):
 
 lista = []
 for i in range(3):
-    lista.append(Thread(target=licznik, args=('Licznik '+str(i+1),i+1,(i+i)**2)))
+    lista.append(Thread(target=licznik, args=('Licznik ' + str(i+1), i+1, (i+1)**2)))
 
 for x in lista:
     x.start()
-    
