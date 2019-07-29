@@ -2,14 +2,13 @@ import threading
 import time
 
 class mojWatek(threading.Thread):
- 
-    def __init__(self, nazwa = 'Watek', opoznienie = 1, powtorzenia = 3):
-        threading.Thread .__init__(self)
- 
+    def __init__(self, nazwa='Watek',opoznienie=1,powtorzenia=3):
+        threading.Thread.__init__(self)
+
         self.nazwa = nazwa
-        self.powtorzenia = powtorzenia
         self.opoznienie = opoznienie
- 
+        self.powtorzenia = powtorzenia
+
     def run(self):
         print(self.nazwa, ' rozpoczyna dzialanie')
         for i in range(self.powtorzenia):
@@ -17,10 +16,11 @@ class mojWatek(threading.Thread):
             time.sleep(self.opoznienie)
         print(self.nazwa, ' konczy dzialanie')
 
-print('Tworze dwa watki')
+print('tworzymy dwa watki')
 watek1 = mojWatek('Watek 1', 1, 8)
 watek2 = mojWatek('Watek 2', 2, 3)
 watek1.start()
 watek2.start()
-
-print('Na razie')
+watek1.join()
+watek2.join()
+print('konczymy ta impreze')
