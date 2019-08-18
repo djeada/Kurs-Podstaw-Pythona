@@ -1,18 +1,14 @@
 import tkinter
 
 root = tkinter.Tk()
- 
-# sticky defines how the widget expands (N, NE, E, SE,
-# S, SW, W, NW)
-# padx and pady provide padding around the widget above
-# and below it
+root.geometry('480x480')
 
-tkinter.Label(root, text=" Name").grid(row=0, sticky=tkinter.W, padx=4)
-tkinter.Entry(root).grid(row=0, column=1, sticky=tkinter.W, pady=4)
- 
-tkinter.Label(root, text="Last Name").grid(row=1, sticky=tkinter.W, padx=4)
-tkinter.Entry(root).grid(row=1, column=1, sticky=tkinter.E, pady=4)
- 
-tkinter.Button(root, text="Submit").grid(row=3)
- 
+tkinter.Label(root, text='Login').grid(row=0,column=0,padx=2,pady=2)
+tkinter.Entry(root).grid(row=0,column=1)
+
+tkinter.Label(root, text='Haslo').grid(row=1,column=0,padx=2,pady=2)
+tkinter.Entry(root).grid(row=1,column=1)
+
+tkinter.Button(root,text='Wyslij').grid(row=2)
+
 root.mainloop()
