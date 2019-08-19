@@ -3,26 +3,33 @@ import tkinter
 root = tkinter.Tk()
 root.geometry('480x480')
 
-def funkcjaPrzycisku():
-    print('Wcisnieto przycisk', )
+def funkcjaPrzycisku1():
+    print('Wcisnieto Przycisk1')
 
-def funkcjaZdarzenia(event):
-    print('Wcisnieto Zdarzenie')
+def lewy(event):
+    print('Na przycisk2 kliknieto lewym przyciskim myszy')
 
-b = tkinter.Button(root,text='Przycisk1')
-b.pack()
-b.bind('<Button-1>',funkcjaZdarzenia)
+def prawy(event):
+    print('Na przycisk2 kliknieto prawym przyciskim myszy')
 
+def funkcjaPrzycisku3(event):
+    print('Wcisnieto Przycisk3')
 
-b2 = tkinter.Button(root,text='Przycisk2',command=funkcjaPrzycisku)
+def funkcjaOkna(event):
+    print('Kliknieto na okienko')
+
+b1 = tkinter.Button(root,text='Przycisk1',command=funkcjaPrzycisku1)
+b1.pack()
+
+b2 = tkinter.Button(root,text='Przycisk2')
+b2.bind('<Button-1>',lewy)
+b2.bind('<Button-3>',prawy)
 b2.pack()
 
 b3 = tkinter.Button(root,text='Przycisk3')
-
+b3.bind('<Button-3>',funkcjaPrzycisku3)
 b3.pack()
-b3.bind('<Button-3>',funkcjaZdarzenia)
 
-
-root.bind('<Button-3>',funkcjaZdarzenia)
+root.bind('<Button-3>',funkcjaOkna)
 
 root.mainloop()
