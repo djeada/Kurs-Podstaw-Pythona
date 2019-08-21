@@ -9,8 +9,8 @@ zdjecie = zdjecie.resize((150,100),Image.ANTIALIAS)
 ikonka = ImageTk.PhotoImage(zdjecie)
 tkinter.Label(root,image=ikonka).pack()
 
-canvas = tkinter.Canvas(root,width=300,height=300)
+canvas = tkinter.Canvas(root, width=300,height=300,bg='blue')
 canvas.pack()
-canvas.create_image(0,0,anchor=tkinter.NW,image=ikonka)
+canvas.create_image(30,15,anchor=tkinter.SW,image=ikonka)
 
 root.mainloop()
