@@ -3,28 +3,25 @@ import tkinter
 root = tkinter.Tk()
 root.geometry('480x480')
 
+glowneMenu = tkinter.Menu()
+root.config(menu=glowneMenu)
 
-def robot():
-    print('Jestem robotem')
+fileMenu = tkinter.Menu(glowneMenu)
+glowneMenu.add_cascade(label='File',menu=fileMenu)
+fileMenu.add_command(label='New File')
+fileMenu.add_command(label='Open')
+fileMenu.add_command(label='Open Module')
+fileMenu.add_separator()
+fileMenu.add_command(label='Recent Files')
 
-menu = tkinter.Menu()
-root.config(menu=menu)
+editMenu = tkinter.Menu(glowneMenu)
+glowneMenu.add_cascade(label='Edit',menu=editMenu)
+editMenu.add_command(label='Undo')
+editMenu.add_command(label='Redo')
 
-subMenu = tkinter.Menu(menu)
-menu.add_cascade(label='File',menu=subMenu)
-subMenu.add_command(label='New Project',command=robot)
-subMenu.add_command(label='HELP',command=robot)
-subMenu.add_separator()
-subMenu.add_command(label='New Project',command=robot)
-
-editMenu = tkinter.Menu(menu)
-menu.add_cascade(label='Edit',menu=editMenu)
-editMenu.add_command(label='New Project',command=robot)
-editMenu.add_command(label='HELP',command=robot)
-editMenu.add_separator()
-editMenu.add_command(label='New Project',command=robot)
-
-
-
+podMenu = tkinter.Menu(editMenu)
+editMenu.add_cascade(label='Male',menu=podMenu)
+podMenu.add_command(label='Undo')
+podMenu.add_command(label='Redo')
 
 root.mainloop()
