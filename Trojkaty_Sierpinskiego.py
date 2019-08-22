@@ -1,28 +1,36 @@
 import turtle
+import random
 
-def draw_triangle(points, color, my_turtle):
-    my_turtle.fillcolor(color)
-    my_turtle.up()
-    my_turtle.goto(points[0][0],points[0][1])
-    my_turtle.down()
-    my_turtle.begin_fill()
-    my_turtle.goto(points[1][0], points[1][1])
-    my_turtle.goto(points[2][0], points[2][1])
-    my_turtle.goto(points[0][0], points[0][1])
-    my_turtle.end_fill()
+def przesuniecie(zolwik, x, y):
+    zolwik.up()
+    zolwik.goto(x,y)
+    zolwik.down()
 
-def get_mid(p1, p2):
-    return ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
+def rysuj_trojkat(zolwik, punkty, kolor):
+    przesuniecie(zolwik,punkty[0][0],punkty[0][1])
+    zolwik.fillcolor(kolor)
+    zolwik.begin_fill()
+    zolwik.goto(punkty[1][0],punkty[1][1])
+    zolwik.goto(punkty[2][0],punkty[2][1])
+    zolwik.goto(punkty[0][0],punkty[0][1])
+    zolwik.end_fill()
 
-def sierpinski(points, degree, my_turtle):
-            color_map = ['blue', 'red', 'green', 'white', 'yellow','violet', 'orange']
-            draw_triangle(points, color_map[degree], my_turtle)
-            if degree > 0:
-                sierpinski([points[0],get_mid(points[0], points[1]),get_mid(points[0], points[2])],degree-1, my_turtle)
-                sierpinski([points[1],get_mid(points[0], points[1]),get_mid(points[1], points[2])],degree-1, my_turtle)
-                sierpinski([points[2],get_mid(points[2], points[1]),get_mid(points[0], points[2])],degree-1, my_turtle)
+def wyznacz_srodek(p1,p2):
+    return ((p1[0]+p2[0])/2,(p1[1]+p2[1])/2)
 
-my_turtle = turtle.Turtle()
-my_points = [[-100, -50], [0, 100], [100, -50]]
-sierpinski(my_points, 6, my_turtle)
+def sierpinski(zolwik, punkty, stopnie):
+    lista_kolorow = ['red', 'violet', 'green', 'blue', 'grey', 'orange', 'yellow']
+    rysuj_trojkat(zolwik, punkty, lista_kolorow[random.randint(0,len(lista_kolorow)-1)])
+    if stopnie > 0:
+        sierpinski(zolwik, (punkty[0],wyznacz_srodek(punkty[0],punkty[1]),wyznacz_srodek(punkty[0],punkty[2])),stopnie-1)
+        sierpinski(zolwik, (punkty[1],wyznacz_srodek(punkty[0],punkty[1]),wyznacz_srodek(punkty[1],punkty[2])),stopnie-1)
+        sierpinski(zolwik, (punkty[2],wyznacz_srodek(punkty[2],punkty[1]),wyznacz_srodek(punkty[0],punkty[2])),stopnie-1)
+
+zolwik = turtle.Turtle()
+zolwik.speed(0)
+
+lista_punktow = [[-200,-100],[0,200],[200,-100]]
+
+sierpinski(zolwik,lista_punktow,3)
+
 turtle.exitonclick()
