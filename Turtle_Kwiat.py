@@ -1,26 +1,24 @@
-import math
 import turtle
 
-def draw_arc(b,circumfrence):
-    n=int(circumfrence/2) 
-    l=circumfrence/n
+def rysuj_luk(zolwik, dlugosc):
+    n = int(dlugosc/2)
     for i in range(n):
-        b.fd(l)
-        b.lt(60/n)
+        zolwik.forward(dlugosc/n)
+        zolwik.left(60/n)
 
-def draw_petal(b,r):
-    draw_arc(b,r)
-    b.lt(120)
-    draw_arc(b,r)
+def rysuj_platek(zolwik, dlugosc):
+    rysuj_luk(zolwik, dlugosc)
+    zolwik.left(120)
+    rysuj_luk(zolwik, dlugosc)
 
-def narysuj_kwiatek(t, dlugosc, ilosc):
+def rysuj_kwiat(zolwik, dlugosc, ilosc):
     for i in range(ilosc):
-        draw_petal(t,dlugosc)
-        t.left(int(180/ilosc))
+        rysuj_platek(zolwik, dlugosc)
+        zolwik.left(360/ilosc)
 
-bob=turtle.Turtle()
-bob.speed(0)
+zolwik = turtle.Turtle()
+zolwik.speed(0)
 
-narysuj_kwiatek(bob,radius,8)
+rysuj_kwiat(zolwik, 100, 16)
 
 turtle.exitonclick()
