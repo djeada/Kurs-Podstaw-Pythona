@@ -4,16 +4,15 @@ import sympy
 import scipy.misc
 
 x = sympy.Symbol('x')
-print(sympy.diff(3*x**2+1,x))
+print(sympy.diff(5*pow(x,2)-x+16,x))
 
-def function(x):
-    return 3*x**2 + 1
+def funkcja(x):
+    return 5*pow(x,2)-x+16
 
-print(scipy.misc.derivative(function,2.0))
+print(scipy.misc.derivative(funkcja,1))
 
 z = numpy.linspace(-5,5)
 
-pyplot.plot(z,function(z))
-pyplot.plot(z,scipy.misc.derivative(function,z))
+pyplot.plot(z,funkcja(z))
+pyplot.plot(z,scipy.misc.derivative(funkcja,z))
 pyplot.show()
-
