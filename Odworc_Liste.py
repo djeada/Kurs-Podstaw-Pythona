@@ -1,4 +1,3 @@
-import random
 class Wezel():
     def __init__(self,dane=None):
         self.dane = dane
@@ -55,7 +54,7 @@ class Lista():
                 return
             pozycja += 1
 
-    def odworc_iter(self):
+    def odwroc_iter(self):
         poprzednik = None
         licznik = self.head
         while licznik:
@@ -65,8 +64,7 @@ class Lista():
             licznik = nastepnik
         self.head = poprzednik
 
-    def odworc_rek(self):
-        
+    def odwroc_rek(self):
         def odwroc_rek_wew(licznik, poprzednik):
             if not licznik:
                 self.head = poprzednik
@@ -74,25 +72,32 @@ class Lista():
 
             nastepnik = licznik.nastepny
             licznik.nastepny = poprzednik
-            
             odwroc_rek_wew(nastepnik, licznik)
-            
         odwroc_rek_wew(licznik=self.head, poprzednik=None)
-       
-lista = Lista()
-for i in range(5):
-    lista.append(random.randint(0,30))
 
-print('Przed: ')
+lista = Lista()
+lista.append(3)
+lista.append(10)
+lista.append(7)
+lista.append(5)
+
+print('Lista przed odwroceniem: ')
 lista.wyswietl()
-lista.odworc_iter()
-print('Po: ')
+lista.odwroc_iter()
+print('Lista po odwroceniu iteracyjnym: ')
 lista.wyswietl()
-lista.odworc_iter()
-print('Po: ')
+lista.odwroc_rek()
+print('Lista po odwroceniu rekurencyjnym: ')
 lista.wyswietl()
-lista.odworc_rek()
-print('Po: ')
-lista.wyswietl()
+
+
+
+
+
+
+
+
+        
+
 
 
