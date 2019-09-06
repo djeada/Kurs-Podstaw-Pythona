@@ -57,9 +57,7 @@ class Lista():
     def usun_duplikaty(self):
         poprzednik = None
         licznik = self.head
-
         duplikaty = {}
-        
         while licznik:
             if licznik.dane in duplikaty:
                 poprzednik.nastepny = licznik.nastepny
@@ -67,26 +65,24 @@ class Lista():
                 duplikaty[licznik.dane] = 'xD'
                 poprzednik = licznik
             licznik = licznik.nastepny
-
-
+            
 lista = Lista()
 lista.append(1)
 lista.append(3)
 lista.append(1)
 lista.append(3)
 lista.append(1)
-lista.append(3)
+lista.append(7)
+lista.append(1)
 lista.append(8)
-lista.append(3)
 
-print('Przed: ')
+print('Lista poczatkowa: ')
 lista.wyswietl()
+
 lista.usun_duplikaty()
-print('Po: ')
+
+print('Lista bez duplikatow: ')
 lista.wyswietl()
-
-
-
         
         
 
