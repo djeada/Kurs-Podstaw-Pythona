@@ -1,3 +1,6 @@
+#kajak
+#19,9,8,9,91
+
 class Wezel():
     def __init__(self,dane=None):
         self.dane = dane
@@ -54,38 +57,55 @@ class Lista():
                 return
             pozycja += 1
 
-    def czy_palindrom1(self):
-        s = ''
-        p = self.head
-        while p:
-            s += str(p.dane)
-            p = p.nastepny
-        return s == s[::-1]
+    def czyPalindrom1(self):
+        napis = ''
+        licznik = self.head
+        while licznik:
+            napis += str(licznik.dane)
+            licznik = licznik.nastepny
+        return napis == napis[::-1]
 
-    def czy_palindrom2(self):
-        s = []
-        p = self.head
-        while p:
-            s.append(p.dane)
-            p = p.nastepny
-        while p:
-            dane = s.pop()
-            if p.dane != dane:
+    def czyPalindrom2(self):
+        stos = []
+        licznik = self.head
+        while licznik:
+            stos.append(licznik.dane)
+            licznik = licznik.nastepny
+        licznik = self.head
+        while licznik:
+            if licznik.dane != stos.pop():
                 return False
-            p = p.nastepny
+            licznik = licznik.nastepny
         return True
 
-lista = Lista()
-lista.append(2)
-lista.append(3)
-lista.append(2)
-
-print(lista.czy_palindrom2())
-
+lista1 = Lista()
 lista2 = Lista()
-lista2.append('a')
-lista2.append('c')
-lista2.append('a')
+lista3 = Lista()
+lista1.append('a')
+lista1.append('b')
+lista1.append('d')
+lista1.append('b')
+lista1.append('a')
 
-print(lista2.czy_palindrom2())
+lista2.append(1)
+lista2.append(3)
+lista2.append(8)
+lista2.append(3)
+lista2.append(1)
+
+lista3.append(1)
+lista3.append(5)
+lista3.append(8)
+lista3.append(3)
+lista3.append(1)
+
+
+print(lista1.czyPalindrom2())
+print(lista2.czyPalindrom2())
+print(lista3.czyPalindrom2())
+
+
+
+
+
 
