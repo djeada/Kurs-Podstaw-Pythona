@@ -101,44 +101,65 @@ class Lista():
             return self
         else:
             a, b = self.podziel()
-            return polacz(a.sortuj(), b.sortuj())
+            return scal(a.sortuj(), b.sortuj())
+ 
 
-def polacz(a, b):
+def scal(a,b):
     pozycja_a = pozycja_b = 0
 
     polaczone_listy = Lista()
-    dlugosc_polaczonych_list = a.dlugosc() + b.dlugosc()
+    dlugosc_poloczonych_list = a.dlugosc() + b.dlugosc()
 
-    while polaczone_listy.dlugosc() < dlugosc_polaczonych_list:
+    while polaczone_listy.dlugosc() < dlugosc_poloczonych_list:
         if a.pobierz(pozycja_a) <= b.pobierz(pozycja_b):
             polaczone_listy.append(a.pobierz(pozycja_a))
             pozycja_a += 1
         else:
             polaczone_listy.append(b.pobierz(pozycja_b))
             pozycja_b += 1
-            
+
         if pozycja_a == a.dlugosc():
             while pozycja_b < b.dlugosc():
                 polaczone_listy.append(b.pobierz(pozycja_b))
                 pozycja_b += 1
-                
+
         elif pozycja_b == b.dlugosc():
             while pozycja_a < a.dlugosc():
                 polaczone_listy.append(a.pobierz(pozycja_a))
                 pozycja_a += 1
+                
     return polaczone_listy
+
 
 lista = Lista()
 
-for i in range(10):
-    lista.append(random.randint(0,30))
+for i in range(30):
+    lista.append(random.randint(0,50))
 
-print('Przed posortowaniem: ')
+print('Przed sortowaniem: ')
 lista.wyswietl()
 
-print('Po posortowaniu: ')
+print('Posortowaniu: ')
 lista.sortuj().wyswietl()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     
 
