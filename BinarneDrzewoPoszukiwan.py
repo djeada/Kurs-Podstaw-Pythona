@@ -64,17 +64,3 @@ drzewo.dodaj(7)
 drzewo.dodaj(8)
 drzewo.dodaj(99)
 drzewo.wyswietl()
-
-
-
-
-        
-                
-    
-
-
-
-
-        
-                
-    
