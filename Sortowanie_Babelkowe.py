@@ -2,13 +2,12 @@ def sortowanie_babelkowe(lista):
     for i in range(len(lista)):
         for j in range(len(lista)-1-i):
             if lista[j] > lista[j+1]:
-                swap(lista[j],lista[j+1])
+                lista = swap(lista, j, j+1)
         printList(lista)
 
-def swap(a,b):
-    temp = a
-    a = b
-    b = temp
+def swap(lista, i, j): 
+    lista[i], lista[j] = lista[j], lista[i] 
+    return lista
 
 def printList(lista):
     for x in lista:
