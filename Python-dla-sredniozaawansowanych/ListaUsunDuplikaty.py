@@ -1,13 +1,14 @@
-class Wezel():
-    def __init__(self,dane=None):
+class Wezel:
+    def __init__(self, dane=None):
         self.dane = dane
         self.nastepny = None
 
-class Lista():
+
+class Lista:
     def __init__(self):
         self.head = Wezel()
 
-    def append(self,dane):
+    def append(self, dane):
         dostawiany_wezel = Wezel(dane)
         if self.head.dane == None:
             self.head = dostawiany_wezel
@@ -31,15 +32,15 @@ class Lista():
         wynik = 1
         while licznik.nastepny != None:
             licznik = licznik.nastepny
-            wynik +=1
+            wynik += 1
         return wynik
 
     def usun(self, i):
         if self.head.dane == None:
-            print('lista jest pusta!')
+            print("lista jest pusta!")
             return
         if i >= self.dlugosc() or i < 0:
-            print('zly indeks')
+            print("zly indeks")
             return
         if i == 0:
             self.head = self.head.nastepny
@@ -49,7 +50,7 @@ class Lista():
         while licznik.nastepny != None:
             poprzednik = licznik
             licznik = licznik.nastepny
-            if pozycja+1 == i:
+            if pozycja + 1 == i:
                 poprzednik.nastepny = licznik.nastepny
                 return
             pozycja += 1
@@ -62,10 +63,11 @@ class Lista():
             if licznik.dane in duplikaty:
                 poprzednik.nastepny = licznik.nastepny
             else:
-                duplikaty[licznik.dane] = 'xD'
+                duplikaty[licznik.dane] = "xD"
                 poprzednik = licznik
             licznik = licznik.nastepny
-            
+
+
 lista = Lista()
 lista.append(1)
 lista.append(3)
@@ -76,14 +78,10 @@ lista.append(7)
 lista.append(1)
 lista.append(8)
 
-print('Lista poczatkowa: ')
+print("Lista poczatkowa: ")
 lista.wyswietl()
 
 lista.usun_duplikaty()
 
-print('Lista bez duplikatow: ')
+print("Lista bez duplikatow: ")
 lista.wyswietl()
-        
-        
-
-

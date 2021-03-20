@@ -1,10 +1,11 @@
-'''
+"""
 Liczymy spolgloski w danym wyrazie
 sprawdzamy czy znak jest litera i jednoczesnie nie jest samogloska
 jesli tak zwiekszamy licznik o 1
-'''
+"""
 
-samogloski = 'aeiouy'
+samogloski = "aeiouy"
+
 
 def zlicz_spolgloski_iter(napis):
     wynik = 0
@@ -13,6 +14,7 @@ def zlicz_spolgloski_iter(napis):
             wynik += 1
     return wynik
 
+
 def zlicz_spolgloski_rek(napis):
     if len(napis) == 0:
         return 0
@@ -20,10 +22,9 @@ def zlicz_spolgloski_rek(napis):
         return 1 + zlicz_spolgloski_rek(napis[1:])
     return zlicz_spolgloski_rek(napis[1:])
 
-lista = ['tunczyk', 'Brokuly', 'James', 'Kapitan']
+
+lista = ["tunczyk", "Brokuly", "James", "Kapitan"]
 
 for x in lista:
     print(zlicz_spolgloski_iter(x))
     print(zlicz_spolgloski_rek(x))
-
-

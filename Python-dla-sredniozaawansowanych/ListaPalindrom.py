@@ -1,16 +1,18 @@
-#kajak
-#19,9,8,9,91
+# kajak
+# 19,9,8,9,91
 
-class Wezel():
-    def __init__(self,dane=None):
+
+class Wezel:
+    def __init__(self, dane=None):
         self.dane = dane
         self.nastepny = None
 
-class Lista():
+
+class Lista:
     def __init__(self):
         self.head = Wezel()
 
-    def append(self,dane):
+    def append(self, dane):
         dostawiany_wezel = Wezel(dane)
         if self.head.dane == None:
             self.head = dostawiany_wezel
@@ -34,15 +36,15 @@ class Lista():
         wynik = 1
         while licznik.nastepny != None:
             licznik = licznik.nastepny
-            wynik +=1
+            wynik += 1
         return wynik
 
     def usun(self, i):
         if self.head.dane == None:
-            print('lista jest pusta!')
+            print("lista jest pusta!")
             return
         if i >= self.dlugosc() or i < 0:
-            print('zly indeks')
+            print("zly indeks")
             return
         if i == 0:
             self.head = self.head.nastepny
@@ -52,13 +54,13 @@ class Lista():
         while licznik.nastepny != None:
             poprzednik = licznik
             licznik = licznik.nastepny
-            if pozycja+1 == i:
+            if pozycja + 1 == i:
                 poprzednik.nastepny = licznik.nastepny
                 return
             pozycja += 1
 
     def czyPalindrom1(self):
-        napis = ''
+        napis = ""
         licznik = self.head
         while licznik:
             napis += str(licznik.dane)
@@ -78,14 +80,15 @@ class Lista():
             licznik = licznik.nastepny
         return True
 
+
 lista1 = Lista()
 lista2 = Lista()
 lista3 = Lista()
-lista1.append('a')
-lista1.append('b')
-lista1.append('d')
-lista1.append('b')
-lista1.append('a')
+lista1.append("a")
+lista1.append("b")
+lista1.append("d")
+lista1.append("b")
+lista1.append("a")
 
 lista2.append(1)
 lista2.append(3)
@@ -103,9 +106,3 @@ lista3.append(1)
 print(lista1.czyPalindrom2())
 print(lista2.czyPalindrom2())
 print(lista3.czyPalindrom2())
-
-
-
-
-
-

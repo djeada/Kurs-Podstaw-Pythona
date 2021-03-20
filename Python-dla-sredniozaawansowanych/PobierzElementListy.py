@@ -1,13 +1,14 @@
-class Wezel():
-    def __init__(self,dane=None):
+class Wezel:
+    def __init__(self, dane=None):
         self.dane = dane
         self.nastepny = None
 
-class Lista():
+
+class Lista:
     def __init__(self):
         self.head = Wezel()
 
-    def append(self,dane):
+    def append(self, dane):
         dostawiany_wezel = Wezel(dane)
         if self.head.dane == None:
             self.head = dostawiany_wezel
@@ -31,15 +32,15 @@ class Lista():
         wynik = 1
         while licznik.nastepny != None:
             licznik = licznik.nastepny
-            wynik +=1
+            wynik += 1
         return wynik
 
     def usun(self, i):
         if self.head.dane == None:
-            print('lista jest pusta!')
+            print("lista jest pusta!")
             return
         if i >= self.dlugosc() or i < 0:
-            print('zly indeks')
+            print("zly indeks")
             return
         if i == 0:
             self.head = self.head.nastepny
@@ -49,17 +50,17 @@ class Lista():
         while licznik.nastepny != None:
             poprzednik = licznik
             licznik = licznik.nastepny
-            if pozycja+1 == i:
+            if pozycja + 1 == i:
                 poprzednik.nastepny = licznik.nastepny
                 return
             pozycja += 1
 
     def pobierz(self, x):
         if self.head.dane == None:
-            print('lista jest pusta!')
+            print("lista jest pusta!")
             return
         if x >= self.dlugosc() or x < 0:
-            print('zly indeks')
+            print("zly indeks")
             return
         licznik = self.head
         pozycja = 0
@@ -81,7 +82,3 @@ print(lista.pobierz(0))
 print(lista.pobierz(2))
 print(lista.pobierz(-11))
 print(lista.pobierz(100))
-
-
-
-

@@ -1,6 +1,6 @@
 import re
 
-'''
+"""
 . dowolny znak
 Przyklad: '.ala' Pasuja: fala, gala, mala, nala
 
@@ -13,25 +13,20 @@ Przyklad: '[^dm]am' Pasuja: sam, ram, gam, tam Niepasuja: dam, mam
 * wszelkie mozliwe kombinacje znakow
 Przyklad: 'k.*' Pasuja: kot, kocur, kalafior, katafrakci
 
-'''
+"""
 
-napis = 'James lubi jesc tunczyki jako jedzenie'
+napis = "James lubi jesc tunczyki jako jedzenie"
 
-wyrazenie = re.compile('j[^ ]*')
+wyrazenie = re.compile("j[^ ]*")
 
-#wzorzec i tekst musza byc takie same 
-if re.match('.*lubi.*', napis):
-    print('znaleziono za pomoca match')
+# wzorzec i tekst musza byc takie same
+if re.match(".*lubi.*", napis):
+    print("znaleziono za pomoca match")
 
-#wzorzec wystepuje w tekscie
-if re.search('[kwefjsb]u.i', napis):
-    print('znaleziono za pomoca search')
+# wzorzec wystepuje w tekscie
+if re.search("[kwefjsb]u.i", napis):
+    print("znaleziono za pomoca search")
 
-#znajdujemy wszystkie wystapienia wyrazenia w tekscie
-for i in re.findall(wyrazenie,napis):
+# znajdujemy wszystkie wystapienia wyrazenia w tekscie
+for i in re.findall(wyrazenie, napis):
     print(i)
-
-
-
-
-

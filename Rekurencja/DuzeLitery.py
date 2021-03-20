@@ -1,14 +1,16 @@
-'''
+"""
 Znajdujemy pierwsze wystapienie duzej litery w wyrazie
 Sukces: zwracamy duza litere
 Porażka: zwracamy -1
-'''
+"""
+
 
 def znajdz_duza_liter_iter(napis):
     for x in napis:
         if x.isupper():
             return x
     return -1
+
 
 def znajdz_duza_liter_rek(napis):
     if len(napis) == 0:
@@ -18,7 +20,8 @@ def znajdz_duza_liter_rek(napis):
     else:
         return znajdz_duza_liter_rek(napis[1:])
 
-lista = ['Marcepan', 'tunCzyk', 'grzegoRz', 'napis']
+
+lista = ["Marcepan", "tunCzyk", "grzegoRz", "napis"]
 
 for x in lista:
     print(znajdz_duza_liter_iter(x))

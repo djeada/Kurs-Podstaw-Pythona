@@ -1,7 +1,8 @@
-class Tunczyk():
+class Tunczyk:
     def __str__(self):
-        return 'Jestem Tunczykiem'
+        return "Jestem Tunczykiem"
 
-class Kot():
+
+class Kot:
     def __str__(self):
-        return 'Jestem Kotem'
+        return "Jestem Kotem"

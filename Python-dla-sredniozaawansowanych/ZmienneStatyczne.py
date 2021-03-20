@@ -1,35 +1,34 @@
 class Tunczyk:
-    #tworzymy zmienna statyczna
+    # tworzymy zmienna statyczna
     ilosc_tunczykow = 0
 
     def __init__(self, imie):
         self.imie = imie
         Tunczyk.ilosc_tunczykow += 1
 
-    #twirzymy metode statyczna
+    # twirzymy metode statyczna
     @staticmethod
     def getIloscTunczykow():
-        print('Aktualna liczba tunczykow to ', Tunczyk.ilosc_tunczykow)
+        print("Aktualna liczba tunczykow to ", Tunczyk.ilosc_tunczykow)
 
-    #nadpisujemy destruktor
+    # nadpisujemy destruktor
     def __del__(self):
-        print('Tunczyk ', self.imie, ' zostal usuniety.')
+        print("Tunczyk ", self.imie, " zostal usuniety.")
         Tunczyk.ilosc_tunczykow -= 1
 
-Tunczyk.getIloscTunczykow()
-
-tunczyk1 = Tunczyk('James')
 
 Tunczyk.getIloscTunczykow()
 
-tunczyk2 = Tunczyk('Greg')
+tunczyk1 = Tunczyk("James")
+
+Tunczyk.getIloscTunczykow()
+
+tunczyk2 = Tunczyk("Greg")
 
 Tunczyk.getIloscTunczykow()
 
 del tunczyk2
 
-#print(tunczyk2.name)
+# print(tunczyk2.name)
 
 Tunczyk.getIloscTunczykow()
-
-

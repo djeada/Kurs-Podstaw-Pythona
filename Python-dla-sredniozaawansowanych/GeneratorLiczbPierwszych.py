@@ -1,21 +1,23 @@
 import math
 
-#naiwny test pierwszosci
+# naiwny test pierwszosci
 def czyPierwsza(x):
-    for i in range(2,int(math.sqrt(x))+1):
+    for i in range(2, int(math.sqrt(x)) + 1):
         if x % i == 0:
             return False
     return True
 
-#znajdujemy wszystkie liczby pierwsze do n
+
+# znajdujemy wszystkie liczby pierwsze do n
 def genPierwszych(n):
-    for i in range(2,n+1):
+    for i in range(2, n + 1):
         if czyPierwsza(i):
             yield i
 
+
 print(list(genPierwszych(100)))
 
-#rozwiazanie za pomoca iteratora
+# rozwiazanie za pomoca iteratora
 class itPierwszych:
     def __init__(self, n):
         self.i = 1
@@ -32,7 +34,5 @@ class itPierwszych:
             if czyPierwsza(self.i):
                 return self.i
 
-print(list(itPierwszych(100)))
 
-        
-    
+print(list(itPierwszych(100)))
