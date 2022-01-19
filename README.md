@@ -51,3 +51,7 @@ Kurs podstaw Pythona
 * Bazy danych z SQLite
 * Tkinter
 * Logi
+
+## Dodatkowe materiały
+
+* https://braydie.gitbook.io/how-to-be-a-programmer/
