@@ -63,6 +63,9 @@ Linki:
 * https://github.com/pypa/virtualenv
 
 ### Dbanie o jakość kodu i lintowanie
+
+Poprawny z punktu widzenia interpretra kod można często napisać na wiele sposobów. Nawet jedna linia kodu może być zazwyczja zapisana na więcej niż jeden sposób. 
+
 ### Debugowanie
 
 Debuger to program, którego zadanie jest inspeckja stanu programu w trakcie wykonywanie. Możesz użyć debugera, aby zatrzymać wykonywanie programu, gdy w trakcie wykonywania osiągnięta zostanie określone przez ciebie miejsce w kodzie. Po zatrzymaniu programu debuger pokazuje aktualne wartości wszystkich zmiennych istniejących w danym punkcie programu. Dzięki temu możemy zweryfikować, czy nasze wyobrażenia o tym jak działa program mają potwierdzenie w rzeczywistości. 
