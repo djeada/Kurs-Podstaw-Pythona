@@ -3,8 +3,8 @@ Kurs podstaw Pythona
 
 ## Podstawy
 
-### Installation on Windows
-### Interactive Python console
+### Instalacja w systemie Windows
+### Interaktywna konsola
 ### Zmienne
 ### Typy Danych
 ### Warunki
