@@ -84,7 +84,7 @@ Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić 
 
 ## Inżynieria oprogramowania
 
-### Pomoc i dokumentajca
+### Pomoc
 ### Moduły i pakiety
 ### Werjse Pythona
 
@@ -149,6 +149,34 @@ Większość współczesnych środwisk programistycznych (IDE) ma wbudowany debu
 
 ### Testy jednostkowe
 ### Dokumentacja
+
+Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest Sphinx. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
+
+Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), na podstawie twoich odpowiedzi Sphinx wygeneruje odpowiednie pliki startowe i wypełni je treścią.
+
+    quickstart
+
+Aby utworzyć dokumentację z plików konfiguracyjnych, należy użyć komendy <code>make</code> wraz z formatem, w jakim chcemy, aby była nasza dokumentacja.
+
+    make html
+
+Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu <code>make</code> nie napotkał żadnych problemów. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach. Przykładem błędu może być umieszczenie linku do nieistniejącego pliku.
+
+#### reStructuredText
+
+Plikiem startowym dokumentacji jest <code>index.rst</code>. Komenda <code>make html</code> wygeneruje na jego podstawie odpowiadający mu plik html. Plik ten zapisany jest w formacie zwanym reStructuredText, a w skrócie rst. Jest to rozszerzenie mark downa, innego języka znaczników. Jego głównym atutem jest możliwość instalowania przydatnych pluginów. Uproszczony został również proces linkowania plików, co jest znaczące dla dokumentacji.
+
+#### Jak pisać dobrą dokumentację?
+
+1. Pierwsza rzecz to tutoriale. Powinniśmy pokazać użytkownikowi naszego oprogramowania jak je zainstalować i uruchomić.
+2. Drugim istotnym punktem jest poradnik. Powinniśmy jasno przedstawić jak używać naszego programu. Wszystkie dostępne funkcje powinny być zaprezentowane i wyjaśnione.
+3. Inną istotną rzeczą są wyjaśnienia. Innych programistów interesować będzie jak działa nasz program za kulisami. Należy opisać jakie decyzje zostały podjęte przy projektowaniu.
+4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo powinno zostać opisane API (interfejs programistyczny aplikacji).
+
+#### Automatyczne generowanie dokumentacji do API
+
+Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (docstrings)  mogą zostać wykorzystane do automatycznego generowania dokumentacji.
+
 ### Pliki wykonywalne i PyInstaller
 
 ## Python w Praktyce
