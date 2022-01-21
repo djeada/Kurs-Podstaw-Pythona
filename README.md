@@ -24,13 +24,13 @@ Zmienne są podstawą każdego języka programowania. Nazwa może składać się
 
 String to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery lub znaki interpunkcyjne, ale również cyfry.
 
-W Pythonie napis deklarujemy, używając apostorfów bądź cudzysłowów. 
+W Pythonie napis deklarujemy, używając apostrofów  bądź cudzysłowów. 
 
     napis = 'James' 
     napis = "James" 
     napis = '''James''' 
 
-Nie ma oddzielnego typu dla pojedynczego znaku. Pojedynczy znak to napis o długości równej 1. Napisy są indeksowane od 0, tak jak i listy. Do konkretnego znaku w danym napisie możemy odwołać się poprzez jego indeks. 
+Nie ma oddzielnego typu dla pojedynczego znaku. Pojedynczy znak to napis o długości równej 1. Napisy są indeksowane od 0 tak jak i listy. Do konkretnego znaku w danym napisie możemy odwołać się poprzez jego indeks. 
 
 Przykładowo dla kodu <code>James = 'Lubie go'</code>, wywołanie <code>James[0]</code> zwróci literę 'L'. Wywołanie <code>James[2]</code> zwróci literę 'b'. 
 
