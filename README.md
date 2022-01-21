@@ -6,11 +6,39 @@ Kurs podstaw Pythona
 ### Instalacja w systemie Windows
 ### Interaktywna konsola
 ### Zmienne
-### Typy Danych
+
+Zmienna to pudełko przechowujące dane. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie. Każda zmienna ma również swój typ, czyli rodzaj danych, jaki przechowuje. 
+
+Typy danych w Pythonie: 
+- Liczby całkowite (int) 
+- Liczby zmiennoprzecinkowe (float) 
+- Napisy (string) 
+- Typ logiczny (bool) 
+
+Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program staje się czytelny i łatwiejszy w utrzymaniu.
+
 ### Warunki
 ### Pętle
 ### Funkcje
 ### Napisy
+
+String to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery lub znaki interpunkcyjne, ale również cyfry.
+
+W Pythonie napis deklarujemy, używając apostorfów bądź cudzysłowów. 
+
+    napis = 'James' 
+    napis = "James" 
+    napis = '''James''' 
+
+Nie ma oddzielnego typu dla pojedynczego znaku. Pojedynczy znak to napis o długości równej 1. Napisy są indeksowane od 0, tak jak i listy. Do konkretnego znaku w danym napisie możemy odwołać się poprzez jego indeks. 
+
+Przykładowo dla kodu <code>James = 'Lubie go'</code>, wywołanie <code>James[0]</code> zwróci literę 'L'. Wywołanie <code>James[2]</code> zwróci literę 'b'. 
+
+Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić czegoś takiego: <code>James[0]='z'</code>. Jeśli chcemy wprowadzić zmiany do napisu, musimy nadpisać aktualny napis innym napisem.
+
+    napis = "pierwotny"
+    napis = "nowy"
+
 ### Kolekcje
 ### Enum
 
