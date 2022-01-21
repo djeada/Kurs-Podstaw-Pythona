@@ -18,6 +18,23 @@ Typy danych w Pythonie:
 Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program staje się czytelny i łatwiejszy w utrzymaniu.
 
 ### Warunki
+
+Typ logiczny może przyjmować jedna z dwóch wartości <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej. 
+
+Przy porównaniach początkujący programiści często zapominają, że pojedynczy znak równości to przypisanie.
+
+- <code>x = 5</code> w taki sposób zapiszemy w zmiennej x wartość 5.
+- <code>x == 5</code> w taki sposób sprawdzimy czy zmienna x przechowuje wartość 5.
+
+Instrukcja warunkowa ma następującą postać:
+
+    If warunek:
+        kod
+    else:
+        kod
+
+Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej zostanie wykonana jedynie, gdy warunek jest prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod słowem kluczowym else). Instrukcje warunkowe zwane są też czasami instrukcjami sterującymi.
+
 ### Pętle
 ### Funkcje
 ### Napisy
