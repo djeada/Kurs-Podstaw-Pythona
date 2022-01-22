@@ -72,6 +72,21 @@ Użycie instrukcji <code>break</code> spowoduje zakończenie wykonywania najbli�
 
 Użycie instrukcji <code>continue</code> spowoduje przejście do następnego obiegu pętli. Wszystkie instrukcje umieszczone pod instrukcją <code>continue</code> nie zostaną wykonane po jej wywołaniu.
 
+### Pętle zagnieżdżone
+
+Podobnie jak możemy zagnieżdżać instrukcje warunkowe, możemy również zagnieżdżać pętle. Jedna pętla może znajdować się w ciele innej pętli. W celu zobrazowania działania takiej konstrukcji posłużymy się graficznymi przykładami i będziemy wypisywać na konsoli różne kształty.
+
+Dwie reguły zagnieżdżania pętli:
+
+1. Pętla zewnętrzna pilnuje wysokości.
+1. Pętla wewnętrzna pilnuje szerokości.
+
+        for y in range(10):
+            for x in range(10): 
+                kod
+
+Jeśli idziemy do sali kinowej i nasz bilet mówi nam, że przysługuje nam miejsce numer 5 w rzędzie numer 2, to pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
+
 ### Funkcje
 ### Napisy
 
