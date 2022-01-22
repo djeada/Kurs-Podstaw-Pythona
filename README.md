@@ -47,7 +47,10 @@ Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden
 
 ### Pętle
 
-Pętle wraz z instrukcjami warunkowymi to podstawa wszystkich języków programowania. Pętla umożliwia wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki nie zostanie spełniony warunek kończący pętlę. W Pythonie mamy dwie pętle <code>For</code> oraz <code>While</code>. Pętla <code>For</code> ma postać:
+Pętle wraz z instrukcjami warunkowymi to podstawa wszystkich języków programowania. Pętla umożliwia wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki nie zostanie spełniony warunek kończący pętlę. W Pythonie mamy dwie pętle <code>For</code> oraz <code>While</code>. 
+
+#### For
+Pętla <code>For</code> ma postać:
 
     for element in kolekcja: 
         kod
@@ -57,6 +60,17 @@ Na razie do tworzenia pętli będziemy używać funkcji <code>range()</code>. Fu
 1. <code>range(10)</code> utworzy ciąg 0123456789, tak więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
 2. <code>range(5,12)</code> utworzy ciąg 567891011, tak więc pętla: <code>for x in range(5,12)</code> zostanie wykonana 7 razy.
 3. <code>range(0,50,10)</code> utworzy ciąg 010203040, tak więc pętla: <code>for x in range(0,50,10)</code> zostanie wykonana 5 razy.
+
+#### While
+
+Pętla <code>While</code> ma postać:
+
+    while warunek konczacy petle: 
+         kod
+
+Użycie instrukcji <code>break</code> spowoduje zakończenie wykonywania najbliżej zagnieżdżonej pętli (działa zarówno dla pętli <code>While</code>, jak i <code>For</code>).
+
+Użycie instrukcji <code>continue</code> spowoduje przejście do następnego obiegu pętli. Wszystkie instrukcje umieszczone pod instrukcją <code>continue</code> nie zostaną wykonane po jej wywołaniu.
 
 ### Funkcje
 ### Napisy
