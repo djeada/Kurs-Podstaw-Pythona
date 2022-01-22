@@ -85,7 +85,7 @@ Dwie reguły zagnieżdżania pętli:
             for x in range(10): 
                 kod
 
-Jeśli idziemy do sali kinowej i nasz bilet mówi nam, że przysługuje nam miejsce numer 5 w rzędzie numer 2, to pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
+Jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce numer 5 w rzędzie numer 2, to pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
 
 ### Funkcje
 ### Napisy
