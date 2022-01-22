@@ -28,7 +28,7 @@ else:
 print(napis.find("l"))
 
 # przyklad zamien napis na lubie tunczyka
-napis = "Bardze nie lubie tunczyka"
+napis = "Bardzo nie lubie tunczyka"
 pocz = int(napis.find("n"))
 kon = int(napis.find("e", pocz, len(napis)))
 print(napis)
