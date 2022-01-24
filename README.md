@@ -88,9 +88,41 @@ Dwie reguły zagnieżdżania pętli:
 Jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce numer 5 w rzędzie numer 2, to pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
 
 ### Funkcje
+
+Funkcje umożliwiają wielokrotne wywołanie w kodzie pojedynczej instrukcji bądź całego bloku instrukcji poprzez nadanie mu nazwy. Funkcja ma następującą postać:
+
+    def nazwa_funkcji(argumenty):
+         kod
+
+Ciało funkcji może być dowolnie rozbudowane, ale zaleca się, by większe funkcje rozbijać na mniejsze, każda o jednym zadaniu. W taki sposób zmniejszamy złożoność naszego kodu i kod staje się czytelniejszy.
+
+Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
+
+    #w tym miejscu definiuję funkcję
+    def ryba():
+       print('rybka')
+
+    #w tym miejscu wywołuje funkcję
+    ryba()
+
+Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworzenie funkcji bez argumentów, jak i funkcji z 10 argumentami. Przykład:
+
+    def ryba(argument):
+      # oczekujemy, że argument będzie liczbą naturalną
+       for i in range(argument):
+             print('ryba')
+
+Użycie słowa kluczowego <code>return</code> spowoduje wyjście z pętli. Poprzez <code>return</code> możemy przekazać do reszty programu wartość z wnętrza funkcji. Taką wartość często zapisujemy w zmiennej po wywołaniu funkcji w innym miejscu programu.
+
+    def suma_trzech(a, b, c):
+        return a + b + c
+
+    suma_a = suma_trzech(3, 6, 2)
+    suma_b = suma_trzech(4, 1, 7)
+
 ### Napisy
 
-String to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery lub znaki interpunkcyjne, ale również cyfry.
+<code>String</code> to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery lub znaki interpunkcyjne, ale również cyfry.
 
 W Pythonie napis deklarujemy, używając apostrofów  bądź cudzysłowów. 
 
