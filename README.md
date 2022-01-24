@@ -92,25 +92,25 @@ Jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce 
 Funkcje umożliwiają wielokrotne wywołanie w kodzie pojedynczej instrukcji bądź całego bloku instrukcji poprzez nadanie mu nazwy. Funkcja ma następującą postać:
 
     def nazwa_funkcji(argumenty):
-         kod
+        kod
 
 Ciało funkcji może być dowolnie rozbudowane, ale zaleca się, by większe funkcje rozbijać na mniejsze, każda o jednym zadaniu. W taki sposób zmniejszamy złożoność naszego kodu i kod staje się czytelniejszy.
 
 Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
 
-    #w tym miejscu definiuję funkcję
+    # w tym miejscu definiuję funkcję
     def ryba():
        print('rybka')
 
-    #w tym miejscu wywołuje funkcję
+    # w tym miejscu wywołuje funkcję
     ryba()
 
 Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworzenie funkcji bez argumentów, jak i funkcji z 10 argumentami. Przykład:
 
     def ryba(argument):
-      # oczekujemy, że argument będzie liczbą naturalną
-       for i in range(argument):
-             print('ryba')
+        # oczekujemy, że argument będzie liczbą naturalną
+        for i in range(argument):
+            print('ryba')
 
 Użycie słowa kluczowego <code>return</code> spowoduje wyjście z pętli. Poprzez <code>return</code> możemy przekazać do reszty programu wartość z wnętrza funkcji. Taką wartość często zapisujemy w zmiennej po wywołaniu funkcji w innym miejscu programu.
 
