@@ -202,6 +202,15 @@ Istnieje wiele narzędzi (tak zwanych linterów) sprawdzających, czy kod przest
 
 <code>Flake8</code> to kolejne świetne narzędzie do lintowania. Choć w działaniu podobny jest do <code>Pylint</code> to jego największą zaletą jest ogromna paleta pluginów tworzonych przez społeczność. Dzięki temu możemy otrzymać jeszcze więcej wskazówek jak poprawić nasz kod i jednocześnie mieć pełną kontrolę nad aspektami kodu, które są sprawdzane.
 
+
+|                            | black | pylint | flake8 | 
+|----------------------------|--------|--------|-------|
+| automatyczna korekcja            |   ✔️   |   ❌   |   ❌  | 
+| wskazówki do stylu     |   👷‍♂️   |   ✔️   |   👷‍♂️  |
+| wyszukiwanie bugów             |   ❌   |   ✔️   |   👷‍♂️  | 
+| wskazywanie zbyt złożonego kodu      |   ❌   |   👷‍♂️   |   ❌  |
+| dostępność pluginów    |   ❌   |   ❌   |   ✔️  | 
+
 Linki:
 
 * https://www.python.org/dev/peps/pep-0008/
