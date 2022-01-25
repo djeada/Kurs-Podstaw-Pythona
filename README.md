@@ -166,6 +166,7 @@ Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić 
 Linki:
 
 * https://github.com/pyenv/pyenv
+* https://github.com/pyenv-win/pyenv-win
 
 ### PIP i PyPI
 ### Środowisko wirtualne
@@ -218,6 +219,7 @@ Linki:
 * https://github.com/psf/black
 * https://github.com/PyCQA/pylint
 * https://github.com/PyCQA/flake8
+* https://github.com/myint/autoflake
 
 ### Debugowanie
 
