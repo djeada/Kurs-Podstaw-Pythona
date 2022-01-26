@@ -6,4 +6,4 @@ def wielka_litera(napis):
 def test_wielka_litera():
   slowo = 'test'
   oczekiwane = 'Test'
-  assert wielka_litera(slowo) == 'oczekiwane'
+  assert wielka_litera(slowo) == oczekiwane
