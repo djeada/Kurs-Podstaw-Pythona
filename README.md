@@ -139,7 +139,54 @@ Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić 
     napis = "pierwotny"
     napis = "nowy"
 
-### Kolekcje
+### Struktury danych
+
+Algorytm to skończona lista kroków (instrukcji). Kroki te sprawdzają, kopiują, usuwają, czy w inny sposób manipulują danymi.
+Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzięki ich implementacjom w Pythonie możemy do całej kolekcji danych (a nie tylko pojedynczej zmiennej) odnosić się przy pomocy jednej nazwy. Istnieje bardzo wiele struktur danych, które różnią się oferowanymi funkcjonalnościami.
+
+* Listy: elementy są uporządkowane i można je zmieniać. W liście mogą występować duplikaty.
+* Krotki: elementy są uporządkowane i nie można ich zmieniać. W krotce mogą występować duplikaty.
+* Zbiory: elementy są nieuporządkowane, nieindeksowane i nie można ich zmieniać. W zbiorze mogą występować duplikaty.
+* Słowniki: elementy są nieuporządkowane, indeksowane i można je zmieniać. Wszystkie klucze w słowniku są unikalne. Wśród wartości mogą występować duplikaty.
+
+#### Lista
+
+Aby znaleźć liczbę elementów listy, użyj: 
+       
+    len(lista)
+       
+Aby dodać element na koniec listy, użyj:
+
+    lista.append(a)
+
+Aby dodać wszystkie elementy z lista2 na koniec lista1, użyj:
+
+    lista1.extend(lista2)
+
+Aby wstawić element a na pozycję i, użyj:
+
+    lista.insert(i,a)
+
+Aby usunąć pierwsze wystąpienie elementu a w liście, użyj:
+
+    lista.remove(a)
+
+Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jako wynik, użyj:
+
+    lista.pop([i])
+
+Aby znaleźć liczbę wystąpień elementu a w liście, użyj:
+
+    lista.count(a)
+
+Aby posortować listę, użyj:
+
+    lista.sort()
+
+Aby odwrócić kolejność elementów w liście, użyj:
+
+    lista.reverse()
+
 ### Enum
 
 ### Liczby losowe
