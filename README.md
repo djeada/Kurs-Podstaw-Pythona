@@ -146,8 +146,8 @@ Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić 
 
 Nieraz w programie potrzebujemy użyć liczb losowych. Moduł <code>random</code> zawiera wiele przydatnych funkcji do losowania liczb całkowitych i zmiennoprzecinkowych.
 
-- instrukcja <code>random.random()</code> wylosuje liczbę losową z przedziału od 0 do 1.
-- <code>random.uniform(a,b)</code> wylosuje liczbę losową z przedziału od a do b.
+- instrukcja <code>random.random()</code> wylosuje liczbę zmiennoprzecinkową z przedziału od 0 do 1.
+- <code>random.uniform(a,b)</code> wylosuje liczbę zmiennoprzecinkową z przedziału od a do b.
 - instrukcja <code>random.randint(a,b)</code> wylosuje liczbę całkowitą z przedziału od a do b.
 
 Najprostszy przykład rozkładu prawdopodobieństwa to rozkład jednostajny. Dla jednostajnego rozkładu prawdopodobieństwa mamy stałą wartość gęstości prawdopodobieństwa na danym przedziale <code>[a,b]</code>. Poza tym przedziałem wartość gęstości prawdopodobieństwa wynosi 0. 
