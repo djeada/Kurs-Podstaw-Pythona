@@ -1,9 +1,11 @@
 import pytest
 
+
 def wielka_litera(napis):
-  return napis.capitalize()
+    return napis.capitalize()
+
 
 def test_wielka_litera():
-  slowo = 'test'
-  oczekiwane = 'Test'
-  assert wielka_litera(slowo) == oczekiwane
+    slowo = "test"
+    oczekiwane = "Test"
+    assert wielka_litera(slowo) == oczekiwane
