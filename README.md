@@ -205,12 +205,13 @@ Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe pr
 
 ### Klasy i obiekty
 ### Referencje i mutacje
-### Czyte funkcje i skutki uboczne
+### Czyste funkcje i skutki uboczne
 ### Dziedziczenie i kompozycja
 ### Wyrażenia regularne
 ### Wyjątki
 ### Wątki
 ### Lambdy
+### Data classes
 ### Generatory
 ### Iteratory
 
