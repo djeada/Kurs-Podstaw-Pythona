@@ -3,8 +3,40 @@ Kurs podstaw Pythona
 
 ## Podstawy
 
+Fundamenty języka Python. Nauka budowania programów. Podstawy algorytmiki.
+
 ### Instalacja w systemie Windows
+
+Aby zainstalować Pythona w systemie Windows, należy wykonać następujące kroki:
+
+1. Odwiedź stronę [Python.org](https://www.python.org/downloads/).
+2. Kliknij na odpowiednią wersję Pythona.
+3. Pobierz instalator i przejdź przez proces instalacji.
+
 ### Interaktywna konsola
+
+Otwórz konsolę Python i wpisz:
+
+    >>> python
+    python 2.7.13 (default, Sep  2 2019, 20:42:59)
+
+Zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
+
+Masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza Enter, zostanie od razu zwrócony wynik wywołania komendy.
+
+    >>> help
+    Type help() for interactive help, or help(object) for help about object.
+
+    >>> 3 + 4
+    7
+
+    >>> print('Hello world')
+    Hello world
+
+    >>> import math
+    >>> math.pi
+    3.141592653589793
+    
 ### Zmienne
 
 Zmienna to pudełko przechowujące dane. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie. Każda zmienna ma również swój typ, czyli rodzaj danych, jaki przechowuje. 
@@ -151,11 +183,13 @@ Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzię
 
 #### Lista
 
+List używamy, gdy chcemy mieć kilka wartości dostępnych pod jedną nazwą.
+
 Aby znaleźć liczbę elementów listy, użyj: 
        
     len(lista)
        
-Aby dodać element na koniec listy, użyj:
+Aby dodać element a na koniec listy, użyj:
 
     lista.append(a)
 
@@ -187,13 +221,128 @@ Aby odwrócić kolejność elementów w liście, użyj:
 
     lista.reverse()
 
-### Krotki
+#### Krotka
 
 Krotek zamiast list, używamy gdy:
 * Liczy się szybkość.
 * Chcemy zabezpieczyć dane przed nadpisaniem.
 
+Aby znaleźć liczbę elementów krotki, użyj:
+
+    len(krotka)
+
+Aby dodać element a na koniec krotki, użyj:
+
+    krotka = krotka + (a,)
+
+Aby dodać wszystkie elementy z krotka2 na koniec krotka1, użyj:
+
+    krotka1 = krotka1 + krotka2
+
+Aby znaleźć indeks pierwszego wystąpienia elementu a w krotce, użyj:
+
+    krotka.index(a)
+
+Aby sprawdzić czy element a występuje w krotce, użyj:
+
+    a in krotka
+
+Aby otrzymać wartość elementu z krotki znajdującego się na pozycji i, użyj:
+
+    krotka[i]
+
+Aby rozpakować krotkę składającą się z trzech elementów i zapisać je w trzech zmiennych, użyj:
+
+    a, b, c = krotka
+
+#### Zbiór
+
+Zbiory są przydatne, gdy chcemy, by wszystkie elementy w kolekcji były unikalne. Dodatkowo dla zbiorów mamy zaimplementowane wiele przydatnych funkcji, pozwalających w prosty sposób pracować na kilku zbiorach jednocześnie.
+
+Aby znaleźć liczbę elementów zbioru, użyj:
+
+    len(zbior)
+
+Aby dodać element a do zbioru, użyj:
+
+    zbior.add(a)
+
+Aby usunąć element a ze zbioru, użyj:
+
+    zbior.remove(a)
+
+Aby sprawdzić, czy element a występuje w zbiorze, użyj:
+
+    a in zbior
+
+Aby sprawdzić, czy zbiór zawiera w sobie wszystkie elementy zbioru zbior2, użyj:
+
+    zbior.issuperset(zbior2)
+
+Aby znaleźć część wspólną dwóch zbiorów, użyj:
+
+    zbior.intersection(zbior2)
+
+Aby znaleźć elementy zbioru zbior1, które nie są w zbiorze zbior2, użyj:
+
+    zbior1.difference(zbior2)
+
+#### Słownik
+
+Słowniki przydatne są, gdy chcemy użyć innych indeksów niż numeryczne. Dodatkowo słowniki są mega szybkie.
+
+Aby znaleźć liczbę elementów słownika, użyj:
+
+    len(słownik)
+
+Aby dodać element b do słownika i zapisać go pod kluczem a, użyj:
+
+    słownik[a] = b
+
+Aby usunąć element ze słownika pod kluczem a, użyj:
+
+    del słownik[a]
+
+Aby sprawdzić, czy klucz występuje w słowniku, użyj:
+
+    a in słownik
+
+Aby sprawdzić, czy wartość występuje w słowniku, użyj:
+
+    b in słownik.values()
+
+Aby wypisać klucze i wartości słownika, użyj:
+
+    for klucz, wartość in słownik.items():
+        print(klucz, wartość)
+
+Aby klucze i wartości posortować wg kluczy, użyj:
+
+    for klucz, wartość in sorted(słownik.items(), key=lambda x: x[0]):
+        print(klucz, wartość)
+
+Aby klucze i wartości posortować wg wartości, użyj:
+
+    for klucz, wartość in sorted(słownik.items(), key=lambda x: x[1]):
+        print(klucz, wartość)
+
 ### Enum
+
+Typ wyliczeniowy enum pozwala na tworzenie zmiennych, które mogą przyjmować jedynie z góry określone wartości. Wartości te mają czytelne nazwy, a dodatkowo enum jest bardzo szybki i opłaca się go używać nawet w krytycznych miejscach programu.
+
+    class Kolor(enum.Enum):
+        ZIELONY = enum.auto()
+        CZERWONY = enum.auto()
+        NIEBIESKI = enum.auto()
+
+    kolor_a = Kolor.ZIELONY
+    kolor_b = Kolor.CZERWONY
+    
+    print(kolor_a.name)
+    print(kolor_a.value)
+
+    print(kolor_b.name)
+    print(kolor_b.value)
 
 ### Liczby losowe
 
@@ -208,6 +357,8 @@ Najprostszy przykład rozkładu prawdopodobieństwa to rozkład jednostajny. Dla
 Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe prawdopodobieństwo wystąpienia niż te oddalone od średniej. Jeśli na jakąś wielkość wpływa dostatecznie wiele czynników, to rozkład prawdopodobieństwa będzie zbliżony do krzywej Gaussa. Dokładniej mówi o tym centralne twierdzenie graniczne. 
 
 ## Średniozawanowane
+
+Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
 
 ### Klasy i obiekty
 ### Referencje i mutacje
