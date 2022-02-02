@@ -187,6 +187,12 @@ Aby odwrócić kolejność elementów w liście, użyj:
 
     lista.reverse()
 
+### Krotki
+
+Krotek zamiast list, używamy gdy:
+* Liczy się szybkość.
+* Chcemy zabezpieczyć dane przed nadpisaniem.
+
 ### Enum
 
 ### Liczby losowe
