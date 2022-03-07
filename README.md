@@ -1,3 +1,58 @@
+## Table of Contents
+<!--ts-->
+- [Podstawy](#Podstawy)
+  - [Instalacja w systemie Windows](#Instalacja-w-systemie-Windows)
+  - [Interaktywna konsola](#Interaktywna-konsola)
+  - [Zmienne](#Zmienne)
+  - [Warunki](#Warunki)
+  - [Pętle](#Pętle)
+  - [Pętle zagnieżdżone](#Pętle-zagnieżdżone)
+  - [Funkcje](#Funkcje)
+  - [Napisy](#Napisy)
+  - [Struktury danych](#Struktury-danych)
+  - [Enum](#Enum)
+  - [Liczby losowe](#Liczby-losowe)
+
+- [Średniozaawansowane](#Średniozaawansowane)
+  - [Klasy i obiekty](#Klasy-i-obiekty)
+  - [Referencje i mutacje](#Referencje-i-mutacje)
+  - [Czyste funkcje i skutki uboczne](#Czyste-funkcje-i-skutki-uboczne)
+  - [Dziedziczenie i kompozycja](#Dziedziczenie-i-kompozycja)
+  - [Wyrażenia regularne](#Wyrażenia-regularne)
+  - [Wyjątki](#Wyjątki)
+  - [Wątki](#Wątki)
+  - [Lambdy](#Lambdy)
+  - [Data classes](#Data-classes)
+  - [Generatory](#Generatory)
+  - [Iteratory](#Iteratory)
+
+- [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
+  - [Pomoc](#Pomoc)
+  - [Moduły i pakiety](#Moduły-i-pakiety)
+  - [Wersje Pythona](#Wersje-Pythona)
+  - [PIP i PyPI](#PIP-i-PyPI)
+  - [Środowisko wirtualne](#Środowisko-wirtualne)
+  - [Dbanie o jakość kodu i lintowanie](#Dbanie-o-jakość-kodu-i-lintowanie)
+  - [Debugowanie](#Debugowanie)
+  - [Testy jednostkowe](#Testy-jednostkowe)
+  - [Dokumentacja](#Dokumentacja)
+  - [Pliki wykonywalne i PyInstaller](#Pliki-wykonywalne-i-PyInstaller)
+
+- [Python w Praktyce](#Python-w-Praktyce)
+  - [Praca z plikami i folderami](#Praca-z-plikami-i-folderami)
+  - [Pandas i csv](#Pandas-i-csv)
+  - [Daty](#Daty)
+  - [Informacje o systemie operacyjnym](#Informacje-o-systemie-operacyjnym)
+  - [HTTP i prosty serwer](#HTTP-i-prosty-serwer)
+  - [API wraz z FastAPI](#API-wraz-z-FastAPI)
+  - [Bazy danych z SQLite](#Bazy-danych-z-SQLite)
+  - [Tkinter](#Tkinter)
+  - [Logi](#Logi)
+
+- [Dodatkowe materiały](#Dodatkowe-materiały) 
+
+<!--te-->
+
 # Kurs-podstaw-Pythona
 Kurs podstaw Pythona
 
@@ -10,7 +65,7 @@ Fundamenty języka Python. Nauka budowania programów. Podstawy algorytmiki.
 Aby zainstalować Pythona w systemie Windows, należy wykonać następujące kroki:
 
 1. Odwiedź stronę [Python.org](https://www.python.org/downloads/).
-2. Kliknij na odpowiednią wersję Pythona.
+2. Kliknij odpowiednią wersję Pythona.
 3. Pobierz instalator i przejdź przez proces instalacji.
 
 ### Interaktywna konsola
@@ -243,7 +298,7 @@ Aby znaleźć indeks pierwszego wystąpienia elementu a w krotce, użyj:
 
     krotka.index(a)
 
-Aby sprawdzić czy element a występuje w krotce, użyj:
+Aby sprawdzić, czy element a występuje w krotce, użyj:
 
     a in krotka
 
@@ -356,7 +411,7 @@ Najprostszy przykład rozkładu prawdopodobieństwa to rozkład jednostajny. Dla
 
 Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe prawdopodobieństwo wystąpienia niż te oddalone od średniej. Jeśli na jakąś wielkość wpływa dostatecznie wiele czynników, to rozkład prawdopodobieństwa będzie zbliżony do krzywej Gaussa. Dokładniej mówi o tym centralne twierdzenie graniczne. 
 
-## Średniozawanowane
+## Średniozaawansowane
 
 Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
 
@@ -376,7 +431,7 @@ Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. I
 
 ### Pomoc
 ### Moduły i pakiety
-### Werjse Pythona
+### Wersje Pythona
 
 <code>Pyenv</code> używany jest do izolowania różnych wersji Pythona. Na przykład jeśli chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz łatwego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. <code>Pyenv</code> ułatwia również proces pobierania i instalowania różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
 
@@ -392,7 +447,7 @@ Linki:
 
 Popularnym narzędziem do tworzenia środowisk wirtualnych jest <code>virtualenv</code>. Narzędzie to tworzy specjalny folder o dowolnej nazwie (np. env/) oraz modyfikuje zmienną środowiskową PATH dodając do niej refernecje do podfolderu bin znajdującego się w utworzonym folderze (np. env/bin/). Wszystkie pakiety i biblioteki instalowane w środowisku wirtualnym wędrują do tego folderu.
 
-Aby utworzyć środowisko wirtualnne w aktualnym folderze, użyj:
+Aby utworzyć środowisko wirtualne w aktualnym folderze, użyj:
 
     virtualenv env
 
@@ -440,13 +495,13 @@ Linki:
 
 ### Debugowanie
 
-Debuger to program, którego zadanie jest inspeckja stanu programu w trakcie wykonywanie. Możesz użyć debugera, aby zatrzymać wykonywanie programu, gdy w trakcie wykonywania osiągnięta zostanie określone przez ciebie miejsce w kodzie. Po zatrzymaniu programu debuger pokazuje aktualne wartości wszystkich zmiennych istniejących w danym punkcie programu. Dzięki temu możemy zweryfikować, czy nasze wyobrażenia o tym jak działa program mają potwierdzenie w rzeczywistości. 
+Debuger to program, którego zadanie jest inspekcja stanu programu w trakcie wykonywanie. Możesz użyć debugera, aby zatrzymać wykonywanie programu, gdy w trakcie wykonywania osiągnięta zostanie określone przez ciebie miejsce w kodzie. Po zatrzymaniu programu debuger pokazuje aktualne wartości wszystkich zmiennych istniejących w danym punkcie programu. Dzięki temu możemy zweryfikować, czy nasze wyobrażenia o tym jak działa program mają potwierdzenie w rzeczywistości. 
 
 Dwa główne zastosowania debugera:
 - Wyszukiwanie przyczyn bugów w kodzie.
 - Analiza działania programu przez zaznajamiających się z nim programistów.
 
-Większość współczesnych środwisk programistycznych (IDE) ma wbudowany debuger. Graficzny interfejs użytkownika umożliwa sterowanie debugerem za pomocą myszy. Miejsca, w których debuger ma zatrzymać program zaznaczane są często za pomocą czerownej kropki, a wartości zmiennych wyświetlane są w specjalnym panelu.
+Większość współczesnych środowisk programistycznych (IDE) ma wbudowany debuger. Graficzny interfejs użytkownika umożliwa sterowanie debugerem za pomocą myszy. Miejsca, w których debuger ma zatrzymać program zaznaczane są często za pomocą czerownej kropki, a wartości zmiennych wyświetlane są w specjalnym panelu.
 
 ### Testy jednostkowe
 ### Dokumentacja
@@ -469,7 +524,7 @@ Plikiem startowym dokumentacji jest <code>index.rst</code>. Plik ten zapisany je
 
 #### Jak pisać dobrą dokumentację?
 
-1. Pierwsza rzecz to tutoriale. Powinniśmy pokazać użytkownikowi naszego oprogramowania jak je zainstalować i uruchomić.
+1. Zacznijmy od tutoriali. Powinniśmy pokazać użytkownikowi naszego oprogramowania jak je zainstalować i uruchomić.
 2. Drugim istotnym punktem jest poradnik. Powinniśmy jasno przedstawić jak używać naszego programu. Wszystkie dostępne funkcje powinny być zaprezentowane i wyjaśnione.
 3. Inną istotną rzeczą są wyjaśnienia. Innych programistów interesować będzie jak działa nasz program za kulisami. Należy opisać jakie decyzje zostały podjęte przy projektowaniu.
 4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo powinno zostać opisane API (interfejs programistyczny aplikacji).
