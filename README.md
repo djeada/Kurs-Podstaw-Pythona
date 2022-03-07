@@ -1,4 +1,7 @@
-## Table of Contents
+# Kurs-podstaw-Pythona
+Kurs podstaw Pythona
+
+## Spis Treści
 <!--ts-->
 - [Podstawy](#Podstawy)
   - [Instalacja w systemie Windows](#Instalacja-w-systemie-Windows)
@@ -52,9 +55,6 @@
 - [Dodatkowe materiały](#Dodatkowe-materiały) 
 
 <!--te-->
-
-# Kurs-podstaw-Pythona
-Kurs podstaw Pythona
 
 ## Podstawy
 
