@@ -504,6 +504,36 @@ Dwa główne zastosowania debugera:
 Większość współczesnych środowisk programistycznych (IDE) ma wbudowany debuger. Graficzny interfejs użytkownika umożliwa sterowanie debugerem za pomocą myszy. Miejsca, w których debuger ma zatrzymać program zaznaczane są często za pomocą czerownej kropki, a wartości zmiennych wyświetlane są w specjalnym panelu.
 
 ### Testy jednostkowe
+
+Mamy dwie biblioteki: unittest i pytest.
+
+#### unittest
+
+Zbudowany zgodnie z filozofia programowania zorientowanego obiektowo. Mamy klasy, dziedziczenie i tysiac roznych funckji assert.
+
+    import unittest
+    class TestSMTP(unittest.TestCase):
+      def smtp_connection(self):
+        import smtplib
+        return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+
+     def test_helo(self):
+        response_code, msg = self.smtp_connection().ehlo()
+        self.assertEqual(response_code, 250)
+
+#### pytest
+
+Zbudowany zgodnie z filozofia im prosciej tym lepiej. Jedna funckja assert. Zadnych klas.
+
+    import pytest
+    @pytest.fixture
+    def smtp_connection():
+       import smtplib
+       return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+    def test_ehlo(smtp_connection):
+       response_code, msg = smtp_connection.ehlo()
+       assert response_code == 250
+
 ### Dokumentacja
 
 Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest Sphinx. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
