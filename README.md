@@ -550,7 +550,7 @@ Spróbuj manualnie odtworzyć wszystkie kroki prowadzące do pojawienia się tej
 2. Następnie przenieść te kroki na kod.
 3. Dodaj test mający sprawdzić, czy niepożądana sytuacja się nie powtarza.
 
-Jeśli błąd pojawia się w funkcji foo() to najpierw znajdź test test_foo() i umieść w nim znalezione kroki. Następnie napraw funkcję foo(). Test z czerwonego  powinien stać się zielony. W przyszłości dbaj o to, by twój test zawsze był zielony.
+Jeśli błąd pojawia się w funkcji <code>foo()</code> to najpierw znajdź test <code>test_foo()</code> i umieść w nim znalezione kroki. Następnie napraw funkcję <code>foo()</code>. Test z czerwonego  powinien stać się zielony. W przyszłości dbaj o to, by twój test zawsze był zielony.
 
 4. Za nim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. 
 
