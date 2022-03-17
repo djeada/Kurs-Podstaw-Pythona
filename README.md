@@ -505,14 +505,16 @@ Większość współczesnych środowisk programistycznych (IDE) ma wbudowany deb
 
 ### Testy jednostkowe
 
-Mamy dwie biblioteki: unittest i pytest.
+Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>.
 
 #### unittest
 
-Zbudowany zgodnie z filozofia programowania zorientowanego obiektowo. Mamy klasy, dziedziczenie i tysiac roznych funckji assert.
-
+Zbudowany zgodnie z filozofią programowania obiektowego. Mamy klasy, dziedziczenie i tysiąc różnych funkcji <code>assert</code>. 
+ 
     import unittest
+    
     class TestSMTP(unittest.TestCase):
+      
       def smtp_connection(self):
         import smtplib
         return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
@@ -523,14 +525,16 @@ Zbudowany zgodnie z filozofia programowania zorientowanego obiektowo. Mamy klasy
 
 #### pytest
 
-Zbudowany zgodnie z filozofia im prosciej tym lepiej. Jedna funckja assert. Zadnych klas.
+Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. Jest jedna funkcja <code>assert</code>. 
 
     import pytest
+    
     @pytest.fixture
     def smtp_connection():
        import smtplib
        return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
-    def test_ehlo(smtp_connection):
+    
+    def test_helo(smtp_connection):
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
 
