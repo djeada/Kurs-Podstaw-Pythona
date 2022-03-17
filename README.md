@@ -538,6 +538,24 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
 
+#### Nie używaj losowych danych w testach
+
+Załóżmy, że masz własną implementację algorytmu sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
+
+    import pytest
+    
+    def test_wlasne_sortowanie():
+       lista_a  = [1, 1, 1]
+       lista_b = [3, 5, 2]
+       lista_c = [-1, 2, 3, -1, 0]
+       # import random
+       # lista_d = [random.randint(-10, 10) for _ in range(5)] # ZLE
+       
+       assert wlasne_sortowanie(lista_a) == sorted(lista_a)
+       assert wlasne_sortowanie(lista_b) == sorted(lista_b)
+       assert wlasne_sortowanie(lista_c) == sorted(lista_c)
+
+
 #### Od znalezienia buga do poprawnie działającego kodu
 
 Znaleziono bug w twoim programie. Co robić?
@@ -555,6 +573,18 @@ Jeśli błąd pojawia się w funkcji <code>foo()</code> to najpierw znajdź test
 4. Za nim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. 
 
 Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
+
+#### Podział testów
+
+Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/">"Software Engineering at Google"</a> testy należy rozdzielić na trzy kategorie w następujących proporcjach:
+
+* 80% testy jednostkowe
+* 15% testy integracyjne
+* 5% testy całego systemu (end-to-end)
+
+#### Automatycznie twórz dane potrzebne do testowania aplikacji
+
+Napisz kod, który automatycznie zbuduje całą aplikację wraz z potrzebnymi zasobami. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją odpowiednimi tabelami wraz z przykładowymi danymi. Dzięki temu, w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo dzięki temu masz możliwość automatycznego testowania całego programu.
 
 ### Dokumentacja
 
