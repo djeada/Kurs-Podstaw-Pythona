@@ -538,6 +538,24 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
 
+#### Od znalezienia buga do poprawnie działającego kodu
+
+Znaleziono bug w twoim programie. Co robić?
+
+1. Spróbuj odtworzyć daną sytuację.
+
+Przykładowo twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę. 
+Spróbuj manualnie odtworzyć wszystkie kroki prowadzące do pojawienia się tej sytuacji.
+
+2. Następnie przenieść te kroki na kod.
+3. Dodaj test mający sprawdzić, czy niepożądana sytuacja się nie powtarza.
+
+Jeśli błąd pojawia się w funkcji foo() to najpierw znajdź test test_foo() i umieść w nim znalezione kroki. Następnie napraw funkcję foo(). Test z czerwonego  powinien stać się zielony. W przyszłości dbaj o to, by twój test zawsze był zielony.
+
+4. Za nim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. 
+
+Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
+
 ### Dokumentacja
 
 Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest Sphinx. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
