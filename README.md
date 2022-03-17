@@ -18,7 +18,7 @@ Kurs podstaw Pythona
 
 - [Średniozaawansowane](#Średniozaawansowane)
   - [Klasy i obiekty](#Klasy-i-obiekty)
-  - [Referencje i mutacje](#Referencje-i-mutacje)
+  - [Referencje i kopiowanie](#Referencje-i-kopiowanie)
   - [Czyste funkcje i skutki uboczne](#Czyste-funkcje-i-skutki-uboczne)
   - [Dziedziczenie i kompozycja](#Dziedziczenie-i-kompozycja)
   - [Wyrażenia regularne](#Wyrażenia-regularne)
@@ -416,7 +416,43 @@ Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe pr
 Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
 
 ### Klasy i obiekty
-### Referencje i mutacje
+### Referencje i kopiowanie
+
+Przekazując obiekt do funkcji, przekazujemy go poprzez referencję. Podobnie przypisując obiekt do nowej nazwy, przypisujemy referencję do pierwotnego obiektu. Wszelkie zmiany na nowym obiekcie będą miały odzwierciedlenie również na pierwotnym obiekcie i vice versa.
+
+    lista = [[1, 2, 3], [4, 5, 6]]
+    nowa_lista = lista
+    
+    nowa_lista.append([-1, -2, -3]) # modyfikuje obie listy
+    nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
+    print(lista)
+    
+ Mamy jeszcze dwa inne sposoby na kopiowanie wartosci z oryginalnego obiektu do nowego obiektu:
+ 
+ 1. Kopiowanie płytkie
+
+Na naszym poprzednim przykładzie z listą 2d, kopiowanie płytkie utworzy nowy obiekt dla zewnętrznej listy, ale wewnętrzne listy będą przekazane przez referencję.
+    
+    import copy
+    lista = [[1, 2, 3], [4, 5, 6]]
+    nowa_lista = copy.copy(lista)
+    
+    nowa_lista.append([-1, -2, -3]) # modyfikuje jedynie nowa liste
+    nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
+    print(lista)
+
+ 2. Kopiowanie glebokie 
+
+Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewnętrznych list musimy użyć kopiowania głębokiego.
+
+    import copy
+    lista = [[1, 2, 3], [4, 5, 6]]
+    nowa_lista = copy.copy(lista)
+
+    nowa_lista.append([-1, -2, -3]) # modyfikuje jedynie nowa liste
+    nowa_lista[0].insert(1, 1)      # modyfikuje jedynie nowa liste
+    print(lista)
+
 ### Czyste funkcje i skutki uboczne
 ### Dziedziczenie i kompozycja
 ### Wyrażenia regularne
