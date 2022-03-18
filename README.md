@@ -104,6 +104,13 @@ Typy danych w Pythonie:
 
 Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program staje się czytelny i łatwiejszy w utrzymaniu.
 
+Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
+
+    a = 3
+    b = a
+    b = 5
+    print(a)
+
 ### Warunki
 
 Typ logiczny może przyjmować jedna z dwóch wartości <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej. 
@@ -137,7 +144,7 @@ Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden
 Pętle wraz z instrukcjami warunkowymi to podstawa wszystkich języków programowania. Pętla umożliwia wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki nie zostanie spełniony warunek kończący pętlę. W Pythonie mamy dwie pętle <code>For</code> oraz <code>While</code>. 
 
 #### For
-Pętla <code>For</code> ma postać:
+Pętla <code>For</code> ogólnie ma postać:
 
     for element in kolekcja: 
         kod
@@ -225,6 +232,11 @@ Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić 
 
     napis = "pierwotny"
     napis = "nowy"
+    
+Aby w napisie użyć, wartości innej zmiennej musimy przed cudzysłowami postawić literkę <code>f</code>, a w cudzysłowie w odpowiednim miejscu między nawiasami klamrowymi nazwę zmiennej, której chcemy użyć.
+
+    liczba = 3
+    nspid = f"twoja liczba to: {liczba}"
 
 ### Struktury danych
 
@@ -275,6 +287,16 @@ Aby posortować listę, użyj:
 Aby odwrócić kolejność elementów w liście, użyj:
 
     lista.reverse()
+
+Aby przy pomocy pętli przejść przez elementy listy użyj:
+
+    for element in lista: 
+        print(element)
+        
+ Aby otrzymać element i indeks, użyj funkcji enumerate:
+ 
+     for indeks, element in enumerate(lista): 
+        print(f'{indeks}: {element}')
 
 #### Krotka
 
