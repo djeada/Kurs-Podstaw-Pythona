@@ -693,3 +693,4 @@ Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (do
 * https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/
 * https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/
 * https://braydie.gitbook.io/how-to-be-a-programmer/
+* https://pythontutor.com/visualize.html#mode=edit
