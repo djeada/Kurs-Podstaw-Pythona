@@ -438,6 +438,23 @@ Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe pr
 Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
 
 ### Klasy i obiekty
+Klasa to otoczka dla danych oraz funkcji pracujących na tych danych. Obiekt to instancja klasy. Mamy całkowitą dowolność w tworzeniu klas, możemy użyć dowolnej kombinacji danych lub nawet stworzyć klasę, która nie trzyma żadnych danych. Nie oznacza to, że każda klasa ma sens. Musimy zastanowić się jakie dane powinny być trzymane wspólnie pod jedną nazwą oraz jakie funkcje przydałby się do pracy z tymi danymi.
+
+Przykład:
+
+    class Osoba:
+        def __init__(self, imie, nazwisko):
+            self.imie = imie
+            self.nazwisko = nazwisko
+
+        def przedstaw_sie(self):
+            print("Cześć, jestem " + self.imie + " " + self.nazwisko)
+
+    osoba = Osoba("Jan", "Kowalski")
+    inna_osoba = Osoba("Adam", "Nowak")
+    osoba.przedstaw_sie()
+    inna_osoba.przedstaw_sie()
+
 ### Referencje i kopiowanie
 
 Przekazując obiekt do funkcji, przekazujemy go poprzez referencję. Podobnie przypisując obiekt do nowej nazwy, przypisujemy referencję do pierwotnego obiektu. Wszelkie zmiany na nowym obiekcie będą miały odzwierciedlenie również na pierwotnym obiekcie i vice versa.
@@ -479,6 +496,51 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
 ### Dziedziczenie i kompozycja
 ### Wyrażenia regularne
 ### Wyjątki
+Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami. 
+
+Istnieje szereg wyjątków zdefiniowanych w standardzie Pythona. Przykładowo jeśli spróbujemy podzielić liczbę przez 0, zostanie wywołane wyjątek <code>ZeroDivisionError</code>.
+
+    print(5 / 0)
+
+Tak, więc wyjątki możemy spotkać, jeśli niepoprawnie użyjemy funkcji bądź operatorów zdefiniowanych w standardzie języka. Możemy również sami wywołać wyjątki. Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Musimy zadbać o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji. 
+
+    raise ValueError("Podano nieprawidłową wartość")
+
+#### Obsługa wyjątków
+
+Nieobsłużony wyjątek zamyka program i wyświetla informację o błędzie. Mechanizm try/except pozwala na obsługę wyjątków.
+
+    try:
+        # kod, który może wywołać wyjątek
+    except:
+        # kod, który wykonuje się w przypadku wystąpienia wyjątku
+    else:
+        # kod, który wykonuje się gdy wyjątek nie wystąpił
+    finally:
+        # kod, który wykonuje się zawsze
+
+W mechanizmie try/except szczególnie ważny jest kod, który wykonuje się w przypadku wystąpienia wyjątku. Wyjątek informuje nas o błędzie i nie powinniśmy go ignorować. Z tego powodu nie umieszczaj <code>pass</code> w bloku except.
+
+Dodatkowo <code>except</code> pozwala nam sprecyzować typ wyjątku jaki ma zostać obsłużony. Jeśli w bloku <code>try</code> może wystąpić więcej niż jeden typ wyjątku to należy przygotować odpowiednią liczbę bloków <code>except</code>. 
+
+    try:
+        # kod, który może wywołać wyjątek
+    except ValueError:
+        # kod, który wykonuje się w przypadku wystąpienia wyjątku ValueError
+    except TypeError:
+        # kod, który wykonuje się w przypadku wystąpienia wyjątku TypeError
+
+Nie należy próbować łapać ogólnego wyjątku, gdyż wszystkie wyjątki dziedziczą po klasie <code>Exception</code>. 
+
+#### Własny wyjątek
+
+W Pythonie mamy możliwość tworzenia włanych wyjątków. Aby utworzyć własny wyjątek, należy dziedziczyć po klasie <code>Exception</code>.
+
+    class WlasnyWyjatek(Exception):
+        def __init__(self, *args, **kwargs):
+            komunikat = "Opis błędu jaki wystąpił"
+            super().__init__(komunikat, *args, **kwargs)
+
 ### Wątki
 ### Lambdy
 ### Data classes
