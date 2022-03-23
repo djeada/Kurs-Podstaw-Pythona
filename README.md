@@ -756,3 +756,4 @@ Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (do
 * https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/
 * https://braydie.gitbook.io/how-to-be-a-programmer/
 * https://pythontutor.com/visualize.html#mode=edit
+* https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/
