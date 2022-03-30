@@ -30,8 +30,7 @@ Kurs podstaw Pythona
   - [Iteratory](#Iteratory)
 
 - [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
-  - [Pomoc](#Pomoc)
-  - [Moduły i pakiety](#Moduły-i-pakiety)
+  - [Moduły i paczki](#Moduły-i-paczki)
   - [Wersje Pythona](#Wersje-Pythona)
   - [PIP i PyPI](#PIP-i-PyPI)
   - [Środowisko wirtualne](#Środowisko-wirtualne)
@@ -549,8 +548,7 @@ W Pythonie mamy możliwość tworzenia włanych wyjątków. Aby utworzyć własn
 
 ## Inżynieria oprogramowania
 
-### Pomoc
-### Moduły i pakiety
+### Moduły i paczki
 ### Wersje Pythona
 
 <code>Pyenv</code> używany jest do izolowania różnych wersji Pythona. Na przykład jeśli chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz łatwego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. <code>Pyenv</code> ułatwia również proces pobierania i instalowania różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
