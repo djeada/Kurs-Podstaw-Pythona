@@ -112,7 +112,7 @@ Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
 ### Warunki
 
-Typ logiczny może przyjmować jedna z dwóch wartości <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej. 
+Typ logiczny może przyjmować jedną z dwóch wartości <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej. 
 
 Przy porównaniach początkujący programiści często zapominają, że pojedynczy znak równości to przypisanie.
 
