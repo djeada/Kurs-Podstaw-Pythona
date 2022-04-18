@@ -297,7 +297,7 @@ Aby odwrócić kolejność elementów w liście, użyj:
 
     lista.reverse()
 
-Aby przy pomocy pętli przejść przez elementy listy użyj:
+Aby przy pomocy pętli przejść przez elementy listy, użyj:
 
     for element in lista: 
         print(element)
@@ -306,6 +306,11 @@ Aby przy pomocy pętli przejść przez elementy listy użyj:
  
      for indeks, element in enumerate(lista): 
         print(f'{indeks}: {element}')
+
+Aby przy pomocy pętli przejść przez elementy dwóch list równej długości, użyj:
+
+     for elem_a, elem_b in zip(lista_a, lista_b): 
+        print(f'element a: {elem_a}; element b: {elem_b}')
 
 #### Krotka
 
