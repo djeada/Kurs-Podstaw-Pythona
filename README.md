@@ -596,6 +596,36 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
 ### Data classes
 ### Iteratory
 ### Generatory
+
+Przyjrzyjmy się dwóm programom:
+
+a) W poniższym przykładzie zwracamy wartości z funkcji <code>foo()</code> przy pomocy słowa kluczowego <code>yield</code>:
+
+    def foo():
+      yield 1
+      yield 2
+      yield 3
+
+    print(list(foo()))
+   
+   Wynik po przekonwertowaniu na listę daje:
+   
+      [1, 2, 3]
+
+b) W tym przykładzie zwracamy wartości z funkcji <code>bar()</code> przy pomocy słowa kluczowego <code>return</code>:
+
+    def bar():
+      return 1
+      return 2 #Martwy kod
+      return 3
+
+    print(bar())
+
+  Wynik:
+   
+      1
+
+
 ### Dekoratory
 
 Dekorator to funkcja, która przyjmuje inną funkcję jako argument. Dekorator może przetworzyć funkcję przekazaną jako argument, połączyć ją z inną funkcją (funkcjami) lub podmienić ją na inną funkcję. Połączenie funkcji z dekoratorem spowoduje wywołanie dekoratora w momencie wywołania funkcji.
