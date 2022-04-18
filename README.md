@@ -735,6 +735,25 @@ Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (do
 
 ### Pliki wykonywalne i PyInstaller
 
+### Kod bajtowy
+
+Do wyświetlania kodu bajtowego służy moduł <code>dis</code>:
+
+    from dis import dis
+
+    def suma(a, b):
+      return a + b
+
+    dis(suma)
+    
+Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
+
+    import inspect
+    import tkinter
+
+    print(inspect.getsource(tkinter.Tk)) # podejzyj kod klasy Tk z modulu tkinter
+    print(inspect.getdoc(tkinter.Tk)) # podejzyj docstring klasy Tk z modulu tkinter
+
 ## Python w Praktyce
 
 ### Praca z plikami i folderami
