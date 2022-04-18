@@ -744,6 +744,31 @@ Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (do
 ### HTTP i prosty serwer
 ### API wraz z FastAPI
 ### Bazy danych z SQLite
+
+Wiele funkcji z modułu <code>sqlite3</code> wymaga od nas by najpierw utworzyć obiekt <code>Connection</code> reprezentujący bazę danych.
+W poniższym przykładzie ścieżka do bazy danych to 'przykladowa_baza_danych.db':
+
+
+    import sqlite3
+    polaczenie = sqlite3.connect('przykladowa_baza_danych.db')
+
+Następnie wszystkie operacje wykounjemy przy pomocy kursora:
+
+    kursor = conn.cursor()
+
+Przykładowo chcemy utworzyć tabelę pracownicy:
+
+    kursor.execute('''CREATE TABLE pracownicy (imie, nazwisko, stanowisko)''')
+    kursor.execute("INSERT INTO stocks pracownicy ('Adam', 'Nowak', 'Programista')")
+
+Aby zmiany zostały zapisane, musimy wysłać je do bazy danych:
+
+    polaczenie.commit()
+
+Pod koniec pracy z bazą danych zamykamy połączenie:
+
+    polaczenie.close()
+
 ### Tkinter
 ### Logi
 
