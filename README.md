@@ -530,7 +530,7 @@ Istnieje szereg wyjątków zdefiniowanych w standardzie Pythona. Przykładowo je
 
     print(5 / 0)
 
-Tak, więc wyjątki możemy spotkać, jeśli niepoprawnie użyjemy funkcji bądź operatorów zdefiniowanych w standardzie języka. Możemy również sami wywołać wyjątki. Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Musimy zadbać o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji. 
+Tak, więc wyjątki możemy spotkać, jeśli niepoprawnie użyjemy funkcji bądź operatorów zdefiniowanych w standardzie języka. Możemy również sami wywołać wyjątki. Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji. 
 
     raise ValueError("Podano nieprawidłową wartość")
 
@@ -568,6 +568,17 @@ W Pythonie mamy możliwość tworzenia włanych wyjątków. Aby utworzyć własn
         def __init__(self, *args, **kwargs):
             komunikat = "Opis błędu jaki wystąpił"
             super().__init__(komunikat, *args, **kwargs)
+
+#### Wyjątki jako mechanizm przepływu sterowania
+
+Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterowania. W poniższym przykładzie używamy wyjątku do sprawdzenia, czy napis reprezentuje liczbę całkowitą:
+
+    def czy_liczba(napis):
+      try:
+        int(napis)
+      except ValueError:
+        return False
+      return True
 
 ### Wątki
 ### Lambdy
