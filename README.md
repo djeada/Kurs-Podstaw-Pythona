@@ -251,6 +251,14 @@ Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzię
 
 List używamy, gdy chcemy mieć kilka wartości dostępnych pod jedną nazwą.
 
+Przykład listy składającej się z kilku liczb całkowitych:
+
+    lista = [3, 2, 3, 9, 10]
+    
+Elementy listy nie muszą być tego samego typu:
+
+    lista = ['a', True, 0.3]
+
 Aby znaleźć liczbę elementów listy, użyj: 
        
     len(lista)
@@ -303,6 +311,10 @@ Krotek zamiast list, używamy gdy:
 * Liczy się szybkość.
 * Chcemy zabezpieczyć dane przed nadpisaniem.
 
+Przykład krotki składającej się z kilku liczb całkowitych:
+
+    krotka = (3, 2, 3, 9, 10)
+    
 Aby znaleźć liczbę elementów krotki, użyj:
 
     len(krotka)
@@ -334,6 +346,10 @@ Aby rozpakować krotkę składającą się z trzech elementów i zapisać je w t
 #### Zbiór
 
 Zbiory są przydatne, gdy chcemy, by wszystkie elementy w kolekcji były unikalne. Dodatkowo dla zbiorów mamy zaimplementowane wiele przydatnych funkcji, pozwalających w prosty sposób pracować na kilku zbiorach jednocześnie.
+
+Przykład zbioru składającego się z kilku liczb całkowitych:
+
+    zbior = {3, 2, 3, 9, 10}
 
 Aby znaleźć liczbę elementów zbioru, użyj:
 
@@ -367,40 +383,46 @@ Aby znaleźć elementy zbioru zbior1, które nie są w zbiorze zbior2, użyj:
 
 Słowniki przydatne są, gdy chcemy użyć innych indeksów niż numeryczne. Dodatkowo słowniki są mega szybkie.
 
+Przykład słownika, którego kluczami są napisy a wartościami liczby całkowite:
+
+    slownik = {'a': 3, 'k': -2, 'b': 10}
+
 Aby znaleźć liczbę elementów słownika, użyj:
 
-    len(słownik)
+    len(slownik)
 
 Aby dodać element b do słownika i zapisać go pod kluczem a, użyj:
 
-    słownik[a] = b
+    slownik[a] = b
 
 Aby usunąć element ze słownika pod kluczem a, użyj:
 
-    del słownik[a]
+    del slownik[a]
 
 Aby sprawdzić, czy klucz występuje w słowniku, użyj:
 
-    a in słownik
+    a in slownik
 
 Aby sprawdzić, czy wartość występuje w słowniku, użyj:
 
-    b in słownik.values()
+    b in slownik.values()
 
 Aby wypisać klucze i wartości słownika, użyj:
 
-    for klucz, wartość in słownik.items():
-        print(klucz, wartość)
+    for klucz, wartosc in slownik.items():
+        print(klucz, wartosc)
 
 Aby klucze i wartości posortować wg kluczy, użyj:
 
-    for klucz, wartość in sorted(słownik.items(), key=lambda x: x[0]):
-        print(klucz, wartość)
+    for klucz, wartosc in sorted(slownik.items(), key=lambda x: x[0]):
+        print(klucz, wartosc)
 
 Aby klucze i wartości posortować wg wartości, użyj:
 
-    for klucz, wartość in sorted(słownik.items(), key=lambda x: x[1]):
-        print(klucz, wartość)
+    for klucz, wartosc in sorted(slownik.items(), key=lambda x: x[1]):
+        print(klucz, wartosc)
+
+Uwaga nie wszystkie typy możemy domyślnie użyć jako kluczy w słowniku! Kluczami mogą być jedynie obiekty haszowalne, czyli takie, które posiadają metodę <code>__hash__()</code>. Przykładowo kluczem słownika nie może być lista, ale może być napis.
 
 ### Enum
 
