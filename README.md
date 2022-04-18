@@ -25,9 +25,11 @@ Kurs podstaw Pythona
   - [Wyjątki](#Wyjątki)
   - [Wątki](#Wątki)
   - [Lambdy](#Lambdy)
+  - [Programowanie funkcyjne](#Programowanie-funkcyjne)
   - [Data classes](#Data-classes)
-  - [Generatory](#Generatory)
   - [Iteratory](#Iteratory)
+  - [Generatory](#Generatory)
+  - [Dekoratory](#Dekoratory)
 
 - [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
   - [Moduły i paczki](#Moduły-i-paczki)
@@ -576,8 +578,32 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
     print(lista_b)
 
 ### Data classes
-### Generatory
 ### Iteratory
+### Generatory
+### Dekoratory
+
+Dekorator to funkcja, która przyjmuje inną funkcję jako argument. Dekorator może przetworzyć funkcję przekazaną jako argument, połączyć ją z inną funkcją (funkcjami) lub podmienić ją na inną funkcję. Połączenie funkcji z dekoratorem spowoduje wywołanie dekoratora w momencie wywołania funkcji.
+
+Przykład dekoratora dodającego <code>print('przetwarzam dane')</code> przed wywołaniem funkcji dekorowanej:
+
+    def dekoruj(funkcja):
+      def funkcja_wew():
+        print('przetwarzam dane')
+        funkcja()
+      return funkcja_wew
+
+Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chcemy dekorować:
+
+    # sposob 1:
+    @dekoruj
+    def foo():
+     print('funkcja foo()')
+
+    # sposob 2:
+    def foo():
+     print('funkcja foo()')
+
+    foo = dekoruj(foo)
 
 ## Inżynieria oprogramowania
 
