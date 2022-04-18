@@ -542,6 +542,17 @@ W Pythonie mamy możliwość tworzenia włanych wyjątków. Aby utworzyć własn
 
 ### Wątki
 ### Lambdy
+### Programowanie funkcyjne
+
+W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z wielkich liter otrzymanego słowa:
+
+    napis = 'Python is Love'
+    lista_a = [c for c in napis if c.isupper()]
+    lista_b = list(map(lambda x: x.upper(), filter(lambda x: x.isupper(), napis)))
+
+    print(lista_a)
+    print(lista_b)
+
 ### Data classes
 ### Generatory
 ### Iteratory
