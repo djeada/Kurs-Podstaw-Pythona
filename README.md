@@ -601,6 +601,23 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
 
 Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych elementów, takich jak inicjalizacja zmiennych argumentami funkcji __init__ oraz operatory porównania. Klasy danych (data classes) automatyzują te powtarzalne procesy i jedyne czego potrzebujemy, to deklaracja pól w obrębie klasy. Są one szczególnie przydatne, gdy klasa, którą piszemy ma na celu głównie grupowanie danych.
 
+    @dataclass(unsafe_hash=True, order=True)
+    class RGB:
+      czerwony: int
+      zielony: int
+      niebieski: int
+
+
+|    Funkcjonalność     |                      Przykład                      |
+----------------------- |--------------------------------------------------- |
+| Inicjalizacja pól     |  kolor = RGB(255, 255, 0)                          |
+| Konwersja na napis    |  RGB(czerwony=255, zielony=255, niebieski=0)       |
+| Porównanie            |  RGB(255, 255, 0) == RGB(255, 120, 255)            |
+| Porządkowanie         |  sorted([ RGB(255, 255, 0), RGB(255, 120, 255)])   |
+| Funkcja haszująca     |  slownik = {kolor : "kolor"}                       |
+| Rozpakowanie          |  asdict(RGB(255, 255, 0)).valu                     |
+| Optymalizacja pamięci |  sys.getsizeof(RGB)                                |
+
 ### Generatory
 
 Generator jest bardzo podobny do funkcji zwracającej listę. Jednak, zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
