@@ -612,7 +612,7 @@ Standardowo wszystkie kolekcje w Pythonie mają zaimplementowaną funkcję It <c
 
 Ten mechanizm jest używany wewnętrznie przez pętlę for. Iteratory pozwalają na implementacje własnych zasad przechodzenia przez kolekcję.
 
-    class ObiektIterowalny(object):
+    class ObiektIterowalny:
 
       def __init__(self):
         self.lista_a = [3, 2, 1]
