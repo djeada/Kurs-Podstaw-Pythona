@@ -620,7 +620,7 @@ Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych eleme
 
 ### Generatory
 
-Generator jest bardzo podobny do funkcji zwracającej listę. Jednak, zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
+Generator jest bardzo podobny do funkcji zwracającej listę. Zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
 
 Przyjrzyjmy się dwóm programom:
 
