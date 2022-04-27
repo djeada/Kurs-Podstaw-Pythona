@@ -153,8 +153,8 @@ Pętla <code>For</code> ogólnie ma postać:
 Na razie do tworzenia pętli będziemy używać funkcji <code>range()</code>. Funkcja ta może przyjmować jeden, dwa lub trzy parametry.
 
 1. <code>range(10)</code> utworzy ciąg <code>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</code>, tak więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
-2. <code>range(5,12)</code> utworzy ciąg <code>(5, 6, 7, 8, 9, 10, 11)</code>, tak więc pętla: <code>for x in range(5,12)</code> zostanie wykonana 7 razy.
-3. <code>range(0,50,10)</code> utworzy ciąg <code>(0, 10 ,20, 30, 40)</code>, tak więc pętla: <code>for x in range(0,50,10)</code> zostanie wykonana 5 razy.
+2. <code>range(5, 12)</code> utworzy ciąg <code>(5, 6, 7, 8, 9, 10, 11)</code>, tak więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
+3. <code>range(0, 50, 10)</code> utworzy ciąg <code>(0, 10, 20, 30, 40)</code>, tak więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
 
 #### While
 
