@@ -584,15 +584,15 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
 ### Lambdy
 ### Programowanie funkcyjne
 
-W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z wielkich liter otrzymanego słowa:
+W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z numerów ASCII odpowiadających wielkim literom otrzymanego słowa:
 
     napis = 'Python is Love'
-    lista_a = [c for c in napis if c.isupper()]
-    lista_b = list(map(lambda x: x.upper(), filter(lambda x: x.isupper(), napis)))
+    lista_a = [ord(znak) for znak in napis if znak.isupper()]
+    lista_b = list(map(lambda znak: ord(znak), filter(lambda znak: znak.isupper(), napis)))
 
     print(lista_a)
     print(lista_b)
-
+    
 ### Data classes
 ### Iteratory
 
