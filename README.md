@@ -608,15 +608,15 @@ Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych eleme
       niebieski: int
 
 
-|    Funkcjonalność     |                      Przykład                      |
------------------------ |--------------------------------------------------- |
-| Inicjalizacja pól     |  kolor = RGB(255, 255, 0)                          |
-| Konwersja na napis    |  RGB(czerwony=255, zielony=255, niebieski=0)       |
-| Porównanie            |  RGB(255, 255, 0) == RGB(255, 120, 255)            |
-| Porządkowanie         |  sorted([ RGB(255, 255, 0), RGB(255, 120, 255)])   |
-| Funkcja haszująca     |  slownik = {kolor : "kolor"}                       |
-| Rozpakowanie          |  asdict(RGB(255, 255, 0)).valu                     |
-| Optymalizacja pamięci |  sys.getsizeof(RGB)                                |
+|    Funkcjonalność     |                      Przykład                                                           |
+----------------------- |---------------------------------------------------------------------------------------- |
+| Inicjalizacja pól     |  <code>kolor = RGB(255, 255, 0)</code>                                                  |
+| Konwersja na napis    |  <code>print(RGB(255, 255, 0))   # "RGB(czerwony=255, zielony=255, niebieski=0)"</code> |
+| Porównanie            |  <code>RGB(255, 255, 0) == RGB(255, 120, 255)</code>                                    |
+| Porządkowanie         |  <code>sorted([ RGB(255, 255, 0), RGB(255, 120, 255)])</code>                           |
+| Funkcja haszująca     |  <code>slownik = {kolor : "kolor"}</code>                                               |
+| Rozpakowanie          |  <code>asdict(RGB(255, 255, 0)).value</code>                                            |
+| Optymalizacja pamięci |  <code>sys.getsizeof(RGB)</code>                                                        |
 
 ### Generatory
 
