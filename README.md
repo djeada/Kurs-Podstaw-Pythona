@@ -24,11 +24,13 @@ Kurs podstaw Pythona
   - [Wyrażenia regularne](#Wyrażenia-regularne)
   - [Wyjątki](#Wyjątki)
   - [Wątki](#Wątki)
+  - [Procesy](#Procesy)
+  - [Asyncio](#Asyncio)
   - [Lambdy](#Lambdy)
   - [Programowanie funkcyjne](#Programowanie-funkcyjne)
-  - [Data classes](#Data-classes)
-  - [Iteratory](#Iteratory)
+  - [Klasy danych](#Klasy-danych)
   - [Generatory](#Generatory)
+  - [Iteratory](#Iteratory)
   - [Dekoratory](#Dekoratory)
 
 - [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
@@ -581,6 +583,8 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
       return True
 
 ### Wątki
+### Procesy
+### Asyncio
 ### Lambdy
 ### Programowanie funkcyjne
 
@@ -590,10 +594,45 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
     lista_a = [ord(znak) for znak in napis if znak.isupper()]
     lista_b = list(map(lambda znak: ord(znak), filter(lambda znak: znak.isupper(), napis)))
 
-    print(lista_a)
-    print(lista_b)
+    print(lista_a) # wyswietli ['p', 'l']
+    print(lista_b) # wyswietli ['p', 'l']
     
-### Data classes
+### Klasy danych
+
+Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych elementów, takich jak inicjalizacja zmiennych argumentami funkcji __init__ oraz operatory porównania. Klasy danych (data classes) automatyzują te powtarzalne procesy i jedyne czego potrzebujemy, to deklaracja pól w obrębie klasy. Są one szczególnie przydatne, gdy klasa, którą piszemy ma na celu głównie grupowanie danych.
+
+### Generatory
+
+Generator jest bardzo podobny do funkcji zwracającej listę. Jednak, zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
+
+Przyjrzyjmy się dwóm programom:
+
+a) W poniższym przykładzie zwracamy wartości z funkcji <code>foo()</code> przy pomocy słowa kluczowego <code>yield</code>:
+
+    def foo():
+      yield 1
+      yield 2
+      yield 3
+
+    print(list(foo()))
+   
+   Wynik po przekonwertowaniu na listę daje:
+   
+      [1, 2, 3]
+
+b) W tym przykładzie zwracamy wartości z funkcji <code>bar()</code> przy pomocy słowa kluczowego <code>return</code>:
+
+    def bar():
+      return 1
+      return 2 #Martwy kod
+      return 3
+
+    print(bar())
+
+  Wynik:
+   
+      1
+
 ### Iteratory
 
 Wiemy już, że przy pomocy pętli <code>for</code> możemy przejść przez kolejne elementy listy:
@@ -628,40 +667,7 @@ Ten mechanizm jest używany wewnętrznie przez pętlę for. Iteratory pozwalają
 
     for elem in obiekt:
       print(elem)
-
-### Generatory
-
-Generator jest bardzo podobny do funkcji zwracającej listę. Jednak, zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
-
-Przyjrzyjmy się dwóm programom:
-
-a) W poniższym przykładzie zwracamy wartości z funkcji <code>foo()</code> przy pomocy słowa kluczowego <code>yield</code>:
-
-    def foo():
-      yield 1
-      yield 2
-      yield 3
-
-    print(list(foo()))
-   
-   Wynik po przekonwertowaniu na listę daje:
-   
-      [1, 2, 3]
-
-b) W tym przykładzie zwracamy wartości z funkcji <code>bar()</code> przy pomocy słowa kluczowego <code>return</code>:
-
-    def bar():
-      return 1
-      return 2 #Martwy kod
-      return 3
-
-    print(bar())
-
-  Wynik:
-   
-      1
-
-
+      
 ### Dekoratory
 
 Dekorator to funkcja, która przyjmuje inną funkcję jako argument. Dekorator może przetworzyć funkcję przekazaną jako argument, połączyć ją z inną funkcją (funkcjami) lub podmienić ją na inną funkcję. Połączenie funkcji z dekoratorem spowoduje wywołanie dekoratora w momencie wywołania funkcji.
