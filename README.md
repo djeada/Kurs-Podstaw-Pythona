@@ -615,7 +615,7 @@ Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych eleme
 | Porównanie            |  <code>RGB(255, 255, 0) == RGB(255, 120, 255)</code>                                    |
 | Porządkowanie         |  <code>sorted([ RGB(255, 255, 0), RGB(255, 120, 255)])</code>                           |
 | Funkcja haszująca     |  <code>slownik = {kolor : "kolor"}</code>                                               |
-| Rozpakowanie          |  <code>asdict(RGB(255, 255, 0)).value</code>                                            |
+| Rozpakowanie          |  <code>asdict(RGB(255, 255, 0)).values()</code>                                         |
 | Optymalizacja pamięci |  <code>sys.getsizeof(RGB)</code>                                                        |
 
 ### Generatory
