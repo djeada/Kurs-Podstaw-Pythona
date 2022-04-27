@@ -595,7 +595,43 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
 
 ### Data classes
 ### Iteratory
+
+Wiemy już, że przy pomocy pętli <code>for</code> możemy przejść przez kolejne elementy listy:
+
+    for elem in lista:
+       print(elem)
+
+Standardowo wszystkie kolekcje w Pythonie mają zaimplementowaną funkcję It <code>__iter__()</code> zwracjącą ich iterator. Wywołanie funckji <code>next()</code> z przekazanym jako argument iteratorem da nam kolejny w sekwencji element kolekcji. Ostatni element wyrzuca wyjątek <code>StopIteration</code>,
+
+    lista = [1, 2, 3]
+    iterator = iter(lista)
+    print(next(iterator)) # wyswietli 1
+    print(next(iterator)) # wyswietli 2
+    print(next(iterator)) # wyswietli 3
+    print(next(iterator)) # zostanie wyrzucony wyjatek
+
+Ten mechanizm jest używany wewnętrznie przez pętlę for. Iteratory pozwalają na implementacje własnych zasad przechodzenia przez kolekcję.
+
+    class ObiektIterowalny(object):
+
+      def __init__(self):
+        self.lista_a = [3, 2, 1]
+        self.lista_b = [-1, -2, -3]
+
+      def __iter__(self):
+        licznik = 0
+        while licznik < len(self.lista_a) and len(self.lista_b):
+          yield self.lista_a[licznik], self.lista_b[licznik]
+          licznik+=1
+
+    obiekt = ObiektIterowalny()
+
+    for elem in obiekt:
+      print(elem)
+
 ### Generatory
+
+Generator jest bardzo podobny do funkcji zwracającej listę. Jednak, zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
 
 Przyjrzyjmy się dwóm programom:
 
