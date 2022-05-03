@@ -787,6 +787,8 @@ Większość współczesnych środowisk programistycznych (IDE) ma wbudowany deb
 
 ### Testy jednostkowe
 
+Testowanie to proces, w którym uruchamiamy program (bądź jego część) z zamiarem znalezienia błędów w działaniu.
+
 Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>.
 
 #### unittest
