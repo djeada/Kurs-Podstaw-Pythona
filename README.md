@@ -510,13 +510,13 @@ Na naszym poprzednim przykładzie z listą 2d, kopiowanie płytkie utworzy nowy 
     nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
     print(lista)
 
- 2. Kopiowanie glebokie 
+ 2. Kopiowanie głębokie 
 
 Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewnętrznych list musimy użyć kopiowania głębokiego.
 
     import copy
     lista = [[1, 2, 3], [4, 5, 6]]
-    nowa_lista = copy.copy(lista)
+    nowa_lista = copy.deepcopy(lista)
 
     nowa_lista.append([-1, -2, -3]) # modyfikuje jedynie nowa liste
     nowa_lista[0].insert(1, 1)      # modyfikuje jedynie nowa liste
