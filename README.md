@@ -34,7 +34,7 @@ Kurs podstaw Pythona
   - [Dekoratory](#Dekoratory)
 
 - [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
-  - [Moduły i paczki](#Moduły-i-paczki)
+  - [Moduły i pakiety](#Moduły-i-pakiety)
   - [Wersje Pythona](#Wersje-Pythona)
   - [PIP i PyPI](#PIP-i-PyPI)
   - [Środowisko wirtualne](#Środowisko-wirtualne)
@@ -741,7 +741,15 @@ Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chc
 
 ## Inżynieria oprogramowania
 
-### Moduły i paczki
+Poza znajomością samego języka programowania, do tworzenia oprogramowania programista musi jeszcze poznać szereg konwencji oraz narzędzi używanych w profesjonalnym środowisku.
+
+### Moduły i pakiety
+
+Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłych folderów.
+
+    import requests
+    print(type(requests)) # <class 'module'>
+
 ### Wersje Pythona
 
 <code>Pyenv</code> używany jest do izolowania różnych wersji Pythona. Na przykład jeśli chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz łatwego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. <code>Pyenv</code> ułatwia również proces pobierania i instalowania różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
