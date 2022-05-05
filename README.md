@@ -480,10 +480,39 @@ Przykład:
         def przedstaw_sie(self):
             print("Cześć, jestem " + self.imie + " " + self.nazwisko)
 
-    osoba = Osoba("Jan", "Kowalski")
-    inna_osoba = Osoba("Adam", "Nowak")
+    osoba = Osoba("Jan", "Kowalski")    # kazdy obiekt ma niezalezne wartosci zmiennych
+    inna_osoba = Osoba("Adam", "Nowak") # obiket inna_osoba jest niezalezny od obiektu osoba 
     osoba.przedstaw_sie()
     inna_osoba.przedstaw_sie()
+
+#### Dostęp do zmiennych w obiektach
+
+Dostęp do zmiennych odbywa się poprzez podanie nazwy obiektu, następnie kropki oraz nazwy zmiennej, którą chcemy odczytać:
+
+    nazwa_obiektu.nazwa_zmiennej
+    
+Modyfikacja wartości przechowanych w zmiennych odbywa się tak samo, jak dla zwykłych zmiennych.
+
+    osoba = Osoba("Jan", "Kowalski")
+    osoba.imie = "Adam"
+    print(osoba.imie) # Zostanie wyswietlone Adam
+
+Mamy również możliwość przy każdym odczycie i modyfikacji wartości zmiennych przechowywanych w obiektach wywołać zdefiniowaną przez nas funkcję. Do tego celu służą dekoratory <code>@property</code> oraz <code>@nazwa_zmiennej.setter</code>.
+
+    class Osoba:
+        def __init__(self, imie, nazwisko):
+            self._imie = imie          # utarlo sie ze nazwy zmiennych dla ktorych zdefiniowane jest @property 
+            self._nazwisko = nazwisko  # oraz odpowiadajacy setter zaczynaja sie od podkreslnika
+
+    @property
+    def imie(self):
+      print('Ktos probuje odczytac imie')
+      return self._imie
+
+    @imie.setter
+    def imie(self, nowa_wartosc):
+       print('Ktos modyfikuje imie')
+       self._imie = nowa_wartosc
 
 ### Referencje i kopiowanie
 
