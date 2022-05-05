@@ -752,6 +752,39 @@ Linki:
 * https://github.com/pyenv-win/pyenv-win
 
 ### PIP i PyPI
+
+PIP to program, który pozwala na instalację pakietów Pythona dostępnych na stronie <a href="https://pypi.org/">PyPI</a>.
+
+Instalacja:
+
+1. Pobierz skrypt <a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a>.
+1. Uruchom skrypt <code>python get-pip.py</code>.
+1. Zweryfikuj poprawność instalcji wpisując w wierszu poleceń następujące komendy: <code>pip help</code>.
+
+Aby zainstalować konkretny pakiet, użyj:
+
+    pip install <nazwa_pakietu>
+    
+Aby wyświetlić szczegóły zainstalowanego pakietu, użyj:
+    
+    pip show <nazwa_pakietu>
+    
+Aby wyświetlić listę wszystkich aktualnie używanych pakietów, użyj:
+
+    pip list
+    
+Aby zapisać w pliku *requirements.txt* listę wszystkich aktualnie używanych pakietów wraz z wersjami, użyj:
+
+    pip freeze > requirements.txt
+    
+Aby odinstalować pakiet, użyj:
+
+    pip uninstall <nazwa_pakietu>
+
+Linki:
+
+* https://pypi.org/
+
 ### Środowisko wirtualne
 
 Środowisko wirtualne to odizolowane od reszty systemu wersje bibliotek i pakietów Pythona. Instalując daną wersję pakietu w środowisku wirtualnym jest ona dostępna tylko w nim. Gdy usuwamy środowisko wirtualne wraz z nim znika również wszystko to co zostało zainstalowane w jęgo obrębie.
