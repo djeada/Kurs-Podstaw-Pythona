@@ -971,6 +971,14 @@ Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (do
 
 ### Pliki wykonywalne i PyInstaller
 
+Instalacja
+
+    pip install pyinstaller
+    
+Przykład użycia z wiersza poleceń:
+
+    pyinstaller --onefile sciezka_do_pliku.py
+
 ### Kod bajtowy
 
 Do wyświetlania kodu bajtowego służy moduł <code>dis</code>:
