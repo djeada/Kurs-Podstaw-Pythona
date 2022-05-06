@@ -32,6 +32,7 @@ Kurs podstaw Pythona.
   - [Generatory](#Generatory)
   - [Iteratory](#Iteratory)
   - [Dekoratory](#Dekoratory)
+  - [Serializacja](#Serializacja)
 
 - [Inżynieria oprogramowania](#Inżynieria-oprogramowania)
   - [Moduły i pakiety](#Moduły-i-pakiety)
@@ -738,6 +739,8 @@ Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chc
      print('funkcja foo()')
 
     foo = dekoruj(foo)
+
+### Serializacja
 
 ## Inżynieria oprogramowania
 
