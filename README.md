@@ -48,7 +48,6 @@ Kurs podstaw Pythona.
 - [Python w Praktyce](#Python-w-Praktyce)
   - [Praca z plikami i folderami](#Praca-z-plikami-i-folderami)
   - [Pandas i csv](#Pandas-i-csv)
-  - [Daty](#Daty)
   - [Informacje o systemie operacyjnym](#Informacje-o-systemie-operacyjnym)
   - [HTTP i prosty serwer](#HTTP-i-prosty-serwer)
   - [API wraz z FastAPI](#API-wraz-z-FastAPI)
@@ -1033,7 +1032,6 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 
 ### Praca z plikami i folderami
 ### Pandas i csv
-### Daty
 ### Informacje o systemie operacyjnym
 ### HTTP i prosty serwer
 ### API wraz z FastAPI
