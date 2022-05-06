@@ -570,7 +570,6 @@ Powiedzmy, że mamy plik gdzie każdy wiersz zawiera trzy informacje oddzielone 
 
 Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bardzo kruche. Cokolwiek zmieni się w naszych danych, musimy przerabiać nasz algorytm. Za każdym razem musimy być bardzo uważni i rozumieć każdy wiersz kodu. W takim podejściu bardzo łatwo popełnić błąd. Istnieje jednak inna metoda. Wyrażenia regularne są deklaratywne, tzn. mówimy co chcemy mieć, a nie w jaki sposób.
 
-
     import re
 
     dane = 'Kowalski/Maj 15, 1983/1721.3'
@@ -583,9 +582,9 @@ Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bard
 
 #### Reguły przy pracy z wyrażeniami regularnymi
 
-* Zbuduj najprostsza wersje wyrazenia regularnego do twojego problemu. 
-* Zawsze testuj czy znajduje TYLKO to co chcesz. Latwo miec false positives. 
-* Rozszerz o inne przypadki.
+1. Zbuduj najprostszą wersję wyrażenia regularnego pasującą do twojego problemu. 
+1. Zawsze testuj czy wyrażenie regularne znajduje TYLKO to, co chcesz, by zostało znalezione. Łatwo o wynik fałszywie pozytywny.
+1. Rozszerz wyrażenie regularne o inne przypadki.
 
 ### Wyjątki
 Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami. 
