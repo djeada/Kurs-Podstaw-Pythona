@@ -745,7 +745,7 @@ Poza znajomością samego języka programowania, do tworzenia oprogramowania pro
 
 ### Moduły i pakiety
 
-Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłych folderów.
+Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
 
     import requests
     print(type(requests)) # <class 'module'>
