@@ -934,17 +934,17 @@ Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę apl
 
 ### Dokumentacja
 
-Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest <a href ="https://www.sphinx-doc.org/en/master/">SPHINX</a>. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
+Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest <a href ="https://www.sphinx-doc.org/en/master/">SPHINX</a>. Jego głównymi zaletami są prostota obsługi oraz ogrom dostępnych opcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można również łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
 
-Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), na podstawie twoich odpowiedzi SPHINX wygeneruje odpowiednie pliki startowe i wypełni je treścią.
+Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), a na podstawie twoich odpowiedzi SPHINX wygeneruje odpowiednie pliki startowe i wypełni je treścią.
 
     quickstart
 
-Aby utworzyć dokumentację z plików konfiguracyjnych, należy użyć komendy <code>make</code> wraz z formatem, w jakim chcemy, aby była nasza dokumentacja.
+Aby utworzyć dokumentację z plików konfiguracyjnych, należy użyć komendy <code>make</code> wraz z formatem, w jakim chcemy, aby zapisana została dokumentacja.
 
     make html
 
-Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu <code>make</code> nie napotkał żadnych problemów. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach. Przykładem błędu może być umieszczenie linku do nieistniejącego pliku.
+Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu <code>make</code> nie napotkał żadnych problemów. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach. Przykładową przyczyną wystąpienia błędu może być umieszczenie linku do nieistniejącego pliku.
 
 #### reStructuredText
 
