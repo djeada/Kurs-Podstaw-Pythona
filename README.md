@@ -80,7 +80,7 @@ Otwórz konsolę Python i wpisz:
 
 Zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
 
-Masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza Enter, zostanie od razu zwrócony wynik wywołania komendy.
+Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza *Enter*, zostanie od razu zwrócony wynik wykonania instrukcji.
 
     >>> help
     Type help() for interactive help, or help(object) for help about object.
@@ -105,7 +105,7 @@ Typy danych w Pythonie:
 - Napisy (string) 
 - Typ logiczny (bool) 
 
-Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program staje się czytelny i łatwiejszy w utrzymaniu.
+Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program jest czytelny, a co za tym idzie łatwiejszy w utrzymaniu.
 
 Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
