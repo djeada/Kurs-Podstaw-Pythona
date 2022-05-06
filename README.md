@@ -186,20 +186,20 @@ Jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce 
 
 ### Funkcje
 
-Funkcje umożliwiają wielokrotne wywołanie w kodzie pojedynczej instrukcji bądź całego bloku instrukcji poprzez nadanie mu nazwy. Funkcja ma następującą postać:
+Funkcje to zamknięty pod jedną nazwą blok instrukcji. Blok teb może być sterowany z zewnątrz poprzez przekazywanie argumentów. Definicja funkcji polega na określeniu, jakie instrukcje należą do ciała funkcji, ile argumentów funkcja oczekuje oraz za pomocą jakiej nazwy będzie wywoływana w innych miejscach kodu. Sama definicja nie uruchamia jeszcze żadnych instrukcji. Dopiero użycie nazwy funkcji wraz z wartościami argumentów w innym miejscu kodu sprawia, że instrukcje zostają wykonane. Funkcja ma następującą postać:
 
     def nazwa_funkcji(argumenty):
-        kod
+        kod # cialo funkcji
 
-Ciało funkcji może być dowolnie rozbudowane, ale zaleca się, by większe funkcje rozbijać na mniejsze, każda o jednym zadaniu. W taki sposób zmniejszamy złożoność naszego kodu i kod staje się czytelniejszy.
+Ciało funkcji może być dowolnie rozbudowane, ale zaleca się, by większe funkcje rozbijać na mniejsze, każdą o jednym, jasno określonym celu. W taki sposób zmniejszana jest złożoność kodu, przez co staje się on czytelniejszy.
 
 Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
 
-    # w tym miejscu definiuję funkcję
+    # w tym miejscu definiuje funkcje
     def ryba():
        print('rybka')
 
-    # w tym miejscu wywołuje funkcję
+    # w tym miejscu wywoluje funkcję
     ryba()
 
 Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworzenie funkcji bez argumentów, jak i funkcji z 10 argumentami. Przykład:
@@ -209,7 +209,7 @@ Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworze
         for i in range(argument):
             print('ryba')
 
-Użycie słowa kluczowego <code>return</code> spowoduje wyjście z pętli. Poprzez <code>return</code> możemy przekazać do reszty programu wartość z wnętrza funkcji. Taką wartość często zapisujemy w zmiennej po wywołaniu funkcji w innym miejscu programu.
+Użycie słowa kluczowego <code>return</code> spowoduje wyjście z funkcji (instrukcje umieszczone poniżej nie zostaną wykonane). Poprzez <code>return</code> możemy również przekazać do reszty programu wartość z wnętrza funkcji. Taka wartość po wywołaniu funkcji jest często zapisywana w zmiennej w innym miejscu programu.
 
     def suma_trzech(a, b, c):
         return a + b + c
@@ -219,9 +219,9 @@ Użycie słowa kluczowego <code>return</code> spowoduje wyjście z pętli. Poprz
 
 ### Napisy
 
-<code>String</code> to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery lub znaki interpunkcyjne, ale również cyfry.
+<code>String</code> to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery, znaki interpunkcyjne, jak również i cyfry.
 
-W Pythonie napis deklarujemy, używając apostrofów  bądź cudzysłowów. 
+W Pythonie napis deklarujemy, używając apostrofów bądź cudzysłowów. 
 
     napis = 'James' 
     napis = "James" 
@@ -231,7 +231,7 @@ Nie ma oddzielnego typu dla pojedynczego znaku. Pojedynczy znak to napis o dług
 
 Przykładowo dla kodu <code>James = 'Lubie go'</code>, wywołanie <code>James[0]</code> zwróci literę 'L'. Wywołanie <code>James[2]</code> zwróci literę 'b'. 
 
-Zainicjalizowany napis nie może być zmieniony. To znaczy, nie możemy zrobić czegoś takiego: <code>James[0]='z'</code>. Jeśli chcemy wprowadzić zmiany do napisu, musimy nadpisać aktualny napis innym napisem.
+Zainicjalizowany napis nie może jest modyfikowalny. To znaczy, nie możemy zrobić czegoś takiego: <code>James[0]='z'</code>. Jeśli chcemy wprowadzić zmiany do napisu, musimy aktualny napis nadpisać nowym napisem.
 
     napis = "pierwotny"
     napis = "nowy"
@@ -244,7 +244,7 @@ Aby w napisie użyć, wartości innej zmiennej musimy przed cudzysłowami postaw
 ### Struktury danych
 
 Algorytm to skończona lista kroków (instrukcji). Kroki te sprawdzają, kopiują, usuwają, czy w inny sposób manipulują danymi.
-Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzięki ich implementacjom w Pythonie możemy do całej kolekcji danych (a nie tylko pojedynczej zmiennej) odnosić się przy pomocy jednej nazwy. Istnieje bardzo wiele struktur danych, które różnią się oferowanymi funkcjonalnościami.
+Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzięki ich implementacjom w Pythonie możemy do całej kolekcji danych (a nie tylko pojedynczej zmiennej) odnosić się przy pomocy jednej nazwy. Istnieje bardzo wiele struktur danych, które różnią się oferowanymi funkcjonalnościami oraz szybkością ich wykonania.
 
 * Listy: elementy są uporządkowane i można je zmieniać. W liście mogą występować duplikaty.
 * Krotki: elementy są uporządkowane i nie można ich zmieniać. W krotce mogą występować duplikaty.
