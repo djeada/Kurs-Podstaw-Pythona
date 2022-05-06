@@ -555,6 +555,38 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
 ### Czyste funkcje i skutki uboczne
 ### Dziedziczenie i kompozycja
 ### Wyrażenia regularne
+
+Pracując z tekstem niejednokrotnie chcemy wyszukać słowo, wiersz bądź zdanie, ale nie mamy jednego sztywnego klucza tylko wzorzec. Przykładowo chcemy znaleźć wszystkie słowo zaczynające się od *abc* lub składające się wyłącznie z małych liter oraz cyfr parzystych. Filtrowanie to następny przykład zadania do którego wykorzystywane są wzorce. Przykładowo chcemy usunąć z tekstu wszystkie liczby. 
+
+Powiedzmy, że mamy plik gdzie każdy wiersz zawiera trzy informacje oddzielone ukośnikami: nazwisko pracownika, datę odczytu, oraz odczyt licnzika. Jak wyciągnąć datę z wiersza? Używając klasycznych funkcji znanej nam klasy <code>String</code> moglibyśmy to zrobić w ten sposób:
+
+    dane = 'Kowalski/Maj 15, 1983/1721.3'
+    pracownik, data, odczyt = dane.split('/')
+    miesiac, dzien, rok = data.split(' ')
+    if dzien[-1] == ',':
+      dzien = dzien[:-1]
+
+    print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+
+Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bardzo kruche. Cokolwiek zmieni się w naszych danych, musimy przerabiać nasz algorytm. Za każdym razem musimy być bardzo uważni i rozumieć każdy wiersz kodu. W takim podejściu bardzo łatwo popełnić błąd. Istnieje jednak inna metoda. Wyrażenia regularne są deklaratywne, tzn. mówimy co chcemy mieć, a nie w jaki sposób.
+
+
+    import re
+
+    dane = 'Kowalski/Maj 15, 1983/1721.3'
+    match = re.search('(.*)/(.*)/(.*)', dane)
+    data = match.group(2) # czesc tekstu odpowiadajaca drugiemu nawiasowi
+    data = re.sub('[^\w\s]', '', data) # usun znaki interpunkcyjne
+    miesiac, dzien, rok = re.split('[\s/]', data) # rozbij przy pomocy spacji
+
+    print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+
+#### Reguły przy pracy z wyrażeniami regularnymi
+
+* Zbuduj najprostsza wersje wyrazenia regularnego do twojego problemu. 
+* Zawsze testuj czy znajduje TYLKO to co chcesz. Latwo miec false positives. 
+* Rozszerz o inne przypadki.
+
 ### Wyjątki
 Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami. 
 
@@ -616,6 +648,8 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
 ### Procesy
 ### Asyncio
 ### Lambdy
+
+
 ### Programowanie funkcyjne
 
 W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z numerów ASCII odpowiadających wielkim literom otrzymanego słowa:
