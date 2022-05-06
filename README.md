@@ -894,7 +894,7 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
 
 #### Nie używaj losowych danych w testach
 
-Załóżmy, że masz własną implementację algorytmu sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
+Załóżmy, że masz własną implementację jednego z algorytmów sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
 
     import pytest
     
@@ -914,9 +914,9 @@ Załóżmy, że masz własną implementację algorytmu sortowania. Jeśli chcesz
 
 Znaleziono bug w twoim programie. Co robić?
 
-1. Spróbuj odtworzyć problematyczną sytuację. Przykładowo twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę.  Spróbuj manualnie wykonać wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
+1. Spróbuj odtworzyć problematyczną sytuację. Przykładowo powiedzmy, że twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę. Najpierw manualnie wykonaj wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
 1. Wytrop w kodzie, który fragment jest odpowiedzialny za znaleziony błąd.
-1. Dodaj test mający sprawdzić, czy niepożądana sytuacja pojawiła się po wykonaniu wytropionego fragmentu kodu. Przykładowo jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code> to najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja foo() wywoływana jest wraz z parametrami przy których pojawia się błąd. Dodaj test wykrywający wystąpienie nieporządanej systuacji. Po uruchomieniu testu, otrzymasz czerwony komunikat. 
+1. Dodaj test mający sprawdzić, czy niepożądana sytuacja pojawiła się po wykonaniu wytropionego fragmentu kodu. Przykładowo, jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code>, to najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja <code>foo()</code> wywoływana jest wraz z parametrami, przy których pojawia się błąd. Dodaj test wykrywający wystąpienie niepożądanej sytuacji. Po uruchomieniu testu otrzymasz czerwony komunikat. 
 1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by twój test pozostał już zielony.
 1. Zanim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
 
@@ -934,9 +934,9 @@ Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę apl
 
 ### Dokumentacja
 
-Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest Sphinx. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
+Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest <a href ="https://www.sphinx-doc.org/en/master/">SPHINX</a>. Jest prosty w użyciu i zawiera wiele przydatnych funkcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
 
-Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), na podstawie twoich odpowiedzi Sphinx wygeneruje odpowiednie pliki startowe i wypełni je treścią.
+Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), na podstawie twoich odpowiedzi SPHINX wygeneruje odpowiednie pliki startowe i wypełni je treścią.
 
     quickstart
 
