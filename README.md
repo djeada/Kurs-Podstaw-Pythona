@@ -914,19 +914,11 @@ Załóżmy, że masz własną implementację algorytmu sortowania. Jeśli chcesz
 
 Znaleziono bug w twoim programie. Co robić?
 
-1. Spróbuj odtworzyć daną sytuację.
-
-Przykładowo twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę. 
-Spróbuj manualnie odtworzyć wszystkie kroki prowadzące do pojawienia się tej sytuacji.
-
-2. Następnie przenieś te kroki na kod.
-3. Dodaj test mający sprawdzić, czy niepożądana sytuacja się nie powtarza.
-
-Jeśli błąd pojawia się w funkcji <code>foo()</code> to najpierw znajdź test <code>test_foo()</code> i umieść w nim znalezione kroki. Następnie napraw funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by twój test pozostał już zielony.
-
-4. Zanim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. 
-
-Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
+1. Spróbuj odtworzyć problematyczną sytuację. Przykładowo twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę.  Spróbuj manualnie wykonać wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
+1. Wytrop w kodzie, który fragment jest odpowiedzialny za znaleziony błąd.
+1. Dodaj test mający sprawdzić, czy niepożądana sytuacja pojawiła się po wykonaniu wytropionego fragmentu kodu. Przykładowo jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code> to najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja foo() wywoływana jest wraz z parametrami przy których pojawia się błąd. Dodaj test wykrywający wystąpienie nieporządanej systuacji. Po uruchomieniu testu, otrzymasz czerwony komunikat. 
+1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by twój test pozostał już zielony.
+1. Zanim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
 
 #### Podział testów
 
@@ -938,7 +930,7 @@ Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/softw
 
 #### Automatycznie twórz dane potrzebne do testowania aplikacji
 
-Napisz kod, który automatycznie zbuduje całą aplikację wraz z potrzebnymi zasobami. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją odpowiednimi tabelami wraz z przykładowymi danymi. Dzięki temu, w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo dzięki temu masz możliwość automatycznego testowania całego programu.
+Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę aplikację oraz potrzebne jej zasoby zbudować. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
 
 ### Dokumentacja
 
@@ -960,14 +952,17 @@ Plikiem startowym dokumentacji jest <code>index.rst</code>. Plik ten zapisany je
 
 #### Jak pisać dobrą dokumentację?
 
-1. Zacznijmy od tutoriali. Powinniśmy pokazać użytkownikowi naszego oprogramowania jak je zainstalować i uruchomić.
-2. Drugim istotnym punktem jest poradnik. Powinniśmy jasno przedstawić jak używać naszego programu. Wszystkie dostępne funkcje powinny być zaprezentowane i wyjaśnione.
-3. Inną istotną rzeczą są wyjaśnienia. Innych programistów interesować będzie jak działa nasz program za kulisami. Należy opisać jakie decyzje zostały podjęte przy projektowaniu.
-4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo powinno zostać opisane API (interfejs programistyczny aplikacji).
+1. Zacznij od tutoriali. Pokaż użytkownikowi jak zainstalować oraz uruchomić twoją aplikację.
+2. Przygotuj scenariusze użycia programu. Opisz dokładnie wszystkie dostępne funkcje. Zaprezentuj, do czego służy każdy z elementów graficznych.
+3. Wyjaśnij, jak działa twój program za kulisami. Odpowiedz na następujące pytania: 
+  - jakie technologie zostały użyte oraz w jakim celu; 
+  - jakie elementy składowe tworzą twoją aplikację;
+  - jakie decyzje zostały podjęte przy projektowaniu.
+4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo powinno zostać wszelkie zewnętrzne API (interfejs programistyczny aplikacji).
 
 #### Automatyczne generowanie dokumentacji do API
 
-Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (docstrings)  mogą zostać wykorzystane do automatycznego generowania dokumentacji.
+Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (docstrings) mogą zostać wykorzystane do automatycznego generowania dokumentacji.
 
 ### Pliki wykonywalne i PyInstaller
 
