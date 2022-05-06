@@ -1,5 +1,5 @@
-# Kurs-podstaw-Pythona
-Kurs podstaw Pythona
+# Kurs-Podstaw-Pythona
+Kurs podstaw Pythona.
 
 ## Spis Treści
 <!--ts-->
