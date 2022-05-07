@@ -68,19 +68,19 @@ Fundamenty języka Python. Nauka budowania programów. Podstawy algorytmiki.
 Aby zainstalować Pythona w systemie Windows, należy wykonać następujące kroki:
 
 1. Odwiedź stronę [Python.org](https://www.python.org/downloads/).
-2. Kliknij odpowiednią wersję Pythona.
+2. Wybierz odpowiednią wersję Pythona.
 3. Pobierz instalator i przejdź przez proces instalacji.
 
 ### Interaktywna konsola
 
-Otwórz konsolę Python i wpisz:
+Otwórz konsolę Pythona i wpisz:
 
     >>> python
     python 2.7.13 (default, Sep  2 2019, 20:42:59)
 
 Zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
 
-Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza *Enter*, zostanie od razu zwrócony wynik wykonania instrukcji.
+Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza *Enter*, zostanie od razu zwrócony wynik wykonania danej instrukcji.
 
     >>> help
     Type help() for interactive help, or help(object) for help about object.
@@ -100,19 +100,19 @@ Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersj
 Zmienna to pudełko przechowujące dane. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie. Każda zmienna ma również swój typ, czyli rodzaj danych, jaki przechowuje. 
 
 Typy danych w Pythonie: 
-- Liczby całkowite (int) 
-- Liczby zmiennoprzecinkowe (float) 
-- Napisy (string) 
-- Typ logiczny (bool) 
+- Liczby całkowite (*int*) 
+- Liczby zmiennoprzecinkowe (*float*) 
+- Napisy (*string*) 
+- Typ logiczny (*bool*) 
 
-Zmienne są podstawą każdego języka programowania. Nazwa może składać się z liter i cyfr, jednak nie może zaczynać się od cyfry. Python nie ogranicza długości nazwy zmiennej. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program jest czytelny, a co za tym idzie łatwiejszy w utrzymaniu.
+Zmienne są podstawą każdego języka programowania. Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się od cyfry. Python nie ogranicza długości nazw. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program jest czytelny, a co za tym idzie łatwiejszy w utrzymaniu.
 
 Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
     a = 3
     b = a
     b = 5
-    print(a)
+    print(a) # ???
 
 ### Warunki
 
@@ -125,12 +125,12 @@ Przy porównaniach początkujący programiści często zapominają, że pojedync
 
 Instrukcja warunkowa ma następującą postać:
 
-    If warunek:
+    if warunek:
         kod
     else:
         kod
 
-Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej zostanie wykonana jedynie, gdy warunek jest prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod słowem kluczowym else). Instrukcje warunkowe zwane są też czasami instrukcjami sterującymi.
+Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej <code>if</code> zostanie wykonana jedynie, gdy warunek zostanie oceniony na prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod słowem kluczowym <code>else</code>). Instrukcje warunkowe zwane są też czasami instrukcjami sterującymi.
 
 Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozycji trzy operatory logiczne: <code>and</code>, <code>or</code> i <code>not</code>: 
 
