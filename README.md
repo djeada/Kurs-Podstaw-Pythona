@@ -782,10 +782,17 @@ Poza znajomością samego języka programowania, do tworzenia oprogramowania pro
 
 Za każdym razem, gdy używamy instrukcji <code>import</code>, to importujemy do naszego skryptu zewnętrzny moduł. Dzięki temu zabiegowi wszystkie funkcje, klasy oraz zmienne globalne z danego modułu są dostępne w skrypcie, który go importuje. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona. Moduły możemy również tworzyć sami.
 
-Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
-
     import requests
     print(type(requests)) # <class 'module'>
+
+Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
+
+    .
+    └── nazwa_paczki
+        ├── __init__.py
+        └── przykladowy_skrypt_a.py
+        └── przykladowy_skrypt_b.py
+        └── przykladowy_skrypt_c.py
 
 ### Wersje Pythona
 
