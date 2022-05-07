@@ -780,6 +780,8 @@ Poza znajomością samego języka programowania, do tworzenia oprogramowania pro
 
 ### Moduły i pakiety
 
+Za każdym razem, gdy używamy instrukcji <code>import</code>, to importujemy do naszego skryptu zewnętrzny moduł. Dzięki temu zabiegowi wszystkie funkcje, klasy oraz zmienne globalne z danego modułu są dostępne w skrypcie, który go importuje. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona. Moduły możemy również tworzyć sami.
+
 Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
 
     import requests
@@ -896,7 +898,7 @@ Testowanie to proces, w którym uruchamiamy program (bądź jego część) z zam
 
 Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>.
 
-#### unittest
+#### Unittest
 
 Zbudowany zgodnie z filozofią programowania obiektowego. Mamy klasy, dziedziczenie i tysiąc różnych funkcji <code>assert</code>. 
  
@@ -912,7 +914,7 @@ Zbudowany zgodnie z filozofią programowania obiektowego. Mamy klasy, dziedzicze
         response_code, msg = self.smtp_connection().ehlo()
         self.assertEqual(response_code, 250)
 
-#### pytest
+#### Pytest
 
 Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. Jest jedna funkcja <code>assert</code>. 
 
