@@ -774,6 +774,33 @@ Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chc
 
 ### Serializacja
 
+Załóżmy, że napisałeś prostą grę, w której gracz może zdobywać punkty doświadczenia. Jeśli chcesz, żeby po ponownym uruchomieniu programu gracz mógł wznowić grę w dokładnie tym samym miejscu, gdzie poprzednio ją zakończył, to musisz w jakiś sposób zapisać tę informację. Serializacja to proces konwertowania obiektu na strumień bajtów w celu otworzenia jego stanu.
+
+Popularnym modułem do serializacji i deserializacji obiektów w Pythonie jest <code>pickle</code>.
+
+Funkcja <code>dumps()</code> służy do serjalizacji obiektu na strumień bajtów. Strumień ten można według życzenia zapisać do pliku, wysłać do innego procesu lub wrzucić na serwer.
+
+    import pickle
+
+    class Czlowiek:
+      def __init__(self, imie, numer):
+        self.imie = imie
+        self.numer = numer
+
+      def __repr__(self):
+        return f'Imie: {self.imie}, numer: {self.numer}'
+
+    sciekza = 'przyklad.pickle'
+
+    with open(sciekza, 'wb') as plik:
+      pickle.dump(Czlowiek('James', 10), plik)
+
+Funkcja <code>loads()</code> służy do odtwarzania stanu obiektów ze strumienia bajtów.
+
+    with open(sciekza, 'rb') as plik:
+      czlowiek = pickle.load(plik)
+      print(czlowiek) #Imie: James, numer: 10
+
 ## Inżynieria oprogramowania
 
 Poza znajomością samego języka programowania, do tworzenia oprogramowania programista musi jeszcze poznać szereg konwencji oraz narzędzi używanych w profesjonalnym środowisku.
