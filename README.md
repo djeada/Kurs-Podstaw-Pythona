@@ -154,9 +154,9 @@ Pętla <code>For</code> ogólnie ma postać:
 
 Na razie do tworzenia pętli będziemy używać funkcji <code>range()</code>. Funkcja ta może przyjmować jeden, dwa lub trzy parametry.
 
-1. <code>range(10)</code> utworzy ciąg <code>(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)</code>, tak więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
-2. <code>range(5, 12)</code> utworzy ciąg <code>(5, 6, 7, 8, 9, 10, 11)</code>, tak więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
-3. <code>range(0, 50, 10)</code> utworzy ciąg <code>(0, 10, 20, 30, 40)</code>, tak więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
+1. <code>range(10)</code> utworzy ciąg *(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)*, tak więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
+2. <code>range(5, 12)</code> utworzy ciąg *(5, 6, 7, 8, 9, 10, 11)*, tak więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
+3. <code>range(0, 50, 10)</code> utworzy ciąg *(0, 10, 20, 30, 40)*, tak więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
 
 #### While
 
@@ -455,9 +455,9 @@ Typ wyliczeniowy enum pozwala na tworzenie zmiennych, które mogą przyjmować j
 
 Nieraz w programie potrzebujemy użyć liczb losowych. Moduł <code>random</code> zawiera wiele przydatnych funkcji do losowania liczb całkowitych i zmiennoprzecinkowych.
 
-- instrukcja <code>random.random()</code> wylosuje liczbę zmiennoprzecinkową z przedziału od 0 do 1.
-- <code>random.uniform(a,b)</code> wylosuje liczbę zmiennoprzecinkową z przedziału od a do b.
-- instrukcja <code>random.randint(a,b)</code> wylosuje liczbę całkowitą z przedziału od a do b.
+- instrukcja <code>random.random()</code> wylosuje liczbę zmiennoprzecinkową z przedziału od *0* do *1*.
+- <code>random.uniform(a,b)</code> wylosuje liczbę zmiennoprzecinkową z przedziału od *a* do *b*.
+- instrukcja <code>random.randint(a,b)</code> wylosuje liczbę całkowitą z przedziału od *a* do *b*.
 
 Najprostszy przykład rozkładu prawdopodobieństwa to rozkład jednostajny. Dla jednostajnego rozkładu prawdopodobieństwa mamy stałą wartość gęstości prawdopodobieństwa na danym przedziale <code>[a,b]</code>. Poza tym przedziałem wartość gęstości prawdopodobieństwa wynosi 0. 
 
