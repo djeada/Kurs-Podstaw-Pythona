@@ -1061,10 +1061,11 @@ Plikiem startowym dokumentacji jest <code>index.rst</code>. Plik ten zapisany je
 1. Zacznij od tutoriali. Pokaż użytkownikowi jak zainstalować oraz uruchomić twoją aplikację.
 2. Przygotuj scenariusze użycia programu. Opisz dokładnie wszystkie dostępne funkcje. Zaprezentuj, do czego służy każdy z elementów graficznych.
 3. Wyjaśnij, jak działa twój program za kulisami. Odpowiedz na następujące pytania: 
-  - jakie technologie zostały użyte oraz w jakim celu; 
-  - jakie elementy składowe tworzą twoją aplikację;
-  - jakie decyzje zostały podjęte przy projektowaniu.
-4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo powinno zostać wszelkie zewnętrzne API (interfejs programistyczny aplikacji).
+  - Jakie technologie zostały użyte oraz w jakim celu?
+  - Jakie elementy składowe tworzą aplikację?
+  - Jakie trudności zostały napotkane przy pisaniu kodu oraz jak zostały rozwiązane?
+  - Jakie decyzje zostały podjęte przy projektowaniu aplikacji?
+4. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo opisane powinno zostać wszelkie zewnętrzne API (interfejs programistyczny aplikacji).
 
 #### Automatyczne generowanie dokumentacji do API
 
