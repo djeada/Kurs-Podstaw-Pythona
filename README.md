@@ -963,7 +963,7 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
 
-#### Nie używaj losowych danych w testach
+#### Losowe dane nie mają miejsca w testach
 
 Załóżmy, że masz własną implementację jednego z algorytmów sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
 
@@ -980,7 +980,6 @@ Załóżmy, że masz własną implementację jednego z algorytmów sortowania. J
        assert wlasne_sortowanie(lista_b) == sorted(lista_b)
        assert wlasne_sortowanie(lista_c) == sorted(lista_c)
 
-
 #### Od znalezienia buga do poprawnie działającego kodu
 
 Znaleziono bug w twoim programie. Co robić?
@@ -991,7 +990,7 @@ Znaleziono bug w twoim programie. Co robić?
 1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by twój test zawsze pozostał zielony.
 1. Zanim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
 
-#### Podział testów
+#### Inne typy testów
 
 Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/">"Software Engineering at Google"</a> testy należy rozdzielić na trzy kategorie w następujących proporcjach:
 
@@ -999,9 +998,45 @@ Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/softw
 * 15% testy integracyjne
 * 5% testy całego systemu (end-to-end)
 
-#### Automatycznie twórz dane potrzebne do testowania aplikacji
+#### Automatyczna generacja danych na potrzeby testów
 
 Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę aplikację oraz potrzebne jej zasoby zbudować. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
+
+### Orgnizacja projektu z testami
+
+Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmodułów. Przykładowo nasza aplikacja może wyglądać w ten sposób:
+
+    projekt
+    ├── przykladowy pakiet
+    │   ├── __init__.py
+    │   └── modul_a.py
+    │   └── modul_b.py
+    └── tests
+        ├── __init__.py
+        └── test_modul_a.py
+        └── test_modul_b.py
+
+Testy powinny być rozdzielone miedzy różne moduły podobnie jak pliki źródłowe. W ten sposób z jednej strony ograniczymy wielkość plików  z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
+
+Aby wywołać wszystkie testy, użyj:
+
+a) Dla modułu <code>unittest</code>:
+
+    $ python -m unittest discover
+    
+b) Dla modułu <code>pytest</code>:
+
+    $ pytest tests/
+
+Aby wywołać tylko testy z konkretnego modułu, użyj:
+
+a) Dla modułu <code>unittest</code>:
+
+    $ python -m unittest tests.test_modul_a
+
+b) Dla modułu <code>pytest</code>:
+
+    $ pytest tests/test_modul_a.py
 
 ### Dokumentacja
 
