@@ -1007,7 +1007,7 @@ Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę apl
 Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmodułów. Przykładowo nasza aplikacja może wyglądać w ten sposób:
 
     projekt
-    ├── przykladowy pakiet
+    ├── przykladowy_pakiet
     │   ├── __init__.py
     │   └── modul_a.py
     │   └── modul_b.py
