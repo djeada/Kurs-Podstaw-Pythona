@@ -1002,7 +1002,7 @@ Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/softw
 
 Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę aplikację oraz potrzebne jej zasoby zbudować. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
 
-### Orgnizacja projektu z testami
+### Organizacja projektu z testami
 
 Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmodułów. Przykładowo nasza aplikacja może wyglądać w ten sposób:
 
