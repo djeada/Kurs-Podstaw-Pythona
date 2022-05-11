@@ -138,9 +138,9 @@ Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozyc
 * <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
 * <code>not</code> – zaprzeczenie wyrażenia.
 
-Wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli a jest różne od 0 i jednocześnie b jest równe 5.
+Wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli *a* jest różne od 0 i jednocześnie *b* jest równe 5.
 
-Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli x jest podzielne przez 2 lub x jest podzielne przez 7.
+Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli *x* jest podzielne przez 2 lub *x* jest podzielne przez 7.
 
 ### Pętle
 
@@ -267,7 +267,7 @@ Aby znaleźć liczbę elementów listy, użyj:
        
     len(lista)
        
-Aby dodać element a na koniec listy, użyj:
+Aby dodać element *a* na koniec listy, użyj:
 
     lista.append(a)
 
@@ -275,11 +275,11 @@ Aby dodać wszystkie elementy z lista2 na koniec lista1, użyj:
 
     lista1.extend(lista2)
 
-Aby wstawić element a na pozycję i, użyj:
+Aby wstawić element *a* na pozycję i, użyj:
 
     lista.insert(i,a)
 
-Aby usunąć pierwsze wystąpienie elementu a w liście, użyj:
+Aby usunąć pierwsze wystąpienie elementu *a* w liście, użyj:
 
     lista.remove(a)
 
@@ -287,7 +287,7 @@ Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jak
 
     lista.pop([i])
 
-Aby znaleźć liczbę wystąpień elementu a w liście, użyj:
+Aby znaleźć liczbę wystąpień elementu *a* w liście, użyj:
 
     lista.count(a)
 
@@ -328,7 +328,7 @@ Aby znaleźć liczbę elementów krotki, użyj:
 
     len(krotka)
 
-Aby dodać element a na koniec krotki, użyj:
+Aby dodać element *a* na koniec krotki, użyj:
 
     krotka = krotka + (a,)
 
@@ -336,11 +336,11 @@ Aby dodać wszystkie elementy z krotka2 na koniec krotka1, użyj:
 
     krotka1 = krotka1 + krotka2
 
-Aby znaleźć indeks pierwszego wystąpienia elementu a w krotce, użyj:
+Aby znaleźć indeks pierwszego wystąpienia elementu *a* w krotce, użyj:
 
     krotka.index(a)
 
-Aby sprawdzić, czy element a występuje w krotce, użyj:
+Aby sprawdzić, czy element *a* występuje w krotce, użyj:
 
     a in krotka
 
@@ -364,15 +364,15 @@ Aby znaleźć liczbę elementów zbioru, użyj:
 
     len(zbior)
 
-Aby dodać element a do zbioru, użyj:
+Aby dodać element *a* do zbioru, użyj:
 
     zbior.add(a)
 
-Aby usunąć element a ze zbioru, użyj:
+Aby usunąć element *a* ze zbioru, użyj:
 
     zbior.remove(a)
 
-Aby sprawdzić, czy element a występuje w zbiorze, użyj:
+Aby sprawdzić, czy element *a* występuje w zbiorze, użyj:
 
     a in zbior
 
@@ -1111,7 +1111,6 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 
 Wiele funkcji z modułu <code>sqlite3</code> wymaga od nas by najpierw utworzyć obiekt <code>Connection</code> reprezentujący bazę danych.
 W poniższym przykładzie ścieżka do bazy danych to 'przykladowa_baza_danych.db':
-
 
     import sqlite3
     polaczenie = sqlite3.connect('przykladowa_baza_danych.db')
