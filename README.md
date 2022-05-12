@@ -647,6 +647,10 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
 ### Asyncio
 ### Lambdy
 
+* Jedna linia
+* Moga byc warunki
+* Brak opcji przypisania wartosci zmiennej
+* Brak petli
 
 ### Programowanie funkcyjne
 
