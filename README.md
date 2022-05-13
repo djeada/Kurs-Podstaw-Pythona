@@ -553,6 +553,56 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
 
 ### Czyste funkcje i skutki uboczne
 ### Dziedziczenie i kompozycja
+
+Dziedziczenie i kompozycja to dwa mechanizmy pozwalające na użycie w jednej klasie kodu z innej klasy. 
+
+Dziedziczenie kopiuje z klasy nadrzędnej wszystkie elementy do klasy podrzędnej. W klasie podrzędnej mamy bezpośredni dostęp do wszystkich pól klasy nadrzędnej i możemy również wywoływać jej wszystkie metody, tak jakby były wywoływane w klasie, która je zdefiniowała. Istnieje możliwość zmiany definicji metod klasy nadrzędnej w klasie podrzędnej. Dziedziczenia używamy, gdy nowa klasa jest szczególnym rodzajem już istniejącej klasy.
+
+    class Czlowiek:
+        def __init__(self, imie: str, nazwisko: str, miejsce_urodzenia: str, zawod: str):
+            self.imie = imie
+            self.nazwisko = nazwisko
+            self.miejsce_urodzenia = miejsce_urodzenia
+            self.zawod = zawod
+
+        def __str__(self):
+            return f"{self.imie} {self.nazwisko} {self.miejsce_urodzenia} {self.zawod}"
+
+
+    class Student(Czlowiek):
+        def __init__(self, imie: str, nazwisko: str, miejsce_urodzenia: str, numer_albumu: int, kierunek_studiow: str):
+            super().__init__(imie, nazwisko, miejsce_urodzenia, 'student')
+            self.numer_albumu = numer_albumu
+            self.kierunek_studiow = kierunek_studiow
+
+        def __str__(self):
+            return f"{super().__str__()} {self.numer_albumu} {self.kierunek_studiow}"
+
+        def __repr__(self):
+            return f"{super().__repr__()} {self.numer_albumu} {self.kierunek_studiow}"
+
+
+Istnieje kilka rodzajów kompozycji. Najprostszym przykładem jest zapisanie obiektu jednej klasy jako pole innej klasy. Definiowana klasa zawiera w sobie inną klasę. W nowo definiowanej klasie nie mamy bezpośredniego dostępu do pól oraz metod innej klasy, ale możemy się do nich dostać poprzez instancję tej klasy. Nie możemy zmienić definicji metod klasy zawartej w naszej klasie. Kompozycji używamy, gdy nowa klasa reprezentuje pewną całość, której istniejąca klasa jest częścią.
+
+    class Pensja:
+
+        def __init__(self, pensja: int, stopa_podwyzki: float):
+            self.pensja = pensja
+            self.stopa_podwyzki = stopa_podwyzki
+
+        def __str__(self):
+            return f"Pensja: {self.pensja}, stopa podwyzki: {self.stopa_podwyzki}"
+
+    class Pracownik:
+
+            def __init__(self, imie: str, nazwisko:str, pensja: Pensja):
+                self.imie = imie
+                self.nazwisko = nazwisko
+                self.pensja = pensja # kompozycja, pensja jest czescia pracownika
+
+            def __str__(self):
+                return f"Pracownik: {self.imie} {self.nazwisko}, zarabia rocznie: {self.pensja.roczna_pensja()}"
+
 ### Wyrażenia regularne
 
 Pracując z tekstem niejednokrotnie chcemy wyszukać słowo, wiersz bądź zdanie, ale nie mamy jednego sztywnego klucza tylko wzorzec. Przykładowo chcemy znaleźć wszystkie słowo zaczynające się od *abc* lub składające się wyłącznie z małych liter oraz cyfr parzystych. Filtrowanie to następny przykład zadania do którego wykorzystywane są wzorce. Przykładowo chcemy usunąć z tekstu wszystkie liczby. 
