@@ -697,10 +697,30 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
 ### Asyncio
 ### Lambdy
 
-* Jedna linia
-* Moga byc warunki
-* Brak opcji przypisania wartosci zmiennej
-* Brak petli
+Wyrażenia lambda to funkcje składające się wyłącznie z jednego wiersza instrukcji definiowane przy pomocy słowo kluczowego <code>lambda</code>. Lambdy nie używają słowa kluczowego <code>return</code>, gdyż zawsze zwracają wynik wykonania tworzącego je wiersza instrukcji. 
+
+    def zwykla_funkcja(liczba: int) -> int:
+      return liczba**2
+    
+    przyklad_lambdy = lambda liczba: liczba**2
+    
+    wartosc = 2
+    
+    print(zwykla_funkcja(wartosc)) # 4
+    print(przyklad_lambdy(wartosc)) # 4
+    print((lambda liczba: liczba**2)(wartosc)) # 4
+
+W porównaniu do znanych nam pełnoprawnych funkcji definiowanych poprzez słowo kluczowe <code>def</code>, lambdy są znacznie ograniczone:
+  - mamy do dyspozycji jedynie jeden wiersz instrukcji.
+  - jest możliwość sprawdzenia warunku, ale nie można zagnieżdżać warunków.
+  - brak opcji tworzenia zmiennych, jak i przypisania wartości do zmiennych już istniejących (dla obiektów możemy użyć <code>setattr()</code>).
+  - brak pętli.
+  
+Nasuwa się pytanie, po co tworzyć nowy mechanizm będący ograniczoną wersją już istniejącego? Otóż dzięki lambdom możemy znacznie ograniczyć liczbę wierszy kodu, a co za tym idzie poprawić czytelność kodu. Niejednokrotnie chcemy wykorzystać funkcję jedynie raz, zamiast tworzyć nową pełnoprawną funkcję przy użyciu słowa kluczowego <code>def</code>, możemy użyć lambdy.
+
+    lista = (('def', 100), ('ghi', 200), ('abc', 300))
+    print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
+    print(sorted(lista, key=lambda x: x[1])) # [('def', 100), ('ghi', 200), ('abc', 300)]
 
 ### Programowanie funkcyjne
 
@@ -1041,8 +1061,8 @@ Znaleziono bug w twoim programie. Co robić?
 1. Spróbuj odtworzyć problematyczną sytuację. Przykładowo powiedzmy, że twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę. Najpierw manualnie wykonaj wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
 1. Wytrop w kodzie, który fragment jest odpowiedzialny za pojawienie się znalezionego błędu.
 1. Dodaj test mający sprawdzić, czy niepożądana sytuacja występuje po wykonaniu wytropionego fragmentu kodu. Przykładowo, jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code>, to najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja <code>foo()</code> wywoływana jest wraz z parametrami, przy których pojawia się błąd. Dodaj test wykrywający wystąpienie niepożądanej sytuacji. Po uruchomieniu testu otrzymasz czerwony komunikat. 
-1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by twój test zawsze pozostał zielony.
-1. Zanim wyślesz swoje zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana prościej. Jeśli tak, to przepisz swój kod i dopiero potem wyślij go do centralnego repozytorium.
+1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by test już zawsze pozostał zielony.
+1. Zanim wyślesz zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana inaczej, być może wpadniesz na prostsze rozwiązanie. 
 
 #### Inne typy testów
 
