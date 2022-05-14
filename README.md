@@ -556,7 +556,7 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
 
 Dziedziczenie i kompozycja to dwa mechanizmy pozwalające na użycie w jednej klasie kodu z innej klasy. 
 
-Dziedziczenie kopiuje z klasy nadrzędnej wszystkie elementy do klasy podrzędnej. W klasie podrzędnej mamy bezpośredni dostęp do wszystkich pól klasy nadrzędnej i możemy również wywoływać jej wszystkie metody, tak jakby były wywoływane w klasie, która je zdefiniowała. Istnieje możliwość zmiany definicji metod klasy nadrzędnej w klasie podrzędnej. Dziedziczenia używamy, gdy nowa klasa jest szczególnym rodzajem już istniejącej klasy.
+Dziedziczenie kopiuje z klasy nadrzędnej wszystkie elementy do klasy podrzędnej. W klasie podrzędnej mamy bezpośredni dostęp do wszystkich pól klasy nadrzędnej i możemy również wywoływać jej wszystkie metody, tak jakby były wywoływane w klasie, która je zdefiniowała. Istnieje możliwość zmiany definicji metod klasy nadrzędnej w klasie podrzędnej. Dziedziczenie jest używane, gdy nowa klasa jest szczególnym rodzajem już istniejącej klasy.
 
     class Czlowiek:
         def __init__(self, imie: str, nazwisko: str, miejsce_urodzenia: str, zawod: str):
@@ -724,25 +724,31 @@ Nasuwa się pytanie, po co tworzyć nowy mechanizm będący ograniczoną wersją
 
 ### Programowanie funkcyjne
 
-Funkcja map() ...
+Funkcja <code>map()</code> ma dwa parametry:
+  1. Nazwa funkcji przyjmującej jeden argument (może to być też wyrażenie lambda).
+  2. Nazwa listy.
+
+Wynikiem działania <code>map()</code> jest nowa lista, której elementy to wyniki wywołania funkcji przekazanej jako pierwszy argument dla każdego elementu listy przekazanej jako drugi argument.
+
+Alternatywnymi konstrukcjami do funkcji <code>map()</code> są:
+  1. Pętla for.
+  2. Wyrażenia listowe.
+
+Porównajmy wyrażenia listowe i funkcję <code>map()</code>:
 
     lista = [5, 10, 15, 20, 25, 30, 35, 40]
 
     lista_a = [elem // 5 for elem in lista] # [1, 2, 3, 4, 5, 6, 7, 8]
     lista_b = list(map(lambda elem : elem // 5, lista)) # [1, 2, 3, 4, 5, 6, 7, 8]
 
-Funkcja filter() ...
+Funkcja <code>filter()</code> działa podobnie jak funkcja <code>map()</code> z tym że jej wynikiem jest nowa lista, której elementy to elementy listy przekazanej jako drugi argument dla których wywołania funkcji przekazanej jako pierwszy argument zwróciły wartość logiczną True.
+
+Porównajmy wyrażenia listowe i funkcję <code>filter()</code>:
+
+    lista = [5, 10, 15, 20, 25, 30, 35, 40]
 
     lista_a = [elem // 5 for elem in lista if elem % 2 == 0] # [2, 4, 6, 8]
     lista_b = list(map(lambda elem : elem // 5, filter(lambda elem : elem % 2 == 0, lista))) # [2, 4, 6, 8]
-
-Zagnieżdżone pętle ...
-
-    x = [2, 3, 5]
-    y = [1, 2]
-    
-    lista_a = [elem_x + elem_y for elem_x in x for elem_y in y] # [3, 5, 7, 5, 7, 9]
-    lista_b = list(map(lambda elem_x : map(lambda elem_y : elem_x + elem_y, y), x)) # [3, 5, 7, 5, 7, 9]
 
 W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z numerów ASCII odpowiadających wielkim literom otrzymanego słowa:
 
@@ -750,8 +756,17 @@ W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składaj�
     lista_a = [ord(znak) for znak in napis if znak.isupper()]
     lista_b = list(map(lambda znak: ord(znak), filter(lambda znak: znak.isupper(), napis)))
 
-    print(lista_a) # wyswietli ['p', 'l']
-    print(lista_b) # wyswietli ['p', 'l']
+    print(lista_a) # ['p', 'l']
+    print(lista_b) # ['p', 'l']
+
+Pętle możemy w naturalny sposób zagnieżdżać. Podobnie możemy również operować na funkcjach <code>map()</code>, <code>filter()</code> i <code>reduce()</code>:
+
+    x = [2, 3, 5]
+    y = [1, 2]
+
+    lista_a = [elem_x + elem_y for elem_x in x for elem_y in y] # [3, 4, 4, 5, 6, 7]
+    lista_b = list()
+    list(map(lambda elem_x: list(map(lambda elem_y: lista_b.append(elem_x + elem_y), y)), x)) # [3, 4, 4, 5, 6, 7]
     
 ### Klasy danych
 
