@@ -1217,6 +1217,13 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 ### HTTP i prosty serwer
 ### API wraz z FastAPI
 ### Bazy danych z SQLite
+Istnieje wiele baz danych. Każda swoje wady i zalety. Zaletą SQLite jest prostota użytku. Nie potrzeba nam żadnego serwera, cała baza danych może zostać sprowadzona do jednego pliku, który w programie możemy w całości załadować do pamięci RAM.
+
+Przykładowe zbiory danych możesz pobrać z następujących stron:
+* <a href="https://data.gov/">data.gov</a>
+* <a href="https://www.kaggle.com/">kaggle</a>
+
+Do pracy z bazą danych SQLite służy moduł <code>sqlite3</code>.
 
 Wiele funkcji z modułu <code>sqlite3</code> wymaga od nas by najpierw utworzyć obiekt <code>Connection</code> reprezentujący bazę danych.
 W poniższym przykładzie ścieżka do bazy danych to 'przykladowa_baza_danych.db':
