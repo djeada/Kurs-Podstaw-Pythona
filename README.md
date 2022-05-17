@@ -1213,6 +1213,7 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 
 ### Praca z plikami i folderami
 ### Pandas i csv
+### Praca z plikami PDF
 ### Informacje o systemie operacyjnym
 ### HTTP i prosty serwer
 ### API wraz z FastAPI
@@ -1250,6 +1251,7 @@ Pod koniec pracy z bazą danych zamykamy połączenie:
 
 ### Tkinter
 ### Logi
+### Kompresja i szyfrowanie danych
 
 ## Dodatkowe materiały
 
