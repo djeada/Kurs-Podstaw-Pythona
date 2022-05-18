@@ -494,6 +494,7 @@ Dostęp do zmiennych odbywa się poprzez podanie nazwy obiektu, następnie kropk
 Modyfikacja wartości przechowanych w zmiennych odbywa się tak samo, jak dla zwykłych zmiennych.
 
     osoba = Osoba("Jan", "Kowalski")
+    print(osoba.imie) # Zostanie wyswietlone Jan
     osoba.imie = "Adam"
     print(osoba.imie) # Zostanie wyswietlone Adam
 
