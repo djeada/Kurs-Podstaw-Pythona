@@ -200,7 +200,7 @@ Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
     def ryba():
        print('rybka')
 
-    # w tym miejscu wywoluje funkcję
+    # w tym miejscu wywoluje funkcje
     ryba()
 
 Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworzenie funkcji bez argumentów, jak i funkcji z 10 argumentami. Przykład:
