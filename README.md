@@ -646,31 +646,31 @@ Istnieje szereg wyjątków zdefiniowanych w standardzie Pythona. Przykładowo je
 
 Tak, więc wyjątki możemy spotkać, jeśli niepoprawnie użyjemy funkcji bądź operatorów zdefiniowanych w standardzie języka. Możemy również sami wywołać wyjątki. Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji. 
 
-    raise ValueError("Podano nieprawidłową wartość")
+    raise ValueError("Podano nieprawidlowa wartosc")
 
 #### Obsługa wyjątków
 
 Nieobsłużony wyjątek zamyka program i wyświetla informację o błędzie. Mechanizm try/except pozwala na obsługę wyjątków.
 
     try:
-        # kod, który może wywołać wyjątek
+        # kod, ktory moze wywolac wyjatek
     except:
-        # kod, który wykonuje się w przypadku wystąpienia wyjątku
+        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku
     else:
-        # kod, który wykonuje się gdy wyjątek nie wystąpił
+        # kod, ktory zostanie wykonany gdy wyjatek nie wystapil
     finally:
-        # kod, który wykonuje się zawsze
+        # kod, ktory zawsze zostanie wykonany
 
 W mechanizmie try/except szczególnie ważny jest kod, który wykonuje się w przypadku wystąpienia wyjątku. Wyjątek informuje nas o błędzie i nie powinniśmy go ignorować. Z tego powodu nie umieszczaj <code>pass</code> w bloku except.
 
 Dodatkowo <code>except</code> pozwala nam sprecyzować typ wyjątku jaki ma zostać obsłużony. Jeśli w bloku <code>try</code> może wystąpić więcej niż jeden typ wyjątku to należy przygotować odpowiednią liczbę bloków <code>except</code>. 
 
     try:
-        # kod, który może wywołać wyjątek
+        # kod, ktory moze wywolac wyjatek
     except ValueError:
-        # kod, który wykonuje się w przypadku wystąpienia wyjątku ValueError
+        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku ValueError
     except TypeError:
-        # kod, który wykonuje się w przypadku wystąpienia wyjątku TypeError
+        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku TypeError
 
 Nie należy próbować łapać ogólnego wyjątku, gdyż wszystkie wyjątki dziedziczą po klasie <code>Exception</code>. 
 
