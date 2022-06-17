@@ -143,6 +143,11 @@ Wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki 
 
 Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli *x* jest podzielne przez 2 lub *x* jest podzielne przez 7.
 
+Czy wiesz co zostanie wypisane na konsoli w poniższym przykładzie? 
+
+    odpowiedz = "TAK"
+    print(odpowiedz == "tak" or "TAK")
+
 ### Pętle
 
 Pętle wraz z instrukcjami warunkowymi to podstawa wszystkich języków programowania. Pętla umożliwia wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki nie zostanie spełniony warunek kończący pętlę. W Pythonie mamy dwie pętle <code>For</code> oraz <code>While</code>. 
