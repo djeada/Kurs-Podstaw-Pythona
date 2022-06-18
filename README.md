@@ -474,7 +474,7 @@ Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe pr
 Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
 
 ### Klasy i obiekty
-Klasa to otoczka dla danych oraz funkcji pracujących na tych danych. Obiekt to instancja klasy. Mamy całkowitą dowolność w tworzeniu klas, możemy użyć dowolnej kombinacji danych lub nawet stworzyć klasę, która nie trzyma żadnych danych. Nie oznacza to, że każda klasa ma sens. Musimy zastanowić się jakie dane powinny być trzymane wspólnie pod jedną nazwą oraz jakie funkcje przydałby się do pracy z tymi danymi.
+Klasa to otoczka dla grupy danych oraz funkcji pracujących na tych danych. Obiekt to instancja klasy. Mamy całkowitą dowolność w tworzeniu klas, możemy użyć dowolnej kombinacji danych lub nawet stworzyć klasę, która nie trzyma żadnych danych. Nie oznacza to, że każda klasa ma sens. Przy projektowaniu klasy musimy zastanowić się jakie dane powinny być trzymane wspólnie pod jedną nazwą oraz jakie funkcje przydałby się do pracy z tymi danymi.
 
 Przykład:
 
@@ -520,6 +520,40 @@ Mamy również możliwość przy każdym odczycie i modyfikacji wartości zmienn
     def imie(self, nowa_wartosc):
        print('Ktos modyfikuje imie')
        self._imie = nowa_wartosc
+       
+#### Pola i metody statyczne
+
+Pola i metody statyczne w odróżnieniu od zwykłych pól i metod nie należą do konkretnych obiektów tylko do całej klasy. Pola statyczne to wszystkie pola zdefiniowane z poziomu klasy. Przy ich definicji nie używamy parametru <code>self</code> ani żadnych specjalnych słów kluczowych. Przy definiowaniu metod statycznych musimy natomiast użyć dekoratora <code>@staticmethod</code>. Dostęp do pól i metod statycznych odbywa się zarówno poprzez nazwę klasy, jak i nazwy obiektów klasy.
+
+    class Czlowiek:
+      liczba_glow = 1
+
+      @staticmethod
+      def wyswietl_glowy():
+        print(f'Liczba glow: {Czlowiek.liczba_glow}')
+
+    Czlowiek.wyswietl_glowy() # Liczba glow: 1
+
+    przykladowy_czlowiek = Czlowiek()
+    przykladowy_czlowiek.wyswietl_glowy() # Liczba glow: 1
+
+Metody klasowe to poszerzone metody statyczne. Przy definiowaniu metod klasowy używamy dekoratora <code>@classmethod</code>. Pierwszym parametrem metod klasowych jest nazwa klasy, klasycznie zwana <code>cls</code>. Dzięki temu możemy metody klasowe wywoływać w zwykłych metodach należących do tej samej klasy.
+
+    class Czlowiek:
+      liczba_glow = 1
+
+      @classmethod
+      def wyswietl_glowy(cls):
+        print(f'Liczba glow: {Czlowiek.liczba_glow}')
+
+      def zwykla_funkcja(self):
+        self.wyswietl_glowy()
+
+    Czlowiek.wyswietl_glowy() # Liczba glow: 1
+
+    przykladowy_czlowiek = Czlowiek()
+    przykladowy_czlowiek.wyswietl_glowy() # Liczba glow: 1
+    przykladowy_czlowiek.zwykla_funkcja() # Liczba glow: 1
 
 ### Referencje i kopiowanie
 
