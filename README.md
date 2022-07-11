@@ -1225,6 +1225,10 @@ Plikiem startowym dokumentacji jest <code>index.rst</code>. Plik ten zapisany je
 
 Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (docstrings) mogą zostać wykorzystane do automatycznego generowania dokumentacji.
 
+#### Linki
+
+* https://developers.google.com/style
+
 ### Pliki wykonywalne i PyInstaller
 
 Instalacja
