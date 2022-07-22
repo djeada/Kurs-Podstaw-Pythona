@@ -17,7 +17,7 @@ Współczesne języki mieszają paradygmaty.
 
 ## Stan
 
-* statefull vs stateless
+* stateful vs stateless
 
 
 ## Zmienność danych
@@ -32,3 +32,7 @@ Zalety:
 * czytelność kodu
 * optymalizacja kodu w czasie kompilacji
 * brak zjawiska wyścigu w programowaniu współbieżnym
+
+## Literatura
+
+* https://web.mit.edu/6.005/www/fa15/classes/09-immutability/
