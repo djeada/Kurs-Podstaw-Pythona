@@ -593,6 +593,20 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
     print(lista)
 
 ### Czyste funkcje i skutki uboczne
+
+Nad funkcje produkujące skutki uboczne preforowane są czyste funkcje.
+
+Skutki uboczne to m.in.:
+
+* Zmiany w plikach.
+* Zmiany w bazie danych.
+* Wysyłanie informacji przez sieć.
+* Zmiany w globalnych zmiennych.
+
+Obiekty mutowalne mogą łatwo zostać zmienione w niepożądany sposób (np. przy zmianie kolejności wywoływania funkcji). Preferujemy więc obiekty niemutowalne, które dają nam większe poczucie bezpieczeństwa kosztem zwiększonego wydajności.
+
+Bezpieczniejsze funkcje to takie, które zamiast modyfikować stan obiektów mutowalnych, zwracają nowy obiekt, nie dotykając się do obiektów przekazanych jako parametry.
+
 ### Dziedziczenie i kompozycja
 
 Dziedziczenie i kompozycja to dwa mechanizmy pozwalające na użycie w jednej klasie kodu z innej klasy. 
