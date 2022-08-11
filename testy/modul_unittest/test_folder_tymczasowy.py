@@ -5,7 +5,7 @@ import unittest
 
 class PrzykladTestu(unittest.TestCase):
     def setUp(self):
-        #
+        # utworz tymczasowy folder
         self.folder_testowy = Path("temp_dir")
         self.folder_testowy.mkdir(parents=True, exist_ok=True)
 
@@ -23,4 +23,4 @@ class PrzykladTestu(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main
+    unittest.main()
