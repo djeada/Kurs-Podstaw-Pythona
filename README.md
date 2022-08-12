@@ -1024,6 +1024,10 @@ Aby odinstalować pakiet, użyj:
 
     pip uninstall <nazwa_pakietu>
 
+Aby zaktualizować program PIP, użyj:
+ 
+    pip install --upgrade pip
+
 Linki:
 
 * https://pypi.org/
