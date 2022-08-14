@@ -1098,6 +1098,10 @@ Większość współczesnych środowisk programistycznych (IDE) ma wbudowany deb
 
 Testowanie to proces, w którym uruchamiamy program (bądź jego część) z zamiarem sprawdzenia poprawności jego działania. Testy jednostkowe mają na celu weryfikację poprawności odizolowanej jednostki programu, najczęściej jednej funkcji.
 
+* czerwone testy pokazują, że coś, co działało wcześniej, aktualnie nie działa.
+* zielone testy nie oznaczają, że wszystko działa poprawnie, tylko że to, co było sprawdzane w testach działa poprawnie.
+* więcej nie zawsze znaczy lepiej (ważenie się 10 razy dziennie nie sprawi, że szybciej schudniesz).
+
 Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>.
 
 #### Unittest
@@ -1130,6 +1134,22 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
     def test_helo(smtp_connection):
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
+
+#### Korzyści z testów jednostkowych
+
+* Pomagają innym programistom zrozumieć, co miał robić dany fragment kodu produkcyjnego.
+* Gdy programy są małe, programista może ręcznie sprawdzić ich działanie z każda modyfikacja. Wraz ze wzrostem złożoności, ręczne testowanie wszystkich części programu staje się niemożliwe.
+* Testy jednostkowe wymuszają przynajmniej minimalną separację zadań między fragmentami kodu.
+
+#### TDD
+
+Technika "test driven development" to sposób pisania programów gdzie testy pisane są przed kodem produkcyjnym. Program pisany jest w trzyetapowych cyklach:
+
+1. Testy jednostkowe.
+2. Kod produkcyjny.
+3. Refkatoryzajca kodu produkcyjnego.
+
+Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopóki wszystkie trzy etapy nie zostały zakończone dla funkcjonalności aktualnie implementowanych.
 
 #### Losowe dane nie mają miejsca w testach
 
@@ -1168,7 +1188,7 @@ Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/softw
 
 #### Automatyczna generacja danych na potrzeby testów
 
-Staraj się obok kodu aplikacji tworzyć skrypty, które będą w stanie tę aplikację oraz potrzebne jej zasoby zbudować. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć kod, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
+Staraj się obok kodu aplikacji tworzyć skrypty generujące zasoby potrzebna aplikacji. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć dostępny pod ręką skrypt, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
 
 ### Organizacja projektu z testami
 
