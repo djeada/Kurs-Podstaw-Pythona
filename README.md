@@ -1338,6 +1338,29 @@ Pod koniec pracy z bazą danych zamykamy połączenie:
 
 ### Tkinter
 ### Logi
+
+Większość programów, które tworzyliśmy w obrębie tego kursu były przez nas jednokrotnie uruchomiane i od razu zamykane. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi wraz z ewentualnymi komunikatami o błędach. Takie informacje zapisywane najczęściej do osobnego pliku zwane są logami.
+
+Moduł <code>logging</code> zawiera wiele przydatnych funkcjonalności do tworzenia logów. 
+
+Mamy dostępnych kilka poziomów logów:
+
+| poziom | wartość |
+| ------ | ------- | 
+| CRITICAL | 50 | 
+| ERROR | 40 | 
+| WARNING | 30 | 
+| INFO | 20 | 
+| DEBUG | 10 | 
+| NOTSET | 0 | 
+
+Rzućmy okiem na prosty przykład:
+
+    import logging
+
+    logging.basicConfig(level=logging.INFO)
+    logging.info("Simple message.")
+
 ### Kompresja i szyfrowanie danych
 
 ## Dodatkowe materiały
