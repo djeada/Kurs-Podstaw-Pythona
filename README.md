@@ -1339,7 +1339,7 @@ Pod koniec pracy z bazą danych zamykamy połączenie:
 ### Tkinter
 ### Logi
 
-Większość programów, które tworzyliśmy w obrębie tego kursu były przez nas jednokrotnie uruchomiane i od razu zamykane. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi wraz z ewentualnymi komunikatami o błędach. Takie informacje zapisywane najczęściej do osobnego pliku zwane są logami.
+Większość programów, które tworzyliśmy w obrębie tego kursu były przez nas jednokrotnie uruchomiane i od razu zamykane. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi wraz z ewentualnymi komunikatami o błędach. Takie informacje zwane logami, są często zapisywane do osobnego pliku.
 
 Moduł <code>logging</code> zawiera wiele przydatnych funkcjonalności do tworzenia logów. 
 
@@ -1354,12 +1354,24 @@ Mamy dostępnych kilka poziomów logów:
 | DEBUG | 10 | 
 | NOTSET | 0 | 
 
-Rzućmy okiem na prosty przykład:
+Rzućmy okiem na prosty przykład, gdzie wypisujemy na konsoli komunikat "Przykladowa wiadomosc":
 
     import logging
 
     logging.basicConfig(level=logging.INFO)
-    logging.info("Simple message.")
+    logging.info("Przykladowa wiadomosc.")
+
+Aby zapisać logi do pliku potrzebujemy obiektu do obsługi pików:
+
+    import logging
+
+    logger = logging.getLogger()
+
+    fh = logging.FileHandler('plik.log')
+    fh.setLevel(logging.WARNING)
+    logger.addHandler(fh)
+
+    logger.warning("Przykladowa wiadomosc.")
 
 ### Kompresja i szyfrowanie danych
 
