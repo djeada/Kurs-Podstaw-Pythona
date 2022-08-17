@@ -6,8 +6,8 @@ Klasyfikacja:
 
 1. Imperatywne:
    Kod składa się z sekwencji instrukcji modyfikujących stan programu (bottom-up).
-  - Proceduralny: kod składa się z funkcji bez klas.
-  - Obiektowy: kod składają się z klas zbudowanych z pól (określających stan) oraz metod (modyfikujących stan).
+  - Proceduralny: istnieje możliwość pogrupowania kodu w funkcje.
+  - Obiektowy: istnieje możliwość pogrupowania kodu w klasy zbudowane z pól (określających stan) oraz metod (modyfikujących stan).
 2. Deklaratywne
   Kod składa się z instrukcji wskazujących na pożądany stan programu bez konieczności definiowania wszystkich kroków prowadzących do tego stanu (top-bottom).
   - Funkcyjny: składają się z funkcji wzorowanych na wyrażeniach matematycznych. 
