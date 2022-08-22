@@ -1,7 +1,10 @@
 # Kurs-Podstaw-Pythona
 Kurs podstaw Pythona.
 
+![Capture](https://user-images.githubusercontent.com/37275728/185895408-59e16b58-4468-4bf3-8444-929e3fa4cc3d.PNG)
+
 ## Spis Treści
+
 <!--ts-->
 
   - [Podstawy](#Podstawy)
