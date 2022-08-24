@@ -1305,6 +1305,9 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 ### Pandas i csv
 ### Praca z plikami PDF
 ### Informacje o systemie operacyjnym
+
+* zmienne środowiskowe
+
 ### HTTP i prosty serwer
 ### API wraz z FastAPI
 ### Bazy danych z SQLite
