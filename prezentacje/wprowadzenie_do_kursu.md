@@ -1,0 +1,1 @@
+* Zaczynając naukę wszyskie legalne z punktu widzenia interpretera kombinacje komend są tak samo ważne. Wraz z praktyką liczba możliwych kombinacji zmniejsza się. Dla doświadczonych programistów ta przestrzeń jest bardzo mała i kod który produkują jest regularny i powtarzalny.
