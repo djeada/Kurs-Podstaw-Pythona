@@ -1207,7 +1207,7 @@ Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmoduł�
         └── test_modul_a.py
         └── test_modul_b.py
 
-Testy powinny być rozdzielone miedzy różne moduły podobnie jak pliki źródłowe. W ten sposób z jednej strony ograniczymy wielkość plików  z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
+Testy powinny być rozdzielone między różne moduły podobnie jak pliki źródłowe. W ten sposób z jednej strony ograniczymy wielkość plików  z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
 
 Aby wywołać wszystkie testy, użyj:
 
