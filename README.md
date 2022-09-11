@@ -687,7 +687,7 @@ Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bard
 
     print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
 
-#### Reguły przy pracy z wyrażeniami regularnymi
+#### Schemat pracy z wyrażeniami regularnymi
 
 1. Zbuduj najprostszą wersję wyrażenia regularnego pasującą do twojego problemu. 
 1. Zawsze testuj czy wyrażenie regularne znajduje TYLKO to, co chcesz, by zostało znalezione. Łatwo o wynik fałszywie pozytywny.
