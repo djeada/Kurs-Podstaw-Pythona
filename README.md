@@ -1383,6 +1383,62 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 
 ## Python w Praktyce
 
+### Argumenty linii poleceń
+
+Python wspiera obsługę argumentów linii poleceń. Jeśli chcemy by nasz skrypt, był sterowany za pomocą argumentów przekazywanych w trakcie jego uruchomienia, mamy do dyspozycji kilka narzędzi, które ułatwią nam to zadanie.
+
+Moduł biblioteki standardowej <code>sys</code> zawiera zmienną *argv*, w której przechowywana jest nazwa programu oraz lista argumentów przekazanych z linii poleceń. Zakłada się, że argumenty oddzielone są przez spacje. 
+
+Przykładowo, jeśli mamy skrypt o nazwie *suma.py* i chcemy by po wywołaniu, skrypt wypisał sumę argumentów przekazanych z linii poleceń, to możemy to zadanie zrealizować w następujący sposób:
+
+    import sys
+    print(sum(sys.argv[1:]))
+    
+Dla następującej kombinacji liczb powinniśmy otrzymać następujący wynik:
+
+    $ python suma.py 3 2 1
+    6
+
+Co, jeśli chcielibyśmy używać flag do nazwania dostępnych opcji? Możemy zostać przy znanym nam *sys.argv*, ale będziemy musieli samodzielnie napisać parser do obsługi wszystkich możliwych kombinacji flag. Łatwiej skorzystać z gotowego narzędzia. Również w bibliotece standardowej mamy moduł *argparse*. Moduł ten daje nam opcję zdefiniowania możliwych do użycia argumentów.
+
+Załóżmy, że chcemy by nasz skrypt przyjmował nazwę pliku jako argument, a następnie dopisywał na końcu pliku wiersz "nowy wiersz". Możemy to zrobić w następujący sposób:
+
+    import argparse
+    from pathlib import Path
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("plik", help="sciezka do pliku ktory chcesz zmodyfikowac")
+    args = parser.parse_args()
+
+    plik = Path(args.plik)
+    nowy_wiersz = "nowy wiersz"
+    plik.write_text(plik.read_text() + nowy_wiersz)
+
+Jeśli teraz uruchomimy plik bez argumentu, to zostanie wyświetlony komunikat o błędzie:
+
+    $ python3 script.py 
+    usage: script.py [-h] plik
+    script.py: error: the following arguments are required: plik
+
+Mamy możliwość wyświetlenia pomocy dla naszego skryptu. Moduł *argparse* generuje pomoc automatycznie na podstawie argumentów, jakie ustawiliśmy.
+
+    $ python3 script.py -h
+    usage: script.py [-h] plik
+
+    positional arguments:
+      plik        sciezka do pliku ktory chcesz zmodyfikowac
+
+    options:
+      -h, --help  show this help message and exit
+
+Jeśli chcemy by argument był opcjonalny to przy dodawaniu go musimy ustawić pole *required* na *False*.
+
+    parser.add_argument("--argument", help="Opcjonalny argument", required=False)
+
+Inne opcje to połączenie argumentu z flagą, nadanie wartości domyślnej oraz ustawienie oczekiwanego typu:
+
+    parser.add_argument("-a", "--argument", help="Argument z wartością domyślną", type=int, default=10, required=False)
+
 ### Praca z plikami i folderami
 
 Standardowa bibliotek Pythona zawiera wiele funkcji do pracy z plikami oraz folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
