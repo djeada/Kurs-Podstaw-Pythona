@@ -49,7 +49,7 @@ Kurs podstaw Pythona.
     - [Pliki-wykonywalne-i-PyInstaller](#Pliki-wykonywalne-i-PyInstaller)
     - [Kod-bajtowy](#Kod-bajtowy)
   - [Python-w-praktyce](#Python-w-praktyce)
-    - [Argumenty-linii-poleceń](#Argumenty-linii-polecen)
+    - [Argumenty-linii-poleceń](#Argumenty-linii-poleceń)
     - [Praca-z-plikami-i-folderami](#Praca-z-plikami-i-folderami)
     - [Pandas-i-csv](#Pandas-i-csv)
     - [Praca-z-plikami-PDF](#Praca-z-plikami-PDF)
