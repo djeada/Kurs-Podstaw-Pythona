@@ -1,6 +1,6 @@
 ## Git
 
-* System kontroli wersji (archiwuje zmiany w kodzie).
+* System kontroli wersji (archiwizuje zmiany w kodzie).
 * Stworzony przez Linusa Torvaldsa w 2005 dla programistów pracujących nad jądrem Linux.
 * Obecnie dominuje na rynku.
 * Szybki, rozproszony, chroniony przed błędami w repozytorium.
@@ -8,18 +8,18 @@
 ## Instalacja
 
 * Pobierz instalator z oficjalnej strony https://git-scm.com/downloads. Następnie przejdź przez proces instalacji.
-* W systemie Linux dla werjsi opartych na Debianie:
+* W systemie Linux dla wersji opartych na Debianie:
 
       sudo apt install git
 
 ## GitHub
 
-* GitHub.com daje bezpłatną możlwiość hostingu repozytoriów oraz oferuje bogaty interfejs graficzny.
+* GitHub.com daje bezpłatną możliwość hostingu repozytoriów oraz oferuje bogaty interfejs graficzny.
 * Obecnie dominuje na rynku.
 * Korzystają z niego największe firmy i organizacje: Microsoft, Meta, NASA, NSA.
 * Ogromna ilość projektów open-source.
 
-Pytanie: Czy muszę korzystać z GitHuba aby korzystać z Gita?
+Pytanie: Czy muszę korzystać z GitHuba, aby korzystać z Gita?
 
 Odpowiedź: Nie, istnieją inne rozwiązania.
 
@@ -27,13 +27,13 @@ Odpowiedź: Nie, istnieją inne rozwiązania.
 
 * Git pracuje z tak zwanymi repozytoriami, gdzie umieszczany jest kod źródłowy. 
 * Każdy członek zespołu ma swoją kopię repozytorium, a w niej dostęp do pełnej historii zmian w projekcie.
-* Po wprowadzeniu swoich zmian programista wysyła je do serwera, a inni członkowie zepsołu aktualizują swoje kopie repozytorium.
+* Po wprowadzeniu swoich zmian programista wysyła je do serwera, a inni członkowie zespołu aktualizują swoje kopie repozytorium.
 * Historia zmian gromadzona jest w obiektach Gita, które zapisuje w ukrytym folderze *.git*.
 
 Typy obiektów: 
 
-1) blob - plik binarny
-2) drzewo - lista innych obiektów wraz z ich nazwą, hashem i listą uprawnień
+1) blob - plik binarny.
+2) drzewo - lista innych obiektów wraz z ich nazwą, hashem i listą uprawnień.
 3) commit - każdy commit trzyma hash poprzedniego commita w historii zmian oraz krótką notkę od autora.
 
 Komendy:
@@ -43,7 +43,7 @@ Komendy:
 
 ## Tworzenie repozytorium
 
-* Aby utworzyć nowe repozytorium zaleca się skorzystanie z serwisu GitHub.
+* Aby utworzyć nowe repozytorium, zaleca się skorzystanie z serwisu GitHub.
 
 * Następnie lokalnie używamy komendy:
 
@@ -56,7 +56,7 @@ Komendy:
 ## Proces pracy z Gitem
 
 * Nanieś zmiany w plikach w swojej lokalnej wersji repozytorium.
-* Dodaj zmienione pliki do składu plików oczeukjących na zatwierdzenie (staging area).
+* Dodaj zmienione pliki do składu plików oczekujących na zatwierdzenie (staging area).
 * Zatwierdź pliki wraz z krótkim komentarzem opisującym wprowadzone zmiany (commit).
 
       cat "Hello" > example.txt
@@ -66,7 +66,7 @@ Komendy:
 
 ## Zatwierdzanie zmian
 
-* Git używa tak zwanych commitów do zatwierdzanie wprowadzonych zmian.
+* Git używa tak zwanych commitów do zatwierdzenia wprowadzonych zmian.
 * Wyświetlając historię zmian w repozytorium widzimy wszystkie dotychczasowe commity (*git log*).
 * Mamy opcję załadowania stanu repozytorium z czasu zatwierdzenia danego commita (*git checkout commit-id*).
 * Każdy commit ma unikalny klucz generowany przez algorytm SHA-1.
@@ -79,7 +79,7 @@ Komendy:
 * Git oferuje opcję nieliniowej historii zmian.
 * Domyślna gałąź zwie się *master* lub *main*.
 * Zawsze możemy utworzyć nową gałąź. Jej punktem startowym będzie ostatnio zatwierdzony commit.
-* Aby przełączyć się z jednej gałęzi na inną używamy polecenia <code>checkout</code> oraz nazwy gałęzi (*git checkout nazwa_galezi*).
+* Aby przełączyć się z jednej gałęzi na inną, używamy polecenia <code>checkout</code> oraz nazwy gałęzi (*git checkout nazwa_galezi*).
 
       git checkout -b nowa_galaz
       git branch
@@ -91,7 +91,7 @@ Komendy:
 ## Konflikty
 
 * Jeśli jednocześnie zostały wprowadzone zmiany w tej samej części pliku na dwóch gałęziach, to przy próbie ich połączenia wystąpi komunikat o konflikcie.
-* Problematyczny plik zostanie zmodyfikowany i będzie zawierał sekcje wydziolone strzalkami: <<<< ... >>>>.
+* Problematyczny plik zostanie zmodyfikowany i będzie zawierał sekcje wydzielone strzałkami: <<<< ... >>>>.
 
       <<<<<<< HEAD:temp.md
       wiadomosc a zmieniona w b
@@ -99,11 +99,11 @@ Komendy:
       wiadomosc a zmieniona w c
       >>>>>>> nowa_galaz:temp.md
 
-• Znajdz te sekcje usun strzalki i wybierz odpowiednią wersję zmian.
+• Znajdź te sekcje, usuń strzałki i wybierz odpowiednią wersję zmian.
 
 ## Interakcje z serwerem
 
-* Komenda `push` służy do wysłyania lokalnych zmian do serwera.
+* Komenda `push` służy do wysłania lokalnych zmian do serwera.
 * Komenda `pull` polega do pobierania modyfikacji z serwera.
 
       git pull origin master
@@ -117,7 +117,7 @@ Komendy:
 | Komenda | Działanie |
 | ------- | --------- |
 | git clone url | pobierz repozytorium z serwera |
-| git add  | dodaj zmienione pliki do składu plików oczeukjących na zatwierdzenie |
+| git add  | dodaj zmienione pliki do składu plików oczekujących na zatwierdzenie |
 | git commit | zatwierdź zmiany |
 | git status | wyświetl informację o zmienionych plikach |
 | git diff | pokaż zmiany naniesione od ostatniego commita |
@@ -133,3 +133,10 @@ Komendy:
 3. Wyświetl historię zmian dla repozytorium.
 4. Dodaj plik 
 5. Wyświetl historię zmian dla repozytorium.
+
+### Ćwiczenie nr 2
+
+1. Dodaj zmiany w tym samym pliku, w lokalnej wersji repozytorium oraz na stronie GitHub.
+2. Spróbuj wysłać lokalne zmiany do serwera. Otrzymasz komunikat o konflikcie.
+3. Rozwiąż konflikt i wyślij zmiany do serwera.
+4. Sprawdź, czy GitHub zaakceptował zmiany.
