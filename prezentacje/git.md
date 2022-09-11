@@ -45,6 +45,8 @@ Komendy:
 
 * Aby utworzyć nowe repozytorium, zaleca się skorzystanie z serwisu GitHub.
 
+![GitHub](https://user-images.githubusercontent.com/37275728/189520870-2bedbded-7354-43b6-8d05-35421cff847e.png)
+
 * Następnie lokalnie używamy komendy:
 
       git clone link_do_repozytorium
