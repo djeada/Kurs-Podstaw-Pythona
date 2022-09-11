@@ -974,12 +974,12 @@ Poza znajomością samego języka programowania, do tworzenia oprogramowania pro
 
 ### Moduły i pakiety
 
-Za każdym razem, gdy używamy instrukcji <code>import</code>, to importujemy do naszego skryptu zewnętrzny moduł. Dzięki temu zabiegowi wszystkie funkcje, klasy oraz zmienne globalne z danego modułu są dostępne w skrypcie, który go importuje. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona. Moduły możemy również tworzyć sami.
+Za każdym razem, gdy używamy instrukcji <code>import</code>, importujemy do naszego skryptu zewnętrzny moduł. Dzięki temu zabiegowi wszystkie funkcje, klasy oraz zmienne globalne z danego modułu są dostępne w skrypcie, który go importuje. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona.
 
     import requests
     print(type(requests)) # <class 'module'>
 
-Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
+Moduły możemy również tworzyć sami. Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
 
     .
     └── nazwa_paczki
@@ -987,6 +987,71 @@ Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzeni
         └── przykladowy_skrypt_a.py
         └── przykladowy_skrypt_b.py
         └── przykladowy_skrypt_c.py
+    └── main.py
+    
+Załóżmy, że *przykladowy_skrypt_a.py* zawiera definicję funkcji *fun_a()* oraz *fun_b()*, które chcemy użyć w skrypcie *main.py*.
+Mamy następujące opcje importowania modułu *przykladowy_skrypt_a* do skryptu *main.py*:
+
+1. Zaimportowanie całego modułu.
+
+      import nazwa_paczki.przykladowy_skrypt_a
+
+      przykladowy_skrypt_a.fun_a()
+      przykladowy_skrypt_a.fun_b()
+
+2. Zaimportowanie całego modułu oraz nadanie mu aliasu:
+    
+      import nazwa_paczki.przykladowy_skrypt_a as modul
+
+      modul.fun_a()
+      modul.fun_b()
+
+3. Zaimportowanie wybranych funkcji z modułu:
+
+      from nazwa_paczki.przykladowy_skrypt_a import fun_a(), fun_b()
+
+      fun_a()
+      fun_b()
+
+4. Zaimportowanie wybranych funkcji z modułu oraz nadanie im aliasów:
+
+      from nazwa_paczki.przykladowy_skrypt_a import fun_a() as fun_1()
+
+      fun_1()
+    
+5. Zaimportowanie wszystkich funkcji z modułu:
+
+      from nazwa_paczki.przykladowy_skrypt_a import *
+
+      fun_a()
+      fun_b()
+
+
+Uwaga: instrukcje bezpośrednio w module (nie będące częścią defnicji żadnej funkcji) zostaną automatycznie wykonane w trakcie importowania modułu!
+
+Przykład:
+    
+    def fun_a():
+        ...
+     
+    def fun_b():
+         ...
+         
+    wyslij_rakiety()
+
+Jeśli ten moduł zostanie zaimportowany w innym skrypcie, to funkcja *wyslij_rakiety()* zostanie wywowałana w trakcie importowania modułu.
+Aby temu zapobiec umieść wszystkie pozostawione same sobie instrukcje w ciele natępującego warunku <code>if __name__ == "__main__":</code> :
+
+    
+    def fun_a():
+        ...
+     
+    def fun_b():
+         ...
+    
+    if __name__ == "__main__":
+      wyslij_rakiety()
+
 
 ### Wersje Pythona
 
@@ -1041,9 +1106,18 @@ Linki:
 
 Popularnym narzędziem do tworzenia środowisk wirtualnych jest <code>virtualenv</code>. Narzędzie to tworzy specjalny folder o dowolnej nazwie (np. env/) oraz modyfikuje zmienną środowiskową PATH dodając do niej refernecje do podfolderu bin znajdującego się w utworzonym folderze (np. env/bin/). Wszystkie pakiety i biblioteki instalowane w środowisku wirtualnym wędrują do tego folderu.
 
-Aby utworzyć środowisko wirtualne w aktualnym folderze, użyj:
+Aby zainstalować narzędzie <code>virtualenv</code> przy pomocy menadźera pakietów <code>PIP</code>, użyj:
+
+    pip install virtualenv
+
+Aby utworzyć środowisko wirtualne o nazwie *env* w aktualnym folderze, użyj:
 
     virtualenv env
+    
+Jeśli w systemie masz zainstalowane różne wersje Pythona, to możesz powiedzieć środowisku wirtualnemu, z której wersji ma korzystać.
+Przykładowo, jeśli mam interpreter Pythona w folderze */usr/bin/python3* i chce, żeby z niego korzystało moje środowisko wirtualne, to używam następującej komendy:
+
+  virtualenv -p /usr/bin/python3 env
 
 Aby wejść do środowiska wirtualnego, użyj:
 
@@ -1052,6 +1126,14 @@ Aby wejść do środowiska wirtualnego, użyj:
 Aby wyjść ze środowiska wirtualnego, użyj:
 
     deactivate
+    
+Aby zapisać do pliku *requirements.txt* wszystkie aktualnie zainstalowane biblioteki wraz z ich wersjami, użyj:
+
+    pip freeze > requirements.txt
+
+Aby zainstalować biblioteki wymienione w pliku *requirements.txt*, użyj:
+
+    pip install -r requirements.txt
     
 Linki:
 
