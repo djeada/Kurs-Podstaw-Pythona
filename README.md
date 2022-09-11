@@ -48,7 +48,8 @@ Kurs podstaw Pythona.
     - [Dokumentacja](#Dokumentacja)
     - [Pliki-wykonywalne-i-PyInstaller](#Pliki-wykonywalne-i-PyInstaller)
     - [Kod-bajtowy](#Kod-bajtowy)
-  - [Python-w-Praktyce](#Python-w-Praktyce)
+  - [Python-w-praktyce](#Python-w-praktyce)
+    - [Argumenty-linii-poleceń](#Argumenty-linii-polecen)
     - [Praca-z-plikami-i-folderami](#Praca-z-plikami-i-folderami)
     - [Pandas-i-csv](#Pandas-i-csv)
     - [Praca-z-plikami-PDF](#Praca-z-plikami-PDF)
@@ -1381,7 +1382,7 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
     print(inspect.getsource(tkinter.Tk)) # podejzyj kod klasy Tk z modulu tkinter
     print(inspect.getdoc(tkinter.Tk)) # podejzyj docstring klasy Tk z modulu tkinter
 
-## Python w Praktyce
+## Python w praktyce
 
 ### Argumenty linii poleceń
 
