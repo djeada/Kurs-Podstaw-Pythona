@@ -994,37 +994,37 @@ Mamy następujące opcje importowania modułu *przykladowy_skrypt_a* do skryptu 
 
 1. Zaimportowanie całego modułu.
 
-      import nazwa_paczki.przykladowy_skrypt_a
+        import nazwa_paczki.przykladowy_skrypt_a
 
-      przykladowy_skrypt_a.fun_a()
-      przykladowy_skrypt_a.fun_b()
+        przykladowy_skrypt_a.fun_a()
+        przykladowy_skrypt_a.fun_b()
 
 2. Zaimportowanie całego modułu oraz nadanie mu aliasu:
     
-      import nazwa_paczki.przykladowy_skrypt_a as modul
+        import nazwa_paczki.przykladowy_skrypt_a as modul
 
-      modul.fun_a()
-      modul.fun_b()
+        modul.fun_a()
+        modul.fun_b()
 
 3. Zaimportowanie wybranych funkcji z modułu:
 
-      from nazwa_paczki.przykladowy_skrypt_a import fun_a(), fun_b()
+        from nazwa_paczki.przykladowy_skrypt_a import fun_a(), fun_b()
 
-      fun_a()
-      fun_b()
+        fun_a()
+        fun_b()
 
 4. Zaimportowanie wybranych funkcji z modułu oraz nadanie im aliasów:
 
-      from nazwa_paczki.przykladowy_skrypt_a import fun_a() as fun_1()
+        from nazwa_paczki.przykladowy_skrypt_a import fun_a() as fun_1()
 
-      fun_1()
+        fun_1()
     
 5. Zaimportowanie wszystkich funkcji z modułu:
 
-      from nazwa_paczki.przykladowy_skrypt_a import *
+        from nazwa_paczki.przykladowy_skrypt_a import *
 
-      fun_a()
-      fun_b()
+        fun_a()
+        fun_b()
 
 
 Uwaga: instrukcje bezpośrednio w module (nie będące częścią defnicji żadnej funkcji) zostaną automatycznie wykonane w trakcie importowania modułu!
@@ -1384,6 +1384,47 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 ## Python w Praktyce
 
 ### Praca z plikami i folderami
+
+Standardowa bibliotek Pythona zawiera wiele funkcji do pracy z plikami oraz folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
+
+#### Otwarcie pliku 
+
+Standardowe funkcje do pracy z plikiem to <code>open()</code> oraz <code>close()</code>. Funkcja <code>open()</code> oczekuje ścieżki do pliku oraz trybu otwarcia. Po użyciu funkcji <code>open</code> program oczekuje wywołania funkcji <code>close()</code>.
+
+    plik = open("sciezka/do/pliku.txt", "w")
+
+    ...
+
+    plik.close()
+
+Mamy 4 standardowe tryby otwarcia pliku:
+
+1. <code>r</code> - odczytywanie.
+1. <code>r+</code> - odczytywanie oraz modyfikacja.
+1. <code>w</code> - modyfikacja wraz z usunięciem poprzedniej treści.
+1. <code>a</code> - modyfikacja wraz z dopisaniem nowej treści do poprzedniej treści pliku.
+
+#### Konstrukcja with
+
+Jako że ludzie często zapominali wywoływać funkcję <code>close()</code>, stworzono konstrukcję <code>with</code>. Konstrukcja ta wywołuje funkcję <code>close()</code> automatycznie.
+
+    with open("sciezka/do/pliku.txt", "w") plik:
+        ...
+
+#### Odczytywanie i zapisywanie danych
+
+Do odczytu danych służy nam funkcja <code>readlines()</code>, która zwraca listę napisów. Każdy napis w liście reprezentuje kolejny wiersz pliku. Do zapisania danych do pliku używamy funkcji <code>write</code>. Funkcja ta przyjmuje jeden argument, napis gdzie kolejne wiersze powinny być oddzielone znakiem *\n*. 
+
+    with open("sciezka/do/pliku.txt") as plik:
+        
+        # odczytaj tresc pliku
+        wiersze = plik.readlines()
+        for wiersz in wiersze:
+          print(wiersz)
+        
+        # zapisz nowa tresc do pliku
+        plik.write("nowy tekst\nwiersz nr. 2\n")
+
 ### Pandas i csv
 ### Praca z plikami PDF
 ### Informacje o systemie operacyjnym
