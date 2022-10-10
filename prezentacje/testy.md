@@ -36,12 +36,12 @@ Załóżmy, że w kodzie produkcyjnym znajduje się funkcja znajdz_klucz(lista, 
 
 ## Pokrycie kodu produkcyjnego (code coverage)
 
-  *1* def fun(a, b):
-  *2*   a += 1
-  *3*   b += 2
-  *4*   if a + b > 22:
-  *5*     a += 1
-  *6*   return a + b
+  *#1#*  def fun(a, b):
+  *#2#*    a += 1
+  *#3#*    b += 2
+  *#4#*    if a + b > 22:
+  *#5#*      a += 1
+  *#6#*    return a + b
    
 Jeśli testujemy *fun(a,b)* jedynie dla a oraz b, których suma jest mniejsza niż 20, to nigdy nie wykonamy wiersza numer 5.
 
@@ -50,3 +50,19 @@ Jeśli testujemy *fun(a,b)* jedynie dla a oraz b, których suma jest mniejsza ni
 * Czerwone testu mówią nam, że kod nie spełnia przynajmniej części wymogów sprawdzanych testach. Wiemy na pewno, że mamy problem, który powinniśmy naprawić.
 * Zielone testy mówią nam, że kod spełnia wszystkie wymogi sprawdzane w testach. Nie znaczy to, że wszystkie teoretyczne wymogi zostały przeniesione na testy.
 * Bug w systemie Klarna doprowadził do wycieku danych użytkowników, mimo że 100% testów było zielonych. Więcej możesz dowiedzieć się pod tym <a href="https://www.klarna.com/se/blogg/detailed-incident-report-incorrect-cache-configuration-leading-to-klarna-app-exposing-personal-information/">linkiem</a>.
+
+## TDD 
+
+TDD (Test Driven Development) to filozofia tworzenia programów polegająca na pisaniu testów przed kodem produkcyjnym. Załóżmy, że chcemy dodać do naszego programu funkcję *fun_a()*. Zanim ją napiszemy, powinniśmy napisać dla niej testy, a następnie rozwijać tę funkcję jednocześnie uruchamiając napisane uprzednio testy do momentu, aż testy staną się zielone.
+
+Zalety TDD:
+
+* chroni przed kodem produkcyjnym niespełniającym swojego zdania.
+* pokazuje, co robi testowany fragment kodu (efekty są widoczne).
+* zabezpiecza przed zmianami wprowadzanymi w przyszłości, gdy zapomnimy już o tym, co wcześniej napisany kod miał robić.
+
+Wady TDD:
+
+* wymaga inwestycji czasu.
+* zmiany są kosztowniejsze do wprowadzenia (musisz zmienić i kod produkcyjny i testy).
+* nadgorliwi wyznawcy mogą zaśmiecać bazę kodu niepotrzebnymi i/lub powielanymi testami.
