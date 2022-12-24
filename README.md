@@ -66,15 +66,18 @@ Kurs podstaw Pythona.
 
 ## Podstawy
 
-Fundamenty języka Python. Nauka budowania programów. Podstawy algorytmiki.
+Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzującym się prostą składnią i dużą elastycznością. Jest szeroko stosowany w różnych dziedzinach, od nauki o danych po tworzenie aplikacji internetowych. W niniejszym artykule skupimy się na fundamentach języka, a także na budowaniu małych programów i pracy z strukturami danych.
 
 ### Instalacja w systemie Windows
+Aby rozpocząć pracę z Pythonom, należy najpierw zainstalować go na swoim komputerze. 
 
 Aby zainstalować Pythona w systemie Windows, należy wykonać następujące kroki:
 
-1. Odwiedź stronę [Python.org](https://www.python.org/downloads/).
-2. Wybierz odpowiednią wersję Pythona.
-3. Pobierz instalator i przejdź przez proces instalacji.
+1. Można to zrobić odwiedzając stronę internetową [Python.org](https://www.python.org/downloads/)
+2. i pobierając instalator odpowiedniej wersji języka.
+3. Następnie należy przejść przez proces instalacji, według instrukcji instalatora.
+
+Po zainstalowaniu Pythona lokalnie, można uruchomić interaktywną konsolę, w której będziemy mogli wpisywać i wykonywać różne komendy.
 
 ### Interaktywna konsola
 
@@ -102,15 +105,15 @@ Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersj
     
 ### Zmienne
 
-Zmienna to pudełko przechowujące dane. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie. Każda zmienna ma również swój typ, czyli rodzaj danych, jaki przechowuje. 
+Zmienna to pojęcie podstawowe w języku programowania. Można je porównać do pudełka, w którym przechowujemy różne dane, takie jak liczby, napisy czy wartości logiczne. Każda zmienna ma swoją nazwę, dzięki której możemy ją odwoływać w naszym programie.
 
-Typy danych w Pythonie: 
+Każda zmienna ma również typ, który określa rodzaj danych, jaki przechowuje. W języku Python mamy do dyspozycji następujące typy danych: 
 - Liczby całkowite (*int*) 
 - Liczby zmiennoprzecinkowe (*float*) 
 - Napisy (*string*) 
 - Typ logiczny (*bool*) 
 
-Zmienne są podstawą każdego języka programowania. Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się od cyfry. Python nie ogranicza długości nazw. Dobry programista nadaje zmiennym nazwy reprezentujące ich zadanie w kodzie. Dzięki temu program jest czytelny, a co za tym idzie łatwiejszy w utrzymaniu.
+Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się od cyfry. Python nie ogranicza długości nazw. Dobrą praktyką jest nadawanie zmiennym nazw odpowiadających ich roli w programie. Dzięki temu nasz kod staje się bardziej czytelny i łatwiejszy w utrzymaniu.
 
 Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
