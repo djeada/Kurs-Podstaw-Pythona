@@ -240,45 +240,75 @@ W powyższym przykładzie pętla zostanie wykonana dla wszystkich liczb z zakres
 
 #### Pętle zagnieżdżone
 
-Podobnie jak możemy zagnieżdżać instrukcje warunkowe, możemy również zagnieżdżać pętle. Jedna pętla może znajdować się w ciele innej pętli. W celu zobrazowania działania takiej konstrukcji posłużymy się graficznymi przykładami i będziemy wypisywać na konsoli różne kształty.
+Podobnie jak możemy zagnieżdżać instrukcje warunkowe, możemy również zagnieżdżać pętle. Pętle zagnieżdżone to pętle znajdujące się w ciele innych pętli. 
 
-Dwie reguły zagnieżdżania pętli:
+Istnieją dwie zasady zagnieżdżania pętli:
 
-1. Pętla zewnętrzna pilnuje wysokości.
-1. Pętla wewnętrzna pilnuje szerokości.
+1. pętla zewnętrzna pilnuje wysokości,
+1. pętla wewnętrzna pilnuje szerokości.
 
-        for y in range(10):
-            for x in range(10): 
+        for y in range(10): # wysokosc
+            for x in range(5): # szerokosc
                 kod
 
-Jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce numer 5 w rzędzie numer 2, to pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
+Pętla zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu w danym rzędzie. Przykładowo, jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce numer 5 w rzędzie numer 2, pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
 
-### Funkcje
+W celu lepszego zobrazowania działania takiej konstrukcji posłużymy się graficznymi przykładami i będziemy wypisywać na konsoli różne kształty. Przykład zagnieżdżonej pętli z kształtami może być zapisany w następujący sposób:
 
-Funkcje to zamknięty pod jedną nazwą blok instrukcji. Blok teb może być sterowany z zewnątrz poprzez przekazywanie argumentów. Definicja funkcji polega na określeniu, jakie instrukcje należą do ciała funkcji, ile argumentów funkcja oczekuje oraz za pomocą jakiej nazwy będzie wywoływana w innych miejscach kodu. Sama definicja nie uruchamia jeszcze żadnych instrukcji. Dopiero użycie nazwy funkcji wraz z wartościami argumentów w innym miejscu kodu sprawia, że instrukcje zostają wykonane. Funkcja ma następującą postać:
+    for i in range(5):
+        for j in range(5):
+            print("*", end="")
+        print()
+
+W wyniku wykonania tego kodu zostanie wypisany na konsoli prostokąt z gwiazdek:
+
+    *****
+    *****
+    *****
+    *****
+    *****
+
+Możemy również użyć zagnieżdżonych pętli, aby narysować bardziej skomplikowane kształty, takie jak trójkąty lub choinkę.
+
+    for i in range(5):
+        for j in range(i+1):
+            print("*", end="")
+        print()
+
+W wyniku wykonania tego kodu zostanie wypisany na konsoli trójkąt z gwiazdek:
+
+    *
+    **
+    ***
+    ****
+    *****
+    
+## Funkcje
+
+Funkcje są blokami instrukcji zamkniętymi pod jedną nazwą i pozwalającymi na kontrolowanie z zewnątrz poprzez przekazywanie argumentów. Definicja funkcji polega na określeniu, które instrukcje należą do ciała funkcji, ile argumentów oczekuje funkcja oraz jaką nazwą będzie ona wywoływana w innych miejscach kodu. Definicja sama w sobie nie uruchamia jeszcze żadnych instrukcji - potrzebne jest użycie nazwy funkcji wraz z wartościami argumentów w innym miejscu kodu, aby instrukcje zostały wykonane. Funkcje mają następującą postać:
 
     def nazwa_funkcji(argumenty):
         kod # cialo funkcji
 
-Ciało funkcji może być dowolnie rozbudowane, ale zaleca się, by większe funkcje rozbijać na mniejsze, każdą o jednym, jasno określonym celu. W taki sposób zmniejszana jest złożoność kodu, przez co staje się on czytelniejszy.
+Ciało funkcji może być dowolnie rozbudowane, ale zaleca się dzielenie większych funkcji na mniejsze, które mają jasno określony cel. W ten sposób zmniejsza się złożoność kodu i ułatwia jego czytanie.
 
 Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
 
-    # w tym miejscu definiuje funkcje
+    # w tym miejscu definiujemy funkcję
     def ryba():
        print('rybka')
 
-    # w tym miejscu wywoluje funkcje
+    # w tym miejscu wywołujemy funkcję
     ryba()
 
-Funkcje mogą mieć dowolną ilość argumentów. Możliwe jest zarówno stworzenie funkcji bez argumentów, jak i funkcji z 10 argumentami. Przykład:
+Funkcje mogą mieć dowolną ilość argumentów - możliwe jest stworzenie funkcji bez argumentów lub funkcji z 10 argumentami. Przykład:
 
     def ryba(argument):
         # oczekujemy, że argument będzie liczbą naturalną
         for i in range(argument):
             print('ryba')
 
-Użycie słowa kluczowego <code>return</code> spowoduje wyjście z funkcji (instrukcje umieszczone poniżej nie zostaną wykonane). Poprzez <code>return</code> możemy również przekazać do reszty programu wartość z wnętrza funkcji. Taka wartość po wywołaniu funkcji jest często zapisywana w zmiennej w innym miejscu programu.
+Słowo kluczowe <code>return</code> powoduje opuszczenie funkcji (instrukcje umieszczone poniżej nie są wykonywane). <code>return</code> pozwala również na przekazanie wartości z wnętrza funkcji do reszty programu. Taka wartość po wywołaniu funkcji jest często zapisywana w zmiennej w innym miejscu programu. Na przykład:
 
     def suma_trzech(a, b, c):
         return a + b + c
@@ -286,45 +316,107 @@ Użycie słowa kluczowego <code>return</code> spowoduje wyjście z funkcji (inst
     suma_a = suma_trzech(3, 6, 2)
     suma_b = suma_trzech(4, 1, 7)
 
+    print(suma_a)  # wyświetli 11
+    print(suma_b)  # wyświetli 12
+
+Możemy również zdefiniować funkcję z domyślnymi argumentami, które zostaną użyte, jeśli nie zostaną przekazane żadne inne. Domyślne argumenty muszą być umieszczone po argumentach obowiązkowych, a ich ilość nie może przekroczyć ilości argumentów obowiązkowych. Przykład:
+
+    def suma_trzech(a, b, c=0):
+        return a + b + c
+
+    suma_a = suma_trzech(3, 6)  # a + b + c = 3 + 6 + 0 = 9
+    suma_b = suma_trzech(4, 1, 7)  # a + b + c = 4 + 1 + 7 = 12
+
+    print(suma_a)  # wyświetli 9
+    print(suma_b)  # wyświetli 12
+
+Istnieje też sposób na zdefiniowanie funkcji z nieograniczoną liczbą argumentów obowiązkowych, przy czym nie możemy ich użyć w połączeniu z argumentami domyślnymi. Przykład:
+
+    def suma_n(*args):
+        return sum(args)
+
+    suma_a = suma_n(1, 2, 3, 4)  # 1 + 2 + 3 + 4 = 10
+    suma_b = suma_n(10, 20, 30)  # 10 + 20 + 30 = 60
+
+    print(suma_a)  # wyświetli 10
+    print(suma_b)  # wyświetli 60
+    
+Ostatni sposób przkazywania arugmentów, to argumenty nazwane, które są przekazywane w postaci słownika. Przykład:
+
+    def suma_n(**kwargs):
+        return sum(kwargs.values())
+
+    suma_a = suma_n(a=1, b=2, c=3, d=4)  # 1 + 2 + 3 + 4
+
+
 ### Napisy
 
-<code>String</code> to tekstowy typ danych. Tutaj będziemy nazywali go napisem. Napis składa się z ciągu znaków. Znakami mogą być litery, znaki interpunkcyjne, jak również i cyfry.
+Napisy to typ danych tekstowych, które składają się z ciągu znaków. Nnapisy mogą być używane do wielu różnych celów, takich jak:
 
-W Pythonie napis deklarujemy, używając apostrofów bądź cudzysłowów. 
+* Wypisywanie tekstu na ekranie.
+* Przechowywanie danych tekstowych w programie.
+* Przetwarzanie i modyfikowanie tekstu.
+
+Możemy deklarować je używając apostrofów lub cudzysłowów. 
 
     napis = 'James' 
     napis = "James" 
     napis = '''James''' 
 
-Nie ma oddzielnego typu dla pojedynczego znaku. Pojedynczy znak to napis o długości równej 1. Napisy są indeksowane od 0 tak jak i listy. Do konkretnego znaku w danym napisie możemy odwołać się poprzez jego indeks. 
+Napisy są indeksowane, co oznacza, że możemy odwołać się do konkretnego znaku w napisie za pomocą jego indeksu. Możemy również wyodrębnić fragment napisu, zwany składnią wycinka (slice).
 
-Przykładowo dla kodu <code>James = 'Lubie go'</code>, wywołanie <code>James[0]</code> zwróci literę 'L'. Wywołanie <code>James[2]</code> zwróci literę 'b'. 
+    napis = "James" 
+    print(napis[1]) # a
+    print(napis[2:5]) # mes
 
-Zainicjalizowany napis nie może jest modyfikowalny. To znaczy, nie możemy zrobić czegoś takiego: <code>James[0]='z'</code>. Jeśli chcemy wprowadzić zmiany do napisu, musimy aktualny napis nadpisać nowym napisem.
+Napisy są niemodyfikowalne, co oznacza, że nie możemy bezpośrednio zmienić poszczególnych znaków w napisie. Możemy jednak tworzyć nowe napisy na podstawie istniejących napisów, zmieniając ich zawartość lub łącząc je ze sobą.
 
     napis = "pierwotny"
     napis = "nowy"
     
-Aby w napisie użyć, wartości innej zmiennej musimy przed cudzysłowami postawić literkę <code>f</code>, a w cudzysłowie w odpowiednim miejscu między nawiasami klamrowymi nazwę zmiennej, której chcemy użyć.
+f-string to sposób formatowania napisów w Pythonie, który pozwala na wstawienie do napisu wartości zmiennych wewnątrz tekstu. W celu użycia f-string, należy przed cudzysłowami postawić literkę "f", a w odpowiednim miejscu między nawiasami klamrowymi nazwę zmiennej, której chcemy użyć.
 
-    liczba = 3
-    nspid = f"twoja liczba to: {liczba}"
+Przykład:
+
+    imie = "Jan"
+    wiek = 30
+
+    napis = f"Mam na imię {imie} i mam {wiek} lat."
+    print(napis)
+
+W powyższym przykładzie zmienna "imie" zostanie zamieniona na "Jan", a zmienna "wiek" na "30". Ostatecznie w wyniku wywołania print(napis) na ekranie pojawi się napis "Mam na imię Jan i mam 30 lat.".
+
+f-string pozwala również na użycie wyrażeń arytmetycznych w napisach.
+
+Przykład:
+
+    a = 10
+    b = 20
+
+    napis = f"Suma a i b wynosi {a + b}."
+    print(napis)
+
+W powyższym przykładzie zostanie wyświetlony napis "Suma a i b wynosi 30.".
 
 ### Struktury danych
 
-Algorytm to skończona lista kroków (instrukcji). Kroki te sprawdzają, kopiują, usuwają, czy w inny sposób manipulują danymi.
-Struktury danych to sposoby na przechowywanie danych w pamięci komputera. Dzięki ich implementacjom w Pythonie możemy do całej kolekcji danych (a nie tylko pojedynczej zmiennej) odnosić się przy pomocy jednej nazwy. Istnieje bardzo wiele struktur danych, które różnią się oferowanymi funkcjonalnościami oraz szybkością ich wykonania.
+Mamy do dyspozycji kilka różnych sposobów przechowywania danych. Te sposoby to tzw. struktury danych. Są to narzędzia, dzięki którym możemy zbierać i przechowywać duże ilości danych w sposób uporządkowany, co ułatwia nam pracę z tymi danymi.
 
-* Listy: elementy są uporządkowane i można je zmieniać. W liście mogą występować duplikaty.
-* Krotki: elementy są uporządkowane i nie można ich zmieniać. W krotce mogą występować duplikaty.
-* Zbiory: elementy są nieuporządkowane, nieindeksowane i nie można ich zmieniać. W zbiorze mogą występować duplikaty.
-* Słowniki: elementy są nieuporządkowane, indeksowane i można je zmieniać. Wszystkie klucze w słowniku są unikalne. Wśród wartości mogą występować duplikaty.
+Oto najpopularniejsze sturktury danych:
+
+* Listy: listy to uporządkowane kolekcje elementów, które mogą być dowolnego typu. Możemy do nich dodawać i usuwać elementy, a także zmieniać ich kolejność. W liście mogą występować duplikaty.
+* Krotki: krotki to podobne do list struktury, ale są one niezmienne. Raz utworzona krotka nie może być zmieniona. W krotkach również mogą występować duplikaty.
+* Zbiory: zbiory to nieuporządkowane kolekcje elementów, w których nie mogą występować duplikaty. Zbiory są szczególnie przydatne, gdy intersują nas jedynie unikalne wartości.
+duplikaty.
+* Słowniki: słowniki to indeksowane kolekcje par klucz-wartość. Wszystkie klucze w słowniku muszą być unikalne, natomiast wartości mogą być duplikatami. Słowniki są bardzo przydatne do przechowywania danych w formie tabeli.
+
+Oczywiście, istnieją również inne struktury danych ale te wymienione są najczęściej używane i najważniejsze dla początkujących.
 
 #### Lista
 
-List używamy, gdy chcemy mieć kilka wartości dostępnych pod jedną nazwą.
+Lista jest strukturą danych służącą do przechowywania kilku wartości pod jedną nazwą.
 
-Przykład listy składającej się z kilku liczb całkowitych:
+Przykład listy złożonej z kilku liczb całkowitych:
 
     lista = [3, 2, 3, 9, 10]
     
@@ -332,58 +424,60 @@ Elementy listy nie muszą być tego samego typu:
 
     lista = ['a', True, 0.3]
 
-Aby znaleźć liczbę elementów listy, użyj: 
+Aby poznać liczbę elementów listy, należy użyć funkcji `len`:
+
+    n = len(lista)
        
-    len(lista)
-       
-Aby dodać element *a* na koniec listy, użyj:
+Aby dodać element a na końcu listy, użyj metody `append`:
 
     lista.append(a)
 
-Aby dodać wszystkie elementy z lista2 na koniec lista1, użyj:
+Aby dodać wszystkie elementy z listy lista2 na końcu listy lista1, użyj metody `extend`:
 
     lista1.extend(lista2)
 
-Aby wstawić element *a* na pozycję i, użyj:
+Aby wstawić element a na pozycję i, użyj metody `insert`:
 
     lista.insert(i,a)
 
-Aby usunąć pierwsze wystąpienie elementu *a* w liście, użyj:
+Aby usunąć pierwsze wystąpienie elementu a z listy, użyj metody `remove`:
 
     lista.remove(a)
 
-Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jako wynik, użyj:
+Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jako wynik, użyj metody `pop`:
 
-    lista.pop([i])
+    element = lista.pop([i])
 
-Aby znaleźć liczbę wystąpień elementu *a* w liście, użyj:
+Aby znaleźć liczbę wystąpień elementu a w liście, użyj metody `count`:
 
-    lista.count(a)
+    licznik = lista.count(a)
 
-Aby posortować listę, użyj:
+Aby posortować listę, użyj metody `sort`:
 
     lista.sort()
 
-Aby odwrócić kolejność elementów w liście, użyj:
+Aby odwrócić kolejność elementów w liście, użyj metody `reverse`:
 
     lista.reverse()
 
-Aby przy pomocy pętli przejść przez elementy listy, użyj:
+Aby przy pomocy pętli przejść przez elementy listy, użyj słowa kluczowego `for`:
 
     for element in lista: 
         print(element)
         
- Aby otrzymać element i indeks, użyj funkcji enumerate:
- 
+Aby otrzymać element i indeks, użyj funkcji `enumerate`:
+
      for indeks, element in enumerate(lista): 
         print(f'{indeks}: {element}')
 
-Aby przy pomocy pętli przejść przez elementy dwóch list równej długości, użyj:
+Aby przy pomocy pętli przejść przez elementy dwóch list równej długości, użyj funckji `zip`:
 
      for elem_a, elem_b in zip(lista_a, lista_b): 
         print(f'element a: {elem_a}; element b: {elem_b}')
 
 #### Krotka
+
+Krotka to struktura danych, podobna do listy, ale niezmienna. To znaczy, że po utworzeniu krotki nie możemy jej zmodyfikować, np. dodając do niej nowe elementy czy usuwając już istniejące.
 
 Krotek zamiast list, używamy gdy:
 * Liczy się szybkość.
@@ -392,119 +486,172 @@ Krotek zamiast list, używamy gdy:
 Przykład krotki składającej się z kilku liczb całkowitych:
 
     krotka = (3, 2, 3, 9, 10)
-    
-Aby znaleźć liczbę elementów krotki, użyj:
 
-    len(krotka)
+Elementy krotki nie muszą być tego samego typu:
 
-Aby dodać element *a* na koniec krotki, użyj:
-
-    krotka = krotka + (a,)
-
-Aby dodać wszystkie elementy z krotka2 na koniec krotka1, użyj:
-
-    krotka1 = krotka1 + krotka2
-
-Aby znaleźć indeks pierwszego wystąpienia elementu *a* w krotce, użyj:
-
-    krotka.index(a)
-
-Aby sprawdzić, czy element *a* występuje w krotce, użyj:
-
-    a in krotka
-
-Aby otrzymać wartość elementu z krotki znajdującego się na pozycji i, użyj:
-
-    krotka[i]
+    krotka = ('a', True, 0.3)
 
 Aby rozpakować krotkę składającą się z trzech elementów i zapisać je w trzech zmiennych, użyj:
 
     a, b, c = krotka
 
+Aby znaleźć liczbę elementów krotki, użyj:
+
+    len(krotka)
+
+Aby przy pomocy pętli przejść przez elementy krotki, użyj:
+
+    for element in krotka: 
+        print(element)
+
+Aby otrzymać element i indeks, użyj funkcji `enumerate`:
+
+    for indeks, element in enumerate(krotka): 
+        print(f'{indeks}: {element}')
+
+Aby przy pomocy pętli przejść przez elementy dwóch krotek równej długości, użyj funckji `zip`:
+
+    for elem_a, elem_b in zip(krotka_a, krotka_b): 
+        print(f'element a: {elem_a}; element b: {elem_b}')
+
 #### Zbiór
 
-Zbiory są przydatne, gdy chcemy, by wszystkie elementy w kolekcji były unikalne. Dodatkowo dla zbiorów mamy zaimplementowane wiele przydatnych funkcji, pozwalających w prosty sposób pracować na kilku zbiorach jednocześnie.
+Zbiór (ang. set) to nieuporządkowana kolekcja unikalnych elementów. Zbiory są zazwyczaj używane do eliminowania duplikatów lub do testowania przynależności elementu do kolekcji.
 
-Przykład zbioru składającego się z kilku liczb całkowitych:
+Aby utworzyć pusty zbiór, użyj:
 
-    zbior = {3, 2, 3, 9, 10}
+    zbior = set()
 
-Aby znaleźć liczbę elementów zbioru, użyj:
+Aby utworzyć zbiór z elementów podanych jako argumenty, użyj:
+
+    zbior = set([element1, element2, element3])
+
+Aby utworzyć zbiór z elementów występujących w iterowalnym obiekcie (np. liście), użyj:
+
+    zbior = set(iterowalny_obiekt)
+
+Aby sprawdzić, czy element jest w zbiorze, użyj:
+
+    element in zbior
+
+Aby dodać element do zbioru, użyj:
+
+    zbior.add(element)
+
+Aby usunąć element ze zbioru, użyj:
+
+    zbior.remove(element)
+
+Aby usunąć element ze zbioru, jeśli istnieje, bez generowania błędu, użyj:
+
+    zbior.discard(element)
+
+Aby usunąć losowy element ze zbioru, użyj:
+
+    zbior.pop()
+
+Aby usunąć wszystkie elementy ze zbioru, użyj:
+
+    zbior.clear()
+
+Aby znaleźć liczbę elementów w zbiorze, użyj:
 
     len(zbior)
 
-Aby dodać element *a* do zbioru, użyj:
+Aby złączyć zbiory, użyj operatora `|`:
 
-    zbior.add(a)
+    zbior1 | zbior2
 
-Aby usunąć element *a* ze zbioru, użyj:
+Aby wyświetlić elementy wspólne dla dwóch zbiorów, użyj operatora `&`:
 
-    zbior.remove(a)
+    zbior1 & zbior2
 
-Aby sprawdzić, czy element *a* występuje w zbiorze, użyj:
+Aby wyświetlić elementy występujące w jednym zbiorze, ale nie w drugim, użyj operatora `^`:
 
-    a in zbior
+    zbior1 ^ zbior2
 
-Aby sprawdzić, czy zbiór zawiera w sobie wszystkie elementy zbioru zbior2, użyj:
+Aby wyświetlić elementy z pierwszego zbioru, ale nie z drugiego, użyj operatora `-`:
 
-    zbior.issuperset(zbior2)
+    zbior1 - zbior2
 
-Aby znaleźć część wspólną dwóch zbiorów, użyj:
+Aby sprawdzić, czy zbiór jest podzbiorem innego zbioru, użyj operatora `<=`:
 
-    zbior.intersection(zbior2)
-
-Aby znaleźć elementy zbioru zbior1, które nie są w zbiorze zbior2, użyj:
-
-    zbior1.difference(zbior2)
+    zbior1 <= zbior2
 
 #### Słownik
+Słownik używamy, gdy chcemy mieć kilka wartości dostępnych pod różnymi nazwami (kluczami). Słownik jest nieuporządkowany i indeksowany.
 
-Słowniki przydatne są, gdy chcemy użyć innych indeksów niż numeryczne. Dodatkowo słowniki są mega szybkie.
+W słowniku można używać jako kluczy dowolnych typów danych, które są niemutowalne (tj. nie mogą być zmieniane). Do niemutowalnych typów danych w Pythonie zaliczają się:
 
-Przykład słownika, którego kluczami są napisy a wartościami liczby całkowite:
+* liczby całkowite (int)
+* liczby zmiennoprzecinkowe (float)
+* napisy (str)
+* krotki (tuple)
 
-    slownik = {'a': 3, 'k': -2, 'b': 10}
+Nie można natomiast używać jako kluczy mutowalnych typów danych, takich jak listy, zbiory lub słowniki, ponieważ nie spełniają one wymogu niemutowalności.
+
+Przykłady poprawnych kluczy:
+
+* liczba całkowita: `slownik[42]`
+* napis: `slownik['klucz']`
+* krotka: `slownik[(1, 2, 3)]`
+
+Przykłady niepoprawnych kluczy:
+
+* lista: `slownik[[1, 2, 3]]`
+* zbiór: `slownik{1, 2, 3}`
+* słownik: `slownik{'klucz': 'wartosc'}`
+
+Przykład słownika zawierającego kilka par klucz-wartość:
+
+    slownik = {'klucz1': 3, 'klucz2': 2, 'klucz3': 3}
+
+Elementy słownika nie muszą być tego samego typu:
+
+    slownik = {'klucz1': 'a', 'klucz2': True, 'klucz3': 0.3}
 
 Aby znaleźć liczbę elementów słownika, użyj:
 
     len(slownik)
 
-Aby dodać element b do słownika i zapisać go pod kluczem a, użyj:
+Aby dodać element a pod kluczem 'klucz4', użyj:
 
-    slownik[a] = b
+    slownik['klucz4'] = a
 
-Aby usunąć element ze słownika pod kluczem a, użyj:
+Aby zmienić wartość pod kluczem 'klucz4', użyj:
 
-    del slownik[a]
+    slownik['klucz4'] = nowa_wartosc
 
-Aby sprawdzić, czy klucz występuje w słowniku, użyj:
+Aby usunąć element pod kluczem 'klucz4', użyj:
 
-    a in slownik
+    del slownik['klucz4']
 
-Aby sprawdzić, czy wartość występuje w słowniku, użyj:
+Aby sprawdzić czy klucz 'klucz4' istnieje w słowniku, użyj:
 
-    b in slownik.values()
+    'klucz4' in slownik
 
-Aby wypisać klucze i wartości słownika, użyj:
+Aby przy pomocy pętli przejść przez elementy słownika, użyj:
 
-    for klucz, wartosc in slownik.items():
-        print(klucz, wartosc)
+    for klucz, wartosc in slownik.items(): 
+        print(f'{klucz}: {wartosc}')
+    
+Aby przy pomocy pętli przejść tylko przez klucze słownika, użyj:
 
-Aby klucze i wartości posortować wg kluczy, użyj:
+    for klucz in slownik: 
+        print(klucz)
 
-    for klucz, wartosc in sorted(slownik.items(), key=lambda x: x[0]):
-        print(klucz, wartosc)
+Aby przy pomocy pętli przejść tylko przez wartości słownika, użyj:
 
-Aby klucze i wartości posortować wg wartości, użyj:
-
-    for klucz, wartosc in sorted(slownik.items(), key=lambda x: x[1]):
-        print(klucz, wartosc)
-
-Uwaga nie wszystkie typy możemy domyślnie użyć jako kluczy w słowniku! Kluczami mogą być jedynie obiekty haszowalne, czyli takie, które posiadają metodę <code>__hash__()</code>. Przykładowo kluczem słownika nie może być lista, ale może być napis.
+    for wartosc in slownik.values(): 
+        print(wartosc)
 
 ### Enum
 
-Typ wyliczeniowy enum pozwala na tworzenie zmiennych, które mogą przyjmować jedynie z góry określone wartości. Wartości te mają czytelne nazwy, a dodatkowo enum jest bardzo szybki i opłaca się go używać nawet w krytycznych miejscach programu.
+Enum (od słowa enumerate - numerować) to specjalny typ danych, który pozwala na tworzenie stałych symbolicznych nazw dla wartości. W przeciwieństwie do zwykłych stałych, wartości Enumów są obiektami, a nie prostymi wartościami. Enum jest szczególnie przydatny, gdy chcemy przypisać nazwy symboliczne do wartości liczbowych.
+
+Wewnątrz definicji klasy Enum tworzymy atrybuty klasy, które będą reprezentować nasze stałe symboliczne. Wartości atrybutów są automatycznie przypisane do kolejnych liczb całkowitych, począwszy od 1. Możemy również przypisać im jawnie określoną wartość.
+
+Przykład definicji Enum dla kolorów:
 
     class Kolor(enum.Enum):
         ZIELONY = enum.auto()
@@ -514,23 +661,40 @@ Typ wyliczeniowy enum pozwala na tworzenie zmiennych, które mogą przyjmować j
     kolor_a = Kolor.ZIELONY
     kolor_b = Kolor.CZERWONY
     
-    print(kolor_a.name)
-    print(kolor_a.value)
+    print(kolor_a.name) # ZIELONY
+    print(kolor_a.value) # 1
 
-    print(kolor_b.name)
-    print(kolor_b.value)
+    print(kolor_b.name) # CZERWONY
+    print(kolor_b.value) # 2
 
 ### Liczby losowe
 
-Nieraz w programie potrzebujemy użyć liczb losowych. Moduł <code>random</code> zawiera wiele przydatnych funkcji do losowania liczb całkowitych i zmiennoprzecinkowych.
+Liczby losowe są często potrzebne w programach, gdyż umożliwiają symulację różnych zjawisk. W Pythonie do generowania liczb losowych można użyć modułu <code>random</code>. Zawiera on wiele przydatnych funkcji, takich jak <code>random.random()</code> czy <code>random.uniform(a,b)</code>, które pozwalają na wylosowanie liczby zmiennoprzecinkowej z odpowiedniego przedziału. Możliwe jest również losowanie liczb całkowitych za pomocą funkcji <code>random.randint(a,b)</code>.
 
-- instrukcja <code>random.random()</code> wylosuje liczbę zmiennoprzecinkową z przedziału od *0* do *1*.
+- <code>random.random()</code> wylosuje liczbę zmiennoprzecinkową z przedziału od *0* do *1*.
 - <code>random.uniform(a,b)</code> wylosuje liczbę zmiennoprzecinkową z przedziału od *a* do *b*.
-- instrukcja <code>random.randint(a,b)</code> wylosuje liczbę całkowitą z przedziału od *a* do *b*.
+- <code>random.randint(a,b)</code> wylosuje liczbę całkowitą z przedziału od *a* do *b*.
 
-Najprostszy przykład rozkładu prawdopodobieństwa to rozkład jednostajny. Dla jednostajnego rozkładu prawdopodobieństwa mamy stałą wartość gęstości prawdopodobieństwa na danym przedziale <code>[a,b]</code>. Poza tym przedziałem wartość gęstości prawdopodobieństwa wynosi 0. 
+Rozkład prawdopodobieństwa opisuje, jakie wartości są bardziej prawdopodobne, a jakie mniej prawdopodobne w losowaniu. Najprostszym przykładem rozkładu prawdopodobieństwa jest rozkład jednostajny, gdzie prawdopodobieństwo wystąpienia dowolnej wartości w przedziale `[a,b]` jest stałe. Wartość gęstości prawdopodobieństwa poza tym przedziałem wynosi 0.
 
-Dla rozkładu Gaussa wartości zbliżone do średniej mają znacznie większe prawdopodobieństwo wystąpienia niż te oddalone od średniej. Jeśli na jakąś wielkość wpływa dostatecznie wiele czynników, to rozkład prawdopodobieństwa będzie zbliżony do krzywej Gaussa. Dokładniej mówi o tym centralne twierdzenie graniczne. 
+Innym rodzajem rozkładu jest rozkład Gaussa, gdzie wartości zbliżone do średniej mają znacznie większe prawdopodobieństwo wystąpienia niż te oddalone od średniej. Wartości tego rodzaju rozkładu są często wykorzystywane w symulacjach, gdyż przy wpływie wielu czynników rozkład prawdopodobieństwa jest zazwyczaj zbliżony do krzywej Gaussa, co opisuje centralne twierdzenie graniczne."
+
+- `random.gauss(mu, sigma)` - losuje liczbę z rozkładu normalnego o średniej `mu` i odchyleniu standardowym `sigma`.
+- `random.expovariate(lambd)` - losuje liczbę z rozkładu wykładniczego o parametrze `lambd`.
+- `random.weibullvariate(alpha, beta)` - losuje liczbę z rozkładu Weibulla o parametrach `alpha` i `beta`.
+- `random.vonmisesvariate(mu, kappa)` - losuje liczbę z rozkładu von Misesa o parametrach `mu` i `kappa`.
+
+Przykład użycia:
+
+    import random
+
+    # losowanie liczb z rozkładu normalnego o średniej 0 i odchyleniu standardowym 1
+    samples = [random.gauss(0, 1) for _ in range(10)]
+    print(samples)
+
+    # losowanie liczb z rozkładu wykładniczego o parametrze 0.5
+    samples = [random.expovariate(0.5) for _ in range(10)]
+    print(samples)
 
 ## Średniozaawansowane
 
