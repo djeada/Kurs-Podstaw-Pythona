@@ -66,29 +66,27 @@ Kurs podstaw Pythona.
 
 ## Podstawy
 
-Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzującym się prostą składnią i dużą elastycznością. Jest szeroko stosowany w różnych dziedzinach, od nauki o danych po tworzenie aplikacji internetowych. W niniejszym artykule skupimy się na fundamentach języka, a także na budowaniu małych programów i pracy z strukturami danych.
+Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzującym się prostą składnią i dużą elastycznością. Jest szeroko stosowany w różnych dziedzinach, od nauk ścisłych po tworzenie aplikacji internetowych. W niniejszym artykule skupimy się na fundamentach języka, a także na budowaniu małych programów i pracy z strukturami danych.
 
 ### Instalacja w systemie Windows
-Aby rozpocząć pracę z Pythonom, należy najpierw zainstalować go na swoim komputerze. 
+Aby rozpocząć przygodę z Pythonem, należy najpierw przygotować sobie odpowiednie środowisko. W tym celu najlepiej pobrać i zainstalować oprogramowanie na swoim komputerze.
 
-Aby zainstalować Pythona w systemie Windows, należy wykonać następujące kroki:
+Aby zainstalować Pythona w systemie Windows, musiszć wykonać następujące kroki:
 
-1. Można to zrobić odwiedzając stronę internetową [Python.org](https://www.python.org/downloads/)
-2. i pobierając instalator odpowiedniej wersji języka.
-3. Następnie należy przejść przez proces instalacji, według instrukcji instalatora.
-
-Po zainstalowaniu Pythona lokalnie, można uruchomić interaktywną konsolę, w której będziemy mogli wpisywać i wykonywać różne komendy.
+1. Przejdź na stronę internetową <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>.
+1. W sekcji "Python Releases for Windows" znajdź i kliknij link do najnowszej stabilnej wersji Pythona dla systemu Windows.
+1. Po pobraniu instalatora, uruchom go i postępuj według podanych instrukcji.
+1. Podczas instalacji, upewnij się, że zaznaczyłeś opcję *Add Python to PATH*, dzięki której będziesz mógł uruchamiać Pythona z dowolnego miejsca w systemie.
+1. Po zakończeniu instalacji, możesz uruchomić Python, wpisując w wierszu poleceń polecenie *python*.
 
 ### Interaktywna konsola
 
-Otwórz konsolę Pythona i wpisz:
+Konsola Pythona to interaktywne środowisko, w którym można wpisywać i wykonywać pojedyncze polecenia. Aby otworzyć konsolę, należy wpisać polecenie *python* w wierszu poleceń. Wówczas zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
 
     >>> python
     python 2.7.13 (default, Sep  2 2019, 20:42:59)
 
-Zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
-
-Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersji Pythona. Po wpisaniu komendy i naciśnięciu klawisza *Enter*, zostanie od razu zwrócony wynik wykonania danej instrukcji.
+Z poziomu konsoli można wykonywać wszystkie dostępne polecenia Pythona. Po wpisaniu polecenia i naciśnięciu klawisza *Enter*, zostanie ono natychmiast wykonane i zwrócony ewentualny wynik (nie wszystkie komendy zwracają wynik). Polecenie <code>help</code> pozwala uzyskać informacje o dostępnych komendach i ich możliwych parametrach. Można również wywoływać funkcje z bibliotek, takich jak np. <code>math.pi</code>, która zwraca stałą pi.
 
     >>> help
     Type help() for interactive help, or help(object) for help about object.
@@ -105,15 +103,15 @@ Z poziomu konsoli masz dostęp do wszystkich komend zdefiniowanych w danej wersj
     
 ### Zmienne
 
-Zmienna to pojęcie podstawowe w języku programowania. Można je porównać do pudełka, w którym przechowujemy różne dane, takie jak liczby, napisy czy wartości logiczne. Każda zmienna ma swoją nazwę, dzięki której możemy ją odwoływać w naszym programie.
+Zmienne stanowią podstawę każdego języka programowania. Służą do przechowywania różnych rodzajów danych, takich jak liczby, napisy czy wartości logiczne. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie.
 
-Każda zmienna ma również typ, który określa rodzaj danych, jaki przechowuje. W języku Python mamy do dyspozycji następujące typy danych: 
+W Pythonie istnieją różne typy zmiennych, które odpowiadają rodzajowi przechowywanych danych. Są to m.in.
 - Liczby całkowite (*int*) 
 - Liczby zmiennoprzecinkowe (*float*) 
 - Napisy (*string*) 
 - Typ logiczny (*bool*) 
 
-Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się od cyfry. Python nie ogranicza długości nazw. Dobrą praktyką jest nadawanie zmiennym nazw odpowiadających ich roli w programie. Dzięki temu nasz kod staje się bardziej czytelny i łatwiejszy w utrzymaniu.
+Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się od cyfry. Python nie ogranicza długości nazw. Dobrym zwyczajem jest nadawanie zmiennym nazw odpowiadających ich roli w programie. Dzięki temu nasz kod staje się bardziej czytelny i łatwiejszy w utrzymaniu.
 
 Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
@@ -124,65 +122,123 @@ Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
 ### Warunki
 
-Typ logiczny może przyjmować jedną z dwóch wartości <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej. 
+Typ logiczny (bool) może przyjmować jedną z dwóch wartości: <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej.
 
-Przy porównaniach początkujący programiści często zapominają, że pojedynczy znak równości to przypisanie.
+Prosta zmienna typu logicznego:
 
-- <code>x = 5</code> w taki sposób zapiszemy w zmiennej x wartość 5.
-- <code>x == 5</code> w taki sposób sprawdzimy czy zmienna x przechowuje wartość 5.
+    wiek = 18 # zmienna typu int
+    warunek = wiek > 18 # zmienna typu bool
+    
+Oto tabela z porównaniami dostępnymi w języku Python:
 
-Instrukcja warunkowa ma następującą postać:
+| Symbol | Opis |
+| ------ | ---- |
+| >	| większy niż |
+| >=	| większy lub równy |
+| <	| mniejszy niż |
+| <=	| mniejszy lub równy |
+| ==	| równy |
+| !=	| różny |
+
+Początkujący programiści często mylą pojedynczy znak równości (<code>=</code>) z podwójnym znakiem równości (<code>==</code>).
+
+- <code>x = 5</code> oznacza przypisanie wartości 5 do zmiennej x.
+- <code>x == 5</code> oznacza sprawdzenie, czy zmienna x jest równa 5.
+
+Instrukcja warunkowa (if-else) ma następującą postać:
 
     if warunek:
         kod
     else:
         kod
 
-Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej <code>if</code> zostanie wykonana jedynie, gdy warunek zostanie oceniony na prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod słowem kluczowym <code>else</code>). Instrukcje warunkowe zwane są też czasami instrukcjami sterującymi.
+Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej <code>if</code> zostanie wykonana jedynie, gdy warunek zostanie oceniony na prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod
+instrukcjami sterującymi.
 
-Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozycji trzy operatory logiczne: <code>and</code>, <code>or</code> i <code>not</code>: 
+Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozycji trzy operatory logiczne: <code>and</code>, <code>or</code> i <code>not</code>:
 
-* <code>and</code> – aby wyrażenie było prawdziwe, oba warunki muszą być prawdziwe.
-* <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
-* <code>not</code> – zaprzeczenie wyrażenia.
+    <code>and</code> – aby wyrażenie było prawdziwe, oba warunki muszą być prawdziwe.
+    <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
+    <code>not</code> – zaprzeczenie wyrażenia.
 
-Wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli *a* jest różne od 0 i jednocześnie *b* jest równe 5.
+Na przykład, wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli a jest różne od 0 i jednocześnie b jest równe 5.
 
-Wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli *x* jest podzielne przez 2 lub *x* jest podzielne przez 7.
+Natomiast wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli x jest podzielne przez 2 lub x jest podzielne przez 7.
 
-Czy wiesz co zostanie wypisane na konsoli w poniższym przykładzie? 
-
+Być może zastanawiasz się, co zostanie wypisane na konsoli w poniższym przykładzie:
+    
     odpowiedz = "TAK"
     print(odpowiedz == "tak" or "TAK")
 
+Wyjaśnienie: operator <code>or</code> zwraca pierwszą wartość prawdziwą, jeśli taka istnieje, w przeciwnym razie zwraca drugą wartość. W tym przypadku pierwszy warunek jest fałszywy, ale drugi jest prawdziwy (bo "TAK" jest różne od fałszu). Z tego powodu całe wyrażenie zwraca drugi warunek, czyli wartość "TAK".
+
 ### Pętle
 
-Pętle wraz z instrukcjami warunkowymi to podstawa wszystkich języków programowania. Pętla umożliwia wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki nie zostanie spełniony warunek kończący pętlę. W Pythonie mamy dwie pętle <code>For</code> oraz <code>While</code>. 
+Pętle wraz z instrukcjami warunkowymi są podstawą wszystkich języków programowania. Pętle pozwalają na wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji, każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki warunek kończący pętlę nie zostanie spełniony. W Pythonie mamy dwie pętle: <code>For</code> i <code>While</code>.
 
 #### For
-Pętla <code>For</code> ogólnie ma postać:
+Pętla <code>For</code> umożliwia wielokrotne wykonanie bloku instrukcji dla każdego elementu z danej kolekcji. Kolekcją może być np. lista, zbiór lub krotka. W przypadku pętli <code>For</code> mamy pewność, że blok instrukcji zostanie wykonany określoną ilość razy, równą liczbie elementów w kolekcji. Pętla <code>For</code> ogólnie ma postać:
 
     for element in kolekcja: 
         kod
 
-Na razie do tworzenia pętli będziemy używać funkcji <code>range()</code>. Funkcja ta może przyjmować jeden, dwa lub trzy parametry.
+Na początek do tworzenia pętli będziemy używać funkcji range(). Funkcja ta może przyjmować jeden, dwa lub trzy parametry.
 
-1. <code>range(10)</code> utworzy ciąg *(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)*, tak więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
-2. <code>range(5, 12)</code> utworzy ciąg *(5, 6, 7, 8, 9, 10, 11)*, tak więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
-3. <code>range(0, 50, 10)</code> utworzy ciąg *(0, 10, 20, 30, 40)*, tak więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
+1. <code>range(10)</code> tworzy ciąg (0, 1, 2, 3, 4, 5, 6, 7, 8, 9), więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
+1. <code>range(5, 12)</code> tworzy ciąg (5, 6, 7, 8, 9, 10, 11), więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
+1. <code>range(0, 50, 10)</code> tworzy ciąg (0, 10, 20, 30, 40), więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
+
+Przykład użycia pętli <code>For</code> z listą:
+
+    dni_tygodnia = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela']
+    for dzien in dni_tygodnia:
+        print(dzien)
+
+Wynikiem wykonania powyższego kodu będzie wypisanie na konsoli nazw wszystkich dni tygodnia.
 
 #### While
+
+Pętla <code>While</code> jest podobna w działaniu do pętli <code>For</code>, ale istnieją również istotne różnice między obiema konstrukcjami. W przypadku pętli <code>While</code> warunek zakończenia pętli jest sprawdzane przed każdym przejściem do kolejnej iteracji. Jeśli warunek nie jest spełniony, pętla zostaje zakończona. Dzięki temu pętla <code>While</code> może być używana do wykonywania pewnych instrukcji w nieskończoność (jeśli warunek kończący pętlę zawsze jest prawdziwy). 
 
 Pętla <code>While</code> ma postać:
 
     while warunek konczacy petle: 
          kod
 
-Użycie instrukcji <code>break</code> spowoduje zakończenie wykonywania najbliżej zagnieżdżonej pętli (działa zarówno dla pętli <code>While</code>, jak i <code>For</code>).
+Poniżej przedstawiony został prosty przykład użycia pętli <code>While</code>:
 
-Użycie instrukcji <code>continue</code> spowoduje przejście do następnego obiegu pętli. Wszystkie instrukcje umieszczone pod instrukcją <code>continue</code> nie zostaną wykonane po jej wywołaniu.
+    licznik = 0
+    while licznik < 5:
+        print(licznik)
+        licznik += 1
 
-### Pętle zagnieżdżone
+W powyższym przykładzie pętla <code>While</code> będzie wykonywana do momentu, aż zmienna licznik będzie mniejsza od 5. W każdym obiegu pętli wyświetlana jest aktualna wartość zmiennej licznik, a następnie jej wartość zostaje zwiększona o 1.
+
+W rezultacie, na konsoli zostaną wyświetlone kolejno liczby od 0 do 4.
+
+#### Polecenia break i continue
+
+Instrukcja <code>break</code> służy do natychmiastowego przerwania działania pętli. Jeśli jest ona wywołana wewnątrz pętli, natychmiast przechodzi do kodu znajdującego się po pętli. Może być ona używana w połączeniu z instrukcjami warunkowymi, aby natychmiastowo zakończyć działanie pętli.
+
+Przykład:
+
+    for i in range(10):
+        if i == 5:
+            break
+        print(i)
+
+W tym przykładzie pętla będzie wykonywana dla wartości zmiennej *i* od 0 do 4, a następnie zostanie przerwana przez instrukcję <code>break</code>.
+
+Instrukcja <code>continue</code> jest używana w pętlach i powoduje przejście do następnego obiegu pętli. Wszystkie instrukcje umieszczone poniżej instrukcji <code>continue</code> w bloku pętli nie zostaną wykonane po jej wywołaniu. Przykład użycia instrukcji <code>continue</code>:
+
+    for i in range(10):
+        if i % 2 == 0:  # jeśli i jest podzielne przez 2
+            continue  # przejdź do następnego obiegu pętli
+        print(i)  # wypisz i
+
+W powyższym przykładzie pętla zostanie wykonana dla wszystkich liczb z zakresu od 0 do 9, ale zostaną one wyświetlone jedynie w przypadku, gdy są nieparzyste. W rezultacie na konsoli zostaną wypisane liczby: 1, 3, 5, 7, 9.
+
+#### Pętle zagnieżdżone
 
 Podobnie jak możemy zagnieżdżać instrukcje warunkowe, możemy również zagnieżdżać pętle. Jedna pętla może znajdować się w ciele innej pętli. W celu zobrazowania działania takiej konstrukcji posłużymy się graficznymi przykładami i będziemy wypisywać na konsoli różne kształty.
 
