@@ -698,10 +698,10 @@ Przykład użycia:
 
 ## Średniozaawansowane
 
-Zaawansowane konstrukcje języka Python. Programowanie zorientowane obiektowo. Implementacja własnych struktur danych.
+Ten artykuł jest skierowany do osób, które już zdobyły podstawowe umiejętności w programowaniu w języku Python. Omawiane zagadnienia obejmują bardziej zaawansowane tematy, takie jak klasy i programowanie obiektowe, tworzenie własnych struktur danych, programowanie funkcyjne oraz mechanizmy takie jak wątki, wyjątki, iteratory, generatory i dekoratory.
 
 ### Klasy i obiekty
-Klasa to otoczka dla grupy danych oraz funkcji pracujących na tych danych. Obiekt to instancja klasy. Mamy całkowitą dowolność w tworzeniu klas, możemy użyć dowolnej kombinacji danych lub nawet stworzyć klasę, która nie trzyma żadnych danych. Nie oznacza to, że każda klasa ma sens. Przy projektowaniu klasy musimy zastanowić się jakie dane powinny być trzymane wspólnie pod jedną nazwą oraz jakie funkcje przydałby się do pracy z tymi danymi.
+Klasa to abstrakcyjny model, który definiuje jakiś zestaw cech i zachowań. Obiekt to konkretna instancja klasy. Możemy tworzyć dowolne klasy, niemniej jednak należy zastanowić się nad tym, jakie dane najlepiej byłoby trzymać razem pod jednym pojemnikiem oraz jakie funkcje mogą być przydatne do pracy z tymi danymi.
 
 Przykład:
 
@@ -718,20 +718,22 @@ Przykład:
     osoba.przedstaw_sie()
     inna_osoba.przedstaw_sie()
 
+W powyższym przykładzie tworzymy klasę Osoba, która posiada dwa pola danych: imie i nazwisko. Klasa ta zawiera również funkcję przedstaw_sie, która wyświetla komunikat z imieniem i nazwiskiem osoby. Następnie tworzymy dwa obiekty klasy Osoba i wywołujemy dla nich metodę przedstaw_sie.
+
 #### Dostęp do zmiennych w obiektach
 
-Dostęp do zmiennych odbywa się poprzez podanie nazwy obiektu, następnie kropki oraz nazwy zmiennej, którą chcemy odczytać:
+W programowaniu obiektowym, zmienne przechowywane są w obiektach. Aby uzyskać dostęp do tych zmiennych, należy podać nazwę obiektu, następnie kropkę i nazwę zmiennej, którą chcemy odczytać.
 
     nazwa_obiektu.nazwa_zmiennej
     
-Modyfikacja wartości przechowanych w zmiennych odbywa się tak samo, jak dla zwykłych zmiennych.
+Możliwe jest również modyfikowanie wartości tych zmiennych tak, jak w przypadku zwykłych zmiennych. 
 
     osoba = Osoba("Jan", "Kowalski")
     print(osoba.imie) # Zostanie wyswietlone Jan
     osoba.imie = "Adam"
     print(osoba.imie) # Zostanie wyswietlone Adam
 
-Mamy również możliwość przy każdym odczycie i modyfikacji wartości zmiennych przechowywanych w obiektach wywołać zdefiniowaną przez nas funkcję. Do tego celu służą dekoratory <code>@property</code> oraz <code>@nazwa_zmiennej.setter</code>.
+Możemy również użyć dekoratorów `@property` i `@nazwa_zmiennej.setter`, aby wywoływać funkcje przy odczycie lub modyfikacji wartości zmiennych przechowywanych w obiektach.
 
     class Osoba:
         def __init__(self, imie, nazwisko):
@@ -750,7 +752,7 @@ Mamy również możliwość przy każdym odczycie i modyfikacji wartości zmienn
        
 #### Pola i metody statyczne
 
-Pola i metody statyczne w odróżnieniu od zwykłych pól i metod nie należą do konkretnych obiektów tylko do całej klasy. Pola statyczne to wszystkie pola zdefiniowane z poziomu klasy. Przy ich definicji nie używamy parametru <code>self</code> ani żadnych specjalnych słów kluczowych. Przy definiowaniu metod statycznych musimy natomiast użyć dekoratora <code>@staticmethod</code>. Dostęp do pól i metod statycznych odbywa się zarówno poprzez nazwę klasy, jak i nazwy obiektów klasy.
+Pola i metody statyczne są używane w programowaniu obiektowym, ale nie należą one do konkretnych obiektów - należą do całej klasy. Pola statyczne to wszystkie pola zdefiniowane w klasie, natomiast metody statyczne są tworzone za pomocą dekoratora `@staticmethod`. Dostęp do pól i metod statycznych możliwy jest zarówno poprzez nazwę klasy, jak i nazwę obiektu klasy.
 
     class Czlowiek:
       liczba_glow = 1
@@ -764,7 +766,7 @@ Pola i metody statyczne w odróżnieniu od zwykłych pól i metod nie należą d
     przykladowy_czlowiek = Czlowiek()
     przykladowy_czlowiek.wyswietl_glowy() # Liczba glow: 1
 
-Metody klasowe to poszerzone metody statyczne. Przy definiowaniu metod klasowy używamy dekoratora <code>@classmethod</code>. Pierwszym parametrem metod klasowych jest nazwa klasy, klasycznie zwana <code>cls</code>. Dzięki temu możemy metody klasowe wywoływać w zwykłych metodach należących do tej samej klasy.
+Metody klasowe to rozszerzenie metod statycznych - są tworzone za pomocą dekoratora `@classmethod`. Pierwszym parametrem metod klasowych jest `cls`, a nie `self`, jak w przypadku metod obiektowych. Metody klasowe są przydatne, gdy chcemy uzyskać dostęp do pól klasy lub do innych metod klasy.
 
     class Czlowiek:
       liczba_glow = 1
