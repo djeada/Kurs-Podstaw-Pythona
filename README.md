@@ -1101,11 +1101,210 @@ Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterow
       return True
 
 ### Wątki
+Wątki, pozwalają na równoległe wykonywanie się kilku fragmentów kodu. Z tego powodu są szczególnie przydatne do obsługi zadań, które mogą zająć dużo czasu, np. łączenie się z zewnętrznym serwerem lub wczytywanie dużych plików. W ten sposób nie musimy czekać na zakończenie danego zadania, lecz możemy je wykonać równolegle z pozostałymi czynnościami.
+
+Aby skorzystać z wątków, należy najpierw zaimportować moduł <code>threading</code>. Następnie, aby utworzyć nowy wątek, należy utworzyć obiekt klasy <code>Thread</code>. Klasa ta przyjmuje jako argument funkcję, która będzie wykonana jako wątek.
+
+    import threading
+    def watek():
+        print("Watek")
+
+    w1 = threading.Thread(target=watek)
+
+Aby uruchomić wątek, należy wywołać metodę <code>start</code> na obiekcie klasy <code>Thread</code>.
+
+    w1.start()
+
+Należy pamiętać, że wątki działają równolegle, więc nie ma gwarancji kolejności wykonywania się poszczególnych wątków. 
+
+#### Własny wątek
+
+Aby utworzyć wątek, należy stworzyć klasę dziedziczącą po klasie <code>Thread</code> z modułu <code>threading</code> i zdefiniować metodę <code>run</code>, która zostanie wywołana przy uruchomieniu wątku. Następnie należy utworzyć obiekt tej klasy i wywołać metodę <code>start</code>, aby rozpocząć działanie wątku.
+
+    import threading
+
+    class MyThread(threading.Thread):
+        def run(self):
+            # kod, ktory zostanie wykonany w watku
+            print("Wątek uruchomiony")
+
+    thread = MyThread()
+    thread.start()
+
+Możemy również przekazać argumenty do metody <code>run</code> poprzez konstruktor klasy.
+
+    import threading
+
+    class MyThread(threading.Thread):
+        def __init__(self, argument):
+            self.argument = argument
+            super().__init__()
+
+        def run(self):
+            # kod, ktory zostanie wykonany w watku
+            print(f"Wątek uruchomiony z argumentem: {self.argument}")
+
+    thread = MyThread("Hello World")
+    thread.start()
+    
+#### Zatrzymanie wątku
+
+W Pythonie można zatrzymać wątek poprzez wywołanie metody `Thread.join()`. Ta metoda blokuje wywołujący wątek aż do momentu, gdy wątek do którego została wywołana zakończy swoje działanie. Przykładowo, jeśli chcemy zatrzymać główny wątek programu do momentu, gdy wszystkie wątki zostaną zakończone, możemy użyć pętli for i iterować po liście wątków i dla każdego z nich wywołać metodę `join()`:
+
+    threads = [thread1, thread2, thread3]
+
+    for thread in threads:
+        thread.join()
+
+Można również użyć metody `Thread.join(timeout)` z opcjonalnym parametrem `timeout`. Parametr ten określa maksymalny czas oczekiwania na zakończenie wątku. Jeśli wątek nie zakończy działania w ciągu tego czasu, wątek wywołujący metodę `join()` zostanie wznowiony.
+
+Innym sposobem zatrzymania wątku jest użycie zmiennej globalnej `threading.Event` z metodami `wait()` i `set()`. Wątek, który chcemy zatrzymać, może oczekiwać na sygnał za pomocą metody `wait()`, a wątek główny może wysłać sygnał za pomocą metody `set()`. W przypadku użycia tej metody, wątek oczekujący może również ustawić opcjonalny limit czasu oczekiwania.
+
+      import threading
+
+      # utworzenie zmiennej Event
+      stop_event = threading.Event()
+
+      def worker_thread():
+          while not stop_event.is_set():
+              # wątek wykonuje swoje zadania
+              do_some_work()
+          # po otrzymaniu sygnalu zatrzymujemy watek
+          stop_event.clear()
+
+      # ...
+
+      # glowny watek chce zatrzymac worker_thread
+      stop_event.set()
+
+Należy pamiętać, że zatrzymanie wątku nie jest powszechnie zalecaną metodą zarządzania wątkami. W wielu przypadkach lepszym rozwiązaniem jest użycie warunków synchronizacyjnych lub zamknięcia wątku za pomocą metody `join()`. Zatrzymanie wątku może powodować nieoczekiwane skutki uboczne i powinno być używane jedynie w wyjątkowych sytuacjach.
+
+#### Dzielenie zasobów między wątkami
+
+Dzielenie zasobów między wątkami polega na umożliwieniu kilku wątkom równoczesnego dostępu do wspólnego zasobu. W przypadku, gdy zasób jest zmienny, konieczne jest zapewnienie bezpieczeństwa jego dostępu, tzn. zapobiegnięcie sytuacji, w której kilka wątków będzie próbowało zmodyfikować ten sam zasób w tym samym czasie. Istnieją mechanizmy umożliwiające bezpieczne dzielenie zasobów między wątkami, takie jak obiekt `Lock`.
+
+Przykład:
+
+    import threading
+
+    # Zmienna globalna, do której będą miały dostęp wątki
+    zmienna_globalna = 0
+
+    # Obiekt Lock, który będziemy używali do synchronizacji dostępu do zmiennej globalnej
+    lock = threading.Lock()
+
+    def watek1():
+      global zmienna_globalna
+      for i in range(100):
+        # Pobieramy lock, aby mieć pewność, że tylko jeden wątek będzie
+        # miał dostęp do zmiennej globalnej w danym momencie
+        lock.acquire()
+        zmienna_globalna += 1
+        lock.release()
+
+    def watek2():
+      global zmienna_globalna
+      for i in range(100):
+        # Pobieramy lock, aby mieć pewność, że tylko jeden wątek będzie
+        # miał dostęp do zmiennej globalnej w danym momencie
+        lock.acquire()
+        zmienna_globalna -= 1
+        lock.release()
+
+    # Uruchamiamy wątki
+    t1 = threading.Thread(target=watek1)
+    t2 = threading.Thread(target=watek2)
+
+    t1.start()
+    t2.start()
+
+    # Czekamy na zakończenie obu wątków
+    t1.join()
+    t2.join()
+
+    # Wypisujemy wartość zmiennej globalnej
+    print(zmienna_globalna)
+
+W tym przykładzie mamy dwie funkcje `watek1` i `watek2`, które zmieniają wartość zmiennej globalnej `zmienna_globalna`. Aby zapewnić bezpieczne dzielenie zasobów między wątkami, użyto mechanizmu blokady. 
+
+#### GIL
+GIL, czyli Global Interpreter Lock, to mechanizm, który ogranicza możliwość jednoczesnego wykonywania kodu przez wiele wątków. W Pythonie każdy wątek jest obsługiwany przez GIL, który kontroluje dostęp do interpretera. W rezultacie tylko jeden wątek jest w stanie wykonywać kod naraz, a pozostałe są zawieszane aż do momentu, gdy GIL zostanie zwolniony.
+
+GIL jest wbudowanym mechanizmem w Pythonie, który został dodany w celu uniknięcia problemów związanych z współdzieleniem zasobów przez wiele wątków. Chociaż GIL może mieć pewne ograniczenia w przypadku bardzo obciążających procesów wielowątkowych, w większości przypadków jest on wystarczający do obsługi równoległości w Pythonie.
+
+Przykładowo, jeśli chcielibyśmy utworzyć program, który będzie sumował elementy w liście, możemy to zrobić za pomocą wielu wątków. Każdy wątek będzie odpowiedzialny za sumowanie części listy. Niestety, GIL spowoduje, że tylko jeden wątek będzie wykonywany w danym momencie, co spowolni działanie programu.
+
+Oto przykład programu sumującego elementy w liście z użyciem wątków:
+
+      import threading
+
+      def sum_list(numbers):
+          # Funkcja sumująca elementy w liście
+          total = 0
+          for number in numbers:
+              total += number
+          print(total)
+
+      # Utworzenie wątków
+      thread1 = threading.Thread(target=sum_list, args=([1, 2, 3],))
+      thread2 = threading.Thread(target=sum_list, args=([4, 5, 6],))
+      thread3 = threading.Thread(target=sum_list, args=([7, 8, 9],))
+
+      # Uruchomienie wątków
+      thread1.start()
+      thread2.start()
+      thread3.start()
+
+      # Oczekiwanie na zakończenie wątków
+      thread1.join()
+      thread2.join()
+      thread3.join()
+
+W powyższym przykładzie, chociaż mamy trzy wątki, GIL spowoduje, że tylko jeden z nich będzie wykonywany w danym momencie, co sprawi że użycie wątków nie pomoże z przyspieszeniem działania progrmau.
+
 ### Procesy
+Procesy to niezależne od siebie instancje programów wykonywane w systemie operacyjnym. Procesy dzielą pamięć i zasoby systemu, takie jak pliki i gniazda sieciowe. W odróżnieniu od wątków, procesy są całkowicie niezależne od siebie i nie mogą udostępniać swoich zmiennych.
+
+W Pythonie mamy moduł <code>multiprocessing</code>, który umożliwia tworzenie procesów. Możemy użyć go, aby uruchomić nasz kod w osobnym procesie.
+
+    import multiprocessing
+    import time
+
+    def worker():
+        print("Rozpoczynam prace")
+        time.sleep(2)
+        print("Koncze prace")
+
+    p = multiprocessing.Process(target=worker)
+    p.start()
+
+W przeciwieństwie do wątków, procesy nie mogą być zatrzymywane. Jeśli chcemy zatrzymać proces, musimy go zakończyć. W tym celu możemy użyć metody <code>terminate()</code>.
+
+    p.terminate()
+
+Procesy są dobrym wyborem, gdy chcemy uruchamiać kod równolegle, ale nie potrzebujemy udostępniać zmiennych między procesami. Procesy są również dobrym wyborem, gdy chcemy uniknąć problemu GIL, który dotyczy wątków w Pythonie. Należy jednak pamiętać, że procesy są bardziej zasobożerne niż wątki i nie nadają się do wszystkich zastosowań.
+
 ### Asyncio
+
+Asyncio to moduł umożliwiający programowanie asynchroniczne. Asynchroniczne programowanie polega na wykonywaniu wielu zadań jednocześnie, bez konieczności blokowania głównego wątku programu. Aby funkcja mogła zostać wykonana asynchronicznie, należy użyć słowa kluczowego async oraz await.
+
+Przykład użycia asyncio:
+
+    import asyncio
+
+    async def main():
+        await asyncio.sleep(1)
+        print("Hello, world!")
+
+    asyncio.run(main())
+
+W tym przykładzie, funkcja `main` jest oznaczona jako `async`, co oznacza, że będzie wykonywana asynchronicznie. Funkcja `asyncio.sleep(1)` jest funkcją, która zatrzymuje wykonanie wątku na 1 sekundę. Słowo kluczowe `await` jest używane do oznaczenia miejsca, w którym wątek ma czekać na zakończenie wykonywania funkcji `asyncio.sleep(1)`.
+
+Moduł `asyncio` umożliwia tworzenie wielu wątków jednocześnie, co pozwala na lepsze wykorzystanie zasobów komputera. Należy jednak pamiętać, że `asyncio` nie jest rozwiązaniem wszystkich problemów związanych z wielowątkowością. W niektórych przypadkach lepszym rozwiązaniem może być użycie biblioteki `threading` lub `multiprocessing`.
+
 ### Lambdy
 
-Wyrażenia lambda to funkcje składające się wyłącznie z jednego wiersza instrukcji definiowane przy pomocy słowo kluczowego <code>lambda</code>. Lambdy nie używają słowa kluczowego <code>return</code>, gdyż zawsze zwracają wynik wykonania tworzącego je wiersza instrukcji. 
+Wyrażenia lambda to funkcje składające się z jednego wiersza instrukcji, definiowane za pomocą słowa kluczowego lambda. Lambdy nie używają słowa kluczowego return, ponieważ zawsze zwracają wynik wykonania tworzącego je wiersza instrukcji.
 
     def zwykla_funkcja(liczba: int) -> int:
       return liczba**2
@@ -1118,13 +1317,16 @@ Wyrażenia lambda to funkcje składające się wyłącznie z jednego wiersza ins
     print(przyklad_lambdy(wartosc)) # 4
     print((lambda liczba: liczba**2)(wartosc)) # 4
 
-W porównaniu do znanych nam pełnoprawnych funkcji definiowanych poprzez słowo kluczowe <code>def</code>, lambdy są znacznie ograniczone:
-  - mamy do dyspozycji jedynie jeden wiersz instrukcji.
-  - jest możliwość sprawdzenia warunku, ale nie można zagnieżdżać warunków.
-  - brak opcji tworzenia zmiennych, jak i przypisania wartości do zmiennych już istniejących (dla obiektów możemy użyć <code>setattr()</code>).
-  - brak pętli.
+W porównaniu do pełnoprawnych funkcji definiowanych za pomocą słowa kluczowego def, lambdy są ograniczone:
+
+- Możemy użyć jedynie jednego wiersza instrukcji.
+- Możliwe jest sprawdzenie warunku, ale nie można zagnieżdżać warunków.
+- Brak możliwości tworzenia zmiennych oraz przypisywania wartości do istniejących zmiennych (dla obiektów możemy użyć <code>setattr()</code>).
+- Brak pętli.
   
-Nasuwa się pytanie, po co tworzyć nowy mechanizm będący ograniczoną wersją już istniejącego? Otóż dzięki lambdom możemy znacznie ograniczyć liczbę wierszy kodu, a co za tym idzie poprawić czytelność kodu. Niejednokrotnie chcemy wykorzystać funkcję jedynie raz, zamiast tworzyć nową pełnoprawną funkcję przy użyciu słowa kluczowego <code>def</code>, możemy użyć lambdy.
+Lambdy są również przydatne, gdy chcemy dostosować się do wymagań danej funkcji, która przyjmuje jako argument funkcję. W takim przypadku nie musimy tworzyć pełnoprawnej funkcji i jej przekazywać, lecz możemy bezpośrednio podstawić lambda.
+
+Na przykład, jeśli chcemy posortować listę obiektów według pewnego atrybutu, możemy skorzystać z metody `sorted()`, która przyjmuje argument `key` - funkcję, która ma zwracać wartość atrybutu według którego ma być sortowana lista. W takiej sytuacji lambda pozwala nam zdefiniować tę funkcję w miejscy wywołania `sorted()`.
 
     lista = (('def', 100), ('ghi', 200), ('abc', 300))
     print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
@@ -1132,33 +1334,25 @@ Nasuwa się pytanie, po co tworzyć nowy mechanizm będący ograniczoną wersją
 
 ### Programowanie funkcyjne
 
-Funkcja <code>map()</code> ma dwa parametry:
-  1. Nazwa funkcji przyjmującej jeden argument (może to być też wyrażenie lambda).
-  2. Nazwa listy.
+Istnieją różne narzędzia służące do transformacji danych. W tym artykule przyjrzymy się kilku z nich: <code>map()</code>, <code>filter()</code> i <code>reduce()</code>. Funkcje te są często używane w programowaniu funkcyjnym. Programowanie funkcyjne to paradygmat programowania, w którym głównym sposobem reprezentowania algorytmów są funkcje. W programowaniu funkcyjnym nacisk kładzie się na transformację danych przy użyciu funkcji, a nie na ich modyfikację w miejscu.
 
-Wynikiem działania <code>map()</code> jest nowa lista, której elementy to wyniki wywołania funkcji przekazanej jako pierwszy argument dla każdego elementu listy przekazanej jako drugi argument.
+Funkcja <code>map()</code> to narzędzie służące do transformowania elementów jednej listy według określonej reguły. Ma ona dwa parametry: nazwę funkcji przyjmującej jeden argument (może to być też wyrażenie lambda) oraz nazwę listy. Funkcja <code>map()</code> zwraca nową listę, w której elementy są wynikami wywołania funkcji przekazanej jako pierwszy argument dla każdego elementu listy przekazanej jako drugi argument.
 
-Alternatywnymi konstrukcjami do funkcji <code>map()</code> są:
-  1. Pętla for.
-  2. Wyrażenia listowe.
-
-Porównajmy wyrażenia listowe i funkcję <code>map()</code>:
+Istnieją również inne sposoby na osiągnięcie tego samego efektu, takie jak pętle for lub wyrażenia listowe. Aby lepiej zrozumieć działanie <code>map()</code>, warto porównać je z innymi metodami:
 
     lista = [5, 10, 15, 20, 25, 30, 35, 40]
 
     lista_a = [elem // 5 for elem in lista] # [1, 2, 3, 4, 5, 6, 7, 8]
     lista_b = list(map(lambda elem : elem // 5, lista)) # [1, 2, 3, 4, 5, 6, 7, 8]
 
-Funkcja <code>filter()</code> działa podobnie jak funkcja <code>map()</code> z tym że jej wynikiem jest nowa lista, której elementy to elementy listy przekazanej jako drugi argument dla których wywołania funkcji przekazanej jako pierwszy argument zwróciły wartość logiczną True.
-
-Porównajmy wyrażenia listowe i funkcję <code>filter()</code>:
+Podobnie działa funkcja <code>filter()</code>. Jej wynikiem jest również nowa lista, złożona z elementów listy przekazanej jako drugi argument, dla których wywołanie funkcji przekazanej jako pierwszy argument zwróciło wartość logiczną `True`. Także i tutaj możemy porównać działanie <code>filter()</code> z innymi sposobami:
 
     lista = [5, 10, 15, 20, 25, 30, 35, 40]
 
     lista_a = [elem // 5 for elem in lista if elem % 2 == 0] # [2, 4, 6, 8]
     lista_b = list(map(lambda elem : elem // 5, filter(lambda elem : elem % 2 == 0, lista))) # [2, 4, 6, 8]
 
-W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z numerów ASCII odpowiadających wielkim literom otrzymanego słowa:
+Funkcja `reduce()` jest narzędziem służącym do agregacji elementów sekwencji według określonej reguły. Podobnie jak `map()` i `filter()`, `reduce()` przyjmuje jako argumenty funkcję oraz sekwencję. Różnica polega na tym, że `reduce()` wywołuje funkcję iteracyjnie na elementach sekwencji i zwraca pojedynczy wynik agregacji. W poniższym przykładzie pokazane są dwa sposoby na utworzenie listy składającej się z numerów ASCII odpowiadających wielkim literom otrzymanego słowa:
 
     napis = 'Python is Love'
     lista_a = [ord(znak) for znak in napis if znak.isupper()]
@@ -1178,14 +1372,17 @@ Pętle możemy w naturalny sposób zagnieżdżać. Podobnie możemy również op
     
 ### Klasy danych
 
-Tworzenie klas niejednokrotnie wiąże się z pisaniem wielu powtarzalnych elementów, takich jak inicjalizacja zmiennych argumentami funkcji __init__ oraz operatory porównania. Klasy danych (data classes) automatyzują te powtarzalne procesy i jedyne czego potrzebujemy, to deklaracja pól w obrębie klasy. Są one szczególnie przydatne, gdy klasa, którą piszemy ma na celu głównie grupowanie danych.
+Tworzenie klas często wiąże się z powtarzalnym pisaniem elementów, takich jak inicjalizacja zmiennych przy użyciu funkcji specjalnej `__init__` oraz implementacja operatorów porównania. W takich przypadkach klasy danych (ang. data classes) mogą okazać się bardzo przydatne. Są one specjalnym rodzajem klas, które automatyzują proces tworzenia powtarzalnych elementów, takich jak inicjalizacja zmiennych i implementacja operatorów porównania. W celu utworzenia klasy danych wystarczy, że w obrębie klasy zadeklarujemy pola, które chcemy przechowywać. Są one szczególnie przydatne, gdy głównym celem naszej klasy jest grupowanie danych.
 
     @dataclass(unsafe_hash=True, order=True)
     class RGB:
       czerwony: int
       zielony: int
       niebieski: int
+      
+W powyższym przykładzie klasa `RGB` jest oznaczona dekoratorem `@dataclass`, co oznacza, że jest to klasa danych. Oznacza to, że automatycznie otrzyma ona metody specjalne, takie jak `__init__`, `__eq__` i `__repr__`, które są zwykle ręcznie implementowane w klasach.
 
+Dekorator @dataclass przyjmuje również dwa dodatkowe argumenty: `unsafe_hash` i `order`. Argument `unsafe_hash` określa, czy instancje tej klasy mają być używane jako elementy słowników lub zbiorów (jeśli argument jest ustawiony na `True`, instancje tej klasy mogą być używane jako elementy słowników lub zbiorów). Argument `order` określa, czy instancje tej klasy będą używane jako elementy posortowanej sekwencji (np. listy). Jeśli argument order jest ustawiony na `True`, instancje tej klasy będą automatycznie posiadać metodę specjalną `__lt__`, która pozwala na porównywanie instancji za pomocą operatora `<`.
 
 |    Funkcjonalność     |                      Przykład                                                           |
 ----------------------- |---------------------------------------------------------------------------------------- |
@@ -1291,11 +1488,11 @@ Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chc
 
 ### Serializacja
 
-Załóżmy, że napisałeś prostą grę, w której gracz może zdobywać punkty doświadczenia. Jeśli chcesz, żeby po ponownym uruchomieniu programu gracz mógł wznowić grę w dokładnie tym samym miejscu, gdzie poprzednio ją zakończył, to musisz w jakiś sposób zapisać tę informację. Serializacja to proces konwertowania obiektu na strumień bajtów w celu otworzenia jego stanu.
+Serializacja to proces konwersji obiektu na strumień bajtów, który może być następnie zapisany, przesłany lub przechowywany w inny sposób. Dzięki serializacji możliwe jest zapisywanie stanu obiektów i ich późniejsze odtwarzanie, co może być przydatne np. w grach, gdzie chcemy zapisać postępy gracza lub w aplikacjach, gdzie chcemy zapisywać dane użytkownika.
 
-Popularnym modułem do serializacji i deserializacji obiektów w Pythonie jest <code>pickle</code>.
+Moduł pickle w języku Python służy do serializacji i deserializacji obiektów. Funkcja `dumps()` pozwala na zserializowanie obiektu do strumienia bajtów, który może być następnie zapisany do pliku lub przesłany do innego procesu. Funkcja `loads()` pozwala na odtworzenie obiektu ze strumienia bajtów.
 
-Funkcja <code>dumps()</code> służy do serjalizacji obiektu na strumień bajtów. Strumień ten można według życzenia zapisać do pliku, wysłać do innego procesu lub wrzucić na serwer.
+Przykład użycia tych funkcji znajduje się poniżej. W kodzie tworzona jest klasa `Czlowiek` z polami `imie` i `numer`, a następnie serializowana i zapisywana do pliku. Następnie obiekt jest odtwarzany z pliku i wyświetlany na ekranie.
 
     import pickle
 
@@ -1312,7 +1509,6 @@ Funkcja <code>dumps()</code> służy do serjalizacji obiektu na strumień bajtó
     with open(sciekza, 'wb') as plik:
       pickle.dump(Czlowiek('James', 10), plik)
 
-Funkcja <code>loads()</code> służy do odtwarzania stanu obiektów ze strumienia bajtów.
 
     with open(sciekza, 'rb') as plik:
       czlowiek = pickle.load(plik)
