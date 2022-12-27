@@ -1514,16 +1514,16 @@ Przykład użycia tych funkcji znajduje się poniżej. W kodzie tworzona jest kl
 
 ## Inżynieria oprogramowania
 
-Poza znajomością samego języka programowania, do tworzenia oprogramowania programista musi jeszcze poznać szereg konwencji oraz narzędzi używanych w profesjonalnym środowisku.
+Inżynieria oprogramowania to dziedzina zajmująca się procesem tworzenia oprogramowania, od projektowania po implementację i utrzymanie. W tej dziedzinie ważne są takie aspekty jak dobór narzędzi i metodologii, zarządzanie projektem, czy współpraca w zespole.
 
 ### Moduły i pakiety
 
-Za każdym razem, gdy używamy instrukcji <code>import</code>, importujemy do naszego skryptu zewnętrzny moduł. Dzięki temu zabiegowi wszystkie funkcje, klasy oraz zmienne globalne z danego modułu są dostępne w skrypcie, który go importuje. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona.
-
+Za każdym razem, gdy używamy instrukcji <code>import</code>, importujemy do skryptu zewnętrzny moduł. Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia .py. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona. Przykładowo, tak możemy zaimporotwać moduł `requests`:
+ 
     import requests
     print(type(requests)) # <class 'module'>
 
-Moduły możemy również tworzyć sami. Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia *.py*. Pakiet jest folderem z modułami zawierającym dodatkowy plik *__init__.py*, który potrzebny jest, aby odróżnić pakiet od zwykłego folderu.
+Pakiety to foldery z modułami, w których znajduje się plik `init.py`. Jest to plik specjalny, który jest potrzebny do odróżnienia pakietu od zwykłego folderu.
 
     .
     └── nazwa_paczki
@@ -1533,82 +1533,89 @@ Moduły możemy również tworzyć sami. Każdy plik Pythona jest modułem, któ
         └── przykladowy_skrypt_c.py
     └── main.py
     
-Załóżmy, że *przykladowy_skrypt_a.py* zawiera definicję funkcji *fun_a()* oraz *fun_b()*, które chcemy użyć w skrypcie *main.py*.
-Mamy następujące opcje importowania modułu *przykladowy_skrypt_a* do skryptu *main.py*:
+Możemy importować moduły na kilka sposobów:
 
-1. Zaimportowanie całego modułu.
+* Zaimportowanie całego modułu:
 
-        import nazwa_paczki.przykladowy_skrypt_a
+      import nazwa_modulu
 
-        przykladowy_skrypt_a.fun_a()
-        przykladowy_skrypt_a.fun_b()
+* Zaimportowanie całego modułu i nadanie mu aliasu:
 
-2. Zaimportowanie całego modułu oraz nadanie mu aliasu:
-    
-        import nazwa_paczki.przykladowy_skrypt_a as modul
+      import nazwa_modulu as alias
 
-        modul.fun_a()
-        modul.fun_b()
+* Zaimportowanie wybranych funkcji z modułu:
 
-3. Zaimportowanie wybranych funkcji z modułu:
+      from nazwa_modulu import fun_1, fun_2
 
-        from nazwa_paczki.przykladowy_skrypt_a import fun_a(), fun_b()
+* Zaimportowanie wybranych funkcji z modułu i nadanie im aliasów:
 
-        fun_a()
-        fun_b()
+      from nazwa_modulu import fun_1 as f1, fun_2 as f2
 
-4. Zaimportowanie wybranych funkcji z modułu oraz nadanie im aliasów:
+* Zaimportowanie wszystkich funkcji z modułu:
 
-        from nazwa_paczki.przykladowy_skrypt_a import fun_a() as fun_1()
+      from nazwa_paczki.przykladowy_skrypt_a import *
 
-        fun_1()
-    
-5. Zaimportowanie wszystkich funkcji z modułu:
+      fun_a()
+      fun_b()
 
-        from nazwa_paczki.przykladowy_skrypt_a import *
+Należy uważać z używaniem instrukcji <code>from modul import *</code>, ponieważ zaimportowane zostają wszystkie zmienne i funkcje z modułu, niezależnie od tego czy ich będziemy używać czy nie. Może to prowadzić do konfliktów nazw oraz utrudnić odczytanie kodu.
 
-        fun_a()
-        fun_b()
-
-
-Uwaga: instrukcje bezpośrednio w module (nie będące częścią defnicji żadnej funkcji) zostaną automatycznie wykonane w trakcie importowania modułu!
+Uwaga: instrukcje, które nie są częścią definicji żadnej funkcji, zostaną automatycznie wykonane podczas importowania modułu!
 
 Przykład:
-    
+
     def fun_a():
         ...
-     
+
     def fun_b():
          ...
-         
+
     wyslij_rakiety()
 
-Jeśli ten moduł zostanie zaimportowany w innym skrypcie, to funkcja *wyslij_rakiety()* zostanie wywowałana w trakcie importowania modułu.
-Aby temu zapobiec umieść wszystkie pozostawione same sobie instrukcje w ciele natępującego warunku <code>if __name__ == "__main__":</code> :
+Jeśli ten moduł zostanie zaimportowany w innym skrypcie, to funkcja `wyslij_rakiety()` zostanie wywołana podczas importowania modułu.
+Aby temu zapobiec, należy umieścić wszystkie instrukcje, które mają być wykonywane poza definicjami funkcji, w ciele następującego warunku <code>if name == "main":</code> :
 
-    
     def fun_a():
         ...
-     
+
     def fun_b():
          ...
-    
+
     if __name__ == "__main__":
       wyslij_rakiety()
 
-
 ### Wersje Pythona
 
-<code>Pyenv</code> używany jest do izolowania różnych wersji Pythona. Na przykład jeśli chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz łatwego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. <code>Pyenv</code> ułatwia również proces pobierania i instalowania różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
+Narzędzie <code>Pyenv</code> służy do izolowania różnych wersji Pythona. Jeśli na przykład chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz prostego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. Ponadto <code>Pyenv</code> umożliwia pobieranie i instalowanie różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
 
 Linki:
 
 * https://github.com/pyenv/pyenv
 * https://github.com/pyenv-win/pyenv-win
 
+Po zainstalowaniu pyenv, możemy użyć polecenia pyenv install aby zainstalować nową wersję Pythona. Na przykład, aby zainstalować wersję Python 3.10, użyjemy polecenia:
+
+    pyenv install 3.10
+
+Aby ustawić wersję Pythona, która będzie używana dla danego katalogu, użyj polecenia pyenv local:
+
+    pyenv local 3.10
+
+Aby ustawić wersję Pythona, która będzie używana dla całego systemu, użyj polecenia pyenv global:
+
+    pyenv global 3.10
+
+Aby wyświetlić listę zainstalowanych wersji Pythona, użyj polecenia pyenv versions:
+
+    pyenv versions
+
+Aby wyświetlić bieżącą wersję Pythona, użyj polecenia pyenv version:
+
+    pyenv version
+
 ### PIP i PyPI
 
-PIP to program, który pozwala na instalację pakietów Pythona dostępnych na stronie <a href="https://pypi.org/">PyPI</a>.
+PIP to narzędzie umożliwiające instalację pakietów Pythona dostępnych na stronie PyPI (Python Package Index).
 
 Instalacja:
 
@@ -1648,7 +1655,7 @@ Linki:
 
 Środowisko wirtualne to odizolowane od reszty systemu wersje bibliotek i pakietów Pythona. Instalując daną wersję pakietu w środowisku wirtualnym jest ona dostępna tylko w nim. Gdy usuwamy środowisko wirtualne wraz z nim znika również wszystko to co zostało zainstalowane w jęgo obrębie.
 
-Popularnym narzędziem do tworzenia środowisk wirtualnych jest <code>virtualenv</code>. Narzędzie to tworzy specjalny folder o dowolnej nazwie (np. env/) oraz modyfikuje zmienną środowiskową PATH dodając do niej refernecje do podfolderu bin znajdującego się w utworzonym folderze (np. env/bin/). Wszystkie pakiety i biblioteki instalowane w środowisku wirtualnym wędrują do tego folderu.
+Popularnym narzędziem do tworzenia środowisk wirtualnych jest <code>virtualenv</code>. Narzędzie to tworzy specjalny folder o dowolnej nazwie (np. `env/`) oraz modyfikuje zmienną środowiskową PATH dodając do niej refernecje do podfolderu `bin` znajdującego się w utworzonym folderze (np. `env/bin/`). Wszystkie pakiety i biblioteki instalowane w środowisku wirtualnym wędrują do tego folderu.
 
 Aby zainstalować narzędzie <code>virtualenv</code> przy pomocy menadźera pakietów <code>PIP</code>, użyj:
 
@@ -1661,7 +1668,7 @@ Aby utworzyć środowisko wirtualne o nazwie *env* w aktualnym folderze, użyj:
 Jeśli w systemie masz zainstalowane różne wersje Pythona, to możesz powiedzieć środowisku wirtualnemu, z której wersji ma korzystać.
 Przykładowo, jeśli mam interpreter Pythona w folderze */usr/bin/python3* i chce, żeby z niego korzystało moje środowisko wirtualne, to używam następującej komendy:
 
-  virtualenv -p /usr/bin/python3 env
+    virtualenv -p /usr/bin/python3 env
 
 Aby wejść do środowiska wirtualnego, użyj:
 
@@ -1685,16 +1692,31 @@ Linki:
 
 ### Dbanie o jakość kodu i lintowanie
 
-Poprawny z punktu widzenia interpretera kod można często napisać na wiele sposobów. Mało tego nawet jedna linia kodu może być zazwyczaj zapisana na więcej niż jeden sposób. Jedną z możliwych przyczyn różnic jest formatowanie. Przykładowo w kodzie do oddzielania instrukcji można użyć zarówno spacji, jak i tabów. Definicje funkcji można oddzielać jednym, dwoma lub trzema enterami. Linie kodu mogą być tak długie, że nie zmieszczą się na ekranie. Czy więc należy ograniczać ich długość? Jeśli tak, to ile dokładnie znaków powinno być górną granicą? Dopóki z kodem pracujemy sami, wszystkie te przykłady nie mają dla nas znaczenia. Sami możemy podejmować decyzje i w dowolnej chwili zmienić zdanie. Co ma jednak zrobić grupa programistów pracująca wspólnie nad jednym projektem? Czy powinni oni debatować jakie reguły są najlepsze i tracić w ten sposób cenny czas? Całe szczęście istnieje lista konwencji pisania kodu przygotowana przez twórców Pythona. Dwa główne dokumenty przedstawiające te konwencje to <code>PEP8</code> i <code>PEP257</code>. Dokumenty te definiują wytyczne do wszystkich poruszonych przez nas zagadnień, ale również wielu innych. Poza samymi suchymi regułami dokumenty te zawierają również wiele przykładów poprawnie, jak i niepoprawnie napisanego kodu.
+Poprawny z punktu widzenia interpretera kod można napisać na wiele sposobów. Nawet jedna linia kodu może być zapisana na wiele sposobów. Jedną z przyczyn takiego stanu rzeczy są różnice w formatowaniu. Na przykład w kodzie do oddzielania instrukcji można użyć zarówno spacji, jak i tabów. Definicje funkcji można oddzielać jednym, dwoma lub trzema enterami. Linie kodu mogą być tak długie, że nie zmieszczą się na ekranie. Czy więc należy ograniczać ich długość? Jeśli tak, to ile znaków powinno być górną granicą? Dopóki z kodem pracujemy sami, wszystko wydaje się być w porządku, ale co jeśli ktoś inny będzie musiał czytać nasz kod? Co jeśli ktoś inny będzie musiał go modyfikować? Wtedy ważne staje się, by kod był czytelny i zrozumiały dla innych programistów. Z tych właśnie względów warto przestrzegać konwencji pisania kodu.
 
-Istnieje wiele narzędzi (tak zwanych linterów) sprawdzających, czy kod przestrzega wytycznych twórców Pythona.
+Narzędzia, takie jak <code>Pylint</code> i <code>Black</code> pomagają nam uniknąć typowych błędów i niepoprawności, które mogą pojawić się podczas pisania kodu. Narzędzia te sprawdzają, czy kod jest zgodny z zasadami zapisanymi w dokumentach <code>PEP8</code> i <code>PEP257</code>.
 
-<code>Black</code> nie pyta o zdanie, automatycznie zmienia formatowanie kodu na zgodne z PEP8.
+Aby użyć narzędzia <code>Pylint</code>, zainstaluj je za pomocą <code>PIP</code>:
 
-<code>Pylint</code> to jeden z najpopularniejszych linterów Pythona. Daje nam trochę więcej wskazówek niż <code>Black</code>, który interesuje się jedynie formatowaniem. <code>Pylint</code> zwróci również uwagę na niepoprawne nazwy zmiennych (np. *a* lub *bb*), czy funkcje i klasy pozostawione bez objaśniających komentarzy (docstrings). Dodatkowo wiele narzędzi do CI/CD (np. Team City, czy Github Actions) zintegrowało <code>Pylint</code> ze swoim interfejsem graficznym. Wskazówki od <code>Pylint</code> nie modyfikują kodu automatycznie i trzeba wprowadzać je ręcznie.
+    pip install pylint
 
-<code>Flake8</code> to kolejne świetne narzędzie do lintowania. Choć w działaniu podobny jest do <code>Pylint</code> to jego największą zaletą jest ogromna paleta pluginów tworzonych przez społeczność. Dzięki temu możemy otrzymać jeszcze więcej wskazówek jak poprawić nasz kod i jednocześnie mieć pełną kontrolę nad aspektami kodu, które są sprawdzane.
+Aby sprawdzić kod za pomocą <code>Pylint</code>, użyj polecenia:
 
+    pylint <nazwa_pliku.py>
+
+Aby użyć narzędzia <code>Black</code>, zainstaluj je za pomocą <code>PIP</code>:
+
+    pip install black
+
+Aby użyć <code>Black</code> do sformatowania kodu w pliku o nazwie <code>nazwa_pliku.py</code>, użyj polecenia:
+
+    black nazwa_pliku.py
+
+Black to narzędzie do automatycznej reformatowania kodu w celu dostosowania go do wytycznych PEP8. Nie pyta ono o zdanie programisty i zmienia formatowanie kodu bez możliwości konsultacji. Z tego względu Black jest narzędziem bardzo szybkim i prostym w użyciu. Jego główną wadą jest brak możliwości konfiguracji. Black nie pozwala na zmianę domyślnych ustawień ani na wyłączenie poszczególnych zasad formatowania.
+
+Flake8 to narzędzie do sprawdzania jakości kodu. Oprócz formatowania kodu, Flake8 sprawdza także jego poprawność semantyczną oraz brak błędów składniowych. W porównaniu do Blacka, Flake8 oferuje większą ilość opcji konfiguracyjnych. Możliwe jest m.in. wyłączenie poszczególnych zasad sprawdzania lub zmiana ich domyślnych ustawień. Jedną z wad Flake8 jest to, że jest ono wolniejsze od Blacka, ponieważ sprawdza także inne aspekty kodu niż tylko jego formatowanie.
+
+Pylint to narzędzie do sprawdzania jakości kodu podobne do Flake8. Oprócz sprawdzania formatowania kodu i braku błędów składniowych, Pylint sprawdza także nazewnictwo zmiennych i funkcji oraz brak docstringów (komentarzy opisujących kod).
 
 |                            | black | pylint | flake8 | 
 |----------------------------|--------|--------|-------|
@@ -1715,28 +1737,39 @@ Linki:
 
 ### Debugowanie
 
-Debuger to program, którego zadanie jest inspekcja stanu programu w trakcie wykonywanie. Możesz użyć debugera, aby zatrzymać wykonywanie programu, gdy w trakcie wykonywania osiągnięta zostanie określone przez ciebie miejsce w kodzie. Po zatrzymaniu programu debuger pokazuje aktualne wartości wszystkich zmiennych istniejących w danym punkcie programu. Dzięki temu możemy zweryfikować, czy nasze wyobrażenia o tym jak działa program mają potwierdzenie w rzeczywistości. 
+Debuger jest bardzo przydatnym narzędziem, zwłaszcza przy pracy nad dużymi projektami. Dzięki niemu możemy zatrzymać program w dowolnym momencie, aby sprawdzić co się w nim dzieje. Możemy też prześledzić kolejne kroki programu, które zostały wykonane do momentu zatrzymania, co pozwala na szybkie i skuteczne znajdowanie błędów.
 
 Dwa główne zastosowania debugera:
 - Wyszukiwanie przyczyn bugów w kodzie.
 - Analiza działania programu przez zaznajamiających się z nim programistów.
 
-Większość współczesnych środowisk programistycznych (IDE) ma wbudowany debuger. Graficzny interfejs użytkownika umożliwa sterowanie debugerem za pomocą myszy. Miejsca, w których debuger ma zatrzymać program zaznaczane są często za pomocą czerownej kropki, a wartości zmiennych wyświetlane są w specjalnym panelu.
+Jedną z mocnych stron debugera jest też to, że pozwala nam zajrzeć "pod maskę" programu i zobaczyć jakie zmienne są zdefiniowane i jakie są ich wartości. Dzięki temu możemy szybciej zrozumieć co dzieje się w kodzie i co jest przyczyną jakichś błędów.
+
+Słabą stroną debugera jest to, że korzystanie z niego może być czasochłonne. Zatrzymywanie programu i przechodzenie przez kolejne kroki wymaga czasu i cierpliwości. Czasem może też być trudno zrozumieć co dzieje się w kodzie, jeśli jest on bardzo skomplikowany lub niezrozumiały.
+
+Większość współczesnych środowisk programistycznych (IDE) ma wbudowany debuger. Debugger w IDE umożliwia ustawienie punktów breakpoint, dzięki którym program zatrzymuje się automatycznie w wybranym miejscu, co ułatwia debugowanie. IDE zazwyczaj posiada również dodatkowe funkcje, takie jak możliwość podglądu zmiennych czy historii wywołań funkcji, które ułatwiają debugowanie.
+
+Jeśli nie korzystamy z IDE, możemy użyć modułu pdb, który jest wbudowanym w Pythonie debugerem. Moduł ten umożliwia kontrolowanie wykonywania kodu z linii poleceń, co pozwala na debugowanie skryptów bez konieczności ich uruchamiania w środowisku programistycznym. Możliwe jest również uruchamianie pdb z poziomu kodu Pythona za pomocą funkcji importowanej z modułu <code>pdb</code>: <code>pdb.set_trace()</code>. Po uruchomieniu tej funkcji program zatrzyma się i będziemy mogli kontrolować jego działanie z linii poleceń.
+
+Linki:
+
+* https://docs.python.org/3/library/pdb.html
 
 ### Testy jednostkowe
 
-Testowanie to proces, w którym uruchamiamy program (bądź jego część) z zamiarem sprawdzenia poprawności jego działania. Testy jednostkowe mają na celu weryfikację poprawności odizolowanej jednostki programu, najczęściej jednej funkcji.
+Testy jednostkowe są ważnym narzędziem w procesie tworzenia oprogramowania, ponieważ pomagają zapewnić, że nasz kod działa poprawnie i jest odporny na błędy. Pozwalają również na szybkie wykrycie błędów, które pojawiły się w wyniku zmian w kodzie, dzięki czemu możemy je szybko naprawić. 
 
-* czerwone testy pokazują, że coś, co działało wcześniej, aktualnie nie działa.
-* zielone testy nie oznaczają, że wszystko działa poprawnie, tylko że to, co było sprawdzane w testach działa poprawnie.
-* więcej nie zawsze znaczy lepiej (ważenie się 10 razy dziennie nie sprawi, że szybciej schudniesz).
+* Czerwone testy, czyli testy, które nie przeszły, pokazują, że coś, co działało wcześniej, aktualnie nie działa. Może to być spowodowane tym, że została wprowadzona jakaś zmiana w kodzie, która spowodowała, że test nie zadziałał poprawnie. Czerwone testy są sygnałem, że coś jest nie tak i konieczne jest przeanalizowanie kodu i znalezienie przyczyny problemu.
+* Zielone testy, czyli testy, które przeszły, pokazują, że to, co było sprawdzane w testach działa poprawnie. Nie oznacza to jednak, że cały program działa poprawnie - mogą być jeszcze inne fragmenty kodu, które nie zostały sprawdzone w testach i które mogą działać niepoprawnie. Zielone testy są ważne, ponieważ pozwalają upewnić się, że kod działa zgodnie z założeniami, ale nie są wystarczające do całkowitego zabezpieczenia aplikacji przed błędami.
 
-Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>.
+Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>. Obie biblioteki, dają nam możliwość tworzenia testów jednostkowych i uruchamiania ich automatycznie, co pozwala na skupienie się na kodowaniu i uniknięcie ręcznego testowania kodu. Obie biblioteki są dość proste w użyciu i oferują duże możliwości tworzenia i uruchamiania testów. Ostateczny wybór biblioteki zależy od indywidualnych potrzeb i preferencji programisty.
 
 #### Unittest
 
-Zbudowany zgodnie z filozofią programowania obiektowego. Mamy klasy, dziedziczenie i tysiąc różnych funkcji <code>assert</code>. 
- 
+Biblioteka ta została zbudowana zgodnie z filozofią programowania obiektowego, co oznacza, że w kodzie tworzymy klasy i korzystamy z dziedziczenia. Unittest oferuje również wiele funkcji assert, które pozwalają na sprawdzenie różnych aspektów działania programu.
+
+Przykład kodu z użyciem unittest:
+
     import unittest
     
     class TestSMTP(unittest.TestCase):
@@ -1749,9 +1782,17 @@ Zbudowany zgodnie z filozofią programowania obiektowego. Mamy klasy, dziedzicze
         response_code, msg = self.smtp_connection().ehlo()
         self.assertEqual(response_code, 250)
 
+W powyższym przykładzie tworzymy klasę TestSMTP, która dziedziczy po klasie TestCase z biblioteki unittest. W tej klasie zdefiniowaliśmy funkcję smtp_connection, która tworzy połączenie z serwerem SMTP, oraz funkcję test_helo, która wywołuje metodę ehlo na połączeniu SMTP i sprawdza, czy otrzymano oczekiwany kod odpowiedzi (250).
+
+Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
+
+    python -m unittest
+
 #### Pytest
 
-Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. Jest jedna funkcja <code>assert</code>. 
+Pytest to również biblioteka służąca do tworzenia i uruchamiania testów jednostkowych w języku Python. Została zbudowana zgodnie z filozofią "im prościej, tym lepiej", co oznacza, że nie ma w niej klas i dziedziczenia. Pytest pozwala na tworzenie testów poprzez definiowanie funkcji oznaczonych adnotacją @pytest.fixture.
+
+Przykład kodu z użyciem pytest:
 
     import pytest
     
@@ -1764,21 +1805,32 @@ Zbudowany zgodnie z filozofią im prościej, tym lepiej. Nie ma żadnych klas. J
        response_code, msg = smtp_connection.ehlo()
        assert response_code == 250
 
+Test składa się z dwóch części: dekoratora <code>@pytest.fixture</code> oraz funkcji testowej <code>test_helo()</code>.
+
+Dekorator <code>@pytest.fixture</code> mówi nam, że funkcja <code>smtp_connection()</code> jest funkcją pomocniczą, która zostanie uruchomiona przed każdą funkcją testową. W tym przypadku <code>smtp_connection()</code> tworzy obiekt <code>SMTP</code> i zwraca go jako wartość. Funkcja ta nie jest testem jednostkowym, ale służy do przygotowania środowiska testowego.
+
+Natomiast funkcja testowa <code>test_helo()</code> jest testem jednostkowym. Funkcja ta przyjmuje jako argument obiekt <code>smtp_connection</code>, który został wcześniej utworzony przez dekorator <code>@pytest.fixture</code>. Funkcja testowa wywołuje na tym obiekcie funkcję <code>ehlo()</code> i sprawdza, czy kod odpowiedzi oraz wiadomość zwracana przez funkcję są takie same, jak oczekiwane wartości. Jeśli tak, to test zostaje zaliczony, w przeciwnym razie test zostaje uznany za nieudany (tzw. "czerwony test").
+
+Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
+
+    pytest
+
 #### Korzyści z testów jednostkowych
 
-* Pomagają innym programistom zrozumieć, co miał robić dany fragment kodu produkcyjnego.
-* Gdy programy są małe, programista może ręcznie sprawdzić ich działanie z każda modyfikacja. Wraz ze wzrostem złożoności, ręczne testowanie wszystkich części programu staje się niemożliwe.
-* Testy jednostkowe wymuszają przynajmniej minimalną separację zadań między fragmentami kodu.
+* Pomagają innym programistom zrozumieć cel danego fragmentu kodu produkcyjnego.
+* Gdy programy są małe, programista może ręcznie sprawdzić ich działanie z każdą modyfikacją. Wraz ze wzrostem złożoności, ręczne testowanie wszystkich części programu staje się niemożliwe. Testy jednostkowe można uruchomić automatycznie.
+* Wymuszają separację zadań między poszczególnymi fragmentami kodu.
+* Pozwalają na szybkie sprawdzenie poprawności działania kodu po dokonaniu zmian w kodzie produkcyjnym.
 
 #### TDD
 
-Technika "test driven development" to sposób pisania programów gdzie testy pisane są przed kodem produkcyjnym. Program pisany jest w trzyetapowych cyklach:
+Technika "test driven development" (TDD) to sposób pisania programów, w którym testy są pisane przed kodem produkcyjnym. Proces tworzenia programu składa się z trzech etapów:
 
 1. Testy jednostkowe.
 2. Kod produkcyjny.
 3. Refkatoryzajca kodu produkcyjnego.
 
-Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopóki wszystkie trzy etapy nie zostały zakończone dla funkcjonalności aktualnie implementowanych.
+Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopóki wszystkie trzy etapy nie zostały zakończone dla aktualnie implementowanych funkcjonalności.
 
 #### Losowe dane nie mają miejsca w testach
 
@@ -1797,31 +1849,42 @@ Załóżmy, że masz własną implementację jednego z algorytmów sortowania. J
        assert wlasne_sortowanie(lista_b) == sorted(lista_b)
        assert wlasne_sortowanie(lista_c) == sorted(lista_c)
 
+Powyższy fragment kodu zawiera przykład użycia pytest do testowania funkcji <code>wlasne_sortowanie</code>. W tym przypadku, trzy listy są tworzone jako dane wejściowe: <code>lista_a</code>, <code>lista_b</code> i <code>lista_c</code>. Następnie są one porównywane z oczekiwanymi wynikami po wywołaniu funkcji <code>sorted()</code> na tych samych danych wejściowych za pomocą polecenia <code>assert</code>. Jeśli wynik zwrócony przez <code>wlasne_sortowanie()</code> jest różny od oczekiwanego wyniku, zostanie wygenerowany błąd, który poinformuje o niepowodzeniu testu.
+
 #### Od znalezienia buga do poprawnie działającego kodu
 
-Znaleziono bug w twoim programie. Co robić?
+Zauważono błąd w twoim programie. Co należy zrobić?
 
-1. Spróbuj odtworzyć problematyczną sytuację. Przykładowo powiedzmy, że twoja aplikacja zamyka się po wciśnięciu na przycisk mający przenieść użytkownika na inną stronę. Najpierw manualnie wykonaj wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
-1. Wytrop w kodzie, który fragment jest odpowiedzialny za pojawienie się znalezionego błędu.
-1. Dodaj test mający sprawdzić, czy niepożądana sytuacja występuje po wykonaniu wytropionego fragmentu kodu. Przykładowo, jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code>, to najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja <code>foo()</code> wywoływana jest wraz z parametrami, przy których pojawia się błąd. Dodaj test wykrywający wystąpienie niepożądanej sytuacji. Po uruchomieniu testu otrzymasz czerwony komunikat. 
-1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Test z czerwonego powinien stać się zielony. W przyszłości dbaj o to, by test już zawsze pozostał zielony.
-1. Zanim wyślesz zmiany do centralnego repozytorium, rzuć raz jeszcze na nie okiem. Zastanów się, czy twoja łatka mogłaby być napisana inaczej, być może wpadniesz na prostsze rozwiązanie. 
+1. Próbuj odtworzyć problematyczną sytuację. Na przykład, jeśli twoja aplikacja zamyka się po wciśnięciu przycisku mającego przenieść użytkownika na inną stronę, najpierw manualnie wykonaj wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
+1. Zlokalizuj w kodzie, który fragment jest odpowiedzialny za pojawienie się znalezionego błędu.
+1. Dodaj test, który sprawdzi, czy niepożądana sytuacja występuje po wykonaniu zlokalizowanego fragmentu kodu. Na przykład, jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code>, najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja <code>foo()</code> jest wywoływana z parametrami, przy których pojawia się błąd. Dodaj test wykrywający wystąpienie niepożądanej sytuacji. Po uruchomieniu testu otrzymasz czerwony komunikat. 
+1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Możesz to zrobić na różne sposoby, ale pamiętaj, że celem jest zamienienie czerwonego komunikatu z testu na zielony. Możesz zmienić sposób działania funkcji, zmienić sposób przekazywania argumentów lub wyeliminować jakiś błąd. Ważne, by po zmianach test <code>test_foo()</code> przeszedł pomyślnie.
+1. Gdy test przechodzi pomyślnie, możesz przejść do kolejnego etapu, czyli refaktoryzacji kodu. To etap, w którym dbamy o to, by kod był czytelny, elegancki i łatwy do zrozumienia. Może to oznaczać przemianowanie zmiennych, zmianę sposobu ich deklaracji, a nawet usunięcie niepotrzebnych linii kodu. Refaktoryzacja powinna być przeprowadzana zgodnie z zasadami zdrowego rozsądku i nie powinna wpływać na poprawność funkcji.
+1. W przyszłości dbaj o to, by test już zawsze pozostał zielony.
 
 #### Inne typy testów
 
-Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/">"Software Engineering at Google"</a> testy należy rozdzielić na trzy kategorie w następujących proporcjach:
+* Testy jednostkowe to testy sprawdzające odizolowane jednostki kodu, najczęściej pojedyncze funkcje.
+* Testy integracyjne to testy sprawdzające, jak różne elementy systemu współpracują ze sobą.
+* Testy całego systemu (end-to-end) to testy sprawdzające, jak system działa jako całość, od wejścia aż do wyjścia.
+
+Ogólnie rzecz biorąc, im mniej testów jednostkowych, tym więcej testów integracyjnych i testów całego systemu jest potrzebnych, aby zapewnić odpowiedni poziom testowania. Ważne jest, aby zachować odpowiedni balans między różnymi typami testów.
+
+Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/">"Software Engineering at Google"</a> testy należy rozdzielić w następujących proporcjach:
 
 * 80% testy jednostkowe
 * 15% testy integracyjne
 * 5% testy całego systemu (end-to-end)
 
-#### Automatyczna generacja danych na potrzeby testów
+#### Generowanie danych testowych automatycznie
 
-Staraj się obok kodu aplikacji tworzyć skrypty generujące zasoby potrzebna aplikacji. Przykładowo załóżmy, że piszesz aplikację, która w tle komunikuje się z bazą danych MySQL. Powinieneś mieć dostępny pod ręką skrypt, który automatycznie zbuduje taką bazę danych i wypełni ją przykładowymi tabelami. Dzięki temu nie musisz czekać na testy w środowisku produkcyjnym i już w czasie pisania programu, możesz od razu upewnić się, że twój kod działa poprawnie. Dodatkowo masz możliwość automatycznego testowania całego programu.
+Przy tworzeniu aplikacji, warto również zadbać o skrypty generujące dane testowe, które są potrzebne do pracy aplikacji. Na przykład, jeśli piszesz aplikację komunikującą się z bazą danych MySQL, powinieneś mieć skrypt, który automatycznie utworzy taką bazę danych i wypełni ją przykładowymi danymi. Dzięki temu, podczas pisania kodu, możesz od razu sprawdzić, czy działa on poprawnie, bez konieczności czekania na uruchomienie testów w środowisku produkcyjnym. Ponadto, masz możliwość automatycznego testowania całej aplikacji.
 
-### Organizacja projektu z testami
+#### Organizacja projektu z testami
 
-Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmodułów. Przykładowo nasza aplikacja może wyglądać w ten sposób:
+Aby zachować porządek w projekcie, warto rozdzielić kod produkcyjny i testy jednostkowe do osobnych folderach. W ten sposób łatwiej będzie zarządzać plikami i szybko odnaleźć potrzebne testy.
+
+Przykładowo, struktura projektu może wyglądać następująco:
 
     projekt
     ├── przykladowy_pakiet
@@ -1833,64 +1896,76 @@ Typowe projekty progamistyczne podzielone są na kilka pakietów oraz podmoduł�
         └── test_modul_a.py
         └── test_modul_b.py
 
-Testy powinny być rozdzielone między różne moduły podobnie jak pliki źródłowe. W ten sposób z jednej strony ograniczymy wielkość plików  z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
+W ten sposób z jednej strony ograniczymy wielkość plików z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
 
-Aby wywołać wszystkie testy, użyj:
+#### Automatyzacja testów
 
-a) Dla modułu <code>unittest</code>:
+W momencie, gdy nasz projekt zaczyna rosnąć w skali, warto zastanowić się nad automatyzacją testów. Możliwe opcje to użycie narzędzi takich jak <a href="https://travis-ci.org/">Travis CI</a>, <a href="https://jenkins.io/">Jenkins</a>, czy <a href="https://circleci.com/">CircleCI</a>. Dzięki temu każdorazowa zmiana w kodzie źródłowym automatycznie uruchamia wszystkie testy, dzięki czemu mamy pewność, że zmiany nie zepsuły istniejącej funkcjonalności.
 
-    $ python -m unittest discover
-    
-b) Dla modułu <code>pytest</code>:
-
-    $ pytest tests/
-
-Aby wywołać tylko testy z konkretnego modułu, użyj:
-
-a) Dla modułu <code>unittest</code>:
-
-    $ python -m unittest tests.test_modul_a
-
-b) Dla modułu <code>pytest</code>:
-
-    $ pytest tests/test_modul_a.py
+Automatyzacja testów to także dobre rozwiązanie, gdy nie chcemy tracić czasu na ręczne wykonywanie testów na wszystkich możliwych platformach i przeglądarkach. W takim przypadku warto zainwestować w narzędzia do testowania aplikacji w różnych przeglądarkach i systemach operacyjnych, takie jak <a href="https://www.selenium.dev/">Selenium</a>.
 
 ### Dokumentacja
 
-Jednym z najpopularniejszych narzędzi do zarządzania dokumentacją w Pythonie jest <a href ="https://www.sphinx-doc.org/en/master/">SPHINX</a>. Jego głównymi zaletami są prostota obsługi oraz ogrom dostępnych opcji. Z pomocą tego narzędzia możesz tworzyć dokumentację w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Można również łatwo dokonać konwersji pliku w formacie LaTeX na PDF.
+Dokumentacja to ważny element każdego projektu, służący do opisania działania aplikacji oraz jej funkcjonalności. Narzędziem służącym do tworzenia dokumentacji w Pythonie jest SPHINX. Pozwala on na tworzenie dokumentacji w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Możliwe jest również przekształcenie pliku w formacie LaTeX do PDF.
 
-Użyj komendy <code>quickstart</code>, aby zbudować szkielet dokumentacji. Będziesz musiał odpowiedzieć na kilka pytań (tak lub nie), a na podstawie twoich odpowiedzi SPHINX wygeneruje odpowiednie pliki startowe i wypełni je treścią.
+Aby zbudować szkielet dokumentacji, wystarczy uruchomić komendę:
 
     quickstart
 
-Aby utworzyć dokumentację z plików konfiguracyjnych, należy użyć komendy <code>make</code> wraz z formatem, w jakim chcemy, aby zapisana została dokumentacja.
+SPHINX zapyta cię o kilka szczegółów dotyczących projektu, na podstawie których wygeneruje odpowiednie pliki startowe i wypełni je treścią.
+
+Aby utworzyć dokumentację z plików konfiguracyjnych, użyj komendy:
 
     make html
 
-Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu <code>make</code> nie napotkał żadnych problemów. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach. Przykładową przyczyną wystąpienia błędu może być umieszczenie linku do nieistniejącego pliku.
+Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu nie pojawią się żadne błędy. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach.
 
 #### reStructuredText
 
-Plikiem startowym dokumentacji jest <code>index.rst</code>. Plik ten zapisany jest w formacie zwanym reStructuredText, a w skrócie rst. Jest to rozszerzenie języka mark down, innego języka znaczników. Jego głównym atutem jest możliwość instalowania przydatnych pluginów. Uproszczony został również proces linkowania plików, co jest znaczące dla dokumentacji.  Komenda <code>make html</code> generuje na podstawie wszystkich plików z rozszerzeniem *.rst* odpowiadające im pliki html.
+Plikiem startowym dokumentacji jest `index.rst`. Zapisany jest on w formacie `reStructuredText`, który jest rozszerzeniem języka markdown. Jego głównym atutem jest możliwość instalowania przydatnych pluginów. Linkowanie plików jest również uproszczone, co jest ważne w dokumentacji. Komenda `make html` generuje na podstawie plików z rozszerzeniem `.rst` odpowiadające im pliki html.
 
 #### Jak pisać dobrą dokumentację?
 
 1. Zacznij od tutoriali.
   - Pokaż użytkownikowi jak zainstalować oraz uruchomić twoją aplikację.
-  - Przygotuj scenariusze użycia programu. 
-  - Opisz dokładnie wszystkie dostępne funkcje. 
+  - Przygotuj scenariusze użycia programu.
   - Zaprezentuj, do czego służy każdy z elementów graficznych.
-  - Tutoriale to nie to samo co dokumentacja, ale dobrze przygotowane poradniki pozwolą ci zebrać wiele informacji, które po przekształceniu do ściślejszej formy mogą stanowić bazę dokumentacji.
-2. Wyjaśnij, jak działa twój program za kulisami. Odpowiedz na następujące pytania: 
-  - Jakie technologie zostały użyte oraz w jakim celu?
-  - Jakie elementy składowe tworzą aplikację?
-  - Jakie trudności zostały napotkane przy pisaniu kodu oraz jak zostały rozwiązane?
-  - Jakie decyzje zostały podjęte przy projektowaniu aplikacji?
-3. Na koniec warto również dodać referencje do komentarzy (docstrings) umieszczonych w naszym kodzie. W szczególności szczegółowo opisane powinno zostać wszelkie zewnętrzne API (interfejs programistyczny aplikacji).
+  - Tutoriale to nie to samo co dokumentacja, ale dobrze przygotowane poradniki pozwolą ci zebrać wiele informacji, które później możesz przetworzyć na dokumentację.
+2. Korzystaj z narzędzi automatyzujących pracę.
+  - Sphinx pozwala na tworzenie dokumentacji w różnych formatach.
+  - Jeśli używasz języka Python, skorzystaj z modułu <code>docstrings</code>, który umożliwia tworzenie dokumentacji bezpośrednio w plikach źródłowych.
+3. Pamiętaj o aktualności dokumentacji.
+  - Utrzymuj dokumentację w równowadze z aktualną wersją aplikacji.
+  - W razie zmian w kodzie, pamiętaj o odpowiednim zaktualizowaniu dokumentacji.
+4. Staraj się być zrozumiały.
+  - Unikaj skomplikowanych zwrotów i nieznanych szerzej pojęć.
+  - Jeśli masz taką możliwość, dodaj przykłady użycia.
+5. Dopracuj szczegóły.
+  - Zadbaj o poprawność gramatyczną i ortograficzną.
+  - Dodaj linki do dokumentacji zewnętrznych bibliotek, jeśli korzystasz z nich w swoim projekcie.
+6. Utrzymuj porządek.
+  - Dokumentacja powinna być czytelna i przejrzysta.
+  - Dziel informacje na krótkie rozdziały i sekcje.
+7. Zachęcaj do zgłaszania błędów i propozycji ulepszeń.
+  - Jeśli użytkownicy znajdą błędy lub będą mieć propozycje ulepszeń, chętnie przyjmij ich uwagi.
 
 #### Automatyczne generowanie dokumentacji do API
 
-Jeśli opisujesz swoje funkcje, klasy oraz moduły w kodzie to te komentarze (docstrings) mogą zostać wykorzystane do automatycznego generowania dokumentacji.
+Jeśli tworzysz aplikację z interfejsem API, warto zadbać o automatyczne generowanie dokumentacji, która będzie zawierała wszystkie dostępne endpointy, opis ich działania, a także informacje o przyjmowanych i zwracanych parametrach. W Pythonie jednym z popularnych narzędzi do tego celu jest <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.
+
+Aby skorzystać z tej funkcjonalności, należy zainstalować rozszerzenie <code>sphinx-apidoc</code> i uruchomić go z odpowiednimi opcjami. W folderze z dokumentacją należy wywołać polecenie:
+
+    sphinx-apidoc -o docs/source/api/ <ścieżka do katalogu z kodem>
+
+To polecenie utworzy plik <code>api.rst</code> z automatycznie wygenerowaną dokumentacją. Następnie należy dodać go do pliku <code>index.rst</code>, aby pojawił się w głównym menu dokumentacji.
+
+    .. toctree::
+       :maxdepth: 2
+       :caption: Spis treści:
+
+       api
+
+Po uruchomieniu polecenia <code>make html</code> będzie można zobaczyć wygenerowaną dokumentację na stronie internetowej.
 
 #### Linki
 
