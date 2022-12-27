@@ -749,7 +749,11 @@ Możemy również użyć dekoratorów `@property` i `@nazwa_zmiennej.setter`, ab
     def imie(self, nowa_wartosc):
        print('Ktos modyfikuje imie')
        self._imie = nowa_wartosc
-       
+
+Klasa Osoba posiada dwa atrybuty - imie oraz nazwisko. Zostały one oznaczone jako prywatne, poprzez dodanie podkreślnika na początku nazwy. Służy to do oznaczenia, że te atrybuty nie powinny być bezpośrednio modyfikowane lub odczytywane przez użytkownika klasy, lecz powinny być dostępne tylko poprzez odpowiednie metody.
+
+Za pomocą dekoratorów `@property` oraz `@imie.setter` zostały zdefiniowane metody do odczytu oraz modyfikacji atrybutu imie. W momencie próby odczytu wartości atrybutu imie zostanie wyświetlony komunikat "Ktoś próbuje odczytać imię" oraz zostanie zwrócona jego wartość. Podobnie, w momencie próby modyfikacji atrybutu imie zostanie wyświetlony komunikat "Ktoś modyfikuje imię" oraz zostanie zmieniona jego wartość.
+
 #### Pola i metody statyczne
 
 Pola i metody statyczne są używane w programowaniu obiektowym, ale nie należą one do konkretnych obiektów - należą do całej klasy. Pola statyczne to wszystkie pola zdefiniowane w klasie, natomiast metody statyczne są tworzone za pomocą dekoratora `@staticmethod`. Dostęp do pól i metod statycznych możliwy jest zarówno poprzez nazwę klasy, jak i nazwę obiektu klasy.
@@ -784,9 +788,11 @@ Metody klasowe to rozszerzenie metod statycznych - są tworzone za pomocą dekor
     przykladowy_czlowiek.wyswietl_glowy() # Liczba glow: 1
     przykladowy_czlowiek.zwykla_funkcja() # Liczba glow: 1
 
+Klasa `Czlowiek` zawiera pole statyczne `liczba_glow` oraz metodę klasową `wyswietl_glowy()`. Metoda ta wyświetla wartość pola `liczba_glow` przy pomocy f-stringów. Metoda `zwykla_funkcja()` jest zwykłą metodą instancyjną i wywołuje metodę klasową `wyswietl_glowy()`. Można się do niej odwołać zarówno poprzez nazwę klasy, jak i nazwę obiektu. W przykładzie są przedstawione trzy sposoby wywołania tej metody: bezpośrednio z poziomu klasy, z poziomu obiektu oraz z poziomu metody instancyjnej. W każdym przypadku wyświetlona zostanie wartość zmiennej `liczba_glow`.
+
 ### Referencje i kopiowanie
 
-Przekazując obiekt do funkcji, przekazujemy go poprzez referencję. Podobnie przypisując obiekt do nowej nazwy, przypisujemy referencję do pierwotnego obiektu. Wszelkie zmiany na nowym obiekcie będą miały odzwierciedlenie również na pierwotnym obiekcie i vice versa.
+Dwa niezwykle istotne pojęcia w programowaniu to "referencja" i "kopiowanie". Referencja to odwołanie do oryginalnego obiektu, a kopiowanie to tworzenie nowego obiektu z tą samą zawartością co oryginalny. W języku Python przekazywanie obiektów do funkcji lub przypisywanie ich do nowych nazw odbywa się poprzez referencje. To oznacza, że zarówno oryginalny obiekt, jak i nowy obiekt będą wskazywać na to samo miejsce w pamięci. Wszelkie zmiany wprowadzone w jednym obiekcie będą widoczne również w drugim.  
 
     lista = [[1, 2, 3], [4, 5, 6]]
     nowa_lista = lista
@@ -795,11 +801,11 @@ Przekazując obiekt do funkcji, przekazujemy go poprzez referencję. Podobnie pr
     nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
     print(lista)
     
- Mamy jeszcze dwa inne sposoby na kopiowanie wartosci z oryginalnego obiektu do nowego obiektu:
+Aby uniknąć takiej sytuacji, możemy skorzystać z kopiowania płytkiego lub głębokiego.
  
  1. Kopiowanie płytkie
 
-Na naszym poprzednim przykładzie z listą 2d, kopiowanie płytkie utworzy nowy obiekt dla zewnętrznej listy, ale wewnętrzne listy będą przekazane przez referencję.
+Kopiowanie płytkie pozwoli na utworzenie nowego obiektu dla zewnętrznej struktury danych, ale wewnętrzne struktury danych będą przekazywane przez referencję. W naszym przykładzie z listą 2d, kopiowanie płytkie utworzy nowy obiekt dla zewnętrznej listy, ale wewnętrzne listy będą przekazane przez referencję.
     
     import copy
     lista = [[1, 2, 3], [4, 5, 6]]
@@ -811,7 +817,7 @@ Na naszym poprzednim przykładzie z listą 2d, kopiowanie płytkie utworzy nowy 
 
  2. Kopiowanie głębokie 
 
-Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewnętrznych list musimy użyć kopiowania głębokiego.
+Kopiowanie głębokie pozwoli natomiast na utworzenie nowych obiektów dla zarówno zewnętrznej, jak i wewnętrznych struktur danych.
 
     import copy
     lista = [[1, 2, 3], [4, 5, 6]]
@@ -823,24 +829,55 @@ Jeśli chcemy utworzyć nowe obiekty zarówno dla zewnętrznej listy, jak i wewn
 
 ### Czyste funkcje i skutki uboczne
 
-Nad funkcje produkujące skutki uboczne preforowane są czyste funkcje.
+NW przeciwieństwie do funkcji produkujących skutki uboczne, czyste funkcje nie wpływają na środowisko poza swoim zasięgiem. 
 
-Skutki uboczne to m.in.:
-
+Skutki uboczne to m.in.
 * Zmiany w plikach.
 * Zmiany w bazie danych.
 * Wysyłanie informacji przez sieć.
 * Zmiany w globalnych zmiennych.
 
-Obiekty mutowalne mogą łatwo zostać zmienione w niepożądany sposób (np. przy zmianie kolejności wywoływania funkcji). Preferujemy więc obiekty niemutowalne, które dają nam większe poczucie bezpieczeństwa kosztem zwiększonego wydajności.
+Przykłady czystych funkcji to:
 
-Bezpieczniejsze funkcje to takie, które zamiast modyfikować stan obiektów mutowalnych, zwracają nowy obiekt, nie dotykając się do obiektów przekazanych jako parametry.
+* Funkcja zwracająca wartość pola trójkąta na podstawie jego boków.
+* Funkcja zwracająca iloczyn elementów w liscie.
+* Funkcja zwracająca największy element w liscie.
+* Funkcja zwracająca nową listę z liczbami parzystymi z oryginalnej listy.
+* Funkcja zwracająca nowy słownik z tylko niektórymi kluczami z oryginalnego słownika.
+* Funkcja zwracająca nowy napis z dużymi literami z oryginalnego napisu.
+
+Czyste funkcje najlepiej pracują z niemutowalnymi obiektami. Można zaimplementować czystą funkcję także z użyciem mutowalnych obiektów, o ile nie modyfikujemy ich stanu podczas działania funkcji. Ważne jest, aby czysta funkcja nie powodowała żadnych skutków ubocznych, czyli żadnych zmian w stanie obiektów poza wartościami, które zwraca.
+
+Obiekty mutowalne to obiekty, które po utworzeniu można zmienić. W Pythonie obiekty mutowalne to np. listy, słowniki i zbiory (set). Obiekty mutowalne są niebezpieczne, ponieważ ich stan może zostać zmieniony w nieoczekiwany sposób, dlatego lepiej preferować obiekty niemutowalne, które zapewniają większe bezpieczeństwo, choć za cenę mniejszej wydajności. Aby zwiększyć bezpieczeństwo, lepiej stosować funkcje, które zamiast modyfikować stan obiektów mutowalnych, zwracają nowy obiekt, nie ruszając przekazanych jako parametry obiektów.
+
+Przykłady obiektów mutowalnych:
+
+    lista = [1, 2, 3]
+    lista.append(4)
+    print(lista) # [1, 2, 3, 4]
+
+    slownik = {'klucz': 'wartosc'}
+    slownik['nowy_klucz'] = 'nowa_wartosc'
+    print(slownik) # {'klucz': 'wartosc', 'nowy_klucz': 'nowa_wartosc'}
+
+    zbior = {1, 2, 3}
+    zbior.add(4)
+    print(zbior) # {1, 2, 3, 4}
+
+Przykłady obiektów niemutowalnych:
+
+    liczba = 5
+    liczba = 6 # możemy zmienić wartość zmiennej, ale nie możemy zmienić samej liczby
+
+    napis = 'napis'
+    napis[1] = 'a' # nie możemy zmienić poszczególnych znaków w napisie
+
+    krotka = (1, 2, 3)
+    krotka[1] = 4 # nie możemy zmienić wartości elementów w krotce
 
 ### Dziedziczenie i kompozycja
 
-Dziedziczenie i kompozycja to dwa mechanizmy pozwalające na użycie w jednej klasie kodu z innej klasy. 
-
-Dziedziczenie kopiuje z klasy nadrzędnej wszystkie elementy do klasy podrzędnej. W klasie podrzędnej mamy bezpośredni dostęp do wszystkich pól klasy nadrzędnej i możemy również wywoływać jej wszystkie metody, tak jakby były wywoływane w klasie, która je zdefiniowała. Istnieje możliwość zmiany definicji metod klasy nadrzędnej w klasie podrzędnej. Dziedziczenie jest używane, gdy nowa klasa jest szczególnym rodzajem już istniejącej klasy.
+Dziedziczenie i kompozycja to dwie techniki pozwalające na użycie kodu z innych klas w nowo tworzonej klasie. Dziedziczenie kopiuje wszystkie elementy z klasy nadrzędnej do klasy podrzędnej i pozwala na bezpośredni dostęp do pól i metod klasy nadrzędnej oraz możliwość zmiany ich definicji w klasie podrzędnej. Jest to używane, gdy nowa klasa jest specjalnym rodzajem już istniejącej klasy.
 
     class Czlowiek:
         def __init__(self, imie: str, nazwisko: str, miejsce_urodzenia: str, zawod: str):
@@ -865,9 +902,10 @@ Dziedziczenie kopiuje z klasy nadrzędnej wszystkie elementy do klasy podrzędne
         def __repr__(self):
             return f"{super().__repr__()} {self.numer_albumu} {self.kierunek_studiow}"
 
+W powyższym przykładzie, klasa `Człowiek` jest klasą nadrzędną, a klasa `Student` jest klasą podrzędną. Klasa `Student` dziedziczy po klasie `Człowiek`, co oznacza, że posiada wszystkie pola i metody zdefiniowane w klasie `Człowiek`. Może również zmienić definicję metod z klasy nadrzędnej poprzez nadpisanie ich w klasie podrzędnej. W tym przykładzie, klasa `Student` nadpisuje metodę `str()` klasy `Człowiek`, aby dodać dodatkowe informacje o numerze albumu i kierunku studiów studenta. Klasa `Student` również nadpisuje metodę `repr()` klasy Człowiek, co oznacza, że jej reprezentacja tekstowa będzie również zawierać te dodatkowe informacje.
 
-Istnieje kilka rodzajów kompozycji. Najprostszym przykładem jest zapisanie obiektu jednej klasy jako pole innej klasy. Definiowana klasa zawiera w sobie inną klasę. W nowo definiowanej klasie nie mamy bezpośredniego dostępu do pól oraz metod innej klasy, ale możemy się do nich dostać poprzez instancję tej klasy. Nie możemy zmienić definicji metod klasy zawartej w naszej klasie. Kompozycji używamy, gdy nowa klasa reprezentuje pewną całość, której istniejąca klasa jest częścią.
-
+Kompozycja zaś polega na umieszczeniu obiektu jednej klasy jako pola w innej klasie. W nowo definiowanej klasie nie ma bezpośredniego dostępu do pól ani metod klasy skomponowanej, ale można do nich dotrzeć poprzez instancję tej klasy. Kompozycja jest używana, gdy nowa klasa reprezentuje całość, której istniejąca klasa jest częścią.
+ 
     class Pensja:
 
         def __init__(self, pensja: int, stopa_podwyzki: float):
@@ -887,11 +925,13 @@ Istnieje kilka rodzajów kompozycji. Najprostszym przykładem jest zapisanie obi
             def __str__(self):
                 return f"Pracownik: {self.imie} {self.nazwisko}, zarabia rocznie: {self.pensja.roczna_pensja()}"
 
+Ten przykład ilustruje kompozycję, gdzie klasa `Pracownik` zawiera instancję klasy `Pensja` jako jedno z pól. W klasie `Pracownik` mamy metodę `roczna_pensja`, która zwraca wartość zapisaną w polu pensja pomnożoną przez stopę podwyżki. Klasa `Pracownik` nie ma bezpośredniego dostępu do pól lub metod klasy `Pensja`, ale może je użyć poprzez instancję tej klasy zapisaną w polu pensja. W ten sposób nowo definiowana klasa `Pracownik` reprezentuje pewną całość, w której istniejąca klasa `Pensja` jest jej częścią.
+
 ### Wyrażenia regularne
 
-Pracując z tekstem niejednokrotnie chcemy wyszukać słowo, wiersz bądź zdanie, ale nie mamy jednego sztywnego klucza tylko wzorzec. Przykładowo chcemy znaleźć wszystkie słowo zaczynające się od *abc* lub składające się wyłącznie z małych liter oraz cyfr parzystych. Filtrowanie to następny przykład zadania do którego wykorzystywane są wzorce. Przykładowo chcemy usunąć z tekstu wszystkie liczby. 
+Wyrażenia regularne to sposób na wyszukiwanie tekstu w oparciu o wzorce. Możemy używać ich do wyszukiwania wzorców w ciągach znaków, ale także do zastępowania znalezionych wzorców innymi ciągami znaków. Możemy również używać wyrażeń regularnych do sprawdzania, czy ciąg znaków spełnia określone kryteria (np. czy jest to adres e-mail). Typowym zadaniem dla wyrażeń regularnych to Przykładowo znalezienie wszystkich słów zaczynających się od *abc* lub składających się wyłącznie z małych liter oraz cyfr parzystych.
 
-Powiedzmy, że mamy plik gdzie każdy wiersz zawiera trzy informacje oddzielone ukośnikami: nazwisko pracownika, datę odczytu, oraz odczyt licnzika. Jak wyciągnąć datę z wiersza? Używając klasycznych funkcji znanej nam klasy <code>String</code> moglibyśmy to zrobić w ten sposób:
+Powiedzmy, że mamy plik gdzie każdy wiersz zawiera trzy informacje oddzielone ukośnikami: nazwisko pracownika, datę odczytu, oraz odczyt licnzika. Jak wyciągnąć datę z każdego wiersza? Używając klasycznych funkcji znanej nam klasy <code>String</code> moglibyśmy to zrobić w taki sposób:
 
     dane = 'Kowalski/Maj 15, 1983/1721.3'
     pracownik, data, odczyt = dane.split('/')
@@ -912,58 +952,142 @@ Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bard
     miesiac, dzien, rok = re.split('[\s/]', data) # rozbij przy pomocy spacji
 
     print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+    
+Aby użyć wyrażeń regularnych, musimy najpierw zaimportować moduł `re`. Następnie możemy użyć różnych funkcji modułu `re`, takich jak `search`, `sub`, `split`, itd. Funkcja `search` służy do wyszukiwania wzorca w ciągu znaków, a funkcja `sub` do zastępowania znalezionych wzorców innymi ciągami znaków. Funkcja `split` służy do podziału ciągu znaków na fragmenty w oparciu o wzorzec.
+
+Wyrażenia regularne składają się z ciągów znaków oraz specjalnych znaków. Specjalne znaki służą do określania rodzaju znaków, które chcemy znaleźć. Na przykład, znak "`.`" oznacza dowolny znak, a znak "`*`" oznacza dowolną ilość powtórzeń poprzedzającego znaku. Możemy również używać nawiasów kwadratowych, by określić zbiór znaków, które chcemy znaleźć. Na przykład, "`[0123456789]`" oznacza dowolną cyfrę, a "`[a-zA-Z]`" oznacza dowolną literę.
+
+#### Znaki specjalne
+
+Oto lista najważniejszych znaków specjalnych, które warto znać:
+
+* <code>.</code> - dowolny znak (oprócz nowego wiersza)
+* <code>\d</code> - cyfra
+* <code>\D</code> - dowolny znak, który nie jest cyfrą
+* <code>\s</code> - biały znak (spacja, tabulacja, nowy wiersz)
+* <code>\S</code> - dowolny znak, który nie jest białym znakiem
+* <code>\w</code> - dowolny znak alfanumeryczny (małe i duże litery, cyfry, znak podkreślenia)
+* <code>\W</code> - dowolny znak, który nie jest znakiem alfanumerycznym
+* <code>[]</code> - zbiór, np. <code>[abc]</code> oznacza a, b lub c
+* <code>^</code> - początek wiersza
+* <code>$</code> - koniec wiersza
+* <code>|</code> - lub, np. <code>abc|def</code> oznacza a, b, c lub d, e, f
+* <code>()</code> - grupa, np. <code>(abc){3}</code> oznacza a, b, c trzy razy
+* <code></code> - powtórzenie dowolne razy, np. <code>a</code> oznacza 0 lub więcej wystąpień a
+* <code>+</code> - powtórzenie co najmniej raz, np. <code>a+</code> oznacza 1 lub więcej wystąpień a
+* <code>?</code> - powtórzenie 0 lub 1 raz, np. <code>a?</code> oznacza 0 lub 1 wystąpienie a
+* <code>{m,n}</code> - powtórzenie od m do n razy, np. <code>a{2,4}</code> oznacza 2, 3 lub 4 wystąpienia a
+
+Oczywiście to tylko wybrane przykłady.
 
 #### Schemat pracy z wyrażeniami regularnymi
 
+Omówimy teraz, jak krok po kroku przeprowadzić wszystkie czynności potrzebne do użycia wyrażeń regularnych w rozwiązaniu danego problemu. Oto krótki opis schematu:
+
 1. Zbuduj najprostszą wersję wyrażenia regularnego pasującą do twojego problemu. 
-1. Zawsze testuj czy wyrażenie regularne znajduje TYLKO to, co chcesz, by zostało znalezione. Łatwo o wynik fałszywie pozytywny.
-1. Rozszerz wyrażenie regularne o inne przypadki.
+1. Przetestuj czy wyrażenie regularne znajduje TYLKO to, co chcesz, by zostało znalezione. Łatwo o wynik fałszywie pozytywny.
+1. Upewnij się, że wyrażenie regularne zwraca wszystkie niezbędne grupy. Pamiętaj, że grupy są oznaczone przez nawiasy `()`.
+1. Poszerz rozwiązanie bazowe o dodatkowe wymogi. 
+1. Upewnij się, że twój kod działa poprawnie dla różnych przypadków testowych.
+
+Pamiętaj, że wyrażenia regularne mogą być skomplikowane i trudne do zrozumienia. Ważne jest, aby dobrze zrozumieć schemat pracy z nimi i systematycznie testować działanie wyrażenia przed użyciem go w kodzie.
 
 ### Wyjątki
-Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami. 
+Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami.
 
-Istnieje szereg wyjątków zdefiniowanych w standardzie Pythona. Przykładowo jeśli spróbujemy podzielić liczbę przez 0, zostanie wywołane wyjątek <code>ZeroDivisionError</code>.
+W Pythonie istnieje szereg wyjątków zdefiniowanych w standardzie, takich jak <code>ZeroDivisionError</code>, który występuje, gdy próbujemy dzielić liczbę przez 0.
 
     print(5 / 0)
 
-Tak, więc wyjątki możemy spotkać, jeśli niepoprawnie użyjemy funkcji bądź operatorów zdefiniowanych w standardzie języka. Możemy również sami wywołać wyjątki. Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji. 
+Możemy również sami wywołać wyjątek, np.: 
 
     raise ValueError("Podano nieprawidlowa wartosc")
+    
+Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji.
 
 #### Obsługa wyjątków
 
-Nieobsłużony wyjątek zamyka program i wyświetla informację o błędzie. Mechanizm try/except pozwala na obsługę wyjątków.
+Obsługa wyjątków polega na zapobieżeniu zatrzymaniu programu w przypadku wystąpienia nieoczekiwanej sytuacji. Jest to szczególnie ważne w programach, które działają "w tle" i nie są interaktywne.
+
+Aby obsłużyć wyjątek, używamy bloku `try/except`. W bloku try umieszczamy kod, który może spowodować wystąpienie wyjątku. W przypadku wystąpienia wyjątku, wykonywany jest kod znajdujący się w bloku except.
+
+Oto przykład obsługi wyjątku `ZeroDivisionError`:
 
     try:
-        # kod, ktory moze wywolac wyjatek
-    except:
-        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku
-    else:
-        # kod, ktory zostanie wykonany gdy wyjatek nie wystapil
-    finally:
-        # kod, ktory zawsze zostanie wykonany
+        print(5 / 0)
+    except ZeroDivisionError:
+        print("Nie można dzielić przez zero")
 
-W mechanizmie try/except szczególnie ważny jest kod, który wykonuje się w przypadku wystąpienia wyjątku. Wyjątek informuje nas o błędzie i nie powinniśmy go ignorować. Z tego powodu nie umieszczaj <code>pass</code> w bloku except.
+Wyjątek informuje nas o błędzie i nie powinniśmy go ignorować. Z tego powodu nigdy nie umieszczaj `pass` w bloku `except`.
 
-Dodatkowo <code>except</code> pozwala nam sprecyzować typ wyjątku jaki ma zostać obsłużony. Jeśli w bloku <code>try</code> może wystąpić więcej niż jeden typ wyjątku to należy przygotować odpowiednią liczbę bloków <code>except</code>. 
+Możemy również obsłużyć wyjątek, który jest podklasą innego wyjątku.
 
     try:
-        # kod, ktory moze wywolac wyjatek
+        print(int("abc"))
     except ValueError:
-        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku ValueError
-    except TypeError:
-        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku TypeError
+        print("Nie można zamienić tekstu na liczbę")
 
-Nie należy próbować łapać ogólnego wyjątku, gdyż wszystkie wyjątki dziedziczą po klasie <code>Exception</code>. 
+Istnieje opcja obsługi kilku różnych wyjątków w jednym bloku `try/except`. W takim wypadku, musimy umieścić osobny blok `except` dla każdego z nich.
+
+    try:
+        print(5 / 0)
+        print(int("abc"))
+    except ZeroDivisionError:
+        print("Nie można dzielić przez zero")
+    except ValueError:
+        print("Nie można zamienić tekstu na liczbę")
+
+Jeśli chcemy obsłużyć wiele różnych wyjątków w jednym bloku, możemy umieścić ich nazwy po przecinku. Możemy też użyć wyjątku ogólnego, np. `Exception`, ale nie jest to zalecane, ponieważ nie wiemy, jaki konkretny wyjątek wystąpił.
+
+    try:
+        # kod, ktory moze wywolac wyjatek
+    except (ValueError, TypeError):
+        # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku ValueError lub TypeError
+
+Możemy również zapisać wyjątek do zmiennej i użyć go w bloku `except`.
+
+    try:
+        print(5 / 0)
+    except ZeroDivisionError as e:
+        print(f"Wystąpił wyjątek: {e}")
+
+Blok `else` jest opcjonalny i wykonywany jest, jeśli nie wystąpił żaden wyjątek w bloku `try`. Możemy go wykorzystać do wykonania kodu, który ma być wykonany po prawidłowym wykonaniu bloku try. W przeciwieństwie do bloku except, blok else nie przyjmuje argumentów.
+
+Blok `finally` jest również opcjonalny, ale zawsze wykonywany bez względu na to, czy wystąpił wyjątek czy nie. Może być używany do wykonania kodu, który ma być wykonany zawsze, niezależnie od tego, czy wystąpił wyjątek czy nie. Może być przydatny, gdy chcemy zamknąć plik lub połączenie z bazą danych po zakończeniu pracy z nim.
 
 #### Własny wyjątek
 
-W Pythonie mamy możliwość tworzenia włanych wyjątków. Aby utworzyć własny wyjątek, należy dziedziczyć po klasie <code>Exception</code>.
+Możemy również tworzyć własne wyjątki. Nasz wyjątek musi dziedziczyć po klasie <code>Exception</code> lub jednej z jej podklas.
 
-    class WlasnyWyjatek(Exception):
-        def __init__(self, *args, **kwargs):
-            komunikat = "Opis błędu jaki wystąpił"
-            super().__init__(komunikat, *args, **kwargs)
+    class MojaWyjatkowaSytuacja(Exception):
+        def __init__(self, value):
+            self.value = value
+
+        def __str__(self):
+            return repr(self.value)
+
+Możemy zgłosić nasz wyjątek za pomocą słowa kluczowego <code>raise</code>.
+
+    raise MojaWyjatkowaSytuacja("To jest moj wyjatek")
+
+Załóżmy, że chcemy sprawdzić czy liczba jest parzysta, gdyż tylko taka liczba może zostać użyta w dalszej części programu.
+
+    def sprawdz_parzystosc(liczba):
+        if liczba % 2 != 0:
+            raise ValueError("Podano nieparzysta liczbe")
+        else:
+            return True
+
+Możemy użyć tej funkcji w taki sposób:
+
+    try:
+        sprawdz_parzystosc(5)
+    except ValueError as v:
+        print(v)
+    else:
+        print("Liczba jest parzysta")
+
+Wyświetlona zostanie informacja o błędzie "Podano nieparzysta liczbe".
 
 #### Wyjątki jako mechanizm przepływu sterowania
 
