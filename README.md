@@ -1396,9 +1396,9 @@ Dekorator @dataclass przyjmuje również dwa dodatkowe argumenty: `unsafe_hash` 
 
 ### Generatory
 
-Generator jest bardzo podobny do funkcji zwracającej listę. Zamiast w jednym ruchu zwracać pełną tablicę, to zwraca on wartości pojedynczo. Dzięki temu  generatory wymagają mniej pamięci, a co więcej daje to klientowi możliwość rozpoczęcia przetwarzania pierwszych zwróconych wartości, za nim jeszcze generator ukończy swoją pracę.
+Generator to specjalny rodzaj funkcji, który zwraca wartości pojedynczo, zamiast zwracać ich wszystkie naraz w postaci listy lub innego iterowalnego obiektu. Generatory są bardziej efektywne pod względem pamięciowym niż listy, ponieważ nie wymagają przechowywania całej listy w pamięci, lecz tylko aktualnie zwracanej wartości. Generatory umożliwiają także klientowi rozpoczęcie przetwarzania zwracanych wartości zanim generator zakończy swoją pracę.
 
-Przyjrzyjmy się dwóm programom:
+Aby utworzyć generator, wystarczy zamiast słowa kluczowego `return` użyć słowa kluczowego `yield`. Wartości, które generator ma zwracać są umieszczane po słowie kluczowym `yield` w ciele funkcji. Przykłady użycia generatorów znajdują się poniżej.
 
 a) W poniższym przykładzie zwracamy wartości z funkcji <code>foo()</code> przy pomocy słowa kluczowego <code>yield</code>:
 
@@ -1428,12 +1428,12 @@ b) W tym przykładzie zwracamy wartości z funkcji <code>bar()</code> przy pomoc
 
 ### Iteratory
 
-Wiemy już, że przy pomocy pętli <code>for</code> możemy przejść przez kolejne elementy listy:
+Pętla `for` jest narzędziem, które umożliwia przejście przez kolejne elementy sekwencji, takiej jak lista, ciąg znaków lub tuple. Możemy użyć pętli `for` w następujący sposób:
 
     for elem in lista:
        print(elem)
 
-Standardowo wszystkie kolekcje w Pythonie mają zaimplementowaną funkcję It <code>__iter__()</code> zwracjącą ich iterator. Wywołanie funckji <code>next()</code> z przekazanym jako argument iteratorem da nam kolejny w sekwencji element kolekcji. Ostatni element wyrzuca wyjątek <code>StopIteration</code>,
+Wbudowane kolekcje, takie jak listy, ciągi znaków i tuple, posiadają metodę `__iter__()`, która zwraca iterator dla danej kolekcji. Iterator to obiekt, który umożliwia przejście przez elementy kolekcji po kolei. Możemy wywołać funkcję `next()` z przekazanym jako argument iterator, aby pobrać kolejny element kolekcji. Jeśli iterator nie ma już więcej elementów do zwrócenia, zostanie rzucony wyjątek `StopIteration`.
 
     lista = [1, 2, 3]
     iterator = iter(lista)
@@ -1442,7 +1442,7 @@ Standardowo wszystkie kolekcje w Pythonie mają zaimplementowaną funkcję It <c
     print(next(iterator)) # wyswietli 3
     print(next(iterator)) # zostanie wyrzucony wyjatek
 
-Ten mechanizm jest używany wewnętrznie przez pętlę for. Iteratory pozwalają na implementacje własnych zasad przechodzenia przez kolekcję.
+Ten mechanizm jest używany wewnętrznie przez pętlę `for`. Iteratory pozwalają na implementację własnych zasad przechodzenia przez kolekcję. Możemy stworzyć własną klasę iterowalną, implementując metodę `__iter__()` i używając słowa kluczowego `yield` w celu zwracania elementów kolekcji po kolei.
 
     class ObiektIterowalny:
 
@@ -1461,36 +1461,34 @@ Ten mechanizm jest używany wewnętrznie przez pętlę for. Iteratory pozwalają
     for elem in obiekt:
       print(elem)
       
+Dzięki temu, że nasz obiekt jest iterowalny, możemy używać go w pętli `for` w taki sam sposób, jak wbudowane kolekcje.
+
 ### Dekoratory
+Przy pomocy dekoratorów możemy rozszerzać funkcjonalność istniejących funkcji bez ich modyfikowania. Możemy też używać ich jako dodatkowego sposobu na zabezpieczenie funkcji przed nieprawidłowym wykorzystaniem lub po prostu jako mechanizmu ułatwiającego debugowanie.
 
-Dekorator to funkcja, która przyjmuje inną funkcję jako argument. Dekorator może przetworzyć funkcję przekazaną jako argument, połączyć ją z inną funkcją (funkcjami) lub podmienić ją na inną funkcję. Połączenie funkcji z dekoratorem spowoduje wywołanie dekoratora w momencie wywołania funkcji.
+Aby zachować informacje o funkcji dekorowanej, możemy użyć dekoratora <code>functools.wraps()</code>:
 
-Przykład dekoratora dodającego <code>print('przetwarzam dane')</code> przed wywołaniem funkcji dekorowanej:
+    import functools
 
     def dekoruj(funkcja):
+      @functools.wraps(funkcja)
       def funkcja_wew():
         print('przetwarzam dane')
         funkcja()
       return funkcja_wew
 
-Mamy dwa równoważne sposoby na połączenie dekoratora z funkcją, którą chcemy dekorować:
+Dzięki temu wszystkie informacje o funkcji <code>foo</code>, takie jak jej nazwa czy dokumentacja, zostaną zachowane po dekoracji.
 
-    # sposob 1:
-    @dekoruj
-    def foo():
-     print('funkcja foo()')
+Możemy też przekazywać argumenty do dekoratora i funkcji dekorowanej:
 
-    # sposob 2:
-    def foo():
-     print('funkcja foo()')
-
-    foo = dekoruj(foo)
+    def dekoruj(funkcja):
+      def funkcja_wew(*args, **kwargs):
 
 ### Serializacja
 
 Serializacja to proces konwersji obiektu na strumień bajtów, który może być następnie zapisany, przesłany lub przechowywany w inny sposób. Dzięki serializacji możliwe jest zapisywanie stanu obiektów i ich późniejsze odtwarzanie, co może być przydatne np. w grach, gdzie chcemy zapisać postępy gracza lub w aplikacjach, gdzie chcemy zapisywać dane użytkownika.
 
-Moduł pickle w języku Python służy do serializacji i deserializacji obiektów. Funkcja `dumps()` pozwala na zserializowanie obiektu do strumienia bajtów, który może być następnie zapisany do pliku lub przesłany do innego procesu. Funkcja `loads()` pozwala na odtworzenie obiektu ze strumienia bajtów.
+Moduł `pickle` służy do serializacji i deserializacji obiektów. Funkcja `dumps()` pozwala na zserializowanie obiektu do strumienia bajtów, który może być następnie zapisany do pliku lub przesłany do innego procesu. Funkcja `loads()` pozwala na odtworzenie obiektu ze strumienia bajtów.
 
 Przykład użycia tych funkcji znajduje się poniżej. W kodzie tworzona jest klasa `Czlowiek` z polami `imie` i `numer`, a następnie serializowana i zapisywana do pliku. Następnie obiekt jest odtwarzany z pliku i wyświetlany na ekranie.
 
