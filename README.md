@@ -58,7 +58,6 @@ Kurs podstaw Pythona.
     - [Bazy-danych-z-SQLite](#Bazy-danych-z-SQLite)
     - [Tkinter](#Tkinter)
     - [Logi](#Logi)
-    - [Kompresja-i-szyfrowanie-danych](#Kompresja-i-szyfrowanie-danych)
   - [Dodatkowe-materiały](#Dodatkowe-materiały)
 
 <!--te-->
@@ -2096,92 +2095,551 @@ Inne opcje to połączenie argumentu z flagą, nadanie wartości domyślnej oraz
 
 ### Praca z plikami i folderami
 
-Standardowa bibliotek Pythona zawiera wiele funkcji do pracy z plikami oraz folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
+Standardowa biblioteka Pythona zawiera wiele funkcji do pracy z plikami i folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
 
 #### Otwarcie pliku 
 
-Standardowe funkcje do pracy z plikiem to <code>open()</code> oraz <code>close()</code>. Funkcja <code>open()</code> oczekuje ścieżki do pliku oraz trybu otwarcia. Po użyciu funkcji <code>open</code> program oczekuje wywołania funkcji <code>close()</code>.
+Do otwierania plików w Pythonie używamy funkcji open(). Funkcja ta przyjmuje ścieżkę do pliku oraz tryb otwarcia. Po użyciu funkcji open() należy pamiętać o wywołaniu funkcji close(), aby zamknąć plik. Możemy to zrobić ręcznie lub skorzystać z konstrukcji with, która automatycznie zamknie plik po jej zakończeniu.
 
-    plik = open("sciezka/do/pliku.txt", "w")
+    # otwarcie pliku w trybie odczytu
+    plik = open("sciezka/do/pliku.txt", "r")
 
     ...
 
     plik.close()
 
-Mamy 4 standardowe tryby otwarcia pliku:
+    # lub z wykorzystaniem konstrukcji with
+    with open("sciezka/do/pliku.txt", "r") as plik:
+        ...
+
+Istnieją 4 standardowe tryby otwarcia pliku:
 
 1. <code>r</code> - odczytywanie.
 1. <code>r+</code> - odczytywanie oraz modyfikacja.
 1. <code>w</code> - modyfikacja wraz z usunięciem poprzedniej treści.
 1. <code>a</code> - modyfikacja wraz z dopisaniem nowej treści do poprzedniej treści pliku.
 
-#### Konstrukcja with
-
-Jako że ludzie często zapominali wywoływać funkcję <code>close()</code>, stworzono konstrukcję <code>with</code>. Konstrukcja ta wywołuje funkcję <code>close()</code> automatycznie.
-
-    with open("sciezka/do/pliku.txt", "w") plik:
-        ...
-
 #### Odczytywanie i zapisywanie danych
 
-Do odczytu danych służy nam funkcja <code>readlines()</code>, która zwraca listę napisów. Każdy napis w liście reprezentuje kolejny wiersz pliku. Do zapisania danych do pliku używamy funkcji <code>write</code>. Funkcja ta przyjmuje jeden argument, napis gdzie kolejne wiersze powinny być oddzielone znakiem *\n*. 
+Aby odczytać zawartość pliku, możemy skorzystać z funkcji readlines(), która zwraca listę napisów. Każdy napis w liście reprezentuje kolejny wiersz pliku. Aby zapisać dane do pliku, używamy funkcji write. Funkcja ta przyjmuje jeden argument, napis, gdzie kolejne wiersze powinny być oddzielone znakiem *\n*.
 
     with open("sciezka/do/pliku.txt") as plik:
-        
+
         # odczytaj tresc pliku
         wiersze = plik.readlines()
         for wiersz in wiersze:
           print(wiersz)
-        
+
         # zapisz nowa tresc do pliku
         plik.write("nowy tekst\nwiersz nr. 2\n")
 
+#### Moduł pathlib
+
+Moduł pathlib pojawił się w Pythonie w wersji 3.4. Jest to zestaw narzędzi, które umożliwiają pracę z plikami i folderami w sposób bardziej przyjazny dla użytkownika.
+
+Oto kilka przykładów metod z tego modułu:
+
+* `.exists()` - zwraca True jeśli plik lub folder o podanej ścieżce istnieje, w przeciwnym wypadku zwraca False.
+* `.is_file()` - zwraca True jeśli obiekt Path reprezentuje plik, w przeciwnym wypadku zwraca False.
+* `.is_dir()` - zwraca True jeśli obiekt Path reprezentuje folder, w przeciwnym wypadku zwraca False.
+* `.read_text()` - odczytuje zawartość pliku jako napis.
+* `.write_text()` - zapisuje napis do pliku.
+* `.open()` - otwiera plik w trybie określonym przez drugi argument (domyślnie 'r').
+
+Poniższy przykład pokazuje, jak można wykorzystać te metody:
+
+    from pathlib import Path
+    
+    sciezka = Path("/sciezka/do/pliku.txt")
+
+    # sprawdzenie, czy plik istnieje
+    if sciezka.exists():
+      print("Plik istnieje.")
+    else:
+      print("Plik nie istnieje.")
+
+    # odczytanie zawartości pliku
+    zawartosc = sciezka.read_text()
+    print(zawartosc)
+
+    # zapisanie nowej zawartości do pliku
+    sciezka.write_text("Nowy tekst w pliku.")
+
+Aby uzyskać obiekt reprezentujący folder, należy utworzyć obiekt klasy Path z odpowiednią ścieżką do folderu:
+
+    folder = Path("sciezka/do/folderu")
+
+Następnie możemy użyć metod tego obiektu, takich jak iterdir() do iterowania po plikach i folderach w danym folderze:
+
+    for element in folder.iterdir():
+        print(element)
+
+Możemy również sprawdzić, czy obiekt jest plikiem czy folderem za pomocą metod is_file() i is_dir():
+
+    if element.is_file():
+        print("To jest plik")
+    elif element.is_dir():
+        print("To jest folder")
+
+Inne przydatne metody to exists(), która sprawdza, czy dany element istnieje, oraz mkdir(), która tworzy nowy folder.
+
+    if not folder.exists():
+        folder.mkdir()
+
 ### Pandas i csv
+
+Moduł Pandas to bardzo popularny moduł, używany do pracy z danymi tabelarycznymi. Do zapisywania danych tabelarycznych do pliku csv oraz odczytywania danych z pliku csv, służą nam funkcje <code>to_csv()</code> oraz <code>read_csv()</code>.
+
+Załóżmy, że mamy tabelę przedstawiającą rachunki za prąd w wybranym domu. Chcemy zapisać tę tabelę do pliku csv, a następnie odczytać dane z tego pliku. Możemy to zrobić w następujący sposób:
+
+    import pandas as pd
+
+    # przygotowujemy dane do zapisania
+    data = [["2022-01-01", 100], ["2022-02-01", 120], ["2022-03-01", 130]]
+    df = pd.DataFrame(data, columns=["data", "kwota"])
+
+    # zapisujemy dane do pliku csv
+    df.to_csv("rachunki.csv", index=False)
+
+    # odczytujemy dane z pliku csv
+    df_odczytane = pd.read_csv("rachunki.csv")
+    print(df_odczytane)
+
+Wynikiem tego kodu będzie tabela o takim wyglądzie:
+
+| data | kwota |
+| ---- | ----- |
+| 2022-01-01	| 100 |
+| 2022-02-01	| 120 |
+| 2022-03-01	| 130 |
+
+#### Podstawowe informacje o tabeli
+
+Po wczytaniu tabeli do pamięci, możemy wyświetlić podstawowe informacje o niej za pomocą funkcji `info()`.
+
+    df.info()
+
+Funkcja ta pokazuje nam takie informacje jak:
+
+* ilość wierszy i kolumn,
+* typy danych w poszczególnych kolumnach,
+* ilość niezapełnionych pól.
+
+#### Podgląd danych
+
+Aby sprawdzić, jakie dane mamy w tabeli, możemy wyświetlić jej fragment za pomocą funkcji `head()` lub `tail()`. Domyślnie obie funkcje wyświetlają 5 pierwszych lub ostatnich wierszy tabeli. Możemy też podać ilość wierszy jaką chcemy wyświetlić jako argument.
+
+    df.head(10) # pierwsze 10 wierszy
+    df.tail() # ostatnie 5 wierszy
+
+#### Selekcja kolumn
+
+Aby wybrać konkretne kolumny z tabeli, możemy użyć notacji z nawiasami kwadratowymi.
+
+    df[["kolumna_1", "kolumna_2"]]
+
+#### Filtrowanie danych
+
+Do filtrowania danych służy nam operator `[]`. Możemy użyć go w połączeniu z operatorami logicznymi, takimi jak `&` lub `|`.
+
+Przykładowo, jeśli mamy tabelę zawierającą informacje o użytkownikach i interesują nas tylko ci użytkownicy, którzy mają więcej niż 30 lat, to możemy użyć następującej komendy:
+
+    df.loc[df['Wiek'] > 30]
+
+Jeśli chcemy pokazać użytkowników, którzy mają więcej niż 30 lat i mieszkają w Warszawie, to możemy użyć następującej komendy:
+
+     df.loc[(df['Wiek'] > 30) & (df['Miasto'] == 'Warszawa')]
+
+
 ### Praca z plikami PDF
+Istnieje kilka popularnych bibliotek do obsługi plików PDF. Jedną z najczęściej używanych jest biblioteka <code>PyPDF2</code>. Aby ją zainstalować, możemy użyć polecenia <code>pip install pypdf2</code>.
+
+#### Otwieranie pliku PDF
+
+Aby otworzyć plik PDF, używamy funkcji `PdfFileReader` z modułu `PyPDF2`.
+
+    from PyPDF2 import PdfFileReader
+
+    # otworz plik
+    with open('plik.pdf', 'rb') as plik:
+        reader = PdfFileReader(plik)
+
+#### Wypisywanie informacji o pliku
+
+Aby wyświetlić informacje o pliku, takie jak ilość stron, autor czy tytuł, możemy skorzystać z odpowiednich właściwości obiektu <code>PdfFileReader</code>:
+
+    print(f"Ilość stron: {czytnik.getNumPages()}")
+    print(f"Autor: {czytnik.getDocumentInfo().author}")
+    print(f"Tytuł: {czytnik.getDocumentInfo().title}")
+
+#### Odczytywanie tekstu
+
+Aby wyświetlić zawartość pliku PDF, możemy użyć metody `getPage()`. Metoda `getPage()` oczekuje obiektu `PageObject` reprezentującego daną stronę. Metoda `getNumPages()` zwraca liczbę stron w pliku.
+
+Poniższy kod wyświetla zawartość wszystkich stron pliku PDF:
+
+    # pobierz liczbe stron
+    liczba_stron = reader.getNumPages()
+
+    # dla kazdej strony
+    for strona in range(liczba_stron):
+        # pobierz tekst strony
+        tekst = reader.getPage(strona).extractText()
+        # wyswietl tekst
+        print(tekst)
+
+#### Modyfikowanie pliku PDF
+
+Aby modyfikować plik PDF, możemy użyć obiektu `PdfFileWriter` z modułu `PyPDF2`. Możemy dodawać nowe strony do pliku lub usuwać istniejące strony.
+
+Poniższy kod dodaje nową stronę z tekstem "Hello, World!" do pliku:
+
+    # utworz obiekt PdfFileWriter
+    writer = PdfFileWriter()
+
+    # dodaj nowa strone z tekstem
+    writer.addPage(writer.newTextPage("Hello, World!"))
+
+    # otworz plik do zapisu
+    with open('nowy_plik.pdf', 'wb') as plik:
+        # zapisz plik
+        writer.write(plik)
+
+#### Łączenie plików PDF
+
+Możemy użyć poniższego kodu, aby połączyć wszystkie pliki PDF z listy:
+
+    import os
+    import glob
+    from PyPDF2 import PdfFileMerger
+
+    # utworzenie listy plikow
+    pdf_files = []
+    for filename in glob.glob('*.pdf'):
+        pdf_files.append(filename)
+
+    # utworzenie obiektu merger
+    merger = PdfFileMerger()
+
+    # laczenie plikow
+    for pdf in pdf_files:
+        merger.append(open(pdf, 'rb'))
+
+    # zapis nowego pliku
+    with open('sciezka/do/nowego_pliku.pdf', 'wb') as fout:
+        merger.write(fout)
+    
 ### Informacje o systemie operacyjnym
 
-* zmienne środowiskowe
+Moduł `os` w bibliotece standardowej umożliwia uzyskiwanie informacji o systemie operacyjnym oraz manipulowanie plikami i folderami.
+
+Przykładowo, możemy uzyskać nazwę aktualnie używanego systemu operacyjnego za pomocą `os.name`:
+
+    import os
+    print(os.name)
+
+#### Informacje o użytkownikach
+
+Aby uzyskać informacje o użytkownikach systemu oraz grupach, możemy skorzystać z modułu `pwd`:
+
+    import pwd
+
+    # Pobierz informacje o użytkowniku
+    user_info = pwd.getpwuid(os.getuid())
+    print(f"Nazwa użytkownika: {user_info.pw_name}")
+    print(f" ID użytkownika: {user_info.pw_uid}")
+    print(f" ID grupy: {user_info.pw_gid}")
+    print(f" Katalog domowy: {user_info.pw_dir}")
+
+    # Pobierz informacje o grupie
+    group_info = pwd.getgrgid(user_info.pw_gid)
+    print(f" Nazwa grupy: {group_info.gr_name}")
+    print(f" ID grupy: {group_info.gr_gid}")
+    print(f" Lista użytkowników w grupie: {group_info.gr_mem}")
+
+#### Dyski
+
+Aby uzyskać informacje o dostępnych dyskach oraz wolnym miejscu na nich, możemy skorzystać z modułu `os.statvfs`:
+
+    import os
+
+    # Pobierz informacje o dysku
+    disk_info = os.statvfs("/")
+    print(f" Całkowita pojemność dysku: {disk_info.f_frsize * disk_info.f_blocks:,} bajtów")
+    print(f" Wolne miejsce na dysku: {disk_info.f_frsize * disk_info.f_bfree:,} bajtów")
+
+#### Informacje o procesorze
+
+Moduł <code>os</code> z biblioteki standardowej zawiera funkcję <code>cpu_count()</code>, która zwraca liczbę rdzeni procesora. Możemy również uzyskać informacje o mocy obliczeniowej procesora za pomocą modułu <code>psutil</code>. Poniższy przykład pokazuje, jak wyświetlić liczbę rdzeni oraz moc obliczeniową procesora:
+
+    import os
+    import psutil
+
+    # Liczba rdzeni procesora
+    print(f"Liczba rdzeni procesora: {os.cpu_count()}")
+
+    # Moc obliczeniowa procesora
+    print(f"Moc obliczeniowa procesora: {psutil.cpu_freq().max} MHz")
+
+#### Zmienne środowiskowe
+
+Moduł <code>os</code> zawiera również funkcję <code>environ</code>, która zwraca słownik zawierający wszystkie zmienne środowiskowe. Możemy odczytać wartość konkretnej zmiennej środowiskowej, używając notacji słownikowej. Poniższy przykład pokazuje, jak wyświetlić zmienną środowiskową o nazwie SHELL:
+
+    import os
+
+    # Wyświetl zmienną środowiskową SHELL
+    print(f"Zmienna środowiskowa SHELL: {os.environ['SHELL']}")
+
+Aby zmienić zmienną środowiskową, można użyć funkcji `os.environ.update()`. Przykładowo, aby ustawić zmienną środowiskową o nazwie `VAR` na wartość value, można użyć następującego kodu:
+
+    import os
+
+    os.environ.update({'VAR': 'value'})
+
+Uwaga: zmiany zmiennych środowiskowych zachodzą tylko w obrębie bieżącego procesu. Po zakończeniu działania skryptu zmiany te nie będą widoczne dla innych procesów. Aby zmiany zmiennych środowiskowych zostały zapisane dla całego systemu, należy je zapisać w odpowiednim pliku konfiguracyjnym (np. `/etc/environment` lub `/etc/bash.bashrc` w systemie Linux).
 
 ### HTTP i prosty serwer
+
+HTTP (Hypertext Transfer Protocol) jest protokołem sieciowym używanym do przesyłania danych między klientem a serwerem. Jest to podstawowa technologia używana do przeglądania stron internetowych oraz komunikacji między aplikacjami.
+
+Aby wysłać żądanie HTTP w Pythonie, można użyć modułu `requests`. Poniższy przykład pokazuje, jak wysłać żądanie typu `GET` do strony internetowej i otrzymać odpowiedź z serwera:
+
+    import requests
+
+    url = "https://www.google.com"
+    response = requests.get(url)
+
+    print(response.status_code) # sprawdzamy kod odpowiedzi
+    print(response.text) # wyświetlamy zawartość odpowiedzi
+
+Możliwe jest również wysyłanie żądań `POST`, `PUT`, `DELETE` itp. oraz dodawanie nagłówków i danych do żądania.
+
+Jeśli chcesz stworzyć prosty serwer HTTP w Pythonie, możesz użyć modułu http.server. Poniższy przykład pokazuje, jak stworzyć serwer, który nasłuchuje na porcie 8000 i wyświetla zawartość pliku `index.html` po otrzymaniu żądania `GET`:
+
+    import http.server
+    import socketserver
+
+    PORT = 8000
+
+    Handler = http.server.SimpleHTTPRequestHandler
+
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print("serving at port", PORT)
+        httpd.serve_forever()
+
+Możesz również dostosować handler, aby obsługiwać różne typy żądań i odpowiednio reagować na nie.
+
 ### API wraz z FastAPI
+
+FastAPI to nowoczesne i szybkie narzędzie do tworzenia API w Pythonie. Jest oparte na bibliotece Starlette i używa Pydantic do walidacji danych wejściowych.
+
+Aby rozpocząć pracę z FastAPI, należy najpierw zainstalować je za pomocą komendy:
+
+    pip install fastapi
+
+Przykład prostego API z FastAPI:
+
+    from fastapi import FastAPI
+
+    app = FastAPI()
+
+    @app.get("/")
+    def read_root():
+        return {"Hello": "World"}
+
+API może przyjmować różne metody HTTP (np. `GET`, `POST`, `DELETE`) oraz zwracać różne formaty danych (np. JSON, HTML).
+
+    from fastapi import FastAPI
+    from pydantic import BaseModel
+
+    app = FastAPI()
+
+    class Item(BaseModel):
+        name: str
+        description: str = None
+        price: float
+        tax: float = None
+
+    @app.post("/items/")
+    def create_item(item: Item):
+        return item
+
+W powyższym przykładzie zdefiniowano nowy model danych - Item, który jest walidowany przy użyciu Pydantic. Następnie zdefiniowano nową ścieżkę `/items/` dostępną dla metody POST, która przyjmuje obiekt item i zwraca go jako odpowiedź.
+
+FastAPI posiada też mechanizm do automatycznej generacji dokumentacji dla API. Aby skorzystać z tej funkcjonalności, należy użyć dekoratora `@app.docs` i odpowiednio opisać poszczególne ścieżki i modele danych.
+
+    from fastapi import FastAPI
+    from pydantic import BaseModel
+
+    app = FastAPI()
+
+    class Item(BaseModel):
+        name: str
+        description: str = None
+        price: float
+        tax: float = None
+
+    @app.post("/items/")
+    @app.docs(
+        summary="Create a new item",
+        description="This endpoint allows you to create a new item in the store",
+        responses={
+            200: {"description": "Success"},
+            404: {"description": "Not found"},
+        },
+    )
+    def create_item(item: Item):
+        return item
+
+Aby uruchomić aplikację, wystarczy wywołać metodę `run()` na obiekcie reprezentującym aplikację:
+
+    if __name__ == "__main__":
+        app.run()
+
+Po uruchomieniu aplikacji możesz otworzyć adres `http://localhost:8000/` w przeglądarce, aby zobaczyć odpowiedź zwróconą przez endpoint.
+
+FastAPI oferuje również możliwość walidacji danych wejściowych i zwracanych przez endpointy. Możesz użyć typów Pythona, takich jak `int` lub `str`, aby opisać argumenty wejściowe oraz typ zwracany przez endpoint. FastAPI automatycznie sprawdzi, czy dane wejściowe są poprawne.
+
 ### Bazy danych z SQLite
-Istnieje wiele baz danych. Każda swoje wady i zalety. Zaletą SQLite jest prostota użytku. Nie potrzeba nam żadnego serwera, cała baza danych może zostać sprowadzona do jednego pliku, który w programie możemy w całości załadować do pamięci RAM.
+Istnieje wiele baz danych. Każda ma swoje wady i zalety. Baza danych SQLite jest niezależna od systemu operacyjnego i nie wymaga instalacji żadnego dodatkowego oprogramowania. Zaletą SQLite jest prostota użytku. Nie potrzeba nam żadnego serwera, cała baza danych może zostać sprowadzona do jednego pliku, który w programie jest w całości załadowany do pamięci RAM.
 
 Przykładowe zbiory danych możesz pobrać z następujących stron:
 * <a href="https://data.gov/">data.gov</a>
 * <a href="https://www.kaggle.com/">kaggle</a>
 
-Do pracy z bazą danych SQLite służy moduł <code>sqlite3</code>.
+Moduł sqlite3 pozwala na obsługę bazy danych SQLite. 
 
-Wiele funkcji z modułu <code>sqlite3</code> wymaga od nas by najpierw utworzyć obiekt <code>Connection</code> reprezentujący bazę danych.
-W poniższym przykładzie ścieżka do bazy danych to 'przykladowa_baza_danych.db':
+#### Połączenie z bazą danych
+
+Do połączenia z bazą danych należy użyć funkcji `connect()` z modułu sqlite3. Funkcja ta przyjmuje jako argument ścieżkę do pliku bazy danych. Jeśli podana baza danych nie istnieje, to zostanie ona utworzona.
 
     import sqlite3
-    polaczenie = sqlite3.connect('przykladowa_baza_danych.db')
 
-Następnie wszystkie operacje wykounjemy przy pomocy kursora:
+    connection = sqlite3.connect("baza_danych.db")
 
-    kursor = conn.cursor()
+#### Tworzenie tabel
 
-Przykładowo chcemy utworzyć tabelę pracownicy:
+Aby utworzyć tabelę w bazie danych, należy wywołać metodę `execute()` na obiekcie połączenia. Metoda ta przyjmuje jako argument polecenie SQL tworzące tabelę.
 
-    kursor.execute('''CREATE TABLE pracownicy (imie, nazwisko, stanowisko)''')
-    kursor.execute("INSERT INTO stocks pracownicy ('Adam', 'Nowak', 'Programista')")
+    connection.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)")
 
-Aby zmiany zostały zapisane, musimy wysłać je do bazy danych:
+#### Dodawanie rekordów
 
-    polaczenie.commit()
+Aby dodać rekord do tabeli, należy wywołać polecenie `INSERT INTO` za pomocą metody `execute()`.
 
-Pod koniec pracy z bazą danych zamykamy połączenie:
+    connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("user1", "pass1"))
+    connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("user2", "pass2"))
 
-    polaczenie.close()
+#### Pobieranie danych
+
+Aby pobrać dane z tabeli, należy wywołać polecenie `SELECT` za pomocą metody `execute()`. Metoda ta zwraca obiekt cursor, z którego można pobrać rekordy za pomocą metody `fetchall()`.
+
+    cursor = connection.execute("SELECT * FROM users")
+    users = cursor.fetchall()
+    print(users)  # [(1, 'user1', 'pass1'), (2, 'user2', 'pass2')]
+
+#### Zamykanie połączenia
+
+Po zakończeniu pracy z bazą danych należy wywołać metodę `close()` na obiekcie połączenia.
+
+    connection.close()
 
 ### Tkinter
+Tkinter jest modułem biblioteki standardowej, który służy do tworzenia interfejsów graficznych (GUI). Możemy z niego korzystać, aby tworzyć proste aplikacje okienkowe.
+
+Tworzenie okna głównego za pomocą Tkinter wygląda następująco:
+
+    import tkinter as tk
+
+    root = tk.Tk()
+    root.mainloop()
+
+Możemy dodać różne elementy interfejsu, takie jak przyciski, etykiety, pola tekstowe i inne. Przykład dodania przycisku:
+
+    import tkinter as tk
+
+    def przycisk_klik():
+        print("Kliknięto przycisk")
+
+    root = tk.Tk()
+    przycisk = tk.Button(root, text="Kliknij mnie", command=przycisk_klik)
+    przycisk.pack()
+    root.mainloop()
+
+Możemy również ustawić różne opcje dla elementów interfejsu, takie jak rozmiar, kolor tła, itp. Przykład:
+
+    import tkinter as tk
+
+    root = tk.Tk()
+    etykieta = tk.Label(root, text="Witaj w Tkinter", font=("Helvetica", 16), bg="yellow")
+    etykieta.pack()
+    root.mainloop()
+
+Tkinter oferuje również możliwość tworzenia layoutów za pomocą ramki (frame). Możemy umieścić różne elementy w ramce i ustalić ich położenie za pomocą siatki (grid). Przykład:
+
+    import tkinter as tk
+
+    root = tk.Tk()
+
+    frame = tk.Frame(root)
+    frame.pack()
+
+    przycisk1 = tk.Button(frame, text="Przycisk 1")
+    przycisk2 = tk.Button(frame, text="Przycisk 2")
+    przycisk3 = tk.Button(frame, text="Przycisk 3")
+
+    przycisk1.grid(row=0, column=0)
+    przycisk2.grid(row=0, column=1)
+    przycisk3.grid(row=0, column=2)
+
+    root.mainloop()
+    
+#### Zdarzenia
+
+mamy możliwość obsługi zdarzeń za pomocą metody `bind()`. Zdarzenia mogą być generowane przez użytkownika lub system. Do najczęściej używanych zdarzeń należą:
+
+* `<Button-1>` - kliknięcie lewym przyciskiem myszy na komponencie
+* `<ButtonRelease-1>` - puszczenie lewego przycisku myszy nad komponentem
+* `<Double-Button-1>` - podwójne kliknięcie lewym przyciskiem myszy na komponencie
+* `<Enter>` - najechanie myszką na komponent
+* `<Leave>` - zjechanie myszką z komponentu
+* `<Key>` - naciśnięcie dowolnego klawisza na klawiaturze
+* `<Return>` - naciśnięcie klawisza Enter
+
+Aby obsłużyć zdarzenie, wystarczy wywołać metodę `bind()` na obiekcie komponentu, przekazując do niej nazwę zdarzenia oraz funkcję obsługi zdarzenia.
+
+Przykładowo, jeśli chcemy wyświetlić komunikat po najechaniu myszką na przycisk, możemy użyć następującego kodu:
+
+    from tkinter import Button, Tk
+
+    def mouse_over(event):
+        print("Myszka najechała na przycisk")
+
+    root = Tk()
+    button = Button(root, text="Przycisk")
+    button.bind("<Enter>", mouse_over)
+    button.pack()
+    root.mainloop()
+
+Możemy też użyć dekoratora `@event_decorator` do obsługi zdarzeń. W tym przypadku nie musimy już ręcznie wywoływać metody `bind()`, a dekorator automatycznie połączy funkcję z odpowiednim zdarzeniem.
+
+    from tkinter import Button, Tk
+
+    root = Tk()
+    button = Button(root, text="Przycisk")
+
+    @button.event_decorator("<Enter>")
+    def mouse_over(event):
+        print("Myszka najechała na przycisk")
+
+    button.pack()
+    root.mainloop()
+
 ### Logi
 
-Większość programów, które tworzyliśmy w obrębie tego kursu były przez nas jednokrotnie uruchomiane i od razu zamykane. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi wraz z ewentualnymi komunikatami o błędach. Takie informacje zwane logami, są często zapisywane do osobnego pliku.
+Większość programów, które tworzyliśmy w obrębie tego kursu, była jednorazowo uruchamiana i od razu zamykana. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi, wraz z ewentualnymi komunikatami o błędach. Takie informacje, zwane logami, są często zapisywane do osobnego pliku.
 
-Moduł <code>logging</code> zawiera wiele przydatnych funkcjonalności do tworzenia logów. 
+Moduł `logging` zawiera wiele przydatnych funkcjonalności do tworzenia logów.
 
 Mamy dostępnych kilka poziomów logów:
 
@@ -2194,14 +2652,14 @@ Mamy dostępnych kilka poziomów logów:
 | DEBUG | 10 | 
 | NOTSET | 0 | 
 
-Rzućmy okiem na prosty przykład, gdzie wypisujemy na konsoli komunikat "Przykladowa wiadomosc":
+Rzućmy okiem na prosty przykład, gdzie wypisujemy na konsoli komunikat "Przykładowa wiadomość":
 
     import logging
 
     logging.basicConfig(level=logging.INFO)
     logging.info("Przykladowa wiadomosc.")
 
-Aby zapisać logi do pliku potrzebujemy obiektu do obsługi pików:
+Aby zapisać logi do pliku potrzebujemy obiektu do obsługi plików:
 
     import logging
 
@@ -2212,8 +2670,6 @@ Aby zapisać logi do pliku potrzebujemy obiektu do obsługi pików:
     logger.addHandler(fh)
 
     logger.warning("Przykladowa wiadomosc.")
-
-### Kompresja i szyfrowanie danych
 
 ## Dodatkowe materiały
 
