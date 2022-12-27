@@ -44,7 +44,6 @@ Kurs podstaw Pythona.
     - [Dbanie-o-jakość-kodu-i-lintowanie](#Dbanie-o-jakość-kodu-i-lintowanie)
     - [Debugowanie](#Debugowanie)
     - [Testy-jednostkowe](#Testy-jednostkowe)
-    - [Organizacja-projektu-z-testami](#Organizacja-projektu-z-testami)
     - [Dokumentacja](#Dokumentacja)
     - [Pliki-wykonywalne-i-PyInstaller](#Pliki-wykonywalne-i-PyInstaller)
     - [Kod-bajtowy](#Kod-bajtowy)
@@ -1973,17 +1972,22 @@ Po uruchomieniu polecenia <code>make html</code> będzie można zobaczyć wygene
 
 ### Pliki wykonywalne i PyInstaller
 
-Instalacja
+Jeśli chcesz udostępnić swoją aplikację innym osobom, prawdopodobnie będziesz chciał zapakować ją w plik wykonywalny. W przypadku systemu Windows najprostszym sposobem na stworzenie pliku wykonywalnego jest użycie programu <a href = "https://www.pyinstaller.org/">PyInstaller</a>.
+
+Aby użyć PyInstaller, należy zainstalować go za pomocą pip:
 
     pip install pyinstaller
-    
-Przykład użycia z wiersza poleceń:
 
-    pyinstaller --onefile sciezka_do_pliku.py
+Następnie możesz wygenerować plik wykonywalny za pomocą polecenia:
+
+    pyinstaller nazwa_pliku.py
+
+Po wykonaniu polecenia zostanie utworzony folder dist, w którym znajdziesz plik wykonywalny o nazwie nazwa_pliku.exe. Możesz go umieścić w dowolnym miejscu na dysku i uruchomić.
+
+PyInstaller ma również opcje pozwalające na dostosowanie sposobu tworzenia plików wykonywalnych do swoich potrzeb. Przykładowo, możesz wybrać, czy chcesz zawrzeć w pliku wykonywalnym zasoby (np. obrazy, dźwięki), czy też chcesz udostępnić je osobno. Możesz także określić, czy plik wykonywalny ma być uruchamiany w oknie konsoli, czy też w osobnym oknie. Więcej informacji o opcjach dostępnych w PyInstaller znajdziesz w <a href = "https://pyinstaller.readthedocs.io/en/stable/index.html">dokumentacji</a>.
 
 ### Kod bajtowy
-
-Do wyświetlania kodu bajtowego służy moduł <code>dis</code>:
+Moduł `dis` służy do wyświetlania kodu bajtowego dla funkcji lub bloków kodu. Aby wyświetlić kod bajtowy dla funkcji, użyj funkcji `dis()` w nastęþujący sposób:
 
     from dis import dis
 
@@ -1991,8 +1995,32 @@ Do wyświetlania kodu bajtowego służy moduł <code>dis</code>:
       return a + b
 
     dis(suma)
+
+Aby wyświetlić kod bajtowy dla bloku kodu, użyj funkcji `disassemble()`:
+
+    from dis import disassemble
+
+    code = """
+    def suma(a, b):
+      return a + b
+    """
+
+    disassemble(code)
+
+Kod bajtowy jest przydatny w przypadku gdy chcesz zrozumieć, jak interpreter konwertuje kod napisany w Pythonie na instrukcje, które są wykonywane przez maszynę. Może to być również pomocne przy optymalizacji kodu lub tworzeniu wtyczek do Pythona w innych językach.
     
-Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
+Aby uzyskać kod z zewnętrznych bibliotek musimy użyć modułu <code>inspect</code>. Biblioteka ta umożliwia uzyskanie informacji o strukturze programu. Może być używana do zapisywania lub odczytywania kodu źródłowego, dokumentacji i innych informacji o obiektach.
+
+Niektóre przydatne funkcje w module inspect to:
+
+* `inspect.getsource(object)` - zwraca kod źródłowy obiektu jako string
+* `inspect.getdoc(object)` - zwraca dokumentację obiektu jako string
+* `inspect.getmembers(object)` - zwraca listę krotek (name, value) dla wszystkich atrybutów obiektu
+* `inspect.isclass(object)` - zwraca True, jeśli obiekt jest klasą
+* `inspect.isfunction(object)` - zwraca True, jeśli obiekt jest funkcją
+* `inspect.ismethod(object)` - zwraca True, jeśli obiekt jest metodą
+
+Przykład użycia:
 
     import inspect
     import tkinter
@@ -2002,13 +2030,21 @@ Aby wyświetlić kod funkcji użyj modułu <code>inspect</code>:
 
 ## Python w praktyce
 
+W tej części przyjrzymy się różnym aspektom pracy z językiem Python w praktyce. Omówimy wiele narzędzi i bibliotek, które mogą być przydatne podczas tworzenia wszelakiego oprogramowania.
+
+Początkowo skupimy się na obsłudze argumentów linii poleceń i pracy z plikami i folderami. Następnie przyjrzymy się bibliotece Pandas i sposobom obsługi plików CSV. Kolejnym tematem będzie praca z plikami PDF oraz uzyskiwanie informacji o systemie operacyjnym.
+
+Przejdziemy również do tematów związanych z siecią, takich jak HTTP oraz prosty serwer. Nie zabraknie również wprowadzenia do tworzenia API za pomocą biblioteki FastAPI oraz pracy z bazami danych za pomocą SQLite.
+
+Na końcu zapoznamy się z biblioteką Tkinter do tworzenia interfejsu graficznego oraz narzędziem do gromadzenia logów.
+
 ### Argumenty linii poleceń
 
-Python wspiera obsługę argumentów linii poleceń. Jeśli chcemy by nasz skrypt, był sterowany za pomocą argumentów przekazywanych w trakcie jego uruchomienia, mamy do dyspozycji kilka narzędzi, które ułatwią nam to zadanie.
+Python obsługuje argumenty linii poleceń. Jeśli chcemy, by nasz skrypt był sterowany przez argumenty przekazywane podczas jego uruchomienia, mamy do dyspozycji kilka narzędzi, które ułatwią nam to zadanie.
 
-Moduł biblioteki standardowej <code>sys</code> zawiera zmienną *argv*, w której przechowywana jest nazwa programu oraz lista argumentów przekazanych z linii poleceń. Zakłada się, że argumenty oddzielone są przez spacje. 
+Moduł biblioteki standardowej sys zawiera zmienną argv, która przechowuje nazwę programu oraz listę argumentów przekazanych z linii poleceń. Zakłada się, że argumenty są oddzielone spacjami.
 
-Przykładowo, jeśli mamy skrypt o nazwie *suma.py* i chcemy by po wywołaniu, skrypt wypisał sumę argumentów przekazanych z linii poleceń, to możemy to zadanie zrealizować w następujący sposób:
+Przykładowo, jeśli mamy skrypt o nazwie suma.py i chcemy, by po jego uruchomieniu skrypt wypisał sumę argumentów przekazanych z linii poleceń, możemy to zrobić w następujący sposób:
 
     import sys
     print(sum(sys.argv[1:]))
@@ -2018,7 +2054,7 @@ Dla następującej kombinacji liczb powinniśmy otrzymać następujący wynik:
     $ python suma.py 3 2 1
     6
 
-Co, jeśli chcielibyśmy używać flag do nazwania dostępnych opcji? Możemy zostać przy znanym nam *sys.argv*, ale będziemy musieli samodzielnie napisać parser do obsługi wszystkich możliwych kombinacji flag. Łatwiej skorzystać z gotowego narzędzia. Również w bibliotece standardowej mamy moduł *argparse*. Moduł ten daje nam opcję zdefiniowania możliwych do użycia argumentów.
+Jeśli chcielibyśmy używać flag do nazywania dostępnych opcji, możemy nadal użyć sys.argv, ale będziemy musieli napisać parser do obsługi wszystkich możliwych kombinacji flag. Łatwiej skorzystać z gotowego narzędzia. Również w bibliotece standardowej mamy moduł *argparse*. Moduł ten daje nam opcję zdefiniowania możliwych do użycia argumentów.
 
 Załóżmy, że chcemy by nasz skrypt przyjmował nazwę pliku jako argument, a następnie dopisywał na końcu pliku wiersz "nowy wiersz". Możemy to zrobić w następujący sposób:
 
