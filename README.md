@@ -13,7 +13,6 @@ Kurs podstaw Pythona.
     - [Zmienne](#Zmienne)
     - [Warunki](#Warunki)
     - [Pętle](#Pętle)
-    - [Pętle-zagnieżdżone](#Pętle-zagnieżdżone)
     - [Funkcje](#Funkcje)
     - [Napisy](#Napisy)
     - [Struktury-danych](#Struktury-danych)
@@ -281,7 +280,7 @@ W wyniku wykonania tego kodu zostanie wypisany na konsoli trójkąt z gwiazdek:
     ****
     *****
     
-## Funkcje
+### Funkcje
 
 Funkcje są blokami instrukcji zamkniętymi pod jedną nazwą i pozwalającymi na kontrolowanie z zewnątrz poprzez przekazywanie argumentów. Definicja funkcji polega na określeniu, które instrukcje należą do ciała funkcji, ile argumentów oczekuje funkcja oraz jaką nazwą będzie ona wywoływana w innych miejscach kodu. Definicja sama w sobie nie uruchamia jeszcze żadnych instrukcji - potrzebne jest użycie nazwy funkcji wraz z wartościami argumentów w innym miejscu kodu, aby instrukcje zostały wykonane. Funkcje mają następującą postać:
 
