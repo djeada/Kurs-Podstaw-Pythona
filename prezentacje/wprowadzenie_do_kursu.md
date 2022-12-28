@@ -11,7 +11,7 @@ Kurs obejmuje następujące tematy:
 
 ## Dlaczego warto uczyć się programowania z tym kursem?
 
-Programowanie to ważna umiejętność, która może być przydatna w wielu dziedzinach. Kurs Python został zaprojektowany z myślą o osobach, które chcą nauczyć się programować, a jednocześnie zrozumieć, co dzieje się pod spodem. Zamiast skupiać się na składni języka Python, kurs skupia się na zrozumieniu podstawowych koncepcji programowania i sposobach ich implementacji w Pythonie.
+Programowanie to ważna umiejętność, która może być przydatna w wielu dziedzinach. Ten kurs został zaprojektowany z myślą o osobach, które chcą nauczyć się programować, a jednocześnie zrozumieć, co dzieje się pod spodem. Zamiast skupiać się na składni konkretnego języka programowania, kurs skupia się na zrozumieniu podstawowych koncepcji programowania.
 
 Dodatkowo, kurs zapewnia dostęp do wielu materiałów pomocniczych, takich jak kod przykładowych programów, ćwiczenia, projekty, notatki i ściągawki, które pomogą Ci zrozumieć i zapamiętać materiał.
 
