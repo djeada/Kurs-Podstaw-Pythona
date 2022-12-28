@@ -14,6 +14,7 @@ def fib_memo(n):
         return 0
     return fib_memo(n - 1) + fib_memo(n - 2)
 
+
 n = 25
 print(Timer(partial(fib_zwykly, n)).timeit(1))
 print(Timer(partial(fib_memo, n)).timeit(1))

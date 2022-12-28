@@ -1,6 +1,5 @@
 class Pensja:
-
-    def __init__(self, pensja:int, stopa_podwyzki:float):
+    def __init__(self, pensja: int, stopa_podwyzki: float):
         self.pensja = pensja
         self.stopa_podwyzki = stopa_podwyzki
 
@@ -13,23 +12,24 @@ class Pensja:
     def __str__(self):
         return f"Pensja: {self.pensja}, stopa podwyzki: {self.stopa_podwyzki}"
 
+
 class Pracownik:
-    
-        def __init__(self, imie:str, nazwisko:str, pensja:Pensja):
-            self.imie = imie
-            self.nazwisko = nazwisko
-            self.pensja = pensja # kompozycja, pensja jest czescia pracownika
+    def __init__(self, imie: str, nazwisko: str, pensja: Pensja):
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.pensja = pensja  # kompozycja, pensja jest czescia pracownika
 
-        def awansuj(self):
-            self.pensja.awansuj()
+    def awansuj(self):
+        self.pensja.awansuj()
 
-        def __str__(self):
-            return f"Pracownik: {self.imie} {self.nazwisko}, zarabia rocznie: {self.pensja.roczna_pensja()}"
+    def __str__(self):
+        return f"Pracownik: {self.imie} {self.nazwisko}, zarabia rocznie: {self.pensja.roczna_pensja()}"
 
 
-class Menedzer(Pracownik): # dziedziczenie, klasa Menedzer dziedziczy po klasie Pracownik
-  
-    def __init__(self, imie:str, nazwisko:str, pensja:Pensja):
+class Menedzer(
+    Pracownik
+):  # dziedziczenie, klasa Menedzer dziedziczy po klasie Pracownik
+    def __init__(self, imie: str, nazwisko: str, pensja: Pensja):
         super().__init__(imie, nazwisko, pensja)
 
     def awansuj(self):
@@ -39,7 +39,7 @@ class Menedzer(Pracownik): # dziedziczenie, klasa Menedzer dziedziczy po klasie 
     def __str__(self):
         return f"Menedżer: {self.imie} {self.nazwisko}, zarabia rocznie: {self.pensja.roczna_pensja()}"
 
-        
+
 if __name__ == "__main__":
     informatyk_a = Pracownik("Jan", "Kowalski", Pensja(1000, 0.1))
     informatyk_b = Pracownik("Anna", "Nowak", Pensja(2000, 0.1))
@@ -47,12 +47,11 @@ if __name__ == "__main__":
 
     pracownicy_firmy = (informatyk_a, informatyk_b, menadzer)
 
-    print('Rok 2022:')
+    print("Rok 2022:")
     for pracownik in pracownicy_firmy:
         print(pracownik)
         pracownik.awansuj()
 
-    print('\nRok 2023:')
+    print("\nRok 2023:")
     for pracownik in pracownicy_firmy:
         print(pracownik)
-    
