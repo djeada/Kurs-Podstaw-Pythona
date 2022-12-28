@@ -155,9 +155,9 @@ instrukcjami sterującymi.
 
 Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozycji trzy operatory logiczne: <code>and</code>, <code>or</code> i <code>not</code>:
 
-    <code>and</code> – aby wyrażenie było prawdziwe, oba warunki muszą być prawdziwe.
-    <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
-    <code>not</code> – zaprzeczenie wyrażenia.
+* <code>and</code> – aby wyrażenie było prawdziwe, oba warunki muszą być prawdziwe.
+* <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
+* <code>not</code> – zaprzeczenie wyrażenia.
 
 Na przykład, wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli a jest różne od 0 i jednocześnie b jest równe 5.
 
