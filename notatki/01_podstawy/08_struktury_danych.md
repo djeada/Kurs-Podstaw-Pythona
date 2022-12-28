@@ -1,0 +1,246 @@
+### Struktury danych
+
+Mamy do dyspozycji kilka różnych sposobów przechowywania danych. Te sposoby to tzw. struktury danych. Są to narzędzia, dzięki którym możemy zbierać i przechowywać duże ilości danych w sposób uporządkowany, co ułatwia nam pracę z tymi danymi.
+
+Oto najpopularniejsze sturktury danych:
+
+* Listy: listy to uporządkowane kolekcje elementów, które mogą być dowolnego typu. Możemy do nich dodawać i usuwać elementy, a także zmieniać ich kolejność. W liście mogą występować duplikaty.
+* Krotki: krotki to podobne do list struktury, ale są one niezmienne. Raz utworzona krotka nie może być zmieniona. W krotkach również mogą występować duplikaty.
+* Zbiory: zbiory to nieuporządkowane kolekcje elementów, w których nie mogą występować duplikaty. Zbiory są szczególnie przydatne, gdy intersują nas jedynie unikalne wartości.
+duplikaty.
+* Słowniki: słowniki to indeksowane kolekcje par klucz-wartość. Wszystkie klucze w słowniku muszą być unikalne, natomiast wartości mogą być duplikatami. Słowniki są bardzo przydatne do przechowywania danych w formie tabeli.
+
+Oczywiście, istnieją również inne struktury danych ale te wymienione są najczęściej używane i najważniejsze dla początkujących.
+
+#### Lista
+
+Lista jest strukturą danych służącą do przechowywania kilku wartości pod jedną nazwą.
+
+Przykład listy złożonej z kilku liczb całkowitych:
+
+    lista = [3, 2, 3, 9, 10]
+    
+Elementy listy nie muszą być tego samego typu:
+
+    lista = ['a', True, 0.3]
+
+Aby poznać liczbę elementów listy, należy użyć funkcji `len`:
+
+    n = len(lista)
+       
+Aby dodać element a na końcu listy, użyj metody `append`:
+
+    lista.append(a)
+
+Aby dodać wszystkie elementy z listy lista2 na końcu listy lista1, użyj metody `extend`:
+
+    lista1.extend(lista2)
+
+Aby wstawić element a na pozycję i, użyj metody `insert`:
+
+    lista.insert(i,a)
+
+Aby usunąć pierwsze wystąpienie elementu a z listy, użyj metody `remove`:
+
+    lista.remove(a)
+
+Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jako wynik, użyj metody `pop`:
+
+    element = lista.pop([i])
+
+Aby znaleźć liczbę wystąpień elementu a w liście, użyj metody `count`:
+
+    licznik = lista.count(a)
+
+Aby posortować listę, użyj metody `sort`:
+
+    lista.sort()
+
+Aby odwrócić kolejność elementów w liście, użyj metody `reverse`:
+
+    lista.reverse()
+
+Aby przy pomocy pętli przejść przez elementy listy, użyj słowa kluczowego `for`:
+
+    for element in lista: 
+        print(element)
+        
+Aby otrzymać element i indeks, użyj funkcji `enumerate`:
+
+     for indeks, element in enumerate(lista): 
+        print(f'{indeks}: {element}')
+
+Aby przy pomocy pętli przejść przez elementy dwóch list równej długości, użyj funckji `zip`:
+
+     for elem_a, elem_b in zip(lista_a, lista_b): 
+        print(f'element a: {elem_a}; element b: {elem_b}')
+
+#### Krotka
+
+Krotka to struktura danych, podobna do listy, ale niezmienna. To znaczy, że po utworzeniu krotki nie możemy jej zmodyfikować, np. dodając do niej nowe elementy czy usuwając już istniejące.
+
+Krotek zamiast list, używamy gdy:
+* Liczy się szybkość.
+* Chcemy zabezpieczyć dane przed nadpisaniem.
+
+Przykład krotki składającej się z kilku liczb całkowitych:
+
+    krotka = (3, 2, 3, 9, 10)
+
+Elementy krotki nie muszą być tego samego typu:
+
+    krotka = ('a', True, 0.3)
+
+Aby rozpakować krotkę składającą się z trzech elementów i zapisać je w trzech zmiennych, użyj:
+
+    a, b, c = krotka
+
+Aby znaleźć liczbę elementów krotki, użyj:
+
+    len(krotka)
+
+Aby przy pomocy pętli przejść przez elementy krotki, użyj:
+
+    for element in krotka: 
+        print(element)
+
+Aby otrzymać element i indeks, użyj funkcji `enumerate`:
+
+    for indeks, element in enumerate(krotka): 
+        print(f'{indeks}: {element}')
+
+Aby przy pomocy pętli przejść przez elementy dwóch krotek równej długości, użyj funckji `zip`:
+
+    for elem_a, elem_b in zip(krotka_a, krotka_b): 
+        print(f'element a: {elem_a}; element b: {elem_b}')
+
+#### Zbiór
+
+Zbiór (ang. set) to nieuporządkowana kolekcja unikalnych elementów. Zbiory są zazwyczaj używane do eliminowania duplikatów lub do testowania przynależności elementu do kolekcji.
+
+Aby utworzyć pusty zbiór, użyj:
+
+    zbior = set()
+
+Aby utworzyć zbiór z elementów podanych jako argumenty, użyj:
+
+    zbior = set([element1, element2, element3])
+
+Aby utworzyć zbiór z elementów występujących w iterowalnym obiekcie (np. liście), użyj:
+
+    zbior = set(iterowalny_obiekt)
+
+Aby sprawdzić, czy element jest w zbiorze, użyj:
+
+    element in zbior
+
+Aby dodać element do zbioru, użyj:
+
+    zbior.add(element)
+
+Aby usunąć element ze zbioru, użyj:
+
+    zbior.remove(element)
+
+Aby usunąć element ze zbioru, jeśli istnieje, bez generowania błędu, użyj:
+
+    zbior.discard(element)
+
+Aby usunąć losowy element ze zbioru, użyj:
+
+    zbior.pop()
+
+Aby usunąć wszystkie elementy ze zbioru, użyj:
+
+    zbior.clear()
+
+Aby znaleźć liczbę elementów w zbiorze, użyj:
+
+    len(zbior)
+
+Aby złączyć zbiory, użyj operatora `|`:
+
+    zbior1 | zbior2
+
+Aby wyświetlić elementy wspólne dla dwóch zbiorów, użyj operatora `&`:
+
+    zbior1 & zbior2
+
+Aby wyświetlić elementy występujące w jednym zbiorze, ale nie w drugim, użyj operatora `^`:
+
+    zbior1 ^ zbior2
+
+Aby wyświetlić elementy z pierwszego zbioru, ale nie z drugiego, użyj operatora `-`:
+
+    zbior1 - zbior2
+
+Aby sprawdzić, czy zbiór jest podzbiorem innego zbioru, użyj operatora `<=`:
+
+    zbior1 <= zbior2
+
+#### Słownik
+Słownik używamy, gdy chcemy mieć kilka wartości dostępnych pod różnymi nazwami (kluczami). Słownik jest nieuporządkowany i indeksowany.
+
+W słowniku można używać jako kluczy dowolnych typów danych, które są niemutowalne (tj. nie mogą być zmieniane). Do niemutowalnych typów danych w Pythonie zaliczają się:
+
+* liczby całkowite (int)
+* liczby zmiennoprzecinkowe (float)
+* napisy (str)
+* krotki (tuple)
+
+Nie można natomiast używać jako kluczy mutowalnych typów danych, takich jak listy, zbiory lub słowniki, ponieważ nie spełniają one wymogu niemutowalności.
+
+Przykłady poprawnych kluczy:
+
+* liczba całkowita: `slownik[42]`
+* napis: `slownik['klucz']`
+* krotka: `slownik[(1, 2, 3)]`
+
+Przykłady niepoprawnych kluczy:
+
+* lista: `slownik[[1, 2, 3]]`
+* zbiór: `slownik{1, 2, 3}`
+* słownik: `slownik{'klucz': 'wartosc'}`
+
+Przykład słownika zawierającego kilka par klucz-wartość:
+
+    slownik = {'klucz1': 3, 'klucz2': 2, 'klucz3': 3}
+
+Elementy słownika nie muszą być tego samego typu:
+
+    slownik = {'klucz1': 'a', 'klucz2': True, 'klucz3': 0.3}
+
+Aby znaleźć liczbę elementów słownika, użyj:
+
+    len(slownik)
+
+Aby dodać element a pod kluczem 'klucz4', użyj:
+
+    slownik['klucz4'] = a
+
+Aby zmienić wartość pod kluczem 'klucz4', użyj:
+
+    slownik['klucz4'] = nowa_wartosc
+
+Aby usunąć element pod kluczem 'klucz4', użyj:
+
+    del slownik['klucz4']
+
+Aby sprawdzić czy klucz 'klucz4' istnieje w słowniku, użyj:
+
+    'klucz4' in slownik
+
+Aby przy pomocy pętli przejść przez elementy słownika, użyj:
+
+    for klucz, wartosc in slownik.items(): 
+        print(f'{klucz}: {wartosc}')
+    
+Aby przy pomocy pętli przejść tylko przez klucze słownika, użyj:
+
+    for klucz in slownik: 
+        print(klucz)
+
+Aby przy pomocy pętli przejść tylko przez wartości słownika, użyj:
+
+    for wartosc in slownik.values(): 
+        print(wartosc)

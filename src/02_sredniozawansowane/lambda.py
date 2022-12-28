@@ -31,3 +31,25 @@ print(list(map(lambda x: "Tak" if x % 2 == 0 else "Nie", [3, 2, 5, 8, 2])))
 
 # przyklad uzycia funkcji lambda jako argumentu funkcji filter()
 print(list(filter(lambda x: x % 2 == 0, [3, 2, 5, 8, 2])))
+
+
+from dataclasses import dataclass
+
+# gdy lambdy nie maja nazwy sa anonimowe
+
+@dataclass
+class Miasto:
+     nazwa: str
+     liczba_mieszkancow: int
+
+miasto_a = Miasto("Inowroclaw", 70_000)
+miasto_b = Miasto("Warszawa", 2_000_000)
+miasto_c = Miasto("Wroclaw", 1_000_000)
+
+miasta = (miasto_a, miasto_b, miasto_c)
+
+# posortowane po liczbie mieszkancow
+print(sorted(miasta, key=lambda m: m.liczba_mieszkancow)) # Inwroclaw, Wroclaw, Warszawa
+
+# posortowane po dlugosci nazwy
+print(sorted(miasta, key=lambda m: len(m.nazwa))) # Wroclaw, Warszawa, Inwroclaw
