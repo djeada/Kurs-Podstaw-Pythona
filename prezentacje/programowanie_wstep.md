@@ -89,9 +89,24 @@ Typowanie to określenie rodzaju danych, które mogą być przechowywane w zmien
 
 Typowanie statyczne oznacza, że typy zmiennych są nadawane w czasie kompilacji programu. Oznacza to, że jeśli chcemy przypisać daną wartość do zmiennej, musimy określić jej typ przed uruchomieniem programu. W przypadku typowania statycznego, błędy typów są zazwyczaj wykrywane już w czasie kompilacji, co ułatwia debugowanie i zapobiega nieoczekiwanym błędom podczas działania programu.
 
+Języki o statycznym typowaniu:
+
+* Java
+* C#
+* C++
+* Go
+* Swift
+    
 ### Typowanie dynamiczne
 
 Typowanie dynamiczne oznacza, że typy zmiennych są przypisywane do wartości przechowywanych w zmiennych w trakcie działania programu. Oznacza to, że możemy przypisać dowolną wartość do zmiennej, niezależnie od jej typu, i nie będziemy musieli określać jej typu przed uruchomieniem programu. W przypadku typowania dynamicznego, błędy typów są zazwyczaj wykrywane dopiero podczas działania programu, co może utrudniać debugowanie i prowadzić do nieoczekiwanych błędów podczas działania programu.
+
+Języki o dynamicznym typowaniu:
+
+* Python
+* Ruby
+* JavaScript
+* PHP
 
 ### Type hints 
 
