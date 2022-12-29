@@ -39,5 +39,5 @@ yaj = sincSquare(xaj, coeffs[0], coeffs[1], coeffs[2])
 
 plt.plot(x, y, "x", xaj, yaj, "r-")
 plt.xlabel("odleglosc [cm]")
-plt.ylabel("kontrast między jasnymi i ciemnymi prążkami")
+plt.ylabel("kontrast miedzy jasnymi i ciemnymi prazkami")
 plt.show()

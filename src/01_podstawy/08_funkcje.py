@@ -8,7 +8,7 @@ def powitanie_z_imieniem(imie):
 
 def powitanie_dla_krola(imie):
     if imie == "Jan":
-        print("Witaj Królu")
+        print("Witaj Krolu")
     else:
         print("Witaj " + imie)
 

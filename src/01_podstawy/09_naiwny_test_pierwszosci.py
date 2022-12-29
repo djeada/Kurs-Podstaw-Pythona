@@ -1,5 +1,5 @@
 # liczby pierwsze: 2, 3, 5, 7
-# liczby złożone: 4, 6, 8, 9, 10
+# liczby zlozone: 4, 6, 8, 9, 10
 # test pierwszosci:
 # 1. sprawdzamy czy liczba jest podzielna przez liczby od 2 do liczba-1
 # 2. jesli tak, to liczba jest zlozona

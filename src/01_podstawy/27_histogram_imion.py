@@ -1,5 +1,5 @@
 # histogram napisow
-# Przykład: a, b, a -> a: 2, b: 1
+# Przyklad: a, b, a -> a: 2, b: 1
 
 
 def histogram_imion(lista_imion):
