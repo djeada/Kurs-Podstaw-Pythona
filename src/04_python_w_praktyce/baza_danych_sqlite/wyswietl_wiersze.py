@@ -1,3 +1,4 @@
+
 import sqlite3
 
 polaczenie = sqlite3.connect("example.db")
