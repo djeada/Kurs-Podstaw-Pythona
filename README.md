@@ -13,23 +13,95 @@ Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzu
 
 | Temat | Notatki |
 | ------ | ----- | 
-| Root Bracketing | <a href="https://github.com/djeada/Numerical-Methods/blob/master/notes/1_root_and_extrema_finding/root_bracketing.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
-| Root Bracketing | <a href="https://github.com/djeada/Numerical-Methods/blob/master/notes/1_root_and_extrema_finding/root_bracketing.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Instalacja w systemie windows | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/01_instalacja_w_systemie_windows.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Interaktywna Konsola | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/02_interaktywna_konsola.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Zmienne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/03_zmienne.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Warunki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/04_warunki.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Pętle | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/05_petle.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Funkcje | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/06_funkcje.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Napisy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/07_napisy.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Struktury Danych | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/08_struktury_danych.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Enum | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/09_enum.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Liczby Losowe | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/01_podstawy/10_liczby_losowe.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 
 ### Przykłady
 
 | Numer | Opis | Kod |
 | ------ | ----- | -------------- |
-| 1 | bla| <a href="https://github.com/djeada/Numerical-Methods/blob/master/src/1_root_and_extrema_finding/root_bracketing/implementation/root_bracketing.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 1 | bla| <a href="https://github.com/djeada/Numerical-Methods/blob/master/src/1_root_and_extrema_finding/root_bracketing/implementation/root_bracketing.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 1 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/01_zmienne.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 2 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/02_wejscie_wyjscie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 3 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/03_warunki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 4 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/04_laczenie_warunkow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 5 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/05_petla_while.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 6 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/06_petla_for.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 7 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/07_zagniezdzanie_petli.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 8 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/08_kalkulator.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 9 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 10 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 11 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 12 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 13 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 14 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 15 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 16 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 17 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 18 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 19 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 20 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 21 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 22 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 23 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 24 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 25 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 26 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 27 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 28 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 29 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 30 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
 
 ## Średniozaawansowane
 
 Ten artykuł jest skierowany do osób, które już zdobyły podstawowe umiejętności w programowaniu w języku Python. Omawiane zagadnienia obejmują bardziej zaawansowane tematy, takie jak klasy i programowanie obiektowe, tworzenie własnych struktur danych, programowanie funkcyjne oraz mechanizmy takie jak wątki, wyjątki, iteratory, generatory i dekoratory.
 
+### Notatki
+
+| Temat | Notatki |
+| ------ | ----- | 
+| Klasy i obiekty | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/01_klasy_i_obiekty.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Referencje i kopiowanie | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/02_referencje_i_kopiowanie.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Czyste funkcje i skutki uboczne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/03_czyste_funkcje_i_skutki_uboczne.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Dziedziczenie i kompozycja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/04_dziedziczenie_i_kompozycja.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Wyrażenia regularne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/05_wyrazenia_regularne.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Wyjątki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/06_wyjatki.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Wątki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/07_watki.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Procesy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/08_procesy.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Asyncio | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/09_asyncio.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Lambdy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/10_lambdy.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Programowanie funkcyjne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/11_programowanie_funkcyjne.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Klasy danych | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/12_klasy_danych.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Generatory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/13_generatory.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Iteratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/14_iteratory.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Dekoratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/15_dekoratory.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Serializacja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/16_serializacja.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+
 ## Inżynieria oprogramowania
 
 Inżynieria oprogramowania to dziedzina zajmująca się procesem tworzenia oprogramowania, od projektowania po implementację i utrzymanie. W tej dziedzinie ważne są takie aspekty jak dobór narzędzi i metodologii, zarządzanie projektem, czy współpraca w zespole.
+
+### Notatki
+
+| Temat | Notatki |
+| ------ | ----- | 
+| Moduły i pakiety | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/01_moduly_i_pakiety.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Wersje Pythona | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/02_wersje_pythona.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Pip i PyPI | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/03_pip_i_pypi.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Środowisko wirtualne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/04_srodowisko_wirtualne.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Dbanie o jakość kodu | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/05_dbanie_o_jakosc_kodu.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Debugowanie | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/06_debugowanie.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Testy jednostkowe | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/07_testy_jednostkowe.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Dokumentacja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/08_dokumentacja.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Pliki wykonywalne i PyInstaller | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/09_pliki_wykonywalne_i_pyinstaller.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Kod bajtowy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/03_inzynieria_oprogramowania/10_kod_bajtowy.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 
 ## Python w praktyce
 
@@ -40,6 +112,21 @@ Początkowo skupimy się na obsłudze argumentów linii poleceń i pracy z plika
 Przejdziemy również do tematów związanych z siecią, takich jak HTTP oraz prosty serwer. Nie zabraknie również wprowadzenia do tworzenia API za pomocą biblioteki FastAPI oraz pracy z bazami danych za pomocą SQLite.
 
 Na końcu zapoznamy się z biblioteką Tkinter do tworzenia interfejsu graficznego oraz narzędziem do gromadzenia logów.
+
+### Notatki
+
+| Temat | Notatki |
+| ------ | ----- | 
+| Argumenty linii poleceń | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/01_argumenty_linii_polecen.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Praca z plikami i folderami | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/02_praca_z_plikami_i_folderami.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Pandas i CSV | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/03_pandas_i_csv.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Praca z plikami PDF | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/04_praca_z_plikami_pdf.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Informacje o systemie operacyjnym | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/05_informacje_o_systemie_operacyjnym.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| HTTP i prosty serwer | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/06_http_i_prosty_serwer.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| API wraz z FastAPI | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/07_api_wraz_z_fastapi.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Bazy danych z SQLite | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/08_bazy_danych_z_sqlite.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Tkinter | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/09_tkinter.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Logi | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/10_logi.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 
 ## Dodatkowe materiały
 
