@@ -28,36 +28,37 @@ Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzu
 
 | Numer | Opis | Kod |
 | ------ | ----- | -------------- |
-| 1 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/01_zmienne.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 2 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/02_wejscie_wyjscie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 3 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/03_warunki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 4 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/04_laczenie_warunkow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 5 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/05_petla_while.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 6 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/06_petla_for.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 7 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/07_zagniezdzanie_petli.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 8 |  | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/08_kalkulator.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 9 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 10 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 11 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 12 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 13 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 14 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 15 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 16 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 17 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 18 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 19 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 20 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 21 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 22 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 23 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 24 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 25 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 26 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 27 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 28 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 29 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
-| 30 |  | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 1 | Zmienne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/01_zmienne.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 2 | Wejście i Wyjście | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/02_wejscie_wyjscie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 3 | Warunki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/03_warunki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 4 | Łączenie Warunków | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/04_laczenie_warunkow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 5 | Pętla While | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/05_petla_while.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 6 | Pętla For | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/06_petla_for.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 7 | Zagnieżdżanie pętli | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/07_zagniezdzanie_petli.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 8 | Funkcje | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/08_funkcje.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 9 | Kalkulator | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/09_kalkulator.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 10 | Naiwny test pierwszości | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/10_naiwny_test_pierwszosci.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 11 | Liczby losowe | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/11_liczby_losowe.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 12 | Rekurencja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/12_rekurencja.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 13 | Rekurencja - spółgłoski | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/13_rekurencja_spolgloski.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 14 | Rekurencja - wielkość liter | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/14_rekurnecja_wielkosc_liter.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 15 | Listy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/15_listy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 16 | Wyrażenia listowe | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/16_wyrazenia_listowe.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 17 | Sortowanie bąbelkowe | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/17_sortowanie_babelkowe.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 18 | Sortowanie przez wybieranie | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/18_sortowanie_przez_wybieranie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 19 | Sortowanie szybkie | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/19_sortowanie_szybkie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 20 | Bogo sort | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/20_bogo_sort.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 21 | Przeszukiwanie listy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/21_przeszukiwanie_listy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 22 | Krotki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/22_krotki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 23 | Napisy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/23_napisy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 24 | Szyfr Cezara | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/24_szyfr_cezara.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 25 | Wisielec | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/25_wisielec.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 26 | Zbiory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/26_zbiory.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 27 | Słowniki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/27_slowniki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 28 | Histogram imion | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/28_histogram_imion.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 29 | Listy 2D | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/29_listy_2d.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 30 | Lista słowników | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/30_lista_slownikow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
+| 31 | Sito Eratostenesa | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/31_sito_eratostenesa.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
 
 ## Średniozaawansowane
 
@@ -83,6 +84,42 @@ Ten artykuł jest skierowany do osób, które już zdobyły podstawowe umiejętn
 | Iteratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/14_iteratory.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 | Dekoratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/15_dekoratory.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 | Serializacja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/02_sredniozawansowane/16_serializacja.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+
+### Przykłady
+
+| Numer | Opis | Kod |
+| ------ | ----- | -------------- |
+| 1 | Klasy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/01_klasy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 2 | Operacje na obiektach | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/02_operacje_na_obiektach.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 3 | Zmienne statyczne | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/03_zmienne_statyczne.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 4 | Kopiowanie płytkie i głębokie | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/04_kopiowanie_plytkie_glebokie.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 5 | Czyste Funkcje | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/05_czyste_funkcje.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 6 | Dziedziczenie a kompozycja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/06_dziedziczenie_a_kompozycja.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 7 | Małpi wojownik | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/07_malpi_wojownik.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 8 | Polimorfizm | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/08_polimorfizm.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 9 | Duck typing | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/09_duck_typing.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 10 | Wektor | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/10_wektor.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 11 | Wyrażenia regularne a | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/11_wyrazenia_regularne_a.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 12 | Wyrażenia regularne b | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/12_wyrazenia_regularne_b.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 13 | Wyrażenia regularne c | <a href=""><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 14 | Wyjątki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/14_wyjatki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 15 | Wątki | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/15_watki.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 16 | Procesy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/16_procesy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 17 | Asyncio | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/17_asyncio.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 18 | Lambdy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/18_lambdy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 19 | Elementy programowania funkcyjnego | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/19_funkcyjne.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 20 | Klasy danych | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/20_klasy_danych.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 21 | 21_iteratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/21_iteratory.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 22 | Generator liczb pierwszych | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/22_generator_liczb_pierwszych.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 23 | Generator liczb Fibonnaciego | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/23_generatorliczb_fibonnaciego.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 24 | Dekoratory | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/24_dekoratory.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 25 | Lista Połączona | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/25_lista_polaczona.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 26 | Odwracanie listy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/26_odwracanie_listy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 27 | Sortowanie listy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/27_sortowanie_listy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 28 | Lista palindromiczna | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/28_lista_palindromiczna.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 29 | Usuwanie duplikatów z listy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/29_usuwanie_duplikatow_z_listy.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 30 | Binarne drzewo poszukiwań | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/30_binarne_drzewo_poszukiwan.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
+| 31 | Generowanie labiryntów | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/02_sredniozawansowane/31_generowanie_labiryntow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> | 
 
 ## Inżynieria oprogramowania
 
