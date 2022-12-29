@@ -1,9 +1,18 @@
-# Kurs-Podstaw-Pythona
-Kurs podstaw Pythona.
+# Kurs Podstaw Pythona
+Jeśli szukasz dobrego wprowadzenia do programowania w języku Python, ten kurs podstaw jest idealnym miejscem dla Ciebie. Został on podzielony na 4 sekcje, dzięki czemu będziesz mógł stopniowo zdobywać wiedzę i umiejętności potrzebne do opanowania języka.
 
 ![Capture](https://user-images.githubusercontent.com/37275728/185895408-59e16b58-4468-4bf3-8444-929e3fa4cc3d.PNG)
 
 ## O Kursie
+
+Celem kursu jest nauka podstaw programowania w języku Python. Kurs podzielony jest na 4 sekcje: podstawy, średniozaawansowane, inżynieria oprogramowania oraz Python w praktyce. Każda z tych sekcji zawiera wiele lekcji i zagadnień, które pomogą w zrozumieniu podstaw programowania i zastosowaniu ich w praktyce.
+
+Kurs obejmuje następujące tematy:
+
+1. Podstawy: instalacja Pythona w systemie Windows, interaktywna konsola, zmienne, warunki, pętle, pętle zagnieżdżone, funkcje, napisy, struktury danych, enum, liczby losowe.
+1. Średniozaawansowane: klasy i obiekty, referencje i kopiowanie, czyste funkcje i skutki uboczne, dziedziczenie i kompozycja, wyrażenia regularne, wyjątki, wątki, procesy, asyncio, lambdy, programowanie funkcyjne, klasy danych, generatory, iteratory, dekoratory, serializacja.
+1. Inżynieria oprogramowania: moduły i pakiety, wersje Pythona, PIP i PyPI, środowisko wirtualne, dbanie o jakość kodu i lintowanie, debugowanie, testy jednostkowe, dokumentacja, pliki wykonywalne i PyInstaller, kod bajtowy.
+1. Python w praktyce: argumenty linii poleceń, praca z plikami i folderami, Pandas i csv, praca z plikami PDF, informacje o systemie operacyjnym, HTTP i prosty serwer, API wraz z FastAPI, bazy danych z SQLite, Tkinter, logi.
 
 ## Podstawy
 
