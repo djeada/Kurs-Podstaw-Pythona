@@ -1,5 +1,5 @@
 # Kurs Podstaw Pythona
-Jeśli szukasz dobrego wprowadzenia do programowania w języku Python, ten kurs podstaw jest idealnym miejscem dla Ciebie. Został on podzielony na 4 sekcje, dzięki czemu będziesz mógł stopniowo zdobywać wiedzę i umiejętności potrzebne do opanowania języka.
+Jeśli szukasz dobrego wprowadzenia do programowania w języku Python, ten kurs jest idealnym miejscem dla Ciebie. Został on podzielony na 4 sekcje, dzięki czemu będziesz mógł stopniowo zdobywać wiedzę i umiejętności potrzebne do opanowania języka.
 
 ![Capture](https://user-images.githubusercontent.com/37275728/185895408-59e16b58-4468-4bf3-8444-929e3fa4cc3d.PNG)
 
