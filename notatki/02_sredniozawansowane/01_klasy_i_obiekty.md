@@ -86,10 +86,10 @@ class Czlowiek:
 
     @classmethod
     def wyswietl_glowy(cls):
-    print(f'Liczba glow: {Czlowiek.liczba_glow}')
+        print(f'Liczba glow: {Czlowiek.liczba_glow}')
 
     def zwykla_funkcja(self):
-    self.wyswietl_glowy()
+        self.wyswietl_glowy()
 
 Czlowiek.wyswietl_glowy() # Liczba glow: 1
 
