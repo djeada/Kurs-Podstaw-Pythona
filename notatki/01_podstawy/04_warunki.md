@@ -4,9 +4,11 @@ Typ logiczny (bool) może przyjmować jedną z dwóch wartości: <code>True</cod
 
 Prosta zmienna typu logicznego:
 
-    wiek = 18 # zmienna typu int
-    warunek = wiek > 18 # zmienna typu bool
-    
+```python
+wiek = 18 # zmienna typu int
+warunek = wiek > 18 # zmienna typu bool
+```
+ 
 Oto tabela z porównaniami dostępnymi w języku Python:
 
 | Symbol | Opis |
