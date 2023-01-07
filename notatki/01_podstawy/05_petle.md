@@ -104,13 +104,11 @@ for i in range(5):
 
 W wyniku wykonania tego kodu zostanie wypisany na konsoli prostokąt z gwiazdek:
 
-```
-*****
-*****
-*****
-*****
-*****
-```
+    *****
+    *****
+    *****
+    *****
+    *****
 
 Możemy również użyć zagnieżdżonych pętli, aby narysować bardziej skomplikowane kształty, takie jak trójkąty lub choinkę.
 
@@ -123,11 +121,8 @@ for i in range(5):
 
 W wyniku wykonania tego kodu zostanie wypisany na konsoli trójkąt z gwiazdek:
 
-```
-*
-**
-***
-****
-*****
-```
-
+    *
+    **
+    ***
+    ****
+    *****
