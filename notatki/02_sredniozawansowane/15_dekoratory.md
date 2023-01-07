@@ -4,18 +4,40 @@ Przy pomocy dekoratorów możemy rozszerzać funkcjonalność istniejących funk
 
 Aby zachować informacje o funkcji dekorowanej, możemy użyć dekoratora <code>functools.wraps()</code>:
 
-    import functools
+```python
+import functools
 
-    def dekoruj(funkcja):
-      @functools.wraps(funkcja)
-      def funkcja_wew():
-        print('przetwarzam dane')
-        funkcja()
-      return funkcja_wew
+def dekoruj(funkcja):
+  @functools.wraps(funkcja)
+  def funkcja_wew():
+    print('przetwarzam dane')
+    funkcja()
+  return funkcja_wew
+
+@dekoruj
+def foo():
+  print('foo')
+
+foo()
+```
 
 Dzięki temu wszystkie informacje o funkcji <code>foo</code>, takie jak jej nazwa czy dokumentacja, zostaną zachowane po dekoracji.
 
 Możemy też przekazywać argumenty do dekoratora i funkcji dekorowanej:
 
-    def dekoruj(funkcja):
-      def funkcja_wew(*args, **kwargs):
+```python
+import functools
+
+def dekoruj(funkcja):
+  @functools.wraps(funkcja)
+  def funkcja_wew(*args, **kwargs):
+    print('przetwarzam dane')
+    funkcja(*args, **kwargs)
+  return funkcja_wew
+
+@dekoruj
+def foo(a, b):
+  print(f'a: {a}; b: {b}')
+
+foo(1, 2)
+```

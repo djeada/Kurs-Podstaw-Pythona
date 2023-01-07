@@ -6,16 +6,18 @@ Wewnątrz definicji klasy Enum tworzymy atrybuty klasy, które będą reprezento
 
 Przykład definicji Enum dla kolorów:
 
-    class Kolor(enum.Enum):
-        ZIELONY = enum.auto()
-        CZERWONY = enum.auto()
-        NIEBIESKI = enum.auto()
+```python
+class Kolor(enum.Enum):
+    ZIELONY = enum.auto()
+    CZERWONY = enum.auto()
+    NIEBIESKI = enum.auto()
 
-    kolor_a = Kolor.ZIELONY
-    kolor_b = Kolor.CZERWONY
-    
-    print(kolor_a.name) # ZIELONY
-    print(kolor_a.value) # 1
+kolor_a = Kolor.ZIELONY
+kolor_b = Kolor.CZERWONY
 
-    print(kolor_b.name) # CZERWONY
-    print(kolor_b.value) # 2
+print(kolor_a.name) # ZIELONY
+print(kolor_a.value) # 1
+
+print(kolor_b.name) # CZERWONY
+print(kolor_b.value) # 2
+```

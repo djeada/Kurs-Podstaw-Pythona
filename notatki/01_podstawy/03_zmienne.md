@@ -12,7 +12,9 @@ Nazwa zmiennej może składać się z liter i cyfr, ale nie może zaczynać się
 
 Czy wiesz jaka liczba zostanie wypisana na konsoli w poniższym przykładzie?
 
-    a = 3
-    b = a
-    b = 5
-    print(a) # ???
+```python
+a = 3
+b = a
+b = 5
+print(a) # ???
+```

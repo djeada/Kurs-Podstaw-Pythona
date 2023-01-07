@@ -7,32 +7,46 @@ Popularnym narzędziem do tworzenia środowisk wirtualnych jest <code>virtualenv
 
 Aby zainstalować narzędzie <code>virtualenv</code> przy pomocy menadźera pakietów <code>PIP</code>, użyj:
 
-    pip install virtualenv
+```
+pip install virtualenv
+```
 
 Aby utworzyć środowisko wirtualne o nazwie *env* w aktualnym folderze, użyj:
 
-    virtualenv env
+```
+virtualenv env
+```
     
 Jeśli w systemie masz zainstalowane różne wersje Pythona, to możesz powiedzieć środowisku wirtualnemu, z której wersji ma korzystać.
 Przykładowo, jeśli mam interpreter Pythona w folderze */usr/bin/python3* i chce, żeby z niego korzystało moje środowisko wirtualne, to używam następującej komendy:
 
-    virtualenv -p /usr/bin/python3 env
+```
+virtualenv -p /usr/bin/python3 env
+```
 
 Aby wejść do środowiska wirtualnego, użyj:
 
-    source env/bin/activate
+```
+source env/bin/activate
+```
     
 Aby wyjść ze środowiska wirtualnego, użyj:
 
-    deactivate
+```
+deactivate
+```
     
 Aby zapisać do pliku *requirements.txt* wszystkie aktualnie zainstalowane biblioteki wraz z ich wersjami, użyj:
 
-    pip freeze > requirements.txt
+```
+pip freeze > requirements.txt
+```
 
 Aby zainstalować biblioteki wymienione w pliku *requirements.txt*, użyj:
 
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
     
 Linki:
 

@@ -5,13 +5,15 @@ Asyncio to moduł umożliwiający programowanie asynchroniczne. Asynchroniczne p
 
 Przykład użycia asyncio:
 
-    import asyncio
+```python
+import asyncio
 
-    async def main():
-        await asyncio.sleep(1)
-        print("Hello, world!")
+async def main():
+    await asyncio.sleep(1)
+    print("Hello, world!")
 
-    asyncio.run(main())
+asyncio.run(main())
+```
 
 W tym przykładzie, funkcja `main` jest oznaczona jako `async`, co oznacza, że będzie wykonywana asynchronicznie. Funkcja `asyncio.sleep(1)` jest funkcją, która zatrzymuje wykonanie wątku na 1 sekundę. Słowo kluczowe `await` jest używane do oznaczenia miejsca, w którym wątek ma czekać na zakończenie wykonywania funkcji `asyncio.sleep(1)`.
 

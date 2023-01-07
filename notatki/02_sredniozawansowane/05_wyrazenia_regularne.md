@@ -5,26 +5,30 @@ Wyrażenia regularne to sposób na wyszukiwanie tekstu w oparciu o wzorce. Może
 
 Powiedzmy, że mamy plik gdzie każdy wiersz zawiera trzy informacje oddzielone ukośnikami: nazwisko pracownika, datę odczytu, oraz odczyt licnzika. Jak wyciągnąć datę z każdego wiersza? Używając klasycznych funkcji znanej nam klasy <code>String</code> moglibyśmy to zrobić w taki sposób:
 
-    dane = 'Kowalski/Maj 15, 1983/1721.3'
-    pracownik, data, odczyt = dane.split('/')
-    miesiac, dzien, rok = data.split(' ')
-    if dzien[-1] == ',':
-      dzien = dzien[:-1]
+```python
+dane = 'Kowalski/Maj 15, 1983/1721.3'
+pracownik, data, odczyt = dane.split('/')
+miesiac, dzien, rok = data.split(' ')
+if dzien[-1] == ',':
+  dzien = dzien[:-1]
 
-    print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+```
 
 Rozwiązanie działa, ale nie należy do najpiękniejszych. Co gorsza, jest bardzo kruche. Cokolwiek zmieni się w naszych danych, musimy przerabiać nasz algorytm. Za każdym razem musimy być bardzo uważni i rozumieć każdy wiersz kodu. W takim podejściu bardzo łatwo popełnić błąd. Istnieje jednak inna metoda. Wyrażenia regularne są deklaratywne, tzn. mówimy co chcemy mieć, a nie w jaki sposób.
 
-    import re
+```python
+import re
 
-    dane = 'Kowalski/Maj 15, 1983/1721.3'
-    match = re.search('(.*)/(.*)/(.*)', dane)
-    data = match.group(2) # czesc tekstu odpowiadajaca drugiemu nawiasowi
-    data = re.sub('[^\w\s]', '', data) # usun znaki interpunkcyjne
-    miesiac, dzien, rok = re.split('[\s/]', data) # rozbij przy pomocy spacji
+dane = 'Kowalski/Maj 15, 1983/1721.3'
+match = re.search('(.*)/(.*)/(.*)', dane)
+data = match.group(2) # czesc tekstu odpowiadajaca drugiemu nawiasowi
+data = re.sub('[^\w\s]', '', data) # usun znaki interpunkcyjne
+miesiac, dzien, rok = re.split('[\s/]', data) # rozbij przy pomocy spacji
 
-    print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
-    
+print(f'{miesiac}, {dzien}, {rok}') # Maj, 15, 1983
+```
+
 Aby użyć wyrażeń regularnych, musimy najpierw zaimportować moduł `re`. Następnie możemy użyć różnych funkcji modułu `re`, takich jak `search`, `sub`, `split`, itd. Funkcja `search` służy do wyszukiwania wzorca w ciągu znaków, a funkcja `sub` do zastępowania znalezionych wzorców innymi ciągami znaków. Funkcja `split` służy do podziału ciągu znaków na fragmenty w oparciu o wzorzec.
 
 Wyrażenia regularne składają się z ciągów znaków oraz specjalnych znaków. Specjalne znaki służą do określania rodzaju znaków, które chcemy znaleźć. Na przykład, znak "`.`" oznacza dowolny znak, a znak "`*`" oznacza dowolną ilość powtórzeń poprzedzającego znaku. Możemy również używać nawiasów kwadratowych, by określić zbiór znaków, które chcemy znaleźć. Na przykład, "`[0123456789]`" oznacza dowolną cyfrę, a "`[a-zA-Z]`" oznacza dowolną literę.

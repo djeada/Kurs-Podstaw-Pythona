@@ -25,10 +25,12 @@ Początkujący programiści często mylą pojedynczy znak równości (<code>=</c
 
 Instrukcja warunkowa (if-else) ma następującą postać:
 
-    if warunek:
-        kod
-    else:
-        kod
+```python
+if warunek:
+    kod
+else:
+    kod
+```
 
 Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej <code>if</code> zostanie wykonana jedynie, gdy warunek zostanie oceniony na prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod
 instrukcjami sterującymi.
@@ -44,8 +46,10 @@ Na przykład, wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśl
 Natomiast wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli x jest podzielne przez 2 lub x jest podzielne przez 7.
 
 Być może zastanawiasz się, co zostanie wypisane na konsoli w poniższym przykładzie:
-    
-    odpowiedz = "TAK"
-    print(odpowiedz == "tak" or "TAK")
+
+```python
+odpowiedz = "TAK"
+print(odpowiedz == "tak" or "TAK")
+```
 
 Wyjaśnienie: operator <code>or</code> zwraca pierwszą wartość prawdziwą, jeśli taka istnieje, w przeciwnym razie zwraca drugą wartość. W tym przypadku pierwszy warunek jest fałszywy, ale drugi jest prawdziwy (bo "TAK" jest różne od fałszu). Z tego powodu całe wyrażenie zwraca drugi warunek, czyli wartość "TAK".

@@ -7,7 +7,7 @@ Dwa główne zastosowania debugera:
 - Wyszukiwanie przyczyn bugów w kodzie.
 - Analiza działania programu przez zaznajamiających się z nim programistów.
 
-Jedną z mocnych stron debugera jest też to, że pozwala nam zajrzeć "pod maskę" programu i zobaczyć jakie zmienne są zdefiniowane i jakie są ich wartości. Dzięki temu możemy szybciej zrozumieć co dzieje się w kodzie i co jest przyczyną jakichś błędów.
+Jedną z mocnych stron debugera jest też to, że pozwala nam zajrzeć "pod maskę" programu i zobaczyć jakie zmienne są zdefiniowane i jakie są ich wartości. Dzięki temu możemy szybciej zrozumieć co dzieje się w kodzie i co jest przyczyną ewentualnych błędów.
 
 Słabą stroną debugera jest to, że korzystanie z niego może być czasochłonne. Zatrzymywanie programu i przechodzenie przez kolejne kroki wymaga czasu i cierpliwości. Czasem może też być trudno zrozumieć co dzieje się w kodzie, jeśli jest on bardzo skomplikowany lub niezrozumiały.
 

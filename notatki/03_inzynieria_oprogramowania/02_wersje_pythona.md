@@ -10,20 +10,30 @@ Linki:
 
 Po zainstalowaniu pyenv, możemy użyć polecenia pyenv install aby zainstalować nową wersję Pythona. Na przykład, aby zainstalować wersję Python 3.10, użyjemy polecenia:
 
-    pyenv install 3.10
+```python
+pyenv install 3.10
+```
 
 Aby ustawić wersję Pythona, która będzie używana dla danego katalogu, użyj polecenia pyenv local:
 
-    pyenv local 3.10
+```python
+pyenv local 3.10
+```
 
 Aby ustawić wersję Pythona, która będzie używana dla całego systemu, użyj polecenia pyenv global:
 
-    pyenv global 3.10
+```python
+pyenv global 3.10
+```
 
 Aby wyświetlić listę zainstalowanych wersji Pythona, użyj polecenia pyenv versions:
 
-    pyenv versions
+```python
+pyenv versions
+```
 
 Aby wyświetlić bieżącą wersję Pythona, użyj polecenia pyenv version:
 
-    pyenv version
+```python
+pyenv version
+```

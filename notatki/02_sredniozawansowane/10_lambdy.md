@@ -3,16 +3,18 @@
 
 Wyrażenia lambda to funkcje składające się z jednego wiersza instrukcji, definiowane za pomocą słowa kluczowego lambda. Lambdy nie używają słowa kluczowego return, ponieważ zawsze zwracają wynik wykonania tworzącego je wiersza instrukcji.
 
-    def zwykla_funkcja(liczba: int) -> int:
-      return liczba**2
-    
-    przyklad_lambdy = lambda liczba: liczba**2
-    
-    wartosc = 2
-    
-    print(zwykla_funkcja(wartosc)) # 4
-    print(przyklad_lambdy(wartosc)) # 4
-    print((lambda liczba: liczba**2)(wartosc)) # 4
+```python
+def zwykla_funkcja(liczba: int) -> int:
+  return liczba**2
+
+przyklad_lambdy = lambda liczba: liczba**2
+
+wartosc = 2
+
+print(zwykla_funkcja(wartosc)) # 4
+print(przyklad_lambdy(wartosc)) # 4
+print((lambda liczba: liczba**2)(wartosc)) # 4
+```
 
 W porównaniu do pełnoprawnych funkcji definiowanych za pomocą słowa kluczowego def, lambdy są ograniczone:
 
@@ -25,6 +27,8 @@ Lambdy są również przydatne, gdy chcemy dostosować się do wymagań danej fu
 
 Na przykład, jeśli chcemy posortować listę obiektów według pewnego atrybutu, możemy skorzystać z metody `sorted()`, która przyjmuje argument `key` - funkcję, która ma zwracać wartość atrybutu według którego ma być sortowana lista. W takiej sytuacji lambda pozwala nam zdefiniować tę funkcję w miejscy wywołania `sorted()`.
 
-    lista = (('def', 100), ('ghi', 200), ('abc', 300))
-    print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
-    print(sorted(lista, key=lambda x: x[1])) # [('def', 100), ('ghi', 200), ('abc', 300)]
+```python
+lista = (('def', 100), ('ghi', 200), ('abc', 300))
+print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
+print(sorted(lista, key=lambda x: x[1])) # [('def', 100), ('ghi', 200), ('abc', 300)]
+```

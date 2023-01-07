@@ -11,27 +11,39 @@ Instalacja:
 
 Aby zainstalować konkretny pakiet, użyj:
 
-    pip install <nazwa_pakietu>
+```
+pip install <nazwa_pakietu>
+```
     
 Aby wyświetlić szczegóły zainstalowanego pakietu, użyj:
     
-    pip show <nazwa_pakietu>
-    
+```
+pip show <nazwa_pakietu>
+```
+
 Aby wyświetlić listę wszystkich aktualnie używanych pakietów, użyj:
 
-    pip list
-    
+```
+pip list
+```
+
 Aby zapisać w pliku *requirements.txt* listę wszystkich aktualnie używanych pakietów wraz z wersjami, użyj:
 
-    pip freeze > requirements.txt
+```
+pip freeze > requirements.txt
+```
     
 Aby odinstalować pakiet, użyj:
 
-    pip uninstall <nazwa_pakietu>
+```
+pip uninstall <nazwa_pakietu>
+```
 
 Aby zaktualizować program PIP, użyj:
- 
-    pip install --upgrade pip
+    
+```
+pip install --upgrade pip
+```
 
 Linki:
 

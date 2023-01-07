@@ -1,24 +1,27 @@
-
 ### Kod bajtowy
 Moduł `dis` służy do wyświetlania kodu bajtowego dla funkcji lub bloków kodu. Aby wyświetlić kod bajtowy dla funkcji, użyj funkcji `dis()` w nastęþujący sposób:
 
-    from dis import dis
+```python
+from dis import dis
 
-    def suma(a, b):
-      return a + b
+def suma(a, b):
+  return a + b
 
-    dis(suma)
+dis(suma)
+```
 
 Aby wyświetlić kod bajtowy dla bloku kodu, użyj funkcji `disassemble()`:
 
-    from dis import disassemble
+```python
+from dis import disassemble
 
-    code = """
-    def suma(a, b):
-      return a + b
-    """
+code = """
+def suma(a, b):
+  return a + b
+"""
 
-    disassemble(code)
+disassemble(code)
+```
 
 Kod bajtowy jest przydatny w przypadku gdy chcesz zrozumieć, jak interpreter konwertuje kod napisany w Pythonie na instrukcje, które są wykonywane przez maszynę. Może to być również pomocne przy optymalizacji kodu lub tworzeniu wtyczek do Pythona w innych językach.
     
@@ -35,8 +38,10 @@ Niektóre przydatne funkcje w module inspect to:
 
 Przykład użycia:
 
-    import inspect
-    import tkinter
+```python
+import inspect
+import tkinter
 
-    print(inspect.getsource(tkinter.Tk)) # podejzyj kod klasy Tk z modulu tkinter
-    print(inspect.getdoc(tkinter.Tk)) # podejzyj docstring klasy Tk z modulu tkinter
+print(inspect.getsource(tkinter.Tk)) # podejzyj kod klasy Tk z modulu tkinter
+print(inspect.getdoc(tkinter.Tk)) # podejzyj docstring klasy Tk z modulu tkinter
+```

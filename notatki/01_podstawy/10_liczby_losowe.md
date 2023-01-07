@@ -17,12 +17,14 @@ Innym rodzajem rozkładu jest rozkład Gaussa, gdzie wartości zbliżone do śre
 
 Przykład użycia:
 
-    import random
+```python
+import random
 
-    # losowanie liczb z rozkładu normalnego o średniej 0 i odchyleniu standardowym 1
-    samples = [random.gauss(0, 1) for _ in range(10)]
-    print(samples)
+# losowanie liczb z rozkladu normalnego o sredniej 0 i odchyleniu standardowym 1
+samples = [random.gauss(0, 1) for _ in range(10)]
+print(samples)
 
-    # losowanie liczb z rozkładu wykładniczego o parametrze 0.5
-    samples = [random.expovariate(0.5) for _ in range(10)]
-    print(samples)
+# losowanie liczb z rozkladu wykladniczego o parametrze 0.5
+samples = [random.expovariate(0.5) for _ in range(10)]
+print(samples)
+```

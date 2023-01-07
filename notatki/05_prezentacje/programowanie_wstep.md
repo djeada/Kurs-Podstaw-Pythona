@@ -2,10 +2,12 @@
 
 Program to sekwencja instrukcji i kodu, która ma być wykonana przez komputer. Program może być napisany w różnych językach programowania, takich jak C, Python, Java itp. Język programowania jest narzędziem do komunikowania się z komputerem i określania sposobu wykonania określonych zadań.
 
-    kod => sprzet => wyjscie
-             ||
-           wejscie
-           
+```
+kod => sprzet => wyjscie
+            ||
+        wejscie
+```
+      
 Wejście i wyjście z programu odnoszą się do sposobu, w jaki program komunikuje się z resztą systemu. Wejście to informacje, które program otrzymuje od innych elementów systemu, natomiast wyjście to informacje, które program wysyła do innych elementów systemu. Wejście i wyjście mogą mieć różne formy, takie jak dane zapisane w pliku, dane przesłane przez sieć, dane przechowywane w pamięci komputera lub dane wprowadzane przez użytkownika za pomocą klawiatury lub innego urządzenia wejścia.
 
 Wejście i wyjście są ściśle związane z kodem programu oraz sprzętem. Kod programu określa sposób, w jaki program przetwarza wejście i generuje wyjście, natomiast sprzęt jest odpowiedzialny za fizyczne przekazywanie danych między programem a resztą systemu. 
@@ -14,7 +16,9 @@ Wejście i wyjście są ściśle związane z kodem programu oraz sprzętem. Kod 
 
 Kod zrozumiały dla człowieka musimy przetłumaczyć na kod zrozumiały dla komputera.
 
-    kod => interpretajca/komiplacja => inny kod
+```
+kod => interpretajca/komiplacja => inny kod
+```
 
 Kompilator to narzędzie, które przekształca kod napisany w języku programowania na kod binarny, który jest zrozumiały dla komputera. Kompilator zazwyczaj pracuje w momencie tworzenia programu i wytwarza wykonywalny plik, który może być uruchomiony przez komputer.
 
@@ -24,7 +28,9 @@ Oto kilka przykładów:
 
 C#:
 
-    kod źródłowy C#.NET ---> kompilator C#.NET ---> CIL (.exe/.dll) ---> kompilator JIT (just-in-time) ---> kod maszynowy
+```
+kod źródłowy C#.NET ---> kompilator C#.NET ---> CIL (.exe/.dll) ---> kompilator JIT (just-in-time) ---> kod maszynowy
+```
 
 1. Kod źródłowy C#.NET jest przetwarzany przez kompilator C#.NET do postaci CIL (Common Intermediate Language).
 1. Następnie CIL jest przetwarzany przez kompilator JIT na kod maszynowy.
@@ -32,7 +38,9 @@ C#:
 
 Przy kompilacji w języku C z Gcc przebieg procesu wygląda następująco:
 
-    kod źródłowy C ---> kompilator Gcc ---> kod wynikowy (na przykład plik wykonywalny lub biblioteka) -> linker -> program
+```
+kod źródłowy C ---> kompilator Gcc ---> kod wynikowy (na przykład plik wykonywalny lub biblioteka) -> linker -> program
+```
 
 1. Kod źródłowy C jest przetwarzany przez kompilator GCC do postaci kodu asemblera.
 1. Kod asemblera jest przetwarzany przez asembler do postaci kodu binarnego.
@@ -41,7 +49,9 @@ Przy kompilacji w języku C z Gcc przebieg procesu wygląda następująco:
 
 Natomiast proces interpretacji w Pythonie przebiega następująco:
 
-    kod źródłowy Python ---> interpreter Python ---> wynik działania kodu (np. wyświetlenie na ekranie lub zapisanie do pliku)
+```
+kod źródłowy Python ---> interpreter Python ---> wynik działania kodu (np. wyświetlenie na ekranie lub zapisanie do pliku)
+```
 
 1. Kod źródłowy Python jest interpretowany przez interpreter Python.
 1. Interpreter wykonuje kod w czasie rzeczywistym, odczytując go wiersz po wierszu.
@@ -57,29 +67,36 @@ Przykłady błędów syntaktycznych to:
 
 1. brak nawiasu zamykającego funkcji:
 
-        def funkcja(
-          print("Hello World!")
+```python
+def funkcja(
+    print("Hello World!")
+```
 
 2. brak dwukropka na końcu wyrażenia warunkowego:
 
-        x = 10
+```python
+x = 10
 
-        if x > 5
-          print("x jest większe od 5")
+if x > 5
+    print("x jest większe od 5")
+```
 
 Przykłady błędów semantycznych to:
 
 1. użycie nieistniejącej zmiennej:
 
-        x = 10
-        print(y) # NameError: name 'y' is not defined
-
+```python
+x = 10
+print(y) # NameError: name 'y' is not defined
+```
 
 2. niepoprawne użycie operatora:
 
-        a = "Hello"
-        b = "World"
-        c = a * b # TypeError: can't multiply sequence by non-int of type 'str'
+```python
+a = "Hello"
+b = "World"
+c = a * b # TypeError: can't multiply sequence by non-int of type 'str'
+```
 
 ## Typowanie
 
@@ -114,8 +131,10 @@ Type hints są dodatkiem do kodu, który pozwala na podanie typów zmiennych i a
 
 Przykład użycia type hints:
 
-    def greet(name: str) -> str:
-      return "Hello, " + name
+```python
+def greet(name: str) -> str:
+    return "Hello, " + name
+```
 
 W tym przykładzie podano, że argument `name` jest typu `str` oraz że funkcja również zwraca wartość typu `str`. Narzędzia takie jak Mypy mogą wykryć, kiedy do funkcji `greet()` zostanie przekazana wartość innego typu niż `str` i wyświetlić odopowiedni komunikat o błędzie.
 

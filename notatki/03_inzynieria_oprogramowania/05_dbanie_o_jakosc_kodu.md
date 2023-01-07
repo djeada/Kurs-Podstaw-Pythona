@@ -1,4 +1,3 @@
-
 ### Dbanie o jakość kodu i lintowanie
 
 Poprawny z punktu widzenia interpretera kod można napisać na wiele sposobów. Nawet jedna linia kodu może być zapisana na wiele sposobów. Jedną z przyczyn takiego stanu rzeczy są różnice w formatowaniu. Na przykład w kodzie do oddzielania instrukcji można użyć zarówno spacji, jak i tabów. Definicje funkcji można oddzielać jednym, dwoma lub trzema enterami. Linie kodu mogą być tak długie, że nie zmieszczą się na ekranie. Czy więc należy ograniczać ich długość? Jeśli tak, to ile znaków powinno być górną granicą? Dopóki z kodem pracujemy sami, wszystko wydaje się być w porządku, ale co jeśli ktoś inny będzie musiał czytać nasz kod? Co jeśli ktoś inny będzie musiał go modyfikować? Wtedy ważne staje się, by kod był czytelny i zrozumiały dla innych programistów. Z tych właśnie względów warto przestrzegać konwencji pisania kodu.
@@ -7,19 +6,27 @@ Narzędzia, takie jak <code>Pylint</code> i <code>Black</code> pomagają nam uni
 
 Aby użyć narzędzia <code>Pylint</code>, zainstaluj je za pomocą <code>PIP</code>:
 
-    pip install pylint
+```bash
+pip install pylint
+```
 
 Aby sprawdzić kod za pomocą <code>Pylint</code>, użyj polecenia:
 
-    pylint <nazwa_pliku.py>
+```bash
+pylint <nazwa_pliku.py>
+```
 
 Aby użyć narzędzia <code>Black</code>, zainstaluj je za pomocą <code>PIP</code>:
 
-    pip install black
+```bash
+pip install black
+```
 
 Aby użyć <code>Black</code> do sformatowania kodu w pliku o nazwie <code>nazwa_pliku.py</code>, użyj polecenia:
 
-    black nazwa_pliku.py
+```bash
+black nazwa_pliku.py
+```
 
 Black to narzędzie do automatycznej reformatowania kodu w celu dostosowania go do wytycznych PEP8. Nie pyta ono o zdanie programisty i zmienia formatowanie kodu bez możliwości konsultacji. Z tego względu Black jest narzędziem bardzo szybkim i prostym w użyciu. Jego główną wadą jest brak możliwości konfiguracji. Black nie pozwala na zmianę domyślnych ustawień ani na wyłączenie poszczególnych zasad formatowania.
 
@@ -35,7 +42,7 @@ Pylint to narzędzie do sprawdzania jakości kodu podobne do Flake8. Oprócz spr
 | wskazywanie zbyt złożonego kodu      |   ❌   |   👷‍♂️   |   ❌  |
 | dostępność pluginów    |   ❌   |   ❌   |   ✔️  | 
 
-Linki:
+#### Linki
 
 * https://www.python.org/dev/peps/pep-0008/
 * https://www.python.org/dev/peps/pep-0257/

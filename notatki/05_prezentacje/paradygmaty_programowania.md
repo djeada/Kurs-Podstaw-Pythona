@@ -9,20 +9,21 @@ Paradygmat imperatywny opiera się na sekwencji instrukcji, które modyfikują s
 * Proceduralny: oparty na koncepcji procedur i funkcji, pozwala na pogrupowanie kodu w funkcje.
 * Obiektowy: oparty na koncepcji klas i obiektów, pozwala na pogrupowanie kodu w klasy zbudowane z pól (określających stan) oraz metod (modyfikujących stan).
 
-        class Car:
-           def __init__(self, position, speed):
-               self.position = position
-               self.speed = speed
+```python
+class Car:
+    def __init__(self, position, speed):
+        self.position = position
+        self.speed = speed
 
-           def move(self, time):
-               self.position += self.speed * time
+    def move(self, time):
+        self.position += self.speed * time
 
-        car = Car(0, 10)
-        car.move(1)
-        print(car.position)  # 10
-        car.move(0.5)
-        print(car.position)  # 15
-
+car = Car(0, 10)
+car.move(1)
+print(car.position)  # 10
+car.move(0.5)
+print(car.position)  # 15
+```
 
 ## Paradygmat deklaratywny
 
@@ -31,23 +32,23 @@ Paradygmat deklaratywny polega na wskazaniu pożądanego stanu programu bez koni
 * Funkcyjny: kod składa się z funkcji, które są wzorowane na wyrażeniach matematycznych i nie modyfikują zewnętrznych danych.
 * Logiczny: kod składa się z zestawu zależności i obliczenia są dowodem pewnego twierdzenia na podstawie tych zależności.
 
+```python
+from functools import reduce
 
-        from functools import reduce
+def move(position, speed, time):
+  return position + speed * time
 
-        def move(position, speed, time):
-          return position + speed * time
+def get_positions(position, speed, time_list):
+  return list(map(lambda time: move(position, speed, time), time_list))
 
-        def get_positions(position, speed, time_list):
-          return list(map(lambda time: move(position, speed, time), time_list))
+def get_prefix_sums(lst):
+  return list(reduce(lambda x, y: x + [x[-1] + y], lst, [0]))
 
-        def get_prefix_sums(lst):
-          return list(reduce(lambda x, y: x + [x[-1] + y], lst, [0]))
+def get_path(position, speed, time_list):
+  return get_prefix_sums(get_positions(position, speed, time_list))[1:]
 
-        def get_path(position, speed, time_list):
-          return get_prefix_sums(get_positions(position, speed, time_list))[1:]
-
-        print(get_path(0, 10, [1, 0.5]))  # [10, 15]
-
+print(get_path(0, 10, [1, 0.5]))  # [10, 15]
+```
 
 ## Współczesne języki programowania
 
@@ -74,28 +75,31 @@ W programowaniu możemy mówić o dwóch rodzajach stanu: stateful i stateless. 
 
 Przykład funkcji trzymającej stan:
 
-    counter = 0
+```python
+counter = 0
 
-    def increment_counter():
-      global counter
-      counter += 1
+def increment_counter():
+  global counter
+  counter += 1
 
-    increment_counter()
-    print(counter)  # 1
-    increment_counter()
-    print(counter)  # 2
+increment_counter()
+print(counter)  # 1
+increment_counter()
+print(counter)  # 2
+```
 
 Przykład funkcji nie zapamiętującej stanu:
 
-    def increment_counter(counter):
-      return counter + 1
+```python
+def increment_counter(counter):
+  return counter + 1
 
-    counter = 0
-    counter = increment_counter(counter)
-    print(counter)  # 1
-    counter = increment_counter(counter)
-    print(counter)  # 2
-
+counter = 0
+counter = increment_counter(counter)
+print(counter)  # 1
+counter = increment_counter(counter)
+print(counter)  # 2
+```
 
 ## Zmienność danych
 
@@ -116,20 +120,23 @@ Przykłady niemutowalnych wartości:
 
 Po dodaniu elementu do listy (mutowalnej wartości), identyfikator obiektu pozostaje taki sam:
 
-    # mutowalna lista
-    numbers = [1, 2, 3]
-    print(id(numbers))  # wyświetla unikalny identyfikator obiektu
-    numbers.append(4)
-    print(id(numbers))  # ten sam identyfikator
+```python
+# mutowalna lista
+numbers = [1, 2, 3]
+print(id(numbers))  # wyświetla unikalny identyfikator obiektu
+numbers.append(4)
+print(id(numbers))  # ten sam identyfikator
+```
 
 Natomiast po zmianie wartości niemutowalnej liczby, identyfikator obiektu ulega zmianie:
 
-    # niemutowalna liczba
-    number = 1
-    print(id(number))  # wyświetla unikalny identyfikator obiektu
-    number += 1
-    print(id(number))  # inny identyfikator
-
+```python
+# niemutowalna liczba
+number = 1
+print(id(number))  # wyświetla unikalny identyfikator obiektu
+number += 1
+print(id(number))  # inny identyfikator
+```
 
 ## Czystość
 
@@ -139,41 +146,56 @@ Przykłady czystych funkcji:
 
 1. Funkcja zwracająca stałą wartość bez względu na jej argumenty:
 
-        def stala(x):
-            return 5
+```python
+def stala(x):
+    return 5
+```
 
-1. Funkcja zwracająca wartość zależną tylko od jednego z argumentów:
+2. Funkcja zwracająca wartość zależną tylko od jednego z argumentów:
 
-        def identity(x, y):
-            return x
+```python
+def identity(x, y):
+    return x
+```
 
-1. Funkcja zwracająca sumę dwóch argumentów:
+3. Funkcja zwracająca sumę dwóch argumentów:
 
-        def suma(x, y):
-            return x + y
+```python
+def suma(x, y):
+    return x + y
+```
 
 Przykłady nieczystych funkcji:
 
 1. Funkcja zmieniająca wartość zmiennej globalnej:
 
-        licznik = 0
-        def dodaj_do_licznika(x):
-            global licznik
-            licznik += x
-            return licznik
+```python
+licznik = 0
+def dodaj_do_licznika(x):
+    global licznik
+    licznik += x
+    return licznik
+```
 
 2. Funkcja modyfikująca elementy listy przekazanej jako argument:
-
-        def modyfikuj_liste(lst):
-            lst[0] = 5
-            return lst
+def zapisz_do_pliku(dane, nazwa_pliku):
+    with open(nazwa_pliku, "w") as f:
+        f.write(dane)
+    return nazwa_pliku
+```python
+def modyfikuj_liste(lst):
+    lst[0] = 5
+    return lst
+```
 
 3. Funkcja zapisująca dane do pliku:
 
-        def zapisz_do_pliku(dane, nazwa_pliku):
-            with open(nazwa_pliku, "w") as f:
-                f.write(dane)
-            return nazwa_pliku
+```python
+def zapisz_do_pliku(dane, nazwa_pliku):
+    with open(nazwa_pliku, "w") as f:
+        f.write(dane)
+    return nazwa_pliku
+```
 
 ## Literatura
 

@@ -14,23 +14,27 @@ Biblioteka ta została zbudowana zgodnie z filozofią programowania obiektowego,
 
 Przykład kodu z użyciem unittest:
 
-    import unittest
-    
-    class TestSMTP(unittest.TestCase):
-      
-      def smtp_connection(self):
-        import smtplib
-        return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+```python
+import unittest
 
-     def test_helo(self):
-        response_code, msg = self.smtp_connection().ehlo()
-        self.assertEqual(response_code, 250)
+class TestSMTP(unittest.TestCase):
+    
+    def smtp_connection(self):
+    import smtplib
+    return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+
+    def test_helo(self):
+    response_code, msg = self.smtp_connection().ehlo()
+    self.assertEqual(response_code, 250)
+```
 
 W powyższym przykładzie tworzymy klasę TestSMTP, która dziedziczy po klasie TestCase z biblioteki unittest. W tej klasie zdefiniowaliśmy funkcję smtp_connection, która tworzy połączenie z serwerem SMTP, oraz funkcję test_helo, która wywołuje metodę ehlo na połączeniu SMTP i sprawdza, czy otrzymano oczekiwany kod odpowiedzi (250).
 
 Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
 
-    python -m unittest
+```
+python -m unittest
+```
 
 #### Pytest
 
@@ -38,16 +42,18 @@ Pytest to również biblioteka służąca do tworzenia i uruchamiania testów je
 
 Przykład kodu z użyciem pytest:
 
-    import pytest
-    
-    @pytest.fixture
-    def smtp_connection():
-       import smtplib
-       return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
-    
-    def test_helo(smtp_connection):
-       response_code, msg = smtp_connection.ehlo()
-       assert response_code == 250
+```python
+import pytest
+
+@pytest.fixture
+def smtp_connection():
+    import smtplib
+    return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+
+def test_helo(smtp_connection):
+    response_code, msg = smtp_connection.ehlo()
+    assert response_code == 250
+```
 
 Test składa się z dwóch części: dekoratora <code>@pytest.fixture</code> oraz funkcji testowej <code>test_helo()</code>.
 
@@ -57,7 +63,9 @@ Natomiast funkcja testowa <code>test_helo()</code> jest testem jednostkowym. Fun
 
 Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
 
-    pytest
+```
+pytest
+```
 
 #### Korzyści z testów jednostkowych
 
@@ -80,18 +88,20 @@ Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopó
 
 Załóżmy, że masz własną implementację jednego z algorytmów sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
 
-    import pytest
+```python
+import pytest
+
+def test_wlasne_sortowanie():
+    lista_a  = [1, 1, 1]
+    lista_b = [3, 5, 2]
+    lista_c = [-1, 2, 3, -1, 0]
+    # import random
+    # lista_d = [random.randint(-10, 10) for _ in range(5)] # ZLE
     
-    def test_wlasne_sortowanie():
-       lista_a  = [1, 1, 1]
-       lista_b = [3, 5, 2]
-       lista_c = [-1, 2, 3, -1, 0]
-       # import random
-       # lista_d = [random.randint(-10, 10) for _ in range(5)] # ZLE
-       
-       assert wlasne_sortowanie(lista_a) == sorted(lista_a)
-       assert wlasne_sortowanie(lista_b) == sorted(lista_b)
-       assert wlasne_sortowanie(lista_c) == sorted(lista_c)
+    assert wlasne_sortowanie(lista_a) == sorted(lista_a)
+    assert wlasne_sortowanie(lista_b) == sorted(lista_b)
+    assert wlasne_sortowanie(lista_c) == sorted(lista_c)
+```
 
 Powyższy fragment kodu zawiera przykład użycia pytest do testowania funkcji <code>wlasne_sortowanie</code>. W tym przypadku, trzy listy są tworzone jako dane wejściowe: <code>lista_a</code>, <code>lista_b</code> i <code>lista_c</code>. Następnie są one porównywane z oczekiwanymi wynikami po wywołaniu funkcji <code>sorted()</code> na tych samych danych wejściowych za pomocą polecenia <code>assert</code>. Jeśli wynik zwrócony przez <code>wlasne_sortowanie()</code> jest różny od oczekiwanego wyniku, zostanie wygenerowany błąd, który poinformuje o niepowodzeniu testu.
 
@@ -130,15 +140,17 @@ Aby zachować porządek w projekcie, warto rozdzielić kod produkcyjny i testy j
 
 Przykładowo, struktura projektu może wyglądać następująco:
 
-    projekt
-    ├── przykladowy_pakiet
-    │   ├── __init__.py
-    │   └── modul_a.py
-    │   └── modul_b.py
-    └── tests
-        ├── __init__.py
-        └── test_modul_a.py
-        └── test_modul_b.py
+```bash
+projekt
+├── przykladowy_pakiet
+│   ├── __init__.py
+│   └── modul_a.py
+│   └── modul_b.py
+└── tests
+    ├── __init__.py
+    └── test_modul_a.py
+    └── test_modul_b.py
+```
 
 W ten sposób z jednej strony ograniczymy wielkość plików z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
 

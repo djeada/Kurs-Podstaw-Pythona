@@ -5,11 +5,15 @@ Jeśli chcesz udostępnić swoją aplikację innym osobom, prawdopodobnie będzi
 
 Aby użyć PyInstaller, należy zainstalować go za pomocą pip:
 
-    pip install pyinstaller
+```
+pip install pyinstaller
+```
 
 Następnie możesz wygenerować plik wykonywalny za pomocą polecenia:
 
-    pyinstaller nazwa_pliku.py
+```
+pyinstaller nazwa_pliku.py
+```
 
 Po wykonaniu polecenia zostanie utworzony folder dist, w którym znajdziesz plik wykonywalny o nazwie nazwa_pliku.exe. Możesz go umieścić w dowolnym miejscu na dysku i uruchomić.
 

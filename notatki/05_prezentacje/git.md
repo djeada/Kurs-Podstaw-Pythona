@@ -9,7 +9,9 @@
 
 Aby zainstalować Git, należy pobrać instalator z oficjalnej strony https://git-scm.com/downloads i przejść przez proces instalacji. W systemie Linux dla wersji opartych na Debianie, można użyć polecenia:
 
-    sudo apt install git
+```bash
+sudo apt install git
+```
 
 ## GitHub
 
@@ -36,8 +38,8 @@ Istnieją trzy typy obiektów w Git:
 
 Przykłady komend, które pozwalają na manipulowanie obiektami i repozytorium to:
 
-    git cat-file -p <object name> - wyświetla informacje o danym obiekcie.
-    git rev-list --objects --all - wyświetla listę wszystkich obiektów w repozytorium.
+* `git cat-file -p <object name>` - wyświetla informacje o danym obiekcie.
+* `git rev-list --objects --all` - wyświetla listę wszystkich obiektów w repozytorium.
 
 ## Tworzenie repozytorium
 
@@ -47,12 +49,16 @@ Aby utworzyć nowe repozytorium, zaleca się skorzystanie z serwisu GitHub lub i
 
 * Aby sklonować istniejące repozytorium na swój komputer, należy użyć komendy:
 
-      git clone link_do_repozytorium
+```bash
+git clone link_do_repozytorium
+```
 
 * Istnieje też opcja utworzenia repozytorium lokalnie, przy pomocy komendy:
 
-      git init
-    
+```bash
+git init
+```
+
 ## Proces pracy z Gitem
 
 Git umożliwia wprowadzanie zmian w plikach w lokalnej wersji repozytorium, dodawanie tych zmienionych plików do składu plików oczekujących na zatwierdzenie (zwanego "staging area") oraz zatwierdzanie tych zmian za pomocą commitów. Proces pracy z Gitem można przedstawić w następujący sposób:
@@ -64,10 +70,12 @@ Git umożliwia wprowadzanie zmian w plikach w lokalnej wersji repozytorium, doda
 
 Przykład:
 
-      cat "Hello" > example.txt
-      git add example.txt
-      git commit -m "przykladowa informacja"
-      git log
+```bash
+cat "Hello" > example.txt
+git add example.txt
+git commit -m "przykladowa informacja"
+git log
+```
 
 ## Zatwierdzanie zmian
 
@@ -87,12 +95,14 @@ Git umożliwia tworzenie nowych gałęzi, które są oddzielnymi ścieżkami roz
 
 Przykład:
 
-      git checkout -b nowa_galaz
-      git branch
-      git touch temp.md
-      git commit -am "proba"
-      git checkout master
-      git merge nowa_galaz
+```bash
+git checkout -b nowa_galaz
+git branch
+git touch temp.md
+git commit -am "proba"
+git checkout master
+git merge nowa_galaz
+```
 
 ## Konflikty
 
@@ -100,11 +110,13 @@ Konflikty w Git występują, gdy dwa różne gałęzie zostały zmodyfikowane w 
 
 Jeśli próba połączenia gałęzi zakończy się konfliktem, plik zawierający konflikt zostanie zmodyfikowany i będzie zawierał sekcje wydzielone strzałkami `<<<<<<<`, `=======`, `>>>>>>>`. Te sekcje oznaczają, gdzie zaczyna się i kończy konflikt, oraz które zmiany pochodzą z jakiej gałęzi. Aby rozwiązać konflikt, należy usunąć strzałki i wybrać odpowiednią wersję zmian, która ma zostać zachowana.
 
-      <<<<<<< HEAD:temp.md
-      wiadomosc a zmieniona w b
-      =======
-      wiadomosc a zmieniona w c
-      >>>>>>> nowa_galaz:temp.md
+```bash
+<<<<<<< HEAD:temp.md
+wiadomosc a zmieniona w b
+=======
+wiadomosc a zmieniona w c
+>>>>>>> nowa_galaz:temp.md
+```
 
 • Znajdź te sekcje, usuń strzałki i wybierz odpowiednią wersję zmian.
 
@@ -114,11 +126,13 @@ Jeśli próba połączenia gałęzi zakończy się konfliktem, plik zawierający
 * Aby pobrać zmiany z serwera, można użyć komendy `git pull`. 
 * W obu przypadkach należy podać nazwę serwera oraz nazwę gałęzi, z której lub do której mają zostać przesłane/pobrane zmiany.
 
-      git pull origin master
-      cat "Hello" > example.txt
-      git add example.txt
-      git commit -m "przykladowa informacja"
-      git push origin master
+```bash
+git pull origin master
+cat "Hello" > example.txt
+git add example.txt
+git commit -m "przykladowa informacja"
+git push origin master
+```
 
 ## Ważne komendy
 

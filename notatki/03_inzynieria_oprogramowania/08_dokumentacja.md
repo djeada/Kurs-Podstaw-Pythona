@@ -5,13 +5,17 @@ Dokumentacja to ważny element każdego projektu, służący do opisania działa
 
 Aby zbudować szkielet dokumentacji, wystarczy uruchomić komendę:
 
-    quickstart
+```
+quickstart
+```
 
 SPHINX zapyta cię o kilka szczegółów dotyczących projektu, na podstawie których wygeneruje odpowiednie pliki startowe i wypełni je treścią.
 
 Aby utworzyć dokumentację z plików konfiguracyjnych, użyj komendy:
 
-    make html
+```
+make html
+```
 
 Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu nie pojawią się żadne błędy. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach.
 
@@ -54,11 +58,13 @@ Aby skorzystać z tej funkcjonalności, należy zainstalować rozszerzenie <code
 
 To polecenie utworzy plik <code>api.rst</code> z automatycznie wygenerowaną dokumentacją. Następnie należy dodać go do pliku <code>index.rst</code>, aby pojawił się w głównym menu dokumentacji.
 
-    .. toctree::
-       :maxdepth: 2
-       :caption: Spis treści:
+```rst
+.. toctree::
+    :maxdepth: 2
+    :caption: Spis treści:
 
-       api
+    api
+```
 
 Po uruchomieniu polecenia <code>make html</code> będzie można zobaczyć wygenerowaną dokumentację na stronie internetowej.
 

@@ -41,9 +41,11 @@ Aby przetestować funkcję `znajdz_klucz(lista, klucz)` możemy napisać następ
 
 Przykłady testów:
 
-    def test_find_key():
-      assert find_key([1,2,3,4,5], 3) == 2
-      assert find_key([1,2,3,4,5], 6) == -1
+```python
+def test_find_key():
+    assert find_key([1,2,3,4,5], 3) == 2
+    assert find_key([1,2,3,4,5], 6) == -1
+```
 
 ## Pokrycie kodu produkcyjnego (code coverage)
 
@@ -51,12 +53,14 @@ Pokrycie kodu produkcyjnego to miernik tego, jaki procent kodu został wykonany 
 
 Przykład:
 
-    #1# def fun(a, b):
-    #2# a += 1
-    #3# b += 2
-    #4# if a + b > 22:
-    #5# a += 1
-    #6# return a + b
+```
+#1# def fun(a, b):
+#2#   a += 1
+#3#   b += 2
+#4#   if a + b > 22:
+#5#   a += 1
+#6#   return a + b
+```
 
 Jeśli testujemy `fun(a,b)` z danymi wejściowymi, które sprawiają, że warunek w linii `#4#` nie jest spełniony, pokrycie kodu nie będzie wynosić 100%. Jeśli dodamy testy z danymi wejściowymi, które sprawiają, że warunek jest spełniony, pokrycie kodu wzrośnie i zbliży się do 100%.
 

@@ -18,62 +18,90 @@ Lista jest strukturą danych służącą do przechowywania kilku wartości pod j
 
 Przykład listy złożonej z kilku liczb całkowitych:
 
-    lista = [3, 2, 3, 9, 10]
-    
+```python
+lista = [3, 2, 3, 9, 10]
+```
+
 Elementy listy nie muszą być tego samego typu:
 
-    lista = ['a', True, 0.3]
+```python
+lista = ['a', True, 0.3]
+```
 
 Aby poznać liczbę elementów listy, należy użyć funkcji `len`:
 
-    n = len(lista)
-       
+```python
+n = len(lista)
+```
+   
 Aby dodać element a na końcu listy, użyj metody `append`:
 
-    lista.append(a)
+```python
+lista.append(a)
+```
 
 Aby dodać wszystkie elementy z listy lista2 na końcu listy lista1, użyj metody `extend`:
 
-    lista1.extend(lista2)
+```python
+lista1.extend(lista2)
+```
 
 Aby wstawić element a na pozycję i, użyj metody `insert`:
 
-    lista.insert(i,a)
+```python
+lista.insert(i,a)
+```
 
 Aby usunąć pierwsze wystąpienie elementu a z listy, użyj metody `remove`:
 
-    lista.remove(a)
+```python
+lista.remove(a)
+```
 
 Aby usunąć element z listy znajdujący się na pozycji i oraz zwrócić go jako wynik, użyj metody `pop`:
 
-    element = lista.pop([i])
+```python
+element = lista.pop([i])
+```
 
 Aby znaleźć liczbę wystąpień elementu a w liście, użyj metody `count`:
 
-    licznik = lista.count(a)
+```python
+licznik = lista.count(a)
+```
 
 Aby posortować listę, użyj metody `sort`:
 
-    lista.sort()
+```python
+lista.sort()
+```
 
 Aby odwrócić kolejność elementów w liście, użyj metody `reverse`:
 
-    lista.reverse()
+```python
+lista.reverse()
+```
 
 Aby przy pomocy pętli przejść przez elementy listy, użyj słowa kluczowego `for`:
 
-    for element in lista: 
-        print(element)
-        
+```python
+for element in lista: 
+    print(element)
+```  
+
 Aby otrzymać element i indeks, użyj funkcji `enumerate`:
 
-     for indeks, element in enumerate(lista): 
-        print(f'{indeks}: {element}')
+```python
+for indeks, element in enumerate(lista): 
+    print(f'{indeks}: {element}')
+```
 
 Aby przy pomocy pętli przejść przez elementy dwóch list równej długości, użyj funckji `zip`:
 
-     for elem_a, elem_b in zip(lista_a, lista_b): 
-        print(f'element a: {elem_a}; element b: {elem_b}')
+```python
+for elem_a, elem_b in zip(lista_a, lista_b): 
+    print(f'element a: {elem_a}; element b: {elem_b}')
+```
 
 #### Krotka
 
@@ -85,34 +113,48 @@ Krotek zamiast list, używamy gdy:
 
 Przykład krotki składającej się z kilku liczb całkowitych:
 
-    krotka = (3, 2, 3, 9, 10)
+```python
+krotka = (3, 2, 3, 9, 10)
+```
 
 Elementy krotki nie muszą być tego samego typu:
 
-    krotka = ('a', True, 0.3)
+```python
+krotka = ('a', True, 0.3)
+```
 
 Aby rozpakować krotkę składającą się z trzech elementów i zapisać je w trzech zmiennych, użyj:
 
-    a, b, c = krotka
+```python
+a, b, c = krotka
+```
 
 Aby znaleźć liczbę elementów krotki, użyj:
 
-    len(krotka)
+```python
+len(krotka)
+```
 
 Aby przy pomocy pętli przejść przez elementy krotki, użyj:
 
-    for element in krotka: 
-        print(element)
+```python
+for element in krotka: 
+    print(element)
+```
 
 Aby otrzymać element i indeks, użyj funkcji `enumerate`:
 
-    for indeks, element in enumerate(krotka): 
-        print(f'{indeks}: {element}')
+```python
+for indeks, element in enumerate(krotka): 
+    print(f'{indeks}: {element}')
+```
 
 Aby przy pomocy pętli przejść przez elementy dwóch krotek równej długości, użyj funckji `zip`:
 
-    for elem_a, elem_b in zip(krotka_a, krotka_b): 
-        print(f'element a: {elem_a}; element b: {elem_b}')
+```python
+for elem_a, elem_b in zip(krotka_a, krotka_b): 
+    print(f'element a: {elem_a}; element b: {elem_b}')
+```
 
 #### Zbiór
 
@@ -120,63 +162,93 @@ Zbiór (ang. set) to nieuporządkowana kolekcja unikalnych elementów. Zbiory s�
 
 Aby utworzyć pusty zbiór, użyj:
 
-    zbior = set()
+```python
+zbior = set()
+```
 
 Aby utworzyć zbiór z elementów podanych jako argumenty, użyj:
 
-    zbior = set([element1, element2, element3])
+```python
+zbior = set([element1, element2, element3])
+```
 
 Aby utworzyć zbiór z elementów występujących w iterowalnym obiekcie (np. liście), użyj:
 
-    zbior = set(iterowalny_obiekt)
+```python
+zbior = set(iterowalny_obiekt)
+```
 
 Aby sprawdzić, czy element jest w zbiorze, użyj:
 
-    element in zbior
+```python
+element in zbior
+```
 
 Aby dodać element do zbioru, użyj:
 
-    zbior.add(element)
+```python
+zbior.add(element)
+```
 
 Aby usunąć element ze zbioru, użyj:
 
-    zbior.remove(element)
+```python
+zbior.remove(element)
+```
 
 Aby usunąć element ze zbioru, jeśli istnieje, bez generowania błędu, użyj:
 
-    zbior.discard(element)
+```python
+zbior.discard(element)
+```
 
 Aby usunąć losowy element ze zbioru, użyj:
 
-    zbior.pop()
+```python
+zbior.pop()
+```
 
 Aby usunąć wszystkie elementy ze zbioru, użyj:
 
-    zbior.clear()
+```python
+zbior.clear()
+```
 
 Aby znaleźć liczbę elementów w zbiorze, użyj:
 
-    len(zbior)
+```python
+len(zbior)
+```
 
 Aby złączyć zbiory, użyj operatora `|`:
 
-    zbior1 | zbior2
+```python
+zbior1 | zbior2
+```
 
 Aby wyświetlić elementy wspólne dla dwóch zbiorów, użyj operatora `&`:
 
-    zbior1 & zbior2
+```python
+zbior1 & zbior2
+```
 
 Aby wyświetlić elementy występujące w jednym zbiorze, ale nie w drugim, użyj operatora `^`:
 
-    zbior1 ^ zbior2
+```python
+zbior1 ^ zbior2
+```
 
 Aby wyświetlić elementy z pierwszego zbioru, ale nie z drugiego, użyj operatora `-`:
 
-    zbior1 - zbior2
+```python
+zbior1 - zbior2
+```
 
 Aby sprawdzić, czy zbiór jest podzbiorem innego zbioru, użyj operatora `<=`:
 
-    zbior1 <= zbior2
+```python
+zbior1 <= zbior2
+```
 
 #### Słownik
 Słownik używamy, gdy chcemy mieć kilka wartości dostępnych pod różnymi nazwami (kluczami). Słownik jest nieuporządkowany i indeksowany.
@@ -204,43 +276,63 @@ Przykłady niepoprawnych kluczy:
 
 Przykład słownika zawierającego kilka par klucz-wartość:
 
-    slownik = {'klucz1': 3, 'klucz2': 2, 'klucz3': 3}
+```python
+slownik = {'klucz1': 3, 'klucz2': 2, 'klucz3': 3}
+```
 
 Elementy słownika nie muszą być tego samego typu:
 
-    slownik = {'klucz1': 'a', 'klucz2': True, 'klucz3': 0.3}
+```python
+slownik = {'klucz1': 'a', 'klucz2': True, 'klucz3': 0.3}
+```
 
 Aby znaleźć liczbę elementów słownika, użyj:
 
-    len(slownik)
+```python
+len(slownik)
+```
 
 Aby dodać element a pod kluczem 'klucz4', użyj:
 
-    slownik['klucz4'] = a
+```python
+slownik['klucz4'] = a
+```
 
 Aby zmienić wartość pod kluczem 'klucz4', użyj:
 
-    slownik['klucz4'] = nowa_wartosc
+```python
+slownik['klucz4'] = nowa_wartosc
+```
 
 Aby usunąć element pod kluczem 'klucz4', użyj:
 
-    del slownik['klucz4']
+```python
+del slownik['klucz4']
+```
 
 Aby sprawdzić czy klucz 'klucz4' istnieje w słowniku, użyj:
 
-    'klucz4' in slownik
+```python
+'klucz4' in slownik
+```
 
 Aby przy pomocy pętli przejść przez elementy słownika, użyj:
 
-    for klucz, wartosc in slownik.items(): 
-        print(f'{klucz}: {wartosc}')
+```python
+for klucz, wartosc in slownik.items(): 
+    print(f'{klucz}: {wartosc}')
+```
     
 Aby przy pomocy pętli przejść tylko przez klucze słownika, użyj:
 
-    for klucz in slownik: 
-        print(klucz)
+```python
+for klucz in slownik: 
+    print(klucz)
+```
 
 Aby przy pomocy pętli przejść tylko przez wartości słownika, użyj:
 
-    for wartosc in slownik.values(): 
-        print(wartosc)
+```python
+for wartosc in slownik.values(): 
+    print(wartosc)
+```
