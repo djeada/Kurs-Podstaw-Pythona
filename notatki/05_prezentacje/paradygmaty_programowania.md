@@ -69,6 +69,24 @@ Elementy charakterystyczne dla programowania funkcyjnego:
 
 Oczywiście powyższe elementy to tylko wybrane przykłady i nie wyczerpują wszystkich elementów charakterystycznych dla programowania obiektowego i funkcyjnego w Pythonie. W rzeczywistości Python jest językiem hybrydowym,
 
+## Ewolucja OOP
+
+* Enkapsulacja to praktyka polegająca na łączeniu danych i zachowań w jednym bycie, np. w klasie, oraz na ograniczaniu dostępu do nich przez elementy zewnętrzne. Abstrakcja odnosi się do redukcji złożonych systemów do prostszych części, ukrywając szczegóły, które nie są potrzebne klientom. Polimorfizm natomiast oznacza zdolność bytów do zmiany zachowania w zależności od kontekstu, w którym są używane.
+
+* Klasy są wygodne, o ile posiadają prosty interfejs i nie są zbyt mocno zależne od innych klas, aby uniknąć tworzenia złożonych hierarchii klas, które mogą prowadzić do problemu "spaghetti code".
+
+* Tablice haszujące i wektory świetnie sprawdzają się w programowaniu obiektowym, ponieważ są to właściwe obiekty z określonym zestawem przypisanych im zachowań. Jednakże jest raczej szczególny przypadek, niż powszechne zjawisko.
+
+* Klasowe podejście OOP może prowadzić do nadmiernej złożoności, trudności w utrzymaniu kodu i skalowaniu aplikacji. Poleganie na dziedziczeniu prowadzi do głębokich hierarchii klas i silnego powiązania między nimi, co uniemożliwia modyfikację jednej klasy bez wpływu na inne.
+
+* Alternatywą dla klasycznej implementacji fundamentów OOP może być wykorzystanie technik programowania funkcyjnego, takich jak closure, aby osiągnąć enkapsulację, lub protokołów i interfejsów do osiągnięcia polimorfizmu.
+
+* W Rust i Go, enkapsulacja odbywa się na poziomie modułu, a metody i pola są widoczne tylko w obrębie tego samego modułu. Enkapsulacja na poziomie modułu nie przeczy głównyn założeniom OOP. 
+
+* W Rust i Go zamiast klas i dziedziczenia, mamy struktury, które podobnie jak klasy enkapsulują dane i zachowania. Jednakże, struktury powinny być prostymi typami danych i nie ma możliwości tworzenia złożonych hierarchii.
+
+* Większość modułów w standardowej bibliotece Rust zwykle zawiera tylko jeden lub dwa silnie powiązane typy. Ta reguła zgodna jest z modułowym podejściem, w którym każdy moduł ma określony cel i jest odpowiedzialny za mały zestaw powiązanych funkcjonalności. Ten zabieg zwiększa czytelność kodu i zmniejsza ryzyko wystąpienia błędów i bugów.
+
 ## Stan
 
 W programowaniu możemy mówić o dwóch rodzajach stanu: stateful i stateless. Stateful oznacza, że program zachowuje swój stan po wykonaniu określonej operacji i może go odczytać w późniejszym czasie. Stateless oznacza, że program nie zapamiętuje stanu po wykonaniu operacji i każde jej wywołanie traktowane jest jako odrębne zdarzenie.
