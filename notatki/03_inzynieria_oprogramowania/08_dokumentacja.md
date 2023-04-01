@@ -25,28 +25,36 @@ Plikiem startowym dokumentacji jest `index.rst`. Zapisany jest on w formacie `re
 
 #### Jak pisać dobrą dokumentację?
 
-1. Zacznij od tutoriali.
-  - Pokaż użytkownikowi jak zainstalować oraz uruchomić twoją aplikację.
-  - Przygotuj scenariusze użycia programu.
-  - Zaprezentuj, do czego służy każdy z elementów graficznych.
-  - Tutoriale to nie to samo co dokumentacja, ale dobrze przygotowane poradniki pozwolą ci zebrać wiele informacji, które później możesz przetworzyć na dokumentację.
-2. Korzystaj z narzędzi automatyzujących pracę.
-  - Sphinx pozwala na tworzenie dokumentacji w różnych formatach.
-  - Jeśli używasz języka Python, skorzystaj z modułu <code>docstrings</code>, który umożliwia tworzenie dokumentacji bezpośrednio w plikach źródłowych.
-3. Pamiętaj o aktualności dokumentacji.
-  - Utrzymuj dokumentację w równowadze z aktualną wersją aplikacji.
-  - W razie zmian w kodzie, pamiętaj o odpowiednim zaktualizowaniu dokumentacji.
-4. Staraj się być zrozumiały.
-  - Unikaj skomplikowanych zwrotów i nieznanych szerzej pojęć.
-  - Jeśli masz taką możliwość, dodaj przykłady użycia.
-5. Dopracuj szczegóły.
-  - Zadbaj o poprawność gramatyczną i ortograficzną.
-  - Dodaj linki do dokumentacji zewnętrznych bibliotek, jeśli korzystasz z nich w swoim projekcie.
-6. Utrzymuj porządek.
-  - Dokumentacja powinna być czytelna i przejrzysta.
-  - Dziel informacje na krótkie rozdziały i sekcje.
-7. Zachęcaj do zgłaszania błędów i propozycji ulepszeń.
-  - Jeśli użytkownicy znajdą błędy lub będą mieć propozycje ulepszeń, chętnie przyjmij ich uwagi.
+# Wskazówki dotyczące tworzenia dokumentacji
+
+1. **Zacznij od tutoriali**
+   - Pokaż użytkownikowi jak zainstalować oraz uruchomić twoją aplikację.
+   - Przygotuj scenariusze użycia programu.
+   - Zaprezentuj, do czego służy każdy z elementów graficznych.
+   - Tutoriale to nie to samo co dokumentacja, ale dobrze przygotowane poradniki pozwolą ci zebrać wiele informacji, które później możesz przetworzyć na dokumentację.
+
+2. **Korzystaj z narzędzi automatyzujących pracę**
+   - Sphinx pozwala na tworzenie dokumentacji w różnych formatach.
+   - Jeśli używasz języka Python, używaj `docstrings`, czyli umieszczaj dokumentacje kodu bezpośrednio w plikach źródłowych.
+
+3. **Pamiętaj o aktualności dokumentacji**
+   - Utrzymuj dokumentację w równowadze z aktualną wersją aplikacji.
+   - W razie zmian w kodzie, pamiętaj o odpowiednim zaktualizowaniu dokumentacji.
+
+4. **Staraj się być zrozumiały**
+   - Unikaj skomplikowanych zwrotów i nieznanych szerzej pojęć.
+   - Jeśli masz taką możliwość, dodaj przykłady użycia konkretnych funkcji.
+
+5. **Dopracuj szczegóły**
+   - Zadbaj o poprawność gramatyczną i ortograficzną.
+   - Dodaj linki do dokumentacji zewnętrznych bibliotek, jeśli korzystasz z nich w swoim projekcie.
+
+6. **Utrzymuj porządek**
+   - Dokumentacja powinna być czytelna i przejrzysta.
+   - Dziel informacje na krótkie rozdziały i sekcje.
+
+7. **Zachęcaj do zgłaszania błędów i propozycji ulepszeń**
+   - Jeśli użytkownicy znajdą błędy lub będą mieć propozycje ulepszeń, chętnie przyjmij ich uwagi.
 
 #### Automatyczne generowanie dokumentacji do API
 
