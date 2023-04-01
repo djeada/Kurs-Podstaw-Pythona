@@ -1,5 +1,5 @@
 
-### Dokumentacja
+## Dokumentacja
 
 Dokumentacja to ważny element każdego projektu, służący do opisania działania aplikacji oraz jej funkcjonalności. Narzędziem służącym do tworzenia dokumentacji w Pythonie jest SPHINX. Pozwala on na tworzenie dokumentacji w różnych formatach, takich jak HTML, LaTeX, epub, czy zwykły tekst. Możliwe jest również przekształcenie pliku w formacie LaTeX do PDF.
 
@@ -19,11 +19,11 @@ make html
 
 Program poinformuje cię o pomyślnym utworzeniu dokumentacji, jeśli w trakcie procesu nie pojawią się żadne błędy. W przeciwnym razie proces tworzenia dokumentacji zostanie przerwany, a na konsoli zostaną wyświetlone komunikaty o błędach.
 
-#### reStructuredText
+### reStructuredText
 
 Plikiem startowym dokumentacji jest `index.rst`. Zapisany jest on w formacie `reStructuredText`, który jest rozszerzeniem języka markdown. Jego głównym atutem jest możliwość instalowania przydatnych pluginów. Linkowanie plików jest również uproszczone, co jest ważne w dokumentacji. Komenda `make html` generuje na podstawie plików z rozszerzeniem `.rst` odpowiadające im pliki html.
 
-#### Jak pisać dobrą dokumentację?
+### Jak pisać dobrą dokumentację?
 
 # Wskazówki dotyczące tworzenia dokumentacji
 
@@ -56,7 +56,7 @@ Plikiem startowym dokumentacji jest `index.rst`. Zapisany jest on w formacie `re
 7. **Zachęcaj do zgłaszania błędów i propozycji ulepszeń**
    - Jeśli użytkownicy znajdą błędy lub będą mieć propozycje ulepszeń, chętnie przyjmij ich uwagi.
 
-#### Automatyczne generowanie dokumentacji do API
+### Automatyczne generowanie dokumentacji do API
 
 Jeśli tworzysz aplikację z interfejsem API, warto zadbać o automatyczne generowanie dokumentacji, która będzie zawierała wszystkie dostępne endpointy, opis ich działania, a także informacje o przyjmowanych i zwracanych parametrach. W Pythonie jednym z popularnych narzędzi do tego celu jest <a href="https://www.sphinx-doc.org/en/master/">Sphinx</a>.
 
@@ -76,6 +76,6 @@ To polecenie utworzy plik <code>api.rst</code> z automatycznie wygenerowaną dok
 
 Po uruchomieniu polecenia <code>make html</code> będzie można zobaczyć wygenerowaną dokumentację na stronie internetowej.
 
-#### Linki
+### Linki
 
 * https://developers.google.com/style

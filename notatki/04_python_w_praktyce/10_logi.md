@@ -1,5 +1,5 @@
 
-### Logi
+## Logi
 
 Większość programów, które tworzyliśmy w obrębie tego kursu, była jednorazowo uruchamiana i od razu zamykana. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi, wraz z ewentualnymi komunikatami o błędach. Takie informacje, zwane logami, są często zapisywane do osobnego pliku.
 

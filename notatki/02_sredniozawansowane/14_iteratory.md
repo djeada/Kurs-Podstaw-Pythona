@@ -1,5 +1,5 @@
 
-### Iteratory
+## Iteratory
 
 Pętla `for` jest narzędziem, które umożliwia przejście przez kolejne elementy sekwencji, takiej jak lista, ciąg znaków lub tuple. Możemy użyć pętli `for` w następujący sposób:
 

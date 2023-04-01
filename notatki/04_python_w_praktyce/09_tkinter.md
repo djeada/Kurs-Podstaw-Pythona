@@ -1,4 +1,4 @@
-### Tkinter
+## Tkinter
 Tkinter jest modułem biblioteki standardowej, który służy do tworzenia interfejsów graficznych (GUI). Możemy z niego korzystać, aby tworzyć proste aplikacje okienkowe.
 
 Tworzenie okna głównego za pomocą Tkinter wygląda następująco:
@@ -57,7 +57,7 @@ przycisk3.grid(row=0, column=2)
 root.mainloop()
 ```
 
-#### Zdarzenia
+### Zdarzenia
 
 mamy możliwość obsługi zdarzeń za pomocą metody `bind()`. Zdarzenia mogą być generowane przez użytkownika lub system. Do najczęściej używanych zdarzeń należą:
 

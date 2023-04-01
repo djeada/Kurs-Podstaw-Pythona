@@ -1,5 +1,5 @@
 
-### Wątki
+## Wątki
 Wątki, pozwalają na równoległe wykonywanie się kilku fragmentów kodu. Z tego powodu są szczególnie przydatne do obsługi zadań, które mogą zająć dużo czasu, np. łączenie się z zewnętrznym serwerem lub wczytywanie dużych plików. W ten sposób nie musimy czekać na zakończenie danego zadania, lecz możemy je wykonać równolegle z pozostałymi czynnościami.
 
 Aby skorzystać z wątków, należy najpierw zaimportować moduł <code>threading</code>. Następnie, aby utworzyć nowy wątek, należy utworzyć obiekt klasy <code>Thread</code>. Klasa ta przyjmuje jako argument funkcję, która będzie wykonana jako wątek.
@@ -20,7 +20,7 @@ w1.start()
 
 Należy pamiętać, że wątki działają równolegle, więc nie ma gwarancji kolejności wykonywania się poszczególnych wątków. 
 
-#### Własny wątek
+### Własny wątek
 
 Aby utworzyć wątek, należy stworzyć klasę dziedziczącą po klasie <code>Thread</code> z modułu <code>threading</code> i zdefiniować metodę <code>run</code>, która zostanie wywołana przy uruchomieniu wątku. Następnie należy utworzyć obiekt tej klasy i wywołać metodę <code>start</code>, aby rozpocząć działanie wątku.
 
@@ -54,7 +54,7 @@ thread = MyThread("Hello World")
 thread.start()
 ```
 
-#### Zatrzymanie wątku
+### Zatrzymanie wątku
 
 W Pythonie można zatrzymać wątek poprzez wywołanie metody `Thread.join()`. Ta metoda blokuje wywołujący wątek aż do momentu, gdy wątek do którego została wywołana zakończy swoje działanie. Przykładowo, jeśli chcemy zatrzymać główny wątek programu do momentu, gdy wszystkie wątki zostaną zakończone, możemy użyć pętli for i iterować po liście wątków i dla każdego z nich wywołać metodę `join()`:
 
@@ -90,7 +90,7 @@ stop_event.set()
 
 Należy pamiętać, że zatrzymanie wątku nie jest powszechnie zalecaną metodą zarządzania wątkami. W wielu przypadkach lepszym rozwiązaniem jest użycie warunków synchronizacyjnych lub zamknięcia wątku za pomocą metody `join()`. Zatrzymanie wątku może powodować nieoczekiwane skutki uboczne i powinno być używane jedynie w wyjątkowych sytuacjach.
 
-#### Dzielenie zasobów między wątkami
+### Dzielenie zasobów między wątkami
 
 Dzielenie zasobów między wątkami polega na umożliwieniu kilku wątkom równoczesnego dostępu do wspólnego zasobu. W przypadku, gdy zasób jest zmienny, konieczne jest zapewnienie bezpieczeństwa jego dostępu, tzn. zapobiegnięcie sytuacji, w której kilka wątków będzie próbowało zmodyfikować ten sam zasób w tym samym czasie. Istnieją mechanizmy umożliwiające bezpieczne dzielenie zasobów między wątkami, takie jak obiekt `Lock`.
 
@@ -140,7 +140,7 @@ print(zmienna_globalna)
 
 W tym przykładzie mamy dwie funkcje `watek1` i `watek2`, które zmieniają wartość zmiennej globalnej `zmienna_globalna`. Aby zapewnić bezpieczne dzielenie zasobów między wątkami, użyto mechanizmu blokady. 
 
-#### GIL
+### GIL
 GIL, czyli Global Interpreter Lock, to mechanizm, który ogranicza możliwość jednoczesnego wykonywania kodu przez wiele wątków. W Pythonie każdy wątek jest obsługiwany przez GIL, który kontroluje dostęp do interpretera. W rezultacie tylko jeden wątek jest w stanie wykonywać kod naraz, a pozostałe są zawieszane aż do momentu, gdy GIL zostanie zwolniony.
 
 GIL jest wbudowanym mechanizmem w Pythonie, który został dodany w celu uniknięcia problemów związanych z współdzieleniem zasobów przez wiele wątków. Chociaż GIL może mieć pewne ograniczenia w przypadku bardzo obciążających procesów wielowątkowych, w większości przypadków jest on wystarczający do obsługi równoległości w Pythonie.

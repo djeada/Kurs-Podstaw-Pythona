@@ -1,4 +1,4 @@
-### Struktury danych
+## Struktury danych
 
 Mamy do dyspozycji kilka różnych sposobów przechowywania danych. Te sposoby to tzw. struktury danych. Są to narzędzia, dzięki którym możemy zbierać i przechowywać duże ilości danych w sposób uporządkowany, co ułatwia nam pracę z tymi danymi.
 
@@ -12,7 +12,7 @@ duplikaty.
 
 Oczywiście, istnieją również inne struktury danych ale te wymienione są najczęściej używane i najważniejsze dla początkujących.
 
-#### Lista
+### Lista
 
 Lista jest strukturą danych służącą do przechowywania kilku wartości pod jedną nazwą.
 
@@ -103,7 +103,7 @@ for elem_a, elem_b in zip(lista_a, lista_b):
     print(f'element a: {elem_a}; element b: {elem_b}')
 ```
 
-#### Krotka
+### Krotka
 
 Krotka to struktura danych, podobna do listy, ale niezmienna. To znaczy, że po utworzeniu krotki nie możemy jej zmodyfikować, np. dodając do niej nowe elementy czy usuwając już istniejące.
 
@@ -156,7 +156,7 @@ for elem_a, elem_b in zip(krotka_a, krotka_b):
     print(f'element a: {elem_a}; element b: {elem_b}')
 ```
 
-#### Zbiór
+### Zbiór
 
 Zbiór (ang. set) to nieuporządkowana kolekcja unikalnych elementów. Zbiory są zazwyczaj używane do eliminowania duplikatów lub do testowania przynależności elementu do kolekcji.
 
@@ -250,7 +250,7 @@ Aby sprawdzić, czy zbiór jest podzbiorem innego zbioru, użyj operatora `<=`:
 zbior1 <= zbior2
 ```
 
-#### Słownik
+### Słownik
 Słownik używamy, gdy chcemy mieć kilka wartości dostępnych pod różnymi nazwami (kluczami). Słownik jest nieuporządkowany i indeksowany.
 
 W słowniku można używać jako kluczy dowolnych typów danych, które są niemutowalne (tj. nie mogą być zmieniane). Do niemutowalnych typów danych w Pythonie zaliczają się:

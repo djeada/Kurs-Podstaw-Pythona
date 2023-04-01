@@ -1,5 +1,5 @@
 
-### HTTP i prosty serwer
+## HTTP i prosty serwer
 
 HTTP (Hypertext Transfer Protocol) jest protokołem sieciowym używanym do przesyłania danych między klientem a serwerem. Jest to podstawowa technologia używana do przeglądania stron internetowych oraz komunikacji między aplikacjami.
 

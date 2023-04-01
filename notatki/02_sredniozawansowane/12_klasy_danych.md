@@ -1,4 +1,4 @@
-### Klasy danych
+## Klasy danych
 
 Tworzenie klas często wiąże się z powtarzalnym pisaniem elementów, takich jak inicjalizacja zmiennych przy użyciu funkcji specjalnej `__init__` oraz implementacja operatorów porównania. W takich przypadkach klasy danych (ang. data classes) mogą okazać się bardzo przydatne. Są one specjalnym rodzajem klas, które automatyzują proces tworzenia powtarzalnych elementów, takich jak inicjalizacja zmiennych i implementacja operatorów porównania. W celu utworzenia klasy danych wystarczy, że w obrębie klasy zadeklarujemy pola, które chcemy przechowywać. Są one szczególnie przydatne, gdy głównym celem naszej klasy jest grupowanie danych.
 

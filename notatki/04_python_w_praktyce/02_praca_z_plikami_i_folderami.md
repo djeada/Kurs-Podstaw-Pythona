@@ -1,9 +1,9 @@
 
-### Praca z plikami i folderami
+## Praca z plikami i folderami
 
 Standardowa biblioteka Pythona zawiera wiele funkcji do pracy z plikami i folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
 
-#### Otwarcie pliku 
+### Otwarcie pliku 
 
 Do otwierania plików w Pythonie używamy funkcji open(). Funkcja ta przyjmuje ścieżkę do pliku oraz tryb otwarcia. Po użyciu funkcji open() należy pamiętać o wywołaniu funkcji close(), aby zamknąć plik. Możemy to zrobić ręcznie lub skorzystać z konstrukcji with, która automatycznie zamknie plik po jej zakończeniu.
 
@@ -27,7 +27,7 @@ Istnieją 4 standardowe tryby otwarcia pliku:
 1. <code>w</code> - modyfikacja wraz z usunięciem poprzedniej treści.
 1. <code>a</code> - modyfikacja wraz z dopisaniem nowej treści do poprzedniej treści pliku.
 
-#### Odczytywanie i zapisywanie danych
+### Odczytywanie i zapisywanie danych
 
 Aby odczytać zawartość pliku, możemy skorzystać z funkcji readlines(), która zwraca listę napisów. Każdy napis w liście reprezentuje kolejny wiersz pliku. Aby zapisać dane do pliku, używamy funkcji write. Funkcja ta przyjmuje jeden argument, napis, gdzie kolejne wiersze powinny być oddzielone znakiem *\n*.
 
@@ -43,7 +43,7 @@ with open("sciezka/do/pliku.txt") as plik:
     plik.write("nowy tekst\nwiersz nr. 2\n")
 ```
 
-#### Moduł pathlib
+### Moduł pathlib
 
 Moduł pathlib pojawił się w Pythonie w wersji 3.4. Jest to zestaw narzędzi, które umożliwiają pracę z plikami i folderami w sposób bardziej przyjazny dla użytkownika.
 

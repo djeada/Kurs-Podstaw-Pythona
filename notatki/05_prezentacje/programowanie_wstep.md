@@ -1,4 +1,4 @@
-## Programowanie
+# Programowanie
 
 Program to sekwencja instrukcji i kodu, która ma być wykonana przez komputer. Program może być napisany w różnych językach programowania, takich jak C, Python, Java itp. Język programowania jest narzędziem do komunikowania się z komputerem i określania sposobu wykonania określonych zadań.
 
@@ -12,7 +12,7 @@ Wejście i wyjście z programu odnoszą się do sposobu, w jaki program komuniku
 
 Wejście i wyjście są ściśle związane z kodem programu oraz sprzętem. Kod programu określa sposób, w jaki program przetwarza wejście i generuje wyjście, natomiast sprzęt jest odpowiedzialny za fizyczne przekazywanie danych między programem a resztą systemu. 
 
-## Kompilator i interpreter
+# Kompilator i interpreter
 
 Kod zrozumiały dla człowieka musimy przetłumaczyć na kod zrozumiały dla komputera.
 
@@ -57,7 +57,7 @@ kod źródłowy Python ---> interpreter Python ---> wynik działania kodu (np. w
 1. Interpreter wykonuje kod w czasie rzeczywistym, odczytując go wiersz po wierszu.
 1. Wynik jest zwracany do użytkownika.
 
-## Syntaktyka (reguły) i semantyka (znaczenie)
+# Syntaktyka (reguły) i semantyka (znaczenie)
 
 Syntaktyka to zestaw reguł dotyczących poprawności składniowej kodu programu. Jeśli kod jest niepoprawny pod względem składni, kompilator lub interpreter zwróci błąd.
 
@@ -98,11 +98,11 @@ b = "World"
 c = a * b # TypeError: can't multiply sequence by non-int of type 'str'
 ```
 
-## Typowanie
+# Typowanie
 
 Typowanie to określenie rodzaju danych, które mogą być przechowywane w zmiennych lub przekazywane do funkcji w programie. Może być ono statyczne lub dynamiczne.
 
-### Typowanie statyczne
+## Typowanie statyczne
 
 Typowanie statyczne oznacza, że typy zmiennych są nadawane w czasie kompilacji programu. Oznacza to, że jeśli chcemy przypisać daną wartość do zmiennej, musimy określić jej typ przed uruchomieniem programu. W przypadku typowania statycznego, błędy typów są zazwyczaj wykrywane już w czasie kompilacji, co ułatwia debugowanie i zapobiega nieoczekiwanym błędom podczas działania programu.
 
@@ -114,7 +114,7 @@ Języki o statycznym typowaniu:
 * Go
 * Swift
     
-### Typowanie dynamiczne
+## Typowanie dynamiczne
 
 Typowanie dynamiczne oznacza, że typy zmiennych są przypisywane do wartości przechowywanych w zmiennych w trakcie działania programu. Oznacza to, że możemy przypisać dowolną wartość do zmiennej, niezależnie od jej typu, i nie będziemy musieli określać jej typu przed uruchomieniem programu. W przypadku typowania dynamicznego, błędy typów są zazwyczaj wykrywane dopiero podczas działania programu, co może utrudniać debugowanie i prowadzić do nieoczekiwanych błędów podczas działania programu.
 
@@ -125,7 +125,7 @@ Języki o dynamicznym typowaniu:
 * JavaScript
 * PHP
 
-### Type hints 
+## Type hints 
 
 Type hints są dodatkiem do kodu, który pozwala na podanie typów zmiennych i argumentów funkcji. Umożliwiają one narzędziom statycznego typowania (takim jak Mypy) oraz innym narzędziom programistycznym na zgłaszanie błędów i ostrzeżeń w kodzie w czasie kompilacji. Type hints nie są obowiązkowe i są ignorowane przez interpreter, dlatego Python pozostaje językiem o dynamicznym typowaniu.
 

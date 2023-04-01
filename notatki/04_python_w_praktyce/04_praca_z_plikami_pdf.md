@@ -1,8 +1,8 @@
 
-### Praca z plikami PDF
+## Praca z plikami PDF
 Istnieje kilka popularnych bibliotek do obsługi plików PDF. Jedną z najczęściej używanych jest biblioteka <code>PyPDF2</code>. Aby ją zainstalować, możemy użyć polecenia <code>pip install pypdf2</code>.
 
-#### Otwieranie pliku PDF
+### Otwieranie pliku PDF
 
 Aby otworzyć plik PDF, używamy funkcji `PdfFileReader` z modułu `PyPDF2`.
 
@@ -14,7 +14,7 @@ with open('plik.pdf', 'rb') as plik:
     reader = PdfFileReader(plik)
 ```
 
-#### Wypisywanie informacji o pliku
+### Wypisywanie informacji o pliku
 
 Aby wyświetlić informacje o pliku, takie jak ilość stron, autor czy tytuł, możemy skorzystać z odpowiednich właściwości obiektu <code>PdfFileReader</code>:
 
@@ -24,7 +24,7 @@ print(f"Autor: {czytnik.getDocumentInfo().author}")
 print(f"Tytuł: {czytnik.getDocumentInfo().title}")
 ```
 
-#### Odczytywanie tekstu
+### Odczytywanie tekstu
 
 Aby wyświetlić zawartość pliku PDF, możemy użyć metody `getPage()`. Metoda `getPage()` oczekuje obiektu `PageObject` reprezentującego daną stronę. Metoda `getNumPages()` zwraca liczbę stron w pliku.
 
@@ -42,7 +42,7 @@ for strona in range(liczba_stron):
     print(tekst)
 ```
 
-#### Modyfikowanie pliku PDF
+### Modyfikowanie pliku PDF
 
 Aby modyfikować plik PDF, możemy użyć obiektu `PdfFileWriter` z modułu `PyPDF2`. Możemy dodawać nowe strony do pliku lub usuwać istniejące strony.
 
@@ -61,7 +61,7 @@ with open('nowy_plik.pdf', 'wb') as plik:
     writer.write(plik)
 ```
 
-#### Łączenie plików PDF
+### Łączenie plików PDF
 
 Możemy użyć poniższego kodu, aby połączyć wszystkie pliki PDF z listy:
 

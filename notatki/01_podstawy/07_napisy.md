@@ -1,4 +1,4 @@
-### Napisy
+## Napisy
 
 Napisy to typ danych tekstowych, które składają się z ciągu znaków. Nnapisy mogą być używane do wielu różnych celów, takich jak:
 

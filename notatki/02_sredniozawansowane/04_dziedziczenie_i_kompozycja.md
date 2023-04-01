@@ -1,4 +1,4 @@
-### Dziedziczenie i kompozycja
+## Dziedziczenie i kompozycja
 
 Dziedziczenie i kompozycja to dwie techniki pozwalające na użycie kodu z innych klas w nowo tworzonej klasie. Dziedziczenie kopiuje wszystkie elementy z klasy nadrzędnej do klasy podrzędnej i pozwala na bezpośredni dostęp do pól i metod klasy nadrzędnej oraz możliwość zmiany ich definicji w klasie podrzędnej. Jest to używane, gdy nowa klasa jest specjalnym rodzajem już istniejącej klasy.
 

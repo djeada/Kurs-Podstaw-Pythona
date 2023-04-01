@@ -1,4 +1,4 @@
-### Informacje o systemie operacyjnym
+## Informacje o systemie operacyjnym
 Moduł `os` w bibliotece standardowej umożliwia uzyskiwanie informacji o systemie operacyjnym oraz manipulowanie plikami i folderami.
 
 Przykładowo, możemy uzyskać nazwę aktualnie używanego systemu operacyjnego za pomocą `os.name`:
@@ -8,7 +8,7 @@ import os
 print(os.name)
 ```
 
-#### Informacje o użytkownikach
+### Informacje o użytkownikach
 Aby uzyskać informacje o użytkownikach systemu oraz grupach, możemy skorzystać z modułu `pwd`:
 
 ```python
@@ -28,7 +28,7 @@ print(f" ID grupy: {group_info.gr_gid}")
 print(f" Lista użytkowników w grupie: {group_info.gr_mem}")
 ```
 
-#### Dyski
+### Dyski
 Aby uzyskać informacje o dostępnych dyskach oraz wolnym miejscu na nich, możemy skorzystać z modułu `os.statvfs`:
 
 ```python
@@ -40,7 +40,7 @@ print(f" Całkowita pojemność dysku: {disk_info.f_frsize * disk_info.f_blocks:
 print(f" Wolne miejsce na dysku: {disk_info.f_frsize * disk_info.f_bfree:,} bajtów")
 ```
 
-#### Informacje o procesorze
+### Informacje o procesorze
 Moduł <code>os</code> z biblioteki standardowej zawiera funkcję <code>cpu_count()</code>, która zwraca liczbę rdzeni procesora. Możemy również uzyskać informacje o mocy obliczeniowej procesora za pomocą modułu <code>psutil</code>. Poniższy przykład pokazuje, jak wyświetlić liczbę rdzeni oraz moc obliczeniową procesora:
 
 ```python
@@ -54,7 +54,7 @@ print(f"Liczba rdzeni procesora: {os.cpu_count()}")
 print(f"Moc obliczeniowa procesora: {psutil.cpu_freq().max} MHz")
 ```
 
-#### Zmienne środowiskowe
+### Zmienne środowiskowe
 Moduł <code>os</code> zawiera również funkcję <code>environ</code>, która zwraca słownik zawierający wszystkie zmienne środowiskowe. Możemy odczytać wartość konkretnej zmiennej środowiskowej, używając notacji słownikowej. Poniższy przykład pokazuje, jak wyświetlić zmienną środowiskową o nazwie SHELL:
 
 ```python

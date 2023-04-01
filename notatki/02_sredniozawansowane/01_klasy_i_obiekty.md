@@ -1,4 +1,4 @@
-### Klasy i obiekty
+## Klasy i obiekty
 Klasa to abstrakcyjny model, który definiuje jakiś zestaw cech i zachowań. Obiekt to konkretna instancja klasy. Możemy tworzyć dowolne klasy, niemniej jednak należy zastanowić się nad tym, jakie dane najlepiej byłoby trzymać razem pod jednym pojemnikiem oraz jakie funkcje mogą być przydatne do pracy z tymi danymi.
 
 Przykład:
@@ -20,7 +20,7 @@ inna_osoba.przedstaw_sie()
 
 W powyższym przykładzie tworzymy klasę Osoba, która posiada dwa pola danych: imie i nazwisko. Klasa ta zawiera również funkcję przedstaw_sie, która wyświetla komunikat z imieniem i nazwiskiem osoby. Następnie tworzymy dwa obiekty klasy Osoba i wywołujemy dla nich metodę przedstaw_sie.
 
-#### Dostęp do zmiennych w obiektach
+### Dostęp do zmiennych w obiektach
 
 W programowaniu obiektowym, zmienne przechowywane są w obiektach. Aby uzyskać dostęp do tych zmiennych, należy podać nazwę obiektu, następnie kropkę i nazwę zmiennej, którą chcemy odczytać.
 
@@ -60,7 +60,7 @@ Klasa Osoba posiada dwa atrybuty - imie oraz nazwisko. Zostały one oznaczone ja
 
 Za pomocą dekoratorów `@property` oraz `@imie.setter` zostały zdefiniowane metody do odczytu oraz modyfikacji atrybutu imie. W momencie próby odczytu wartości atrybutu imie zostanie wyświetlony komunikat "Ktoś próbuje odczytać imię" oraz zostanie zwrócona jego wartość. Podobnie, w momencie próby modyfikacji atrybutu imie zostanie wyświetlony komunikat "Ktoś modyfikuje imię" oraz zostanie zmieniona jego wartość.
 
-#### Pola i metody statyczne
+### Pola i metody statyczne
 
 Pola i metody statyczne są używane w programowaniu obiektowym, ale nie należą one do konkretnych obiektów - należą do całej klasy. Pola statyczne to wszystkie pola zdefiniowane w klasie, natomiast metody statyczne są tworzone za pomocą dekoratora `@staticmethod`. Dostęp do pól i metod statycznych możliwy jest zarówno poprzez nazwę klasy, jak i nazwę obiektu klasy.
 

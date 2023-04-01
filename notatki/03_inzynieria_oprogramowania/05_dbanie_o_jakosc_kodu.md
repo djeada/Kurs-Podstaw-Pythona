@@ -1,4 +1,4 @@
-### Dbanie o jakość kodu i lintowanie
+## Dbanie o jakość kodu i lintowanie
 
 Poprawny z punktu widzenia interpretera kod można napisać na wiele sposobów. Nawet jedna linia kodu może być zapisana na wiele sposobów. Jedną z przyczyn takiego stanu rzeczy są różnice w formatowaniu. Na przykład w kodzie do oddzielania instrukcji można użyć zarówno spacji, jak i tabów. Definicje funkcji można oddzielać jednym, dwoma lub trzema enterami. Linie kodu mogą być tak długie, że nie zmieszczą się na ekranie. Czy więc należy ograniczać ich długość? Jeśli tak, to ile znaków powinno być górną granicą? Dopóki z kodem pracujemy sami, wszystko wydaje się być w porządku, ale co jeśli ktoś inny będzie musiał czytać nasz kod? Co jeśli ktoś inny będzie musiał go modyfikować? Wtedy ważne staje się, by kod był czytelny i zrozumiały dla innych programistów. Z tych właśnie względów warto przestrzegać konwencji pisania kodu.
 
@@ -42,7 +42,7 @@ Pylint to narzędzie do sprawdzania jakości kodu podobne do Flake8. Oprócz spr
 | wskazywanie zbyt złożonego kodu      |   ❌   |   👷‍♂️   |   ❌  |
 | dostępność pluginów    |   ❌   |   ❌   |   ✔️  | 
 
-#### Linki
+### Linki
 
 * https://www.python.org/dev/peps/pep-0008/
 * https://www.python.org/dev/peps/pep-0257/

@@ -1,5 +1,5 @@
 
-### Asyncio
+## Asyncio
 
 Asyncio to moduł umożliwiający programowanie asynchroniczne. Asynchroniczne programowanie polega na wykonywaniu wielu zadań jednocześnie, bez konieczności blokowania głównego wątku programu. Aby funkcja mogła zostać wykonana asynchronicznie, należy użyć słowa kluczowego async oraz await.
 

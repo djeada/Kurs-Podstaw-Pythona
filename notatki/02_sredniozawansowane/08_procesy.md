@@ -1,5 +1,5 @@
 
-### Procesy
+## Procesy
 Procesy to niezależne od siebie instancje programów wykonywane w systemie operacyjnym. Procesy dzielą pamięć i zasoby systemu, takie jak pliki i gniazda sieciowe. W odróżnieniu od wątków, procesy są całkowicie niezależne od siebie i nie mogą udostępniać swoich zmiennych.
 
 W Pythonie mamy moduł <code>multiprocessing</code>, który umożliwia tworzenie procesów. Możemy użyć go, aby uruchomić nasz kod w osobnym procesie.

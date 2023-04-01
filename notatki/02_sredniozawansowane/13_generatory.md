@@ -1,5 +1,5 @@
 
-### Generatory
+## Generatory
 
 Generator to specjalny rodzaj funkcji, który zwraca wartości pojedynczo, zamiast zwracać ich wszystkie naraz w postaci listy lub innego iterowalnego obiektu. Generatory są bardziej efektywne pod względem pamięciowym niż listy, ponieważ nie wymagają przechowywania całej listy w pamięci, lecz tylko aktualnie zwracanej wartości. Generatory umożliwiają także klientowi rozpoczęcie przetwarzania zwracanych wartości zanim generator zakończy swoją pracę.
 

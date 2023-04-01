@@ -1,8 +1,8 @@
-## Paradygmaty w programowaniu
+# Paradygmaty w programowaniu
 
 Paradygmat w programowaniu to sposób myślenia o tworzeniu programów, oparty na zbiorze mechanizmów dostępnych w danym języku programowania. Istnieją dwa główne paradygmaty: imperatywny i deklaratywny.
 
-## Paradygmat imperatywny
+# Paradygmat imperatywny
 
 Paradygmat imperatywny opiera się na sekwencji instrukcji, które modyfikują stan programu. Jest to podejście bottom-up, czyli skupiające się na krokach prowadzących do osiągnięcia pożądanego stanu. Podparadygmaty imperatywne to:
 
@@ -25,7 +25,7 @@ car.move(0.5)
 print(car.position)  # 15
 ```
 
-## Paradygmat deklaratywny
+# Paradygmat deklaratywny
 
 Paradygmat deklaratywny polega na wskazaniu pożądanego stanu programu bez konieczności definiowania wszystkich kroków prowadzących do niego. Jest to podejście top-down, czyli skupiające się na osiągnięciu pożądanego rezultatu poprzez określenie zależności i reguł. Podparadygmaty deklaratywne to:
 
@@ -50,7 +50,7 @@ def get_path(position, speed, time_list):
 print(get_path(0, 10, [1, 0.5]))  # [10, 15]
 ```
 
-## Współczesne języki programowania
+# Współczesne języki programowania
 
 Współczesne języki programowania często łączą różne paradygmaty i pozwalają na mieszanie składni z różnych paradygatów w jednym programie. Dzięki temu programiści mogą wybierać najlepsze rozwiązanie dla konkretnego problemu i optymalizować swój kod.
 
@@ -69,7 +69,7 @@ Elementy charakterystyczne dla programowania funkcyjnego:
 
 Oczywiście powyższe elementy to tylko wybrane przykłady i nie wyczerpują wszystkich elementów charakterystycznych dla programowania obiektowego i funkcyjnego w Pythonie. W rzeczywistości Python jest językiem hybrydowym,
 
-## Ewolucja OOP
+# Ewolucja OOP
 
 * Enkapsulacja to praktyka polegająca na łączeniu danych i zachowań w jednym bycie, np. w klasie, oraz na ograniczaniu dostępu do nich przez elementy zewnętrzne. Abstrakcja odnosi się do redukcji złożonych systemów do prostszych części, ukrywając szczegóły, które nie są potrzebne klientom. Polimorfizm natomiast oznacza zdolność bytów do zmiany zachowania w zależności od kontekstu, w którym są używane.
 
@@ -87,7 +87,7 @@ Oczywiście powyższe elementy to tylko wybrane przykłady i nie wyczerpują wsz
 
 * Większość modułów w standardowej bibliotece Rust zwykle zawiera tylko jeden lub dwa silnie powiązane typy. Ta reguła zgodna jest z modułowym podejściem, w którym każdy moduł ma określony cel i jest odpowiedzialny za mały zestaw powiązanych funkcjonalności. Ten zabieg zwiększa czytelność kodu i zmniejsza ryzyko wystąpienia błędów i bugów.
 
-## Stan
+# Stan
 
 W programowaniu możemy mówić o dwóch rodzajach stanu: stateful i stateless. Stateful oznacza, że program zachowuje swój stan po wykonaniu określonej operacji i może go odczytać w późniejszym czasie. Stateless oznacza, że program nie zapamiętuje stanu po wykonaniu operacji i każde jej wywołanie traktowane jest jako odrębne zdarzenie.
 
@@ -119,7 +119,7 @@ counter = increment_counter(counter)
 print(counter)  # 2
 ```
 
-## Zmienność danych
+# Zmienność danych
 
 W programowaniu mówimy o dwóch rodzajach zmienności danych: mutowalność (mutability) i niezmienność (immutability). Mutowalność oznacza, że dane są zmienne i mogą być zmodyfikowane przez program. Niezmienność oznacza, że raz przypisane dane są niezmienne i nie mogą być zmodyfikowane przez program.
 
@@ -156,7 +156,7 @@ number += 1
 print(id(number))  # inny identyfikator
 ```
 
-## Czystość
+# Czystość
 
 Funkcja jest czysta, jeśli nie modyfikuje danych, których nie jest właścicielem. Czystość ma wiele zalet, takich jak czytelność kodu, optymalizacja kodu w czasie kompilacji oraz brak zjawiska wyścigu w programowaniu współbieżnym.
 
@@ -215,7 +215,7 @@ def zapisz_do_pliku(dane, nazwa_pliku):
     return nazwa_pliku
 ```
 
-## Literatura
+# Literatura
 
 * https://web.mit.edu/6.005/www/fa15/classes/09-immutability/
 * https://cs.lmu.edu/~ray/notes/paradigms/

@@ -1,5 +1,5 @@
 
-### Wyrażenia regularne
+## Wyrażenia regularne
 
 Wyrażenia regularne to sposób na wyszukiwanie tekstu w oparciu o wzorce. Możemy używać ich do wyszukiwania wzorców w ciągach znaków, ale także do zastępowania znalezionych wzorców innymi ciągami znaków. Możemy również używać wyrażeń regularnych do sprawdzania, czy ciąg znaków spełnia określone kryteria (np. czy jest to adres e-mail). Typowym zadaniem dla wyrażeń regularnych to Przykładowo znalezienie wszystkich słów zaczynających się od *abc* lub składających się wyłącznie z małych liter oraz cyfr parzystych.
 
@@ -33,7 +33,7 @@ Aby użyć wyrażeń regularnych, musimy najpierw zaimportować moduł `re`. Nas
 
 Wyrażenia regularne składają się z ciągów znaków oraz specjalnych znaków. Specjalne znaki służą do określania rodzaju znaków, które chcemy znaleźć. Na przykład, znak "`.`" oznacza dowolny znak, a znak "`*`" oznacza dowolną ilość powtórzeń poprzedzającego znaku. Możemy również używać nawiasów kwadratowych, by określić zbiór znaków, które chcemy znaleźć. Na przykład, "`[0123456789]`" oznacza dowolną cyfrę, a "`[a-zA-Z]`" oznacza dowolną literę.
 
-#### Znaki specjalne
+### Znaki specjalne
 
 Oto lista najważniejszych znaków specjalnych, które warto znać:
 
@@ -56,7 +56,7 @@ Oto lista najważniejszych znaków specjalnych, które warto znać:
 
 Oczywiście to tylko wybrane przykłady.
 
-#### Schemat pracy z wyrażeniami regularnymi
+### Schemat pracy z wyrażeniami regularnymi
 
 Omówimy teraz, jak krok po kroku przeprowadzić wszystkie czynności potrzebne do użycia wyrażeń regularnych w rozwiązaniu danego problemu. Oto krótki opis schematu:
 

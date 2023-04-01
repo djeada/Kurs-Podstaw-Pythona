@@ -1,4 +1,4 @@
-### Kod bajtowy
+## Kod bajtowy
 Moduł `dis` służy do wyświetlania kodu bajtowego dla funkcji lub bloków kodu. Aby wyświetlić kod bajtowy dla funkcji, użyj funkcji `dis()` w nastęþujący sposób:
 
 ```python

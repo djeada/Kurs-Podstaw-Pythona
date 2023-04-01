@@ -1,5 +1,5 @@
 
-### Instalacja w systemie Windows
+## Instalacja w systemie Windows
 Aby rozpocząć przygodę z Pythonem, należy najpierw przygotować sobie odpowiednie środowisko. W tym celu najlepiej pobrać i zainstalować oprogramowanie na swoim komputerze.
 
 Aby zainstalować Pythona w systemie Windows, musiszć wykonać następujące kroki:

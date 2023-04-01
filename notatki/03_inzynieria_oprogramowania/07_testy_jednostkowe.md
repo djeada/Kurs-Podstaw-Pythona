@@ -1,5 +1,5 @@
 
-### Testy jednostkowe
+## Testy jednostkowe
 
 Testy jednostkowe są ważnym narzędziem w procesie tworzenia oprogramowania, ponieważ pomagają zapewnić, że nasz kod działa poprawnie i jest odporny na błędy. Pozwalają również na szybkie wykrycie błędów, które pojawiły się w wyniku zmian w kodzie, dzięki czemu możemy je szybko naprawić. 
 
@@ -8,7 +8,7 @@ Testy jednostkowe są ważnym narzędziem w procesie tworzenia oprogramowania, p
 
 Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>. Obie biblioteki, dają nam możliwość tworzenia testów jednostkowych i uruchamiania ich automatycznie, co pozwala na skupienie się na kodowaniu i uniknięcie ręcznego testowania kodu. Obie biblioteki są dość proste w użyciu i oferują duże możliwości tworzenia i uruchamiania testów. Ostateczny wybór biblioteki zależy od indywidualnych potrzeb i preferencji programisty.
 
-#### Unittest
+### Unittest
 
 Biblioteka ta została zbudowana zgodnie z filozofią programowania obiektowego, co oznacza, że w kodzie tworzymy klasy i korzystamy z dziedziczenia. Unittest oferuje również wiele funkcji assert, które pozwalają na sprawdzenie różnych aspektów działania programu.
 
@@ -36,7 +36,7 @@ Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w ko
 python -m unittest
 ```
 
-#### Pytest
+### Pytest
 
 Pytest to również biblioteka służąca do tworzenia i uruchamiania testów jednostkowych w języku Python. Została zbudowana zgodnie z filozofią "im prościej, tym lepiej", co oznacza, że nie ma w niej klas i dziedziczenia. Pytest pozwala na tworzenie testów poprzez definiowanie funkcji oznaczonych adnotacją @pytest.fixture.
 
@@ -67,14 +67,14 @@ Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w ko
 pytest
 ```
 
-#### Korzyści z testów jednostkowych
+### Korzyści z testów jednostkowych
 
 * Pomagają innym programistom zrozumieć cel danego fragmentu kodu produkcyjnego.
 * Gdy programy są małe, programista może ręcznie sprawdzić ich działanie z każdą modyfikacją. Wraz ze wzrostem złożoności, ręczne testowanie wszystkich części programu staje się niemożliwe. Testy jednostkowe można uruchomić automatycznie.
 * Wymuszają separację zadań między poszczególnymi fragmentami kodu.
 * Pozwalają na szybkie sprawdzenie poprawności działania kodu po dokonaniu zmian w kodzie produkcyjnym.
 
-#### TDD
+### TDD
 
 Technika "test driven development" (TDD) to sposób pisania programów, w którym testy są pisane przed kodem produkcyjnym. Proces tworzenia programu składa się z trzech etapów:
 
@@ -84,7 +84,7 @@ Technika "test driven development" (TDD) to sposób pisania programów, w który
 
 Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopóki wszystkie trzy etapy nie zostały zakończone dla aktualnie implementowanych funkcjonalności.
 
-#### Losowe dane nie mają miejsca w testach
+### Losowe dane nie mają miejsca w testach
 
 Załóżmy, że masz własną implementację jednego z algorytmów sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
 
@@ -105,7 +105,7 @@ def test_wlasne_sortowanie():
 
 Powyższy fragment kodu zawiera przykład użycia pytest do testowania funkcji <code>wlasne_sortowanie</code>. W tym przypadku, trzy listy są tworzone jako dane wejściowe: <code>lista_a</code>, <code>lista_b</code> i <code>lista_c</code>. Następnie są one porównywane z oczekiwanymi wynikami po wywołaniu funkcji <code>sorted()</code> na tych samych danych wejściowych za pomocą polecenia <code>assert</code>. Jeśli wynik zwrócony przez <code>wlasne_sortowanie()</code> jest różny od oczekiwanego wyniku, zostanie wygenerowany błąd, który poinformuje o niepowodzeniu testu.
 
-#### Od znalezienia buga do poprawnie działającego kodu
+### Od znalezienia buga do poprawnie działającego kodu
 
 Zauważono błąd w twoim programie. Co należy zrobić?
 
@@ -116,7 +116,7 @@ Zauważono błąd w twoim programie. Co należy zrobić?
 1. Gdy test przechodzi pomyślnie, możesz przejść do kolejnego etapu, czyli refaktoryzacji kodu. To etap, w którym dbamy o to, by kod był czytelny, elegancki i łatwy do zrozumienia. Może to oznaczać przemianowanie zmiennych, zmianę sposobu ich deklaracji, a nawet usunięcie niepotrzebnych linii kodu. Refaktoryzacja powinna być przeprowadzana zgodnie z zasadami zdrowego rozsądku i nie powinna wpływać na poprawność funkcji.
 1. W przyszłości dbaj o to, by test już zawsze pozostał zielony.
 
-#### Inne typy testów
+### Inne typy testów
 
 * Testy jednostkowe to testy sprawdzające odizolowane jednostki kodu, najczęściej pojedyncze funkcje.
 * Testy integracyjne to testy sprawdzające, jak różne elementy systemu współpracują ze sobą.
@@ -130,11 +130,11 @@ Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/softw
 * 15% testy integracyjne
 * 5% testy całego systemu (end-to-end)
 
-#### Generowanie danych testowych automatycznie
+### Generowanie danych testowych automatycznie
 
 Przy tworzeniu aplikacji, warto również zadbać o skrypty generujące dane testowe, które są potrzebne do pracy aplikacji. Na przykład, jeśli piszesz aplikację komunikującą się z bazą danych MySQL, powinieneś mieć skrypt, który automatycznie utworzy taką bazę danych i wypełni ją przykładowymi danymi. Dzięki temu, podczas pisania kodu, możesz od razu sprawdzić, czy działa on poprawnie, bez konieczności czekania na uruchomienie testów w środowisku produkcyjnym. Ponadto, masz możliwość automatycznego testowania całej aplikacji.
 
-#### Organizacja projektu z testami
+### Organizacja projektu z testami
 
 Aby zachować porządek w projekcie, warto rozdzielić kod produkcyjny i testy jednostkowe do osobnych folderach. W ten sposób łatwiej będzie zarządzać plikami i szybko odnaleźć potrzebne testy.
 
@@ -154,7 +154,7 @@ projekt
 
 W ten sposób z jednej strony ograniczymy wielkość plików z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
 
-#### Automatyzacja testów
+### Automatyzacja testów
 
 W momencie, gdy nasz projekt zaczyna rosnąć w skali, warto zastanowić się nad automatyzacją testów. Możliwe opcje to użycie narzędzi takich jak <a href="https://travis-ci.org/">Travis CI</a>, <a href="https://jenkins.io/">Jenkins</a>, czy <a href="https://circleci.com/">CircleCI</a>. Dzięki temu każdorazowa zmiana w kodzie źródłowym automatycznie uruchamia wszystkie testy, dzięki czemu mamy pewność, że zmiany nie zepsuły istniejącej funkcjonalności.
 

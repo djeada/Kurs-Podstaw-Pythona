@@ -1,4 +1,4 @@
-### Referencje i kopiowanie
+## Referencje i kopiowanie
 
 Dwa niezwykle istotne pojęcia w programowaniu to "referencja" i "kopiowanie". Referencja to odwołanie do oryginalnego obiektu, a kopiowanie to tworzenie nowego obiektu z tą samą zawartością co oryginalny. W języku Python przekazywanie obiektów do funkcji lub przypisywanie ich do nowych nazw odbywa się poprzez referencje. To oznacza, że zarówno oryginalny obiekt, jak i nowy obiekt będą wskazywać na to samo miejsce w pamięci. Wszelkie zmiany wprowadzone w jednym obiekcie będą widoczne również w drugim.  
 

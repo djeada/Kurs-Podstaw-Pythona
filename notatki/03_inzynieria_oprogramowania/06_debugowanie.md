@@ -1,5 +1,5 @@
 
-### Debugowanie
+## Debugowanie
 
 Debuger jest bardzo przydatnym narzędziem, zwłaszcza przy pracy nad dużymi projektami. Dzięki niemu możemy zatrzymać program w dowolnym momencie, aby sprawdzić co się w nim dzieje. Możemy też prześledzić kolejne kroki programu, które zostały wykonane do momentu zatrzymania, co pozwala na szybkie i skuteczne znajdowanie błędów.
 

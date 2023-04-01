@@ -1,5 +1,5 @@
 
-### Wersje Pythona
+## Wersje Pythona
 
 Narzędzie <code>Pyenv</code> służy do izolowania różnych wersji Pythona. Jeśli na przykład chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz prostego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. Ponadto <code>Pyenv</code> umożliwia pobieranie i instalowanie różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
 

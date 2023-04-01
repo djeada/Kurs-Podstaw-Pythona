@@ -1,4 +1,4 @@
-### Programowanie funkcyjne
+## Programowanie funkcyjne
 
 Istnieją różne narzędzia służące do transformacji danych. W tym artykule przyjrzymy się kilku z nich: <code>map()</code>, <code>filter()</code> i <code>reduce()</code>. Funkcje te są często używane w programowaniu funkcyjnym. Programowanie funkcyjne to paradygmat programowania, w którym głównym sposobem reprezentowania algorytmów są funkcje. W programowaniu funkcyjnym nacisk kładzie się na transformację danych przy użyciu funkcji, a nie na ich modyfikację w miejscu.
 

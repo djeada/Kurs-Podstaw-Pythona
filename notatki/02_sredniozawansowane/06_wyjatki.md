@@ -1,4 +1,4 @@
-### Wyjątki
+## Wyjątki
 Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami.
 
 W Pythonie istnieje szereg wyjątków zdefiniowanych w standardzie, takich jak <code>ZeroDivisionError</code>, który występuje, gdy próbujemy dzielić liczbę przez 0.
@@ -15,7 +15,7 @@ raise ValueError("Podano nieprawidlowa wartosc")
   
 Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji.
 
-#### Obsługa wyjątków
+### Obsługa wyjątków
 
 Obsługa wyjątków polega na zapobieżeniu zatrzymaniu programu w przypadku wystąpienia nieoczekiwanej sytuacji. Jest to szczególnie ważne w programach, które działają "w tle" i nie są interaktywne.
 
@@ -75,7 +75,7 @@ Blok `else` jest opcjonalny i wykonywany jest, jeśli nie wystąpił żaden wyj�
 
 Blok `finally` jest również opcjonalny, ale zawsze wykonywany bez względu na to, czy wystąpił wyjątek czy nie. Może być używany do wykonania kodu, który ma być wykonany zawsze, niezależnie od tego, czy wystąpił wyjątek czy nie. Może być przydatny, gdy chcemy zamknąć plik lub połączenie z bazą danych po zakończeniu pracy z nim.
 
-#### Własny wyjątek
+### Własny wyjątek
 
 Możemy również tworzyć własne wyjątki. Nasz wyjątek musi dziedziczyć po klasie <code>Exception</code> lub jednej z jej podklas.
 
@@ -118,7 +118,7 @@ else:
 
 Wyświetlona zostanie informacja o błędzie "Podano nieparzysta liczbe".
 
-#### Wyjątki jako mechanizm przepływu sterowania
+### Wyjątki jako mechanizm przepływu sterowania
 
 Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterowania. W poniższym przykładzie używamy wyjątku do sprawdzenia, czy napis reprezentuje liczbę całkowitą:
 

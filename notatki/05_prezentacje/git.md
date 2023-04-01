@@ -1,11 +1,11 @@
-## Git
+# Git
 
 * Git to system kontroli wersji, który archiwizuje zmiany w kodzie i pozwala na łatwe zarządzanie różnymi wersjami projektu. 
 * Został stworzony w 2005 roku przez Linusa Torvaldsa dla programistów pracujących nad jądrem systemu operacyjnego Linux. 
 * Obecnie jest jednym z najpopularniejszych systemów kontroli wersji na świecie. 
 * Git jest szybki, rozproszony, co oznacza, że może być używany przez wielu ludzi jednocześnie, a także jest chroniony przed błędami w repozytorium, co pozwala na bezpieczne przechowywanie zmian w kodzie.
 
-## Instalacja
+# Instalacja
 
 Aby zainstalować Git, należy pobrać instalator z oficjalnej strony https://git-scm.com/downloads i przejść przez proces instalacji. W systemie Linux dla wersji opartych na Debianie, można użyć polecenia:
 
@@ -13,7 +13,7 @@ Aby zainstalować Git, należy pobrać instalator z oficjalnej strony https://gi
 sudo apt install git
 ```
 
-## GitHub
+# GitHub
 
 * GitHub to platforma internetowa, która umożliwia bezpłatne hostowanie repozytoriów Git oraz oferuje bogaty interfejs graficzny do ich zarządzania. 
 * Obecnie jest jednym z najpopularniejszych serwisów tego typu na świecie i korzystają z niego największe firmy i organizacje, takie jak Microsoft, Meta, NASA czy NSA. 
@@ -23,7 +23,7 @@ Pytanie: Czy muszę korzystać z GitHuba, aby korzystać z Gita?
 
 Odpowiedź: Nie, istnieją inne rozwiązania do hostowania repozytoriów Git, takie jak np. GitLab czy Bitbucket. Można również hostować repozytoria na własnym serwerze lub używać innych narzędzi do zarządzania kontrolą wersji, które nie są związane z GitHubem.
 
-## Jak to działa?
+# Jak to działa?
 
 * Do pracy z Gitem wykorzystywane są tak zwane repozytoria, czyli miejsca, w których przechowywana jest historia zmian w projekcie. 
 * Każdy członek zespołu programistów, który uczestniczy w pracach nad projektem, posiada swoją kopię repozytorium, w której ma dostęp do pełnej historii zmian w projekcie. 
@@ -41,7 +41,7 @@ Przykłady komend, które pozwalają na manipulowanie obiektami i repozytorium t
 * `git cat-file -p <object name>` - wyświetla informacje o danym obiekcie.
 * `git rev-list --objects --all` - wyświetla listę wszystkich obiektów w repozytorium.
 
-## Tworzenie repozytorium
+# Tworzenie repozytorium
 
 Aby utworzyć nowe repozytorium, zaleca się skorzystanie z serwisu GitHub lub innej platformy do hostowania repozytoriów Git. 
 
@@ -59,7 +59,7 @@ git clone link_do_repozytorium
 git init
 ```
 
-## Proces pracy z Gitem
+# Proces pracy z Gitem
 
 Git umożliwia wprowadzanie zmian w plikach w lokalnej wersji repozytorium, dodawanie tych zmienionych plików do składu plików oczekujących na zatwierdzenie (zwanego "staging area") oraz zatwierdzanie tych zmian za pomocą commitów. Proces pracy z Gitem można przedstawić w następujący sposób:
 
@@ -77,7 +77,7 @@ git commit -m "przykladowa informacja"
 git log
 ```
 
-## Zatwierdzanie zmian
+# Zatwierdzanie zmian
 
 * Git wykorzystuje commity do zatwierdzenia wprowadzonych zmian w kodzie. 
 * Dzięki komendzie `git log` można wyświetlić historię commitów w repozytorium. 
@@ -85,7 +85,7 @@ git log
 
 ![commit](https://user-images.githubusercontent.com/37275728/189501913-7fa99b33-bbd9-4667-a3d3-70c9ad197f41.png)
 
-## Rozgałęzianie i łączenie gałęzi
+# Rozgałęzianie i łączenie gałęzi
 Git umożliwia tworzenie nowych gałęzi, które są oddzielnymi ścieżkami rozwoju projektu. Domyślna gałąź to najczęściej gałąź `master` lub `main`. Gałęzie służą do odizolowania różnych funkcjonalności lub zmian od głównej linii kodu, co pozwala na pracę nad nimi bez ryzyka ich wpływu na inne elementy projektu.
 
 * Aby utworzyć nową gałąź, można użyć komendy `git checkout -b nazwa_galezi`, gdzie `nazwa_galezi` to nazwa nowej gałęzi. 
@@ -104,7 +104,7 @@ git checkout master
 git merge nowa_galaz
 ```
 
-## Konflikty
+# Konflikty
 
 Konflikty w Git występują, gdy dwa różne gałęzie zostały zmodyfikowane w taki sposób, że te same linie kodu zostały zmienione na obu gałęziach. W takiej sytuacji Git nie jest w stanie samodzielnie połączyć tych zmian, dlatego konieczne jest ręczne rozwiązanie konfliktu.
 
@@ -120,7 +120,7 @@ wiadomosc a zmieniona w c
 
 • Znajdź te sekcje, usuń strzałki i wybierz odpowiednią wersję zmian.
 
-## Interakcje z serwerem
+# Interakcje z serwerem
 
 * Aby przesłać zmiany z lokalnego repozytorium na serwer, można użyć komendy `git push`. 
 * Aby pobrać zmiany z serwera, można użyć komendy `git pull`. 
@@ -134,7 +134,7 @@ git commit -m "przykladowa informacja"
 git push origin master
 ```
 
-## Ważne komendy
+# Ważne komendy
 
 | Komenda | Działanie |
 | ------- | --------- |
@@ -146,9 +146,9 @@ git push origin master
 | git push | wyślij lokalne zmiany do serwera |
 | git pull | pobierz modyfikację z serwera |
 
-## Ćwiczenia
+# Ćwiczenia
 
-### Ćwiczenie nr 1
+## Ćwiczenie nr 1
 
 1. Sklonuj lokalnie repozytorium z twojego konta na GitHub za pomocą komendy `git clone link_do_repozytorium`.
 1. Utwórz nowy plik tekstowy w obrębie tego repozytorium, np. za pomocą polecenia `touch nazwa_pliku.txt`.
@@ -156,7 +156,7 @@ git push origin master
 1. Dodaj plik do składu plików oczekujących na zatwierdzenie za pomocą polecenia `git add nazwa_pliku.txt`.
 1. Wyświetl ponownie historię zmian dla repozytorium za pomocą komendy `git log`.
     
-### Ćwiczenie nr 2
+## Ćwiczenie nr 2
 
 1. Dodaj zmiany w tym samym pliku, zarówno w lokalnej wersji repozytorium, jak i na stronie GitHub.
 1. Spróbuj wysłać lokalne zmiany do serwera za pomocą polecenia `git push origin nazwa_galezi`. Otrzymasz komunikat o konflikcie.

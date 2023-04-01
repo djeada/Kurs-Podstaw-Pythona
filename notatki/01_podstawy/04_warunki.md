@@ -1,4 +1,4 @@
-### Warunki
+## Warunki
 
 Typ logiczny (bool) może przyjmować jedną z dwóch wartości: <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej.
 

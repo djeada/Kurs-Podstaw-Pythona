@@ -1,4 +1,4 @@
-### Argumenty linii poleceń
+## Argumenty linii poleceń
 
 Python obsługuje argumenty linii poleceń. Jeśli chcemy, by nasz skrypt był sterowany przez argumenty przekazywane podczas jego uruchomienia, mamy do dyspozycji kilka narzędzi, które ułatwią nam to zadanie.
 

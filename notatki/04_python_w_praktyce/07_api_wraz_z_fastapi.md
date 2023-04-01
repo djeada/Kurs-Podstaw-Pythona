@@ -1,5 +1,5 @@
 
-### API wraz z FastAPI
+## API wraz z FastAPI
 
 FastAPI to nowoczesne i szybkie narzędzie do tworzenia API w Pythonie. Jest oparte na bibliotece Starlette i używa Pydantic do walidacji danych wejściowych.
 

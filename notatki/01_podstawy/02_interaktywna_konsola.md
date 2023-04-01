@@ -1,4 +1,4 @@
-### Interaktywna konsola
+## Interaktywna konsola
 
 Konsola Pythona to interaktywne środowisko, w którym można wpisywać i wykonywać pojedyncze polecenia. Aby otworzyć konsolę, należy wpisać polecenie *python* w wierszu poleceń. Wówczas zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
 

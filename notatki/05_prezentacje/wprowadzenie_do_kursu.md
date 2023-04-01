@@ -1,4 +1,4 @@
-## Cel kursu
+# Cel kursu
 
 Celem kursu jest nauka podstaw programowania w języku Python. Kurs podzielony jest na 4 sekcje: podstawy, średniozaawansowane, inżynieria oprogramowania oraz Python w praktyce. Każda z tych sekcji zawiera wiele lekcji i zagadnień, które pomogą w zrozumieniu podstaw programowania i zastosowaniu ich w praktyce.
 
@@ -9,13 +9,13 @@ Kurs obejmuje następujące tematy:
 1. Inżynieria oprogramowania: moduły i pakiety, wersje Pythona, PIP i PyPI, środowisko wirtualne, dbanie o jakość kodu i lintowanie, debugowanie, testy jednostkowe, dokumentacja, pliki wykonywalne i PyInstaller, kod bajtowy.
 1. Python w praktyce: argumenty linii poleceń, praca z plikami i folderami, Pandas i csv, praca z plikami PDF, informacje o systemie operacyjnym, HTTP i prosty serwer, API wraz z FastAPI, bazy danych z SQLite, Tkinter, logi.
 
-## Dlaczego warto uczyć się programowania z tym kursem?
+# Dlaczego warto uczyć się programowania z tym kursem?
 
 Programowanie to ważna umiejętność, która może być przydatna w wielu dziedzinach. Ten kurs został zaprojektowany z myślą o osobach, które chcą nauczyć się programować, a jednocześnie zrozumieć, co dzieje się pod spodem. Zamiast skupiać się na składni konkretnego języka programowania, kurs skupia się na zrozumieniu podstawowych koncepcji programowania.
 
 Dodatkowo, kurs zapewnia dostęp do wielu materiałów pomocniczych, takich jak kod przykładowych programów, ćwiczenia, projekty, notatki i ściągawki, które pomogą Ci zrozumieć i zapamiętać materiał.
 
-## Jak uczyć się programowania?
+# Jak uczyć się programowania?
 
 Podejście do nauki jest kluczowe dla sukcesu w programowaniu. Wielu ludzi kończy szkoły z dobrymi ocenami, ale bez głębszego zrozumienia tego, czego się uczyli. W przypadku programowania, samo zapamiętanie składni i instrukcji nie wystarczy, aby tworzyć złożone programy. Aby osiągnąć sukces jako programista, musisz rozumieć jak działa oprogramowanie.
 

@@ -1,4 +1,4 @@
-### Zmienne
+## Zmienne
 
 Zmienne stanowią podstawę każdego języka programowania. Służą do przechowywania różnych rodzajów danych, takich jak liczby, napisy czy wartości logiczne. Każda zmienna ma swoją nazwę, poprzez którą odwołujemy się do niej w programie.
 

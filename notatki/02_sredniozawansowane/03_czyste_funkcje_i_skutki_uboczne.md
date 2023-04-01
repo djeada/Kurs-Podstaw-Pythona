@@ -1,4 +1,4 @@
-### Czyste funkcje i skutki uboczne
+## Czyste funkcje i skutki uboczne
 
 NW przeciwieństwie do funkcji produkujących skutki uboczne, czyste funkcje nie wpływają na środowisko poza swoim zasięgiem. 
 

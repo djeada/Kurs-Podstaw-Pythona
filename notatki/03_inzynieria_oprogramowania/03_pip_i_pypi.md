@@ -1,5 +1,5 @@
 
-### PIP i PyPI
+## PIP i PyPI
 
 PIP to narzędzie umożliwiające instalację pakietów Pythona dostępnych na stronie PyPI (Python Package Index).
 

@@ -1,4 +1,4 @@
-### Pandas i csv
+## Pandas i csv
 
 Moduł Pandas to bardzo popularny moduł, używany do pracy z danymi tabelarycznymi. Do zapisywania danych tabelarycznych do pliku csv oraz odczytywania danych z pliku csv, służą nam funkcje <code>to_csv()</code> oraz <code>read_csv()</code>.
 
@@ -27,7 +27,7 @@ Wynikiem tego kodu będzie tabela o takim wyglądzie:
 | 2022-02-01	| 120 |
 | 2022-03-01	| 130 |
 
-#### Podstawowe informacje o tabeli
+### Podstawowe informacje o tabeli
 
 Po wczytaniu tabeli do pamięci, możemy wyświetlić podstawowe informacje o niej za pomocą funkcji `info()`.
 
@@ -41,7 +41,7 @@ Funkcja ta pokazuje nam takie informacje jak:
 * typy danych w poszczególnych kolumnach,
 * ilość niezapełnionych pól.
 
-#### Podgląd danych
+### Podgląd danych
 
 Aby sprawdzić, jakie dane mamy w tabeli, możemy wyświetlić jej fragment za pomocą funkcji `head()` lub `tail()`. Domyślnie obie funkcje wyświetlają 5 pierwszych lub ostatnich wierszy tabeli. Możemy też podać ilość wierszy jaką chcemy wyświetlić jako argument.
 
@@ -50,7 +50,7 @@ df.head(10) # pierwsze 10 wierszy
 df.tail() # ostatnie 5 wierszy
 ```
 
-#### Selekcja kolumn
+### Selekcja kolumn
 
 Aby wybrać konkretne kolumny z tabeli, możemy użyć notacji z nawiasami kwadratowymi.
 
@@ -58,7 +58,7 @@ Aby wybrać konkretne kolumny z tabeli, możemy użyć notacji z nawiasami kwadr
 df[["kolumna_1", "kolumna_2"]]
 ```
 
-#### Filtrowanie danych
+### Filtrowanie danych
 
 Do filtrowania danych służy nam operator `[]`. Możemy użyć go w połączeniu z operatorami logicznymi, takimi jak `&` lub `|`.
 

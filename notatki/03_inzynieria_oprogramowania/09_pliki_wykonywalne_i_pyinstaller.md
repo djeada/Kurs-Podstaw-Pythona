@@ -1,5 +1,5 @@
 
-### Pliki wykonywalne i PyInstaller
+## Pliki wykonywalne i PyInstaller
 
 Jeśli chcesz udostępnić swoją aplikację innym osobom, prawdopodobnie będziesz chciał zapakować ją w plik wykonywalny. W przypadku systemu Windows najprostszym sposobem na stworzenie pliku wykonywalnego jest użycie programu <a href = "https://www.pyinstaller.org/">PyInstaller</a>.
 
