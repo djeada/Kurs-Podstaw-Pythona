@@ -1,27 +1,28 @@
 ## Wyjątki
-Wyjątkami nazywamy sytuacje, które uniemożliwiają poprawne wykonanie danego bloku kodu. Tym samym terminem określany jest również mechanizm języka Python pozwalający na radzenie sobie z tymi sytuacjami.
 
-W Pythonie istnieje szereg wyjątków zdefiniowanych w standardzie, takich jak <code>ZeroDivisionError</code>, który występuje, gdy próbujemy dzielić liczbę przez 0.
+W programowaniu, wyjątki są sytuacjami, które występują podczas wykonywania programu, uniemożliwiając jego poprawne działanie. W języku Python, mechanizm wyjątków jest kluczowym elementem obsługi błędów i nieoczekiwanych sytuacji.
 
-```python
-print(5 / 0)
-```
+### Podstawy wyjątków
 
-Możemy również sami wywołać wyjątek, np.: 
+Python posiada bogatą listę wbudowanych wyjątków, które można wykorzystać w swoich programach. Przykładem jest `ZeroDivisionError`, który występuje podczas próby dzielenia przez zero:
 
 ```python
-raise ValueError("Podano nieprawidlowa wartosc")
+print(5 / 0)  # Spowoduje wystąpienie wyjątku ZeroDivisionError
 ```
-  
-Uwaga, nic nie chroni nas przed wywołaniem wyjątku w nieodpowiednim miejscu. Naszym zadaniem jest dbanie o to, aby wywołanie wyjątku było wykonane w odpowiedniej sytuacji.
+
+Możemy też samodzielnie wywołać wyjątek przy użyciu słowa kluczowego `raise`:
+
+```python
+raise ValueError("Podano nieprawidłową wartość")
+```
+
+Chociaż jesteśmy w stanie wywołać dowolny wyjątek, powinniśmy zawsze dążyć do używania ich w odpowiednich kontekstach, tak aby komunikat błędu był jak najbardziej precyzyjny.
 
 ### Obsługa wyjątków
 
-Obsługa wyjątków polega na zapobieżeniu zatrzymaniu programu w przypadku wystąpienia nieoczekiwanej sytuacji. Jest to szczególnie ważne w programach, które działają "w tle" i nie są interaktywne.
+Aby zapobiec zatrzymaniu działania programu w wyniku wyjątku, można skorzystać z bloku `try/except`. Kod, który może spowodować błąd, umieszcza się wewnątrz bloku try, a obsługę błędu realizuje się w bloku except.
 
-Aby obsłużyć wyjątek, używamy bloku `try/except`. W bloku try umieszczamy kod, który może spowodować wystąpienie wyjątku. W przypadku wystąpienia wyjątku, wykonywany jest kod znajdujący się w bloku except.
-
-Oto przykład obsługi wyjątku `ZeroDivisionError`:
+Przykład obsługi wyjątku `ZeroDivisionError`:
 
 ```python
 try:
@@ -30,18 +31,9 @@ except ZeroDivisionError:
     print("Nie można dzielić przez zero")
 ```
 
-Wyjątek informuje nas o błędzie i nie powinniśmy go ignorować. Z tego powodu nigdy nie umieszczaj `pass` w bloku `except`.
+Dla jasności i przejrzystości kodu, warto unikać pustych bloków except (z użyciem `pass`), gdyż może to skutkować ukryciem błędów.
 
-Możemy również obsłużyć wyjątek, który jest podklasą innego wyjątku.
-
-```python
-try:
-    print(int("abc"))
-except ValueError:
-    print("Nie można zamienić tekstu na liczbę")
-```
-
-Istnieje opcja obsługi kilku różnych wyjątków w jednym bloku `try/except`. W takim wypadku, musimy umieścić osobny blok `except` dla każdego z nich.
+Możemy obsłużyć wiele różnych wyjątków w jednym bloku `try`:
 
 ```python
 try:
@@ -53,16 +45,16 @@ except ValueError:
     print("Nie można zamienić tekstu na liczbę")
 ```
 
-Jeśli chcemy obsłużyć wiele różnych wyjątków w jednym bloku, możemy umieścić ich nazwy po przecinku. Możemy też użyć wyjątku ogólnego, np. `Exception`, ale nie jest to zalecane, ponieważ nie wiemy, jaki konkretny wyjątek wystąpił.
+Aby obsłużyć kilka wyjątków w jednym bloku `except`, można umieścić ich nazwy po przecinku:
 
 ```python
 try:
-    # kod, ktory moze wywolac wyjatek
+    # kod, który może wywołać wyjątek
 except (ValueError, TypeError):
-    # kod, ktory zostanie wykonany w przypadku wystapienia wyjatku ValueError lub TypeError
+    # kod obsługi dla wyjątków ValueError lub TypeError
 ```
 
-Możemy również zapisać wyjątek do zmiennej i użyć go w bloku `except`.
+Za pomocą klauzuli `as` możemy przypisać wyjątek do zmiennej, co pozwala na dostęp do szczegółów błędu:
 
 ```python
 try:
@@ -71,13 +63,27 @@ except ZeroDivisionError as e:
     print(f"Wystąpił wyjątek: {e}")
 ```
 
-Blok `else` jest opcjonalny i wykonywany jest, jeśli nie wystąpił żaden wyjątek w bloku `try`. Możemy go wykorzystać do wykonania kodu, który ma być wykonany po prawidłowym wykonaniu bloku try. W przeciwieństwie do bloku except, blok else nie przyjmuje argumentów.
+Oprócz bloków try i except, Python oferuje bloki `else` i `finally`:
 
-Blok `finally` jest również opcjonalny, ale zawsze wykonywany bez względu na to, czy wystąpił wyjątek czy nie. Może być używany do wykonania kodu, który ma być wykonany zawsze, niezależnie od tego, czy wystąpił wyjątek czy nie. Może być przydatny, gdy chcemy zamknąć plik lub połączenie z bazą danych po zakończeniu pracy z nim.
+- Blok `else`: Wykonywany, gdy nie wystąpi żaden wyjątek w bloku try.
+- Blok `finally`: Zawsze jest wykonywany, niezależnie od tego, czy wystąpił wyjątek czy nie. Często używany do sprzątania, takiego jak zamknięcie plików czy połączeń z bazą danych.
 
-### Własny wyjątek
+```python
+try:
+    # kod, który może wywołać wyjątek
+except ValueError:
+    # obsługa wyjątku ValueError
+else:
+    # kod do wykonania, jeśli nie wystąpił żaden wyjątek
+finally:
+    # kod do wykonania zawsze, niezależnie od wystąpienia wyjątku
+```
 
-Możemy również tworzyć własne wyjątki. Nasz wyjątek musi dziedziczyć po klasie <code>Exception</code> lub jednej z jej podklas.
+Zrozumienie i właściwe wykorzystanie wyjątków jest kluczem do tworzenia niezawodnych i odpornych na błędy aplikacji w Pythonie.
+
+### Własne wyjątki w Pythonie
+
+Tworzenie własnych wyjątków jest przydatne, gdy chcemy obsłużyć specyficzne dla naszej aplikacji sytuacje błędów. Aby stworzyć własny wyjątek, należy stworzyć nową klasę, która dziedziczy po klasie `Exception` lub innej istniejącej klasie wyjątku.
 
 ```python
 class MojaWyjatkowaSytuacja(Exception):
@@ -88,39 +94,40 @@ class MojaWyjatkowaSytuacja(Exception):
         return repr(self.value)
 ```
 
-Możemy zgłosić nasz wyjątek za pomocą słowa kluczowego <code>raise</code>.
+Aby zgłosić nasz własny wyjątek, korzystamy ze słowa kluczowego `raise`:
 
 ```python
-raise MojaWyjatkowaSytuacja("To jest moj wyjatek")
+raise MojaWyjatkowaSytuacja("To jest mój wyjątek")
 ```
 
-Załóżmy, że chcemy sprawdzić czy liczba jest parzysta, gdyż tylko taka liczba może zostać użyta w dalszej części programu.
+Przyjmijmy założenie, że w pewnej części naszej aplikacji wymagamy, aby podawane liczby były parzyste. Możemy stworzyć funkcję sprawdzającą parzystość liczby i zgłaszającą błąd przy użyciu wyjątku:
 
 ```python
 def upewnij_sie_ze_liczba_jest_parzysta(liczba):
     if liczba % 2 != 0:
-        raise ValueError("Podano nieparzysta liczbe")
+        raise ValueError("Podano nieparzystą liczbę")
     
     return liczba
 ```
 
-Możemy użyć tej funkcji w taki sposób:
+Aby użyć tej funkcji i odpowiednio obsłużyć ewentualny wyjątek, możemy skorzystać z bloku `try/except`:
 
 ```python
 try:
-    sprawdz_parzystosc(5)
+    upewnij_sie_ze_liczba_jest_parzysta(5)
 except ValueError as v:
     print(v)
 else:
     print("Liczba jest parzysta")
-```else:
-        return True
+```
 
-Wyświetlona zostanie informacja o błędzie "Podano nieparzysta liczbe".
+Jeśli użyjemy powyższego kodu z liczbą 5, zostanie wyświetlony komunikat: "Podano nieparzystą liczbę". Jeśli natomiast użyjemy liczby parzystej, np. 6, zostanie wyświetlony komunikat: "Liczba jest parzysta".
 
 ### Wyjątki jako mechanizm przepływu sterowania
 
-Innym zastosowaniem wyjątków jest użycie ich jako mechanizm przepływu sterowania. W poniższym przykładzie używamy wyjątku do sprawdzenia, czy napis reprezentuje liczbę całkowitą:
+Chociaż wyjątki zostały pierwotnie zaprojektowane jako sposób na radzenie sobie z nieoczekiwanymi błędami, w pewnych sytuacjach mogą być używane jako mechanizm przepływu sterowania. Innymi słowy, mogą być używane do sterowania logiką programu w miejscach, gdzie tradycyjne metody, takie jak instrukcje warunkowe, mogą być mniej wyraźne lub mniej efektywne.
+
+Poniżej przedstawiony jest przykład funkcji, która sprawdza, czy dany napis reprezentuje liczbę całkowitą, wykorzystując wyjątki do przepływu sterowania:
 
 ```python
 def czy_liczba(napis):
@@ -130,3 +137,7 @@ def czy_liczba(napis):
         return False
     return True
 ```
+
+Gdy podamy do tej funkcji napis, który jest poprawną liczbą, funkcja int(napis) zostanie poprawnie wykonana i funkcja zwróci True. Jeśli napis nie jest poprawną liczbą, zostanie zgłoszony wyjątek ValueError, który zostanie przechwycony i funkcja zwróci False.
+
+Chociaż taki sposób korzystania z wyjątków może wydawać się praktyczny w niektórych sytuacjach, ważne jest, aby zachować ostrożność. Zbyt częste używanie wyjątków do przepływu sterowania może prowadzić do kodu, który jest trudniejszy do zrozumienia i utrzymania. W związku z tym, wyjątki powinny być używane głównie do obsługi błędów i nieoczekiwanych sytuacji, a nie jako główny mechanizm przepływu sterowania.

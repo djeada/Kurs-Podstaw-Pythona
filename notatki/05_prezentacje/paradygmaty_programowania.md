@@ -1,13 +1,13 @@
-# Paradygmaty w programowaniu
+## Paradygmaty w programowaniu
 
-Paradygmat w programowaniu to sposób myślenia o tworzeniu programów, oparty na zbiorze mechanizmów dostępnych w danym języku programowania. Istnieją dwa główne paradygmaty: imperatywny i deklaratywny.
+Paradygmat w programowaniu to nie tylko sposób myślenia o tworzeniu programów, ale także zestaw konceptów i technik, które kierują projektowaniem i strukturyzacją oprogramowania. Te filozofie wpływają na to, jak programiści definiują problemy oraz jak podejmują decyzje o sposobie ich rozwiązania. Chociaż istnieją dwa główne paradygmaty, imperatywny i deklaratywny, rzeczywistość jest bardziej złożona i wiele języków pozwala korzystać z wielu paradygmatów jednocześnie.
 
-# Paradygmat imperatywny
+### Paradygmat imperatywny
 
-Paradygmat imperatywny opiera się na sekwencji instrukcji, które modyfikują stan programu. Jest to podejście bottom-up, czyli skupiające się na krokach prowadzących do osiągnięcia pożądanego stanu. Podparadygmaty imperatywne to:
+Paradygmat imperatywny koncentruje się na "jak to zrobić". Opisuje sekwencje instrukcji, które modyfikują stan programu. Działanie programu oparte jest na sekwencji operacji zmieniających jego stan.
 
-* Proceduralny: oparty na koncepcji procedur i funkcji, pozwala na pogrupowanie kodu w funkcje.
-* Obiektowy: oparty na koncepcji klas i obiektów, pozwala na pogrupowanie kodu w klasy zbudowane z pól (określających stan) oraz metod (modyfikujących stan).
+- **Proceduralny**: Opiera się na organizacji kodu za pomocą funkcji i procedur, które wykonują określone zadania.
+- **Obiektowy**: Skupia się na jednostkach zwanych obiektami, które są instancjami klas. Klasy definiują zachowanie (metody) i stan (atrybuty) obiektów.
 
 ```python
 class Car:
@@ -25,198 +25,74 @@ car.move(0.5)
 print(car.position)  # 15
 ```
 
-# Paradygmat deklaratywny
+### Paradygmat deklaratywny
 
-Paradygmat deklaratywny polega na wskazaniu pożądanego stanu programu bez konieczności definiowania wszystkich kroków prowadzących do niego. Jest to podejście top-down, czyli skupiające się na osiągnięciu pożądanego rezultatu poprzez określenie zależności i reguł. Podparadygmaty deklaratywne to:
+Paradygmat deklaratywny skupia się na "co chcemy osiągnąć", zamiast na "jak to osiągnąć". Opisuje żądany wynik, nie zajmując się konkretnymi krokami prowadzącymi do jego osiągnięcia.
 
-* Funkcyjny: kod składa się z funkcji, które są wzorowane na wyrażeniach matematycznych i nie modyfikują zewnętrznych danych.
-* Logiczny: kod składa się z zestawu zależności i obliczenia są dowodem pewnego twierdzenia na podstawie tych zależności.
+- Funkcyjny: Kod jest zbiorem funkcji, które są wzorowane na wyrażeniach matematycznych. Nie mają one efektów ubocznych i nie modyfikują stanu zewnętrznego.
+- Logiczny: Skupia się na określaniu relacji i zależności. Programy są zbiorem faktów i reguł, a wykonanie programu polega na poszukiwaniu dowodów czy spełnienia określonych warunków.
 
 ```python
-from functools import reduce
-
+# Definicja funkcji czystej do obliczania nowej pozycji
 def move(position, speed, time):
-  return position + speed * time
+    return position + speed * time
 
-def get_positions(position, speed, time_list):
-  return list(map(lambda time: move(position, speed, time), time_list))
+# Rekursywna funkcja, która oblicza pozycje dla listy czasu
+def get_positions_recursive(position, speed, time_list):
+    if not time_list:
+        return []
+    return [move(position, speed, time_list[0])] + get_positions_recursive(move(position, speed, time_list[0]), speed, time_list[1:])
 
-def get_prefix_sums(lst):
-  return list(reduce(lambda x, y: x + [x[-1] + y], lst, [0]))
-
+# Funkcja do generowania listy ścieżek na podstawie pozycji początkowej, prędkości i listy czasu
 def get_path(position, speed, time_list):
-  return get_prefix_sums(get_positions(position, speed, time_list))[1:]
+    return get_positions_recursive(position, speed, time_list)
 
+# Wykorzystanie powyższych funkcji
 print(get_path(0, 10, [1, 0.5]))  # [10, 15]
 ```
 
-# Współczesne języki programowania
+### Współczesne języki programowania
 
-Współczesne języki programowania często łączą różne paradygmaty i pozwalają na mieszanie składni z różnych paradygatów w jednym programie. Dzięki temu programiści mogą wybierać najlepsze rozwiązanie dla konkretnego problemu i optymalizować swój kod.
+Współczesne języki programowania często łączą różne paradygmaty i oferują elastyczność, pozwalając programistom na mieszanie składni z różnych paradygmatów w jednym programie. Dzięki temu programiści mają swobodę wyboru i mogą stosować najbardziej odpowiednie narzędzia dla konkretnego problemu, co z kolei przekłada się na większą efektywność rozwoju i optymalizację kodu.
 
-Poniżej przedstawiono kilka elementów Pythona, które można uznać za charakterystyczne dla programowania obiektowego oraz funkcyjnego:
-Elementy charakterystyczne dla programowania obiektowego:
+Python to język, który z powodzeniem łączy cechy programowania obiektowego oraz funkcyjnego. Oto kilka charakterystycznych elementów dla obu tych paradygmatów w Pythonie:
 
-* Klasy: służą do definiowania nowych typów danych, zawierają pola (określające stan obiektu) oraz metody (modyfikujące stan obiektu).
-* Dziedziczenie: pozwala na tworzenie nowych klas, które rozszerzają istniejące klasy o dodatkowe funkcjonalności.
-* Enkapsulacja: polega na ukrywaniu szczegółów implementacji w obrębie klasy, co umożliwia użytkownikom korzystanie z obiektów bez konieczności znajomości ich wewnętrznej struktury.
+**Elementy charakterystyczne dla programowania obiektowego**:
 
-Elementy charakterystyczne dla programowania funkcyjnego:
+* **Klasy**: Służą do definiowania nowych typów danych i zawierają zarówno atrybuty (reprezentujące stan obiektu) jak i metody (operujące na tym stanie).
+* **Dziedziczenie**: Umożliwia tworzenie klas pochodnych, które dziedziczą atrybuty i metody po klasie bazowej, pozwalając jednocześnie na ich rozszerzanie lub modyfikację.
+* **Enkapsulacja**: Ukrywa wewnętrzne szczegóły klasy, dzięki czemu można je modyfikować bez wpływu na kod korzystający z tej klasy.
 
-* First-class functions: funkcje są traktowane jako zwykłe obiekty, co oznacza, że można je przekazywać jako argumenty do innych funkcji, zwracać je jako wartości z funkcji itp.
-* Higher-order functions: funkcje, które jako argumenty przyjmują inne funkcje lub zwracają je jako wartość.
-* Funkcje lambda: krótkie funkcje, które są często używane do tworzenia anonimowych funkcji w programowaniu funkcyjnym.
+**Elementy charakterystyczne dla programowania funkcyjnego**:
 
-Oczywiście powyższe elementy to tylko wybrane przykłady i nie wyczerpują wszystkich elementów charakterystycznych dla programowania obiektowego i funkcyjnego w Pythonie. W rzeczywistości Python jest językiem hybrydowym,
+* **First-class functions**: W Pythonie funkcje są obiektami pierwszej klasy, co oznacza, że można je przekazywać jako argumenty, zwracać z innych funkcji czy przypisywać do zmiennych.
+* **Higher-order functions**: Są to funkcje, które przyjmują inne funkcje jako argumenty lub zwracają je. Przykładem może być funkcja `map` lub `filter`.
+* **Funkcje lambda**: Umożliwiają szybkie tworzenie anonimowych funkcji na potrzeby jednorazowego użycia.
 
-# Ewolucja OOP
+W rzeczywistości Python, jak wiele współczesnych języków programowania, jest językiem hybrydowym. Oznacza to, że nie ogranicza się do jednego paradygmatu, ale pozwala na ich mieszanie w zależności od potrzeb i preferencji programisty. Taka elastyczność czyni Pythona niezwykle wszechstronnym i adaptowalnym do różnorodnych zastosowań, od analizy danych, przez rozwój aplikacji webowych, aż po skomplikowane systemy wbudowane.
 
-* Enkapsulacja to praktyka polegająca na łączeniu danych i zachowań w jednym bycie, np. w klasie, oraz na ograniczaniu dostępu do nich przez elementy zewnętrzne. Abstrakcja odnosi się do redukcji złożonych systemów do prostszych części, ukrywając szczegóły, które nie są potrzebne klientom. Polimorfizm natomiast oznacza zdolność bytów do zmiany zachowania w zależności od kontekstu, w którym są używane.
+### Ewolucja OOP (Programowania Obiektowego)
 
-* Klasy są wygodne, o ile posiadają prosty interfejs i nie są zbyt mocno zależne od innych klas, aby uniknąć tworzenia złożonych hierarchii klas, które mogą prowadzić do problemu "spaghetti code".
+Programowanie obiektowe (OOP) stało się dominującym paradygmatem w ciągu ostatnich dekad, ale jak każdy paradygmat, rozwijało się i dostosowywało do nowych wyzwań i koncepcji.
 
-* Tablice haszujące i wektory świetnie sprawdzają się w programowaniu obiektowym, ponieważ są to właściwe obiekty z określonym zestawem przypisanych im zachowań. Jednakże jest raczej szczególny przypadek, niż powszechne zjawisko.
+* **Enkapsulacja, Abstrakcja, i Polimorfizm**: Enkapsulacja odnosi się do praktyki ograniczania dostępu do pewnych składników obiektu i łączenia danych z zachowaniami. Abstrakcja pozwala na reprezentację złożonych systemów w bardziej ogólnej formie, ukrywając szczegóły. Polimorfizm daje możliwość definiowania wielu form dla funkcji lub metod, dzięki czemu można je używać w różnorodny sposób.
 
-* Klasowe podejście OOP może prowadzić do nadmiernej złożoności, trudności w utrzymaniu kodu i skalowaniu aplikacji. Poleganie na dziedziczeniu prowadzi do głębokich hierarchii klas i silnego powiązania między nimi, co uniemożliwia modyfikację jednej klasy bez wpływu na inne.
+* **Klasy i Złożoność**: Chociaż klasy są podstawowym budulcem OOP, mogą prowadzić do złożonych hierarchii i zależności. Ważne jest, aby zachować prostotę, unikając zbytniego powiązania i zagnieżdżenia.
 
-* Alternatywą dla klasycznej implementacji fundamentów OOP może być wykorzystanie technik programowania funkcyjnego, takich jak closure, aby osiągnąć enkapsulację, lub protokołów i interfejsów do osiągnięcia polimorfizmu.
+* **Kolekcje w OOP**: Tablice haszujące i wektory są często używane w OOP, ale nie każda kolekcja musi być "obiektowo zorientowana". Ważne jest, aby wybierać odpowiednie struktury danych dla konkretnych zastosowań.
 
-* W Rust i Go, enkapsulacja odbywa się na poziomie modułu, a metody i pola są widoczne tylko w obrębie tego samego modułu. Enkapsulacja na poziomie modułu nie przeczy głównyn założeniom OOP. 
+* **Wyzwania OOP**: Nadmierne poleganie na dziedziczeniu i głębokich hierarchiach klas może prowadzić do trudności w utrzymaniu kodu. Szczególnie w dużych systemach, gdzie zmiana w jednym miejscu może wpłynąć na wiele innych.
 
-* W Rust i Go zamiast klas i dziedziczenia, mamy struktury, które podobnie jak klasy enkapsulują dane i zachowania. Jednakże, struktury powinny być prostymi typami danych i nie ma możliwości tworzenia złożonych hierarchii.
+* **Funkcyjne podejście do OOP**: Techniki programowania funkcyjnego, takie jak closure czy funkcje wyższego rzędu, mogą być użyte do realizacji niektórych koncepcji obiektowych, takich jak enkapsulacja czy polimorfizm, oferując jednocześnie większą elastyczność i prostotę.
 
-* Większość modułów w standardowej bibliotece Rust zwykle zawiera tylko jeden lub dwa silnie powiązane typy. Ta reguła zgodna jest z modułowym podejściem, w którym każdy moduł ma określony cel i jest odpowiedzialny za mały zestaw powiązanych funkcjonalności. Ten zabieg zwiększa czytelność kodu i zmniejsza ryzyko wystąpienia błędów i bugów.
+* **OOP w Rust i Go**: Zarówno Rust, jak i Go oferują podejście do enkapsulacji oparte na modułach, gdzie metody i pola są ograniczone do konkretnego zakresu. Chociaż różni się to od klasycznego OOP, nadal jest zgodne z jego głównymi założeniami.
 
-# Stan
+* **Struktury zamiast klas**: W językach takich jak Rust i Go, zamiast klas mamy do czynienia ze strukturami. Struktury te służą do reprezentowania danych i, w przeciwieństwie do klas, nie mają wbudowanej koncepcji dziedziczenia.
 
-W programowaniu możemy mówić o dwóch rodzajach stanu: stateful i stateless. Stateful oznacza, że program zachowuje swój stan po wykonaniu określonej operacji i może go odczytać w późniejszym czasie. Stateless oznacza, że program nie zapamiętuje stanu po wykonaniu operacji i każde jej wywołanie traktowane jest jako odrębne zdarzenie.
+* **Modularność w Rust**: W praktyce, większość modułów w standardowej bibliotece Rust koncentruje się na jednym lub kilku ściśle powiązanych typach, co sprzyja przejrzystości, izolacji odpowiedzialności i ogólnej jakości kodu.
 
-Przykład funkcji trzymającej stan:
+Ostatecznie, OOP jest narzędziem - tak jak każdy paradygmat programowania. Kluczową kwestią jest umiejętność wyboru właściwych narzędzi i technik w zależności od konkretnego problemu.
 
-```python
-counter = 0
 
-def increment_counter():
-  global counter
-  counter += 1
-
-increment_counter()
-print(counter)  # 1
-increment_counter()
-print(counter)  # 2
-```
-
-Przykład funkcji nie zapamiętującej stanu:
-
-```python
-def increment_counter(counter):
-  return counter + 1
-
-counter = 0
-counter = increment_counter(counter)
-print(counter)  # 1
-counter = increment_counter(counter)
-print(counter)  # 2
-```
-
-# Zmienność danych
-
-W programowaniu mówimy o dwóch rodzajach zmienności danych: mutowalność (mutability) i niezmienność (immutability). Mutowalność oznacza, że dane są zmienne i mogą być zmodyfikowane przez program. Niezmienność oznacza, że raz przypisane dane są niezmienne i nie mogą być zmodyfikowane przez program.
-
-Przykłady mutowalnych wartości:
-
-* listy: [1, 2, 3]
-* słowniki: {'a': 1, 'b': 2}
-* obiekty zdefiniowane przez użytkownika za pomocą klas
-
-Przykłady niemutowalnych wartości:
-
-* liczby: 1, 2, 3
-* krotki: (1, 2, 3)
-* napisy: 'abc'
-* obiekty frozenset (niezmienne zbiory)
-
-Po dodaniu elementu do listy (mutowalnej wartości), identyfikator obiektu pozostaje taki sam:
-
-```python
-# mutowalna lista
-numbers = [1, 2, 3]
-print(id(numbers))  # wyświetla unikalny identyfikator obiektu
-numbers.append(4)
-print(id(numbers))  # ten sam identyfikator
-```
-
-Natomiast po zmianie wartości niemutowalnej liczby, identyfikator obiektu ulega zmianie:
-
-```python
-# niemutowalna liczba
-number = 1
-print(id(number))  # wyświetla unikalny identyfikator obiektu
-number += 1
-print(id(number))  # inny identyfikator
-```
-
-# Czystość
-
-Funkcja jest czysta, jeśli nie modyfikuje danych, których nie jest właścicielem. Czystość ma wiele zalet, takich jak czytelność kodu, optymalizacja kodu w czasie kompilacji oraz brak zjawiska wyścigu w programowaniu współbieżnym.
-
-Przykłady czystych funkcji:
-
-1. Funkcja zwracająca stałą wartość bez względu na jej argumenty:
-
-```python
-def stala(x):
-    return 5
-```
-
-2. Funkcja zwracająca wartość zależną tylko od jednego z argumentów:
-
-```python
-def identity(x, y):
-    return x
-```
-
-3. Funkcja zwracająca sumę dwóch argumentów:
-
-```python
-def suma(x, y):
-    return x + y
-```
-
-Przykłady nieczystych funkcji:
-
-1. Funkcja zmieniająca wartość zmiennej globalnej:
-
-```python
-licznik = 0
-def dodaj_do_licznika(x):
-    global licznik
-    licznik += x
-    return licznik
-```
-
-2. Funkcja modyfikująca elementy listy przekazanej jako argument:
-def zapisz_do_pliku(dane, nazwa_pliku):
-    with open(nazwa_pliku, "w") as f:
-        f.write(dane)
-    return nazwa_pliku
-```python
-def modyfikuj_liste(lst):
-    lst[0] = 5
-    return lst
-```
-
-3. Funkcja zapisująca dane do pliku:
-
-```python
-def zapisz_do_pliku(dane, nazwa_pliku):
-    with open(nazwa_pliku, "w") as f:
-        f.write(dane)
-    return nazwa_pliku
-```
-
-# Literatura
-
-* https://web.mit.edu/6.005/www/fa15/classes/09-immutability/
 * https://cs.lmu.edu/~ray/notes/paradigms/
 * https://homes.cs.aau.dk/~normark/prog3-03/html/notes/paradigms-book.html

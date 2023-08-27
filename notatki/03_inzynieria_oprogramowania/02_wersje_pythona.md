@@ -1,39 +1,62 @@
+## Zarządzanie wersjami Pythona za pomocą Pyenv
 
-## Wersje Pythona
+`Pyenv` to narzędzie, które pozwala łatwo zarządzać wieloma wersjami Pythona na jednym komputerze. Dzięki niemu możemy nie tylko izolować różne projekty od siebie, korzystając z różnych wersji Pythona, ale także przetestować nasz kod pod różnymi wersjami interpretera.
 
-Narzędzie <code>Pyenv</code> służy do izolowania różnych wersji Pythona. Jeśli na przykład chcesz przetestować swój kod w Pythonie 2.5, 3.6 i 3.10, potrzebujesz prostego sposobu na przełączanie się między nimi. <code>Pyenv</code> modyfikuje zmienną środowiskową PATH dodając do niej ścieżkę do specjalnego folderu <code>(pyenv root)/shims</code>. Ponadto <code>Pyenv</code> umożliwia pobieranie i instalowanie różnych wersji Pythona za pomocą polecenia <code>pyenv install</code>.
+### Jak działa Pyenv?
 
-Linki:
+Głównym zadaniem `Pyenv` jest manipulacja zmienną środowiskową `PATH`. Narzędzie to dodaje ścieżkę do specjalnego folderu `(pyenv root)/shims`, co pozwala na wybór odpowiedniej wersji Pythona w zależności od kontekstu.
 
-* https://github.com/pyenv/pyenv
-* https://github.com/pyenv-win/pyenv-win
+### Instalacja
 
-Po zainstalowaniu pyenv, możemy użyć polecenia pyenv install aby zainstalować nową wersję Pythona. Na przykład, aby zainstalować wersję Python 3.10, użyjemy polecenia:
+Aby zainstalować `Pyenv`, możesz skorzystać z oficjalnych repozytoriów:
 
-```python
-pyenv install 3.10
-```
+* [Pyenv dla systemów UNIX-podobnych (Linux, MacOS)](https://github.com/pyenv/pyenv)
+* [Pyenv dla Windows](https://github.com/pyenv-win/pyenv-win)
 
-Aby ustawić wersję Pythona, która będzie używana dla danego katalogu, użyj polecenia pyenv local:
+### Zarządzanie wersjami Pythona
 
-```python
-pyenv local 3.10
-```
+1. **Instalacja konkretnej wersji Pythona**
 
-Aby ustawić wersję Pythona, która będzie używana dla całego systemu, użyj polecenia pyenv global:
+    Aby zainstalować żądaną wersję Pythona, użyj polecenia:
 
-```python
-pyenv global 3.10
-```
+    ```bash
+    pyenv install 3.10.0
+    ```
 
-Aby wyświetlić listę zainstalowanych wersji Pythona, użyj polecenia pyenv versions:
+    Zwróć uwagę na to, że warto podać pełny numer wersji, w tym przypadku `3.10.0`, a nie tylko `3.10`.
 
-```python
-pyenv versions
-```
+2. **Ustawienie wersji Pythona dla danego katalogu**
 
-Aby wyświetlić bieżącą wersję Pythona, użyj polecenia pyenv version:
+    Jeśli chcesz ustawić wersję Pythona specyficznie dla jednego projektu, użyj polecenia:
 
-```python
-pyenv version
-```
+    ```bash
+    pyenv local 3.10.0
+    ```
+
+    Spowoduje to utworzenie pliku `.python-version` w bieżącym katalogu, który informuje `Pyenv` o tym, jaką wersję Pythona należy używać w tym konkretnym kontekście.
+
+3. **Ustawienie globalnej wersji Pythona**
+
+    Jeśli chcesz zmienić wersję Pythona, która jest używana jako domyślna dla Twojego użytkownika, użyj:
+
+    ```bash
+    pyenv global 3.10.0
+    ```
+
+4. **Wyświetlanie listy dostępnych wersji Pythona**
+
+    Aby sprawdzić, które wersje Pythona są zainstalowane na Twoim systemie, użyj:
+
+    ```bash
+    pyenv versions
+    ```
+
+5. **Sprawdzanie bieżącej wersji Pythona**
+
+    Aby sprawdzić aktualnie używaną wersję Pythona, użyj polecenia:
+
+    ```bash
+    pyenv version
+    ```
+
+Korzystanie z `Pyenv` pozwala na elastyczne zarządzanie wersjami Pythona, co jest szczególnie przydatne w środowiskach deweloperskich i przy wielu projektach opartych na różnych wersjach interpretera.

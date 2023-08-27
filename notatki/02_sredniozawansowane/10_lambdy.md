@@ -1,11 +1,14 @@
+## Wyrażenia Lambda w Pythonie
 
-## Lambdy
+W Pythonie wyrażenia lambda to krótkie, anonimowe funkcje, które można zdefiniować w jednym wierszu przy użyciu słowa kluczowego `lambda`. Są one często stosowane w miejscach, gdzie krótka, prostota funkcja jest wymagana na chwilę, bez potrzeby definiowania pełnoprawnej funkcji.
 
-Wyrażenia lambda to funkcje składające się z jednego wiersza instrukcji, definiowane za pomocą słowa kluczowego lambda. Lambdy nie używają słowa kluczowego return, ponieważ zawsze zwracają wynik wykonania tworzącego je wiersza instrukcji.
+### Podstawy
+
+Oto podstawowy przykład wyrażenia lambda w porównaniu do standardowej funkcji:
 
 ```python
 def zwykla_funkcja(liczba: int) -> int:
-  return liczba**2
+    return liczba**2
 
 przyklad_lambdy = lambda liczba: liczba**2
 
@@ -16,19 +19,23 @@ print(przyklad_lambdy(wartosc)) # 4
 print((lambda liczba: liczba**2)(wartosc)) # 4
 ```
 
-W porównaniu do pełnoprawnych funkcji definiowanych za pomocą słowa kluczowego def, lambdy są ograniczone:
+### Ograniczenia wyrażeń lambda
 
-- Możemy użyć jedynie jednego wiersza instrukcji.
-- Możliwe jest sprawdzenie warunku, ale nie można zagnieżdżać warunków.
-- Brak możliwości tworzenia zmiennych oraz przypisywania wartości do istniejących zmiennych (dla obiektów możemy użyć <code>setattr()</code>).
-- Brak pętli.
-  
-Lambdy są również przydatne, gdy chcemy dostosować się do wymagań danej funkcji, która przyjmuje jako argument funkcję. W takim przypadku nie musimy tworzyć pełnoprawnej funkcji i jej przekazywać, lecz możemy bezpośrednio podstawić lambda.
+Chociaż wyrażenia lambda są wygodne, mają pewne ograniczenia w porównaniu do standardowych funkcji:
 
-Na przykład, jeśli chcemy posortować listę obiektów według pewnego atrybutu, możemy skorzystać z metody `sorted()`, która przyjmuje argument `key` - funkcję, która ma zwracać wartość atrybutu według którego ma być sortowana lista. W takiej sytuacji lambda pozwala nam zdefiniować tę funkcję w miejscy wywołania `sorted()`.
+- Można zdefiniować tylko jedno wyrażenie.
+- Nie jest możliwe używanie instrukcji, takich jak `if`, `for` czy `while`.
+- Nie można definiować ani przypisywać zmiennych (chociaż można używać `setattr()` dla obiektów).
+- Są one mniej czytelne w przypadku skomplikowanych operacji.
+
+### Zastosowania
+
+Wyrażenia lambda są szczególnie przydatne w miejscach, gdzie funkcja wymaga jednego wyrażenia jako argumentu. Typowym zastosowaniem jest sortowanie listy według określonego kryterium:
 
 ```python
-lista = (('def', 100), ('ghi', 200), ('abc', 300))
+lista = [('def', 100), ('ghi', 200), ('abc', 300)]
 print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
 print(sorted(lista, key=lambda x: x[1])) # [('def', 100), ('ghi', 200), ('abc', 300)]
 ```
+
+W powyższym przykładzie, wyrażenie lambda zostało użyte do zdefiniowania funkcji klucza dla metody `sorted()`, co pozwala na elastyczne sortowanie listy bez konieczności tworzenia dodatkowych funkcji.

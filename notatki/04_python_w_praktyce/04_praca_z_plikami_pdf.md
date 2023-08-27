@@ -1,88 +1,105 @@
+## Manipulacja i analiza plików PDF
 
-## Praca z plikami PDF
-Istnieje kilka popularnych bibliotek do obsługi plików PDF. Jedną z najczęściej używanych jest biblioteka <code>PyPDF2</code>. Aby ją zainstalować, możemy użyć polecenia <code>pip install pypdf2</code>.
+Praca z plikami PDF w Pythonie jest możliwa dzięki kilku dostępnym bibliotekom. Jednym z najpopularniejszych narzędzi służących do tego celu jest `PyPDF2`.
+
+### Instalacja biblioteki PyPDF2
+
+Aby rozpocząć pracę z `PyPDF2`, najpierw trzeba ją zainstalować. Można to zrobić przy pomocy menedżera pakietów `pip`:
+
+```bash
+pip install pypdf2
+```
 
 ### Otwieranie pliku PDF
 
-Aby otworzyć plik PDF, używamy funkcji `PdfFileReader` z modułu `PyPDF2`.
+Korzystając z `PyPDF2`, możemy łatwo otworzyć i przeczytać plik PDF:
 
 ```python
 from PyPDF2 import PdfFileReader
 
-# otworz plik
+# Otwieranie pliku PDF
 with open('plik.pdf', 'rb') as plik:
-    reader = PdfFileReader(plik)
+    czytnik = PdfFileReader(plik)
 ```
 
-### Wypisywanie informacji o pliku
+'rb' w funkcji open oznacza tryb "odczyt binarny", który jest wymagany do czytania plików PDF.
 
-Aby wyświetlić informacje o pliku, takie jak ilość stron, autor czy tytuł, możemy skorzystać z odpowiednich właściwości obiektu <code>PdfFileReader</code>:
+### Eksploracja informacji o pliku
+
+Dzięki `PyPDF2` możemy także uzyskać różne informacje o pliku PDF, takie jak:
+
+- Liczba stron.
+- Autor.
+- Tytuł.
 
 ```python
 print(f"Ilość stron: {czytnik.getNumPages()}")
-print(f"Autor: {czytnik.getDocumentInfo().author}")
-print(f"Tytuł: {czytnik.getDocumentInfo().title}")
+informacje = czytnik.getDocumentInfo()
+print(f"Autor: {informacje.author}")
+print(f"Tytuł: {informacje.title}")
 ```
 
-### Odczytywanie tekstu
+### Eksploracja zawartości pliku PDF
 
-Aby wyświetlić zawartość pliku PDF, możemy użyć metody `getPage()`. Metoda `getPage()` oczekuje obiektu `PageObject` reprezentującego daną stronę. Metoda `getNumPages()` zwraca liczbę stron w pliku.
+Aby uzyskać dostęp do treści strony w pliku PDF, możemy skorzystać z metody `getPage()`, która zwraca obiekt `PageObject` reprezentujący daną stronę. Natomiast metoda `getNumPages()` informuje nas o liczbie stron w dokumencie.
 
-Poniższy kod wyświetla zawartość wszystkich stron pliku PDF:
+Poniższy fragment kodu prezentuje, jak wyświetlić zawartość wszystkich stron pliku PDF:
 
 ```python
-# pobierz liczbe stron
-liczba_stron = reader.getNumPages()
+liczba_stron = czytnik.getNumPages()
 
-# dla kazdej strony
-for strona in range(liczba_stron):
-    # pobierz tekst strony
-    tekst = reader.getPage(strona).extractText()
-    # wyswietl tekst
+for nr_strony in range(liczba_stron):
+    strona = czytnik.getPage(nr_strony)
+    tekst = strona.extractText()
     print(tekst)
 ```
 
-### Modyfikowanie pliku PDF
+### Modyfikowanie dokumentów PDF
 
-Aby modyfikować plik PDF, możemy użyć obiektu `PdfFileWriter` z modułu `PyPDF2`. Możemy dodawać nowe strony do pliku lub usuwać istniejące strony.
+Jeśli chcemy dokonać modyfikacji w pliku PDF, możemy skorzystać z obiektu `PdfFileWriter` dostępnego w module `PyPDF2`. Umożliwia on dodawanie nowych stron, usuwanie istniejących czy wprowadzanie innych zmian.
 
-Poniższy kod dodaje nową stronę z tekstem "Hello, World!" do pliku:
+Przykład poniżej przedstawia, jak dodać nową stronę z tekstem "Hello, World!" do dokumentu:
 
 ```python
-# utworz obiekt PdfFileWriter
+from PyPDF2 import PdfFileWriter
+
 writer = PdfFileWriter()
 
-# dodaj nowa strone z tekstem
-writer.addPage(writer.newTextPage("Hello, World!"))
+# Utworzenie nowej strony jest bardziej złożone niż w przykładzie
+# Potrzebujemy modułu reportlab do generowania treści strony
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
-# otworz plik do zapisu
+packet = BytesIO()
+can = canvas.Canvas(packet, pagesize=A4)
+can.drawString(100, 750, "Hello, World!")
+can.save()
+
+packet.seek(0)
+new_pdf = PdfFileReader(packet)
+writer.addPage(new_pdf.getPage(0))
+
 with open('nowy_plik.pdf', 'wb') as plik:
-    # zapisz plik
     writer.write(plik)
 ```
 
-### Łączenie plików PDF
+### Łączenie wielu plików PDF w jeden
 
-Możemy użyć poniższego kodu, aby połączyć wszystkie pliki PDF z listy:
+Jeśli chcemy połączyć wiele plików PDF w jeden dokument, możemy użyć `PdfFileMerger`. Poniżej znajduje się fragment kodu, który demonstruje, jak to zrobić:
 
 ```python
-import os
-import glob
 from PyPDF2 import PdfFileMerger
+import glob
 
-# utworzenie listy plikow
-pdf_files = []
-for filename in glob.glob('*.pdf'):
-    pdf_files.append(filename)
-
-# utworzenie obiektu merger
+pliki_pdf = glob.glob('*.pdf')
 merger = PdfFileMerger()
 
-# laczenie plikow
-for pdf in pdf_files:
-    merger.append(open(pdf, 'rb'))
+for pdf in pliki_pdf:
+    with open(pdf, 'rb') as plik:
+        merger.append(plik)
 
-# zapis nowego pliku
-with open('sciezka/do/nowego_pliku.pdf', 'wb') as fout:
-    merger.write(fout)
+with open('polaczony_dokument.pdf', 'wb') as wyjsciowy_plik:
+    merger.write(wyjsciowy_plik)
 ```
+
+Zwróć uwagę, że przy otwieraniu plików używamy kontekstu with, aby zapewnić prawidłowe zarządzanie zasobami i zamknięcie plików po ich użyciu.

@@ -1,44 +1,44 @@
-# Wstęp
+## Inspekcja Kodu
 
-* Inspekcja (recenzja) kodu, znana również jako "Code Review", to popularna praktyka w inżynierii oprogramowania.
-* Polega ona na przeczytaniu i ocenie kodu przez programistę niebędącego jego autorem, celem autoryzacji i akceptacji jakości kodu przed jego włączeniem do bazy kodu.
-* Często w tym celu otwierane są Pull Requesty w serwisie GitHub.
+Inspekcja kodu, nazywana również recenzją lub "Code Review", to kluczowy element cyklu życia oprogramowania, zastosowany, by poprawić jakość kodu oraz przyspieszyć rozwój projektu.
 
-# Cele
+### Czym jest Inspekcja Kodu?
 
-* Potwierdzenie, że kod spełnia wymagania klienta.
-* Wykrycie błędów (bugów) w kodzie.
-* Sprawdzenie zgodności stylu kodu ze stylem wybranym przez zespół.
-* Ewentualne podanie wskazówek do poprawienia czytelności lub architektury kodu.
-* Styl tutaj odnosi się nie tylko do kwestii takich jak formatowanie czy nazewnictwo, ale także do wszystkich standardów jakości, w tym użycia odpowiednich wzorców projektowych oraz podziału testów na jednostkowe, funkcjonalne i integracyjne.
+- To proces, w którym kod źródłowy jest przeglądany przez jednego lub więcej programistów, którzy nie są jego autorami.
+- Często stosowany jest w celu znalezienia i naprawienia błędów, które zostały przeoczone w początkowej fazie rozwoju.
+- Inspekcje są często realizowane przy pomocy Pull Requestów na platformach do kontroli wersji, takich jak GitHub.
 
-# Proces
+### Cele
 
-* Autor kodu samodzielnie sprawdza swój kod.
-* Autor kodu oddaje kod do recenzji.
-* Recenzenci dzielą się swoimi spostrzeżeniami i uwagami.
-* Autor refaktoryzuje kod i ponownie oddaje go do recenzji.
-* Recenzenci akceptują kod i integrują go z bazą kodu.
+- Upewnienie się, że kod spełnia wszystkie zdefiniowane wymagania.
+- Wykrycie wszelkich błędów czy niedociągnięć.
+- Sprawdzenie, czy kod jest zgodny ze standardami zespołu programistycznego, obejmującymi formatowanie, nazewnictwo, wzorce projektowe i strukturę testów.
+- Wspieranie współpracy i komunikacji w zespole poprzez wymianę uwag i sugestii.
 
-# Korzyści
+### Jak Przeprowadzać Inspekcję?
 
-*  Poprawa jakości kodu poprzez wykrywanie błędów i niedociągnięć.
-* Zwiększenie czytelności i zrozumienia kodu przez innych programistów, co ułatwia jego późniejsze modyfikowanie i utrzymanie.
-* Wymiana doświadczeń i wiedzy między członkami zespołu.
-* Usprawnienie procesu tworzenia oprogramowania poprzez lepsze planowanie i rozdzielenie odpowiedzialności.
-* Zwiększenie zaangażowania i motywacji członków zespołu poprzez współodpowiedzialność za kod.
-* Poprawa wizerunku firmy poprzez dostarczanie klientom wysokiej jakości produktów.
+1. **Przygotowanie**: Autor kodu przygotowuje się do recenzji, upewniając się, że jest gotowy do przeglądu i spełnia wszystkie podstawowe wymagania.
+2. **Przegląd**: Recenzenci przeglądają kod, zwracając uwagę na wszystkie ważne aspekty jakości, takie jak funkcjonalność, czytelność, zgodność ze standardami itp.
+3. **Komentarze**: Recenzenci udzielają informacji zwrotnych, wskazując obszary do poprawy lub wyrażając uznanie dla dobrze wykonanej pracy.
+4. **Poprawki**: Autor dokonuje niezbędnych poprawek w kodzie na podstawie otrzymanych uwag.
+5. **Akceptacja**: Po wprowadzeniu poprawek, recenzenci przeprowadzają ponowny przegląd, aby upewnić się, że wszystkie uwagi zostały uwzględnione, a następnie akceptują kod do integracji z główną bazą.
 
-# Powszechne problemy
+### Korzyści
 
-* Recenzenci szukają jedynie powierzchownych problemów, takich jak literówki czy nieścisłości w formatowaniu, zamiast skupiać się na krytycznych aspektach kodu.
-* Recenzenci usiłują narzucić swój styl pisania kodu na ocenianym kodzie, zamiast skupić się na jego jakości.
-* Recenzenci nie znają wymagań, które autor kodu otrzymał od klienta, co może prowadzić do niepotrzebnych sugestii i spowolnienia procesu.
-* Autor kodu może mieć trudności z przyjęciem krytyki i sugestii, co może prowadzić do oporu wobec zmian i negatywnych emocji.
-* Brak odpowiedniej komunikacji i współpracy między autorem a recenzentami może spowodować opóźnienia i nieporozumienia.
+- **Poprawa jakości**: Dzięki wielu oczom przeglądającym kod, łatwiej jest wyłapać błędy i potencjalne problemy.
+- **Współpraca**: Umożliwia lepsze zrozumienie kodu przez cały zespół, co ułatwia jego późniejsze modyfikowanie.
+- **Uczenie się**: Młodsi lub mniej doświadczeni programiści mogą uczyć się od bardziej doświadczonych kolegów.
+- **Integracja**: Ułatwia proces integracji nowego kodu z istniejącym projektem, zapewniając, że wszystko działa poprawnie razem.
 
-# Wskazówki dotyczące prawidłowego przeprowadzania inspekcji kodu
+### Powszechne wyzwania
 
-* Jeśli recenzje są używane jako narzędzie do negocjacji wynagrodzenia lub awansu, programiści mogą zacząć rywalizować ze sobą i rzucać sobie kłody pod nogi, co może prowadzić do niezdrowej atmosfery w zespole i pogorszenia jakości kodu.
-* Recenzje powinny być przeprowadzane wyłącznie w gronie programistów, ponieważ osoby nietechniczne mogą nie mieć wystarczającej wiedzy i doświadczenia, aby odpowiednio ocenić kod.
-* Recenzje mogą być źródłem negatywnych emocji dla autora kodu, dlatego ważne jest, aby język używany w komentarzach był ściśle nadzorowany i niezrażający dla innych. Warto również pamiętać o tym, aby skupić się na merytorycznych aspektach kodu, a nie na osobach.
+- **Subiektywność**: Ryzyko, że recenzenci będą oceniać kod na podstawie własnych preferencji, a nie ogólnie przyjętych standardów.
+- **Komunikacja**: Ważne jest, aby uwagi były konstruktywne i oparte na faktach, unikając języka, który może być postrzegany jako krytyczny lub obraźliwy.
+- **Czas**: Odpowiednie przeglądanie kodu wymaga czasu, co może spowolnić proces produkcji.
+  
+### Dobre praktyki
+
+- Unikaj używania recenzji jako narzędzia politycznego lub do promocji. Nie pozwól, aby recenzje stały się polem rywalizacji.
+- Skup się na kodzie, nie na osobie. Unikaj używania języka, który może być postrzegany jako osobisty atak.
+- Pamiętaj, że głównym celem jest poprawa jakości kodu, a nie znalezienie winnych.
+- Promuj otwartą komunikację i zachęcaj do zadawania pytań oraz dzielenia się wiedzą.

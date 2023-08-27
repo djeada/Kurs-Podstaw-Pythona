@@ -1,161 +1,241 @@
-
 ## Testy jednostkowe
 
-Testy jednostkowe są ważnym narzędziem w procesie tworzenia oprogramowania, ponieważ pomagają zapewnić, że nasz kod działa poprawnie i jest odporny na błędy. Pozwalają również na szybkie wykrycie błędów, które pojawiły się w wyniku zmian w kodzie, dzięki czemu możemy je szybko naprawić. 
+Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Umożliwiają one pewność, że napisane przez nas komponenty działają zgodnie z oczekiwaniami, a także pomagają w identyfikowaniu i naprawianiu błędów na wczesnym etapie.
 
-* Czerwone testy, czyli testy, które nie przeszły, pokazują, że coś, co działało wcześniej, aktualnie nie działa. Może to być spowodowane tym, że została wprowadzona jakaś zmiana w kodzie, która spowodowała, że test nie zadziałał poprawnie. Czerwone testy są sygnałem, że coś jest nie tak i konieczne jest przeanalizowanie kodu i znalezienie przyczyny problemu.
-* Zielone testy, czyli testy, które przeszły, pokazują, że to, co było sprawdzane w testach działa poprawnie. Nie oznacza to jednak, że cały program działa poprawnie - mogą być jeszcze inne fragmenty kodu, które nie zostały sprawdzone w testach i które mogą działać niepoprawnie. Zielone testy są ważne, ponieważ pozwalają upewnić się, że kod działa zgodnie z założeniami, ale nie są wystarczające do całkowitego zabezpieczenia aplikacji przed błędami.
+### Czym są testy jednostkowe?
 
-Ogólnie w Pythonie mamy dwie popularne biblioteki służące do testów jednostkowych: <code>unittest</code> i <code>pytest</code>. Obie biblioteki, dają nam możliwość tworzenia testów jednostkowych i uruchamiania ich automatycznie, co pozwala na skupienie się na kodowaniu i uniknięcie ręcznego testowania kodu. Obie biblioteki są dość proste w użyciu i oferują duże możliwości tworzenia i uruchamiania testów. Ostateczny wybór biblioteki zależy od indywidualnych potrzeb i preferencji programisty.
+* **Czerwone testy**:
+  - Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
+  - Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
+  
+* **Zielone testy**:
+  - To testy, które przeszły pomyślnie.
+  - O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
+  
+### Korzyści z testów jednostkowych
 
-### Unittest
+- **Dokumentacja kodu**: Testy jednostkowe służą jako doskonała dokumentacja. Pozwalają innym programistom zrozumieć, jak dany fragment kodu ma działać oraz jakie są oczekiwane rezultaty jego działania.
+  
+- **Automatyzacja**: W początkowej fazie projektu możliwe jest ręczne testowanie każdej modyfikacji. Jednak w miarę rosnącej złożoności projektu staje się to bardzo nieefektywne. Testy jednostkowe można łatwo zautomatyzować, co pozwala na sprawdzanie poprawności kodu w sposób szybki i systematyczny.
 
-Biblioteka ta została zbudowana zgodnie z filozofią programowania obiektowego, co oznacza, że w kodzie tworzymy klasy i korzystamy z dziedziczenia. Unittest oferuje również wiele funkcji assert, które pozwalają na sprawdzenie różnych aspektów działania programu.
+- **Wymuszanie dobrej architektury**: Pisanie testów jednostkowych wymusza modularność i separację zadań w kodzie, co prowadzi do bardziej klarownej i zrozumiałej struktury kodu.
 
-Przykład kodu z użyciem unittest:
+- **Pewność**: Testy jednostkowe dają pewność, że dokonane zmiany w kodzie nie wprowadziły niechcianych błędów w innych częściach systemu, które były wcześniej już przetestowane.
+
+### TDD (Test Driven Development)
+
+Technika "test driven development" (TDD) to podejście do tworzenia oprogramowania, w którym testy są tworzone przed kodem źródłowym. Proces tworzenia oprogramowania w podejściu TDD jest cykliczny i składa się z trzech głównych etapów:
+
+1. **Pisanie testu**: Zanim zostanie napisany jakikolwiek kod, programista tworzy test jednostkowy, który definiuje oczekiwane zachowanie nowej funkcjonalności. W tym momencie test nie przechodzi, ponieważ brakuje odpowiedniej implementacji.
+
+2. **Pisanie kodu**: Programista pisze minimalny kod potrzebny do przejścia testu. W tym momencie celem nie jest tworzenie idealnego rozwiązania, ale napisanie kodu, który sprawi, że test będzie przechodził.
+
+3. **Refaktoryzacja**: Kiedy test przechodzi, programista optymalizuje kod, eliminując redundancje i zapewniając, że struktura kodu jest klarowna i zgodna ze standardami.
+
+Korzystanie z TDD pomaga w utrzymaniu czystego kodu, minimalizuje ryzyko błędów i zachęca do myślenia o projektowaniu i architekturze systemu od samego początku procesu tworzenia oprogramowania.
+
+### Organizacja projektu z testami
+
+Dla wielu projektów, zwłaszcza tych większych, odpowiednia organizacja plików i katalogów jest kluczem do utrzymania przejrzystości i efektywności. Rozdzielenie kodu produkcyjnego od testów nie tylko pomaga w zarządzaniu plikami, ale także ułatwia konfigurację narzędzi CI/CD oraz automatyzację testów.
+
+Przykładowa struktura folderów dla projektu z testami może wyglądać tak:
+
+```bash
+projekt/
+│
+├── przykladowy_pakiet/
+│   ├── __init__.py
+│   ├── modul_a.py
+│   └── modul_b.py
+│
+└── tests/
+    ├── __init__.py
+    ├── test_modul_a.py
+    └── test_modul_b.py
+```
+
+Kluczową ideą jest tu utrzymanie logicznej struktury, która odzwierciedla organizację kodu produkcyjnego. Dzięki temu, w miarę rozrostu projektu, łatwo będzie dodawać, modyfikować i lokalizować testy.
+
+### Narzędzia do testów jednostkowych w Pythonie:
+
+W Pythonie istnieją dwie główne biblioteki do pisania i uruchamiania testów jednostkowych:
+
+1. **`unittest`**:
+   - Jest to standardowa biblioteka w Pythonie do testów jednostkowych.
+   - Umożliwia tworzenie testów, zestawów testów oraz uruchamianie ich.
+   - Posiada wbudowane mechanizmy asercji oraz setup i teardown dla przygotowywania środowiska testów.
+   
+2. **`pytest`**:
+   - Jest to zewnętrzna biblioteka, która stała się bardzo popularna w społeczności Pythona.
+   - Charakteryzuje się prostotą i bardziej naturalnym stylem pisania testów.
+   - Posiada bogatą funkcjonalność w zakresie parametryzacji testów, używania tzw. "fixtures" oraz wtyczek rozszerzających jej możliwości.
+
+Ostateczny wybór pomiędzy `unittest` a `pytest` zależy od potrzeb projektu i preferencji zespołu. Niezależnie od wyboru, regularne pisanie i uruchamianie testów jednostkowych jest kluczem do tworzenia niezawodnego oprogramowania.
+
+### Przykład testu unittest
+
+`unittest` to standardowa biblioteka w Pythonie przeznaczona do tworzenia testów jednostkowych. Podąża ona za paradygmatem programowania obiektowego, co oznacza, że testy są organizowane w postaci klas, a mechanizmy takie jak dziedziczenie mogą być wykorzystywane do tworzenia hierarchii testów czy rozszerzania funkcjonalności.
+
+Kluczowe cechy `unittest`:
+
+- Struktura oparta na klasach: każdy zestaw testów to klasa dziedzicząca po `unittest.TestCase`.
+- Bogaty zestaw funkcji `assert` do weryfikacji warunków (np. `assertEqual`, `assertTrue`).
+- Możliwość definiowania metod `setUp` i `tearDown` do przygotowywania i sprzątania po teście.
+
+Przykład kodu z użyciem `unittest`:
 
 ```python
 import unittest
 
-class TestSMTP(unittest.TestCase):
-    
-    def smtp_connection(self):
-    import smtplib
-    return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+def int_to_roman(num):
+    val = [
+        1000, 900, 500, 400,
+        100, 90, 50, 40,
+        10, 9, 5, 4,
+        1
+        ]
+    syms = [
+        "M", "CM", "D", "CD",
+        "C", "XC", "L", "XL",
+        "X", "IX", "V", "IV",
+        "I"
+        ]
+    roman_num = ''
+    i = 0
+    while  num > 0:
+        for _ in range(num // val[i]):
+            roman_num += syms[i]
+            num -= val[i]
+        i += 1
+    return roman_num
 
-    def test_helo(self):
-    response_code, msg = self.smtp_connection().ehlo()
-    self.assertEqual(response_code, 250)
+class TestRomanNumerals(unittest.TestCase):
+
+    def test_conversion(self):
+        self.assertEqual(int_to_roman(1), 'I')
+        self.assertEqual(int_to_roman(4), 'IV')
+        self.assertEqual(int_to_roman(40), 'XL')
+        self.assertEqual(int_to_roman(99), 'XCIX')
+        self.assertEqual(int_to_roman(1000), 'M')
 ```
 
-W powyższym przykładzie tworzymy klasę TestSMTP, która dziedziczy po klasie TestCase z biblioteki unittest. W tej klasie zdefiniowaliśmy funkcję smtp_connection, która tworzy połączenie z serwerem SMTP, oraz funkcję test_helo, która wywołuje metodę ehlo na połączeniu SMTP i sprawdza, czy otrzymano oczekiwany kod odpowiedzi (250).
+W powyższym przykładzie:
 
-Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
+    Funkcja int_to_roman konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
+    Klasa TestRomanNumerals dziedziczy po unittest.TestCase i służy do testowania funkcji int_to_roman.
+    Metoda test_conversion przeprowadza serię testów, sprawdzając różne przypadki konwersji.
 
-```
-python -m unittest
-```
+Aby uruchomić testy jednostkowe, można użyć następującego polecenia w konsoli:
 
-### Pytest
+python -m unittest nazwa_pliku_testowego.py
 
-Pytest to również biblioteka służąca do tworzenia i uruchamiania testów jednostkowych w języku Python. Została zbudowana zgodnie z filozofią "im prościej, tym lepiej", co oznacza, że nie ma w niej klas i dziedziczenia. Pytest pozwala na tworzenie testów poprzez definiowanie funkcji oznaczonych adnotacją @pytest.fixture.
+Pamiętaj, by nazwy plików z testami zaczynały się od słowa "test", ponieważ unittest szuka takich plików podczas skanowania katalogów.
 
-Przykład kodu z użyciem pytest:
+### Przykład testu pytest
+
+`pytest` to popularna i wszechstronna biblioteka do tworzenia testów w Pythonie. W porównaniu z `unittest`, `pytest` oferuje bardziej skondensowany i czytelny sposób definiowania testów, eliminując potrzebę tworzenia klas i korzystania z funkcji `assert`. Dodatkowo, `pytest` jest znany ze swojego rozbudowanego wyjścia i możliwości diagnozy, które pomagają w identyfikowaniu i rozwiązywaniu problemów w testach.
+
+Kluczowe cechy `pytest`:
+
+- Testy mogą być definiowane jako proste funkcje, bez potrzeby opakowywania ich w klasach.
+- Intuicyjne funkcje asercji - nie trzeba korzystać z metody `assertEqual` ani innych metod specyficznych dla `unittest`. Wystarczy użyć standardowego Pythonowego `assert`.
+- Bogaty zestaw wtyczek i integracja z wieloma narzędziami i bibliotekami trzecich stron.
+  
+Przykład kodu z użyciem `pytest`:
 
 ```python
-import pytest
+def int_to_roman(num):
+    val = [
+        1000, 900, 500, 400,
+        100, 90, 50, 40,
+        10, 9, 5, 4,
+        1
+        ]
+    syms = [
+        "M", "CM", "D", "CD",
+        "C", "XC", "L", "XL",
+        "X", "IX", "V", "IV",
+        "I"
+        ]
+    roman_num = ''
+    i = 0
+    while  num > 0:
+        for _ in range(num // val[i]):
+            roman_num += syms[i]
+            num -= val[i]
+        i += 1
+    return roman_num
 
-@pytest.fixture
-def smtp_connection():
-    import smtplib
-    return smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
-
-def test_helo(smtp_connection):
-    response_code, msg = smtp_connection.ehlo()
-    assert response_code == 250
+def test_int_to_roman():
+    assert int_to_roman(1) == 'I'
+    assert int_to_roman(4) == 'IV'
+    assert int_to_roman(40) == 'XL'
+    assert int_to_roman(99) == 'XCIX'
+    assert int_to_roman(1000) == 'M'
 ```
 
-Test składa się z dwóch części: dekoratora <code>@pytest.fixture</code> oraz funkcji testowej <code>test_helo()</code>.
+W powyższym przykładzie:
 
-Dekorator <code>@pytest.fixture</code> mówi nam, że funkcja <code>smtp_connection()</code> jest funkcją pomocniczą, która zostanie uruchomiona przed każdą funkcją testową. W tym przypadku <code>smtp_connection()</code> tworzy obiekt <code>SMTP</code> i zwraca go jako wartość. Funkcja ta nie jest testem jednostkowym, ale służy do przygotowania środowiska testowego.
+    Funkcja int_to_roman konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
+    Funkcja test_int_to_roman przeprowadza serię testów, sprawdzając różne przypadki konwersji.
 
-Natomiast funkcja testowa <code>test_helo()</code> jest testem jednostkowym. Funkcja ta przyjmuje jako argument obiekt <code>smtp_connection</code>, który został wcześniej utworzony przez dekorator <code>@pytest.fixture</code>. Funkcja testowa wywołuje na tym obiekcie funkcję <code>ehlo()</code> i sprawdza, czy kod odpowiedzi oraz wiadomość zwracana przez funkcję są takie same, jak oczekiwane wartości. Jeśli tak, to test zostaje zaliczony, w przeciwnym razie test zostaje uznany za nieudany (tzw. "czerwony test").
+Aby uruchomić testy napisane z użyciem pytest, można użyć następującego polecenia w konsoli:
 
-Aby uruchomić testy jednostkowe, wystarczy wywołać odpowiednie polecenie w konsoli: 
+pytest nazwa_pliku_testowego.py
 
-```
-pytest
-```
-
-### Korzyści z testów jednostkowych
-
-* Pomagają innym programistom zrozumieć cel danego fragmentu kodu produkcyjnego.
-* Gdy programy są małe, programista może ręcznie sprawdzić ich działanie z każdą modyfikacją. Wraz ze wzrostem złożoności, ręczne testowanie wszystkich części programu staje się niemożliwe. Testy jednostkowe można uruchomić automatycznie.
-* Wymuszają separację zadań między poszczególnymi fragmentami kodu.
-* Pozwalają na szybkie sprawdzenie poprawności działania kodu po dokonaniu zmian w kodzie produkcyjnym.
-
-### TDD
-
-Technika "test driven development" (TDD) to sposób pisania programów, w którym testy są pisane przed kodem produkcyjnym. Proces tworzenia programu składa się z trzech etapów:
-
-1. Testy jednostkowe.
-2. Kod produkcyjny.
-3. Refkatoryzajca kodu produkcyjnego.
-
-Programista nigdy nie przechodzi do implementacji nowych funkcjonalności, dopóki wszystkie trzy etapy nie zostały zakończone dla aktualnie implementowanych funkcjonalności.
-
-### Losowe dane nie mają miejsca w testach
-
-Załóżmy, że masz własną implementację jednego z algorytmów sortowania. Jeśli chcesz porównać wynik jego działania, z wynikiem działania funkcji <code>sorted()</code> z biblioteki standardowej to ręcznie przygotuj listy wejściowe.
-
-```python
-import pytest
-
-def test_wlasne_sortowanie():
-    lista_a  = [1, 1, 1]
-    lista_b = [3, 5, 2]
-    lista_c = [-1, 2, 3, -1, 0]
-    # import random
-    # lista_d = [random.randint(-10, 10) for _ in range(5)] # ZLE
-    
-    assert wlasne_sortowanie(lista_a) == sorted(lista_a)
-    assert wlasne_sortowanie(lista_b) == sorted(lista_b)
-    assert wlasne_sortowanie(lista_c) == sorted(lista_c)
-```
-
-Powyższy fragment kodu zawiera przykład użycia pytest do testowania funkcji <code>wlasne_sortowanie</code>. W tym przypadku, trzy listy są tworzone jako dane wejściowe: <code>lista_a</code>, <code>lista_b</code> i <code>lista_c</code>. Następnie są one porównywane z oczekiwanymi wynikami po wywołaniu funkcji <code>sorted()</code> na tych samych danych wejściowych za pomocą polecenia <code>assert</code>. Jeśli wynik zwrócony przez <code>wlasne_sortowanie()</code> jest różny od oczekiwanego wyniku, zostanie wygenerowany błąd, który poinformuje o niepowodzeniu testu.
+Pamiętaj, by nazwy plików z testami oraz same funkcje testowe zaczynały się od słowa "test", ponieważ pytest szuka takich funkcji/plików podczas skanowania katalogów.
 
 ### Od znalezienia buga do poprawnie działającego kodu
 
-Zauważono błąd w twoim programie. Co należy zrobić?
+Odkrycie błędu w twoim kodzie to dopiero początek drogi. Oto kroki, które warto podjąć, aby odnaleźć i skutecznie naprawić problem:
 
-1. Próbuj odtworzyć problematyczną sytuację. Na przykład, jeśli twoja aplikacja zamyka się po wciśnięciu przycisku mającego przenieść użytkownika na inną stronę, najpierw manualnie wykonaj wszystkie kroki prowadzące do pojawienia się niechcianego efektu.
-1. Zlokalizuj w kodzie, który fragment jest odpowiedzialny za pojawienie się znalezionego błędu.
-1. Dodaj test, który sprawdzi, czy niepożądana sytuacja występuje po wykonaniu zlokalizowanego fragmentu kodu. Na przykład, jeśli błąd pojawia się po wywołaniu funkcji <code>foo()</code>, najpierw znajdź test <code>test_foo()</code> i upewnij się, że funkcja <code>foo()</code> jest wywoływana z parametrami, przy których pojawia się błąd. Dodaj test wykrywający wystąpienie niepożądanej sytuacji. Po uruchomieniu testu otrzymasz czerwony komunikat. 
-1. W kolejnym kroku przyjdzie ci naprawić funkcję <code>foo()</code>. Możesz to zrobić na różne sposoby, ale pamiętaj, że celem jest zamienienie czerwonego komunikatu z testu na zielony. Możesz zmienić sposób działania funkcji, zmienić sposób przekazywania argumentów lub wyeliminować jakiś błąd. Ważne, by po zmianach test <code>test_foo()</code> przeszedł pomyślnie.
-1. Gdy test przechodzi pomyślnie, możesz przejść do kolejnego etapu, czyli refaktoryzacji kodu. To etap, w którym dbamy o to, by kod był czytelny, elegancki i łatwy do zrozumienia. Może to oznaczać przemianowanie zmiennych, zmianę sposobu ich deklaracji, a nawet usunięcie niepotrzebnych linii kodu. Refaktoryzacja powinna być przeprowadzana zgodnie z zasadami zdrowego rozsądku i nie powinna wpływać na poprawność funkcji.
-1. W przyszłości dbaj o to, by test już zawsze pozostał zielony.
+1. **Reprodukcja problemu**: Spróbuj dokładnie odtworzyć sytuację, w której wystąpił błąd. Wiedza o tym, jak i kiedy błąd się pojawia, jest kluczowa, aby zrozumieć jego przyczynę. Na przykład, jeśli twoja aplikacja zamyka się po naciśnięciu pewnego przycisku, zacznij od manualnego przejścia przez wszystkie kroki prowadzące do tego efektu.
 
+2. **Lokalizacja błędu**: Odszukaj w kodzie miejsce, które prawdopodobnie odpowiada za zaistniały problem.
+
+3. **Dodawanie testu**: Utwórz test, który symuluje odnaleziony błąd. Jeśli problem pojawia się po wywołaniu funkcji `foo()`, dodaj lub modyfikuj istniejący test `test_foo()` w taki sposób, aby odzwierciedlał sytuację prowadzącą do błędu. Po uruchomieniu tego testu powinieneś otrzymać czerwony komunikat, informujący o niepowodzeniu testu.
+
+4. **Naprawa błędu**: Teraz Twoim celem jest modyfikacja kodu tak, aby test przeszedł pomyślnie. Konieczne może być dostosowanie funkcji, zmiana argumentów przekazywanych do funkcji lub wyeliminowanie innych błędów. Pamiętaj, że kluczową sprawą jest to, by po wprowadzeniu zmian test `test_foo()` zakończył się sukcesem.
+
+5. **Refaktoryzacja**: Gdy test już przechodzi, warto zadbać o to, by Twój kod był jak najbardziej optymalny i czytelny. Refaktoryzacja może obejmować zmianę nazw zmiennych, reorganizację kodu czy usuwanie zbędnych fragmentów. Ważne jest jednak, aby w trakcie refaktoryzacji nie wprowadzić nowych błędów - dlatego po każdej większej zmianie warto ponownie uruchomić testy.
+
+6. **Utrzymanie jakości**: W przyszłości regularnie uruchamiaj testy, aby upewnić się, że wszystko działa jak należy. Pamiętaj, że każda modyfikacja kodu powinna być poprzedzona aktualizacją lub dodaniem odpowiednich testów. Dzięki temu zapewnisz ciągłość jakości i unikniesz powrotu starych błędów.
 ### Inne typy testów
 
-* Testy jednostkowe to testy sprawdzające odizolowane jednostki kodu, najczęściej pojedyncze funkcje.
-* Testy integracyjne to testy sprawdzające, jak różne elementy systemu współpracują ze sobą.
-* Testy całego systemu (end-to-end) to testy sprawdzające, jak system działa jako całość, od wejścia aż do wyjścia.
+W procesie tworzenia oprogramowania wykorzystuje się różne rodzaje testów, aby upewnić się, że system działa prawidłowo na różnych poziomach. Oto trzy główne typy testów:
 
-Ogólnie rzecz biorąc, im mniej testów jednostkowych, tym więcej testów integracyjnych i testów całego systemu jest potrzebnych, aby zapewnić odpowiedni poziom testowania. Ważne jest, aby zachować odpowiedni balans między różnymi typami testów.
+* **Testy jednostkowe**: Są to testy, które skupiają się na pojedynczych, izolowanych jednostkach kodu, takich jak funkcje czy metody. Mają na celu upewnienie się, że dany fragment kodu działa poprawnie w izolacji.
 
-Zgodnie z zaleceniami autora <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/">"Software Engineering at Google"</a> testy należy rozdzielić w następujących proporcjach:
+* **Testy integracyjne**: Te testy koncentrują się na interakcjach między różnymi częściami systemu, takimi jak moduły, komponenty czy serwisy. Ich celem jest sprawdzenie, czy różne elementy aplikacji poprawnie ze sobą współpracują.
 
-* 80% testy jednostkowe
-* 15% testy integracyjne
-* 5% testy całego systemu (end-to-end)
+* **Testy całego systemu (end-to-end)**: Jak sama nazwa wskazuje, te testy sprawdzają system jako całość, od wejścia do wyjścia. Celem jest upewnienie się, że cały system działa prawidłowo, uwzględniając wszystkie jego składniki.
 
-### Generowanie danych testowych automatycznie
+Optymalne testowanie oprogramowania wymaga odpowiedniego balansu między tymi typami testów. Zbyt mało testów jednostkowych może prowadzić do konieczności intensywniejszego testowania na wyższych poziomach. Według rekomendacji zawartych w książce ["Software Engineering at Google"](https://www.oreilly.com/library/view/software-engineering-at/9781492082781/), proporcje podziału testów powinny być następujące:
 
-Przy tworzeniu aplikacji, warto również zadbać o skrypty generujące dane testowe, które są potrzebne do pracy aplikacji. Na przykład, jeśli piszesz aplikację komunikującą się z bazą danych MySQL, powinieneś mieć skrypt, który automatycznie utworzy taką bazę danych i wypełni ją przykładowymi danymi. Dzięki temu, podczas pisania kodu, możesz od razu sprawdzić, czy działa on poprawnie, bez konieczności czekania na uruchomienie testów w środowisku produkcyjnym. Ponadto, masz możliwość automatycznego testowania całej aplikacji.
+* 70-80% testy jednostkowe
+* 15-20% testy integracyjne
+* 5-10% testy całego systemu (end-to-end)
 
-### Organizacja projektu z testami
+### Automatyczne generowanie danych testowych
 
-Aby zachować porządek w projekcie, warto rozdzielić kod produkcyjny i testy jednostkowe do osobnych folderach. W ten sposób łatwiej będzie zarządzać plikami i szybko odnaleźć potrzebne testy.
-
-Przykładowo, struktura projektu może wyglądać następująco:
-
-```bash
-projekt
-├── przykladowy_pakiet
-│   ├── __init__.py
-│   └── modul_a.py
-│   └── modul_b.py
-└── tests
-    ├── __init__.py
-    └── test_modul_a.py
-    └── test_modul_b.py
-```
-
-W ten sposób z jednej strony ograniczymy wielkość plików z testami, a z drugiej strony ułatwimy wszystkim życie, gdyż znacznie łatwiej będzie zlokalizować konkretny test.
+Podczas tworzenia aplikacji niezmiernie ważne jest, aby mieć dostęp do rzetelnych danych testowych. Może to być kluczowe, szczególnie gdy aplikacja wymaga interakcji z bazami danych lub innymi zewnętrznymi źródłami danych. Skrypty generujące dane testowe pozwalają szybko i efektywnie wypełniać system wartościami, które są zbliżone do rzeczywistych. Dzięki temu programiści i testerzy mogą ocenić, jak aplikacja zachowa się w prawdziwym środowisku, bez ryzyka wprowadzenia błędów w produkcji.
 
 ### Automatyzacja testów
 
-W momencie, gdy nasz projekt zaczyna rosnąć w skali, warto zastanowić się nad automatyzacją testów. Możliwe opcje to użycie narzędzi takich jak <a href="https://travis-ci.org/">Travis CI</a>, <a href="https://jenkins.io/">Jenkins</a>, czy <a href="https://circleci.com/">CircleCI</a>. Dzięki temu każdorazowa zmiana w kodzie źródłowym automatycznie uruchamia wszystkie testy, dzięki czemu mamy pewność, że zmiany nie zepsuły istniejącej funkcjonalności.
+Automatyzacja testów jest kluczowym elementem współczesnego procesu rozwoju oprogramowania, umożliwiając szybsze wykrywanie błędów i pewność, że wprowadzone zmiany nie wpłynęły negatywnie na istniejącą funkcjonalność. Współczesne narzędzia do automatyzacji testów i integracji ciągłej (CI/CD) umożliwiają nie tylko automatyczne uruchamianie testów, ale także automatyczne wdrażanie aplikacji w odpowiednich środowiskach.
 
-Automatyzacja testów to także dobre rozwiązanie, gdy nie chcemy tracić czasu na ręczne wykonywanie testów na wszystkich możliwych platformach i przeglądarkach. W takim przypadku warto zainwestować w narzędzia do testowania aplikacji w różnych przeglądarkach i systemach operacyjnych, takie jak <a href="https://www.selenium.dev/">Selenium</a>.
+Oto kilka powszechnie używanych narzędzi i platform:
+
+- [Travis CI](https://travis-ci.org/): Chmurzasta usługa CI, idealna dla projektów hostowanych na GitHubie. Zintegrowana z wieloma narzędziami, oferuje prostą konfigurację i jest często wybierana w projektach open source.
+
+- [Jenkins](https://jenkins.io/): Wielofunkcyjne narzędzie CI/CD open source, znane z elastyczności i bogatej ekosystemy wtyczek. Może być uruchomione na lokalnych serwerach lub w chmurze.
+
+- [GitLab CI/CD](https://docs.gitlab.com/ee/ci/): Zintegrowany z GitLabem system CI/CD, który pozwala na definiowanie skomplikowanych potoków pracy przy użyciu plików konfiguracyjnych.
+
+- [CircleCI](https://circleci.com/): Chmurzasta platforma CI/CD, która umożliwia automatyczne budowanie, testowanie i wdrażanie aplikacji w wielu środowiskach.
+
+Dla tych, którzy tworzą aplikacje webowe, kluczowe może być także testowanie w wielu przeglądarkach:
+
+- [Selenium](https://www.selenium.dev/): Popularne narzędzie do testowania aplikacji webowych w różnych przeglądarkach. Umożliwia symulację interakcji użytkownika i może być używane z wieloma językami programowania.
+
+Dzięki automatyzacji testów, zespoły deweloperskie mogą skupić się na tworzeniu wartościowych funkcji, mając pewność, że jakość oprogramowania jest nieustannie monitorowana i utrzymywana na wysokim poziomie.

@@ -1,63 +1,74 @@
 
-## Moduły i pakiety
+## Moduły i pakiety w Pythonie
 
-Za każdym razem, gdy używamy instrukcji <code>import</code>, importujemy do skryptu zewnętrzny moduł. Każdy plik Pythona jest modułem, którego nazwa to nazwa pliku bez rozszerzenia .py. <a href="https://docs.python.org/3/library/index.html">Dokumentacja</a> zawiera pełną listę wbudowanych modułów biblioteki standardowej Pythona. Przykładowo, tak możemy zaimporotwać moduł `requests`:
- 
+W Pythonie, moduły i pakiety umożliwiają organizację i strukturyzację kodu. Ułatwiają zarządzanie dużymi projektami oraz współpracę z innymi programistami.
+
+### Moduły
+
+Moduł to pojedynczy plik Pythona, który zawiera zestaw funkcji, klas i zmiennych. Moduł może być zaimportowany do innego modułu lub skryptu za pomocą instrukcji `import`. [Dokumentacja Pythona](https://docs.python.org/3/library/index.html) zawiera pełną listę wbudowanych modułów w bibliotece standardowej.
+
+Przykład importu modułu `requests`:
+
 ```python
 import requests
-print(type(requests)) # <class 'module'>
+print(type(requests))  # <class 'module'>
 ```
 
-Pakiety to foldery z modułami, w których znajduje się plik `init.py`. Jest to plik specjalny, który jest potrzebny do odróżnienia pakietu od zwykłego folderu.
+### Pakiety
+
+Pakiet to kolekcja powiązanych modułów zgrupowanych w jednym katalogu. Katalog ten musi zawierać plik __init__.py (może być pusty), który informuje Pythona, że dany katalog powinien być traktowany jako pakiet.
+
+Struktura katalogu dla pakietu:
 
 ```
 .
-└── nazwa_paczki
-    ├── __init__.py
-    └── przykladowy_skrypt_a.py
-    └── przykladowy_skrypt_b.py
-    └── przykladowy_skrypt_c.py
+├── nazwa_paczki
+│   ├── __init__.py
+│   ├── przykladowy_skrypt_a.py
+│   ├── przykladowy_skrypt_b.py
+│   └── przykladowy_skrypt_c.py
 └── main.py
 ```
- 
-Możemy importować moduły na kilka sposobów:
 
-* Zaimportowanie całego modułu:
+### Importowanie modułów i pakietów
+
+Moduły i funkcje z nich można importować na różne sposoby:
+
+- Zaimportowanie całego modułu:
 
 ```python
 import nazwa_modulu
 ```
 
-* Zaimportowanie całego modułu i nadanie mu aliasu:
+- Zaimportowanie modułu z aliasem:
 
 ```python
 import nazwa_modulu as alias
 ```
 
-* Zaimportowanie wybranych funkcji z modułu:
+- Zaimportowanie konkretnych funkcji z modułu:
 
 ```python
 from nazwa_modulu import fun_1, fun_2
 ```
 
-* Zaimportowanie wybranych funkcji z modułu i nadanie im aliasów:
+- Zaimportowanie funkcji z aliasem:
 
 ```python
 from nazwa_modulu import fun_1 as f1, fun_2 as f2
 ```
 
-* Zaimportowanie wszystkich funkcji z modułu:
+- Zaimportowanie całej zawartości modułu:
 
 ```python
 from nazwa_paczki.przykladowy_skrypt_a import *
-
-fun_a()
-fun_b()
 ```
 
-Należy uważać z używaniem instrukcji <code>from modul import *</code>, ponieważ zaimportowane zostają wszystkie zmienne i funkcje z modułu, niezależnie od tego czy ich będziemy używać czy nie. Może to prowadzić do konfliktów nazw oraz utrudnić odczytanie kodu.
+Korzystaj ostrożnie z instrukcji `from modul import *`. Importuje ona wszystkie funkcje i zmienne z modułu, co może prowadzić do niechcianych konfliktów nazw.
 
-Uwaga: instrukcje, które nie są częścią definicji żadnej funkcji, zostaną automatycznie wykonane podczas importowania modułu!
+### Wykonywanie kodu podczas importowania
+
+Kod, który nie jest częścią definicji funkcji czy klasy, zostaje wykonany podczas importowania modułu. 
 
 Przykład:
 
@@ -72,7 +83,7 @@ wyslij_rakiety()
 ```
 
 Jeśli ten moduł zostanie zaimportowany w innym skrypcie, to funkcja `wyslij_rakiety()` zostanie wywołana podczas importowania modułu.
-Aby temu zapobiec, należy umieścić wszystkie instrukcje, które mają być wykonywane poza definicjami funkcji, w ciele następującego warunku <code>if name == "main":</code> :
+Aby zapobiec niechcianemu wywoływaniu kodu podczas importowania, używa się konstrukcji:
 
 ```python
 def fun_a():

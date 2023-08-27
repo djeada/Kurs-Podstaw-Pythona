@@ -1,20 +1,41 @@
-
 ## Pliki wykonywalne i PyInstaller
 
-Jeśli chcesz udostępnić swoją aplikację innym osobom, prawdopodobnie będziesz chciał zapakować ją w plik wykonywalny. W przypadku systemu Windows najprostszym sposobem na stworzenie pliku wykonywalnego jest użycie programu <a href = "https://www.pyinstaller.org/">PyInstaller</a>.
+Jeśli chcesz podzielić się swoją aplikacją Python z innymi użytkownikami, którzy niekoniecznie mają zainstalowane środowisko Pythona, pakowanie twojego kodu w plik wykonywalny (.exe, .app, .bin itp. w zależności od systemu operacyjnego) jest doskonałym rozwiązaniem. Narzędziem, które doskonale spełnia to zadanie, jest [PyInstaller](https://www.pyinstaller.org/).
 
-Aby użyć PyInstaller, należy zainstalować go za pomocą pip:
+### Instalacja
 
-```
+Aby zacząć korzystać z PyInstaller, najpierw musisz go zainstalować. Możesz to zrobić za pomocą narzędzia pip:
+
+```bash
 pip install pyinstaller
 ```
 
-Następnie możesz wygenerować plik wykonywalny za pomocą polecenia:
+### Tworzenie pliku wykonywalnego
 
+Po zainstalowaniu PyInstaller możesz łatwo przekształcić swój skrypt Pythona w plik wykonywalny:
+
+```bash
+pyinstaller --onefile nazwa_pliku.py
 ```
-pyinstaller nazwa_pliku.py
-```
 
-Po wykonaniu polecenia zostanie utworzony folder dist, w którym znajdziesz plik wykonywalny o nazwie nazwa_pliku.exe. Możesz go umieścić w dowolnym miejscu na dysku i uruchomić.
+Opcja `--onefile` powoduje, że cała aplikacja, wraz ze wszystkimi zależnościami, jest pakowana w jeden plik wykonywalny.
 
-PyInstaller ma również opcje pozwalające na dostosowanie sposobu tworzenia plików wykonywalnych do swoich potrzeb. Przykładowo, możesz wybrać, czy chcesz zawrzeć w pliku wykonywalnym zasoby (np. obrazy, dźwięki), czy też chcesz udostępnić je osobno. Możesz także określić, czy plik wykonywalny ma być uruchamiany w oknie konsoli, czy też w osobnym oknie. Więcej informacji o opcjach dostępnych w PyInstaller znajdziesz w <a href = "https://pyinstaller.readthedocs.io/en/stable/index.html">dokumentacji</a>.
+Po zakończeniu procesu, w wygenerowanym katalogu dist znajdziesz plik wykonywalny (np. `nazwa_pliku.exe` dla Windows). Teraz możesz łatwo podzielić się swoją aplikacją, przesyłając ten plik.
+
+### Zaawansowane ustawienia
+
+PyInstaller oferuje szeroką gamę opcji i flag, które pozwalają dostosować proces tworzenia pliku wykonywalnego. Oto kilka przykładów:
+
+- **Tryb GUI vs Tryb konsoli**: Domyślnie PyInstaller tworzy plik wykonywalny z oknem konsoli. Jeśli chcesz ukryć okno konsoli (przydatne dla aplikacji z interfejsem graficznym), możesz użyć flagi `--noconsole`.
+
+- **Dołączanie zasobów**: Jeśli twoja aplikacja korzysta z dodatkowych plików, takich jak obrazy czy dźwięki, możesz je dołączyć do pliku wykonywalnego za pomocą flagi `--add-data='ścieżka/źródłowa;ścieżka/docelowa'`.
+
+- **Ikonka aplikacji**: Chcesz, aby twój plik wykonywalny miał niestandardową ikonę? Użyj flagi `--icon=ścieżka_do_ikony.ico`.
+
+- **Wyłączanie modułów**: Jeśli wiesz, że pewne moduły Pythona nie są potrzebne w twoim pliku wykonywalnym, możesz je wykluczyć za pomocą flagi `--exclude`.
+
+- **Optymalizacja**: Możesz zredukować rozmiar pliku wykonywalnego i przyspieszyć start aplikacji, korzystając z flagi `--optimize=1` lub `--optimize=2`.
+
+- **Jedno plik vs Katalog**: Domyślnie PyInstaller tworzy katalog z plikiem wykonywalnym i wszystkimi zależnościami. Jeśli chcesz, aby cała aplikacja była spakowana w jeden plik, użyj opcji `--onefile`.
+
+Aby uzyskać pełną listę dostępnych opcji i dokładne ich opisy, warto odwiedzić [oficjalną dokumentację PyInstaller](https://pyinstaller.readthedocs.io/en/stable/index.html).

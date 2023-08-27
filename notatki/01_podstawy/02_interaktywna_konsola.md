@@ -1,25 +1,46 @@
-## Interaktywna konsola
+## Interaktywna konsola Pythona
 
-Konsola Pythona to interaktywne środowisko, w którym można wpisywać i wykonywać pojedyncze polecenia. Aby otworzyć konsolę, należy wpisać polecenie *python* w wierszu poleceń. Wówczas zostanie wyświetlona informacja o wersji Pythona dostępnej w systemie.
+Interaktywna konsola Pythona, nazywana również interpreterem, to narzędzie umożliwiające wpisywanie i natychmiastowe wykonanie instrukcji w języku Python. Dzięki niej możemy szybko testować fragmenty kodu, eksplorować biblioteki czy uczyć się nowych funkcji języka.
 
-```
->>> python
-python 2.7.13 (default, Sep  2 2019, 20:42:59)
-```
+### Uruchomienie konsoli
 
-Z poziomu konsoli można wykonywać wszystkie dostępne polecenia Pythona. Po wpisaniu polecenia i naciśnięciu klawisza *Enter*, zostanie ono natychmiast wykonane i zwrócony ewentualny wynik (nie wszystkie komendy zwracają wynik). Polecenie <code>help</code> pozwala uzyskać informacje o dostępnych komendach i ich możliwych parametrach. Można również wywoływać funkcje z bibliotek, takich jak np. <code>math.pi</code>, która zwraca stałą pi.
+Aby otworzyć interaktywną konsolę Pythona, otwórz wiersz poleceń (np. `cmd` lub `PowerShell` w systemie Windows) i wpisz `python`. Powinieneś zobaczyć informację o wersji Pythona i znak zachęty (`>>>`), który wskazuje, że konsola jest gotowa do przyjmowania poleceń.
 
 ```
->>> help
-Type help() for interactive help, or help(object) for help about object.
+$ python
+Python 3.9.6 (default, Jul 30 2021, 16:36:19)
+[Clang 12.0.0 (clang-1200.0.32.29)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+```
 
->>> 3 + 4
-7
+### Wykonywanie poleceń
 
->>> print('Hello world')
-Hello world
+Z poziomu konsoli możesz wprowadzać polecenia Pythona. Wprowadź instrukcję i naciśnij `Enter`, aby ją wykonać. Oto kilka przykładów:
 
->>> import math
->>> math.pi
+```
+2 + 3
+5
+
+print("Witaj, świecie!")
+Witaj, świecie!
+```
+
+### Eksploracja bibliotek
+
+Możesz łatwo korzystać z wbudowanych bibliotek i funkcji. Na przykład, aby uzyskać wartość liczby π z biblioteki `math`:
+
+```
+import math
+math.pi
 3.141592653589793
 ```
+
+### Pomoc i informacje
+
+Jeśli potrzebujesz pomocy w związku z określoną funkcją lub chciałbyś dowiedzieć się więcej o dostępnych komendach, użyj funkcji `help()`:
+
+```
+help()
+```
+
+Ta funkcja otworzy interaktywny tryb pomocy, w którym możesz przeszukiwać dokumentację oraz informacje o różnych modułach i funkcjach Pythona.

@@ -4,13 +4,12 @@ Mamy do dyspozycji kilka różnych sposobów przechowywania danych. Te sposoby t
 
 Oto najpopularniejsze sturktury danych:
 
-* Listy: listy to uporządkowane kolekcje elementów, które mogą być dowolnego typu. Możemy do nich dodawać i usuwać elementy, a także zmieniać ich kolejność. W liście mogą występować duplikaty.
-* Krotki: krotki to podobne do list struktury, ale są one niezmienne. Raz utworzona krotka nie może być zmieniona. W krotkach również mogą występować duplikaty.
-* Zbiory: zbiory to nieuporządkowane kolekcje elementów, w których nie mogą występować duplikaty. Zbiory są szczególnie przydatne, gdy intersują nas jedynie unikalne wartości.
-duplikaty.
-* Słowniki: słowniki to indeksowane kolekcje par klucz-wartość. Wszystkie klucze w słowniku muszą być unikalne, natomiast wartości mogą być duplikatami. Słowniki są bardzo przydatne do przechowywania danych w formie tabeli.
+* Listy: Listy to uporządkowane kolekcje elementów, które mogą być różnych typów. Są one modyfikowalne, co oznacza, że możemy dodawać, usuwać oraz modyfikować elementy na liście. W liście mogą występować duplikaty.
+* Krotki: Krotki są podobne do list, ale są niemodyfikowalne. Oznacza to, że po ich utworzeniu nie możemy zmieniać ich zawartości. Krotki są często używane tam, gdzie chcemy zachować stałość danych. Podobnie jak listy, krotki mogą zawierać duplikaty.
+* Zbiory: Zbiory to nieuporządkowane kolekcje unikalnych elementów. Ze względu na ich unikalność, zbiory są użyteczne tam, gdzie interesują nas jedynie różnorodne wartości.
+* Słowniki: Słowniki to kolekcje par klucz-wartość. Klucze w słowniku muszą być unikalne, ale wartości mogą się powtarzać. Słowniki są szczególnie przydatne, gdy chcemy przechowywać dane w sposób zorganizowany, np. informacje o osobie, gdzie kluczem jest nazwa atrybutu (np. "imię"), a wartością jest konkretne dane (np. "Anna").
 
-Oczywiście, istnieją również inne struktury danych ale te wymienione są najczęściej używane i najważniejsze dla początkujących.
+Każda z tych struktur danych ma swoje zastosowania i cechy, które sprawiają, że jest odpowiednia w określonych sytuacjach. Warto więc znać je wszystkie i umieć wybrać odpowiednią strukturę dla danego problemu.
 
 ### Lista
 

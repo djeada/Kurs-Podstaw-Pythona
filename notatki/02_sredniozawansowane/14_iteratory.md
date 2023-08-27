@@ -1,43 +1,68 @@
-
 ## Iteratory
 
-Pętla `for` jest narzędziem, które umożliwia przejście przez kolejne elementy sekwencji, takiej jak lista, ciąg znaków lub tuple. Możemy użyć pętli `for` w następujący sposób:
+W języku Python pętla `for` służy do iterowania przez kolekcje lub iterowalne obiekty, takie jak listy, napisy, krotki czy słowniki. Kluczowym konceptem w kontekście iteracji jest tzw. iterator.
+
+### Podstawy działania iteratorów
+
+Przykład iteracji przez listę:
 
 ```python
-for elem in lista:
+for elem in [1, 2, 3]:
     print(elem)
 ```
 
-Wbudowane kolekcje, takie jak listy, ciągi znaków i tuple, posiadają metodę `__iter__()`, która zwraca iterator dla danej kolekcji. Iterator to obiekt, który umożliwia przejście przez elementy kolekcji po kolei. Możemy wywołać funkcję `next()` z przekazanym jako argument iterator, aby pobrać kolejny element kolekcji. Jeśli iterator nie ma już więcej elementów do zwrócenia, zostanie rzucony wyjątek `StopIteration`.
+Wbudowane kolekcje, takie jak listy, napisy czy krotki, są "iterowalne", co oznacza, że mają zaimplementowaną metodę `__iter__()`. Wywołanie tej metody zwraca iterator - obiekt, który posiada metodę `__next__()`. Dzięki niej można uzyskać dostęp do kolejnych elementów kolekcji.
 
 ```python
 lista = [1, 2, 3]
 iterator = iter(lista)
-print(next(iterator)) # wyswietli 1
-print(next(iterator)) # wyswietli 2
-print(next(iterator)) # wyswietli 3
-print(next(iterator)) # zostanie wyrzucony wyjatek
+print(next(iterator))  # 1
+print(next(iterator))  # 2
+print(next(iterator))  # 3
+# print(next(iterator))  # Wyrzuca wyjątek StopIteration
 ```
 
-Ten mechanizm jest używany wewnętrznie przez pętlę `for`. Iteratory pozwalają na implementację własnych zasad przechodzenia przez kolekcję. Możemy stworzyć własną klasę iterowalną, implementując metodę `__iter__()` i używając słowa kluczowego `yield` w celu zwracania elementów kolekcji po kolei.
+Gdy iterator osiągnie koniec kolekcji, wywołanie metody `__next__()` spowoduje wyrzucenie wyjątku `StopIteration`, informującego o tym, że nie ma już więcej elementów do zwrócenia.
+
+### Tworzenie własnych iteratorów
+
+Aby stworzyć własny iterator, trzeba zdefiniować dwie metody: `__iter__()` oraz `__next__()`. Metoda `__iter__()` powinna zwrócić obiekt iteratora (często jest to self), a metoda `__next__()` powinna zwracać kolejny element lub rzucać wyjątek StopIteration, gdy elementy się skończą.
+
+Przykład:
 
 ```python
-class ObiektIterowalny:
+class MojaKolekcja:
+    def __init__(self):
+        self.elementy = [1, 2, 3]
 
-  def __init__(self):
-    self.lista_a = [3, 2, 1]
-    self.lista_b = [-1, -2, -3]
+    def __iter__(self):
+        self.indeks = 0
+        return self
 
-  def __iter__(self):
-    licznik = 0
-    while licznik < len(self.lista_a) and len(self.lista_b):
-      yield self.lista_a[licznik], self.lista_b[licznik]
-      licznik+=1
+    def __next__(self):
+        if self.indeks < len(self.elementy):
+            wynik = self.elementy[self.indeks]
+            self.indeks += 1
+            return wynik
+        else:
+            raise StopIteration
 
-obiekt = ObiektIterowalny()
-
-for elem in obiekt:
-  print(elem)
+kolekcja = MojaKolekcja()
+for elem in kolekcja:
+    print(elem)
 ```
 
-Dzięki temu, że nasz obiekt jest iterowalny, możemy używać go w pętli `for` w taki sam sposób, jak wbudowane kolekcje.
+### Generatory jako iteratory
+
+Generatory są specjalnym rodzajem iteratorów, które definiuje się za pomocą funkcji i słowa kluczowego `yield`. Dzięki generatorom można łatwo tworzyć własne iterowalne sekwencje bez konieczności definiowania klas z metodami `__iter__()` i `__next__()`.
+
+Przykład:
+
+```python
+def generator_liczb():
+    for i in range(3):
+        yield i
+
+for liczba in generator_liczb():
+    print(liczba)
+```

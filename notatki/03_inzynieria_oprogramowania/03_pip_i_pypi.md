@@ -1,50 +1,100 @@
-
 ## PIP i PyPI
 
-PIP to narzędzie umożliwiające instalację pakietów Pythona dostępnych na stronie PyPI (Python Package Index).
+`PIP` (Python Package Installer) to menedżer pakietów dla języka Python, który pozwala na łatwą instalację, aktualizację i usunięcie pakietów dostępnych w repozytorium `PyPI` (Python Package Index).
 
-Instalacja:
+### Instalacja PIP
 
-1. Pobierz skrypt <a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a>.
-1. Uruchom skrypt <code>python get-pip.py</code>.
-1. Zweryfikuj poprawność instalcji wpisując w wierszu poleceń następujące komendy: <code>pip help</code>.
+1. Pobierz skrypt [get-pip.py](https://bootstrap.pypa.io/get-pip.py).
+2. Uruchom skrypt za pomocą:
 
-Aby zainstalować konkretny pakiet, użyj:
-
-```
-pip install <nazwa_pakietu>
-```
-    
-Aby wyświetlić szczegóły zainstalowanego pakietu, użyj:
-    
-```
-pip show <nazwa_pakietu>
+```bash
+python get-pip.py
 ```
 
-Aby wyświetlić listę wszystkich aktualnie używanych pakietów, użyj:
+3. Sprawdź, czy instalacja przebiegła pomyślnie, wywołując:
 
+```bash
+pip help
 ```
+
+### Podstawowe operacje z PIP
+
+- Instalacja pakietu:
+
+```bash
+pip install nazwa_pakietu
+```
+
+- Wyświetlanie szczegółów zainstalowanego pakietu:
+
+```bash
+pip show nazwa_pakietu
+```
+
+- Lista zainstalowanych pakietów:
+
+```bash
 pip list
 ```
 
-Aby zapisać w pliku *requirements.txt* listę wszystkich aktualnie używanych pakietów wraz z wersjami, użyj:
+- Zapisywanie zainstalowanych pakietów do pliku:
 
-```
+Używając poniższego polecenia, możesz zapisać listę zainstalowanych pakietów wraz z ich wersjami do pliku requirements.txt.
+
+```bash
 pip freeze > requirements.txt
 ```
-    
-Aby odinstalować pakiet, użyj:
 
-```
-pip uninstall <nazwa_pakietu>
+- Instalacja pakietów z pliku requirements.txt:
+
+```bash
+pip install -r requirements.txt
 ```
 
-Aby zaktualizować program PIP, użyj:
-    
+- Odinstalowywanie pakietu:
+
+```bash
+pip uninstall nazwa_pakietu
 ```
+
+- Aktualizacja PIP:
+
+```bash
 pip install --upgrade pip
 ```
 
-Linki:
+- Wyszukiwanie pakietów:
 
-* https://pypi.org/
+Możesz wyszukać pakiet w repozytorium PyPI za pomocą:
+
+```bash
+pip search nazwa_pakietu
+```
+
+### Aktualizacja pakietów
+
+- Aktualizacja konkretnego pakietu:
+
+```bash
+pip install --upgrade nazwa_pakietu
+```
+
+- Aktualizacja wszystkich pakietów:
+
+Możesz użyć poniższego polecenia, aby uzyskać listę przestarzałych pakietów:
+
+```bash
+pip list --outdated
+```
+
+Następnie aktualizuj je przy użyciu `pip install --upgrade`.
+
+### Linki
+
+- [Oficjalna strona PyPI (Python Package Index)](https://pypi.org/)
+- [Kompletna dokumentacja PIP](https://pip.pypa.io/en/stable/)
+- [PIP na GitHubie](https://github.com/pypa/pip)
+- [Narzędzie venv do tworzenia wirtualnych środowisk](https://docs.python.org/3/library/venv.html)
+- [Narzędzie virtualenv](https://virtualenv.pypa.io/en/latest/)
+- [Porównanie menedżerów pakietów Pythona](https://packaging.python.org/guides/tool-recommendations/)
+- [Jak bezpiecznie korzystać z PyPI](https://pyfound.blogspot.com/2013/10/clarifying-peps-role-in-pypi.html)

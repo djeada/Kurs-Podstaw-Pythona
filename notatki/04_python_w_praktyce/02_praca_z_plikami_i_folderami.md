@@ -1,107 +1,107 @@
-
 ## Praca z plikami i folderami
 
-Standardowa biblioteka Pythona zawiera wiele funkcji do pracy z plikami i folderami. Skrypty Pythona mogą być używane do automatyzacji prostych zadań biurowych.
+Biblioteka standardowa Pythona oferuje szereg funkcji i narzędzi do efektywnej pracy z plikami i folderami. Dzięki tym narzędziom, skrypty Pythona mogą być używane do automatyzacji różnych zadań, od prostych czynności biurowych po bardziej zaawansowane operacje na danych.
 
-### Otwarcie pliku 
+### Otwarcie i zamknięcie pliku 
 
-Do otwierania plików w Pythonie używamy funkcji open(). Funkcja ta przyjmuje ścieżkę do pliku oraz tryb otwarcia. Po użyciu funkcji open() należy pamiętać o wywołaniu funkcji close(), aby zamknąć plik. Możemy to zrobić ręcznie lub skorzystać z konstrukcji with, która automatycznie zamknie plik po jej zakończeniu.
+Aby otworzyć plik w Pythonie, używamy funkcji `open()`. Główne argumenty tej funkcji to ścieżka do pliku oraz tryb otwarcia. Ważne jest, aby po pracy z plikiem odpowiednio go zamknąć, co można zrealizować za pomocą metody `close()`. Zalecane jest korzystanie z konstrukcji `with`, która automatycznie dba o poprawne zamknięcie pliku.
 
 ```python
-# otwarcie pliku w trybie odczytu
+# Otwarcie pliku w trybie odczytu
 plik = open("sciezka/do/pliku.txt", "r")
-
-...
-
+# ... operacje na pliku ...
 plik.close()
 
-# lub z wykorzystaniem konstrukcji with
+# Alternatywna metoda z użyciem `with`
 with open("sciezka/do/pliku.txt", "r") as plik:
-    ...
+    # ... operacje na pliku ...
 ```
 
-Istnieją 4 standardowe tryby otwarcia pliku:
+Do dyspozycji mamy różne tryby otwarcia pliku:
 
-1. <code>r</code> - odczytywanie.
-1. <code>r+</code> - odczytywanie oraz modyfikacja.
-1. <code>w</code> - modyfikacja wraz z usunięciem poprzedniej treści.
-1. <code>a</code> - modyfikacja wraz z dopisaniem nowej treści do poprzedniej treści pliku.
+- `r` - odczyt pliku.
+- `r+` - odczyt i modyfikacja pliku.
+- `w` - zapis do pliku (usunięcie istniejącej treści i zapis nowej).
+- `a` - dopisanie do pliku (bez usuwania istniejącej treści).
 
-### Odczytywanie i zapisywanie danych
+### Odczytywanie i zapisywanie danych z/do pliku
 
-Aby odczytać zawartość pliku, możemy skorzystać z funkcji readlines(), która zwraca listę napisów. Każdy napis w liście reprezentuje kolejny wiersz pliku. Aby zapisać dane do pliku, używamy funkcji write. Funkcja ta przyjmuje jeden argument, napis, gdzie kolejne wiersze powinny być oddzielone znakiem *\n*.
+Odczytanie całego pliku można zrealizować za pomocą metody readlines(), która zwróci listę linii z pliku. Każdy element tej listy to napis reprezentujący kolejny wiersz. Zapis danych do pliku odbywa się przy użyciu metody write().
 
 ```python
-with open("sciezka/do/pliku.txt") as plik:
-
-    # odczytaj tresc pliku
+with open("sciezka/do/pliku.txt", "r") as plik:
+    # Odczytanie zawartości pliku
     wiersze = plik.readlines()
     for wiersz in wiersze:
-        print(wiersz)
+        print(wiersz.strip())  # `strip()` usuwa znaki końca linii
 
-    # zapisz nowa tresc do pliku
+# Zapis nowych danych do pliku
+with open("sciezka/do/pliku.txt", "w") as plik:
     plik.write("nowy tekst\nwiersz nr. 2\n")
 ```
 
-### Moduł pathlib
+Pamiętajmy, aby wybierać odpowiedni tryb otwarcia pliku zależnie od planowanych operacji!
 
-Moduł pathlib pojawił się w Pythonie w wersji 3.4. Jest to zestaw narzędzi, które umożliwiają pracę z plikami i folderami w sposób bardziej przyjazny dla użytkownika.
+### Moduł `pathlib` w Pythonie
 
-Oto kilka przykładów metod z tego modułu:
+Współczesna praca z plikami i folderami w Pythonie stała się znacznie bardziej intuicyjna i wydajna dzięki wprowadzeniu modułu `pathlib` w wersji 3.4. Zamiast manipulowania ścieżkami jako zwykłymi łańcuchami znaków, `pathlib` pozwala na reprezentowanie ścieżek jako obiektów z wieloma użytecznymi metodami.
 
-* `.exists()` - zwraca True jeśli plik lub folder o podanej ścieżce istnieje, w przeciwnym wypadku zwraca False.
-* `.is_file()` - zwraca True jeśli obiekt Path reprezentuje plik, w przeciwnym wypadku zwraca False.
-* `.is_dir()` - zwraca True jeśli obiekt Path reprezentuje folder, w przeciwnym wypadku zwraca False.
-* `.read_text()` - odczytuje zawartość pliku jako napis.
-* `.write_text()` - zapisuje napis do pliku.
-* `.open()` - otwiera plik w trybie określonym przez drugi argument (domyślnie 'r').
+Oto kilka podstawowych metod dostępnych w klasie `Path`:
 
-Poniższy przykład pokazuje, jak można wykorzystać te metody:
+* `.exists()` - sprawdza, czy dana ścieżka istnieje.
+* `.is_file()` - sprawdza, czy ścieżka wskazuje na plik.
+* `.is_dir()` - sprawdza, czy ścieżka wskazuje na folder.
+* `.read_text()` - odczytuje zawartość pliku jako tekst.
+* `.write_text()` - zapisuje tekst do pliku.
+* `.open()` - otwiera plik w określonym trybie (domyślnie w trybie odczytu 'r').
+
+Poniżej przedstawiam, jak używać wymienionych metod:
 
 ```python
 from pathlib import Path
 
 sciezka = Path("/sciezka/do/pliku.txt")
 
-# sprawdzenie, czy plik istnieje
 if sciezka.exists():
     print("Plik istnieje.")
 else:
     print("Plik nie istnieje.")
 
-# odczytanie zawartości pliku
 zawartosc = sciezka.read_text()
 print(zawartosc)
 
-# zapisanie nowej zawartości do pliku
 sciezka.write_text("Nowy tekst w pliku.")
 ```
 
-Aby uzyskać obiekt reprezentujący folder, należy utworzyć obiekt klasy Path z odpowiednią ścieżką do folderu:
+Reprezentowanie folderu jest równie proste:
 
 ```python
-folder = Path("sciezka/do/folderu")
-```
+folder = Path("/sciezka/do/folderu")
 
-Następnie możemy użyć metod tego obiektu, takich jak iterdir() do iterowania po plikach i folderach w danym folderze:
-
-```python
 for element in folder.iterdir():
     print(element)
 ```
 
-Możemy również sprawdzić, czy obiekt jest plikiem czy folderem za pomocą metod is_file() i is_dir():
+Dzięki obiektowemu podejściu pathlib, możemy łatwo sprawdzić, czy dany obiekt to plik czy folder:
 
 ```python
 if element.is_file():
-    print("To jest plik")
+    print("To jest plik.")
 elif element.is_dir():
-    print("To jest folder")
+    print("To jest folder.")
 ```
 
-Inne przydatne metody to exists(), która sprawdza, czy dany element istnieje, oraz mkdir(), która tworzy nowy folder.
+`pathlib` oferuje również wiele innych przydatnych metod, takich jak:
+
+- `.mkdir()` - tworzy nowy folder.
+- `.rename()` - zmienia nazwę pliku lub folderu.
+- `.glob()` - wyszukuje pliki i foldery według podanego wzorca.
+
+Przykład użycia `.mkdir()` i sprawdzenia istnienia folderu:
 
 ```python
 if not folder.exists():
-    folder.mkdir()
+    folder.mkdir(parents=True, exist_ok=True)
 ```
+
+Parametr `parents=True` sprawia, że zostaną utworzone wszystkie nieistniejące foldery nadrzędne, a `exist_ok=True` zapobiega błędom, jeśli folder już istnieje.

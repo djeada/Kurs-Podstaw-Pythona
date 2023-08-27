@@ -1,15 +1,18 @@
+## Tworzenie API przy użyciu FastAPI
 
-## API wraz z FastAPI
+FastAPI to nowoczesne, wydajne i łatwe w użyciu narzędzie do tworzenia API w Pythonie. Za jego popularność odpowiada prostota tworzenia aplikacji, wbudowana walidacja danych oraz automatyczne generowanie dokumentacji.
 
-FastAPI to nowoczesne i szybkie narzędzie do tworzenia API w Pythonie. Jest oparte na bibliotece Starlette i używa Pydantic do walidacji danych wejściowych.
+### Instalacja FastAPI
 
-Aby rozpocząć pracę z FastAPI, należy najpierw zainstalować je za pomocą komendy:
+Aby zacząć pracę z FastAPI, musisz najpierw zainstalować odpowiednie pakiety. Oprócz samego FastAPI warto zainstalować serwer ASGI, np. `uvicorn`, który pozwoli na uruchamianie aplikacji:
 
-```python
-pip install fastapi
+```bash
+pip install fastapi uvicorn
 ```
 
-Przykład prostego API z FastAPI:
+### Tworzenie prostego API
+
+Rozpocznij od utworzenia instancji FastAPI i zdefiniowania kilku ścieżek:
 
 ```python
 from fastapi import FastAPI
@@ -21,61 +24,115 @@ def read_root():
     return {"Hello": "World"}
 ```
 
-API może przyjmować różne metody HTTP (np. `GET`, `POST`, `DELETE`) oraz zwracać różne formaty danych (np. JSON, HTML).
+Aby uruchomić powyższe API, zapisz kod do pliku, np. main.py, a następnie uruchom serwer za pomocą uvicorn:
 
-```python
-from fastapi import FastAPI
+```bash
+uvicorn main:app --reload
+```
+
+Po uruchomieniu przejdź do przeglądarki i otwórz adres `http://localhost:8000` - zobaczysz odpowiedź z powitaniem.
+
+### Przykładowe API
+
+#### Model danych
+
+Używamy **Pydantic** do definiowania modelu danych:
+
+- **Item**: Przedstawia przedmiot, który posiada atrybuty takie jak: `name`, `description`, `price` oraz `tax`.
+
+```
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
+
+items = {}  # prosty "słownik" do przechowywania danych
 
 class Item(BaseModel):
     name: str
     description: str = None
     price: float
     tax: float = None
+```
 
+#### Endpointy
+
+1. **Tworzenie przedmiotu (POST)**
+   - Ścieżka: `/items/`
+   - Przyjmuje dane przedmiotu w formacie JSON.
+   - Zwraca dane stworzonego przedmiotu.
+   - Wewnętrznie, przedmiot jest dodawany do słownika (`items`) z unikalnym ID.
+
+```
 @app.post("/items/")
 def create_item(item: Item):
+    item_id = len(items) + 1
+    items[item_id] = item
+    return {"id": item_id, **item.dict()}
+```
+  
+2. **Pobieranie przedmiotu (GET)**
+   - Ścieżka: `/items/{item_id}`
+   - Na podstawie przekazanego `item_id` zwraca dane przedmiotu.
+   - Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
+     
+```
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+    item = items.get(item_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Item not found")
     return item
 ```
 
-W powyższym przykładzie zdefiniowano nowy model danych - Item, który jest walidowany przy użyciu Pydantic. Następnie zdefiniowano nową ścieżkę `/items/` dostępną dla metody POST, która przyjmuje obiekt item i zwraca go jako odpowiedź.
-
-FastAPI posiada też mechanizm do automatycznej generacji dokumentacji dla API. Aby skorzystać z tej funkcjonalności, należy użyć dekoratora `@app.docs` i odpowiednio opisać poszczególne ścieżki i modele danych.
-
+3. **Usuwanie przedmiotu (DELETE)**
+   - Ścieżka: `/items/{item_id}`
+   - Na podstawie przekazanego `item_id` usuwa przedmiot.
+   - Zwraca informację o sukcesie operacji.
+   - Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
+     
 ```python
-from fastapi import FastAPI
-from pydantic import BaseModel
-
-app = FastAPI()
-
-class Item(BaseModel):
-    name: str
-    description: str = None
-    price: float
-    tax: float = None
-
-@app.post("/items/")
-@app.docs(
-    summary="Create a new item",
-    description="This endpoint allows you to create a new item in the store",
-    responses={
-        200: {"description": "Success"},
-        404: {"description": "Not found"},
-    },
-)
-def create_item(item: Item):
-    return item
+@app.delete("/items/{item_id}")
+def delete_item(item_id: int):
+    if item_id not in items:
+        raise HTTPException(status_code=404, detail="Item not found")
+    del items[item_id]
+    return {"status": "success"}
 ```
 
-Aby uruchomić aplikację, wystarczy wywołać metodę `run()` na obiekcie reprezentującym aplikację:
+### Korzystanie z API przy użyciu requests
+
+Do komunikacji z API, instalujemy bibliotekę `requests` za pomocą komendy: `pip install requests`.
+
+1. **Tworzenie przedmiotu (POST)**
+   - Używając metody `requests.post`, wysyłamy dane w formacie JSON do endpointu `/items/`.
+   - Przykład: `response = requests.post(url + '/items/', json=item_data)`
 
 ```python
-if __name__ == "__main__":
-    app.run()
+import requests
+
+# Tworzenie (POST)
+item_data = {"name": "example", "price": 10.0}
+response = requests.post("http://127.0.0.1:8000/items/", json=item_data)
+print(response.json())
 ```
 
-Po uruchomieniu aplikacji możesz otworzyć adres `http://localhost:8000/` w przeglądarce, aby zobaczyć odpowiedź zwróconą przez endpoint.
+2. **Pobieranie przedmiotu (GET)**
+   - Korzystając z metody `requests.get`, możemy pobrać dane przedmiotu.
+   - Przykład: `response = requests.get(url + f'/items/{item_id}')`
 
-FastAPI oferuje również możliwość walidacji danych wejściowych i zwracanych przez endpointy. Możesz użyć typów Pythona, takich jak `int` lub `str`, aby opisać argumenty wejściowe oraz typ zwracany przez endpoint. FastAPI automatycznie sprawdzi, czy dane wejściowe są poprawne.
+```python
+# Pobieranie (GET)
+response = requests.get("http://127.0.0.1:8000/items/1")
+print(response.json())
+```
+
+3. **Usuwanie przedmiotu (DELETE)**
+   - Metoda `requests.delete` pozwala usunąć przedmiot na podstawie `item_id`.
+   - Przykład: `response = requests.delete(url + f'/items/{item_id}')`
+
+```python
+# Usuwanie (DELETE)
+response = requests.delete("http://127.0.0.1:8000/items/1")
+print(response.json())
+```

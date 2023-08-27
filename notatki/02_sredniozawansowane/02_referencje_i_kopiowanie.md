@@ -1,42 +1,82 @@
 ## Referencje i kopiowanie
 
-Dwa niezwykle istotne pojęcia w programowaniu to "referencja" i "kopiowanie". Referencja to odwołanie do oryginalnego obiektu, a kopiowanie to tworzenie nowego obiektu z tą samą zawartością co oryginalny. W języku Python przekazywanie obiektów do funkcji lub przypisywanie ich do nowych nazw odbywa się poprzez referencje. To oznacza, że zarówno oryginalny obiekt, jak i nowy obiekt będą wskazywać na to samo miejsce w pamięci. Wszelkie zmiany wprowadzone w jednym obiekcie będą widoczne również w drugim.  
+W Pythonie rozróżniamy dwa kluczowe pojęcia: "referencję" oraz "kopiowanie".
+
+- **Referencja** to odwołanie do pewnego obiektu w pamięci.
+- **Kopiowanie** polega na tworzeniu nowego obiektu z identyczną zawartością co pierwotny obiekt.
+
+W Pythonie, gdy przekazujemy obiekty do funkcji, przypisujemy je do innych zmiennych, lub umieszczamy je w kolekcjach, operujemy na referencjach. W praktyce oznacza to, że modyfikacje wprowadzone na jednym "egzemplarzu" obiektu odzwierciedlają się na wszystkich jego "egzemplarzach".
 
 ```python
 lista = [[1, 2, 3], [4, 5, 6]]
-nowa_lista = lista
+kopia_listy = lista
 
-nowa_lista.append([-1, -2, -3]) # modyfikuje obie listy
-nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
-print(lista)
+kopia_listy.append([-1, -2, -3]) # wpłynie na obie listy
+kopia_listy[0].insert(1, 1)     # wpłynie również na obie listy
+print(lista)  # pokaże zmienioną listę
 ```
 
-Aby uniknąć takiej sytuacji, możemy skorzystać z kopiowania płytkiego lub głębokiego.
- 
- 1. Kopiowanie płytkie
+Aby uniknąć niechcianych efektów, można skorzystać z mechanizmów kopiowania: płytkiego (shallow copy) lub głębokiego (deep copy).
 
-Kopiowanie płytkie pozwoli na utworzenie nowego obiektu dla zewnętrznej struktury danych, ale wewnętrzne struktury danych będą przekazywane przez referencję. W naszym przykładzie z listą 2d, kopiowanie płytkie utworzy nowy obiekt dla zewnętrznej listy, ale wewnętrzne listy będą przekazane przez referencję.
-    
+### Kopiowanie płytkie (Shallow Copy)
+
+Tworzy nową kolekcję na najwyższym poziomie, ale elementy wewnętrzne (np. listy w liście) są nadal referencjami.
+
+```python
+
+import copy
+lista = [[1, 2, 3], [4, 5, 6]]
+kopia_plytka = copy.copy(lista)
+
+kopia_plytka.append([-1, -2, -3])  # wpłynie tylko na `kopia_plytka`
+kopia_plytka[0].insert(1, 1)      # wpłynie na obie listy, bo wewnętrzne listy są referencjami
+print(lista)  # pokaże częściowo zmienioną listę
+```
+
+### Kopiowanie głębokie (Deep Copy)
+
+Tworzy całkowicie nową kopię obiektu i wszystkich jego wewnętrznych elementów. Jest to kopiowanie "w głąb".
+
 ```python
 import copy
 lista = [[1, 2, 3], [4, 5, 6]]
-nowa_lista = copy.copy(lista)
+kopia_gleboka = copy.deepcopy(lista)
 
-nowa_lista.append([-1, -2, -3]) # modyfikuje jedynie nowa liste
-nowa_lista[0].insert(1, 1)      # modyfikuje obie listy
-print(lista)
+kopia_gleboka.append([-1, -2, -3])  # wpłynie tylko na `kopia_gleboka`
+kopia_gleboka[0].insert(1, 1)      # wpłynie również tylko na `kopia_gleboka`
+print(lista)  # pokaże oryginalną listę, bez zmian
 ```
 
- 2. Kopiowanie głębokie 
+Podsumowując, ważne jest, aby być świadomym, czy pracujemy na kopii, czy na oryginalnym obiekcie, a także tego, jakie są konsekwencje naszych działań w kontekście referencji i kopiowania.
 
-Kopiowanie głębokie pozwoli natomiast na utworzenie nowych obiektów dla zarówno zewnętrznej, jak i wewnętrznych struktur danych.
+### Domyślne wartości parametrów funkcji i ich mutowalność
+
+W Pythonie wartości domyślne dla parametrów funkcji są wyliczane tylko raz w momencie definiowania funkcji, a nie za każdym razem, gdy funkcja jest wywoływana. Oznacza to, że jeśli wartość domyślna jest mutowalna, jak lista lub słownik, wszelkie modyfikacje tej wartości zostaną zachowane między kolejnymi wywołaniami funkcji. Może to prowadzić do nieoczekiwanych efektów ubocznych.
+
+Rozważmy funkcję, która dodaje element do listy. Lista jest parametrem z domyślną wartością `[]`.
 
 ```python
-import copy
-lista = [[1, 2, 3], [4, 5, 6]]
-nowa_lista = copy.deepcopy(lista)
+def dodaj_element(element, lista=[]):
+    lista.append(element)
+    return lista
 
-nowa_lista.append([-1, -2, -3]) # modyfikuje jedynie nowa liste
-nowa_lista[0].insert(1, 1)      # modyfikuje jedynie nowa liste
-print(lista)
+print(dodaj_element(1))        # [1]
+print(dodaj_element(2))        # [1, 2] - a oczekiwaliśmy [2]
 ```
+
+W powyższym przykładzie, za drugim razem zamiast uzyskać listę zawierającą tylko 2, otrzymujemy listę z 1 i 2, ponieważ domyślna lista została zmodyfikowana podczas pierwszego wywołania.
+
+Jeśli chcemy uniknąć tego rodzaju problemów, jednym z podejść jest użycie wartości None jako domyślnej wartości parametru, a następnie wewnątrz funkcji zastąpienie jej nowym, pustym obiektem mutowalnym.
+
+```python
+def dodaj_element(element, lista=None):
+    if lista is None:
+        lista = []
+    lista.append(element)
+    return lista
+
+print(dodaj_element(1))        # [1]
+print(dodaj_element(2))        # [2] - wynik zgodny z oczekiwaniami
+```
+
+Korzystając z tego podejścia, unikamy nieoczekiwanych efektów ubocznych związanych z mutowalnymi wartościami domyślnymi.

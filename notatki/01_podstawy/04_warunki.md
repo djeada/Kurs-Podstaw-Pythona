@@ -1,57 +1,75 @@
-## Warunki
+## Instrukcje warunkowe
 
-Typ logiczny (bool) może przyjmować jedną z dwóch wartości: <code>True</code> lub <code>False</code>. Typ logiczny ma istotne znaczenie dla instrukcji warunkowej.
+Typ logiczny (`bool`) w Pythonie może przyjmować jedną z dwóch wartości: `True` lub `False`. Jest to kluczowe dla działania instrukcji warunkowych, które decydują o przebiegu programu w zależności od spełnienia określonych kryteriów.
 
-Prosta zmienna typu logicznego:
+### Tworzenie warunków
 
 ```python
-wiek = 18 # zmienna typu int
-warunek = wiek > 18 # zmienna typu bool
+wiek = 18
+czy_pelnoletni = wiek >= 18
 ```
- 
-Oto tabela z porównaniami dostępnymi w języku Python:
 
-| Symbol | Opis |
-| ------ | ---- |
-| >	| większy niż |
-| >=	| większy lub równy |
-| <	| mniejszy niż |
-| <=	| mniejszy lub równy |
-| ==	| równy |
-| !=	| różny |
+W powyższym przykładzie, zmienna `czy_pelnoletni` będzie miała wartość `True`, ponieważ 18 jest równe 18.
 
-Początkujący programiści często mylą pojedynczy znak równości (<code>=</code>) z podwójnym znakiem równości (<code>==</code>).
+### Porównania w Pythonie
 
-- <code>x = 5</code> oznacza przypisanie wartości 5 do zmiennej x.
-- <code>x == 5</code> oznacza sprawdzenie, czy zmienna x jest równa 5.
+| Operator | Opis                  | Przykład      | Wynik    |
+|----------|-----------------------|---------------|----------|
+| `>`      | większy niż           | `5 > 3`       | `True`   |
+| `>=`     | większy lub równy     | `5 >= 5`      | `True`   |
+| `<`      | mniejszy niż           | `3 < 5`       | `True`   |
+| `<=`     | mniejszy lub równy     | `3 <= 2`      | `False`  |
+| `==`     | równy                 | `5 == 5`      | `True`   |
+| `!=`     | różny                 | `5 != 3`      | `True`   |
 
-Instrukcja warunkowa (if-else) ma następującą postać:
+Warto zwrócić uwagę na różnicę pomiędzy `=` a `==`. Pierwszy służy do przypisania wartości do zmiennej, a drugi do porównania dwóch wartości.
+
+### Instrukcja warunkowa
+
+Instrukcje warunkowe w Pythonie służą do wykonania określonego kodu w zależności od spełnienia pewnego warunku.
+
+Podstawowa struktura to `if-else`:
 
 ```python
 if warunek:
-    kod
+    # kod wykonywany, gdy warunek jest prawdziwy
 else:
-    kod
+    # kod wykonywany, gdy warunek jest fałszywy
 ```
 
-Część kodu umieszczona w pierwszym wcięciu po instrukcji warunkowej <code>if</code> zostanie wykonana jedynie, gdy warunek zostanie oceniony na prawdziwy. Gdy warunek nie jest spełniony, ta część kodu zostanie całkowicie pominięta, a zamiast niej wykonany zostanie kod umieszczony w drugim wcięciu (pod
-instrukcjami sterującymi.
+W przypadku wielu warunków, można używać `elif` (skrót od "else if"):
 
-Operatory logiczne służą do łączenia warunków. W Pythonie mamy do dyspozycji trzy operatory logiczne: <code>and</code>, <code>or</code> i <code>not</code>:
+```python
+if warunek1:
+    # kod wykonywany, gdy warunek1 jest prawdziwy
+elif warunek2:
+    # kod wykonywany, gdy warunek1 jest fałszywy, ale warunek2 jest prawdziwy
+else:
+    # kod wykonywany, gdy żaden z wcześniejszych warunków nie jest prawdziwy
+```
 
-* <code>and</code> – aby wyrażenie było prawdziwe, oba warunki muszą być prawdziwe.
-* <code>or</code> – aby wyrażenie było prawdziwe, tylko jeden warunek musi być prawdziwy.
-* <code>not</code> – zaprzeczenie wyrażenia.
+### Operatory logiczne
 
-Na przykład, wyrażenie <code>a != 0 and b == 5</code> będzie prawdziwe, jeśli oba warunki są spełnione, tzn. jeśli a jest różne od 0 i jednocześnie b jest równe 5.
+Do łączenia i modyfikacji warunków w Pythonie stosuje się operatory logiczne:
 
-Natomiast wyrażenie <code>x % 2 == 0 or x % 7 == 0</code> będzie prawdziwe, jeśli jeden z warunków jest spełniony, tzn. jeśli x jest podzielne przez 2 lub x jest podzielne przez 7.
+- `and` - oba warunki muszą być prawdziwe
+- `or` - przynajmniej jeden warunek musi być prawdziwy
+- `not` - neguje warunek
 
-Być może zastanawiasz się, co zostanie wypisane na konsoli w poniższym przykładzie:
+Przykład zastosowania operatorów logicznych:
+
+```python
+a = 5
+b = 10
+if a > 0 and b < 20:
+    print("Obie wartości spełniają warunek.")
+```
+
+W kontekście operatora `or`, istotne jest dodatkowe wyjaśnienie działania wyrażenia:
 
 ```python
 odpowiedz = "TAK"
 print(odpowiedz == "tak" or "TAK")
 ```
 
-Wyjaśnienie: operator <code>or</code> zwraca pierwszą wartość prawdziwą, jeśli taka istnieje, w przeciwnym razie zwraca drugą wartość. W tym przypadku pierwszy warunek jest fałszywy, ale drugi jest prawdziwy (bo "TAK" jest różne od fałszu). Z tego powodu całe wyrażenie zwraca drugi warunek, czyli wartość "TAK".
+Wyrażenie to jest mylące. W rzeczywistości kod sprawdza, czy odpowiedz jest równa "tak", co jest fałszywe. Jednak drugi warunek (po operatorze or) jest po prostu wartością string "TAK", która jest zawsze traktowana jako prawdziwa w kontekście logicznym. Dlatego całe wyrażenie zwraca "TAK", ale nie z powodu spełnienia warunku porównania, tylko dlatego, że string "TAK" jest "prawdziwy".

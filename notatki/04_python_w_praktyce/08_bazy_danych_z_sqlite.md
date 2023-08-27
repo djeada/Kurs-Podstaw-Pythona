@@ -1,14 +1,39 @@
 ## Bazy danych z SQLite
-Istnieje wiele baz danych. Każda ma swoje wady i zalety. Baza danych SQLite jest niezależna od systemu operacyjnego i nie wymaga instalacji żadnego dodatkowego oprogramowania. Zaletą SQLite jest prostota użytku. Nie potrzeba nam żadnego serwera, cała baza danych może zostać sprowadzona do jednego pliku, który w programie jest w całości załadowany do pamięci RAM.
 
-Przykładowe zbiory danych możesz pobrać z następujących stron:
-* <a href="https://data.gov/">data.gov</a>
-* <a href="https://www.kaggle.com/">kaggle</a>
+Na rynku dostępnych jest wiele różnorodnych systemów zarządzania bazami danych (DBMS). Każdy z nich posiada specyficzne wady i zalety. Jednym z popularnych, lekkich DBMS jest SQLite. Kluczowe cechy SQLite to:
 
-Moduł sqlite3 pozwala na obsługę bazy danych SQLite. 
+- **Niezmienność systemu operacyjnego**: SQLite działa na większości dostępnych systemów operacyjnych.
+- **Brak wymogu instalacji**: SQLite nie wymaga instalacji dodatkowego oprogramowania ani konfiguracji serwera.
+- **Samowystarczalność**: Cała baza danych jest zawarta w jednym pliku, co ułatwia przenoszenie i kopie zapasowe.
+- **Wydajność**: W wielu przypadkach, cała baza danych jest ładowana do pamięci RAM, co przyspiesza operacje na niej.
 
-### Połączenie z bazą danych
-Do połączenia z bazą danych należy użyć funkcji `connect()` z modułu sqlite3. Funkcja ta przyjmuje jako argument ścieżkę do pliku bazy danych. Jeśli podana baza danych nie istnieje, to zostanie ona utworzona.
+Jeżeli poszukujesz zestawów danych do wykorzystania w projektach czy do nauki, polecam następujące źródła:
+* [data.gov](https://data.gov/)
+* [kaggle](https://www.kaggle.com/)
+
+### Połączenie (Connection)
+
+W kontekście baz danych, połączenie odnosi się do sesji między aplikacją a bazą danych. Gdy mówimy o "połączeniu z bazą danych", mamy na myśli nawiązanie komunikacji pomiędzy aplikacją (w naszym przypadku programem w Pythonie) a serwerem bazy danych (w tym przypadku plikiem bazy SQLite).
+
+`connection` w naszym przykładzie jest instancją klasy, która reprezentuje to połączenie. Za pomocą tego obiektu możemy:
+
+- Wykonywać operacje na bazie danych, takie jak tworzenie tabeli czy dodawanie rekordów.
+- Zarządzać transakcjami (czyli grupami operacji, które mają być traktowane jako jedna całość; możemy je "zatwierdzać" (`commit`) lub "cofać" (`rollback`)).
+- Zamykać połączenie z bazą danych.
+
+### Kursor
+
+W kontekście baz danych, kursor to specjalny obiekt, który umożliwia przechodzenie przez wyniki zapytania oraz odzyskiwanie kolejnych wierszy danych. W skrócie, kursor to narzędzie, które pozwala "przeszukiwać" wyniki zapytań krok po kroku.
+
+W module `sqlite3` w Pythonie, kursor jest używany do:
+
+- Wykonywania zapytań do bazy danych.
+- Pobierania wyników zapytań (np. za pomocą metod `fetchone()` do pobierania jednego wiersza, `fetchall()` do pobierania wszystkich wierszy czy `fetchmany(size)` do pobierania określonej liczby wierszy).
+- Obsługi błędów i wyjątków powiązanych z operacjami na bazie danych.
+
+### Otwarcie połączenia z bazą danych
+
+Połączenie z bazą danych lub jej utworzenie (jeśli nie istnieje) realizuje się za pomocą funkcji `connect()`.
 
 ```python
 import sqlite3
@@ -17,31 +42,53 @@ connection = sqlite3.connect("baza_danych.db")
 ```
 
 ### Tworzenie tabel
-Aby utworzyć tabelę w bazie danych, należy wywołać metodę `execute()` na obiekcie połączenia. Metoda ta przyjmuje jako argument polecenie SQL tworzące tabelę.
+
+Aby zdefiniować strukturę bazy, można utworzyć odpowiednie tabele za pomocą języka SQL.
 
 ```python
-connection.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)")
+sql_create_table = """
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL
+)
+"""
+
+connection.execute(sql_create_table)
 ```
 
 ### Dodawanie rekordów
-Aby dodać rekord do tabeli, należy wywołać polecenie `INSERT INTO` za pomocą metody `execute()`.
+
+Wprowadzanie danych do tabeli realizowane jest przez polecenie `INSERT INTO`.
 
 ```python
-connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("user1", "pass1"))
-connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("user2", "pass2"))
+data_users = [
+    ("user1", "pass1"),
+    ("user2", "pass2")
+]
+
+for user in data_users:
+    connection.execute("INSERT INTO users (username, password) VALUES (?, ?)", user)
+
+# Zatwierdzenie zmian
+connection.commit()
 ```
 
 ### Pobieranie danych
-Aby pobrać dane z tabeli, należy wywołać polecenie `SELECT` za pomocą metody `execute()`. Metoda ta zwraca obiekt cursor, z którego można pobrać rekordy za pomocą metody `fetchall()`.
+
+Do zapytań o dane z tabeli wykorzystuje się polecenie `SELECT`.
 
 ```python
 cursor = connection.execute("SELECT * FROM users")
 users = cursor.fetchall()
-print(users)  # [(1, 'user1', 'pass1'), (2, 'user2', 'pass2')]
+
+for user in users:
+    print(user)
 ```
 
 ### Zamykanie połączenia
-Po zakończeniu pracy z bazą danych należy wywołać metodę `close()` na obiekcie połączenia.
+
+Po wszystkich operacjach na bazie danych, konieczne jest zamknięcie połączenia.
 
 ```python
 connection.close()

@@ -1,11 +1,14 @@
-
 ## Generatory
 
-Generator to specjalny rodzaj funkcji, który zwraca wartości pojedynczo, zamiast zwracać ich wszystkie naraz w postaci listy lub innego iterowalnego obiektu. Generatory są bardziej efektywne pod względem pamięciowym niż listy, ponieważ nie wymagają przechowywania całej listy w pamięci, lecz tylko aktualnie zwracanej wartości. Generatory umożliwiają także klientowi rozpoczęcie przetwarzania zwracanych wartości zanim generator zakończy swoją pracę.
+Generator to specjalny rodzaj funkcji w Pythonie, który umożliwia zwracanie wartości pojedynczo zamiast wszystkich naraz, tak jak w przypadku listy lub innego iterowalnego obiektu. Dzięki temu generatory są bardziej wydajne pod względem zużycia pamięci, ponieważ nie muszą przechowywać całej kolekcji wartości w pamięci od razu. Zamiast tego, generują one wartości na bieżąco w miarę ich potrzeby. To sprawia, że są one idealne do przetwarzania dużych zbiorów danych, które nie mieszczą się w pamięci operacyjnej.
 
-Aby utworzyć generator, wystarczy zamiast słowa kluczowego `return` użyć słowa kluczowego `yield`. Wartości, które generator ma zwracać są umieszczane po słowie kluczowym `yield` w ciele funkcji. Przykłady użycia generatorów znajdują się poniżej.
+### Przykłady użycia generatorów
 
-a) W poniższym przykładzie zwracamy wartości z funkcji <code>foo()</code> przy pomocy słowa kluczowego <code>yield</code>:
+Aby utworzyć generator, używa się słowa kluczowego `yield` zamiast `return`. Każde wystąpienie słowa kluczowego `yield` w ciele funkcji określa wartość, którą generator ma zwrócić.
+
+#### Prosty generator
+
+W poniższym kodzie funkcja `foo()` jest generatorem, który zwraca trzy wartości.
 
 ```python
 def foo():
@@ -13,22 +16,39 @@ def foo():
   yield 2
   yield 3
 
+for val in foo():
+    print(val)
+```
+
+Wynik:
+
+```
+1
+2
+3
+```
+
+Można również przekształcić generator w listę:
+
+```python
 print(list(foo()))
 ```
 
-Wynik po przekonwertowaniu na listę daje:
+Wynik:
 
 ```
 [1, 2, 3]
 ```
 
-b) W tym przykładzie zwracamy wartości z funkcji <code>bar()</code> przy pomocy słowa kluczowego <code>return</code>:
+b) Zwracanie wartości przy pomocy return:
+
+Dla porównania, tradycyjne funkcje używają return do zwracania wartości. Jednak tylko pierwsze wystąpienie return jest wykonane, a pozostałe linie kodu po nim są traktowane jako martwy kod.
 
 ```python
 def bar():
   return 1
-  return 2 #Martwy kod
-  return 3
+  return 2  # Martwy kod, nie zostanie wykonany
+  return 3  # Martwy kod, nie zostanie wykonany
 
 print(bar())
 ```
@@ -38,3 +58,90 @@ Wynik:
 ```
 1
 ```
+
+Generatory są potężnym narzędziem, pozwalającym na tworzenie efektywnych pod względem pamięci i elastycznych rozwiązań dla wielu problemów związanych z przetwarzaniem danych.
+
+#### Generator tworzący sekwencje liczb
+
+```python
+def range_generator(n):
+    i = 0
+    while i < n:
+        yield i
+        i += 1
+
+for number in range_generator(5):
+    print(number)
+```
+
+Wynik:
+
+```
+0
+1
+2
+3
+4
+```
+
+### Generatory a Wyrażenia Listowe
+
+Python oferuje składnię tzw. "generator comprehensions", która jest bardzo podobna do wyrażeń listowych (ang. list comprehensions), ale zamiast tworzyć listy, tworzy generatory.
+
+Przykład:
+
+```python
+gen = (i**2 for i in range(5))
+
+for val in gen:
+    print(val)
+```
+
+Wynik:
+
+```
+0
+1
+4
+9
+16
+```
+
+#### Wbudowane Funkcje Wspierające Generatory
+
+- `itertools`: Moduł ten oferuje wiele użytecznych narzędzi do tworzenia i manipulowania iteratorami.
+- `next(generator, default)`: Pobiera następną wartość z generatora. Jeśli generator jest pusty, zwraca wartość domyślną.
+- `yield from`: Umożliwia delegowanie części wartości do innego generatora.
+
+Przykład użycia `yield from`:
+
+```python
+def chain_generators(*iterables):
+    for iterable in iterables:
+        yield from iterable
+
+gen1 = range(3)
+gen2 = simple_generator()
+
+for val in chain_generators(gen1, gen2):
+    print(val)
+```
+
+Wynik:
+
+```
+0
+1
+2
+1
+2
+3
+```
+
+### Zastosowania i korzyści z używania generatorów
+
+- **Lepsza wydajność pamięci**: Generatory zużywają mniej pamięci, ponieważ generują wartości na bieżąco.
+- **Lepsza wydajność czasowa**: Oszczędność czasu, gdy nie musimy czekać, aż wszystkie wartości zostaną wygenerowane.
+- **Elastyczność**: Można łatwo tworzyć potoki przetwarzania danych, łącząc kilka generatorów razem.
+
+W praktyce, generatory są niezbędnym narzędziem dla programistów Pythona, umożliwiając tworzenie kodu bardziej wydajnego i zwięzłego.

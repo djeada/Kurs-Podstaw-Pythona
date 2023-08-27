@@ -1,43 +1,43 @@
-## Pętle
+## Pętle w Pythonie
 
-Pętle wraz z instrukcjami warunkowymi są podstawą wszystkich języków programowania. Pętle pozwalają na wielokrotne wykonanie pojedynczej instrukcji lub całego bloku instrukcji. Oprócz bloku instrukcji, każda pętla ma również warunek zakończenia. Pętla powtarza blok instrukcji, dopóki warunek kończący pętlę nie zostanie spełniony. W Pythonie mamy dwie pętle: <code>For</code> i <code>While</code>.
+Pętle w Pythonie, podobnie jak w wielu innych językach programowania, pozwalają na wielokrotne wykonanie fragmentu kodu. Umożliwiają efektywne przetwarzanie kolekcji danych, takich jak listy czy słowniki, oraz wykonywanie powtarzalnych operacji bez konieczności wielokrotnego pisania tego samego kodu.
 
-### For
-Pętla <code>For</code> umożliwia wielokrotne wykonanie bloku instrukcji dla każdego elementu z danej kolekcji. Kolekcją może być np. lista, zbiór lub krotka. W przypadku pętli <code>For</code> mamy pewność, że blok instrukcji zostanie wykonany określoną ilość razy, równą liczbie elementów w kolekcji. Pętla <code>For</code> ogólnie ma postać:
+### Pętla For
 
-```python
-    for element in kolekcja: 
-        kod
-```
+Pętla `for` służy do iteracji po elementach kolekcji (np. listy, krotki, słowniki, ciągi znaków) lub po sekwencji liczb generowanej przez funkcję `range()`.
 
-Na początek do tworzenia pętli będziemy używać funkcji range(). Funkcja ta może przyjmować jeden, dwa lub trzy parametry.
-
-1. <code>range(10)</code> tworzy ciąg (0, 1, 2, 3, 4, 5, 6, 7, 8, 9), więc pętla: <code>for x in range(10)</code> zostanie wykonana 10 razy.
-1. <code>range(5, 12)</code> tworzy ciąg (5, 6, 7, 8, 9, 10, 11), więc pętla: <code>for x in range(5, 12)</code> zostanie wykonana 7 razy.
-1. <code>range(0, 50, 10)</code> tworzy ciąg (0, 10, 20, 30, 40), więc pętla: <code>for x in range(0, 50, 10)</code> zostanie wykonana 5 razy.
-
-Przykład użycia pętli <code>For</code> z listą:
+Podstawowa składnia pętli `for` wygląda następująco:
 
 ```python
-dni_tygodnia = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela']
-for dzien in dni_tygodnia:
-    print(dzien)
+for element in kolekcja:
+    # kod do wykonania dla każdego elementu
 ```
 
-Wynikiem wykonania powyższego kodu będzie wypisanie na konsoli nazw wszystkich dni tygodnia.
+Funkcja `range()` jest często używana w pętlach for, gdy chcemy wykonać blok kodu określoną liczbę razy. Może przyjmować różną liczbę argumentów:
 
-### While
+- `range(n)` - generuje sekwencję od 0 do n-1.
+- `range(start, stop)` - generuje sekwencję od start do stop-1.
+- `range(start, stop, krok)` - generuje sekwencję zaczynając od start, kończąc na stop-1, zwiększając wartość o krok przy każdej iteracji.
 
-Pętla <code>While</code> jest podobna w działaniu do pętli <code>For</code>, ale istnieją również istotne różnice między obiema konstrukcjami. W przypadku pętli <code>While</code> warunek zakończenia pętli jest sprawdzane przed każdym przejściem do kolejnej iteracji. Jeśli warunek nie jest spełniony, pętla zostaje zakończona. Dzięki temu pętla <code>While</code> może być używana do wykonywania pewnych instrukcji w nieskończoność (jeśli warunek kończący pętlę zawsze jest prawdziwy). 
+Przykłady:
 
-Pętla <code>While</code> ma postać:
+- `for i in range(5)`: - powtórzy blok 5 razy (dla i=0, 1, 2, 3, 4).
+- `for i in range(3, 8)`: - powtórzy blok dla i=3, 4, 5, 6, 7.
+- `for i in range(0, 10, 2)`: - powtórzy blok dla i=0, 2, 4, 6, 8.
+
+### Pętla `while`
+
+Pętla `while` w Pythonie umożliwia wielokrotne wykonanie bloku kodu, dopóki określony warunek jest prawdziwy. W przeciwieństwie do pętli `for`, która iteruje się przez znane wcześniej kolekcje danych, pętla `while` może być używana do tworzenia pętli, których liczba iteracji nie jest znana z góry.
+
+Podstawowa składnia pętli `while` jest następująca:
 
 ```python
-while warunek konczacy petle: 
-        kod
+while warunek:
+    # kod do wykonania
 ```
+Każdy obieg pętli rozpoczyna się od sprawdzenia warunku. Jeśli warunek jest prawdziwy, blok kodu wewnątrz pętli jest wykonany. Po wykonaniu bloku, warunek jest ponownie sprawdzany, i jeśli nadal jest prawdziwy, pętla kontynuuje swoje działanie. Proces ten powtarza się, aż warunek stanie się fałszywy, wtedy pętla zostaje zakończona.
 
-Poniżej przedstawiony został prosty przykład użycia pętli <code>While</code>:
+Przykład użycia pętli while:
 
 ```python
 licznik = 0
@@ -46,13 +46,17 @@ while licznik < 5:
     licznik += 1
 ```
 
-W powyższym przykładzie pętla <code>While</code> będzie wykonywana do momentu, aż zmienna licznik będzie mniejsza od 5. W każdym obiegu pętli wyświetlana jest aktualna wartość zmiennej licznik, a następnie jej wartość zostaje zwiększona o 1.
+W powyższym kodzie pętla będzie działała tak długo, jak zmienna licznik jest mniejsza niż 5. W każdej iteracji, wartość licznik jest drukowana, a następnie zwiększana o 1. W efekcie, program wypisuje liczby od 0 do 4 włącznie.
 
-W rezultacie, na konsoli zostaną wyświetlone kolejno liczby od 0 do 4.
+Jest to podstawowe zastosowanie pętli while, ale można ją również używać w bardziej zaawansowanych scenariuszach, na przykład w połączeniu z instrukcjami break (do natychmiastowego wyjścia z pętli) i continue (do przerwania bieżącej iteracji i przejścia do następnej).
 
-### Polecenia break i continue
+### Polecenia `break` i `continue`
 
-Instrukcja <code>break</code> służy do natychmiastowego przerwania działania pętli. Jeśli jest ona wywołana wewnątrz pętli, natychmiast przechodzi do kodu znajdującego się po pętli. Może być ona używana w połączeniu z instrukcjami warunkowymi, aby natychmiastowo zakończyć działanie pętli.
+Instrukcje sterujące, takie jak `break` i `continue`, pozwalają na bardziej skomplikowaną kontrolę przepływu w pętlach. Pomagają one odpowiednio przerwać działanie pętli lub pominąć pozostałą część bieżącej iteracji.
+
+#### Instrukcja `break`
+
+Instrukcja `break` kończy działanie bieżącej pętli i przenosi wykonanie do kodu umieszczonego bezpośrednio po niej. Jest szczególnie przydatna, gdy chcemy przerwać działanie pętli na podstawie pewnego warunku.
 
 Przykład:
 
@@ -63,37 +67,45 @@ for i in range(10):
     print(i)
 ```
 
-W tym przykładzie pętla będzie wykonywana dla wartości zmiennej *i* od 0 do 4, a następnie zostanie przerwana przez instrukcję <code>break</code>.
+W powyższym kodzie, pętla for przebiega przez liczby od 0 do 9. Jednakże, gdy wartość i osiągnie 5, instrukcja break zostanie wywołana, przerwując działanie pętli. W efekcie, liczby od 0 do 4 zostaną wypisane na konsoli.
+Instrukcja continue
 
-Instrukcja <code>continue</code> jest używana w pętlach i powoduje przejście do następnego obiegu pętli. Wszystkie instrukcje umieszczone poniżej instrukcji <code>continue</code> w bloku pętli nie zostaną wykonane po jej wywołaniu. Przykład użycia instrukcji <code>continue</code>:
+Instrukcja continue pomija pozostałą część bieżącej iteracji pętli i przechodzi bezpośrednio do kolejnej iteracji. Może być używana, jeśli chcemy pominąć pewne instrukcje w bieżącej iteracji na podstawie pewnego warunku.
+
+Przykład:
 
 ```python
 for i in range(10):
-    if i % 2 == 0:  # jeśli i jest podzielne przez 2
-        continue  # przejdź do następnego obiegu pętli
-    print(i)  # wypisz i
+    if i % 2 == 0:  # jeśli i jest liczbą parzystą
+        continue
+    print(i)
 ```
 
-W powyższym przykładzie pętla zostanie wykonana dla wszystkich liczb z zakresu od 0 do 9, ale zostaną one wyświetlone jedynie w przypadku, gdy są nieparzyste. W rezultacie na konsoli zostaną wypisane liczby: 1, 3, 5, 7, 9.
+W tym przykładzie, pętla for iteruje przez liczby od 0 do 9. Gdy i jest liczbą parzystą, instrukcja continue jest wywołana, pomijając instrukcję print(i). Dzięki temu na konsoli zostaną wypisane tylko liczby nieparzyste, tj. 1, 3, 5, 7 oraz 9.
 
 ### Pętle zagnieżdżone
 
-Podobnie jak możemy zagnieżdżać instrukcje warunkowe, możemy również zagnieżdżać pętle. Pętle zagnieżdżone to pętle znajdujące się w ciele innych pętli. 
+Zagnieżdżanie pętli polega na umieszczaniu jednej pętli wewnątrz innej, co pozwala na tworzenie bardziej złożonych struktur kontroli przepływu. W praktyce, iteracja pętli zewnętrznej powoduje wykonanie całej pętli wewnętrznej przed przejściem do następnej iteracji pętli zewnętrznej.
 
-Istnieją dwie zasady zagnieżdżania pętli:
+Kiedy zagnieżdżamy pętle, warto pamiętać o następujących zasadach:
 
-1. pętla zewnętrzna pilnuje wysokości,
-1. pętla wewnętrzna pilnuje szerokości.
+1. Pętla zewnętrzna kontroluje "makro" iteracje, np. wiersze.
+2. Pętla wewnętrzna kontroluje "mikro" iteracje, np. kolumny.
+
+Przykład:
 
 ```python
-for y in range(10): # wysokosc
-    for x in range(5): # szerokosc
-        kod
+for y in range(3):  # wiersze
+    for x in range(4):  # kolumny
+        print("(", y, ",", x, ")", end=" ")
+    print()
 ```
 
-Pętla zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu w danym rzędzie. Przykładowo, jeśli idziemy do sali kinowej i nasz bilet mówi, że przysługuje nam miejsce numer 5 w rzędzie numer 2, pętle zewnętrzna ustawi nas w odpowiednim rzędzie, a pętla wewnętrzna na odpowiednim miejscu.
+W tym przykładzie, dla każdej iteracji pętli zewnętrznej, pętla wewnętrzna zostanie wykonana w całości. Wydrukowany zostanie układ współrzędnych dla prostokąta o wymiarach 3x4.
 
-W celu lepszego zobrazowania działania takiej konstrukcji posłużymy się graficznymi przykładami i będziemy wypisywać na konsoli różne kształty. Przykład zagnieżdżonej pętli z kształtami może być zapisany w następujący sposób:
+Aby lepiej zrozumieć działanie pętli zagnieżdżonych, przyjrzyjmy się w jaki sposób można je wykorzystać do generowania prostych wzorów graficznych:
+
+1. Prostokąt:
 
 ```python
 for i in range(5):
@@ -102,15 +114,17 @@ for i in range(5):
     print()
 ```
 
-W wyniku wykonania tego kodu zostanie wypisany na konsoli prostokąt z gwiazdek:
+Wynik:
 
-    *****
-    *****
-    *****
-    *****
-    *****
+```
+*****
+*****
+*****
+*****
+*****
+```
 
-Możemy również użyć zagnieżdżonych pętli, aby narysować bardziej skomplikowane kształty, takie jak trójkąty lub choinkę.
+2. Trójkąt prostokątny:
 
 ```python
 for i in range(5):
@@ -119,10 +133,35 @@ for i in range(5):
     print()
 ```
 
-W wyniku wykonania tego kodu zostanie wypisany na konsoli trójkąt z gwiazdek:
+Wynik:
 
+```
+*
+**
+***
+****
+*****
+```
+
+3. Choinka:
+
+```python
+for i in range(5):
+    for j in range(5 - i - 1):  # Dla spacji
+        print(" ", end="")
+    for k in range(2 * i + 1):  # Dla gwiazdek
+        print("*", end="")
+    print()
+```
+
+Wynik:
+
+```
     *
-    **
-    ***
-    ****
-    *****
+   ***
+  *****
+ *******
+*********
+```
+
+Pętle zagnieżdżone pozwalają na realizację wielu złożonych operacji i są kluczem do tworzenia bardziej zaawansowanych programów.

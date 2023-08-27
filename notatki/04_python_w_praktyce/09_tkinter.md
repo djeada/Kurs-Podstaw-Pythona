@@ -1,103 +1,133 @@
-## Tkinter
-Tkinter jest modułem biblioteki standardowej, który służy do tworzenia interfejsów graficznych (GUI). Możemy z niego korzystać, aby tworzyć proste aplikacje okienkowe.
+## Tkinter - Tworzenie interfejsów graficznych
 
-Tworzenie okna głównego za pomocą Tkinter wygląda następująco:
+Tkinter to wbudowany moduł w Pythonie do tworzenia interfejsów graficznych (GUI). Dzięki niemu można szybko i prosto tworzyć aplikacje okienkowe. Poniżej znajdują się podstawowe informacje oraz przykłady wykorzystania Tkinter.
 
-```python
+### Inicjalizacja okna głównego
 
-import tkinter as tk
-
-root = tk.Tk()
-root.mainloop()
-```
-
-Możemy dodać różne elementy interfejsu, takie jak przyciski, etykiety, pola tekstowe i inne. Przykład dodania przycisku:
-
-```python
-import tkinter as tk
-
-def przycisk_klik():
-    print("Kliknięto przycisk")
-
-root = tk.Tk()
-przycisk = tk.Button(root, text="Kliknij mnie", command=przycisk_klik)
-przycisk.pack()
-root.mainloop()
-```
-
-Możemy również ustawić różne opcje dla elementów interfejsu, takie jak rozmiar, kolor tła, itp. Przykład:
+Aby rozpocząć pracę z Tkinter, najpierw trzeba stworzyć główne okno aplikacji:
 
 ```python
 import tkinter as tk
 
 root = tk.Tk()
-etykieta = tk.Label(root, text="Witaj w Tkinter", font=("Helvetica", 16), bg="yellow")
-etykieta.pack()
+root.title("Moja aplikacja")  # Nadanie tytułu oknu
+root.geometry("300x200")     # Ustawienie wymiarów okna
 root.mainloop()
 ```
 
-Tkinter oferuje również możliwość tworzenia layoutów za pomocą ramki (frame). Możemy umieścić różne elementy w ramce i ustalić ich położenie za pomocą siatki (grid). Przykład:
+### Dodawanie elementów do okna
+
+Tkinter oferuje szeroką gamę widżetów (elementów interfejsu), takich jak przyciski, etykiety czy pola tekstowe.
+
+#### Przycisk
+
+```python
+def on_button_click():
+    print("Kliknięto przycisk!")
+
+button = tk.Button(root, text="Kliknij", command=on_button_click)
+button.pack(pady=20)
+```
+
+#### Etykieta
+
+```python
+label = tk.Label(root, text="To jest etykieta", font=("Arial", 14))
+label.pack(pady=20)
+```
+
+### Układanie i kompozycja widżetów
+
+Tworzenie skutecznych interfejsów graficznych wymaga nie tylko dodawania odpowiednich widżetów, ale także ich odpowiedniego układania. W Tkinter mamy do dyspozycji kilka metod umożliwiających kontrolę nad rozmieszczeniem komponentów w oknie.
+
+#### Główne metody układania
+
+1. **pack()**: Automatycznie układa widżety jeden za drugim, w zależności od wybranej orientacji (pionowej lub poziomej).
+2. **grid()**: Pozwala układać widżety w siatce, podobnej do tabeli, gdzie każdy widżet jest przypisany do określonego wiersza i kolumny.
+3. **place()**: Umożliwia dokładne umiejscowienie widżetu w określonym miejscu, podając konkretne współrzędne x i y.
+
+#### Użycie ramek dla lepszej organizacji
+
+Ramki (ang. `Frame`) w Tkinter to narzędzie, które pozwala na grupowanie widżetów. Dzięki temu możemy lepiej zarządzać układem oraz stosować różne metody kompozycji dla różnych grup widżetów.
+
+Przykład użycia ramek:
 
 ```python
 import tkinter as tk
 
 root = tk.Tk()
 
-frame = tk.Frame(root)
-frame.pack()
+# Tworzenie ramki
+frame = tk.Frame(root, bg="lightgray", bd=5, relief="ridge")  # Dodane tło i obramowanie dla lepszej wizualizacji
+frame.pack(pady=20, padx=20)
 
-przycisk1 = tk.Button(frame, text="Przycisk 1")
-przycisk2 = tk.Button(frame, text="Przycisk 2")
-przycisk3 = tk.Button(frame, text="Przycisk 3")
+button1 = tk.Button(frame, text="Przycisk 1")
+button2 = tk.Button(frame, text="Przycisk 2")
 
-przycisk1.grid(row=0, column=0)
-przycisk2.grid(row=0, column=1)
-przycisk3.grid(row=0, column=2)
+# Umieszczanie przycisków w siatce wewnątrz ramki
+button1.grid(row=0, column=0, padx=10)
+button2.grid(row=0, column=1, padx=10)
 
 root.mainloop()
 ```
 
-### Zdarzenia
+- Ramki są świetnym narzędziem do tworzenia segmentów w interfejsie, takich jak paski narzędzi, sekcje formularzy czy panele nawigacyjne.
+- Wybór metody układania zależy od konkretnego przypadku. W niektórych sytuacjach `pack()` będzie idealny, podczas gdy w innych `grid()` lub `place()` dadzą więcej kontroli.
+- Unikaj mieszania metod układania (np. `pack()` z `grid()`) w obrębie jednej ramki, ponieważ może to prowadzić do nieoczekiwanych wyników.
 
-mamy możliwość obsługi zdarzeń za pomocą metody `bind()`. Zdarzenia mogą być generowane przez użytkownika lub system. Do najczęściej używanych zdarzeń należą:
+### Obsługa zdarzeń
 
-* `<Button-1>` - kliknięcie lewym przyciskiem myszy na komponencie
-* `<ButtonRelease-1>` - puszczenie lewego przycisku myszy nad komponentem
-* `<Double-Button-1>` - podwójne kliknięcie lewym przyciskiem myszy na komponencie
-* `<Enter>` - najechanie myszką na komponent
-* `<Leave>` - zjechanie myszką z komponentu
-* `<Key>` - naciśnięcie dowolnego klawisza na klawiaturze
-* `<Return>` - naciśnięcie klawisza Enter
+W Tkinter, zdarzenia odgrywają kluczową rolę, umożliwiając interakcję użytkownika z interfejsem graficznym. Aby odpowiedzieć na różne akcje użytkownika, takie jak kliknięcia myszą czy naciśnięcia klawisza, używamy mechanizmu obsługi zdarzeń.
 
-Aby obsłużyć zdarzenie, wystarczy wywołać metodę `bind()` na obiekcie komponentu, przekazując do niej nazwę zdarzenia oraz funkcję obsługi zdarzenia.
+#### Podstawowe zdarzenia
 
-Przykładowo, jeśli chcemy wyświetlić komunikat po najechaniu myszką na przycisk, możemy użyć następującego kodu:
+Oto niektóre z najczęściej używanych zdarzeń w Tkinter:
+
+* `<Button-1>`: Kliknięcie lewym przyciskiem myszy na komponencie.
+* `<ButtonRelease-1>`: Puszczenie lewego przycisku myszy nad komponentem.
+* `<Double-Button-1>`: Podwójne kliknięcie lewym przyciskiem myszy na komponencie.
+* `<Enter>`: Najechanie myszką na komponent.
+* `<Leave>`: Zjechanie myszką z komponentu.
+* `<Key>`: Naciśnięcie dowolnego klawisza na klawiaturze.
+* `<Return>`: Naciśnięcie klawisza Enter.
+
+#### Metoda `bind()`
+
+Aby obsłużyć zdarzenie, można użyć metody `bind()`, która jest dostępna dla wszystkich komponentów w Tkinter. Metoda ta przyjmuje dwa argumenty: nazwę zdarzenia oraz funkcję (lub metodę), która ma zostać wywołana, gdy zdarzenie wystąpi.
+
+Przykład obsługi zdarzenia najechania myszką na przycisk:
 
 ```python
 from tkinter import Button, Tk
 
-def mouse_over(event):
+def on_mouse_enter(event):
     print("Myszka najechała na przycisk")
 
 root = Tk()
-button = Button(root, text="Przycisk")
-button.bind("<Enter>", mouse_over)
+button = Button(root, text="Najedź na mnie!")
+button.bind("<Enter>", on_mouse_enter)
 button.pack()
 root.mainloop()
 ```
 
-Możemy też użyć dekoratora `@event_decorator` do obsługi zdarzeń. W tym przypadku nie musimy już ręcznie wywoływać metody `bind()`, a dekorator automatycznie połączy funkcję z odpowiednim zdarzeniem.
+#### Uwaga o dekoratorze @event_decorator
+
+Dekorator `@event_decorator` nie jest standardową częścią biblioteki Tkinter. Jeżeli chcesz z niego korzystać, potrzebujesz dodatkowej biblioteki lub samodzielnej implementacji tego dekoratora. W standardowym Tkinter, obsługa zdarzeń opiera się głównie na użyciu metody `bind()`.
+
+#### Łączenie wielu zdarzeń
+
+Możesz również połączyć kilka zdarzeń z jednym komponentem, co pozwala na tworzenie bardziej złożonych interakcji:
 
 ```python
-from tkinter import Button, Tk
 
-root = Tk()
-button = Button(root, text="Przycisk")
+def on_mouse_leave(event):
+    print("Myszka opuściła przycisk")
 
-@button.event_decorator("<Enter>")
-def mouse_over(event):
-    print("Myszka najechała na przycisk")
-
-button.pack()
-root.mainloop()
+button.bind("<Leave>", on_mouse_leave)
 ```
+
+W ten sposób, korzystając z różnych zdarzeń i odpowiednich funkcji obsługi, możesz tworzyć interaktywne i dynamiczne interfejsy użytkownika w Tkinter.
+
+### Zakończenie pracy
+
+Po dodaniu wszystkich elementów i konfiguracji interfejsu, należy wywołać funkcję `mainloop()` na obiekcie głównego okna. Dzięki temu aplikacja będzie działać do momentu zamknięcia okna przez użytkownika.

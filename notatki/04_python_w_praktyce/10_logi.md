@@ -1,44 +1,53 @@
+## Logowanie
 
-## Logi
+Podczas tworzenia większych aplikacji niezbędne jest monitorowanie ich działania, zwłaszcza gdy są one uruchamiane przez długi czas. Logi pozwalają na zapisywanie i analizowanie działania programu, co jest niezwykle ważne przy diagnozowaniu problemów czy monitorowaniu postępów. Moduł `logging` w Pythonie oferuje rozbudowane narzędzia do tworzenia i zarządzania logami.
 
-Większość programów, które tworzyliśmy w obrębie tego kursu, była jednorazowo uruchamiana i od razu zamykana. W prawdziwym świecie programy mogą działać godzinami, dniami lub nawet całymi latami. W takim przypadku wypadałoby poza samym efektem działania programu co jakiś czas otrzymać od programu informacje o tym, co aktualnie robi, wraz z ewentualnymi komunikatami o błędach. Takie informacje, zwane logami, są często zapisywane do osobnego pliku.
+### Poziomy logów
 
-Moduł `logging` zawiera wiele przydatnych funkcjonalności do tworzenia logów.
+Logi można kategoryzować na podstawie ich ważności. Oto dostępne poziomy logów w module `logging`:
 
-Mamy dostępnych kilka poziomów logów:
+| Poziom logu  | Wartość | Opis |
+| ------------ | ------- | ---- |
+| CRITICAL     | 50      | Błędy krytyczne, które mogą powodować przerwanie działania programu |
+| ERROR        | 40      | Błędy, które nie zatrzymują działania programu, ale wymagają uwagi |
+| WARNING      | 30      | Ostrzeżenia o potencjalnych problemach w przyszłości |
+| INFO         | 20      | Ogólne informacje o działaniu programu |
+| DEBUG        | 10      | Szczegółowe informacje, przydatne podczas debugowania |
+| NOTSET       | 0       | Poziom domyślny dla loggerów |
 
-| poziom | wartość |
-| ------ | ------- | 
-| CRITICAL | 50 | 
-| ERROR | 40 | 
-| WARNING | 30 | 
-| INFO | 20 | 
-| DEBUG | 10 | 
-| NOTSET | 0 | 
+### Logowanie do konsoli
 
-Rzućmy okiem na prosty przykład, gdzie wypisujemy na konsoli komunikat "Przykładowa wiadomość":
+W celu wypisania informacji na konsolę możemy skorzystać z funkcji takich jak `logging.info()`, `logging.warning()` itp.:
 
 ```python
 import logging
 
 logging.basicConfig(level=logging.INFO)
-logging.info("Przykladowa wiadomosc.")
+logging.info("Przykladowa wiadomosc INFO.")
+logging.warning("Przykladowa wiadomosc WARNING.")
 ```
 
-W powyższym przykładzie, linia `logging.basicConfig(level=logging.INFO)` ustawia poziom logów na `INFO`. Poziomy logów określają ważność logów. W przypadku będą wyświetlane logi o poziomie `INFO` i wszystkie powyżej niego (np. `WARNING`, `ERROR`, `CRITICAL`). Linia `logging.info("Przykladowa wiadomosc.")` wyświetla komunikat "Przykladowa wiadomosc." na konsoli. W tym przypadku poziom logu jest ustawiony na `INFO`. Jeśli poziom logów ustawiony przez `logging.basicConfig()` jest równy lub wyższy niż poziom logu wyświetlanego przez `logging.info()`, komunikat zostanie wyświetlony. W przeciwnym razie komunikat nie zostanie wyświetlony.
+W tym przykładzie ustawiliśmy poziom logów na INFO, co oznacza, że widoczne będą komunikaty o poziomie INFO oraz wszystkie o wyższym priorytecie.
 
-Aby zapisać logi do pliku potrzebujemy obiektu do obsługi plików (FileHandler):
+### Logowanie do pliku
+
+Logowanie do pliku jest niezbędne w sytuacjach, gdy logi muszą być przechowywane i analizowane w przyszłości:
 
 ```python
 import logging
 
 logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 fh = logging.FileHandler('plik.log')
 fh.setLevel(logging.WARNING)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+
 logger.addHandler(fh)
 
-logger.warning("Przykladowa wiadomosc.")
+logger.info("Przykladowa wiadomosc INFO.")  # Ten komunikat nie zostanie zapisany do pliku
+logger.warning("Przykladowa wiadomosc WARNING.")
 ```
 
-W powyższym przykładzie tworzymy najpierw obiekt `logger` służący do zarządzania logami, a następnie obiekt `fh` służący do zapisywania logów do pliku. Nazwa pliku podana jest jako argument 'plik.log'. Linia `fh.setLevel(logging.WARNING)` ustawia poziom logów dla obiektu `fh` na `WARNING`. Poziomy logów określają ważność logów. W przypadku ustawienia poziomu na `WARNING`, będą zapisywane logi o poziomie `WARNING` i wszystkie powyżej niego. Linia `logger.addHandler(fh)` dodaje obiekt `fh` do obiektu `logger`. W ten sposób logi wygenerowane przez `logger` będą zapisywane do pliku przez obiekt `fh`. Linia `logger.warning("Przykladowa wiadomosc.")` zapisuje komunikat "Przykladowa wiadomość" do pliku o nazwie 'plik.log'. 
+W powyższym kodzie, obiekt `logger` jest skonfigurowany do logowania komunikatów o poziomie INFO i wyższych. Dodatkowo dodaliśmy `FileHandler`, który zapisuje logi o poziomie WARNING i wyższych do pliku 'plik.log'. Użyliśmy również formatter do określenia formatu logów, dodając informacje o dacie i czasie.
