@@ -170,7 +170,7 @@ W systemach z dynamicznym typowaniem typ zmiennej jest określany w trakcie dzia
 * JavaScript
 * PHP
 
-### Wskazówki dotyczące typów)
+### Wskazówki dotyczące typów
 
 Choć Python jest językiem o dynamicznym typowaniu, zostały wprowadzone "type hints" (wskazówki dotyczące typów) dla zmiennych, argumentów funkcji i wartości zwracanych. Pozwalają one programistom na określenie oczekiwanych typów, co ułatwia czytelność kodu i umożliwia korzystanie z narzędzi do statycznego sprawdzania typów, takich jak Mypy.
 
