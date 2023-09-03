@@ -13,13 +13,13 @@ def moja_funkcja():
     print("Rozpoczynam prace w wątku:", threading.current_thread().name)
 
 # Tworzenie nowego wątku
-watek1 = threading.Thread(target=moja_funkcja, name="Watek-1")
+watek = threading.Thread(target=moja_funkcja, name="Watek-1")
 
 # Uruchamianie wątku
-watek1.start()
+watek.start()
 
 # Oczekiwanie na zakończenie wątku
-watek1.join()
+watek.join()
 ```
 
 Kilka ważnych uwag na temat wątków w Pythonie:
@@ -38,13 +38,13 @@ Poniżej przedstawiono przykład tworzenia prostego wątku:
 ```python
 import threading
 
-class MyThread(threading.Thread):
+class MojWatek(threading.Thread):
     def run(self):
         # kod, który zostanie wykonany w wątku
         print("Wątek uruchomiony")
 
-thread = MyThread()
-thread.start()
+watek = MojWatek()
+watek.start()
 ```
 
 Jeżeli chcemy przekazać argumenty do naszego wątku, możemy to zrobić poprzez konstruktor klasy. Pamiętajmy, aby w konstruktorze wywołać konstruktor klasy nadrzędnej przy użyciu super().
@@ -52,7 +52,7 @@ Jeżeli chcemy przekazać argumenty do naszego wątku, możemy to zrobić poprze
 ```python
 import threading
 
-class MyThread(threading.Thread):
+class MojWatek(threading.Thread):
     def __init__(self, argument):
         super().__init__()
         self.argument = argument
@@ -61,8 +61,8 @@ class MyThread(threading.Thread):
         # kod, który zostanie wykonany w wątku
         print(f"Wątek uruchomiony z argumentem: {self.argument}")
 
-thread = MyThread("Hello World")
-thread.start()
+watek = MojWatek("Hello World")
+watek.start()
 ```
 
 Ważne jest, aby pamiętać o potencjalnych problemach związanych z wielowątkowością, takich jak konkurencyjny dostęp do wspólnych zasobów czy potencjalne sytuacje wyścigowe. W przypadku potrzeby synchronizacji wątków warto skorzystać z mechanizmów dostarczanych przez moduł threading, takich jak Lock czy Semaphore.
@@ -71,46 +71,51 @@ Ważne jest, aby pamiętać o potencjalnych problemach związanych z wielowątko
 
 Kontrolowanie i zatrzymywanie wątków w Pythonie może być nieco skomplikowane, ale dzięki narzędziom dostarczanym przez moduł `threading` jest to możliwe do osiągnięcia.
 
-1. **Metoda `join()`**: 
-    Głównym sposobem oczekiwania na zakończenie wątku jest użycie metody `Thread.join()`. Blokuje ona wywołujący wątek do momentu zakończenia wątku, na którym została wywołana.
-    ```python
-    threads = [thread1, thread2, thread3]
+### Metoda join()
 
-    for thread in threads:
-        thread.join()
-    ```
-    Można również określić maksymalny czas oczekiwania za pomocą parametru `timeout` w metodzie `join()`. Jeśli po tym czasie wątek nie zakończył pracy, główny wątek zostanie wznowiony.
+Głównym sposobem oczekiwania na zakończenie wątku jest użycie metody `Thread.join()`. Blokuje ona wywołujący wątek do momentu zakończenia wątku, na którym została wywołana.
 
-2. **Zmienna `Event` w module `threading`**:
-    Umożliwia komunikację między wątkami. Wątek może oczekiwać na sygnał (metoda `wait()`) i inny wątek może wysłać ten sygnał (metoda `set()`).
-    ```python
-    import threading
+```python
+watki = [watek1, watek2, watek3]
 
-    stop_event = threading.Event()
+for watek in watki:
+    watek.join()
+```
 
-    def worker_thread():
-        while not stop_event.is_set():
-            # wątek wykonuje swoje zadania
-            do_some_work()
-        # po otrzymaniu sygnalu wątek jest zatrzymywany
-        stop_event.clear()
+Można również określić maksymalny czas oczekiwania za pomocą parametru `timeout` w metodzie `join()`. Jeśli po tym czasie wątek nie zakończył pracy, główny wątek zostanie wznowiony.
 
-    # ...
+### Zmienna Event
 
-    # główny wątek chce zatrzymać worker_thread
-    stop_event.set()
-    ```
+Zmienna `Event` w module `threading` umożliwia komunikację między wątkami. Wątek może oczekiwać na sygnał (metoda `wait()`) i inny wątek może wysłać ten sygnał (metoda `set()`).
 
-3. **Uwagi**:
-    - Zatrzymanie wątku (zwłaszcza przez wymuszanie) nie jest zalecane, ponieważ może prowadzić do nieprzewidywalnych skutków ubocznych. Zamiast tego powinno się zastosować mechanizmy synchronizacji lub pozwolić wątkowi zakończyć pracę naturalnie.
-    - W przypadku korzystania z globalnych zmiennych lub zasobów współdzielonych, zawsze pamiętaj o synchronizacji dostępu, aby uniknąć zjawiska wyścigu lub naruszeń integralności danych.
-    - Należy unikać używania stałych pętli, które sprawdzają pewien warunek (jak `stop_event.is_set()`) w nieskończoność, gdyż mogą one powodować niepotrzebne obciążenie procesora.
-   
+```python
+import threading
+
+stop_event = threading.Event()
+
+def worker_thread():
+    while not stop_event.is_set():
+        # wątek wykonuje swoje zadania
+        do_some_work()
+    # po otrzymaniu sygnalu wątek jest zatrzymywany
+    stop_event.clear()
+
+# ...
+
+# główny wątek chce zatrzymać worker_thread
+stop_event.set()
+```
+
+Uwagi:
+- Zatrzymanie wątku (zwłaszcza przez wymuszanie) nie jest zalecane, ponieważ może prowadzić do nieprzewidywalnych skutków ubocznych. Zamiast tego powinno się zastosować mechanizmy synchronizacji lub pozwolić wątkowi zakończyć pracę naturalnie.
+- W przypadku korzystania z globalnych zmiennych lub zasobów współdzielonych, zawsze pamiętaj o synchronizacji dostępu, aby uniknąć zjawiska wyścigu lub naruszeń integralności danych.
+- Należy unikać używania stałych pętli, które sprawdzają pewien warunek (jak `stop_event.is_set()`) w nieskończoność, gdyż mogą one powodować niepotrzebne obciążenie procesora.
+
 ### Dzielenie zasobów między wątkami
 
 W wielowątkowych aplikacjach często występuje potrzeba korzystania z współdzielonych zasobów, takich jak zmienne czy struktury danych. Jednak równoczesny dostęp wielu wątków do tych zasobów może prowadzić do nieprzewidywalnych i niepożądanych skutków, takich jak sytuacje wyścigowe. Aby uniknąć tych problemów, konieczne jest użycie mechanizmów synchronizacji.
 
-#### Mechanizm blokady (`Lock`)
+#### Mechanizm blokady
 
 Obiekt `Lock` z modułu `threading` pozwala na zapewnienie, że tylko jeden wątek na raz może wykonywać określony fragment kodu.
 
@@ -119,34 +124,34 @@ Przykład:
 ```python
 import threading
 
-# Zmienna globalna dostępna dla wielu wątków
+# Globalna zmienna dostępna dla wielu wątków
 zmienna_globalna = 0
 
-# Obiekt Lock do synchronizacji dostępu do zmiennej_globalnej
-lock = threading.Lock()
+# Obiekt Zamek do synchronizacji dostępu do zmienna_globalna
+blokada = threading.Lock()
 
-def watek1():
+def funkcja_watek1():
     global zmienna_globalna
     for _ in range(100):
-        with lock:  # Zastosowanie kontekstu zamiast manualnego pobierania i zwalniania blokady
+        with blokada:  # Zastosowanie kontekstu zamiast manualnego pobierania i zwalniania blokady
             zmienna_globalna += 1
 
-def watek2():
+def funkcja_watek2():
     global zmienna_globalna
     for _ in range(100):
-        with lock:
+        with blokada:
             zmienna_globalna -= 1
 
 # Tworzenie i uruchamianie wątków
-t1 = threading.Thread(target=watek1)
-t2 = threading.Thread(target=watek2)
+watek1 = threading.Thread(target=funkcja_watek1)
+watek2 = threading.Thread(target=funkcja_watek2)
 
-t1.start()
-t2.start()
+watek1.start()
+watek2.start()
 
 # Czekanie na zakończenie wątków
-t1.join()
-t2.join()
+watek1.join()
+watek2.join()
 
 # Wyświetlenie wyniku
 print(zmienna_globalna)
@@ -175,24 +180,24 @@ Rozwiązanie? W przypadkach, gdy chcemy maksymalnie wykorzystać wielordzeniowo�
 ```python
 import threading
 
-def sum_list(numbers):
-    total = sum(numbers)  # Uproszczony sposób sumowania
-    print(total)
+def suma_listy(liczby):
+    suma = sum(liczby)  # Uproszczony sposób sumowania
+    print(suma)
 
 # Utworzenie wątków
-threads = [
-    threading.Thread(target=sum_list, args=([1, 2, 3],)),
-    threading.Thread(target=sum_list, args=([4, 5, 6],)),
-    threading.Thread(target=sum_list, args=([7, 8, 9],))
+watki = [
+    threading.Thread(target=suma_listy, args=([1, 2, 3],)),
+    threading.Thread(target=suma_listy, args=([4, 5, 6],)),
+    threading.Thread(target=suma_listy, args=([7, 8, 9],))
 ]
 
 # Uruchomienie wątków
-for thread in threads:
-    thread.start()
+for watek in watki:
+    watek.start()
 
 # Oczekiwanie na zakończenie wątków
-for thread in threads:
-    thread.join()
+for watek in watki:
+    watek.join()
 ```
 
 Ostateczna uwaga: Gdy chcemy przyspieszyć operacje w Pythonie, warto też rozważyć użycie bibliotek specjalizujących się w równoległości, takich jak `Dask` czy `Joblib`.
