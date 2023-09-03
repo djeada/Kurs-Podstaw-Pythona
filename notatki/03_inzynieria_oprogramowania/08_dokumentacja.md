@@ -130,33 +130,33 @@ Dyrektywy służą do wstawiania różnych elementów, takich jak obrazy, tabele
 
 Pisanie efektywnej dokumentacji to proces, który może sprawić, że Twoja aplikacja stanie się bardziej użyteczna i przystępna. Poniżej znajdują się wskazówki, które pomogą Ci tworzyć jasną, zrozumiałą i przyjazną dla użytkownika dokumentację:
 
-1. **Zacznij od tutoriali**
-   - Wprowadź użytkownika krok po kroku przez proces instalacji i uruchomienia aplikacji.
-   - Demonstruj podstawowe scenariusze użytkowania Twojego oprogramowania.
-   - Wyjaśnij funkcjonalność poszczególnych elementów interfejsu.
-   - Mimo że tutoriale różnią się od klasycznej dokumentacji, stanowią doskonały punkt wyjścia, z którego można czerpać informacje.
+#### Zacznij od tutoriali
+- Wprowadź użytkownika krok po kroku przez proces instalacji i uruchomienia aplikacji.
+- Demonstruj podstawowe scenariusze użytkowania Twojego oprogramowania.
+- Wyjaśnij funkcjonalność poszczególnych elementów interfejsu.
+- Mimo że tutoriale różnią się od klasycznej dokumentacji, stanowią doskonały punkt wyjścia, z którego można czerpać informacje.
 
-2. **Automatyzuj proces tworzenia dokumentacji**
-   - Narzędzia takie jak Sphinx ułatwiają tworzenie jednolitej i konsekwentnej dokumentacji w różnych formatach.
-   - Przy programowaniu w Pythonie wykorzystuj `docstrings` do tworzenia wewnętrznej dokumentacji kodu.
+#### Automatyzuj proces tworzenia dokumentacji
+- Narzędzia takie jak Sphinx ułatwiają tworzenie jednolitej i konsekwentnej dokumentacji w różnych formatach.
+- Przy programowaniu w Pythonie wykorzystuj `docstrings` do tworzenia wewnętrznej dokumentacji kodu.
 
-3. **Dokumentacja musi być na bieżąco aktualizowana**
-   - Upewnij się, że treść dokumentacji odzwierciedla aktualny stan aplikacji.
-   - Każda zmiana w kodzie powinna być odzwierciedlona w dokumentacji.
+#### Dokumentacja musi być na bieżąco aktualizowana
+- Upewnij się, że treść dokumentacji odzwierciedla aktualny stan aplikacji.
+- Każda zmiana w kodzie powinna być odzwierciedlona w dokumentacji.
 
-4. **Używaj jasnego i zrozumiałego języka**
-   - Unikaj technicznych terminów, chyba że są one niezbędne. Jeśli tak, staraj się je wyjaśnić.
-   - Ilustruj skomplikowane koncepcje przykładami praktycznymi.
+#### Używaj jasnego i zrozumiałego języka
+- Unikaj technicznych terminów, chyba że są one niezbędne. Jeśli tak, staraj się je wyjaśnić.
+- Ilustruj skomplikowane koncepcje przykładami praktycznymi.
 
-5. **Zwracaj uwagę na detale**
-   - Dbaj o poprawność językową oraz stylistyczną.
-   - Jeżeli Twoja aplikacja bazuje na zewnętrznych bibliotekach, dołącz linki do ich dokumentacji.
+#### Zwracaj uwagę na detale
+- Dbaj o poprawność językową oraz stylistyczną.
+- Jeżeli Twoja aplikacja bazuje na zewnętrznych bibliotekach, dołącz linki do ich dokumentacji.
 
-6. **Zachowuj strukturę i organizację**
-   - Informacje powinny być prezentowane w logiczny sposób, uporządkowane w odpowiednie sekcje i podsekcje.
-   - Wykorzystuj nagłówki, listy i wyróżnienia, aby uczynić tekst bardziej czytelnym.
+#### Zachowuj strukturę i organizację
+- Informacje powinny być prezentowane w logiczny sposób, uporządkowane w odpowiednie sekcje i podsekcje.
+- Wykorzystuj nagłówki, listy i wyróżnienia, aby uczynić tekst bardziej czytelnym.
 
-7. **Bądź otwarty na feedback**
+#### Bądź otwarty na feedback
    - Zachęcaj użytkowników do zgłaszania błędów w dokumentacji czy proponowania ulepszeń.
    - Pamiętaj, że Twoi użytkownicy są najlepszym źródłem informacji o tym, jak ulepszyć dokumentację.
 
