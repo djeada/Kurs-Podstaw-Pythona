@@ -7,22 +7,21 @@
 Aby użyć `asyncio`, kluczowym elementem jest deklaracja funkcji jako `async`:
 
 ```python
-async def my_coroutine():
-    print("Start")
+async def moja_korutyna():
+    print("Początek")
     await asyncio.sleep(1)
-    print("End after 1 second")
+    print("Koniec po 1 sekundzie")
 ```
 
 W powyższym kodzie używamy `await`, której można używać tylko wewnątrz funkcji zadeklarowanej jako `async`. `await` wskazuje, że w tym miejscu funkcja może zostać "zawieszona", co pozwala na wykonanie innej aktywnej korutyny.
 
 ```python
-
 import asyncio
 
 async def main():
-    print("Starting")
-    await my_coroutine()
-    print("Finished")
+    print("Rozpoczynam")
+    await moja_korutyna()
+    print("Zakończono")
 
 asyncio.run(main())
 ```
@@ -34,27 +33,27 @@ Dzięki `asyncio` możemy także łatwo uruchamiać wiele korutyn równolegle:
 ```python
 import asyncio
 
-async def say_after(delay, what):
-    await asyncio.sleep(delay)
-    print(what)
+async def powiedz_po(opoznienie, co):
+    await asyncio.sleep(opoznienie)
+    print(co)
 
 async def main():
-    print("Started")
+    print("Rozpoczęto")
     
-    task1 = asyncio.create_task(say_after(1, "Hello"))
-    task2 = asyncio.create_task(say_after(2, "World"))
+    zadanie1 = asyncio.create_task(powiedz_po(1, "Cześć"))
+    zadanie2 = asyncio.create_task(powiedz_po(2, "Świecie"))
 
-    await task1
-    await task2
+    await zadanie1
+    await zadanie2
 
-    print("Finished")
+    print("Zakończono")
 
 asyncio.run(main())
 ```
 
-W powyższym kodzie `asyncio.create_task()` uruchamia korutynę, nie czekając na jej zakończenie. Dzięki temu `say_after(1, "Hello")` i `say_after(2, "World")` są uruchamiane równolegle.
+W powyższym kodzie `asyncio.create_task()` uruchamia korutynę, nie czekając na jej zakończenie. Dzięki temu `powiedz_po(1, "Cześć")` i `powiedz_po(2, "Świecie")` są uruchamiane równolegle.
 
-## Jak `asyncio` zwiększa wydajność
+## Jak asyncio zwiększa wydajność
 
 Załóżmy, że masz do zrobienia wiele żądań sieciowych do różnych serwisów API. W podejściu synchronicznym żądanie za żądaniem zostanie obsłużone pojedynczo, a każde kolejne żądanie będzie czekać, aż poprzednie się zakończy.
 
@@ -62,48 +61,48 @@ W podejściu asynchronicznym, podczas gdy jedno żądanie czeka na odpowiedź, i
 
 Przyjrzyjmy się prostemu porównaniu wydajności między podejściem synchronicznym a asynchronicznym przy użyciu żądań HTTP.
 
-**Synchroniczne podejście**:
+### Synchroniczne podejście
 
 ```python
 import requests
 import time
 
-urls = ["http://example.com" for _ in range(10)]
+adresy_url = ["http://example.com" for _ in range(10)]
 
-start_time = time.time()
+czas_startu = time.time()
 
-for url in urls:
-    response = requests.get(url)
-    print(response.status_code)
+for adres in adresy_url:
+    odpowiedz = requests.get(adres)
+    print(odpowiedz.status_code)
 
-end_time = time.time()
-print(f"Synchronicznie: {end_time - start_time} sekund")
+czas_konca = time.time()
+print(f"Synchronicznie: {czas_konca - czas_startu} sekund")
 ```
 
-Asynchroniczne podejście:
+### Asynchroniczne podejście
 
 ```python
 import aiohttp
 import asyncio
 import time
 
-urls = ["http://example.com" for _ in range(10)]
+adresy_url = ["http://example.com" for _ in range(10)]
 
-async def fetch(url, session):
-    async with session.get(url) as response:
-        print(response.status)
-        return await response.text()
+async def pobierz(adres, sesja):
+    async with sesja.get(adres) as odpowiedz:
+        print(odpowiedz.status)
+        return await odpowiedz.text()
 
 async def main():
-    async with aiohttp.ClientSession() as session:
-        tasks = [fetch(url, session) for url in urls]
-        await asyncio.gather(*tasks)
+    async with aiohttp.ClientSession() as sesja:
+        zadania = [pobierz(adres, sesja) for adres in adresy_url]
+        await asyncio.gather(*zadania)
 
-start_time = time.time()
+czas_startu = time.time()
 asyncio.run(main())
-end_time = time.time()
+czas_konca = time.time()
 
-print(f"Asynchronicznie: {end_time - start_time} sekund")
+print(f"Asynchronicznie: {czas_konca - czas_startu} sekund")
 ```
 
 Dla wielu żądań różnica w czasie wykonywania między tymi dwoma podejściami będzie znacząca. Wersja asynchroniczna zwykle będzie znacznie szybsza, ponieważ może jednocześnie inicjować wiele żądań, zamiast czekać na zakończenie każdego z nich osobno.
@@ -112,77 +111,69 @@ Dla wielu żądań różnica w czasie wykonywania między tymi dwoma podejściam
 
 Używanie `asyncio` w Pythonie, chociaż potężne, może przynieść pewne wyzwania. Aby lepiej zilustrować te trudności, przyjrzyjmy się kilku konkretnym przykładom:
 
-#### 1. Integracja z kodem synchronicznym
+#### Integracja z kodem synchronicznym
 
-**Problem:**  
-Załóżmy, że używasz asynchronicznej korutyny do obsługi operacji sieciowej, ale potrzebujesz skorzystać z biblioteki, która działa synchronicznie.
+**Problem:** Załóżmy, że używasz asynchronicznej korutyny do obsługi operacji sieciowej, ale potrzebujesz skorzystać z biblioteki, która działa synchronicznie.
 
 ```python
 import asyncio
 import requests
 
-async def fetch_data():
-    response = requests.get("http://example.com")  # synchroniczna operacja
-    return response.text
+async def pobierz_dane():
+    odpowiedz = requests.get("http://example.com")  # synchroniczna operacja
+    return odpowiedz.text
 
-asyncio.run(fetch_data())
+asyncio.run(pobierz_dane())
 ```
 
-Trudność:
-Wywołanie synchronicznej funkcji requests.get w korutynie blokuje cały loop zdarzeń, co uniemożliwia równoczesne wykonywanie innych korutyn.
+Trudność: Wywołanie synchronicznej funkcji requests.get w korutynie blokuje cały loop zdarzeń, co uniemożliwia równoczesne wykonywanie innych korutyn.
 
-#### 2. Debugowanie
+#### Debugowanie
 
-**Problem:**
-Podczas debugowania napotkasz błąd w jednej z wielu korutyn, które są jednocześnie uruchomione.
+**Problem:** Podczas debugowania napotkasz błąd w jednej z wielu korutyn, które są jednocześnie uruchomione.
 
 ```python
-async def broken_coroutine():
+async def zepsuta_korutyna():
     await asyncio.sleep(1)
-    raise ValueError("Oops!")
+    raise ValueError("Ups!")
 
 async def main():
-    task1 = asyncio.create_task(broken_coroutine())
-    task2 = asyncio.create_task(another_coroutine())
-    await task1
-    await task2
+    zadanie1 = asyncio.create_task(zepsuta_korutyna())
+    zadanie2 = asyncio.create_task(inna_korutyna())
+    await zadanie1
+    await zadanie2
 
 asyncio.run(main())
 ```
 
-**Trudność:**
-Zdiagnozowanie, która korutyna jest problematyczna i dlaczego, może być trudniejsze ze względu na asynchroniczne zachowanie i brak tradycyjnego stosu wywołań.
+**Trudność:** Zdiagnozowanie, która korutyna jest problematyczna i dlaczego, może być trudniejsze ze względu na asynchroniczne zachowanie i brak tradycyjnego stosu wywołań.
 
-#### 3. Poprawne zarządzanie zasobami
+#### Poprawne zarządzanie zasobami
 
-**Problem:**
-Tworzenie wielu połączeń bez ich odpowiedniego zamykania.
+**Problem:** Tworzenie wielu połączeń bez ich odpowiedniego zamykania.
 
 ```python
-async def fetch_many():
-    urls = ["http://example.com"] * 100
-    for url in urls:
-        response = await aiohttp.request("GET", url)
+async def pobierz_wiele():
+    adresy_url = ["http://example.com"] * 100
+    for adres in adresy_url:
+        odpowiedz = await aiohttp.request("GET", adres)
         # brak zamknięcia połączenia
 
-asyncio.run(fetch_many())
+asyncio.run(pobierz_wiele())
 ```
 
-**Trudność:**
-Niezamknięte połączenia mogą prowadzić do wycieków zasobów, co obciąża system i może prowadzić do błędów.
+**Trudność:** Niezamknięte połączenia mogą prowadzić do wycieków zasobów, co obciąża system i może prowadzić do błędów.
 
-#### 4. Asynchroniczne operacje ograniczone przez CPU
+#### Asynchroniczne operacje ograniczone przez CPU
 
-**Problem:**
-Używanie asynchroniczności do operacji ograniczonych przez CPU.
+**Problem:** Używanie asynchroniczności do operacji ograniczonych przez CPU.
 
 ```python
-async def cpu_bound_task(data):
-    result = sum([x*x for x in data])
-    return result
+async def zadanie_obciazajace_cpu(dane):
+    wynik = sum([x*x for x in dane])
+    return wynik
 
-asyncio.run(cpu_bound_task(range(1000000)))
+asyncio.run(zadanie_obciazajace_cpu(range(1000000)))
 ```
 
-**Trudność:**
-Choć asyncio jest doskonałe do operacji ograniczonych przez I/O, nie przyspiesza to operacji ograniczonych przez CPU i może wprowadzać niepotrzebny narzut.
+**Trudność:** Choć asyncio jest doskonałe do operacji ograniczonych przez I/O, nie przyspiesza to operacji ograniczonych przez CPU i może wprowadzać niepotrzebny narzut.
