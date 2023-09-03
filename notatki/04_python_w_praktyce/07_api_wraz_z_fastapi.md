@@ -36,9 +36,9 @@ Po uruchomieniu przejdź do przeglądarki i otwórz adres `http://localhost:8000
 
 #### Model danych
 
-Używamy **Pydantic** do definiowania modelu danych:
+Jednym z popularnych narzędzi do definiowania i walidacji modelu danych jest **Pydantic**. Dzięki niemu możemy w sposób deklaratywny określić strukturę naszych danych oraz oczekiwane typy wartości.
 
-- **Item**: Przedstawia przedmiot, który posiada atrybuty takie jak: `name`, `description`, `price` oraz `tax`.
+Poniżej mamy przykład modelu **Item**:
 
 ```
 from fastapi import FastAPI, HTTPException
@@ -55,13 +55,19 @@ class Item(BaseModel):
     tax: float = None
 ```
 
-#### Endpointy
+Model ten przedstawia przedmiot, który posiada następujące atrybuty:
 
-1. **Tworzenie przedmiotu (POST)**
-   - Ścieżka: `/items/`
-   - Przyjmuje dane przedmiotu w formacie JSON.
-   - Zwraca dane stworzonego przedmiotu.
-   - Wewnętrznie, przedmiot jest dodawany do słownika (`items`) z unikalnym ID.
+- `name`: Nazwa przedmiotu. Jest to pole wymagane i powinno być typu `str`.
+- `description`: Opis przedmiotu. Jest to pole opcjonalne i również powinno być typu `str`.
+- `price`: Cena przedmiotu. Jest to pole wymagane i powinno być typu `float` lub `int`.
+- `tax`: Podatek dla danego przedmiotu. Jest to pole opcjonalne i, jeśli podane, powinno być typu `float` lub `int`.
+
+#### Tworzenie przedmiotu (POST)
+
+- Ścieżka: `/items/`
+- Przyjmuje dane przedmiotu w formacie JSON.
+- Zwraca dane stworzonego przedmiotu.
+- Wewnętrznie, przedmiot jest dodawany do słownika (`items`) z unikalnym ID.
 
 ```
 @app.post("/items/")
@@ -71,10 +77,11 @@ def create_item(item: Item):
     return {"id": item_id, **item.dict()}
 ```
   
-2. **Pobieranie przedmiotu (GET)**
-   - Ścieżka: `/items/{item_id}`
-   - Na podstawie przekazanego `item_id` zwraca dane przedmiotu.
-   - Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
+#### Pobieranie przedmiotu (GET)
+
+- Ścieżka: `/items/{item_id}`
+- Na podstawie przekazanego `item_id` zwraca dane przedmiotu.
+- Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
      
 ```
 @app.get("/items/{item_id}")
@@ -85,11 +92,12 @@ def read_item(item_id: int):
     return item
 ```
 
-3. **Usuwanie przedmiotu (DELETE)**
-   - Ścieżka: `/items/{item_id}`
-   - Na podstawie przekazanego `item_id` usuwa przedmiot.
-   - Zwraca informację o sukcesie operacji.
-   - Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
+#### Usuwanie przedmiotu (DELETE)
+
+- Ścieżka: `/items/{item_id}`
+- Na podstawie przekazanego `item_id` usuwa przedmiot.
+- Zwraca informację o sukcesie operacji.
+- Jeśli przedmiot o danym ID nie istnieje, zwraca błąd 404.
      
 ```python
 @app.delete("/items/{item_id}")
@@ -104,9 +112,10 @@ def delete_item(item_id: int):
 
 Do komunikacji z API, instalujemy bibliotekę `requests` za pomocą komendy: `pip install requests`.
 
-1. **Tworzenie przedmiotu (POST)**
-   - Używając metody `requests.post`, wysyłamy dane w formacie JSON do endpointu `/items/`.
-   - Przykład: `response = requests.post(url + '/items/', json=item_data)`
+#### Tworzenie przedmiotu (POST)
+
+- Używając metody `requests.post`, wysyłamy dane w formacie JSON do endpointu `/items/`.
+- Przykład: `response = requests.post(url + '/items/', json=item_data)`
 
 ```python
 import requests
@@ -117,9 +126,10 @@ response = requests.post("http://127.0.0.1:8000/items/", json=item_data)
 print(response.json())
 ```
 
-2. **Pobieranie przedmiotu (GET)**
-   - Korzystając z metody `requests.get`, możemy pobrać dane przedmiotu.
-   - Przykład: `response = requests.get(url + f'/items/{item_id}')`
+#### Pobieranie przedmiotu (GET)
+
+- Korzystając z metody `requests.get`, możemy pobrać dane przedmiotu.
+- Przykład: `response = requests.get(url + f'/items/{item_id}')`
 
 ```python
 # Pobieranie (GET)
@@ -127,9 +137,10 @@ response = requests.get("http://127.0.0.1:8000/items/1")
 print(response.json())
 ```
 
-3. **Usuwanie przedmiotu (DELETE)**
-   - Metoda `requests.delete` pozwala usunąć przedmiot na podstawie `item_id`.
-   - Przykład: `response = requests.delete(url + f'/items/{item_id}')`
+#### Usuwanie przedmiotu (DELETE)
+
+- Metoda `requests.delete` pozwala usunąć przedmiot na podstawie `item_id`.
+- Przykład: `response = requests.delete(url + f'/items/{item_id}')`
 
 ```python
 # Usuwanie (DELETE)
