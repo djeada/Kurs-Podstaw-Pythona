@@ -6,22 +6,22 @@ Testy w kontekście inżynierii oprogramowania odnoszą się do procesu weryfika
 
 W zależności od zakresu i celu testowania można wyróżnić różne rodzaje testów:
 
-1. **Testy jednostkowe (Unit Tests)**:
-   - Skupiają się na pojedynczym fragmencie kodu, np. funkcji lub metodzie.
-   - Służą do sprawdzenia poprawności działania poszczególnych elementów kodu w izolacji.
-   - Są zazwyczaj pisane przez deweloperów.
-   
-2. **Testy integracyjne (Integration Tests)**:
-   - Testują interakcje pomiędzy różnymi fragmentami oprogramowania.
-   - Mogą sprawdzać, jak różne moduły lub usługi współpracują ze sobą.
-   
-3. **Testy systemowe (System Tests)**:
-   - Testują kompletny, zintegrowany system, aby ocenić czy spełnia on określone wymagania.
-   - Sprawdzają działanie systemu jako całości, w tym interakcje z zewnętrznymi systemami.
+#### Testy jednostkowe (Unit Tests)
+- Skupiają się na pojedynczym fragmencie kodu, np. funkcji lub metodzie.
+- Służą do sprawdzenia poprawności działania poszczególnych elementów kodu w izolacji.
+- Są zazwyczaj pisane przez deweloperów.
 
-4. **Testy akceptacyjne (Acceptance Tests)**:
-   - Mają na celu potwierdzenie, czy system spełnia oczekiwania użytkowników końcowych i biznesowych.
-   - Mogą być prowadzone przez zespoły QA, klienta lub użytkowników.
+#### Testy integracyjne (Integration Tests)
+- Testują interakcje pomiędzy różnymi fragmentami oprogramowania.
+- Mogą sprawdzać, jak różne moduły lub usługi współpracują ze sobą.
+
+#### Testy systemowe (System Tests)
+- Testują kompletny, zintegrowany system, aby ocenić czy spełnia on określone wymagania.
+- Sprawdzają działanie systemu jako całości, w tym interakcje z zewnętrznymi systemami.
+
+#### Testy akceptacyjne (Acceptance Tests)
+- Mają na celu potwierdzenie, czy system spełnia oczekiwania użytkowników końcowych i biznesowych.
+- Mogą być prowadzone przez zespoły QA, klienta lub użytkowników.
 
 ### Przykłady bugów prowadzących do katastrof
 
@@ -38,23 +38,23 @@ Ostatecznie testy mają kluczowe znaczenie dla jakości i bezpieczeństwa oprogr
 Testowanie jest kluczowym etapem w cyklu życia oprogramowania. Oto podstawowe kroki procesu testowania:
 
 1. **Zdefiniuj cel testu**:
-   - Określ, jakie zachowanie lub funkcjonalność chcesz przetestować.
-   - Ustal spodziewane wyniki.
+    - Określ, jakie zachowanie lub funkcjonalność chcesz przetestować.
+    - Ustal spodziewane wyniki.
 
 2. **Przygotuj dane**:
-   - Wybierz odpowiednie dane wejściowe i/lub konfigurację programu.
-   - W niektórych przypadkach może to obejmować przygotowanie środowiska testowego lub mockowania zewnętrznych zasobów.
+    - Wybierz odpowiednie dane wejściowe i/lub konfigurację programu.
+    - W niektórych przypadkach może to obejmować przygotowanie środowiska testowego lub mockowania zewnętrznych zasobów.
 
 3. **Wykonaj test**:
-   - Uruchom testowany fragment kodu z przygotowanymi danymi wejściowymi.
+    - Uruchom testowany fragment kodu z przygotowanymi danymi wejściowymi.
 
 4. **Walidacja**:
-   - Porównaj faktyczny wynik z oczekiwanym wynikiem.
-   - Ustal, czy test przeszedł pomyślnie czy zakończył się niepowodzeniem.
+    - Porównaj faktyczny wynik z oczekiwanym wynikiem.
+    - Ustal, czy test przeszedł pomyślnie czy zakończył się niepowodzeniem.
 
 5. **Raportowanie**:
-   - Zapisz wynik testu, w tym wszelkie znalezione błędy lub nieprawidłowości.
-   - Ustal dalsze kroki, takie jak naprawa błędów lub przeprowadzenie dalszych testów.
+    - Zapisz wynik testu, w tym wszelkie znalezione błędy lub nieprawidłowości.
+    - Ustal dalsze kroki, takie jak naprawa błędów lub przeprowadzenie dalszych testów.
 
 ### Testy jednostkowe
 
