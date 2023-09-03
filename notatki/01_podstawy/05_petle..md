@@ -1,4 +1,4 @@
-## Pętle w Pythonie
+## Pętle
 
 Pętle w Pythonie, podobnie jak w wielu innych językach programowania, pozwalają na wielokrotne wykonanie fragmentu kodu. Umożliwiają efektywne przetwarzanie kolekcji danych, takich jak listy czy słowniki, oraz wykonywanie powtarzalnych operacji bez konieczności wielokrotnego pisania tego samego kodu.
 
@@ -25,7 +25,7 @@ Przykłady:
 - `for i in range(3, 8)`: - powtórzy blok dla i=3, 4, 5, 6, 7.
 - `for i in range(0, 10, 2)`: - powtórzy blok dla i=0, 2, 4, 6, 8.
 
-### Pętla `while`
+### Pętla While
 
 Pętla `while` w Pythonie umożliwia wielokrotne wykonanie bloku kodu, dopóki określony warunek jest prawdziwy. W przeciwieństwie do pętli `for`, która iteruje się przez znane wcześniej kolekcje danych, pętla `while` może być używana do tworzenia pętli, których liczba iteracji nie jest znana z góry.
 
@@ -50,11 +50,11 @@ W powyższym kodzie pętla będzie działała tak długo, jak zmienna licznik je
 
 Jest to podstawowe zastosowanie pętli while, ale można ją również używać w bardziej zaawansowanych scenariuszach, na przykład w połączeniu z instrukcjami break (do natychmiastowego wyjścia z pętli) i continue (do przerwania bieżącej iteracji i przejścia do następnej).
 
-### Polecenia `break` i `continue`
+### Polecenia break i continue
 
 Instrukcje sterujące, takie jak `break` i `continue`, pozwalają na bardziej skomplikowaną kontrolę przepływu w pętlach. Pomagają one odpowiednio przerwać działanie pętli lub pominąć pozostałą część bieżącej iteracji.
 
-#### Instrukcja `break`
+#### Instrukcja break
 
 Instrukcja `break` kończy działanie bieżącej pętli i przenosi wykonanie do kodu umieszczonego bezpośrednio po niej. Jest szczególnie przydatna, gdy chcemy przerwać działanie pętli na podstawie pewnego warunku.
 
@@ -68,7 +68,8 @@ for i in range(10):
 ```
 
 W powyższym kodzie, pętla for przebiega przez liczby od 0 do 9. Jednakże, gdy wartość i osiągnie 5, instrukcja break zostanie wywołana, przerwując działanie pętli. W efekcie, liczby od 0 do 4 zostaną wypisane na konsoli.
-Instrukcja continue
+
+#### Instrukcja continue
 
 Instrukcja continue pomija pozostałą część bieżącej iteracji pętli i przechodzi bezpośrednio do kolejnej iteracji. Może być używana, jeśli chcemy pominąć pewne instrukcje w bieżącej iteracji na podstawie pewnego warunku.
 
