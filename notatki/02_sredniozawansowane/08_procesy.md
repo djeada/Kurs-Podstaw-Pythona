@@ -8,14 +8,14 @@ W Pythonie, dzięki modułowi `multiprocessing`, można łatwo tworzyć i zarzą
 import multiprocessing
 import time
 
-def worker():
-    print("Rozpoczynam prace")
+def pracownik():
+    print("Rozpoczynam pracę")
     time.sleep(2)
-    print("Kończę prace")
+    print("Kończę pracę")
 
-p = multiprocessing.Process(target=worker)
-p.start()
-p.join()  # Oczekuje na zakończenie procesu
+proces = multiprocessing.Process(target=pracownik)
+proces.start()
+proces.join()  # Oczekuje na zakończenie procesu
 ```
 
 Aby zatrzymać proces przed jego naturalnym zakończeniem, można użyć metody terminate():
@@ -47,15 +47,15 @@ Kolejki w module `multiprocessing` działają podobnie jak wątkowe kolejki w mo
 ```python
 import multiprocessing
 
-def worker(q):
-    q.put("Hello from process!")
+def pracownik(kolejka):
+    kolejka.put("Proces pozdrawia serdecznie!")
 
 if __name__ == "__main__":
-    q = multiprocessing.Queue()
-    p = multiprocessing.Process(target=worker, args=(q,))
-    p.start()
-    print(q.get())  # Odbieramy komunikat od procesu
-    p.join()
+    kolejka = multiprocessing.Queue()
+    proces = multiprocessing.Process(target=pracownik, args=(kolejka,))
+    proces.start()
+    print(kolejka.get())  # Odbieramy komunikat od procesu
+    proces.join()
 ```
 
 W tym przykładzie proces potomny wysyła komunikat do procesu głównego za pomocą kolejki.
@@ -67,16 +67,16 @@ Potoki to kolejny sposób komunikacji między procesami. Składają się z dwóc
 ```python
 import multiprocessing
 
-def worker(conn):
-    conn.send("Hello from process!")
-    conn.close()
+def pracownik(polaczenie):
+    polaczenie.send("Proces pozdrawia serdecznie!")
+    polaczenie.close()
 
 if __name__ == "__main__":
-    parent_conn, child_conn = multiprocessing.Pipe()
-    p = multiprocessing.Process(target=worker, args=(child_conn,))
-    p.start()
-    print(parent_conn.recv())  # Odbieramy komunikat od procesu
-    p.join()
+    polaczenie_rodzica, polaczenie_dziecka = multiprocessing.Pipe()
+    proces = multiprocessing.Process(target=pracownik, args=(polaczenie_dziecka,))
+    proces.start()
+    print(polaczenie_rodzica.recv())  # Odbieramy komunikat od procesu
+    proces.join()
 ```
 
 Warto zaznaczyć, że obie metody – zarówno kolejki, jak i potoki – powinny być używane z uwagą. Należy pamiętać o możliwych zakleszczeniach (deadlocks) i zapewnić odpowiednie zabezpieczenia, by je unikać.
@@ -86,30 +86,30 @@ Warto zaznaczyć, że obie metody – zarówno kolejki, jak i potoki – powinny
 ```python
 import multiprocessing
 
-def compute_squares(numbers, result, index):
-    print(f"Process {index+1} working with {numbers}")
-    for i, num in enumerate(numbers):
-        result[i] = num * num
-    print(f"Process {index+1} done!")
+def oblicz_kwadraty(liczby, wynik, indeks):
+    print(f"Proces {indeks+1} pracuje z {liczby}")
+    for i, liczba in enumerate(liczby):
+        wynik[i] = liczba * liczba
+    print(f"Proces {indeks+1} zakończony!")
 
 if __name__ == "__main__":
-    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    n_processes = 3
-    size = len(numbers) // n_processes
-    processes = []
-    result = multiprocessing.Array('i', len(numbers))
+    liczby = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    liczba_procesow = 3
+    rozmiar = len(liczby) // liczba_procesow
+    procesy = []
+    wynik = multiprocessing.Array('i', len(liczby))
 
-    for i in range(n_processes):
-        start_index = size * i
-        end_index = None if i == n_processes - 1 else start_index + size
-        p = multiprocessing.Process(target=compute_squares, args=(numbers[start_index:end_index], result[start_index:end_index], i))
-        processes.append(p)
+    for i in range(liczba_procesow):
+        indeks_startowy = rozmiar * i
+        indeks_koncowy = None if i == liczba_procesow - 1 else indeks_startowy + rozmiar
+        p = multiprocessing.Process(target=oblicz_kwadraty, args=(liczby[indeks_startowy:indeks_koncowy], wynik[indeks_startowy:indeks_koncowy], i))
+        procesy.append(p)
         p.start()
 
-    for p in processes:
+    for p in procesy:
         p.join()
 
-    print(f"Squares: {list(result)}")
+    print(f"Kwadraty: {list(wynik)}")
 ```
 
 W tym kodzie dzielimy listę liczb na mniejsze fragmenty i przekazujemy je do różnych procesów. Każdy proces oblicza kwadraty liczb równolegle z innymi procesami. Używamy wspólnej pamięci (w postaci `multiprocessing.Array`) do przechowywania wyników, więc po zakończeniu wszystkich procesów możemy odczytać wyniki.
