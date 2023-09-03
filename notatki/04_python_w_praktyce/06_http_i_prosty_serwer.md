@@ -42,7 +42,7 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
 
 Aby ustawić konkretną ścieżkę (katalog) do serwowania plików zamiast domyślnego bieżącego katalogu, można skorzystać z klasy `SimpleHTTPRequestHandler` i zmienić wartość atrybutu `directory`.
 
-#### Zaawansowane dostosowywanie:
+#### Zaawansowane dostosowywanie
 
 Dla bardziej złożonych wymagań, klasy SimpleHTTPRequestHandler można rozszerzyć, dostosowując metody do obsługi różnych typów żądań HTTP:
 
