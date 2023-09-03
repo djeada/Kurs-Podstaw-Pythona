@@ -1,17 +1,17 @@
 ## Testy jednostkowe
 
-Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Umożliwiają one pewność, że napisane przez nas komponenty działają zgodnie z oczekiwaniami, a także pomagają w identyfikowaniu i naprawianiu błędów na wczesnym etapie.
+Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Pozwalają programiście mieć pewność, że napisane przez niego komponenty działają zgodnie z oczekiwaniami oraz pomagają w identyfikacji i naprawie błędów na wczesnym etapie.
 
-### Czym są testy jednostkowe?
+### Czym dokładnie są testy jednostkowe?
 
-* **Czerwone testy**:
-  - Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
-  - Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
+#### Czerwone testy  
+- Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
+- Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
   
-* **Zielone testy**:
-  - To testy, które przeszły pomyślnie.
-  - O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
-  
+#### Zielone testy
+- To testy, które przeszły pomyślnie.
+- O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
+
 ### Korzyści z testów jednostkowych
 
 - **Dokumentacja kodu**: Testy jednostkowe służą jako doskonała dokumentacja. Pozwalają innym programistom zrozumieć, jak dany fragment kodu ma działać oraz jakie są oczekiwane rezultaty jego działania.
@@ -60,15 +60,15 @@ Kluczową ideą jest tu utrzymanie logicznej struktury, która odzwierciedla org
 
 W Pythonie istnieją dwie główne biblioteki do pisania i uruchamiania testów jednostkowych:
 
-1. **`unittest`**:
-   - Jest to standardowa biblioteka w Pythonie do testów jednostkowych.
-   - Umożliwia tworzenie testów, zestawów testów oraz uruchamianie ich.
-   - Posiada wbudowane mechanizmy asercji oraz setup i teardown dla przygotowywania środowiska testów.
-   
-2. **`pytest`**:
-   - Jest to zewnętrzna biblioteka, która stała się bardzo popularna w społeczności Pythona.
-   - Charakteryzuje się prostotą i bardziej naturalnym stylem pisania testów.
-   - Posiada bogatą funkcjonalność w zakresie parametryzacji testów, używania tzw. "fixtures" oraz wtyczek rozszerzających jej możliwości.
+#### unittest
+- Jest to standardowa biblioteka w Pythonie do testów jednostkowych.
+- Umożliwia tworzenie testów, zestawów testów oraz uruchamianie ich.
+- Posiada wbudowane mechanizmy asercji oraz setup i teardown dla przygotowywania środowiska testów.
+
+#### pytest
+- Jest to zewnętrzna biblioteka, która stała się bardzo popularna w społeczności Pythona.
+- Charakteryzuje się prostotą i bardziej naturalnym stylem pisania testów.
+- Posiada bogatą funkcjonalność w zakresie parametryzacji testów, używania tzw. "fixtures" oraz wtyczek rozszerzających jej możliwości.
 
 Ostateczny wybór pomiędzy `unittest` a `pytest` zależy od potrzeb projektu i preferencji zespołu. Niezależnie od wyboru, regularne pisanie i uruchamianie testów jednostkowych jest kluczem do tworzenia niezawodnego oprogramowania.
 
@@ -200,6 +200,7 @@ Odkrycie błędu w twoim kodzie to dopiero początek drogi. Oto kroki, które wa
 5. **Refaktoryzacja**: Gdy test już przechodzi, warto zadbać o to, by Twój kod był jak najbardziej optymalny i czytelny. Refaktoryzacja może obejmować zmianę nazw zmiennych, reorganizację kodu czy usuwanie zbędnych fragmentów. Ważne jest jednak, aby w trakcie refaktoryzacji nie wprowadzić nowych błędów - dlatego po każdej większej zmianie warto ponownie uruchomić testy.
 
 6. **Utrzymanie jakości**: W przyszłości regularnie uruchamiaj testy, aby upewnić się, że wszystko działa jak należy. Pamiętaj, że każda modyfikacja kodu powinna być poprzedzona aktualizacją lub dodaniem odpowiednich testów. Dzięki temu zapewnisz ciągłość jakości i unikniesz powrotu starych błędów.
+
 ### Inne typy testów
 
 W procesie tworzenia oprogramowania wykorzystuje się różne rodzaje testów, aby upewnić się, że system działa prawidłowo na różnych poziomach. Oto trzy główne typy testów:
@@ -226,16 +227,16 @@ Automatyzacja testów jest kluczowym elementem współczesnego procesu rozwoju o
 
 Oto kilka powszechnie używanych narzędzi i platform:
 
-- [Travis CI](https://travis-ci.org/): Chmurzasta usługa CI, idealna dla projektów hostowanych na GitHubie. Zintegrowana z wieloma narzędziami, oferuje prostą konfigurację i jest często wybierana w projektach open source.
+- **[Travis CI](https://travis-ci.org/)**: Chmurzasta usługa CI, idealna dla projektów hostowanych na GitHubie. Zintegrowana z wieloma narzędziami, oferuje prostą konfigurację i jest często wybierana w projektach open source.
 
-- [Jenkins](https://jenkins.io/): Wielofunkcyjne narzędzie CI/CD open source, znane z elastyczności i bogatej ekosystemy wtyczek. Może być uruchomione na lokalnych serwerach lub w chmurze.
+- **[Jenkins](https://jenkins.io/)**: Wielofunkcyjne narzędzie CI/CD open source, znane z elastyczności i bogatej ekosystemy wtyczek. Może być uruchomione na lokalnych serwerach lub w chmurze.
 
-- [GitLab CI/CD](https://docs.gitlab.com/ee/ci/): Zintegrowany z GitLabem system CI/CD, który pozwala na definiowanie skomplikowanych potoków pracy przy użyciu plików konfiguracyjnych.
+- **[GitLab CI/CD](https://docs.gitlab.com/ee/ci/)**: Zintegrowany z GitLabem system CI/CD, który pozwala na definiowanie skomplikowanych potoków pracy przy użyciu plików konfiguracyjnych.
 
-- [CircleCI](https://circleci.com/): Chmurzasta platforma CI/CD, która umożliwia automatyczne budowanie, testowanie i wdrażanie aplikacji w wielu środowiskach.
+- **[CircleCI](https://circleci.com/)**: Chmurzasta platforma CI/CD, która umożliwia automatyczne budowanie, testowanie i wdrażanie aplikacji w wielu środowiskach.
 
 Dla tych, którzy tworzą aplikacje webowe, kluczowe może być także testowanie w wielu przeglądarkach:
 
-- [Selenium](https://www.selenium.dev/): Popularne narzędzie do testowania aplikacji webowych w różnych przeglądarkach. Umożliwia symulację interakcji użytkownika i może być używane z wieloma językami programowania.
+- **[Selenium](https://www.selenium.dev/)**: Popularne narzędzie do testowania aplikacji webowych w różnych przeglądarkach. Umożliwia symulację interakcji użytkownika i może być używane z wieloma językami programowania.
 
 Dzięki automatyzacji testów, zespoły deweloperskie mogą skupić się na tworzeniu wartościowych funkcji, mając pewność, że jakość oprogramowania jest nieustannie monitorowana i utrzymywana na wysokim poziomie.
