@@ -83,6 +83,7 @@ lista.reverse()
 
 Aby przy pomocy pętli przejść przez elementy listy, użyj słowa kluczowego `for`:
 
+
 ```python
 for element in lista: 
     print(element)
