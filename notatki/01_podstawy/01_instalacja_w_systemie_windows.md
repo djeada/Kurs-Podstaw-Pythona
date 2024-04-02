@@ -4,11 +4,16 @@ Aby rozpocząć programowanie w Pythonie, konieczne jest przygotowanie odpowiedn
 
 ### Kroki instalacyjne
 
-#### Przejście na oficjalną stronę Pythona
-Wejdź na stronę [Oficjalne pobieranie Pythona](https://www.python.org/downloads/).
+#### Przejście na stronę Pythona
+
+Wejdź na stronę [Python](https://www.python.org/downloads/) z linkami do pobrania plików.
+
+![python_website](https://github.com/djeada/Kurs-Podstaw-Pythona/assets/37275728/615dc6d2-6ce3-469a-9528-3441283cd829)
 
 #### Pobieranie odpowiedniej wersji
 W sekcji "Python Releases for Windows", znajdź najnowszą stabilną wersję Pythona dedykowaną dla systemu Windows i kliknij w odpowiedni link, aby rozpocząć pobieranie.
+
+![python_windows](https://github.com/djeada/Kurs-Podstaw-Pythona/assets/37275728/13939d60-cef4-4f35-81f9-48c2a0ec9a37)
 
 #### Uruchomienie instalatora
 Po zakończeniu pobierania, lokalizuj plik instalacyjny (zwykle w folderze Pobrane) i uruchom go, klikając dwukrotnie.
