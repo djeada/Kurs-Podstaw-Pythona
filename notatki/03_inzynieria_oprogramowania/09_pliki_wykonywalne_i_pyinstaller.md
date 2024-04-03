@@ -1,6 +1,6 @@
 ## Pliki wykonywalne i PyInstaller
 
-Tworzenie plików wykonywalnych z projektów Python to doskonały sposób na udostępnianie aplikacji osobom, które nie mają Pythona. Narzędzie PyInstaller jest tu kluczowe, ponieważ umożliwia przekształcanie skryptów Pythona w pliki `.exe`, `.app`, `.bin` i inne, w zależności od systemu operacyjnego.
+Tworzenie plików wykonywalnych z kodu to efektywny sposób na dzielenie się aplikacjami z użytkownikami, którzy nie mają zainstalowanego Pythona na swoim komputerze. W tym kontekście, PyInstaller odgrywa kluczową rolę, umożliwiając konwersję skryptów na pliki `.exe`, `.app`, `.bin` itd., zależnie od systemu operacyjnego.
 
 ### Instalacja PyInstaller
 
