@@ -30,7 +30,7 @@ Ciało funkcji może być dowolnie rozbudowane, ale zaleca się dzielenie więks
 
 ### Wywołanie funkcji
 
-Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Przykład:
+Zdefiniowaną funkcję wywołujemy w kodzie poprzez jej nazwę. Poniżej znajduje się podstawowy przykład wywołania funkcji.
 
 ```python
 # w tym miejscu definiujemy funkcję
@@ -39,17 +39,26 @@ def ryba():
 
 # w tym miejscu wywołujemy funkcję
 ryba()
+# wyświetli: rybka
 ```
 
 ### Funkcje z argumentami
 
-Funkcje mogą mieć dowolną ilość argumentów - możliwe jest stworzenie funkcji bez argumentów lub funkcji z wieloma argumentami. Przykład:
+Funkcje mogą mieć dowolną ilość argumentów - możliwe jest stworzenie funkcji bez argumentów lub funkcji z wieloma argumentami. Argumenty te pozwalają na przekazywanie danych do funkcji, które mogą być wykorzystywane w jej wnętrzu. Poniżej znajduje się przykład funkcji z jednym argumentem.
 
 ```python
 def ryba(argument):
     # oczekujemy, że argument będzie liczbą naturalną
     for i in range(argument):
         print('ryba')
+
+# wywołanie funkcji z argumentem 3
+ryba(3)
+
+# wyświetli:
+# ryba
+# ryba
+# ryba
 ```
 
 ### Słowo kluczowe `return`
