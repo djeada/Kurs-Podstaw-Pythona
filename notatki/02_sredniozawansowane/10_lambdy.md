@@ -1,8 +1,28 @@
-## Wyrażenia Lambda w Pythonie
+## Funkcje Lambda
 
-W Pythonie wyrażenia lambda to krótkie, anonimowe funkcje, które można zdefiniować w jednym wierszu przy użyciu słowa kluczowego `lambda`. Są one często stosowane w miejscach, gdzie krótka, prostota funkcja jest wymagana na chwilę, bez potrzeby definiowania pełnoprawnej funkcji.
+Lambda to anonimowa funkcja, która może być używana w wielu językach programowania. Funkcje te są nazywane "anonimowymi", ponieważ nie mają przypisanej nazwy. Lambdy są używane, gdy potrzebujemy krótkiej funkcji, którą można zdefiniować w jednym wierszu.
 
-### Podstawy
+## Dlaczego warto używać lambd?
+
+Funkcje lambda mają kilka zalet:
+
+1. **Zwięzłość**: Pozwalają na definiowanie krótkich funkcji w jednym wierszu, co może uprościć kod.
+2. **Anonimowość**: Nie wymagają nazwy, co jest przydatne, gdy funkcja jest używana tylko raz i nie ma potrzeby jej ponownego wywołania.
+3. **Funkcyjność**: Umożliwiają programowanie funkcyjne, gdzie funkcje są traktowane jako obiekty pierwszej klasy i mogą być przekazywane jako argumenty, zwracane z innych funkcji, itp.
+
+### Składnia funkcji lambda
+
+Składnia funkcji lambda zależy od języka programowania, ale zazwyczaj jest zbliżona do poniższego schematu:
+
+```
+lambda argumenty: wyrażenie
+```
+
+- `lambda`: Słowo kluczowe do stworzenia funkcji anonimowej.
+- `argumenty`: Lista argumentów wejściowych, które mogą być dowolną liczbą argumentów oddzielonych przecinkami.
+- `wyrażenie`: Wyrażenie, które jest zwracane przez funkcję lambda.
+
+### Przykład
 
 Oto podstawowy przykład wyrażenia lambda w porównaniu do standardowej funkcji:
 
