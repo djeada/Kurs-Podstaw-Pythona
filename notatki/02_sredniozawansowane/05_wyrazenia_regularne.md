@@ -6,7 +6,9 @@ Wyrażenia regularne to potężne narzędzie do wyszukiwania, analizy i manipula
 - Weryfikacji poprawności formatu danych (np. adresy e-mail).
 - Zastępowania fragmentów tekstu innymi ciągami.
 
-**Przykład**: Wyszukiwanie wszystkich słów zaczynających się od *abc* lub składających się wyłącznie z małych liter oraz cyfr parzystych.
+### Przykład
+
+Wyszukiwanie wszystkich słów zaczynających się od *abc* lub składających się wyłącznie z małych liter oraz cyfr parzystych.
 
 Rozważmy sytuację, w której mamy plik tekstowy, gdzie każdy wiersz zawiera trzy informacje oddzielone ukośnikami: nazwisko pracownika, datę odczytu oraz odczyt licznika. Chcemy wyciągnąć datę z każdego wiersza:
 
@@ -55,6 +57,49 @@ Wyrażenia regularne wykorzystują różne znaki specjalne, aby definiować skom
 * `?` - Oznacza zero lub jedno powtórzenie.
 * `{m,n}` - Określa zakres powtórzeń od m do n. Na przykład, `a{2,4}` pasuje do "aa", "aaa" lub "aaaa".
 
+### Przykłady użycia znaków specjalnych
+
+```python
+import re
+
+tekst = "Przykładowy tekst z cyframi 123 i znakami specjalnymi !@#."
+
+# Dopasowanie dowolnego znaku
+pattern = r'.'
+matches = re.findall(pattern, tekst)
+print(matches)  # ['P', 'r', 'z', 'y', ... , '3', ' ', 'i', ' ', 'z', 'n', ...]
+
+# Dopasowanie wszystkich cyfr
+pattern = r'\d'
+matches = re.findall(pattern, tekst)
+print(matches)  # ['1', '2', '3']
+
+# Dopasowanie wszystkich znaków niebędących cyframi
+pattern = r'\D'
+matches = re.findall(pattern, tekst)
+print(matches)  # ['P', 'r', 'z', 'y', 'k', 'ł', 'a', 'd', 'o', 'w', 'y', ' ', 't', 'e', 'k', ...]
+
+# Dopasowanie wszystkich białych znaków
+pattern = r'\s'
+matches = re.findall(pattern, tekst)
+print(matches)  # [' ', ' ', ' ', ' ', ' ']
+
+# Dopasowanie wszystkich znaków niebędących białymi znakami
+pattern = r'\S'
+matches = re.findall(pattern, tekst)
+print(matches)  # ['P', 'r', 'z', 'y', 'k', 'ł', 'a', 'd', 'o', 'w', 'y', 't', 'e', 'k', 's', ...]
+
+# Dopasowanie wszystkich znaków alfanumerycznych
+pattern = r'\w'
+matches = re.findall(pattern, tekst)
+print(matches)  # ['P', 'r', 'z', 'y', 'k', 'ł', 'a', 'd', 'o', 'w', 'y', 't', 'e', 'k', ...]
+
+# Dopasowanie wszystkich znaków niebędących alfanumerycznymi
+pattern = r'\W'
+matches = re.findall(pattern, tekst)
+print(matches)  # [' ', ' ', ' ', ' ', ' ', ' ', '!', '@', '#', '.']
+```
+
 ### Schemat pracy z wyrażeniami regularnymi
 
 Praca z wyrażeniami regularnymi może być skomplikowana. Aby uprościć ten proces, warto postępować zgodnie z następującym schematem:
@@ -65,4 +110,43 @@ Praca z wyrażeniami regularnymi może być skomplikowana. Aby uprościć ten pr
 4. **Rozszerzenie wzorca**: W miarę potrzeb, rozbudowuj swój wzorzec, dodając kolejne elementy i specjalne znaki.
 5. **Przeprowadzanie testów**: Przetestuj wyrażenie na różnych przypadkach testowych, zarówno tych typowych, jak i skrajnych.
 
-Zawsze testuj dokładnie wyrażenia regularne przed wdrożeniem w produkcyjnym kodzie.
+### Przykłady bardziej zaawansowanych zastosowań wyrażeń regularnych
+
+#### Weryfikacja adresu e-mail
+
+```python
+import re
+
+def czy_poprawny_email(email):
+    pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(pattern, email) is not None
+
+print(czy_poprawny_email("test@example.com"))  # True
+print(czy_poprawny_email("test@.com"))  # False
+```
+
+#### Zastępowanie tekstu
+
+```python
+import re
+
+tekst = "To jest stary tekst."
+pattern = r'stary'
+nowy_tekst = re.sub(pattern, 'nowy', tekst)
+print(nowy_tekst)  # To jest nowy tekst.
+```
+
+#### Wyciąganie numerów telefonów
+
+```python
+
+
+import re
+
+tekst = "Moje numery to: 123-456-7890 i (123) 456-7890."
+pattern = r'\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+numery = re.findall(pattern, tekst)
+print(numery)  # ['123-456-7890', '(123) 456-7890']
+```
+
+Zawsze testuj dokładnie wyrażenia regularne przed wdrożeniem w produkcyjnym kodzie, aby upewnić się, że działają zgodnie z oczekiwaniami i są wydajne.
