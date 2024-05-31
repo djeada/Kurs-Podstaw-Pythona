@@ -1,22 +1,57 @@
 # Kurs Podstaw Pythona
-Jeśli szukasz dobrego wprowadzenia do programowania w języku Python, ten kurs jest idealnym miejscem dla Ciebie. Został on podzielony na 4 sekcje, dzięki czemu będziesz mógł stopniowo zdobywać wiedzę i umiejętności potrzebne do opanowania języka.
+Jeśli chcesz rozpocząć naukę programowania w języku Python, ten kurs będzie doskonałym wyborem. Kurs jest starannie podzielony na cztery sekcje, co umożliwia stopniowe przyswajanie wiedzy i umiejętności niezbędnych do opanowania tego języka. Dzięki temu, krok po kroku, zbudujesz solidne podstawy oraz poznasz zaawansowane techniki programowania w Pythonie.
 
 ![Capture](https://user-images.githubusercontent.com/37275728/185895408-59e16b58-4468-4bf3-8444-929e3fa4cc3d.PNG)
 
 ## O Kursie
 
-Celem kursu jest nauka podstaw programowania w języku Python. Kurs podzielony jest na 4 sekcje: podstawy, średniozaawansowane, inżynieria oprogramowania oraz Python w praktyce. Każda z tych sekcji zawiera wiele lekcji i zagadnień, które pomogą w zrozumieniu podstaw programowania i zastosowaniu ich w praktyce.
+Celem tego kursu jest nauka podstaw programowania w języku Python. Kurs jest starannie podzielony na cztery sekcje: podstawy, tematy średniozaawansowane, inżynieria oprogramowania oraz Python w praktyce. Każda z tych sekcji zawiera wiele lekcji i zagadnień, które pomogą zrozumieć fundamentalne zasady programowania oraz zastosować je w praktyce.
 
 Kurs obejmuje następujące tematy:
 
-1. Podstawy: instalacja Pythona w systemie Windows, interaktywna konsola, zmienne, warunki, pętle, pętle zagnieżdżone, funkcje, napisy, struktury danych, enum, liczby losowe.
-1. Średniozaawansowane: klasy i obiekty, referencje i kopiowanie, czyste funkcje i skutki uboczne, dziedziczenie i kompozycja, wyrażenia regularne, wyjątki, wątki, procesy, asyncio, lambdy, programowanie funkcyjne, klasy danych, generatory, iteratory, dekoratory, serializacja.
-1. Inżynieria oprogramowania: moduły i pakiety, wersje Pythona, PIP i PyPI, środowisko wirtualne, dbanie o jakość kodu i lintowanie, debugowanie, testy jednostkowe, dokumentacja, pliki wykonywalne i PyInstaller, kod bajtowy.
-1. Python w praktyce: argumenty linii poleceń, praca z plikami i folderami, Pandas i csv, praca z plikami PDF, informacje o systemie operacyjnym, HTTP i prosty serwer, API wraz z FastAPI, bazy danych z SQLite, Tkinter, logi.
+1. **Podstawy**: 
+   - Instalacja Pythona w systemie Windows
+   - Interaktywna konsola
+   - Zmienne, warunki, pętle i pętle zagnieżdżone
+   - Funkcje, napisy, struktury danych
+   - Enum, liczby losowe
 
+2. **Tematy średniozaawansowane**: 
+   - Klasy i obiekty, referencje i kopiowanie
+   - Czyste funkcje i skutki uboczne
+   - Dziedziczenie i kompozycja
+   - Wyrażenia regularne, wyjątki
+   - Wątki, procesy, asyncio
+   - Lambdy, programowanie funkcyjne
+   - Klasy danych, generatory, iteratory, dekoratory
+   - Serializacja
+
+3. **Inżynieria oprogramowania**: 
+   - Moduły i pakiety, wersje Pythona
+   - PIP i PyPI, środowisko wirtualne
+   - Dbanie o jakość kodu i lintowanie
+   - Debugowanie, testy jednostkowe, dokumentacja
+   - Pliki wykonywalne i PyInstaller, kod bajtowy
+
+4. **Python w praktyce**: 
+   - Argumenty linii poleceń
+   - Praca z plikami i folderami, Pandas i CSV
+   - Praca z plikami PDF
+   - Informacje o systemie operacyjnym
+   - HTTP i prosty serwer
+   - API z FastAPI, bazy danych z SQLite
+   - Tkinter, logi
+   
 ## Podstawy
 
-Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzującym się prostą składnią i dużą elastycznością. Jest szeroko stosowany w różnych dziedzinach, od nauk ścisłych po tworzenie aplikacji internetowych. W niniejszym artykule skupimy się na fundamentach języka, a także na budowaniu małych programów i pracy z strukturami danych.
+Python to wszechstronny język programowania, znany z prostej składni i dużej elastyczności. Jest szeroko stosowany w różnych dziedzinach, od nauk ścisłych po tworzenie aplikacji internetowych. W tej sekcji skupimy się na fundamentach języka, które stanowią podstawę do dalszej nauki i bardziej zaawansowanych projektów.
+
+Na początek omówimy instalację Pythona na systemie Windows oraz korzystanie z interaktywnej konsoli, co umożliwi natychmiastowe testowanie i eksperymentowanie z kodem. Następnie przejdziemy do podstawowych konceptów, takich jak zmienne, operatory, instrukcje warunkowe oraz pętle, które są kluczowe do zrozumienia logiki programowania.
+
+Poznamy także bardziej zaawansowane elementy, takie jak funkcje, które pozwalają na organizowanie kodu w bardziej czytelny i modułowy sposób, oraz struktury danych, w tym listy, krotki, słowniki i zbiory, które są niezbędne do efektywnego zarządzania danymi.
+
+Na koniec tej sekcji zajmiemy się również bardziej specyficznymi elementami Pythona, takimi jak napisy, enumy i generowanie liczb losowych, co umożliwi tworzenie bardziej złożonych i interaktywnych programów. Te fundamenty zapewnią solidne podstawy do dalszego rozwoju w kierunku średniozaawansowanych i zaawansowanych technik programowania w Pythonie.
+
 
 ### Notatki
 
@@ -69,9 +104,15 @@ Język Python jest językiem programowania ogólnego przeznaczenia, charakteryzu
 | 30 | Lista słowników | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/30_lista_slownikow.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
 | 31 | Sito Eratostenesa | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/src/01_podstawy/31_sito_eratostenesa.py"><img src="https://img.icons8.com/color/344/python.png" height="50" /> </a> |
 
-## Średniozaawansowane
+## Tematy średniozaawansowane
 
-Ten artykuł jest skierowany do osób, które już zdobyły podstawowe umiejętności w programowaniu w języku Python. Omawiane zagadnienia obejmują bardziej zaawansowane tematy, takie jak klasy i programowanie obiektowe, tworzenie własnych struktur danych, programowanie funkcyjne oraz mechanizmy takie jak wątki, wyjątki, iteratory, generatory i dekoratory.
+Ta sekcja jest przeznaczona dla osób, które opanowały podstawy programowania w Pythonie i chcą poszerzyć swoją wiedzę o bardziej zaawansowane tematy. Skupimy się na takich zagadnieniach jak klasy i programowanie obiektowe, które pozwalają na tworzenie złożonych i dobrze zorganizowanych aplikacji.
+
+Przyjrzymy się również tworzeniu własnych struktur danych, co umożliwi dostosowanie Pythona do specyficznych potrzeb Twoich projektów. Programowanie funkcyjne będzie kolejnym krokiem, obejmującym takie koncepcje jak lambdy, czyste funkcje i skutki uboczne, co pozwoli na bardziej eleganckie i efektywne pisanie kodu.
+
+Dodatkowo, omówimy mechanizmy takie jak wątki i procesy, które są kluczowe dla tworzenia aplikacji wielowątkowych i równoległych. Zajmiemy się również obsługą wyjątków, co jest niezbędne do pisania niezawodnego i odpornego na błędy kodu.
+
+Nie zabraknie także tematyki iteratorów i generatorów, które umożliwiają efektywne zarządzanie dużymi zbiorami danych oraz dekoratorów, które pozwalają na modyfikowanie funkcji i metod w elastyczny sposób. Ta sekcja przygotuje Cię do jeszcze bardziej zaawansowanego programowania i rozwiązywania złożonych problemów w Pythonie.
 
 ### Notatki
 
@@ -132,7 +173,15 @@ Ten artykuł jest skierowany do osób, które już zdobyły podstawowe umiejętn
 
 ## Inżynieria oprogramowania
 
-Inżynieria oprogramowania to dziedzina zajmująca się procesem tworzenia oprogramowania, od projektowania po implementację i utrzymanie. W tej dziedzinie ważne są takie aspekty jak dobór narzędzi i metodologii, zarządzanie projektem, czy współpraca w zespole.
+Inżynieria oprogramowania to dziedzina zajmująca się kompleksowym procesem tworzenia oprogramowania, obejmującym projektowanie, implementację oraz utrzymanie aplikacji. Kluczowymi aspektami w tej dziedzinie są dobór odpowiednich narzędzi i metodologii, efektywne zarządzanie projektem oraz współpraca w zespole.
+
+W tej sekcji omówimy różne narzędzia i techniki, które wspierają proces tworzenia oprogramowania. Poznasz moduły i pakiety Pythona, które pomagają w organizowaniu kodu i zarządzaniu zależnościami. Dowiesz się, jak korzystać z systemów zarządzania wersjami, takich jak Git, aby śledzić zmiany w kodzie i współpracować z innymi programistami.
+
+Omówimy także zarządzanie pakietami za pomocą PIP i PyPI, co pozwala na łatwą instalację i aktualizację bibliotek. Wprowadzenie do tworzenia i zarządzania środowiskami wirtualnymi pomoże Ci izolować projekty i uniknąć konfliktów zależności.
+
+Kolejnym ważnym tematem będzie dbanie o jakość kodu, w tym lintowanie, czyli automatyczne sprawdzanie zgodności kodu ze standardami, oraz techniki debugowania, które pomogą w identyfikacji i naprawie błędów. Dowiesz się również, jak pisać testy jednostkowe, aby zapewnić niezawodność i stabilność aplikacji.
+
+Nie zapomnimy o dokumentacji, która jest nieodzowną częścią każdego projektu, oraz o tworzeniu plików wykonywalnych za pomocą narzędzi takich jak PyInstaller. Poznasz również, czym jest kod bajtowy i jak Python interpretuje Twój kod. Ta sekcja przygotuje Cię do pracy nad rzeczywistymi projektami programistycznymi, zapewniając solidne podstawy w inżynierii oprogramowania.
 
 ### Notatki
 
@@ -151,13 +200,17 @@ Inżynieria oprogramowania to dziedzina zajmująca się procesem tworzenia oprog
 
 ## Python w praktyce
 
-W tej części przyjrzymy się różnym aspektom pracy z językiem Python w praktyce. Omówimy wiele narzędzi i bibliotek, które mogą być przydatne podczas tworzenia wszelakiego oprogramowania.
+W tej części skupimy się na praktycznych aspektach pracy z językiem Python, omawiając narzędzia i biblioteki, które są niezwykle przydatne podczas tworzenia różnorodnego oprogramowania.
 
-Początkowo skupimy się na obsłudze argumentów linii poleceń i pracy z plikami i folderami. Następnie przyjrzymy się bibliotece Pandas i sposobom obsługi plików CSV. Kolejnym tematem będzie praca z plikami PDF oraz uzyskiwanie informacji o systemie operacyjnym.
+Na początek, zajmiemy się obsługą argumentów linii poleceń, co pozwoli na tworzenie bardziej dynamicznych i elastycznych skryptów. Następnie przejdziemy do pracy z plikami i folderami, ucząc się jak efektywnie zarządzać danymi na dysku.
 
-Przejdziemy również do tematów związanych z siecią, takich jak HTTP oraz prosty serwer. Nie zabraknie również wprowadzenia do tworzenia API za pomocą biblioteki FastAPI oraz pracy z bazami danych za pomocą SQLite.
+Kolejnym krokiem będzie zapoznanie się z biblioteką Pandas, która umożliwia wygodną i efektywną pracę z plikami CSV oraz analizę danych. Omówimy również, jak manipulować plikami PDF i jak uzyskiwać informacje o systemie operacyjnym, co może być przydatne w wielu praktycznych zastosowaniach.
 
-Na końcu zapoznamy się z biblioteką Tkinter do tworzenia interfejsu graficznego oraz narzędziem do gromadzenia logów.
+Przyjrzymy się również tematom związanym z siecią, takim jak obsługa protokołu HTTP oraz tworzenie prostego serwera. Wprowadzenie do tworzenia API za pomocą biblioteki FastAPI pozwoli na budowanie nowoczesnych i wydajnych interfejsów do komunikacji między różnymi aplikacjami.
+
+Nie zabraknie też tematyki baz danych – nauczymy się korzystać z SQLite, co umożliwi efektywne zarządzanie danymi w aplikacjach. Na koniec zapoznamy się z biblioteką Tkinter, która służy do tworzenia interfejsów graficznych, oraz z narzędziami do gromadzenia logów, co jest kluczowe dla monitorowania i debugowania aplikacji.
+
+Dzięki tej sekcji zdobędziesz praktyczne umiejętności, które pozwolą Ci tworzyć wszechstronne i funkcjonalne aplikacje w języku Python.
 
 ### Notatki
 
