@@ -1,4 +1,4 @@
-## Programowanie funkcyjne w Pythonie
+## Programowanie funkcyjne
 
 Programowanie funkcyjne (ang. functional programming) to paradygmat programowania, który traktuje obliczenia jako ewaluację funkcji matematycznych i unika zmiany stanu oraz danych mutowalnych. Jest to podejście odmienne od programowania imperatywnego, gdzie kod składa się z serii instrukcji zmieniających stan programu. 
 
