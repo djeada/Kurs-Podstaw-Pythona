@@ -1,6 +1,13 @@
 ## Programowanie funkcyjne w Pythonie
 
-Programowanie funkcyjne to paradygmat koncentrujący się na dekompozycji problemu za pomocą zestawu funkcji. W Pythonie, dzięki wbudowanym narzędziom takim jak `map()`, `filter()` i `reduce()`, jesteśmy w stanie stosować techniki programowania funkcyjnego w sposób efektywny.
+Programowanie funkcyjne (ang. functional programming) to paradygmat programowania, który traktuje obliczenia jako ewaluację funkcji matematycznych i unika zmiany stanu oraz danych mutowalnych. Jest to podejście odmienne od programowania imperatywnego, gdzie kod składa się z serii instrukcji zmieniających stan programu. 
+
+Cechy programowania funkcyjnego:
+
+1. **Funkcje jako obywatele pierwszej klasy**: Funkcje mogą być przekazywane jako argumenty do innych funkcji, zwracane jako wyniki innych funkcji i przypisywane do zmiennych.
+2. **Niezmienność**: Dane są niemutowalne, co oznacza, że po utworzeniu obiektu jego stan nie może być zmieniony.
+3. **Brak efektów ubocznych**: Funkcje w programowaniu funkcyjnym nie powinny modyfikować stanu programu ani wprowadzać efektów ubocznych.
+4. **Rekurencja**: Programowanie funkcyjne często wykorzystuje rekurencję zamiast pętli iteracyjnych do realizacji powtarzających się operacji.
 
 ### Mapowanie z map()
 
