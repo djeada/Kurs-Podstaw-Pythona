@@ -9,37 +9,37 @@ Cechy programowania funkcyjnego:
 3. **Brak efektów ubocznych**: Funkcje w programowaniu funkcyjnym nie powinny modyfikować stanu programu ani wprowadzać efektów ubocznych.
 4. **Rekurencja**: Programowanie funkcyjne często wykorzystuje rekurencję zamiast pętli iteracyjnych do realizacji powtarzających się operacji.
 
-### Mapowanie z map()
+### Transformacja z `map()`
 
-Funkcja `map()` pozwala na transformację każdego elementu kolekcji. Przyjmuje ona funkcję oraz kolekcję, a następnie zwraca nową kolekcję, której elementy są wynikami zastosowania funkcji do każdego elementu wejściowej kolekcji.
-
-```python
-lista = [5, 10, 15, 20, 25, 30, 35, 40]
-
-# Za pomocą wyrażeń listowych
-lista_a = [elem // 5 for elem in lista] # [1, 2, 3, 4, 5, 6, 7, 8]
-
-# Za pomocą funkcji map()
-lista_b = list(map(lambda elem: elem // 5, lista)) # [1, 2, 3, 4, 5, 6, 7, 8]
-```
-
-### Filtrowanie z filter()
-
-Za pomocą `filter()` możemy wyselekcjonować elementy kolekcji, które spełniają określone kryterium.
+Funkcja `map()` umożliwia przekształcenie każdego elementu kolekcji. Przyjmuje funkcję oraz kolekcję jako argumenty, a następnie zwraca nową kolekcję, której elementy są wynikami zastosowania podanej funkcji do każdego elementu wejściowej kolekcji.
 
 ```python
 lista = [5, 10, 15, 20, 25, 30, 35, 40]
 
-# Za pomocą wyrażeń listowych
-lista_a = [elem for elem in lista if elem % 2 == 0] # [10, 20, 30, 40]
+# Przekształcenie za pomocą wyrażeń listowych
+lista_a = [elem // 5 for elem in lista]  # [1, 2, 3, 4, 5, 6, 7, 8]
 
-# Za pomocą funkcji filter()
-lista_b = list(filter(lambda elem: elem % 2 == 0, lista)) # [10, 20, 30, 40]
+# Przekształcenie za pomocą funkcji map()
+lista_b = list(map(lambda elem: elem // 5, lista))  # [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-### Agregacja z reduce()
+### Filtrowanie z `filter()`
 
-Do korzystania z `reduce()` potrzebujemy zaimportować ją z modułu functools. Jest ona używana do redukowania kolekcji do jednej wartości poprzez iteracyjne stosowanie określonej funkcji.
+Funkcja `filter()` służy do wybierania elementów kolekcji, które spełniają określone kryterium. Przyjmuje funkcję oraz kolekcję jako argumenty, a następnie zwraca nową kolekcję zawierającą tylko te elementy, dla których funkcja zwróciła wartość prawdziwą.
+
+```python
+lista = [5, 10, 15, 20, 25, 30, 35, 40]
+
+# Filtrowanie za pomocą wyrażeń listowych
+lista_a = [elem for elem in lista if elem % 2 == 0]  # [10, 20, 30, 40]
+
+# Filtrowanie za pomocą funkcji filter()
+lista_b = list(filter(lambda elem: elem % 2 == 0, lista))  # [10, 20, 30, 40]
+```
+
+### Agregacja z `reduce()`
+
+Funkcja `reduce()` z modułu `functools` jest używana do redukowania kolekcji do jednej wartości poprzez iteracyjne stosowanie określonej funkcji. Aby korzystać z `reduce()`, należy ją najpierw zaimportować.
 
 ```python
 from functools import reduce
@@ -48,14 +48,17 @@ liczby = [1, 2, 3, 4, 5]
 suma = reduce(lambda x, y: x + y, liczby)  # 15
 ```
 
-### Połączenie funkcji
+### Złożone operacje z wykorzystaniem `map()`, `filter()` i `reduce()`
 
-Funkcje `map()`, `filter()` i `reduce()` można łączyć, aby tworzyć bardziej złożone operacje na kolekcjach.
+Funkcje `map()`, `filter()` i `reduce()` można łączyć, aby tworzyć bardziej złożone operacje na kolekcjach. Przykład poniżej demonstruje ich zastosowanie w jednym ciągu operacji.
 
 ```python
 napis = 'Python is Love'
+
 # Zwraca listę kodów ASCII wielkich liter w ciągu
-lista = list(map(lambda znak: ord(znak), filter(lambda znak: znak.isupper(), napis))) # [80, 76]
+lista = list(map(lambda znak: ord(znak), filter(lambda znak: znak.isupper(), napis)))  # [80, 76]
 ```
 
-Programowanie funkcyjne w Pythonie pozwala na eleganckie i wydajne manipulowanie kolekcjami. Poprzez połączenie różnych funkcji, możemy tworzyć złożone operacje transformacji danych w zwięzły i czytelny sposób.
+W powyższym przykładzie:
+- `filter()` wybiera tylko wielkie litery z napisu.
+- `map()` przekształca wybrane litery na ich kody ASCII.
