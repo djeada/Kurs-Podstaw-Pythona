@@ -14,7 +14,7 @@ Funkcje lambda mają kilka zalet:
 
 Składnia funkcji lambda zależy od języka programowania, ale zazwyczaj jest zbliżona do poniższego schematu:
 
-```
+```python
 lambda argumenty: wyrażenie
 ```
 
@@ -44,18 +44,70 @@ print((lambda liczba: liczba**2)(wartosc)) # 4
 Chociaż wyrażenia lambda są wygodne, mają pewne ograniczenia w porównaniu do standardowych funkcji:
 
 - Można zdefiniować tylko jedno wyrażenie.
-- Nie jest możliwe używanie instrukcji, takich jak `if`, `for` czy `while`.
+- Nie jest możliwe używanie instrukcji, takich jak `if-elif-else`, `for` czy `while`.
 - Nie można definiować ani przypisywać zmiennych (chociaż można używać `setattr()` dla obiektów).
 - Są one mniej czytelne w przypadku skomplikowanych operacji.
 
-### Zastosowania
+### Zaawansowane zastosowania
 
-Wyrażenia lambda są szczególnie przydatne w miejscach, gdzie funkcja wymaga jednego wyrażenia jako argumentu. Typowym zastosowaniem jest sortowanie listy według określonego kryterium:
+#### Symulacja `if`
+
+Chociaż w wyrażeniach lambda nie można bezpośrednio używać instrukcji `if`, można je symulować za pomocą operatora warunkowego (ternary operator):
 
 ```python
-lista = [('def', 100), ('ghi', 200), ('abc', 300)]
-print(sorted(lista, key=lambda x: x[0])) # [('abc', 300), ('def', 100), ('ghi', 200)]
-print(sorted(lista, key=lambda x: x[1])) # [('def', 100), ('ghi', 200), ('abc', 300)]
+lambda x: 'parzysta' if x % 2 == 0 else 'nieparzysta'
 ```
 
-W powyższym przykładzie, wyrażenie lambda zostało użyte do zdefiniowania funkcji klucza dla metody `sorted()`, co pozwala na elastyczne sortowanie listy bez konieczności tworzenia dodatkowych funkcji.
+Przykład użycia:
+
+```python
+czy_parzysta = lambda x: 'parzysta' if x % 2 == 0 else 'nieparzysta'
+print(czy_parzysta(4)) # 'parzysta'
+print(czy_parzysta(5)) # 'nieparzysta'
+```
+
+#### Symulacja `for`
+
+W wyrażeniach lambda nie można bezpośrednio używać pętli `for`, ale można symulować operacje iteracyjne za pomocą funkcji wbudowanych, takich jak `map` i `filter`:
+
+```python
+lambda lista: list(map(lambda x: x**2, lista))
+```
+
+Przykład użycia:
+
+```python
+kwadraty = lambda lista: list(map(lambda x: x**2, lista))
+print(kwadraty([1, 2, 3, 4])) # [1, 4, 9, 16]
+```
+
+#### Symulacja `while`
+
+Bezpośrednia symulacja `while` w wyrażeniach lambda nie jest możliwa, ale prostsze przypadki można obsłużyć poprzez rekurencję (chociaż nie jest to zalecane ze względu na ograniczenia rekurencji w Pythonie):
+
+```python
+faktorial = lambda n: 1 if n == 0 else n * faktorial(n-1)
+```
+
+Przykład użycia:
+
+```python
+faktorial = lambda n: 1 if n == 0 else n * faktorial(n-1)
+print(faktorial(5)) # 120
+```
+
+#### Sortowanie złożonych struktur danych
+
+Kiedy pracujemy ze złożonym strukturami danych, wyrażenia lambda mogą okazać się niezastąpione przy operacjach takich jak sortowania:
+
+```python
+studenci = [
+    {'imie': 'Jan', 'wiek': 23},
+    {'imie': 'Anna', 'wiek': 22},
+    {'imie': 'Piotr', 'wiek': 24}
+]
+
+sortowani_po_wieku = sorted(studenci, key=lambda x: x['wiek'])
+print(sortowani_po_wieku)
+# [{'imie': 'Anna', 'wiek': 22}, {'imie': 'Jan', 'wiek': 23}, {'imie': 'Piotr', 'wiek': 24}]
+```
