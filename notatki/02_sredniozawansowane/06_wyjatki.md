@@ -125,9 +125,9 @@ Jeśli użyjemy powyższego kodu z liczbą 5, zostanie wyświetlony komunikat: "
 
 ### Wyjątki jako mechanizm przepływu sterowania
 
-Chociaż wyjątki zostały pierwotnie zaprojektowane jako sposób na radzenie sobie z nieoczekiwanymi błędami, w pewnych sytuacjach mogą być używane jako mechanizm przepływu sterowania. Innymi słowy, mogą być używane do sterowania logiką programu w miejscach, gdzie tradycyjne metody, takie jak instrukcje warunkowe, mogą być mniej wyraźne lub mniej efektywne.
+Chociaż wyjątki zostały pierwotnie zaprojektowane jako sposób na radzenie sobie z nieoczekiwanymi błędami, w pewnych sytuacjach mogą być używane jako mechanizm przepływu sterowania. Innymi słowy, mogą być stosowane do sterowania logiką programu w miejscach, gdzie tradycyjne metody, takie jak instrukcje warunkowe, mogą być mniej wyraźne lub mniej efektywne.
 
-Poniżej przedstawiony jest przykład funkcji, która sprawdza, czy dany napis reprezentuje liczbę całkowitą, wykorzystując wyjątki do przepływu sterowania:
+Jednym z takich zastosowań jest walidacja danych, gdzie wyjątki mogą uprościć kod i uczynić go bardziej czytelnym. Poniżej przedstawiony jest przykład funkcji, która sprawdza, czy dany napis reprezentuje liczbę całkowitą, wykorzystując wyjątki do przepływu sterowania:
 
 ```python
 def czy_liczba(napis):
@@ -138,6 +138,8 @@ def czy_liczba(napis):
     return True
 ```
 
-Gdy podamy do tej funkcji napis, który jest poprawną liczbą, funkcja int(napis) zostanie poprawnie wykonana i funkcja zwróci True. Jeśli napis nie jest poprawną liczbą, zostanie zgłoszony wyjątek ValueError, który zostanie przechwycony i funkcja zwróci False.
+Gdy podamy do tej funkcji napis, który jest poprawną liczbą, funkcja `int(napis)` zostanie poprawnie wykonana i funkcja zwróci `True`. Jeśli napis nie jest poprawną liczbą, zostanie zgłoszony wyjątek `ValueError`, który zostanie przechwycony i funkcja zwróci `False`.
 
-Chociaż taki sposób korzystania z wyjątków może wydawać się praktyczny w niektórych sytuacjach, ważne jest, aby zachować ostrożność. Zbyt częste używanie wyjątków do przepływu sterowania może prowadzić do kodu, który jest trudniejszy do zrozumienia i utrzymania. W związku z tym, wyjątki powinny być używane głównie do obsługi błędów i nieoczekiwanych sytuacji, a nie jako główny mechanizm przepływu sterowania.
+Powyższy przykład ilustruje, jak wyjątki mogą być używane do kontrolowania przepływu sterowania w programie. W tym przypadku unikamy złożonej logiki warunkowej, sprawdzając poprawność napisu za pomocą prostego bloku `try-except`.
+
+Warto zauważyć, że nadużywanie wyjątków jako mechanizmu przepływu sterowania może prowadzić do mniej czytelnego i trudniejszego do utrzymania kodu. Dlatego należy używać tej techniki z rozwagą i w sytuacjach, gdzie naprawdę przynosi korzyści w postaci uproszczenia logiki programu.
