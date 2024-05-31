@@ -54,6 +54,15 @@ print(lista)  # pokaże oryginalną listę, bez zmian
 
 Podsumowując, ważne jest, aby być świadomym, czy pracujemy na kopii, czy na oryginalnym obiekcie, a także tego, jakie są konsekwencje naszych działań w kontekście referencji i kopiowania.
 
+### Podsumowanie tematów: referencja, kopiowanie, płytkie, głębokie
+
+| Temat       | Opis                                                                                  | Przykład w Pythonie                   |
+|-------------|----------------------------------------------------------------------------------------|---------------------------------------|
+| Referencja  | Odwołanie się do tego samego obiektu w pamięci. Zmiany w obiekcie są widoczne w każdej referencji. | ```python a = [1, 2, 3]; b = a ```    |
+| Kopiowanie  | Tworzenie nowej kopii obiektu.                                                         |                                       |
+| Płytkie     | Kopiowanie tylko najbliższego poziomu struktury. Zagnieżdżone obiekty pozostają współdzielone. | ```python import copy; b = copy.copy(a) ``` |
+| Głębokie    | Rekurencyjne kopiowanie całej struktury, włącznie z zagnieżdżonymi obiektami.          | ```python import copy; b = copy.deepcopy(a) ``` |
+
 ### Domyślne wartości parametrów funkcji i ich mutowalność
 
 W Pythonie wartości domyślne dla parametrów funkcji są wyliczane tylko raz w momencie definiowania funkcji, a nie za każdym razem, gdy funkcja jest wywoływana. Oznacza to, że jeśli wartość domyślna jest mutowalna, jak lista lub słownik, wszelkie modyfikacje tej wartości zostaną zachowane między kolejnymi wywołaniami funkcji. Może to prowadzić do nieoczekiwanych efektów ubocznych.
