@@ -368,10 +368,8 @@ for wartosc in slownik.values():
 |                  | `count()`               | Zwraca liczbę wystąpień określonego elementu.                                     | `lista.count(5)`                                       |
 |                  | `sort()`                | Sortuje elementy listy w miejscu.                                                 | `lista.sort()`                                         |
 |                  | `reverse()`             | Odwraca kolejność elementów listy.                                                | `lista.reverse()`                                      |
-
 | **Krotka**       | `count()`               | Zwraca liczbę wystąpień określonego elementu.                                     | `krotka.count(5)`                                      |
 |                  | `index()`               | Zwraca indeks pierwszego wystąpienia określonego elementu.                        | `krotka.index(5)`                                      |
-
 | **Zbiór**        | `add()`                 | Dodaje element do zbioru.                                                         | `zbior.add(5)`                                         |
 |                  | `remove()`              | Usuwa element ze zbioru; wyrzuca błąd, jeśli element nie istnieje.                 | `zbior.remove(5)`                                      |
 |                  | `discard()`             | Usuwa element ze zbioru, jeśli istnieje.                                          | `zbior.discard(5)`                                     |
@@ -381,7 +379,6 @@ for wartosc in slownik.values():
 |                  | `intersection()`        | Zwraca nowy zbiór będący przecięciem zbiorów.                                     | `zbior.intersection(inny_zbior)`                      |
 |                  | `difference()`          | Zwraca nowy zbiór będący różnicą zbiorów.                                         | `zbior.difference(inny_zbior)`                        |
 |                  | `symmetric_difference()`| Zwraca nowy zbiór będący symetryczną różnicą zbiorów.                             | `zbior.symmetric_difference(inny_zbior)`              |
-
 | **Słownik**      | `get()`                 | Zwraca wartość dla określonego klucza.                                            | `slownik.get('klucz')`                                |
 |                  | `keys()`                | Zwraca widok wszystkich kluczy w słowniku.                                        | `slownik.keys()`                                       |
 |                  | `values()`              | Zwraca widok wszystkich wartości w słowniku.                                      | `slownik.values()`                                     |
