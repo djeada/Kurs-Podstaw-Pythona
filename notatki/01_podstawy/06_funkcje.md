@@ -141,17 +141,19 @@ Zalety używania `**kwargs`
 Dokumentowanie funkcji jest kluczowe dla utrzymania przejrzystości i zrozumienia kodu. Python pozwala na dodawanie docstringów, które są specjalnymi komentarzami umieszczonymi bezpośrednio pod definicją funkcji. Przykład:
 
 ```python
-def suma_trzech(a, b, c=0):
+def oblicz_pole_prostokata(dlugosc, szerokosc):
     """
-    Funkcja sumuje trzy liczby.
+    Funkcja oblicza pole prostokąta.
 
     Args:
-        a (int): Pierwsza liczba.
-        b (int): Druga liczba.
-        c (int, optional): Trzecia liczba, domyślnie 0.
+        dlugosc (float): Długość prostokąta.
+        szerokosc (float): Szerokość prostokąta.
 
     Returns:
-        int: Suma trzech liczb.
+        float: Pole prostokąta.
     """
-    return a + b + c
+    return dlugosc * szerokosc
+
+pole = oblicz_pole_prostokata(5.0, 3.5)
+print(pole)  # wyświetli: 17.5
 ```
