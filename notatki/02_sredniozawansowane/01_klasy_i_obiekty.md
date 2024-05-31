@@ -2,11 +2,9 @@
 
 Programowanie obiektowe (ang. Object-Oriented Programming, OOP) to paradygmat programowania, który opiera się na koncepcji "obiektów". Obiekty są instancjami klas, które łączą dane (atrybuty) i funkcje (metody) w jedną jednostkę. Klasy i obiekty są podstawowymi elementami tego paradygmatu i przynoszą wiele korzyści w tworzeniu skalowalnego, zrozumiałego i łatwego do utrzymania kodu.
 
-### Klasy i obiekty: definicje
+- **Klasa**: Szablon lub projekt definiujący strukturę i zachowanie obiektów. Określa, jakie atrybuty i metody będą miały obiekty tej klasy.
 
-**Klasa**: Szablon lub projekt definiujący strukturę i zachowanie obiektów. Określa, jakie atrybuty i metody będą miały obiekty tej klasy.
-
-**Obiekt**: Konkretna instancja klasy, która posiada rzeczywiste wartości atrybutów zdefiniowanych przez klasę.
+- **Obiekt**: Konkretna instancja klasy, która posiada rzeczywiste wartości atrybutów zdefiniowanych przez klasę.
 
 ### Struktura klasy
 
