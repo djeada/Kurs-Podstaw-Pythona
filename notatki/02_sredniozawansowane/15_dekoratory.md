@@ -20,6 +20,8 @@ def foo():
 foo()  # Wyjście: przetwarzam dane \n foo
 ```
 
+W powyższym przykładzie `dekoruj` jest dekoratorem, który dodaje komunikat "przetwarzam dane" przed wywołaniem funkcji `foo`.
+
 ### Zachowanie metadanych z funkcji dekorowanej
 
 Aby zachować metadane oryginalnej funkcji po jej dekorowaniu, używamy dekoratora `functools.wraps()`:
@@ -85,6 +87,62 @@ def bar():
     print('bar')
 
 bar()  # Wyjście: Dekorator z argumentem! \n bar
+```
+
+### Zastosowanie dekoratorów w rzeczywistych scenariuszach
+
+Dekoratory są niezwykle użyteczne w wielu scenariuszach, takich jak:
+
+#### Caching
+
+Dekorator może być użyty do zapamiętywania wyników funkcji, co jest szczególnie przydatne w przypadku kosztownych obliczeniowo operacji.
+
+```python
+import functools
+
+def memoize(funkcja):
+    cache = {}
+    
+    @functools.wraps(funkcja)
+    def funkcja_wew(*args):
+        if args in cache:
+            return cache[args]
+        result = funkcja(*args)
+        cache[args] = result
+        return result
+    
+    return funkcja_wew
+
+@memoize
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+print(fib(10))  # Wyjście: 55
+```
+
+#### Logowanie
+
+Dekorator może dodać logowanie do funkcji, pomagając śledzić wywołania funkcji i ich parametry.
+
+```python
+import functools
+
+def logowanie(funkcja):
+    @functools.wraps(funkcja)
+    def funkcja_wew(*args, **kwargs):
+        print(f'Wywoływanie {funkcja.__name__} z argumentami: {args}, {kwargs}')
+        result = funkcja(*args, **kwargs)
+        print(f'{funkcja.__name__} zwrócił: {result}')
+        return result
+    return funkcja_wew
+
+@logowanie
+def dodaj(a, b):
+    return a + b
+
+dodaj(3, 5)  # Wyjście: Wywoływanie dodaj z argumentami: (3, 5), {} \n dodaj zwrócił: 8
 ```
 
 Dekoratory to funkcjonalność, która sprawia, że Python jest językiem wyjątkowo elastycznym i ekspresyjnym, umożliwiającym tworzenie zaawansowanych wzorców projektowych w prosty i zwięzły sposób.
