@@ -1,19 +1,34 @@
 ## Struktury danych
 
-Mamy do dyspozycji kilka różnych sposobów przechowywania danych. Te sposoby to tzw. struktury danych. Są to narzędzia, dzięki którym możemy zbierać i przechowywać duże ilości danych w sposób uporządkowany, co ułatwia nam pracę z tymi danymi.
+Mamy do dyspozycji kilka różnych sposobów przechowywania danych, które nazywamy strukturami danych. Są to narzędzia, dzięki którym możemy zbierać i przechowywać duże ilości danych w sposób uporządkowany, co znacząco ułatwia pracę z tymi danymi.
 
-Oto najpopularniejsze sturktury danych:
+Oto najpopularniejsze struktury danych:
 
-* Listy: Listy to uporządkowane kolekcje elementów, które mogą być różnych typów. Są one modyfikowalne, co oznacza, że możemy dodawać, usuwać oraz modyfikować elementy na liście. W liście mogą występować duplikaty.
-* Krotki: Krotki są podobne do list, ale są niemodyfikowalne. Oznacza to, że po ich utworzeniu nie możemy zmieniać ich zawartości. Krotki są często używane tam, gdzie chcemy zachować stałość danych. Podobnie jak listy, krotki mogą zawierać duplikaty.
-* Zbiory: Zbiory to nieuporządkowane kolekcje unikalnych elementów. Ze względu na ich unikalność, zbiory są użyteczne tam, gdzie interesują nas jedynie różnorodne wartości.
-* Słowniki: Słowniki to kolekcje par klucz-wartość. Klucze w słowniku muszą być unikalne, ale wartości mogą się powtarzać. Słowniki są szczególnie przydatne, gdy chcemy przechowywać dane w sposób zorganizowany, np. informacje o osobie, gdzie kluczem jest nazwa atrybutu (np. "imię"), a wartością jest konkretne dane (np. "Anna").
+- **Listy**: Są najbardziej uniwersalne i mogą być używane wszędzie tam, gdzie potrzebujemy dynamicznej, modyfikowalnej kolekcji elementów. Doskonale nadają się do przechowywania sekwencyjnych danych, które mogą się zmieniać. Przykładowe zastosowania to:
+  - Przechowywanie listy zakupów.
+  - Gromadzenie wyników pomiarów w eksperymencie.
+  - Przechowywanie obiektów w grze komputerowej.
 
-Każda z tych struktur danych ma swoje zastosowania i cechy, które sprawiają, że jest odpowiednia w określonych sytuacjach. Warto więc znać je wszystkie i umieć wybrać odpowiednią strukturę dla danego problemu.
+- **Krotki**: Idealne do przechowywania zestawów danych, które nie powinny się zmieniać po ich utworzeniu. Często używane jako klucze w słownikach lub jako elementy zwracane przez funkcje, które zwracają wiele wartości. Przykłady zastosowań to:
+  - Przechowywanie współrzędnych punktu (x, y).
+  - Zwracanie wielu wartości z funkcji (np. status i wynik operacji).
+  - Przechowywanie danych konfiguracyjnych, które nie powinny być modyfikowane.
+
+- **Zbiory**: Używane tam, gdzie potrzebujemy unikalnych elementów i nie zależy nam na ich kolejności. Przydatne w operacjach matematycznych takich jak sumy, przecięcia i różnice zbiorów. Przykłady zastosowań to:
+  - Przechowywanie unikalnych identyfikatorów.
+  - Realizacja operacji zbiorowych, takich jak unia czy przecięcie.
+  - Filtrowanie duplikatów z listy.
+
+- **Słowniki**: Najlepsze do przechowywania danych w formie klucz-wartość, co pozwala na szybki dostęp do wartości na podstawie klucza. Idealne do przechowywania ustrukturyzowanych danych, takich jak rekordy bazy danych czy konfiguracje. Przykłady zastosowań to:
+  - Przechowywanie konfiguracji aplikacji.
+  - Indeksowanie danych na podstawie unikalnych kluczy (np. numerów identyfikacyjnych).
+  - Przechowywanie słownika językowego (tłumaczenia słów).
+
+Każda z tych struktur danych ma swoje unikalne zastosowania i cechy, które sprawiają, że jest odpowiednia w określonych sytuacjach. Poniżej znajdują się bardziej szczegółowe opisy zastosowań poszczególnych struktur danych:
 
 ### Lista
 
-Lista jest strukturą danych służącą do przechowywania kilku wartości pod jedną nazwą.
+Listy to uporządkowane kolekcje elementów, które mogą być różnych typów. Są one modyfikowalne, co oznacza, że możemy dodawać, usuwać oraz modyfikować elementy na liście. W liście mogą występować duplikaty.
 
 Przykład listy złożonej z kilku liczb całkowitych:
 
@@ -105,9 +120,10 @@ for elem_a, elem_b in zip(lista_a, lista_b):
 
 ### Krotka
 
-Krotka to struktura danych, podobna do listy, ale niezmienna. To znaczy, że po utworzeniu krotki nie możemy jej zmodyfikować, np. dodając do niej nowe elementy czy usuwając już istniejące.
+Krotki są podobne do list, ale są niemodyfikowalne. Oznacza to, że po ich utworzeniu nie możemy zmieniać ich zawartości. Krotki są często używane tam, gdzie chcemy zachować stałość danych. Podobnie jak listy, krotki mogą zawierać duplikaty.
 
 Krotek zamiast list, używamy gdy:
+
 * Liczy się szybkość.
 * Chcemy zabezpieczyć dane przed nadpisaniem.
 
@@ -158,7 +174,7 @@ for elem_a, elem_b in zip(krotka_a, krotka_b):
 
 ### Zbiór
 
-Zbiór (ang. set) to nieuporządkowana kolekcja unikalnych elementów. Zbiory są zazwyczaj używane do eliminowania duplikatów lub do testowania przynależności elementu do kolekcji.
+Zbiory to nieuporządkowane kolekcje unikalnych elementów. Ze względu na ich unikalność, zbiory są użyteczne tam, gdzie interesują nas jedynie różnorodne wartości.
 
 Aby utworzyć pusty zbiór, użyj:
 
@@ -251,7 +267,8 @@ zbior1 <= zbior2
 ```
 
 ### Słownik
-Słownik używamy, gdy chcemy mieć kilka wartości dostępnych pod różnymi nazwami (kluczami). Słownik jest nieuporządkowany i indeksowany.
+
+Słowniki to kolekcje par klucz-wartość. Klucze w słowniku muszą być unikalne, ale wartości mogą się powtarzać. Słowniki są szczególnie przydatne, gdy chcemy przechowywać dane w sposób zorganizowany, np. informacje o osobie, gdzie kluczem jest nazwa atrybutu (np. "imię"), a wartością jest konkretne dane (np. "Anna").
 
 W słowniku można używać jako kluczy dowolnych typów danych, które są niemutowalne (tj. nie mogą być zmieniane). Do niemutowalnych typów danych w Pythonie zaliczają się:
 
@@ -336,3 +353,41 @@ Aby przy pomocy pętli przejść tylko przez wartości słownika, użyj:
 for wartosc in slownik.values(): 
     print(wartosc)
 ```
+
+### Podsumowanie metod dostępnych dla struktur danych
+
+| Struktura danych | Metoda                  | Opis                                                                              | Przykład                                               |
+|------------------|-------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------|
+| **Lista**        | `append()`              | Dodaje element na końcu listy.                                                    | `lista.append(5)`                                      |
+|                  | `extend()`              | Dodaje wszystkie elementy z podanej kolekcji do listy.                            | `lista.extend([6, 7, 8])`                              |
+|                  | `insert()`              | Wstawia element na określonej pozycji.                                            | `lista.insert(1, 'a')`                                 |
+|                  | `remove()`              | Usuwa pierwsze wystąpienie określonego elementu.                                  | `lista.remove('a')`                                    |
+|                  | `pop()`                 | Usuwa i zwraca element z określonej pozycji (domyślnie ostatni element).          | `lista.pop()`                                          |
+|                  | `clear()`               | Usuwa wszystkie elementy z listy.                                                 | `lista.clear()`                                        |
+|                  | `index()`               | Zwraca indeks pierwszego wystąpienia określonego elementu.                        | `lista.index(5)`                                       |
+|                  | `count()`               | Zwraca liczbę wystąpień określonego elementu.                                     | `lista.count(5)`                                       |
+|                  | `sort()`                | Sortuje elementy listy w miejscu.                                                 | `lista.sort()`                                         |
+|                  | `reverse()`             | Odwraca kolejność elementów listy.                                                | `lista.reverse()`                                      |
+
+| **Krotka**       | `count()`               | Zwraca liczbę wystąpień określonego elementu.                                     | `krotka.count(5)`                                      |
+|                  | `index()`               | Zwraca indeks pierwszego wystąpienia określonego elementu.                        | `krotka.index(5)`                                      |
+
+| **Zbiór**        | `add()`                 | Dodaje element do zbioru.                                                         | `zbior.add(5)`                                         |
+|                  | `remove()`              | Usuwa element ze zbioru; wyrzuca błąd, jeśli element nie istnieje.                 | `zbior.remove(5)`                                      |
+|                  | `discard()`             | Usuwa element ze zbioru, jeśli istnieje.                                          | `zbior.discard(5)`                                     |
+|                  | `pop()`                 | Usuwa i zwraca losowy element ze zbioru.                                          | `zbior.pop()`                                          |
+|                  | `clear()`               | Usuwa wszystkie elementy ze zbioru.                                               | `zbior.clear()`                                        |
+|                  | `union()`               | Zwraca nowy zbiór będący sumą zbiorów.                                            | `zbior.union(inny_zbior)`                             |
+|                  | `intersection()`        | Zwraca nowy zbiór będący przecięciem zbiorów.                                     | `zbior.intersection(inny_zbior)`                      |
+|                  | `difference()`          | Zwraca nowy zbiór będący różnicą zbiorów.                                         | `zbior.difference(inny_zbior)`                        |
+|                  | `symmetric_difference()`| Zwraca nowy zbiór będący symetryczną różnicą zbiorów.                             | `zbior.symmetric_difference(inny_zbior)`              |
+
+| **Słownik**      | `get()`                 | Zwraca wartość dla określonego klucza.                                            | `slownik.get('klucz')`                                |
+|                  | `keys()`                | Zwraca widok wszystkich kluczy w słowniku.                                        | `slownik.keys()`                                       |
+|                  | `values()`              | Zwraca widok wszystkich wartości w słowniku.                                      | `slownik.values()`                                     |
+|                  | `items()`               | Zwraca widok wszystkich par klucz-wartość w słowniku.                             | `slownik.items()`                                      |
+|                  | `pop()`                 | Usuwa i zwraca wartość dla określonego klucza.                                    | `slownik.pop('klucz')`                                 |
+|                  | `popitem()`             | Usuwa i zwraca ostatnią parę klucz-wartość.                                       | `slownik.popitem()`                                    |
+|                  | `clear()`               | Usuwa wszystkie elementy ze słownika.                                             | `slownik.clear()`                                      |
+|                  | `update()`              | Aktualizuje słownik o podane pary klucz-wartość.                                  | `slownik.update({'klucz2': 'wartosc2'})`              |
+|                  | `setdefault()`          | Zwraca wartość dla określonego klucza, jeśli klucz nie istnieje dodaje go z wartością domyślną. | `slownik.setdefault('klucz', 'domyslna_wartosc')`     |
