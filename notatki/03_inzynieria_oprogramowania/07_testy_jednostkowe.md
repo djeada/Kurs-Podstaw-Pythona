@@ -1,16 +1,16 @@
 ## Testy jednostkowe
 
-Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Pozwalają programiście mieć pewność, że napisane przez niego komponenty działają zgodnie z oczekiwaniami oraz pomagają w identyfikacji i naprawie błędów na wczesnym etapie.
-
-### Czym dokładnie są testy jednostkowe?
+Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Pozwalają programiście mieć pewność, że napisane przez niego komponenty działają zgodnie z oczekiwaniami oraz pomagają w identyfikacji i naprawie błędów na wczesnym etapie. 
 
 #### Czerwone testy  
 - Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
 - Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
-  
+- W przypadku czerwonych testów należy dokładnie przeanalizować zmiany w kodzie oraz zidentyfikować przyczynę problemu, a następnie naprawić błąd.
+
 #### Zielone testy
 - To testy, które przeszły pomyślnie.
 - O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
+- Zielone testy pozwalają na refaktoryzację kodu, zachowując pewność, że funkcjonalność nie została naruszona.
 
 ### Korzyści z testów jednostkowych
 
@@ -121,13 +121,15 @@ class TestRomanNumerals(unittest.TestCase):
 
 W powyższym przykładzie:
 
-    Funkcja int_to_roman konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
-    Klasa TestRomanNumerals dziedziczy po unittest.TestCase i służy do testowania funkcji int_to_roman.
-    Metoda test_conversion przeprowadza serię testów, sprawdzając różne przypadki konwersji.
+- Funkcja `int_to_roman` konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
+- Klasa `TestRomanNumerals` dziedziczy po `unittest.TestCase` i służy do testowania funkcji `int_to_roman`.
+- Metoda test_conversion przeprowadza serię testów, sprawdzając różne przypadki konwersji.
 
 Aby uruchomić testy jednostkowe, można użyć następującego polecenia w konsoli:
 
+```python
 python -m unittest nazwa_pliku_testowego.py
+```
 
 Pamiętaj, by nazwy plików z testami zaczynały się od słowa "test", ponieważ unittest szuka takich plików podczas skanowania katalogów.
 
@@ -176,12 +178,14 @@ def test_int_to_roman():
 
 W powyższym przykładzie:
 
-    Funkcja int_to_roman konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
-    Funkcja test_int_to_roman przeprowadza serię testów, sprawdzając różne przypadki konwersji.
+- Funkcja `int_to_roman` konwertuje liczby całkowite na ich reprezentacje w postaci rzymskiej.
+- Funkcja `test_int_to_roman` przeprowadza serię testów, sprawdzając różne przypadki konwersji.
 
 Aby uruchomić testy napisane z użyciem pytest, można użyć następującego polecenia w konsoli:
 
+```python
 pytest nazwa_pliku_testowego.py
+```
 
 Pamiętaj, by nazwy plików z testami oraz same funkcje testowe zaczynały się od słowa "test", ponieważ pytest szuka takich funkcji/plików podczas skanowania katalogów.
 
