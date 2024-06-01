@@ -1,12 +1,30 @@
 ## Serializacja
 
-Serializacja to proces konwersji obiektu (lub struktury danych) na postać, która może być łatwo zapisana, przesyłana lub przechowywana. Głównym celem jest przechowywanie stanu obiektu lub przesyłanie go pomiędzy różnymi systemami lub aplikacjami.
+Serializacja to proces przekształcania obiektu lub struktury danych w format, który można łatwo przechowywać lub przesyłać. Zserializowane dane można następnie przywrócić do ich oryginalnej postaci za pomocą procesu deserializacji. Serializacja jest szeroko stosowana w programowaniu do przesyłania danych między różnymi systemami, przechowywania ich w plikach, bazach danych, lub w celu tymczasowego przechowywania obiektów w pamięci.
 
-W Pythonie istnieje wiele narzędzi do serializacji, ale jednym z najbardziej podstawowych jest moduł `pickle`. Moduł ten umożliwia konwersję dowolnego obiektu Pythona na strumień bajtów i odwrotnie.
+```
++------------------+      Serializacja      +----------------+
+| Obiekt Pythona   | ---------------------> | Bajty          |
++------------------+                        +----------------+
+        Ʌ                                         |
+        |                                         |
+        | Deserializacja                          | Deserializacja
+        |                                         |
+        |                                         V
++------------------+      Serializacja      +-----------------+
+| Bajty            | <--------------------- | Obiekt Pythona  |
++------------------+                        +-----------------+
+```
+
+### Zastosowania serializacji
+
+- **Przechowywanie danych**: Zserializowane dane mogą być zapisane w plikach lub bazach danych, co pozwala na ich późniejsze odczytanie i przywrócenie do stanu pierwotnego.
+- **Przesyłanie danych**: Serializacja umożliwia przesyłanie obiektów przez sieć, np. między różnymi komponentami aplikacji rozproszonych lub w komunikacji klient-serwer.
+- **Klonowanie obiektów**: Proces serializacji i deserializacji może być użyty do głębokiego kopiowania obiektów, czyli tworzenia kopii obiektu wraz z wszystkimi zagnieżdżonymi obiektami.
 
 ### Przykład użycia `pickle`
 
-Poniżej znajduje się przykład, jak można serializować i deserializować obiekt klasy `Czlowiek`:
+W Pythonie istnieje wiele narzędzi do serializacji, ale jednym z najbardziej podstawowych jest moduł `pickle`. Moduł ten umożliwia konwersję dowolnego obiektu Pythona na strumień bajtów i odwrotnie. Poniżej znajduje się przykład, jak można serializować i deserializować obiekt klasy `Czlowiek`:
 
 ```python
 import pickle
@@ -31,9 +49,23 @@ with open(sciezka, 'rb') as plik:
     print(czlowiek)  # Wyjście: Imie: James, Numer: 10
 ```
 
-### Ostrzeżenie dotyczące bezpieczeństwa
+#### Ostrzeżenie dotyczące bezpieczeństwa
 
 Chociaż `pickle` jest bardzo potężnym narzędziem, może być niebezpieczny. Nigdy nie należy deserializować danych otrzymanych od nieznanych lub niezaufanych źródeł, ponieważ może to prowadzić do wykonywania złośliwego kodu. W takich przypadkach lepiej korzystać z formatów danych takich jak JSON lub XML, które są bardziej ograniczone pod względem funkcjonalności, ale są bezpieczne.
+
+Wyobraźmy sobie, że ktoś przesyła nam zserializowane dane, a my deserializujemy je za pomocą `pickle`:
+
+```python
+import pickle
+
+# Otrzymane dane (mogą pochodzić z niezaufanego źródła)
+data = b"cos zlośliwego"
+
+# Deserializacja danych
+obj = pickle.loads(data)
+```
+
+Jeśli dane zawierają złośliwy kod, jego wykonanie może prowadzić do poważnych konsekwencji, takich jak kradzież danych, uszkodzenie systemu, czy instalacja malware.
 
 ### Alternatywne narzędzia do serializacji
 
