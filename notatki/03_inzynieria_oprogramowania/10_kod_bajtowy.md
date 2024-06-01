@@ -1,10 +1,10 @@
 ## Kod bajtowy w Pythonie
 
-Kod bajtowy to skompilowana wersja kodu źródłowego, który jest interpretowany przez Pythona. Zamiast uruchamiać bezpośrednio kod źródłowy, Python najpierw przekształca go w kod bajtowy, który jest bardziej efektywny dla wirtualnej maszyny Pythona. Aby zrozumieć i analizować kod bajtowy, Python dostarcza moduł `dis`.
+Kod bajtowy to skompilowana wersja kodu źródłowego, który jest interpretowany przez Pythona. Zamiast uruchamiać bezpośrednio kod źródłowy, Python najpierw przekształca go w kod bajtowy, który jest bardziej efektywny dla wirtualnej maszyny Pythona (CPython). To pozwala na szybsze wykonanie programu, ponieważ kod bajtowy jest już optymalizowany do przetwarzania przez interpreter.
 
 ### Analiza funkcji z użyciem modułu `dis`
 
-Aby przeanalizować kod bajtowy dla konkretnej funkcji, używamy funkcji `dis()`. Oto przykład:
+Moduł `dis` (disassembler) jest wbudowanym narzędziem w Pythonie, które pozwala na analizę kodu bajtowego. Możemy użyć funkcji `dis()` z tego modułu, aby zrozumieć, jak Python interpretuje i wykonuje dane instrukcje. Oto przykład:
 
 ```python
 from dis import dis
@@ -15,9 +15,11 @@ def suma(a, b):
 dis(suma)
 ```
 
+W powyższym przykładzie, funkcja `suma()` jest kompilowana do kodu bajtowego, a następnie `dis()` wizualizuje wynikowy kod bajtowy, prezentując kolejne operacje, które Python wykonuje podczas uruchamiania funkcji.
+
 ### Analiza bloków kodu
 
-Chociaż używaliśmy `dis()` do analizy funkcji, można go również użyć do analizy dowolnych bloków kodu. W tym celu najpierw kompilujemy kod, a następnie przekazujemy do `dis()`. Oto jak to zrobimy:
+Chociaż używaliśmy `dis()` do analizy funkcji, można go również użyć do analizy dowolnych bloków kodu. W tym celu najpierw kompilujemy kod do formatu bajtowego, a następnie przekazujemy go do `dis()`. Oto jak to zrobić:
 
 ```python
 from dis import dis
@@ -30,17 +32,22 @@ def suma(a, b):
 dis(code)
 ```
 
-### Dlaczego analiza kodu bajtowego jest ważna?
+W tym przypadku, cały blok kodu jest kompilowany jako obiekt wykonywalny (`exec`), co oznacza, że może zawierać definicje funkcji oraz instrukcje. Następnie analizujemy ten skompilowany kod, co pozwala zobaczyć, jak interpreter Pythona planuje wykonanie każdej instrukcji.
 
-- **Analiza wydajności**: Kod bajtowy może pomóc w zrozumieniu, dlaczego pewne fragmenty kodu działają wolniej niż inne.
-- **Zrozumienie wewnętrznych mechanizmów Pythona**: Dzięki analizie kodu bajtowego można głębiej zrozumieć, jak działa Python "pod spodem".
-- **Debugowanie**: Kod bajtowy może być pomocny w debugowaniu, zwłaszcza gdy chcemy zrozumieć niestandardowe zachowanie naszego kodu.
+### Dlaczego warto rozumieć kod bajtowy?
+
+Rozumienie kodu bajtowego w Pythonie ma kilka zalet:
+- **Optymalizacja**: Pozwala deweloperom zrozumieć, jak różne konstrukcje kodu wpływają na wydajność.
+- **Debugowanie**: Ułatwia identyfikację problemów związanych z wydajnością oraz błędów w logice programu.
+- **Edukacja**: Pomaga programistom lepiej zrozumieć, jak działa interpreter Pythona, co może przyczynić się do pisania lepszego kodu.
+
+Kod bajtowy jest niezbędnym pośrednikiem między wysokopoziomowym językiem Pythona a instrukcjami, które bezpośrednio wykonuje maszyna, dlatego zrozumienie jego struktury i funkcjonowania może znacząco wpłynąć na skuteczność programowania.
 
 ## Analiza kodu z zewnętrznych bibliotek za pomocą modułu `inspect`
 
 Moduł `inspect` w Pythonie dostarcza narzędzi umożliwiających introspekcję kodu, co jest szczególnie przydatne przy analizie kodu z zewnętrznych bibliotek. Pozwala na uzyskanie informacji na temat bieżących obiektów i źródeł w czasie wykonywania programu.
 
-Oto kilka kluczowych funkcji dostępnych w module `inspect`:
+### Kluczowe funkcje dostępne w module `inspect`
 
 - `inspect.getsource(object)`: Zwraca kod źródłowy obiektu jako string.
 - `inspect.getdoc(object)`: Zwraca dokumentację obiektu (zwykle docstring) jako string.
@@ -61,6 +68,8 @@ print(inspect.getdoc(tkinter.Tk))     # Wyświetl docstring klasy Tk z modułu t
 
 ### Zalety korzystania z modułu inspect
 
-- **Nauka**: Pozwala na dogłębne zrozumienie zewnętrznych bibliotek przez analizę ich kodu źródłowego i dokumentacji.
-- **Debugowanie**: Można dokładnie zobaczyć, jak działają poszczególne funkcje lub klasy, co ułatwia identyfikację problemów.
-- **Rozszerzalność**: Jeśli chcesz rozszerzyć funkcjonalność zewnętrznej biblioteki, moduł inspect pomoże zrozumieć jej strukturę i działanie.
+- **Nauka**: Moduł `inspect` umożliwia dogłębne zrozumienie zewnętrznych bibliotek przez analizę ich kodu źródłowego i dokumentacji. Jest to szczególnie przydatne dla programistów chcących nauczyć się, jak zbudowane są biblioteki i jak mogą wykorzystywać ich funkcje w swoich projektach.
+- **Debugowanie**: Dostęp do wewnętrznej struktury funkcji, klas, czy metod pozwala na dokładne zrozumienie, jak działają one "pod kapotem", co ułatwia identyfikację i rozwiązywanie problemów.
+- **Możliwość rozszerzenia**: Jeśli planujesz rozszerzyć funkcjonalność zewnętrznej biblioteki, `inspect` pomoże zrozumieć jej strukturę i działanie, co jest nieocenione przy projektowaniu nowych rozwiązań opartych na istniejących bibliotekach.
+
+Moduł `inspect` jest potężnym narzędziem dla każdego programisty Pythona, pozwalającym na głęboki wgląd w działanie zarówno własnego, jak i zewnętrznego kodu.
