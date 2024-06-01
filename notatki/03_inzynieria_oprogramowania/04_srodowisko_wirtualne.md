@@ -34,59 +34,59 @@ I. Instalacja virtualenv
 
 Aby zainstalować narzędzie **virtualenv** za pomocą menedżera pakietów **PIP**, wykonaj:
 
-    ```bash
-    pip install virtualenv
-    ```
+```bash
+pip install virtualenv
+```
 
 II. Tworzenie nowego środowiska wirtualnego
 
 Aby utworzyć nowe środowisko wirtualne o nazwie `env` w bieżącym folderze, wpisz:
 
-    ```bash
-    virtualenv env
-    ```
+```bash
+virtualenv env
+```
 
 Jeśli posiadasz różne wersje Pythona zainstalowane w systemie, możesz określić, której wersji Pythona ma używać twoje środowisko wirtualne. Przykładowo, aby użyć interpretera Pythona zlokalizowanego w `/usr/bin/python3`:
 
-    ```bash
-    virtualenv -p /usr/bin/python3 env
-    ```
+```bash
+virtualenv -p /usr/bin/python3 env
+```
 
 III. Aktywacja środowiska wirtualnego
 
 Aby aktywować środowisko wirtualne (w systemach bazujących na Unix):
 
-    ```bash
-    source env/bin/activate
-    ```
+```bash
+source env/bin/activate
+```
 
 Dla systemów Windows:
 
-    ```bash
-    env\Scripts\activate
-    ```
+```bash
+env\Scripts\activate
+```
 
 IV. Dezaktywacja środowiska wirtualnego
 
 Aby dezaktywować środowisko wirtualne:
 
-    ```bash
-    deactivate
-    ```
+```bash
+deactivate
+```
 
 V. Zarządzanie zależnościami
 
 Możesz również zapisywać i przywracać zależności projektu. Aby zapisać zainstalowane pakiety do pliku `requirements.txt`:
 
-    ```bash
-    pip freeze > requirements.txt
-    ```
+```bash
+pip freeze > requirements.txt
+```
 
 Aby zainstalować pakiety z pliku `requirements.txt`:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+pip install -r requirements.txt
+```
 
 #### Venv
 
@@ -96,9 +96,9 @@ I. Tworzenie środowiska wirtualnego za pomocą venv
 
 Aby utworzyć środowisko wirtualne za pomocą `venv`:
 
-    ```bash
-    python3 -m venv env
-    ```
+```bash
+python3 -m venv env
+```
   
 II. Inne operacje
 
