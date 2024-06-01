@@ -42,7 +42,7 @@ with open("sciezka/do/pliku.txt", "w") as plik:
 
 Pamiętajmy, aby wybierać odpowiedni tryb otwarcia pliku zależnie od planowanych operacji!
 
-### Moduł `pathlib` w Pythonie
+### Moduł `pathlib`
 
 Współczesna praca z plikami i folderami w Pythonie stała się znacznie bardziej intuicyjna i wydajna dzięki wprowadzeniu modułu `pathlib` w wersji 3.4. Zamiast manipulowania ścieżkami jako zwykłymi łańcuchami znaków, `pathlib` pozwala na reprezentowanie ścieżek jako obiektów z wieloma użytecznymi metodami.
 
@@ -105,3 +105,28 @@ if not folder.exists():
 ```
 
 Parametr `parents=True` sprawia, że zostaną utworzone wszystkie nieistniejące foldery nadrzędne, a `exist_ok=True` zapobiega błędom, jeśli folder już istnieje.
+
+### Porównanie modułów `pathlib` i `os`
+
+| Funkcjonalność           | `pathlib`                                                    | `os`                                                           |
+|--------------------------|--------------------------------------------------------------|----------------------------------------------------------------|
+| Bieżący katalog roboczy  | `Path.cwd()`                                                 | `os.getcwd()`                                                  |
+| Katalog domowy           | `Path.home()`                                                | `os.path.expanduser("~")`                                      |
+| Sprawdzanie istnienia    | `Path('/some/path').exists()`                                | `os.path.exists('/some/path')`                                 |
+| Sprawdzanie katalogu     | `Path('/some/path').is_dir()`                                | `os.path.isdir('/some/path')`                                  |
+| Sprawdzanie pliku        | `Path('/some/path').is_file()`                               | `os.path.isfile('/some/path')`                                 |
+| Tworzenie katalogu       | `Path('/new/dir').mkdir(parents=True, exist_ok=True)`        | `os.makedirs('/new/dir', exist_ok=True)`                       |
+| Usuwanie katalogu        | `Path('/some/dir').rmdir()`                                  | `os.rmdir('/some/dir')`                                        |
+| Usuwanie pliku           | `Path('/some/file').unlink()`                                | `os.remove('/some/file')`                                      |
+| Zmiana nazwy             | `Path('/old/name').rename('/new/name')`                      | `os.rename('/old/name', '/new/name')`                          |
+| Odczyt tekstu z pliku    | `Path('/some/file').read_text()`                             | `with open('/some/file') as f: content = f.read()`             |
+| Zapis tekstu do pliku    | `Path('/some/file').write_text('New content')`               | `with open('/some/file', 'w') as f: f.write('New content')`    |
+| Odczyt bajtów z pliku    | `Path('/some/file').read_bytes()`                            | `with open('/some/file', 'rb') as f: content = f.read()`       |
+| Zapis bajtów do pliku    | `Path('/some/file').write_bytes(b'New content')`             | `with open('/some/file', 'wb') as f: f.write(b'New content')`  |
+| Iterowanie przez katalog | `for item in Path('.').iterdir(): print(item)`               | `for item in os.listdir('.'): print(item)`                     |
+| Wzorzec glob             | `for p in Path('.').glob('*.txt'): print(p)`                 | `import glob; for p in glob.glob('*.txt'): print(p)`           |
+| Rekurencyjny glob        | `for p in Path('.').rglob('*.txt'): print(p)`                | `import glob; for p in glob.iglob('**/*.txt', recursive=True): print(p)` |
+| Absolutna ścieżka        | `abs_path = Path('some/relative/path').resolve()`            | `abs_path = os.path.abspath('some/relative/path')`             |
+
+Moduł `pathlib` oferuje bardziej nowoczesne, obiektowe podejście do pracy z systemem plików, podczas gdy `os` i `os.path` dostarczają bardziej tradycyjne, proceduralne metody. `pathlib` jest zazwyczaj bardziej intuicyjny i czytelny, szczególnie dla operacji na ścieżkach plików.
+
