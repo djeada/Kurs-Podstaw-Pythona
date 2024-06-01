@@ -1,83 +1,85 @@
 ## Zarządzanie wersjami Pythona za pomocą Pyenv
 
-`Pyenv` to narzędzie, które pozwala łatwo zarządzać wieloma wersjami Pythona na jednym komputerze. Dzięki niemu możemy nie tylko izolować różne projekty od siebie, korzystając z różnych wersji Pythona, ale także przetestować nasz kod pod różnymi wersjami interpretera.
+`Pyenv` to narzędzie umożliwiające łatwe zarządzanie wieloma wersjami Pythona na jednym komputerze. Dzięki Pyenv można izolować różne projekty, korzystając z odpowiednich wersji Pythona dla każdego z nich, oraz testować kod pod różnymi wersjami interpretera, co jest kluczowe dla utrzymania kompatybilności i stabilności aplikacji.
 
 ### Sprawdzanie Zainstalowanej Wersji Pythona
 
-Sprawdzenie, jaką wersję Pythona masz zainstalowaną na swoim komputerze, różni się w zależności od systemu operacyjnego.
+Znajomość zainstalowanej wersji Pythona jest ważna, gdyż pozwala na odpowiednie dostosowanie środowiska pracy oraz rozwiązywanie problemów związanych z kompatybilnością. Sposób sprawdzenia zainstalowanej wersji różni się w zależności od systemu operacyjnego.
 
 #### Linux
 
-W systemach Linux, możesz to zrobić poprzez uruchomienie poniższego polecenia w terminalu:
+W systemach Linux, standardowe polecenie do sprawdzania wersji Pythona to:
 
-```
-python --version
-```
+ ```
+ python --version
+ ```
 
-Lub, jeśli używasz Python 3, polecenie może być:
+Jeśli jednak Python 3 jest instalowany równolegle z Pythonem 2, bardziej specyficzne polecenie to:
 
-```
-python3 --version
-```
+ ```
+ python3 --version
+ ```
 
 #### Windows
 
-W systemie Windows, sprawdzenie wersji Pythona odbywa się poprzez otwarcie wiersza poleceń (Command Prompt) i wpisanie:
+W systemie Windows, sprawdzenie zainstalowanej wersji Pythona odbywa się przez otwarcie wiersza poleceń (Command Prompt) i wpisanie:
 
-```
-python --version
-```
+ ```
+ python --version
+ ```
 
 ### Upgrade Pythona
 
-Upgradowanie Pythona do nowszej wersji różni się w zależności od systemu operacyjnego i metody instalacji.
+Aktualizacja Pythona do nowszej wersji jest ważnym krokiem w utrzymaniu zgodności kodu i bezpieczeństwa aplikacji. Proces ten różni się w zależności od systemu operacyjnego i wybranej metody instalacji.
 
 #### Linux
 
 1. **Używanie Menedżera Pakietów:**
+   W większości dystrybucji Linux, aktualizacja Pythona może być wykonana za pomocą menedżera pakietów. Na przykład, na Ubuntu można użyć następujących komend:
 
-   W wielu dystrybucjach Linuxa możesz użyć menedżera pakietów. Na przykład, na Ubuntu:
+    ```
+    sudo apt-get update
+    sudo apt-get upgrade python3
+    ```
 
-```
-sudo apt-get update
-sudo apt-get upgrade python3
-```
+2. **Kompilacja ze Źródeł:**
+   Dla zaawansowanych użytkowników, możliwe jest też zaktualizowanie Pythona przez skompilowanie najnowszej wersji ze źródeł. Proces ten umożliwia bardziej szczegółową konfigurację i optymalizację. Kody do kompilacji na Ubuntu:
 
-3. **Kompilacja ze Źródeł:**
-
-   Możesz także zaktualizować Pythona poprzez pobranie najnowszej wersji ze strony Python.org i jej skompilowanie:
-
-```sudo apt-get install build-essential checkinstall
-sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-sudo ./configure
-sudo make
-sudo checkinstall
-```
+    ```
+    sudo apt-get install build-essential checkinstall
+    sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+    sudo ./configure
+    sudo make
+    sudo checkinstall
+    ```
 
 #### Windows
 
 1. **Pobieranie Nowej Wersji:**
+   Aby zaktualizować Pythona na Windows, najlepiej jest pobrać najnowszą wersję instalatora ze strony [python.org](https://www.python.org). Instalator zwykle oferuje opcję automatycznego zastąpienia starej wersji nową.
 
-   Przejdź na oficjalną stronę Pythona (python.org), pobierz instalator dla najnowszej wersji i wykonaj instalację. Instalator zazwyczaj automatycznie zastępuje starą wersję.
+    ```
+    # Przykład pobierania nowej wersji z python.org
+    ```
 
 2. **Używanie Pyenv:**
+   Użytkownicy `Pyenv` na Windows mogą łatwo zarządzać wersjami Pythona. Aby zaktualizować Pythona, wystarczy zainstalować nową wersję i ustawić ją jako domyślną:
 
-   Jeśli używasz `Pyenv` na Windows, możesz zaktualizować Pythona poprzez:
+    ```
+    pyenv install 3.x.x
+    pyenv global 3.x.x
+    ```
 
-```
-pyenv install 3.x.x
-pyenv global 3.x.x
-```
+    Zamień `3.x.x` na numer żądanej wersji Pythona.
 
-Zamień `3.x.x` na numer żądanej wersji Pythona.
 
 ### Jak działa Pyenv?
 
-Głównym zadaniem `Pyenv` jest manipulacja zmienną środowiskową `PATH`. Narzędzie to dodaje ścieżkę do specjalnego folderu `(pyenv root)/shims`, co pozwala na wybór odpowiedniej wersji Pythona w zależności od kontekstu.
+Głównym zadaniem `Pyenv` jest manipulacja zmienną środowiskową `PATH`, aby umożliwić przełączanie między różnymi wersjami Pythona. Dodając ścieżkę do specjalnego folderu `(pyenv root)/shims` w zmiennej `PATH`, `Pyenv` pozwala na wybór odpowiedniej wersji Pythona w zależności od kontekstu, co jest niezwykle przydatne przy pracy z różnymi projektami.
 
 ### Instalacja
 
-Aby zainstalować `Pyenv`, możesz skorzystać z oficjalnych repozytoriów:
+Aby zainstalować `Pyenv`, skorzystaj z poniższych oficjalnych repozytoriów, które dostarczają instrukcji instalacyjnych dostosowanych do różnych systemów operacyjnych:
 
 * [Pyenv dla systemów UNIX-podobnych (Linux, MacOS)](https://github.com/pyenv/pyenv)
 * [Pyenv dla Windows](https://github.com/pyenv-win/pyenv-win)
@@ -86,46 +88,44 @@ Aby zainstalować `Pyenv`, możesz skorzystać z oficjalnych repozytoriów:
 
 1. **Instalacja konkretnej wersji Pythona**
 
-Aby zainstalować żądaną wersję Pythona, użyj polecenia:
+    Aby zainstalować żądaną wersję Pythona, użyj polecenia:
 
-```bash
-pyenv install 3.10.0
-```
+    ```bash
+    pyenv install 3.10.0
+    ```
 
-Zwróć uwagę na to, że warto podać pełny numer wersji, w tym przypadku `3.10.0`, a nie tylko `3.10`.
+    Zalecane jest podanie pełnego numeru wersji, np. `3.10.0`, a nie tylko `3.10`, aby uniknąć nieporozumień co do subwersji.
 
 2. **Ustawienie wersji Pythona dla danego katalogu**
 
-Jeśli chcesz ustawić wersję Pythona specyficznie dla jednego projektu, użyj polecenia:
+    Możesz określić wersję Pythona specyficznie dla jednego projektu, co jest szczególnie użyteczne w dużych środowiskach deweloperskich, gdzie różne projekty mogą wymagać różnych wersji interpretera:
 
-```bash
-pyenv local 3.10.0
-```
+    ```bash
+    pyenv local 3.10.0
+    ```
 
-Spowoduje to utworzenie pliku `.python-version` w bieżącym katalogu, który informuje `Pyenv` o tym, jaką wersję Pythona należy używać w tym konkretnym kontekście.
+    To polecenie utworzy plik `.python-version` w bieżącym katalogu, który informuje `Pyenv` o tym, jaką wersję Pythona należy używać w tym kontekście.
 
 3. **Ustawienie globalnej wersji Pythona**
 
-Jeśli chcesz zmienić wersję Pythona, która jest używana jako domyślna dla Twojego użytkownika, użyj:
+    Aby zmienić wersję Pythona, która jest używana jako domyślna dla Twojego użytkownika, użyj polecenia:
 
-```bash
-pyenv global 3.10.0
-```
+    ```bash
+    pyenv global 3.10.0
+    ```
 
 4. **Wyświetlanie listy dostępnych wersji Pythona**
 
-Aby sprawdzić, które wersje Pythona są zainstalowane na Twoim systemie, użyj:
+    Aby sprawdzić, które wersje Pythona są zainstalowane na Twoim systemie oraz która z nich jest aktualnie aktywna, użyj:
 
-```bash
-pyenv versions
-```
+    ```bash
+    pyenv versions
+    ```
 
 5. **Sprawdzanie bieżącej wersji Pythona**
 
-Aby sprawdzić aktualnie używaną wersję Pythona, użyj polecenia:
+    Aby szybko zweryfikować, która wersja Pythona jest aktualnie używana w danym środowisku pracy, skorzystaj z polecenia:
 
-```bash
-pyenv version
-```
-
-Korzystanie z `Pyenv` pozwala na elastyczne zarządzanie wersjami Pythona, co jest szczególnie przydatne w środowiskach deweloperskich i przy wielu projektach opartych na różnych wersjach interpretera.
+    ```bash
+    pyenv version
+    ```
