@@ -22,7 +22,7 @@ with open('plik.pdf', 'rb') as plik:
     czytnik = PdfFileReader(plik)
 ```
 
-'rb' w funkcji open oznacza tryb "odczyt binarny", który jest wymagany do czytania plików PDF.
+`'rb'` w funkcji `open` oznacza tryb "odczyt binarny", który jest wymagany do czytania plików PDF.
 
 ### Eksploracja informacji o pliku
 
@@ -33,8 +33,8 @@ Dzięki `PyPDF2` możemy także uzyskać różne informacje o pliku PDF, takie j
 - Tytuł.
 
 ```python
-print(f"Ilość stron: {czytnik.getNumPages()}")
 informacje = czytnik.getDocumentInfo()
+print(f"Ilość stron: {czytnik.getNumPages()}")
 print(f"Autor: {informacje.author}")
 print(f"Tytuł: {informacje.title}")
 ```
@@ -61,24 +61,24 @@ Jeśli chcemy dokonać modyfikacji w pliku PDF, możemy skorzystać z obiektu `P
 Przykład poniżej przedstawia, jak dodać nową stronę z tekstem "Hello, World!" do dokumentu:
 
 ```python
-from PyPDF2 import PdfFileWriter
-
-writer = PdfFileWriter()
-
-# Utworzenie nowej strony jest bardziej złożone niż w przykładzie
-# Potrzebujemy modułu reportlab do generowania treści strony
+from PyPDF2 import PdfFileWriter, PdfFileReader
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 from io import BytesIO
 
+# Utworzenie nowej strony
 packet = BytesIO()
 can = canvas.Canvas(packet, pagesize=A4)
 can.drawString(100, 750, "Hello, World!")
 can.save()
 
+# Przeczytanie nowej strony
 packet.seek(0)
 new_pdf = PdfFileReader(packet)
+writer = PdfFileWriter()
 writer.addPage(new_pdf.getPage(0))
 
+# Zapisanie nowego pliku PDF
 with open('nowy_plik.pdf', 'wb') as plik:
     writer.write(plik)
 ```
@@ -102,4 +102,4 @@ with open('polaczony_dokument.pdf', 'wb') as wyjsciowy_plik:
     merger.write(wyjsciowy_plik)
 ```
 
-Zwróć uwagę, że przy otwieraniu plików używamy kontekstu with, aby zapewnić prawidłowe zarządzanie zasobami i zamknięcie plików po ich użyciu.
+Zwróć uwagę, że przy otwieraniu plików używamy kontekstu `with`, aby zapewnić prawidłowe zarządzanie zasobami i zamknięcie plików po ich użyciu.
