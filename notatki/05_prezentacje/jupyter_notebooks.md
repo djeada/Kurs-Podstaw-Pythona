@@ -60,16 +60,6 @@ Jeśli używasz menedżera pakietów `conda`, możesz zainstalować Jupyter Note
     jupyter notebook
     ```
 
-### Uruchamianie Jupyter Notebook
-
-Po wykonaniu jednego z powyższych sposobów instalacji, uruchomienie Jupyter Notebook spowoduje otwarcie interfejsu Jupyter w przeglądarce internetowej. Możesz wtedy tworzyć nowe notatniki, otwierać istniejące pliki `.ipynb` i zaczynać pracę z interaktywnym kodem i dokumentami.
-
-```bash
-jupyter notebook
-```
-
-Powinien uruchomić serwer Jupyter Notebook i otworzyć stronę w przeglądarce, skąd będziesz mógł zarządzać swoimi notatnikami.
-
 ### Screenshot
 
 Na zrzucie ekranu przedstawiono interfejs Jupyter Notebook z uruchomionym notatnikiem o nazwie "Intro".
