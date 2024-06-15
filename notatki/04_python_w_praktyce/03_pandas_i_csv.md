@@ -2,6 +2,8 @@
 
 Pandas to potężna biblioteka w języku Python, przeznaczona do analizy i przetwarzania danych. Jednym z kluczowych zastosowań Pandas jest obsługa plików CSV (Comma-Separated Values). Biblioteka ta udostępnia funkcje takie jak `to_csv()` do zapisywania ramki danych (DataFrame) do pliku CSV oraz `read_csv()` do wczytywania danych z pliku CSV.
 
+### Przykład użycia funkcji `to_csv()` i `read_csv()`
+
 Przyjrzyjmy się, jak można wykorzystać te funkcje na praktycznym przykładzie. Załóżmy, że mamy następujące dane dotyczące rachunków za prąd w wybranym okresie:
 
 ```python
@@ -26,20 +28,20 @@ print("\nOdczytane dane z pliku CSV:")
 print(df_odczytane)
 ```
 
-Po wykonaniu powyższego kodu, w pliku rachunki.csv znajdą się dane:
+Po wykonaniu powyższego kodu, w pliku `rachunki.csv` znajdą się dane:
 
-| data | kwota |
-| ---- | ----- |
-| 2022-01-01	| 100 |
-| 2022-02-01	| 120 |
-| 2022-03-01	| 130 |
+| Data       | Kwota |
+|------------|-------|
+| 2022-01-01 | 100   |
+| 2022-02-01 | 120   |
+| 2022-03-01 | 130   |
 
 Kilka uwag:
 
-- Parametr sep=';' określa separator używany w pliku CSV. W niektórych regionach standardowo używa się przecinka, ale w wielu krajach, gdzie przecinek jest używany jako separator dziesiętny, używa się średnika.
-- Parametr encoding='utf-8' zapewnia, że plik będzie zakodowany w formacie UTF-8, co jest szczególnie ważne, jeśli dane zawierają znaki spoza ASCII, np. polskie litery.
+- Parametr `sep=';'` określa separator używany w pliku CSV. W niektórych regionach standardowo używa się przecinka, ale w wielu krajach, gdzie przecinek jest używany jako separator dziesiętny, używa się średnika.
+- Parametr `encoding='utf-8'` zapewnia, że plik będzie zakodowany w formacie UTF-8, co jest szczególnie ważne, jeśli dane zawierają znaki spoza ASCII, np. polskie litery.
 
-Pandas udostępnia również wiele dodatkowych opcji dla read_csv(), pozwalających na bardziej zaawansowaną kontrolę nad procesem wczytywania danych, takich jak określenie typów kolumn, przetwarzanie brakujących danych i wiele innych.
+Pandas udostępnia również wiele dodatkowych opcji dla `read_csv()`, pozwalających na bardziej zaawansowaną kontrolę nad procesem wczytywania danych, takich jak określenie typów kolumn, przetwarzanie brakujących danych i wiele innych.
 
 ### Eksploracja danych w Pandas
 
@@ -95,9 +97,81 @@ starsi_warszawianie = df.loc[(df['Wiek'] > 30) & (df['Miasto'] == 'Warszawa')]
 Jeśli chcemy szybko poznać podstawowe statystyki dotyczące kolumn numerycznych, możemy użyć funkcji `describe()`:
 
 ```python
-df.describe()
+# Przykładowe dane
+data = {
+    "Data": ["2022-01-01", "2022-02-01", "2022-03-01"],
+    "Kwota": [100, 120, 130]
+}
+df = pd.DataFrame(data)
+
+# Obliczenie statystyk opisowych
+statystyki = df.describe()
+print(statystyki)
 ```
 
 Ta funkcja dostarczy informacji na temat średniej, mediany, odchylenia standardowego i innych podstawowych statystyk dla każdej kolumny numerycznej w tabeli.
 
-Eksploracja danych to kluczowy krok w każdym projekcie analizy danych, a Pandas oferuje wiele narzędzi ułatwiających ten proces.
+Przykładowy wynik działania powyższego kodu:
+
+```plaintext
+            Kwota
+count    3.000000
+mean   116.666667
+std     15.275252
+min    100.000000
+25%    110.000000
+50%    120.000000
+75%    125.000000
+max    130.000000
+```
+
+Opis wyników:
+
+- **count**: liczba niepustych wartości w kolumnie.
+- **mean**: średnia arytmetyczna wartości w kolumnie.
+- **std**: odchylenie standardowe, miara dyspersji wartości w kolumnie.
+- **min**: najmniejsza wartość w kolumnie.
+- **25%**: pierwszy kwartyl, wartość poniżej której znajduje się 25% danych.
+- **50%**: mediana, wartość środkowa (drugi kwartyl).
+- **75%**: trzeci kwartyl, wartość poniżej której znajduje się 75% danych.
+- **max**: największa wartość w kolumnie.
+
+### Przykładowe zastosowania Pandas
+
+#### Agregacja danych
+
+Pandas pozwala na łatwą agregację danych, na przykład obliczenie średniej, sumy czy liczby wystąpień:
+
+```python
+# Średnia wartość w kolumnie Kwota
+srednia_kwota = df['Kwota'].mean()
+print(f"Średnia wartość rachunku: {srednia_kwota}")
+
+# Suma wartości w kolumnie Kwota
+suma_kwot = df['Kwota'].sum()
+print(f"Suma wartości rachunków: {suma_kwot}")
+```
+
+#### Grupowanie danych
+
+Często przydatne jest grupowanie danych według określonych kryteriów. Pandas umożliwia to za pomocą metody `groupby()`:
+
+```python
+# Grupowanie danych według miesiąca i obliczenie średniej wartości rachunku
+df['Data'] = pd.to_datetime(df['Data'])
+df['Miesiąc'] = df['Data'].dt.month
+srednia_miesieczna = df.groupby('Miesiąc')['Kwota'].mean()
+print(srednia_miesieczna)
+```
+
+#### Przetwarzanie brakujących danych
+
+W praktycznych zastosowaniach często spotykamy się z brakującymi danymi. Pandas oferuje funkcje takie jak `fillna()` i `dropna()`, które pomagają w radzeniu sobie z brakami:
+
+```python
+# Uzupełnianie brakujących wartości średnią
+df_filled = df.fillna(df.mean())
+
+# Usuwanie wierszy z brakującymi wartościami
+df_dropped = df.dropna()
+```
