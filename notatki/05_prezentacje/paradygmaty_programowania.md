@@ -230,35 +230,43 @@ W praktyce, większość modułów w standardowej bibliotece Rust koncentruje si
 
 Aby zgłębić temat programowania obiektowego (OOP) i innych paradygmatów programowania, warto zapoznać się z poniższymi zasobami:
 
-1. **Podstawy i koncepcje OOP**:
-   - [Programowanie obiektowe - Wikipedia](https://pl.wikipedia.org/wiki/Programowanie_obiektowe) - Artykuł na Wikipedii przedstawiający podstawowe koncepcje OOP, takie jak klasy, obiekty, dziedziczenie i polimorfizm.
-   - [Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html) - Przewodnik po podstawowych koncepcjach OOP na stronie Oracle.
+I. **Podstawy i koncepcje OOP**:
 
-2. **Enkapsulacja, Abstrakcja, i Polimorfizm**:
-   - [Understanding OOP Encapsulation](https://www.geeksforgeeks.org/encapsulation-in-java/) - Artykuł na GeeksforGeeks omawiający enkapsulację w Java.
-   - [Abstraction in Object-Oriented Programming](https://www.baeldung.com/java-abstraction) - Przewodnik po abstrakcji w OOP na Baeldung.
-   - [Polymorphism in OOP](https://www.tutorialspoint.com/java/java_polymorphism.htm) - Artykuł na TutorialsPoint omawiający polimorfizm w Java.
+- [Programowanie obiektowe - Wikipedia](https://pl.wikipedia.org/wiki/Programowanie_obiektowe) - Artykuł na Wikipedii przedstawiający podstawowe koncepcje OOP, takie jak klasy, obiekty, dziedziczenie i polimorfizm.
+- [Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html) - Przewodnik po podstawowych koncepcjach OOP na stronie Oracle.
 
-3. **Kolekcje w OOP**:
-   - [Data Structures in Object-Oriented Programming](https://www.javatpoint.com/data-structures-in-java) - Artykuł na JavaTpoint omawiający różne struktury danych używane w OOP.
-   - [Using Collections in Java](https://www.geeksforgeeks.org/collections-in-java-2/) - Przewodnik po kolekcjach w Java na GeeksforGeeks.
+II. **Enkapsulacja, Abstrakcja, i Polimorfizm**:
 
-4. **Wyzwania OOP**:
-   - [Challenges of Object-Oriented Programming](https://www.codingninjas.com/codestudio/library/challenges-of-object-oriented-programming) - Artykuł omawiający wyzwania i trudności związane z OOP.
-   - [Avoiding Common OOP Pitfalls](https://www.thoughtworks.com/insights/articles/avoiding-common-oop-pitfalls) - Przewodnik po unikaniu powszechnych pułapek w OOP na ThoughtWorks.
+- [Understanding OOP Encapsulation](https://www.geeksforgeeks.org/encapsulation-in-java/) - Artykuł na GeeksforGeeks omawiający enkapsulację w Java.
+- [Abstraction in Object-Oriented Programming](https://www.baeldung.com/java-abstraction) - Przewodnik po abstrakcji w OOP na Baeldung.
+- [Polymorphism in OOP](https://www.tutorialspoint.com/java/java_polymorphism.htm) - Artykuł na TutorialsPoint omawiający polimorfizm w Java.
 
-5. **Funkcyjne podejście do OOP**:
-   - [Functional Programming vs. Object-Oriented Programming](https://www.freecodecamp.org/news/object-oriented-programming-vs-functional-programming-2fa4a7602390/) - Artykuł na FreeCodeCamp porównujący OOP i programowanie funkcyjne.
-   - [Using Functional Programming Techniques in OOP](https://www.smashingmagazine.com/2019/05/functional-programming-oop-javascript/) - Przewodnik po technikach funkcyjnych w OOP na Smashing Magazine.
+III. **Kolekcje w OOP**:
 
-6. **OOP w Rust i Go**:
-   - [Object-Oriented Programming in Rust](https://doc.rust-lang.org/book/ch17-00-oop.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony OOP.
-   - [Object-Oriented Programming in Go](https://golangbot.com/oops-part1/) - Przewodnik po OOP w Go na GolangBot.
+- [Data Structures in Object-Oriented Programming](https://www.javatpoint.com/data-structures-in-java) - Artykuł na JavaTpoint omawiający różne struktury danych używane w OOP.
+- [Using Collections in Java](https://www.geeksforgeeks.org/collections-in-java-2/) - Przewodnik po kolekcjach w Java na GeeksforGeeks.
 
-7. **Struktury zamiast klas**:
-   - [Structs in Rust](https://doc.rust-lang.org/book/ch05-00-structs.html) - Rozdział z oficjalnej dokumentacji Rust omawiający struktury.
-   - [Structs in Go](https://tour.golang.org/moretypes/2) - Oficjalny przewodnik po strukturach w Go.
+IV. **Wyzwania OOP**:
 
-8. **Modularność w Rust**:
-   - [Modules in Rust](https://doc.rust-lang.org/book/ch07-00-modules.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony modułom.
-   - [Building Modular Applications in Rust](https://blog.logrocket.com/building-modular-applications-rust/) - Artykuł na LogRocket o tworzeniu modularnych aplikacji w Rust.
+- [Challenges of Object-Oriented Programming](https://www.codingninjas.com/codestudio/library/challenges-of-object-oriented-programming) - Artykuł omawiający wyzwania i trudności związane z OOP.
+- [Avoiding Common OOP Pitfalls](https://www.thoughtworks.com/insights/articles/avoiding-common-oop-pitfalls) - Przewodnik po unikaniu powszechnych pułapek w OOP na ThoughtWorks.
+
+V. **Funkcyjne podejście do OOP**:
+
+- [Functional Programming vs. Object-Oriented Programming](https://www.freecodecamp.org/news/object-oriented-programming-vs-functional-programming-2fa4a7602390/) - Artykuł na FreeCodeCamp porównujący OOP i programowanie funkcyjne.
+- [Using Functional Programming Techniques in OOP](https://www.smashingmagazine.com/2019/05/functional-programming-oop-javascript/) - Przewodnik po technikach funkcyjnych w OOP na Smashing Magazine.
+
+VI. **OOP w Rust i Go**:
+
+- [Object-Oriented Programming in Rust](https://doc.rust-lang.org/book/ch17-00-oop.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony OOP.
+- [Object-Oriented Programming in Go](https://golangbot.com/oops-part1/) - Przewodnik po OOP w Go na GolangBot.
+
+VII. **Struktury zamiast klas**:
+
+- [Structs in Rust](https://doc.rust-lang.org/book/ch05-00-structs.html) - Rozdział z oficjalnej dokumentacji Rust omawiający struktury.
+- [Structs in Go](https://tour.golang.org/moretypes/2) - Oficjalny przewodnik po strukturach w Go.
+
+VIII. **Modularność w Rust**:
+
+- [Modules in Rust](https://doc.rust-lang.org/book/ch07-00-modules.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony modułom.
+- [Building Modular Applications in Rust](https://blog.logrocket.com/building-modular-applications-rust/) - Artykuł na LogRocket o tworzeniu modularnych aplikacji w Rust.
