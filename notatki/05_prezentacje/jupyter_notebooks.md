@@ -12,36 +12,36 @@ Anaconda to popularna dystrybucja Pythona, która zawiera wiele narzędzi do ana
 2. **Zainstaluj Anacondę**: Postępuj zgodnie z instrukcjami instalatora dla Twojego systemu operacyjnego.
 3. **Uruchom Jupyter Notebook**:
    
-    - Otwórz Anaconda Navigator i kliknij przycisk "Launch" obok Jupyter Notebook.
-    - Alternatywnie, możesz uruchomić Jupyter Notebook z terminala, wpisując:
-      
-      ```bash
-      jupyter notebook
-      ```
+   - Otwórz Anaconda Navigator i kliknij przycisk "Launch" obok Jupyter Notebook.
+   - Alternatywnie, możesz uruchomić Jupyter Notebook z terminala, wpisując:
+
+```bash
+jupyter notebook
+```
 
 ### Instalacja za pomocą `pip`
 
 Jeśli wolisz zainstalować Jupyter Notebook bezpośrednio za pomocą `pip`, wykonaj następujące kroki:
 
 1. **Zainstaluj pip**: Upewnij się, że masz zainstalowanego `pip`. Możesz to sprawdzić, wpisując w terminalu:
-   
-    ```bash
-    pip --version
-    ```
-    
-    Jeśli `pip` nie jest zainstalowany, możesz go zainstalować, postępując zgodnie z [instrukcjami instalacji pip](https://pip.pypa.io/en/stable/installation/).
+
+```bash
+pip --version
+```
+
+Jeśli `pip` nie jest zainstalowany, możesz go zainstalować, postępując zgodnie z [instrukcjami instalacji pip](https://pip.pypa.io/en/stable/installation/).
 
 2. **Zainstaluj Jupyter Notebook**: Wpisz w terminalu:
-   
-    ```bash
-    pip install notebook
-    ```
+
+```bash
+pip install notebook
+```
 
 3. **Uruchom Jupyter Notebook**: Po zakończeniu instalacji, uruchom Jupyter Notebook, wpisując w terminalu:
 
-    ```bash
-    jupyter notebook
-    ```
+```bash
+jupyter notebook
+```
 
 ### Instalacja za pomocą Menedżera Pakietów `conda`
 
@@ -50,15 +50,15 @@ Jeśli używasz menedżera pakietów `conda`, możesz zainstalować Jupyter Note
 1. **Zainstaluj `conda`**: Jeśli jeszcze go nie masz, możesz zainstalować `conda` jako część dystrybucji Anaconda lub Miniconda.
 2. **Zainstaluj Jupyter Notebook**: Wpisz w terminalu:
 
-    ```bash
-    conda install -c conda-forge notebook
-    ```
+```bash
+conda install -c conda-forge notebook
+```
 
 3. **Uruchom Jupyter Notebook**: Po zakończeniu instalacji, uruchom Jupyter Notebook, wpisując w terminalu:
 
-   ```bash
-    jupyter notebook
-    ```
+```bash
+jupyter notebook
+```
 
 ### Screenshot
 
