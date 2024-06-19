@@ -58,10 +58,10 @@ Podsumowując, ważne jest, aby być świadomym, czy pracujemy na kopii, czy na 
 
 | Temat       | Opis                                                                                  | Przykład w Pythonie                   |
 |-------------|----------------------------------------------------------------------------------------|---------------------------------------|
-| Referencja  | Odwołanie się do tego samego obiektu w pamięci. Zmiany w obiekcie są widoczne w każdej referencji. | ```python a = [1, 2, 3]; b = a ```    |
+| Referencja  | Odwołanie się do tego samego obiektu w pamięci. Zmiany w obiekcie są widoczne w każdej referencji. | `a = [1, 2, 3]; b = a`    |
 | Kopiowanie  | Tworzenie nowej kopii obiektu.                                                         |                                       |
-| Płytkie     | Kopiowanie tylko najbliższego poziomu struktury. Zagnieżdżone obiekty pozostają współdzielone. | ```python import copy; b = copy.copy(a) ``` |
-| Głębokie    | Rekurencyjne kopiowanie całej struktury, włącznie z zagnieżdżonymi obiektami.          | ```python import copy; b = copy.deepcopy(a) ``` |
+| Płytkie     | Kopiowanie tylko najbliższego poziomu struktury. Zagnieżdżone obiekty pozostają współdzielone. | `import copy; b = copy.copy(a)` |
+| Głębokie    | Rekurencyjne kopiowanie całej struktury, włącznie z zagnieżdżonymi obiektami.          | `import copy; b = copy.deepcopy(a)` |
 
 ### Domyślne wartości parametrów funkcji i ich mutowalność
 
