@@ -105,7 +105,7 @@ XII. Aby przy pomocy pętli przejść przez elementy listy, użyj słowa kluczow
 ```python
 for element in lista: 
     print(element)
-```  
+```
 
 XIII. Aby otrzymać element i indeks, użyj funkcji `enumerate`:
 
