@@ -45,7 +45,8 @@ Konsola pozwala również na definiowanie zmiennych i funkcji, co umożliwia prz
 a = 10
 b = 20
 def suma(x, y):
-... return x + y
+  return x + y
+...
 ...
 suma(a, b)
 30
