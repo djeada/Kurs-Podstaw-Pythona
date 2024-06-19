@@ -34,6 +34,18 @@ miesiac, dzien, rok = match.group(2).split()
 print(f'{miesiac}, {dzien}, {rok}')  # Maj, 15, 1983
 ```
 
+I. Zdefiniowanie wzorca wyrażenia regularnego:
+
+- `pattern = r'([^/]*)/([^,]*), ([^/]*)/([^/]*)'` - wzorzec do dopasowania czterech grup:
+- `([^/]*)` - wszystko przed pierwszym ukośnikiem,
+- `([^,]*),` - wszystko przed przecinkiem,
+- ` ([^/]*)` - wszystko przed drugim ukośnikiem,
+- `([^/]*)` - wszystko przed końcem napisu.
+
+II. Dopasowanie wzorca do danych: `match = re.match(pattern, dane)` 
+
+III. Rozdzielenie daty na części: `miesiac, dzien, rok = match.group(2).split()`
+
 Moduł `re` w Pythonie udostępnia funkcje do pracy z wyrażeniami regularnymi, takie jak `match`, `search`, `split`, czy `sub`. Specjalne znaki w wyrażeniach regularnych, takie jak `.` (dowolny znak), `*` (dowolna liczba powtórzeń), czy `[a-z]` (dowolna mała litera), pozwalają na definiowanie skomplikowanych wzorców do wyszukiwania tekstu.
 
 ### Znaki specjalne w wyrażeniach regularnych
@@ -125,6 +137,15 @@ print(czy_poprawny_email("test@example.com"))  # True
 print(czy_poprawny_email("test@.com"))  # False
 ```
 
+- `pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'` - wzorzec do dopasowania poprawnych adresów email:
+- `^` - początek napisu,
+- `[a-zA-Z0-9_.+-]+` - jedna lub więcej liter, cyfr, podkreślników, kropek, plusów lub myślników,
+- `@` - znak małpy (at),
+- `[a-zA-Z0-9-]+` - jedna lub więcej liter, cyfr lub myślników (część przed kropką),
+- `\.` - dosłowna kropka,
+- `[a-zA-Z0-9-.]+` - jedna lub więcej liter, cyfr, kropek lub myślników (domena),
+- `$` - koniec napisu.
+
 #### Zastępowanie tekstu
 
 ```python
@@ -139,8 +160,6 @@ print(nowy_tekst)  # To jest nowy tekst.
 #### Wyciąganie numerów telefonów
 
 ```python
-
-
 import re
 
 tekst = "Moje numery to: 123-456-7890 i (123) 456-7890."
@@ -148,5 +167,14 @@ pattern = r'\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
 numery = re.findall(pattern, tekst)
 print(numery)  # ['123-456-7890', '(123) 456-7890']
 ```
+
+- `pattern = r'\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'` - wzorzec do dopasowania numerów telefonów w różnych formatach:
+- `\(?` - opcjonalny nawias otwierający,
+- `\d{3}` - trzy cyfry,
+- `\)?` - opcjonalny nawias zamykający,
+- `[-.\s]?` - opcjonalny myślnik, kropka lub spacja,
+- `\d{3}` - trzy cyfry,
+- `[-.\s]?` - opcjonalny myślnik, kropka lub spacja,
+- `\d{4}` - cztery cyfry.
 
 Zawsze testuj dokładnie wyrażenia regularne przed wdrożeniem w produkcyjnym kodzie, aby upewnić się, że działają zgodnie z oczekiwaniami i są wydajne.
