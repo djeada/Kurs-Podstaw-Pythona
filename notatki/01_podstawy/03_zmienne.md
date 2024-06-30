@@ -17,21 +17,12 @@ is_active = True  # Zmienna typu bool
 
 W Pythonie mamy kilka podstawowych typów danych, które są używane do przechowywania różnych rodzajów informacji:
 
-I. **Liczby całkowite (`int`)**: Służą do przechowywania liczb całkowitych, zarówno dodatnich, jak i ujemnych.
-
-Przykłady: `5`, `-3`, `42`
-
-II. **Liczby zmiennoprzecinkowe (`float`)**: Służą do przechowywania liczb rzeczywistych z częścią dziesiętną.
-
-Przykłady: `3.14`, `-0.001`, `4.0`
-
-III. **Napisy (`str`)**: Służą do przechowywania ciągów znaków, takich jak słowa czy zdania.
-
-Przykłady: `"Hello"`, `'Python'`
-
-IV. **Typ logiczny (`bool`)**: Służy do przechowywania wartości logicznych, które mogą być `True` lub `False`.
-
-Przykłady: `True`, `False`
+| Typ danych                  | Opis                                                 | Przykłady            |
+|-----------------------------|------------------------------------------------------|----------------------|
+| **Liczby całkowite (`int`)**| Służą do przechowywania liczb całkowitych, zarówno dodatnich, jak i ujemnych. | `5`, `-3`, `42`      |
+| **Liczby zmiennoprzecinkowe (`float`)** | Służą do przechowywania liczb rzeczywistych z częścią dziesiętną. | `3.14`, `-0.001`, `4.0` |
+| **Napisy (`str`)**          | Służą do przechowywania ciągów znaków, takich jak słowa czy zdania. | `"Hello"`, `'Python'`|
+| **Typ logiczny (`bool`)**   | Służy do przechowywania wartości logicznych, które mogą być `True` lub `False`. | `True`, `False`      |
 
 ### Nazewnictwo zmiennych
 
