@@ -24,19 +24,17 @@ Po pomyślnym wykonaniu tej komendy, jeśli wszystko przebiegnie bez błędów, 
 
 **reStructuredText** (rST) to elastyczny i rozbudowany język znaczników przeznaczony do tworzenia dokumentacji i prostych stron internetowych. W porównaniu z popularnym językiem markdown, rST oferuje znacznie bogatszy zestaw funkcji, co czyni go idealnym narzędziem do tworzenia rozbudowanej dokumentacji.
 
-### Kluczowe cechy reStructuredText:
+### Kluczowe cechy reStructuredText
 
-1. **Zaawansowane formatowanie**: rST oferuje funkcje, takie jak przypisy dolne, tabele, linki oraz definicje, które nie są tak łatwo dostępne w markdown.
+1. reStructuredText oferuje zaawansowane formatowanie, takie jak przypisy dolne, tabele, linki oraz definicje, które nie są tak łatwo dostępne w markdown.
+   
+2. Dzięki wsparciu dla różnych pluginów, reStructuredText można łatwo dostosować do konkretnych potrzeb projektu.
 
-2. **Rozszerzalność**: Dzięki wsparciu dla różnych pluginów, rST można łatwo dostosować do konkretnych potrzeb projektu. 
+3. reStructuredText jest głównym formatem używanym przez Sphinx, popularne narzędzie do generowania dokumentacji. Plik `index.rst` jest centralnym punktem dokumentacji w Sphinx, zawierającym główną strukturę oraz linki do innych części dokumentacji.
 
-3. **Integracja z Sphinx**: rST jest głównym formatem używanym przez Sphinx, popularne narzędzie do generowania dokumentacji. Plik `index.rst` jest centralnym punktem dokumentacji w Sphinx, zawierającym główną strukturę oraz linki do innych części dokumentacji.
+4. Linkowanie do innych plików czy sekcji w reStructuredText jest bardziej intuicyjne i przejrzyste, co ułatwia utrzymanie spójności w rozbudowanych dokumentacjach.
 
-4. **Prostota linkowania**: W rST linkowanie do innych plików czy sekcji jest bardziej intuicyjne i przejrzyste, dzięki czemu utrzymanie spójności w rozbudowanych dokumentacjach staje się łatwiejsze.
-
-5. **Automatyczna generacja HTML**: Sphinx, korzystając z plików rST, umożliwia generowanie dokumentacji w różnych formatach, w tym w HTML. Wystarczy użyć komendy `make html`, aby przekształcić pliki rST w elegancką stronę internetową.
-
-Dla projektów o złożonej strukturze dokumentacji, reStructuredText w połączeniu z Sphinxem oferuje niezrównane możliwości. Dzięki zaawansowanym funkcjom i możliwościom dostosowania, tworzenie profesjonalnej i spójnej dokumentacji staje się prostsze i bardziej efektywne.
+5. Sphinx, korzystając z plików reStructuredText, umożliwia generowanie dokumentacji w różnych formatach, w tym w HTML. Wystarczy użyć komendy `make html`, aby przekształcić pliki reStructuredText w elegancką stronę internetową.
 
 ### Podstawowe formatowanie w reStructuredText
 
@@ -126,85 +124,131 @@ Dyrektywy służą do wstawiania różnych elementów, takich jak obrazy, tabele
         print("Przykład kodu")
 ```
 
-### Jak pisać dobrą dokumentację?
-
-Pisanie efektywnej dokumentacji to proces, który może sprawić, że Twoja aplikacja stanie się bardziej użyteczna i przystępna. Poniżej znajdują się wskazówki, które pomogą Ci tworzyć jasną, zrozumiałą i przyjazną dla użytkownika dokumentację:
-
-#### Zacznij od tutoriali
-- Wprowadź użytkownika krok po kroku przez proces instalacji i uruchomienia aplikacji.
-- Demonstruj podstawowe scenariusze użytkowania Twojego oprogramowania.
-- Wyjaśnij funkcjonalność poszczególnych elementów interfejsu.
-- Mimo że tutoriale różnią się od klasycznej dokumentacji, stanowią doskonały punkt wyjścia, z którego można czerpać informacje.
-
-#### Automatyzuj proces tworzenia dokumentacji
-- Narzędzia takie jak Sphinx ułatwiają tworzenie jednolitej i konsekwentnej dokumentacji w różnych formatach.
-- Przy programowaniu w Pythonie wykorzystuj `docstrings` do tworzenia wewnętrznej dokumentacji kodu.
-
-#### Dokumentacja musi być na bieżąco aktualizowana
-- Upewnij się, że treść dokumentacji odzwierciedla aktualny stan aplikacji.
-- Każda zmiana w kodzie powinna być odzwierciedlona w dokumentacji.
-
-#### Używaj jasnego i zrozumiałego języka
-- Unikaj technicznych terminów, chyba że są one niezbędne. Jeśli tak, staraj się je wyjaśnić.
-- Ilustruj skomplikowane koncepcje przykładami praktycznymi.
-
-#### Zwracaj uwagę na detale
-- Dbaj o poprawność językową oraz stylistyczną.
-- Jeżeli Twoja aplikacja bazuje na zewnętrznych bibliotekach, dołącz linki do ich dokumentacji.
-
-#### Zachowuj strukturę i organizację
-- Informacje powinny być prezentowane w logiczny sposób, uporządkowane w odpowiednie sekcje i podsekcje.
-- Wykorzystuj nagłówki, listy i wyróżnienia, aby uczynić tekst bardziej czytelnym.
-
-#### Bądź otwarty na feedback
-   - Zachęcaj użytkowników do zgłaszania błędów w dokumentacji czy proponowania ulepszeń.
-   - Pamiętaj, że Twoi użytkownicy są najlepszym źródłem informacji o tym, jak ulepszyć dokumentację.
-
 ### Automatyczne generowanie dokumentacji dla API
 
 Współczesne aplikacje często korzystają z interfejsów API, które pozwalają na komunikację między różnymi usługami. Aby ułatwić korzystanie z takiego API, kluczowe jest dostarczenie dokładnej, ale i czytelnej dokumentacji. Automatyczne generowanie dokumentacji może znacząco przyspieszyć ten proces, jednocześnie zapewniając, że jest ona zawsze aktualna.
 
-W Pythonie możemy wykorzystać narzędzie **Sphinx** do generowania dokumentacji, a w kontekście API, jego rozszerzenie `sphinx-apidoc` jest szczególnie przydatne.
+W Pythonie możemy wykorzystać narzędzie **Sphinx** do generowania dokumentacji, a w kontekście API, jego rozszerzenie **sphinx-apidoc** jest szczególnie przydatne.
 
-#### Krok po kroku:
+#### Krok po kroku
 
-1. **Instalacja sphinx-apidoc**:
-    Jeśli jeszcze nie masz zainstalowanego `sphinx-apidoc`, możesz to zrobić za pomocą pip:
+**I. Instalacja sphinx-apidoc**:
 
-    ```bash
-    pip install sphinx
-    ```
+- Przed przystąpieniem do generowania dokumentacji, należy upewnić się, że mamy zainstalowane narzędzie Sphinx. Można to zrobić za pomocą menedżera pakietów pip:
 
-2. **Generowanie dokumentacji dla API**:
-    Przejdź do folderu, w którym znajduje się Twoja dokumentacja, a następnie użyj poniższego polecenia:
+```bash
+pip install sphinx
+```
 
-    ```bash
-    sphinx-apidoc -o docs/source/api/ <ścieżka do katalogu z kodem>
-    ```
+Sphinx to narzędzie, które pozwala na łatwe tworzenie dokumentacji w formacie reStructuredText (rst) lub Markdown, a następnie konwertowanie jej na różne formaty wyjściowe, takie jak HTML, PDF, czy ePub.
 
-    To polecenie generuje plik `api.rst`, który zawiera automatycznie wygenerowane informacje na temat Twojego API.
+- Sphinx-apidoc to rozszerzenie Sphinxa, które automatycznie generuje dokumentację dla API na podstawie docstringów w kodzie. Instalacja jest prosta i również odbywa się za pomocą pip:
 
-3. **Dodanie wygenerowanej dokumentacji do głównej zawartości**:
-    Teraz musisz dodać nowo utworzony plik `api.rst` do głównego pliku `index.rst`, aby był on dostępny w głównym menu dokumentacji:
+```bash
+pip install sphinx-apidoc
+```
 
-    ```rst
-    .. toctree::
-        :maxdepth: 2
-        :caption: Spis treści:
+Ten pakiet rozszerza funkcjonalność Sphinxa, umożliwiając automatyczne skanowanie kodu źródłowego i generowanie odpowiednich plików dokumentacji.
 
-        api
-    ```
+**II. Generowanie dokumentacji dla API**
 
-4. **Generowanie strony internetowej z dokumentacją**:
-    Po dodaniu pliku `api.rst` do `index.rst`, wystarczy uruchomić polecenie:
+- Przed przystąpieniem do generowania dokumentacji, upewnij się, że masz katalog, w którym będą przechowywane pliki dokumentacji. Najczęściej jest to katalog `docs` w głównym katalogu projektu.
 
-    ```bash
-    make html
-    ```
+- Aby wygenerować pliki reStructuredText, które będą podstawą dokumentacji, użyj polecenia sphinx-apidoc. Przejdź do katalogu dokumentacji i wykonaj następujące polecenie:
 
-    Dzięki temu uzyskasz stronę internetową zawierającą nowo wygenerowaną dokumentację.
+```bash
+sphinx-apidoc -o docs/source/api/ <ścieżka do katalogu z kodem>
+```
+
+W powyższym poleceniu `<ścieżka do katalogu z kodem>` zastąp ścieżką do katalogu zawierającego Twój kod źródłowy. Polecenie to skanuje wskazany katalog i generuje pliki .rst dla wszystkich modułów i pakietów w projekcie.
+
+**III. Dodanie wygenerowanej dokumentacji do głównej zawartości**
+
+Aby wygenerowane pliki .rst były widoczne w głównej dokumentacji, musisz je dodać do pliku `index.rst`, który jest głównym plikiem startowym dokumentacji Sphinx. Otwórz plik `index.rst` i dodaj do niego wpis dla wygenerowanej dokumentacji API:
+
+```rst
+.. toctree::
+:maxdepth: 2
+:caption: Spis treści:
+
+api/index
+```
+
+W powyższym przykładzie `api/index` odnosi się do głównego pliku indeksu wygenerowanego przez sphinx-apidoc. Upewnij się, że ścieżka jest zgodna z rzeczywistą lokalizacją pliku.
+
+**IV. Generowanie strony internetowej z dokumentacją**:
+
+6. **Kompletne generowanie dokumentacji**: Po dodaniu wygenerowanych plików do głównego indeksu, możemy przystąpić do generowania końcowego formatu dokumentacji. Najczęściej używanym formatem jest HTML, który umożliwia przeglądanie dokumentacji w przeglądarce internetowej. Aby wygenerować dokumentację w formacie HTML, wykonaj następujące polecenie w katalogu głównym dokumentacji:
+
+```bash
+make html
+```
+
+Po zakończeniu procesu, wygenerowane pliki HTML będą dostępne w katalogu `_build/html`. Możesz je otworzyć w przeglądarce internetowej, aby przejrzeć dokumentację.
+
+**V. Aktualizacja dokumentacji**:
+
+7. **Automatyzacja procesu aktualizacji**: Dokumentacja powinna być zawsze aktualna, odzwierciedlając bieżący stan kodu. Jednym ze sposobów na zapewnienie aktualności dokumentacji jest zautomatyzowanie procesu jej generowania. Można to osiągnąć na kilka sposobów:
+
+- **Continuous Integration (CI)**: Skonfiguruj narzędzie CI, takie jak Travis CI, GitHub Actions, czy Jenkins, aby automatycznie generowało dokumentację przy każdym wdrożeniu kodu na główną gałąź repozytorium.
+- **Pre-commit hooks**: Użyj pre-commit hooks, aby generować dokumentację przed każdym zatwierdzeniem (commit). Dzięki temu każdy commit zawiera aktualną wersję dokumentacji.
+
+**VI. Dostosowanie wyglądu dokumentacji**
+
+Sphinx umożliwia szerokie możliwości dostosowywania wyglądu i funkcjonalności dokumentacji. Możesz zmienić motyw, dodawać własne style CSS, a także modyfikować szablony HTML. Wszystkie te ustawienia znajdują się w pliku `conf.py`, który jest głównym plikiem konfiguracyjnym Sphinx:
+
+- Możesz zmienić motyw dokumentacji, modyfikując linię `html_theme` w pliku `conf.py`. Na przykład, aby użyć motywu 'alabaster', zmień tę linię na:
+
+```python
+html_theme = 'alabaster'
+```
+
+- Możesz dodać własne style CSS, tworząc plik CSS i dodając go do `conf.py`:
+
+```python
+html_static_path = ['_static']
+html_css_files = [
+    'custom.css',
+]
+```
+
+Sphinx pozwala na pełną personalizację szablonów HTML. Możesz tworzyć własne szablony lub modyfikować istniejące, dodając pliki HTML do katalogu `_templates`.
+
+**VII. Konsystencja i dokładność**
+
+Automatyczne narzędzia generowania dokumentacji, takie jak sphinx-apidoc, zapewniają, że dokumentacja jest spójna i dokładna. Dzięki automatycznemu skanowaniu kodu, narzędzia te są w stanie wygenerować dokumentację, która odzwierciedla rzeczywisty stan kodu, minimalizując ryzyko błędów i niezgodności.
+
+**VIII. Oszczędność czasu**
+
+Ręczne pisanie i aktualizowanie dokumentacji może być bardzo czasochłonne. Automatyzacja tego procesu pozwala zaoszczędzić czas programistów, który mogą przeznaczyć na rozwijanie funkcjonalności aplikacji, zamiast martwić się o ręczne aktualizowanie dokumentacji.
+
+**IX. Lepsza współpraca zespołowa**
+
+Dzięki automatycznemu generowaniu dokumentacji, wszyscy członkowie zespołu mają dostęp do najnowszych informacji o API. To ułatwia współpracę, ponieważ wszyscy członkowie zespołu mogą korzystać z aktualnej dokumentacji, co minimalizuje ryzyko nieporozumień i błędów.
+
+**X. Łatwość użycia**
+
+Narzędzia takie jak Sphinx i sphinx-apidoc są stosunkowo łatwe do skonfigurowania i użycia. Nawet mniej doświadczeni programiści mogą szybko nauczyć się korzystać z tych narzędzi, co czyni je dostępnymi dla szerokiego grona użytkowników.
 
 ### Linki
 
 * [Style Guide for Developers](https://developers.google.com/style)
 * [Sphinx Official Documentation](https://www.sphinx-doc.org/en/master/)
+* [reStructuredText Documentation](https://docutils.sourceforge.io/rst.html)
+* [Read the Docs Documentation](https://docs.readthedocs.io/en/stable/)
+* [Sphinx Themes](https://sphinx-themes.org/)
+* [Sphinx GitHub Repository](https://github.com/sphinx-doc/sphinx)
+* [Sphinx Extensions](https://www.sphinx-doc.org/en/master/usage/extensions/index.html)
+* [Markdown Guide](https://www.markdownguide.org/)
+* [Python Documentation](https://docs.python.org/3/)
+* [NumPy Documentation](https://numpy.org/doc/)
+* [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
+* [Jinja2 Documentation](https://jinja.palletsprojects.com/en/3.0.x/)
+* [ReadTheDocs Tutorial](https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html)
+* [Sphinx AutoAPI Extension](https://sphinx-autoapi.readthedocs.io/en/latest/)
+* [Sphinx Napoleon Extension](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html)
+* [Continuous Integration with Sphinx](https://docs.readthedocs.io/en/stable/ci/index.html)
+* [Sphinx HTML Themes Gallery](https://sphinx-themes.org/)
+* [GitHub Actions for Sphinx](https://github.com/marketplace/actions/sphinx-build)
+* [Travis CI for Sphinx](https://travis-ci.org/)
+
