@@ -4,15 +4,15 @@ Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowan
 
 #### Czerwone testy  
 
-- Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
-- Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
-- W przypadku czerwonych testów należy dokładnie przeanalizować zmiany w kodzie oraz zidentyfikować przyczynę problemu, a następnie naprawić błąd.
+- Oznaczają testy, które zakończyły się niepowodzeniem. Jeśli test, który wcześniej przechodził pomyślnie, nagle staje się czerwony, wskazuje to na potencjalny problem w kodzie.
+- Czerwone testy sygnalizują, że coś jest nie tak. Może to wynikać z wprowadzenia zmiany, która zakłóciła wcześniejsze działanie kodu.
+- W przypadku czerwonych testów należy dokładnie przeanalizować zmiany w kodzie, zidentyfikować przyczynę problemu i naprawić błąd.
 
 #### Zielone testy
 
-- To testy, które przeszły pomyślnie.
-- O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
-- Zielone testy pozwalają na refaktoryzację kodu, zachowując pewność, że funkcjonalność nie została naruszona.
+- To testy, które zakończyły się pomyślnie.
+- Choć zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
+- Zielone testy umożliwiają refaktoryzację kodu, zachowując pewność, że funkcjonalność nie została naruszona.
 
 ### Korzyści z testów jednostkowych
 
@@ -225,7 +225,5 @@ Oto kilka powszechnie używanych narzędzi i platform:
 | **Typ**                    | Chmurowa usługa CI                                                                              | Narzędzie CI/CD open source                                                                      | Zintegrowany system CI/CD                                                                                   | Chmurowa platforma CI/CD                                                                                    | Narzędzie do testowania aplikacji webowych                                                                   |
 | **Integracja z GitHubem**  | Idealna dla projektów hostowanych na GitHubie                                                   | Możliwa                                                                                           | Zintegrowany z GitLabem                                                                                    | Możliwa                                                                                                     | Nie dotyczy                                                                                                   |
 | **Konfiguracja**           | Prosta konfiguracja                                                                             | Elastyczna konfiguracja, bogaty ekosystem wtyczek                                                | Definiowanie potoków pracy przy użyciu plików konfiguracyjnych                                             | Automatyczne budowanie, testowanie i wdrażanie aplikacji                                                   | Symulacja interakcji użytkownika, używanie z wieloma językami programowania                                   |
-| **Środowisko uruchomieniowe** | Chmura                                                                                         | Lokalny serwer lub chmura                                                                         | GitLab                                                                                                      | Chmura                                                                                                       | Różne przeglądarki                                                                                             |
-| **Popularność**            | Często wybierana w projektach open source                                                       | Znane z elastyczności                                                                             | Popularne wśród użytkowników GitLaba                                                                        | Popularne                                                                                                    | Popularne narzędzie do testowania aplikacji webowych                                                         |
-
-
+| **Środowisko** | Chmura                                                                                         | Lokalny serwer lub chmura                                                                         | GitLab                                                                                                      | Chmura                                                                                                       | Różne przeglądarki                                                                                             |
+| **Popularność**            | Wysoka popularność wśród projektów open source na GitHubie                                      | Bardzo popularne w dużych organizacjach i projektach korporacyjnych                               | Wysoka popularność wśród użytkowników GitLaba                                                               | Mniej popularne                                                                    | Bardzo popularne w testowaniu aplikacji webowych                                                              |
