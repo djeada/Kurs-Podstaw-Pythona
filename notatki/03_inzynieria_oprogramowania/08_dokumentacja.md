@@ -186,12 +186,13 @@ make html
 
 Po zakończeniu procesu, wygenerowane pliki HTML będą dostępne w katalogu `_build/html`. Możesz je otworzyć w przeglądarce internetowej, aby przejrzeć dokumentację.
 
-**V. Aktualizacja dokumentacji**:
+**V. Aktualizacja dokumentacji**
 
-7. **Automatyzacja procesu aktualizacji**: Dokumentacja powinna być zawsze aktualna, odzwierciedlając bieżący stan kodu. Jednym ze sposobów na zapewnienie aktualności dokumentacji jest zautomatyzowanie procesu jej generowania. Można to osiągnąć na kilka sposobów:
+Automatyzacja procesu aktualizacji dokumentacji jest kluczowa, aby zawsze odzwierciedlała bieżący stan kodu. Można to osiągnąć na kilka sposobów:
 
-- **Continuous Integration (CI)**: Skonfiguruj narzędzie CI, takie jak Travis CI, GitHub Actions, czy Jenkins, aby automatycznie generowało dokumentację przy każdym wdrożeniu kodu na główną gałąź repozytorium.
-- **Pre-commit hooks**: Użyj pre-commit hooks, aby generować dokumentację przed każdym zatwierdzeniem (commit). Dzięki temu każdy commit zawiera aktualną wersję dokumentacji.
+- Jednym ze sposobów na zapewnienie aktualności dokumentacji jest zautomatyzowanie procesu jej generowania.
+- Narzędzia Continuous Integration (CI) można skonfigurować, takie jak Travis CI, GitHub Actions, czy Jenkins, aby automatycznie generowały dokumentację przy każdym wdrożeniu kodu na główną gałąź repozytorium.
+- Użyj pre-commit hooks, aby generować dokumentację przed każdym zatwierdzeniem (commit). Dzięki temu każdy commit zawiera aktualną wersję dokumentacji.
 
 **VI. Dostosowanie wyglądu dokumentacji**
 
