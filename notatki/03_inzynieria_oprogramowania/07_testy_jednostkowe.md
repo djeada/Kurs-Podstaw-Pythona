@@ -3,34 +3,31 @@
 Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Pozwalają programiście mieć pewność, że napisane przez niego komponenty działają zgodnie z oczekiwaniami oraz pomagają w identyfikacji i naprawie błędów na wczesnym etapie. 
 
 #### Czerwone testy  
+
 - Oznaczają testy, które nie przeszły. Jeśli test, który wcześniej działał, staje się czerwony, wskazuje to na potencjalny problem w kodzie.
 - Czerwone testy sygnalizują, że coś jest nie tak. Może to być spowodowane wprowadzeniem zmiany, która zakłóciła wcześniejsze działanie kodu.
 - W przypadku czerwonych testów należy dokładnie przeanalizować zmiany w kodzie oraz zidentyfikować przyczynę problemu, a następnie naprawić błąd.
 
 #### Zielone testy
+
 - To testy, które przeszły pomyślnie.
 - O ile zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują one jednak, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
 - Zielone testy pozwalają na refaktoryzację kodu, zachowując pewność, że funkcjonalność nie została naruszona.
 
 ### Korzyści z testów jednostkowych
 
-- **Dokumentacja kodu**: Testy jednostkowe służą jako doskonała dokumentacja. Pozwalają innym programistom zrozumieć, jak dany fragment kodu ma działać oraz jakie są oczekiwane rezultaty jego działania.
-  
-- **Automatyzacja**: W początkowej fazie projektu możliwe jest ręczne testowanie każdej modyfikacji. Jednak w miarę rosnącej złożoności projektu staje się to bardzo nieefektywne. Testy jednostkowe można łatwo zautomatyzować, co pozwala na sprawdzanie poprawności kodu w sposób szybki i systematyczny.
-
-- **Wymuszanie dobrej architektury**: Pisanie testów jednostkowych wymusza modularność i separację zadań w kodzie, co prowadzi do bardziej klarownej i zrozumiałej struktury kodu.
-
-- **Pewność**: Testy jednostkowe dają pewność, że dokonane zmiany w kodzie nie wprowadziły niechcianych błędów w innych częściach systemu, które były wcześniej już przetestowane.
+- Testy jednostkowe służą jako doskonała dokumentacja. Pozwalają innym programistom zrozumieć, jak dany fragment kodu ma działać oraz jakie są oczekiwane rezultaty jego działania.
+- W początkowej fazie projektu możliwe jest ręczne testowanie każdej modyfikacji. Jednak w miarę rosnącej złożoności projektu staje się to bardzo nieefektywne. Testy jednostkowe można łatwo zautomatyzować, co pozwala na sprawdzanie poprawności kodu w sposób szybki i systematyczny.
+- Pisanie testów jednostkowych wymusza modularność i separację zadań w kodzie, co prowadzi do bardziej klarownej i zrozumiałej struktury kodu.
+- Testy jednostkowe dają pewność, że dokonane zmiany w kodzie nie wprowadziły niechcianych błędów w innych częściach systemu, które były wcześniej już przetestowane.
 
 ### TDD (Test Driven Development)
 
 Technika "test driven development" (TDD) to podejście do tworzenia oprogramowania, w którym testy są tworzone przed kodem źródłowym. Proces tworzenia oprogramowania w podejściu TDD jest cykliczny i składa się z trzech głównych etapów:
 
-1. **Pisanie testu**: Zanim zostanie napisany jakikolwiek kod, programista tworzy test jednostkowy, który definiuje oczekiwane zachowanie nowej funkcjonalności. W tym momencie test nie przechodzi, ponieważ brakuje odpowiedniej implementacji.
-
-2. **Pisanie kodu**: Programista pisze minimalny kod potrzebny do przejścia testu. W tym momencie celem nie jest tworzenie idealnego rozwiązania, ale napisanie kodu, który sprawi, że test będzie przechodził.
-
-3. **Refaktoryzacja**: Kiedy test przechodzi, programista optymalizuje kod, eliminując redundancje i zapewniając, że struktura kodu jest klarowna i zgodna ze standardami.
+1. Zanim zostanie napisany jakikolwiek kod, programista tworzy test jednostkowy, który definiuje oczekiwane zachowanie nowej funkcjonalności. Ten krok nazywamy "pisaniem testu". Na tym etapie test nie przechodzi, ponieważ brakuje odpowiedniej implementacji.
+2. Następnie programista pisze minimalny kod potrzebny do przejścia testu. Ten krok nazywamy "pisaniem kodu". Celem nie jest tworzenie idealnego rozwiązania, ale napisanie kodu, który sprawi, że test będzie przechodził.
+3. Kiedy test przechodzi, programista optymalizuje kod, eliminując redundancje i zapewniając, że struktura kodu jest klarowna i zgodna ze standardami. Ten krok nazywamy "refaktoryzacją".
 
 Korzystanie z TDD pomaga w utrzymaniu czystego kodu, minimalizuje ryzyko błędów i zachęca do myślenia o projektowaniu i architekturze systemu od samego początku procesu tworzenia oprogramowania.
 
@@ -60,15 +57,12 @@ Kluczową ideą jest tu utrzymanie logicznej struktury, która odzwierciedla org
 
 W Pythonie istnieją dwie główne biblioteki do pisania i uruchamiania testów jednostkowych:
 
-#### unittest
-- Jest to standardowa biblioteka w Pythonie do testów jednostkowych.
-- Umożliwia tworzenie testów, zestawów testów oraz uruchamianie ich.
-- Posiada wbudowane mechanizmy asercji oraz setup i teardown dla przygotowywania środowiska testów.
-
-#### pytest
-- Jest to zewnętrzna biblioteka, która stała się bardzo popularna w społeczności Pythona.
-- Charakteryzuje się prostotą i bardziej naturalnym stylem pisania testów.
-- Posiada bogatą funkcjonalność w zakresie parametryzacji testów, używania tzw. "fixtures" oraz wtyczek rozszerzających jej możliwości.
+| **Cecha**                          | **unittest**                                                                            | **pytest**                                                                                           |
+|------------------------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| Typ                                | Standardowa biblioteka w Pythonie do testów jednostkowych                               | Zewnętrzna biblioteka, która stała się bardzo popularna w społeczności Pythona                        |
+| Tworzenie testów                   | Umożliwia tworzenie testów, zestawów testów oraz uruchamianie ich                         | Charakteryzuje się prostotą i bardziej naturalnym stylem pisania testów                               |
+| Mechanizmy asercji                 | Posiada wbudowane mechanizmy asercji                                                    | Posiada bogatą funkcjonalność w zakresie parametryzacji testów, używania tzw. "fixtures" oraz wtyczek |
+| Przygotowanie środowiska testów    | Posiada setup i teardown dla przygotowywania środowiska testów                           | -                                                                                                    |
 
 Ostateczny wybór pomiędzy `unittest` a `pytest` zależy od potrzeb projektu i preferencji zespołu. Niezależnie od wyboru, regularne pisanie i uruchamianie testów jednostkowych jest kluczem do tworzenia niezawodnego oprogramowania.
 
@@ -193,17 +187,12 @@ Pamiętaj, by nazwy plików z testami oraz same funkcje testowe zaczynały się 
 
 Odkrycie błędu w twoim kodzie to dopiero początek drogi. Oto kroki, które warto podjąć, aby odnaleźć i skutecznie naprawić problem:
 
-1. **Reprodukcja problemu**: Spróbuj dokładnie odtworzyć sytuację, w której wystąpił błąd. Wiedza o tym, jak i kiedy błąd się pojawia, jest kluczowa, aby zrozumieć jego przyczynę. Na przykład, jeśli twoja aplikacja zamyka się po naciśnięciu pewnego przycisku, zacznij od manualnego przejścia przez wszystkie kroki prowadzące do tego efektu.
-
-2. **Lokalizacja błędu**: Odszukaj w kodzie miejsce, które prawdopodobnie odpowiada za zaistniały problem.
-
-3. **Dodawanie testu**: Utwórz test, który symuluje odnaleziony błąd. Jeśli problem pojawia się po wywołaniu funkcji `foo()`, dodaj lub modyfikuj istniejący test `test_foo()` w taki sposób, aby odzwierciedlał sytuację prowadzącą do błędu. Po uruchomieniu tego testu powinieneś otrzymać czerwony komunikat, informujący o niepowodzeniu testu.
-
-4. **Naprawa błędu**: Teraz Twoim celem jest modyfikacja kodu tak, aby test przeszedł pomyślnie. Konieczne może być dostosowanie funkcji, zmiana argumentów przekazywanych do funkcji lub wyeliminowanie innych błędów. Pamiętaj, że kluczową sprawą jest to, by po wprowadzeniu zmian test `test_foo()` zakończył się sukcesem.
-
-5. **Refaktoryzacja**: Gdy test już przechodzi, warto zadbać o to, by Twój kod był jak najbardziej optymalny i czytelny. Refaktoryzacja może obejmować zmianę nazw zmiennych, reorganizację kodu czy usuwanie zbędnych fragmentów. Ważne jest jednak, aby w trakcie refaktoryzacji nie wprowadzić nowych błędów - dlatego po każdej większej zmianie warto ponownie uruchomić testy.
-
-6. **Utrzymanie jakości**: W przyszłości regularnie uruchamiaj testy, aby upewnić się, że wszystko działa jak należy. Pamiętaj, że każda modyfikacja kodu powinna być poprzedzona aktualizacją lub dodaniem odpowiednich testów. Dzięki temu zapewnisz ciągłość jakości i unikniesz powrotu starych błędów.
+1. Spróbuj dokładnie odtworzyć sytuację, w której wystąpił błąd. Wiedza o tym, jak i kiedy błąd się pojawia, jest kluczowa, aby zrozumieć jego przyczynę. Na przykład, jeśli twoja aplikacja zamyka się po naciśnięciu pewnego przycisku, zacznij od manualnego przejścia przez wszystkie kroki prowadzące do tego efektu.
+2. Odszukaj w kodzie miejsce, które prawdopodobnie odpowiada za zaistniały problem.
+3. Utwórz test, który symuluje odnaleziony błąd. Jeśli problem pojawia się po wywołaniu funkcji `foo()`, dodaj lub modyfikuj istniejący test `test_foo()` w taki sposób, aby odzwierciedlał sytuację prowadzącą do błędu. Po uruchomieniu tego testu powinieneś otrzymać czerwony komunikat, informujący o niepowodzeniu testu.
+4. Teraz Twoim celem jest modyfikacja kodu tak, aby test przeszedł pomyślnie. Konieczne może być dostosowanie funkcji, zmiana argumentów przekazywanych do funkcji lub wyeliminowanie innych błędów. Pamiętaj, że kluczową sprawą jest to, by po wprowadzeniu zmian test `test_foo()` zakończył się sukcesem.
+5. Gdy test już przechodzi, warto zadbać o to, by Twój kod był jak najbardziej optymalny i czytelny. Refaktoryzacja może obejmować zmianę nazw zmiennych, reorganizację kodu czy usuwanie zbędnych fragmentów. Ważne jest jednak, aby w trakcie refaktoryzacji nie wprowadzić nowych błędów - dlatego po każdej większej zmianie warto ponownie uruchomić testy.
+6. W przyszłości regularnie uruchamiaj testy, aby upewnić się, że wszystko działa jak należy. Pamiętaj, że każda modyfikacja kodu powinna być poprzedzona aktualizacją lub dodaniem odpowiednich testów. Dzięki temu zapewnisz ciągłość jakości i unikniesz powrotu starych błędów.
 
 ### Inne typy testów
 
@@ -231,16 +220,12 @@ Automatyzacja testów jest kluczowym elementem współczesnego procesu rozwoju o
 
 Oto kilka powszechnie używanych narzędzi i platform:
 
-- **[Travis CI](https://travis-ci.org/)**: Chmurzasta usługa CI, idealna dla projektów hostowanych na GitHubie. Zintegrowana z wieloma narzędziami, oferuje prostą konfigurację i jest często wybierana w projektach open source.
+| **Cecha**                  | **Travis CI**                                                                                   | **Jenkins**                                                                                      | **GitLab CI/CD**                                                                                          | **CircleCI**                                                                                                 | **Selenium**                                                                                                   |
+|----------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| **Typ**                    | Chmurowa usługa CI                                                                              | Narzędzie CI/CD open source                                                                      | Zintegrowany system CI/CD                                                                                   | Chmurowa platforma CI/CD                                                                                    | Narzędzie do testowania aplikacji webowych                                                                   |
+| **Integracja z GitHubem**  | Idealna dla projektów hostowanych na GitHubie                                                   | Możliwa                                                                                           | Zintegrowany z GitLabem                                                                                    | Możliwa                                                                                                     | Nie dotyczy                                                                                                   |
+| **Konfiguracja**           | Prosta konfiguracja                                                                             | Elastyczna konfiguracja, bogaty ekosystem wtyczek                                                | Definiowanie potoków pracy przy użyciu plików konfiguracyjnych                                             | Automatyczne budowanie, testowanie i wdrażanie aplikacji                                                   | Symulacja interakcji użytkownika, używanie z wieloma językami programowania                                   |
+| **Środowisko uruchomieniowe** | Chmura                                                                                         | Lokalny serwer lub chmura                                                                         | GitLab                                                                                                      | Chmura                                                                                                       | Różne przeglądarki                                                                                             |
+| **Popularność**            | Często wybierana w projektach open source                                                       | Znane z elastyczności                                                                             | Popularne wśród użytkowników GitLaba                                                                        | Popularne                                                                                                    | Popularne narzędzie do testowania aplikacji webowych                                                         |
 
-- **[Jenkins](https://jenkins.io/)**: Wielofunkcyjne narzędzie CI/CD open source, znane z elastyczności i bogatej ekosystemy wtyczek. Może być uruchomione na lokalnych serwerach lub w chmurze.
 
-- **[GitLab CI/CD](https://docs.gitlab.com/ee/ci/)**: Zintegrowany z GitLabem system CI/CD, który pozwala na definiowanie skomplikowanych potoków pracy przy użyciu plików konfiguracyjnych.
-
-- **[CircleCI](https://circleci.com/)**: Chmurzasta platforma CI/CD, która umożliwia automatyczne budowanie, testowanie i wdrażanie aplikacji w wielu środowiskach.
-
-Dla tych, którzy tworzą aplikacje webowe, kluczowe może być także testowanie w wielu przeglądarkach:
-
-- **[Selenium](https://www.selenium.dev/)**: Popularne narzędzie do testowania aplikacji webowych w różnych przeglądarkach. Umożliwia symulację interakcji użytkownika i może być używane z wieloma językami programowania.
-
-Dzięki automatyzacji testów, zespoły deweloperskie mogą skupić się na tworzeniu wartościowych funkcji, mając pewność, że jakość oprogramowania jest nieustannie monitorowana i utrzymywana na wysokim poziomie.
