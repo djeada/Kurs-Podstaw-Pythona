@@ -6,123 +6,109 @@
 
 Menadżery pakietów to narzędzia, które odgrywają kluczową rolę w zarządzaniu oprogramowaniem, ułatwiając procesy instalacji, aktualizacji, konfiguracji i usuwania pakietów oprogramowania w systemie komputerowym. Są one niezwykle przydatne w różnych środowiskach – od systemów operacyjnych po specyficzne platformy programistyczne, takie jak Python, Ruby czy JavaScript. Oto kilka głównych celów i korzyści z używania menadżerów pakietów:
 
-- **Zarządzanie zależnościami**: Menadżery pakietów automatycznie zarządzają zależnościami między pakietami, co oznacza, że potrafią zidentyfikować i zainstalować wszystkie inne pakiety (zależności), które są niezbędne do prawidłowego działania instalowanego oprogramowania. Dzięki temu użytkownicy nie muszą ręcznie śledzić i instalować każdej zależności.
-
-- **Uproszczenie instalacji**: Menadżery pakietów umożliwiają łatwą instalację oprogramowania za pomocą pojedynczego polecenia. Usuwają potrzebę ręcznego pobierania i konfigurowania oprogramowania, co jest szczególnie przydatne w przypadku skomplikowanych systemów z wieloma komponentami.
-
-- **Konserwacja i aktualizacje**: Zapewniają łatwe aktualizacje dla oprogramowania, pozwalając na szybkie i skuteczne wdrażanie poprawek bezpieczeństwa i ulepszeń funkcjonalnych. Menadżery pakietów często oferują także narzędzia do przeglądania historii instalacji i wycofywania zmian, jeśli aktualizacje nie działają prawidłowo.
-
-- **Zarządzanie wersjami**: Umożliwiają instalację i utrzymanie wielu wersji tego samego oprogramowania, co jest istotne w środowiskach deweloperskich, gdzie różne projekty mogą wymagać różnych wersji tej samej biblioteki lub narzędzia.
-
-- **Oszczędność czasu i zasobów**: Automatyzacja wielu rutynowych zadań związanych z zarządzaniem oprogramowaniem oszczędza czas, minimalizuje ryzyko błędów ludzkich i pozwala zespołom programistycznym skoncentrować się na bardziej strategicznych aspektach projektów.
-
-- **Spójność i standardyzacja**: Menadżery pakietów przyczyniają się do spójności w instalacji i konfiguracji oprogramowania poprzez zapewnienie standardowych procedur dla tych procesów. Pomaga to w utrzymaniu porządku w systemach, które są szeroko rozpowszechnione w przedsiębiorstwach i dużych organizacjach.
+- Menadżery pakietów automatycznie zarządzają zależnościami między pakietami, co oznacza, że potrafią zidentyfikować i zainstalować wszystkie inne pakiety (zależności), które są niezbędne do prawidłowego działania instalowanego oprogramowania. Dzięki temu użytkownicy nie muszą ręcznie śledzić i instalować każdej zależności.
+- Menadżery pakietów umożliwiają łatwą instalację oprogramowania za pomocą pojedynczego polecenia. Usuwają potrzebę ręcznego pobierania i konfigurowania oprogramowania, co jest szczególnie przydatne w przypadku skomplikowanych systemów z wieloma komponentami.
+- *Zapewniają łatwe aktualizacje dla oprogramowania, pozwalając na szybkie i skuteczne wdrażanie poprawek bezpieczeństwa i ulepszeń funkcjonalnych. Menadżery pakietów często oferują także narzędzia do przeglądania historii instalacji i wycofywania zmian, jeśli aktualizacje nie działają prawidłowo.
+- Umożliwiają instalację i utrzymanie wielu wersji tego samego oprogramowania, co jest istotne w środowiskach deweloperskich, gdzie różne projekty mogą wymagać różnych wersji tej samej biblioteki lub narzędzia.
+- Automatyzacja wielu rutynowych zadań związanych z zarządzaniem oprogramowaniem oszczędza czas, minimalizuje ryzyko błędów ludzkich i pozwala zespołom programistycznym skoncentrować się na bardziej strategicznych aspektach projektów.
+- Menadżery pakietów przyczyniają się do spójności w instalacji i konfiguracji oprogramowania poprzez zapewnienie standardowych procedur dla tych procesów. Pomaga to w utrzymaniu porządku w systemach, które są szeroko rozpowszechnione w przedsiębiorstwach i dużych organizacjach.
 
 ### Instalacja PIP
 
 W nowszych wersjach Pythona, PIP jest instalowany automatycznie razem z interpreterem. Jeśli jednak z jakiegoś powodu nie masz zainstalowanego PIP, istnieje kilka metod jego instalacji:
 
-1. **Ponowna instalacja Pythona:**
-   Najprostsze rozwiązanie to ponowna instalacja Pythona, co zapewni, że PIP będzie dołączony do instalacji.
+I. Najprostsze rozwiązanie to ponowna instalacja Pythona, co zapewni, że PIP będzie dołączony do instalacji.
 
-2. **Instalacja PIP manualnie:**
-   Jeśli preferujesz manualną instalację PIP, możesz pobrać skrypt instalacyjny `get-pip.py` z oficjalnej strony.
+II. Jeśli preferujesz manualną instalację PIP, możesz pobrać skrypt instalacyjny `get-pip.py` z oficjalnej strony.
 
-    ```bash
-    python get-pip.py
-    ```
+```bash
+python get-pip.py
+```
 
-3. **Weryfikacja instalacji:**
-   Po instalacji warto sprawdzić, czy PIP działa poprawnie:
+III. Po instalacji warto sprawdzić, czy PIP działa poprawnie:
 
-    ```bash
-    pip help
-    ```
+```bash
+pip help
+```
 
 ### Podstawowe operacje z PIP
 
 PIP oferuje szeroki wachlarz funkcji, które ułatwiają zarządzanie pakietami Pythona:
 
-- **Instalacja pakietu:**
+- Instalacja pakietu:
 
-    ```bash
-    pip install nazwa_pakietu
-    ```
+```bash
+pip install nazwa_pakietu
+```
 
-- **Wyświetlanie szczegółów zainstalowanego pakietu:**
+- Wyświetlanie szczegółów zainstalowanego pakietu:
 
-    ```bash
-    pip show nazwa_pakietu
-    ```
+```bash
+pip show nazwa_pakietu
+```
 
-- **Lista zainstalowanych pakietów:**
+- Lista zainstalowanych pakietów:
 
-    ```bash
-    pip list
-    ```
+```bash
+pip list
+```
 
-- **Zapisywanie zainstalowanych pakietów do pliku:**
+- Zapisywanie zainstalowanych pakietów do pliku:
 
-    Możesz zapisać listę zainstalowanych pakietów wraz z ich wersjami do pliku `requirements.txt`, co jest pomocne przy replikacji środowiska projektu:
+Możesz zapisać listę zainstalowanych pakietów wraz z ich wersjami do pliku `requirements.txt`, co jest pomocne przy replikacji środowiska projektu:
 
-    ```bash
-    pip freeze > requirements.txt
-    ```
+```bash
+pip freeze > requirements.txt
+```
 
-- **Instalacja pakietów z pliku `requirements.txt`:**
+- Instalacja pakietów z pliku `requirements.txt`:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+pip install -r requirements.txt
+```
 
-- **Odinstalowywanie pakietu:**
+- Odinstalowywanie pakietu:
 
-    ```bash
-    pip uninstall nazwa_pakietu
-    ```
+```bash
+pip uninstall nazwa_pakietu
+```
 
-- **Wyszukiwanie pakietów:**
+- Wyszukiwanie pakietów:
 
-    PIP umożliwia także wyszukiwanie pakietów dostępnych w PyPI:
+PIP umożliwia także wyszukiwanie pakietów dostępnych w PyPI:
 
-    ```bash
-    pip search nazwa_pakietu
-    ```
-
+```bash
+pip search nazwa_pakietu
+```
 
 ### Aktualizacja pakietów
 
 Aktualizacja pakietów jest kluczowym elementem utrzymania bezpieczeństwa i efektywności aplikacji. Dzięki menedżerom pakietów, jak `pip` w Pythonie, proces ten jest znacznie uproszczony.
 
-- **Aktualizacja konkretnego pakietu:**
+- Możesz zaktualizować konkretny pakiet do najnowszej dostępnej wersji, używając poniższego polecenia:
 
-  Możesz zaktualizować specyficzny pakiet do najnowszej dostępnej wersji, używając poniższego polecenia:
+```bash
+pip install --upgrade nazwa_pakietu
+```
 
-    ```bash
-    pip install --upgrade nazwa_pakietu
-    ```
+- Aby uzyskać listę przestarzałych pakietów, użyj:
 
-- **Aktualizacja wszystkich pakietów:**
+```bash
+pip list --outdated
+```
 
-  Aby uzyskać listę przestarzałych pakietów, użyj:
+Następnie możesz zaktualizować każdy z nich przy użyciu `pip install --upgrade`. Jeśli chcesz zaktualizować wszystkie przestarzałe pakiety jednocześnie, możesz użyć pętli w Bashu:
 
-    ```bash
-    pip list --outdated
-    ```
+```bash
+pip list --outdated | grep -v 'Package' | awk '{print $1}' | xargs -n1 pip install --upgrade
+```
 
-  Następnie możesz zaktualizować każdy z nich przy użyciu `pip install --upgrade`. Jeśli chcesz zaktualizować wszystkie przestarzałe pakiety jednocześnie, możesz użyć pętli w Bashu:
+- Regularna aktualizacja samego narzędzia `pip` jest ważna, by mieć dostęp do najnowszych funkcji i poprawek bezpieczeństwa:
 
-    ```bash
-    pip list --outdated | grep -v 'Package' | awk '{print $1}' | xargs -n1 pip install --upgrade
-    ```
+```bash
+pip install --upgrade pip
+```
 
-- **Aktualizacja PIP:**
-
-  Regularna aktualizacja samego `pip` jest ważna, by mieć dostęp do najnowszych funkcji i poprawek bezpieczeństwa:
-
-    ```bash
-    pip install --upgrade pip
-    ```
 ### Czym jest `setup.py`?
 
 `setup.py` jest tradycyjnym plikiem konfiguracyjnym w projektach Python, który służy do definiowania metadanych projektu oraz zarządzania zależnościami i dystrybucją pakietu. Jest to część standardowego narzędzia `setuptools`, które pomaga w pakowaniu i dystrybucji bibliotek Pythona.
@@ -218,37 +204,37 @@ Ten plik `setup.py` zawiera podstawowe informacje o pakiecie, w tym zależności
 
 Aby opublikować pakiet na PyPI, należy wykonać kilka kroków:
 
-1. **Przygotuj swój pakiet:**
-   Upewnij się, że Twój pakiet ma odpowiednio skonfigurowany plik `setup.py`. Powinien zawierać wszystkie niezbędne informacje, takie jak nazwa pakietu, wersja, autor, zależności itp.
+I. Upewnij się, że Twój pakiet ma odpowiednio skonfigurowany plik `setup.py`. Powinien zawierać wszystkie niezbędne informacje, takie jak nazwa pakietu, wersja, autor, zależności itp.
 
-2. **Zarejestruj się na PyPI:**
-   Utwórz konto na [PyPI](https://pypi.org/) i na [Test PyPI](https://test.pypi.org/), które można użyć do testowania przesyłania pakietów.
+II. Utwórz konto na [PyPI](https://pypi.org/) i na [Test PyPI](https://test.pypi.org/), które można użyć do testowania przesyłania pakietów.
 
-3. **Zbuduj swój pakiet:**
-   Użyj `setuptools` do zbudowania swojego pakietu. Możesz to zrobić, uruchamiając poniższe polecenie w katalogu projektu:
-    ```
-    python setup.py sdist bdist_wheel
-    ```
-   To polecenie utworzy archiwum źródłowe oraz koło dystrybucyjne, które są preferowanym formatem dystrybucji.
+III. Użyj `setuptools` do zbudowania swojego pakietu. Możesz to zrobić, uruchamiając poniższe polecenie w katalogu projektu:
 
-4. **Wyślij pakiet na Test PyPI:**
-   Przed oficjalnym opublikowaniem pakietu możesz przetestować proces przesyłania na Test PyPI, używając `twine`:
-    ```
-    twine upload --repository testpypi dist/*
-    ```
-   Po przetestowaniu, możesz zalogować się i sprawdzić, czy pakiet jest dostępny.
+```
+python setup.py sdist bdist_wheel
+```
 
-5. **Opublikuj pakiet na PyPI:**
-   Jeśli wszystko jest gotowe, możesz opublikować swój pakiet na oficjalnym PyPI za pomocą:
-    ```
-    twine upload dist/*
-    ```
+To polecenie utworzy archiwum źródłowe oraz koło dystrybucyjne, które są preferowanym formatem dystrybucji.
 
-6. **Sprawdź dostępność pakietu:**
-   Po opublikowaniu, Twój pakiet powinien być dostępny na PyPI i gotowy do instalacji przez każdego za pomocą:
-    ```
-    pip install nazwa_twojego_pakietu
-    ```
+IV. Przed oficjalnym opublikowaniem pakietu możesz przetestować proces przesyłania na Test PyPI, używając `twine`:
+
+```
+twine upload --repository testpypi dist/*
+```
+
+Po przetestowaniu, możesz zalogować się i sprawdzić, czy pakiet jest dostępny.
+
+V. Jeśli wszystko jest gotowe, możesz opublikować swój pakiet na oficjalnym PyPI za pomocą:
+
+```
+twine upload dist/*
+```
+
+VI. Po opublikowaniu, Twój pakiet powinien być dostępny na PyPI i gotowy do instalacji przez każdego za pomocą:
+
+```
+pip install nazwa_twojego_pakietu
+```
 
 Pamiętaj, że utrzymanie pakietu to również aktualizowanie go o nowe funkcje, poprawki błędów oraz aktualizacje zależności, co jest ważne dla utrzymania dobrych praktyk bezpieczeństwa i kompatybilności.
 
