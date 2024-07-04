@@ -153,7 +153,6 @@ Ten pakiet rozszerza funkcjonalność Sphinxa, umożliwiając automatyczne skano
 **II. Generowanie dokumentacji dla API**
 
 - Przed przystąpieniem do generowania dokumentacji, upewnij się, że masz katalog, w którym będą przechowywane pliki dokumentacji. Najczęściej jest to katalog `docs` w głównym katalogu projektu.
-
 - Aby wygenerować pliki reStructuredText, które będą podstawą dokumentacji, użyj polecenia sphinx-apidoc. Przejdź do katalogu dokumentacji i wykonaj następujące polecenie:
 
 ```bash
@@ -178,7 +177,7 @@ W powyższym przykładzie `api/index` odnosi się do głównego pliku indeksu wy
 
 **IV. Generowanie strony internetowej z dokumentacją**:
 
-6. **Kompletne generowanie dokumentacji**: Po dodaniu wygenerowanych plików do głównego indeksu, możemy przystąpić do generowania końcowego formatu dokumentacji. Najczęściej używanym formatem jest HTML, który umożliwia przeglądanie dokumentacji w przeglądarce internetowej. Aby wygenerować dokumentację w formacie HTML, wykonaj następujące polecenie w katalogu głównym dokumentacji:
+Po dodaniu wygenerowanych plików do głównego indeksu, możemy przystąpić do generowania końcowego formatu dokumentacji. Najczęściej używanym formatem jest HTML, który umożliwia przeglądanie dokumentacji w przeglądarce internetowej. Aby wygenerować dokumentację w formacie HTML, wykonaj następujące polecenie w katalogu głównym dokumentacji:
 
 ```bash
 make html
