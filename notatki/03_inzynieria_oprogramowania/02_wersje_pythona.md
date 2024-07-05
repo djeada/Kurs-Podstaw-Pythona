@@ -17,19 +17,19 @@
 
 | Wersja  | Data Wydania  | Główne Zmiany                                      |
 |---------|---------------|--------------------------------------------------|
-| 3.0     | 03.12.2008    | Przełomowe zmiany: print() jako funkcja, nowa semantyka stringów (unicode domyślnie), dzielenie całkowitoliczbowe |
-| 3.1     | 27.06.2009    | Poprawa wydajności, nowa biblioteka I/O, OrderedDict |
-| 3.2     | 20.02.2011    | Wsparcie dla `concurrent.futures`, `argparse`, formaty float repr |
-| 3.3     | 29.09.2012    | Wprowadzenie `yield from`, kluczowych słów `faulthandler`, lustracja katalogów |
-| 3.4     | 16.03.2014    | `asyncio`, enums, pathlib, poprawa modułu unittest |
+| 3.0     | 03.12.2008    | Przełomowe zmiany: `print()` jako funkcja, nowa semantyka napisów (unicode domyślnie), dzielenie całkowitoliczbowe |
+| 3.1     | 27.06.2009    | Poprawa wydajności, nowa biblioteka wejścia/wyjścia, `OrderedDict` |
+| 3.2     | 20.02.2011    | Wsparcie dla `concurrent.futures`, `argparse`, formaty zmiennoprzecinkowe `repr` |
+| 3.3     | 29.09.2012    | Wprowadzenie `yield from`, kluczowych słów `faulthandler`, śledzenie zmian w katalogach |
+| 3.4     | 16.03.2014    | `asyncio`, wyliczenia (enums), `pathlib`, poprawa modułu `unittest` |
 | 3.5     | 13.09.2015    | Wprowadzenie `async` i `await`, operator mnożenia macierzy |
-| 3.6     | 23.12.2016    | F-strings, zmiany w dicts, nowe funkcje async generators i comprehensions |
-| 3.7     | 27.06.2018    | Klasy danych, odroczona ewaluacja adnotacji typów, zmienne kontekstowe.|
-| 3.8     | 14.10.2019    | Assignment expressions (walrus operator :=), positional-only parameters |
-| 3.9     | 05.10.2020    | Nowe operatory dla słowników, funkcje stringów removeprefix() i removesuffix() |
-| 3.10    | 04.10.2021    | Pattern matching, lepsze wsparcie dla podpowiedzi typów, usprawnienia w zarządzaniu kontekstami |
+| 3.6     | 23.12.2016    | Napisy formatowane (f-strings), zmiany w słownikach (`dict`), nowe funkcjonalności asynchronicznych generatorów i wyrażeń generujących (comprehensions) |
+| 3.7     | 27.06.2018    | Klasy danych, odroczona ewaluacja adnotacji typów, zmienne kontekstowe |
+| 3.8     | 14.10.2019    | Wyrażenia przypisania (operator morsa :=), parametry tylko pozycyjne |
+| 3.9     | 05.10.2020    | Nowe operatory dla słowników, funkcje napisów `removeprefix()` i `removesuffix()` |
+| 3.10    | 04.10.2021    | Dopasowywanie wzorców (pattern matching), lepsze wsparcie dla podpowiedzi typów, usprawnienia w zarządzaniu kontekstami |
 | 3.11    | 03.10.2022    | Wzrost wydajności, lepsze debugowanie, dynamiczne profile i bardziej szczegółowe wyjątki |
-| 3.12    | 02.10.2023    | Bardziej elastyczne parsowanie f-stringów, wsparcie dla protokołu buforowania, nowy API debugowania/profilowania, wsparcie dla izolowanych subinterpreterów z osobnymi Global Interpreter Locks, poprawa komunikatów błędów, wsparcie dla Linux perf profiler oraz liczne usprawnienia wydajnościowe |
+| 3.12    | 02.10.2023    | Bardziej elastyczne parsowanie napisów formatowanych (f-stringów), wsparcie dla protokołu buforowania, nowy interfejs debugowania/profilowania, wsparcie dla izolowanych podinterpreterów z osobnymi globalnymi blokadami interpretera (Global Interpreter Locks), poprawa komunikatów błędów, wsparcie dla Linux perf profiler oraz liczne usprawnienia wydajnościowe |
 | 3.13    | Planowana: 2024 | Wprowadzenie kompilatora JIT, poprawa wydajności, wprowadzenie PEP 649 (opóźniona ocena adnotacji), większa elastyczność i optymalizacja kodu |
 
 ### Sprawdzanie Zainstalowanej Wersji Pythona
