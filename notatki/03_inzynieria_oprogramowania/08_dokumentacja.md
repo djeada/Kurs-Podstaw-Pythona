@@ -126,11 +126,22 @@ Dyrektywy służą do wstawiania różnych elementów, takich jak obrazy, tabele
 
 ### Automatyczne generowanie dokumentacji dla API
 
-Współczesne aplikacje często korzystają z interfejsów API, które pozwalają na komunikację między różnymi usługami. Aby ułatwić korzystanie z takiego API, kluczowe jest dostarczenie dokładnej, ale i czytelnej dokumentacji. Automatyczne generowanie dokumentacji może znacząco przyspieszyć ten proces, jednocześnie zapewniając, że jest ona zawsze aktualna.
+Współczesne aplikacje często korzystają z interfejsów API, które pozwalają na komunikację między różnymi usługami. Aby ułatwić korzystanie z takiego API, kluczowe jest dostarczenie dokładnej, ale i czytelnej dokumentacji. Automatyczne generowanie dokumentacji może znacząco przyspieszyć ten proces, jednocześnie zapewniając, że jest ona zawsze aktualna. Proces ten pozwala nam zaoszczędzić czas oraz minimalizuje ryzyko błędów i nieścisłości wynikających z ręcznego pisania dokumentacji.
 
 W Pythonie możemy wykorzystać narzędzie **Sphinx** do generowania dokumentacji, a w kontekście API, jego rozszerzenie **sphinx-apidoc** jest szczególnie przydatne.
 
 #### Krok po kroku
+
+Początkowa struktura projektu może wyglądać następująco:
+
+```
+my_project/
+├── my_module/
+│   ├── __init__.py
+│   ├── module1.py
+│   └── module2.py
+└── setup.py
+```
 
 **I. Instalacja sphinx-apidoc**:
 
@@ -140,7 +151,7 @@ W Pythonie możemy wykorzystać narzędzie **Sphinx** do generowania dokumentacj
 pip install sphinx
 ```
 
-Sphinx to narzędzie, które pozwala na łatwe tworzenie dokumentacji w formacie reStructuredText (rst) lub Markdown, a następnie konwertowanie jej na różne formaty wyjściowe, takie jak HTML, PDF, czy ePub.
+Sphinx to narzędzie, które pozwala na łatwe tworzenie dokumentacji w formacie reStructuredText (rst) lub Markdown, a następnie konwertowanie jej na różne formaty wyjściowe, takie jak HTML, PDF, czy ePub. Sphinx jest szeroko stosowany w społeczności Pythona i jest wspierany przez wiele narzędzi CI/CD.
 
 - Sphinx-apidoc to rozszerzenie Sphinxa, które automatycznie generuje dokumentację dla API na podstawie docstringów w kodzie. Instalacja jest prosta i również odbywa się za pomocą pip:
 
@@ -148,29 +159,61 @@ Sphinx to narzędzie, które pozwala na łatwe tworzenie dokumentacji w formacie
 pip install sphinx-apidoc
 ```
 
-Ten pakiet rozszerza funkcjonalność Sphinxa, umożliwiając automatyczne skanowanie kodu źródłowego i generowanie odpowiednich plików dokumentacji.
+Ten pakiet rozszerza funkcjonalność Sphinxa, umożliwiając automatyczne skanowanie kodu źródłowego i generowanie odpowiednich plików dokumentacji. Dzięki sphinx-apidoc, każdy moduł i pakiet w projekcie zostanie opisany na podstawie docstringów, co pozwala na zachowanie spójności między kodem a dokumentacją.
 
 **II. Generowanie dokumentacji dla API**
 
-- Przed przystąpieniem do generowania dokumentacji, upewnij się, że masz katalog, w którym będą przechowywane pliki dokumentacji. Najczęściej jest to katalog `docs` w głównym katalogu projektu.
-- Aby wygenerować pliki reStructuredText, które będą podstawą dokumentacji, użyj polecenia sphinx-apidoc. Przejdź do katalogu dokumentacji i wykonaj następujące polecenie:
+- Przed przystąpieniem do generowania dokumentacji, upewnij się, że masz katalog, w którym będą przechowywane pliki dokumentacji. Najczęściej jest to katalog `docs` w głównym katalogu projektu. Możesz go utworzyć poleceniem:
+
+```bash
+mkdir docs
+```
+
+- Aby wygenerować pliki reStructuredText, które będą podstawą dokumentacji, użyj polecenia `sphinx-apidoc`. Przejdź do katalogu dokumentacji i wykonaj następujące polecenie:
 
 ```bash
 sphinx-apidoc -o docs/source/api/ <ścieżka do katalogu z kodem>
 ```
 
-W powyższym poleceniu `<ścieżka do katalogu z kodem>` zastąp ścieżką do katalogu zawierającego Twój kod źródłowy. Polecenie to skanuje wskazany katalog i generuje pliki .rst dla wszystkich modułów i pakietów w projekcie.
+W powyższym poleceniu `<ścieżka do katalogu z kodem>` zastąp ścieżką do katalogu zawierającego twój kod źródłowy. Polecenie to skanuje wskazany katalog i generuje pliki `.rst` dla wszystkich modułów i pakietów w projekcie. Dla naszego przykładu to będzie:
 
-**III. Dodanie wygenerowanej dokumentacji do głównej zawartości**
+```bash
+sphinx-apidoc -o docs/source/api/ ../my_module/
+```
 
-Aby wygenerowane pliki .rst były widoczne w głównej dokumentacji, musisz je dodać do pliku `index.rst`, który jest głównym plikiem startowym dokumentacji Sphinx. Otwórz plik `index.rst` i dodaj do niego wpis dla wygenerowanej dokumentacji API:
+Po tym kroku struktura katalogów będzie wyglądać następująco:
+
+```
+my_project/
+├── docs/
+│   ├── Makefile
+│   ├── build/
+│   └── source/
+│       ├── api/
+│       │   ├── my_module.module1.rst
+│       │   ├── my_module.module2.rst
+│       │   └── my_module.rst
+│       ├── conf.py
+│       ├── index.rst
+│       └── _static/
+│       └── _templates/
+├── my_module/
+│   ├── __init__.py
+│   ├── module1.py
+│   └── module2.py
+└── setup.py
+```
+
+**III. Konfiguracja Sphinx i dodanie wygenerowanej dokumentacji do głównej zawartości**
+
+Aby wygenerowane pliki `.rst` były widoczne w głównej dokumentacji, musisz je dodać do pliku `index.rst`, który jest głównym plikiem startowym dokumentacji Sphinx. Otwórz plik `index.rst` i dodaj do niego wpis dla wygenerowanej dokumentacji API:
 
 ```rst
 .. toctree::
-:maxdepth: 2
-:caption: Spis treści:
+   :maxdepth: 2
+   :caption: Spis treści:
 
-api/index
+   api/index
 ```
 
 W powyższym przykładzie `api/index` odnosi się do głównego pliku indeksu wygenerowanego przez sphinx-apidoc. Upewnij się, że ścieżka jest zgodna z rzeczywistą lokalizacją pliku.
@@ -185,13 +228,54 @@ make html
 
 Po zakończeniu procesu, wygenerowane pliki HTML będą dostępne w katalogu `_build/html`. Możesz je otworzyć w przeglądarce internetowej, aby przejrzeć dokumentację.
 
-**V. Aktualizacja dokumentacji**
+Po tym kroku struktura katalogów będzie wyglądać następująco:
+
+```
+my_project/
+├── docs/
+│   ├── Makefile
+│   ├── build/
+│   │   └── html/
+│   │       ├── index.html
+│   │       ├── genindex.html
+│   │       ├── ...
+│   └── source/
+│       ├── api/
+│       │   ├── my_module.module1.rst
+│       │   ├── my_module.module2.rst
+│       │   └── my_module.rst
+│       ├── conf.py
+│       ├── index.rst
+│       └── _static/
+│       └── _templates/
+├── my_module/
+│   ├── __init__.py
+│   ├── module1.py
+│   └── module2.py
+└── setup.py
+```
+
+**V. Automatyzacja aktualizacji dokumentacji**
 
 Automatyzacja procesu aktualizacji dokumentacji jest kluczowa, aby zawsze odzwierciedlała bieżący stan kodu. Można to osiągnąć na kilka sposobów:
 
-- Jednym ze sposobów na zapewnienie aktualności dokumentacji jest zautomatyzowanie procesu jej generowania.
-- Narzędzia Continuous Integration (CI) można skonfigurować, takie jak Travis CI, GitHub Actions, czy Jenkins, aby automatycznie generowały dokumentację przy każdym wdrożeniu kodu na główną gałąź repozytorium.
-- Użyj pre-commit hooks, aby generować dokumentację przed każdym zatwierdzeniem (commit). Dzięki temu każdy commit zawiera aktualną wersję dokumentacji.
+- Konfiguracja narzędzi **CI**, takich jak Travis CI, GitHub Actions, czy Jenkins, pozwala na automatyczne generowanie dokumentacji przy każdym wdrożeniu kodu na główną gałąź repozytorium. Dzięki temu dokumentacja jest zawsze aktualna i odzwierciedla ostatnie zmiany w kodzie.
+
+- Użyj **pre-commit hooks**, aby generować dokumentację przed każdym zatwierdzeniem (commit). Dzięki temu każdy commit zawiera aktualną wersję dokumentacji. Można to skonfigurować za pomocą narzędzia `pre-commit`:
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+- repo: local
+  hooks:
+  - id: generate-docs
+    name: Generate Sphinx Documentation
+    entry: sphinx-apidoc -o docs/source/api/ ../my_module/ && make -C docs html
+    language: system
+    stages: [commit]
+```
+
+- Można ustawić cron job lub inny systemowy harmonogram zadań, aby regularnie uruchamiał skrypt generujący dokumentację, np. co noc. To zapewni, że dokumentacja będzie aktualizowana na bieżąco bez ręcznej interwencji.
 
 **VI. Dostosowanie wyglądu dokumentacji**
 
@@ -218,7 +302,7 @@ Sphinx pozwala na pełną personalizację szablonów HTML. Możesz tworzyć wła
 
 Automatyczne narzędzia generowania dokumentacji, takie jak sphinx-apidoc, zapewniają, że dokumentacja jest spójna i dokładna. Dzięki automatycznemu skanowaniu kodu, narzędzia te są w stanie wygenerować dokumentację, która odzwierciedla rzeczywisty stan kodu, minimalizując ryzyko błędów i niezgodności.
 
-**VIII. Oszczędność czasu**
+**VIII. Oszczędzanie czasu**
 
 Ręczne pisanie i aktualizowanie dokumentacji może być bardzo czasochłonne. Automatyzacja tego procesu pozwala zaoszczędzić czas programistów, który mogą przeznaczyć na rozwijanie funkcjonalności aplikacji, zamiast martwić się o ręczne aktualizowanie dokumentacji.
 
