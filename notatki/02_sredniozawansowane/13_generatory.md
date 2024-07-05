@@ -140,8 +140,8 @@ Wynik:
 
 ### Zastosowania i korzyści z używania generatorów
 
-- **Lepsza wydajność pamięci**: Generatory zużywają mniej pamięci, ponieważ generują wartości na bieżąco.
-- **Lepsza wydajność czasowa**: Oszczędność czasu, gdy nie musimy czekać, aż wszystkie wartości zostaną wygenerowane.
-- **Elastyczność**: Można łatwo tworzyć potoki przetwarzania danych, łącząc kilka generatorów razem.
+- Generatory zużywają mniej pamięci, ponieważ generują wartości na bieżąco.
+- Oszczędność czasu, gdy nie musimy czekać, aż wszystkie wartości zostaną wygenerowane.
+- Można łatwo tworzyć potoki przetwarzania danych, łącząc kilka generatorów razem.
 
 W praktyce, generatory są niezbędnym narzędziem dla programistów Pythona, umożliwiając tworzenie kodu bardziej wydajnego i zwięzłego.
