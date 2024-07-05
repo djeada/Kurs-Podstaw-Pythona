@@ -7,11 +7,8 @@ Debugger to narzędzie używane przez programistów do testowania i usuwania bł
 Debugger oferuje wiele funkcji, które ułatwiają identyfikację i rozwiązywanie problemów w kodzie:
 
 - Przerwanie wykonania programu, czyli **breakpoints**, pozwala zatrzymać program w wybranych punktach, aby sprawdzić stan zmiennych, warunki wykonania i inne aspekty.
-  
 - **Kroki** umożliwiają wykonanie programu krok po kroku, co pozwala na obserwację zmian w stanach zmiennych i logice działania programu.
-  
 - **Inspekcja stanu** pozwala na oglądanie wartości zmiennych, stanu stosu wywołań i innych danych wewnętrznych programu.
-  
 - **Modyfikacja stanu** umożliwia zmianę wartości zmiennych podczas wykonywania programu, aby zobaczyć, jak te zmiany wpłyną na działanie programu.
 
 ### Zalety korzystania z debuggera
@@ -25,7 +22,6 @@ Debugger oferuje wiele funkcji, które ułatwiają identyfikację i rozwiązywan
 Większość zintegrowanych środowisk programistycznych (IDE) zapewnia wbudowane narzędzia debugowania, które oferują zaawansowane funkcje, takie jak:
 
 - Ustawianie punktów zatrzymania (breakpoints), pozwala na definiowanie miejsc, gdzie wykonanie kodu zostanie zatrzymane.
-  
 - Podgląd wartości zmiennych w czasie rzeczywistym, umożliwia oglądanie wartości zmiennych w czasie, gdy program jest zatrzymany na punkcie przerwania.
 
 Dzięki integracji z IDE, debugowanie staje się bardziej intuicyjne i efektywne, co znacząco przyspiesza proces rozwoju oprogramowania oraz identyfikację i rozwiązywanie błędów.
@@ -86,4 +82,3 @@ b 150, count > 5  # Breakpoint na linii 150, który aktywuje się tylko gdy wart
 ```
 
 To polecenie ustawia punkt zatrzymania na linii 150, ale program zatrzyma się tam tylko wtedy, gdy wartość zmiennej `count` będzie większa niż 5. Dzięki temu możesz bardziej precyzyjnie kontrolować przebieg debugowania, koncentrując się na istotnych warunkach i sytuacjach w kodzie.
-
