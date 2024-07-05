@@ -45,51 +45,118 @@ Pandas udostępnia również wiele dodatkowych opcji dla `read_csv()`, pozwalaj�
 
 ### Eksploracja danych w Pandas
 
-Gdy wczytujemy dane w formie tabeli przy użyciu biblioteki Pandas, często chcemy najpierw przeprowadzić ich podstawową analizę i wstępne przetwarzanie. Oto kilka przydatnych funkcji i technik, które ułatwią ten proces:
+Gdy wczytujemy dane w formie tabeli przy użyciu biblioteki Pandas, często chcemy najpierw przeprowadzić ich podstawową analizę i wstępne przetwarzanie. Oto kilka przydatnych funkcji i technik, które ułatwią ten proces.
+
+#### Przykładowy zestaw danych
+
+Przykładowy zestaw danych, na którym będziemy wykonywać operacje, wygląda następująco:
+
+| Imię     | Wiek | Miasto   | Wynagrodzenie |
+|----------|------|----------|---------------|
+| Jan      | 28   | Warszawa | 4500          |
+| Anna     | 22   | Kraków   | 3900          |
+| Piotr    | 34   | Warszawa | 5200          |
+| Maria    | 45   | Gdańsk   | 6100          |
+| Tomasz   | 30   | Wrocław  | 4700          |
+
+Kod wczytujący te dane do Pandas:
+
+```python
+import pandas as pd
+
+data = {
+    'Imię': ['Jan', 'Anna', 'Piotr', 'Maria', 'Tomasz'],
+    'Wiek': [28, 22, 34, 45, 30],
+    'Miasto': ['Warszawa', 'Kraków', 'Warszawa', 'Gdańsk', 'Wrocław'],
+    'Wynagrodzenie': [4500, 3900, 5200, 6100, 4700]
+}
+
+df = pd.DataFrame(data)
+```
 
 #### Informacje o strukturze danych
 
-Aby uzyskać ogólny przegląd wczytanej tabeli, można użyć funkcji `info()`. Dostarcza ona informacje na temat:
-
-* Liczby wierszy i kolumn.
-* Typów danych w poszczególnych kolumnach.
-* Ilości brakujących wartości.
+Aby uzyskać ogólny przegląd wczytanej tabeli, można użyć funkcji `info()`. Dostarcza ona informacje na temat liczby wierszy i kolumn, typów danych w poszczególnych kolumnach oraz ilości brakujących wartości.
 
 ```python
 df.info()
 ```
 
+Wynik:
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 4 columns):
+ #   Column         Non-Null Count  Dtype 
+---  ------         --------------  ----- 
+ 0   Imię           5 non-null      object
+ 1   Wiek           5 non-null      int64 
+ 2   Miasto         5 non-null      object
+ 3   Wynagrodzenie  5 non-null      int64 
+dtypes: int64(2), object(2)
+memory usage: 288.0+ bytes
+```
+
 #### Podgląd zawartości
 
-Jeśli chcemy rzucić okiem na początkowe lub końcowe wiersze tabeli, przydadzą się funkcje `head()` oraz `tail()`. Domyślnie zwracają one 5 wierszy, ale można zmienić ten limit, podając odpowiednią liczbę jako argument:
+Jeśli chcemy rzucić okiem na początkowe lub końcowe wiersze tabeli, przydadzą się funkcje `head()` oraz `tail()`. Domyślnie zwracają one 5 wierszy, ale można zmienić ten limit, podając odpowiednią liczbę jako argument.
 
 ```python
 df.head(10) # pierwsze 10 wierszy
 df.tail(3)  # ostatnie 3 wiersze
 ```
 
+Wynik dla `df.head(3)`:
+```
+     Imię  Wiek    Miasto  Wynagrodzenie
+0     Jan    28  Warszawa          4500
+1    Anna    22    Kraków          3900
+2   Piotr    34  Warszawa          5200
+```
+
 #### Wybieranie kolumn
 
-Jeśli chcemy skupić się na konkretnych kolumnach, możemy je łatwo wybrać:
+Jeśli chcemy skupić się na konkretnych kolumnach, możemy je łatwo wybrać. Na przykład, jeśli chcemy wybrać tylko kolumny "Imię" i "Wiek":
 
 ```python
-df_selected = df[["kolumna_1", "kolumna_2"]]
+df_selected = df[['Imię', 'Wiek']]
+```
+
+Wynik:
+```
+     Imię  Wiek
+0     Jan    28
+1    Anna    22
+2   Piotr    34
+3   Maria    45
+4  Tomasz    30
 ```
 
 #### Filtrowanie wierszy
 
-Aby przefiltrować wiersze w tabeli na podstawie pewnych kryteriów, korzystamy z metody `loc[]`:
-
-- Wybieranie wierszy, w których wartość w kolumnie "Wiek" jest większa niż 30:
+Aby przefiltrować wiersze w tabeli na podstawie pewnych kryteriów, korzystamy z metody `loc[]`. Na przykład, wybieranie wierszy, w których wartość w kolumnie "Wiek" jest większa niż 30:
 
 ```python
 starsi_niz_30 = df.loc[df['Wiek'] > 30]
 ```
 
-- Wybieranie wierszy, w których wiek użytkownika przekracza 30 lat i mieszka w Warszawie:
+Wynik:
+```
+    Imię  Wiek    Miasto  Wynagrodzenie
+2  Piotr    34  Warszawa          5200
+3  Maria    45    Gdańsk          6100
+```
+
+Aby wybrać wiersze, w których wiek użytkownika przekracza 30 lat i mieszka w Warszawie:
 
 ```python
 starsi_warszawianie = df.loc[(df['Wiek'] > 30) & (df['Miasto'] == 'Warszawa')]
+```
+
+Wynik:
+```
+    Imię  Wiek    Miasto  Wynagrodzenie
+2  Piotr    34  Warszawa          5200
 ```
 
 #### Statystyki opisowe
@@ -135,12 +202,40 @@ Opis wyników:
 - **50%**: mediana, wartość środkowa (drugi kwartyl).
 - **75%**: trzeci kwartyl, wartość poniżej której znajduje się 75% danych.
 - **max**: największa wartość w kolumnie.
+### Agregacja danych
 
-### Przykładowe zastosowania Pandas
+Pandas pozwala na łatwą agregację danych, na przykład obliczenie średniej, sumy czy liczby wystąpień. Dzięki temu możemy szybko uzyskać kluczowe informacje statystyczne na temat naszych danych.
 
-#### Agregacja danych
+#### Przykładowy zestaw danych
 
-Pandas pozwala na łatwą agregację danych, na przykład obliczenie średniej, sumy czy liczby wystąpień:
+Przykładowy zestaw danych, na którym będziemy wykonywać operacje, wygląda następująco:
+
+| Data       | Klient  | Kwota |
+|------------|---------|-------|
+| 2023-01-01 | Jan     | 250   |
+| 2023-01-02 | Anna    | 300   |
+| 2023-01-03 | Piotr   | 450   |
+| 2023-02-01 | Maria   | 500   |
+| 2023-02-02 | Tomasz  | 600   |
+
+Kod wczytujący te dane do Pandas:
+
+```python
+import pandas as pd
+
+data = {
+    'Data': ['2023-01-01', '2023-01-02', '2023-01-03', '2023-02-01', '2023-02-02'],
+    'Klient': ['Jan', 'Anna', 'Piotr', 'Maria', 'Tomasz'],
+    'Kwota': [250, 300, 450, 500, 600]
+}
+
+df = pd.DataFrame(data)
+df['Data'] = pd.to_datetime(df['Data'])
+```
+
+#### Obliczenie średniej i sumy
+
+Aby obliczyć średnią i sumę wartości w kolumnie `Kwota`, możemy użyć funkcji `mean()` i `sum()`:
 
 ```python
 # Średnia wartość w kolumnie Kwota
@@ -152,26 +247,100 @@ suma_kwot = df['Kwota'].sum()
 print(f"Suma wartości rachunków: {suma_kwot}")
 ```
 
-#### Grupowanie danych
+Wyniki:
+```
+Średnia wartość rachunku: 420.0
+Suma wartości rachunków: 2100
+```
 
-Często przydatne jest grupowanie danych według określonych kryteriów. Pandas umożliwia to za pomocą metody `groupby()`:
+### Grupowanie danych
+
+Często przydatne jest grupowanie danych według określonych kryteriów. Pandas umożliwia to za pomocą metody `groupby()`, która pozwala na grupowanie danych według jednej lub kilku kolumn i wykonywanie agregacji na tych grupach.
+
+#### Grupowanie według miesiąca i obliczenie średniej wartości rachunku
+
+Aby grupować dane według miesiąca i obliczyć średnią wartość rachunku, możemy skorzystać z poniższego kodu:
 
 ```python
-# Grupowanie danych według miesiąca i obliczenie średniej wartości rachunku
-df['Data'] = pd.to_datetime(df['Data'])
+# Dodanie kolumny Miesiąc
 df['Miesiąc'] = df['Data'].dt.month
+
+# Grupowanie danych według miesiąca i obliczenie średniej wartości rachunku
 srednia_miesieczna = df.groupby('Miesiąc')['Kwota'].mean()
 print(srednia_miesieczna)
 ```
 
-#### Przetwarzanie brakujących danych
+Wynik:
+```
+Miesiąc
+1    333.333333
+2    550.000000
+Name: Kwota, dtype: float64
+```
 
-W praktycznych zastosowaniach często spotykamy się z brakującymi danymi. Pandas oferuje funkcje takie jak `fillna()` i `dropna()`, które pomagają w radzeniu sobie z brakami:
+### Przetwarzanie brakujących danych
+
+W praktycznych zastosowaniach często spotykamy się z brakującymi danymi. Pandas oferuje funkcje takie jak `fillna()` i `dropna()`, które pomagają w radzeniu sobie z brakami.
+
+#### Przykładowy zestaw danych z brakującymi wartościami
+
+| Data       | Klient  | Kwota |
+|------------|---------|-------|
+| 2023-01-01 | Jan     | 250   |
+| 2023-01-02 | Anna    | NaN   |
+| 2023-01-03 | Piotr   | 450   |
+| 2023-02-01 | Maria   | 500   |
+| 2023-02-02 | Tomasz  | NaN   |
+
+Kod wczytujący te dane do Pandas:
+
+```python
+import numpy as np
+
+data = {
+    'Data': ['2023-01-01', '2023-01-02', '2023-01-03', '2023-02-01', '2023-02-02'],
+    'Klient': ['Jan', 'Anna', 'Piotr', 'Maria', 'Tomasz'],
+    'Kwota': [250, np.nan, 450, 500, np.nan]
+}
+
+df = pd.DataFrame(data)
+df['Data'] = pd.to_datetime(df['Data'])
+```
+
+#### Uzupełnianie brakujących wartości średnią
+
+Aby uzupełnić brakujące wartości średnią z kolumny `Kwota`, możemy użyć funkcji `fillna()`:
 
 ```python
 # Uzupełnianie brakujących wartości średnią
-df_filled = df.fillna(df.mean())
+df_filled = df.fillna(df['Kwota'].mean())
+print(df_filled)
+```
 
+Wynik:
+```
+        Data  Klient  Kwota
+0 2023-01-01     Jan  250.0
+1 2023-01-02    Anna  400.0
+2 2023-01-03   Piotr  450.0
+3 2023-02-01   Maria  500.0
+4 2023-02-02  Tomasz  400.0
+```
+
+#### Usuwanie wierszy z brakującymi wartościami
+
+Aby usunąć wiersze z brakującymi wartościami, używamy funkcji `dropna()`:
+
+```python
 # Usuwanie wierszy z brakującymi wartościami
 df_dropped = df.dropna()
+print(df_dropped)
+```
+
+Wynik:
+```
+        Data Klient  Kwota
+0 2023-01-01    Jan  250.0
+2 2023-01-03  Piotr  450.0
+3 2023-02-01  Maria  500.0
 ```
