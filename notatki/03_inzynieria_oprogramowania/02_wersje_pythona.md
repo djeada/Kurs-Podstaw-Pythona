@@ -2,6 +2,36 @@
 
 `Pyenv` to narzędzie umożliwiające łatwe zarządzanie wieloma wersjami Pythona na jednym komputerze. Dzięki Pyenv można izolować różne projekty, korzystając z odpowiednich wersji Pythona dla każdego z nich, oraz testować kod pod różnymi wersjami interpretera, co jest kluczowe dla utrzymania kompatybilności i stabilności aplikacji.
 
+### Dostępne wersje Pythona
+
+| Wersja  | Data Wydania  | Główne Zmiany                                      |
+|---------|---------------|--------------------------------------------------|
+| 2.0     | 16.10.2000    | Wprowadzenie list comprehensions (wyrażenia listowe), detektor cyklu zbierania śmieci |
+| 2.1     | 17.04.2001    | Wprowadzenie zagnieżdżonych zakresów, docstrings (dokumentacja w funkcjach) |
+| 2.2     | 21.12.2001    | Nowy model typów i klas, generatory |
+| 2.3     | 29.07.2003    | Wprowadzenie setów (zbiorów), nowa biblioteka datetime |
+| 2.4     | 30.11.2004    | Dekoratory funkcji, wyrażenia generatorów |
+| 2.5     | 19.09.2006    | Wprowadzenie instrukcji `with`, wyrażenia warunkowe |
+| 2.6     | 01.10.2008    | Funkcje wstępne dla Pythona 3.x, poprawa błędów |
+| 2.7     | 03.07.2010    | Ostatnia wersja z serii 2.x, wsparcie do 2020 roku, dictionary comprehensions (wyrażenia słownikowe), usprawnienia unittest |
+
+| Wersja  | Data Wydania  | Główne Zmiany                                      |
+|---------|---------------|--------------------------------------------------|
+| 3.0     | 03.12.2008    | Przełomowe zmiany: print() jako funkcja, nowa semantyka stringów (unicode domyślnie), dzielenie całkowitoliczbowe |
+| 3.1     | 27.06.2009    | Poprawa wydajności, nowa biblioteka I/O, OrderedDict |
+| 3.2     | 20.02.2011    | Wsparcie dla `concurrent.futures`, `argparse`, formaty float repr |
+| 3.3     | 29.09.2012    | Wprowadzenie `yield from`, kluczowych słów `faulthandler`, lustracja katalogów |
+| 3.4     | 16.03.2014    | `asyncio`, enums, pathlib, poprawa modułu unittest |
+| 3.5     | 13.09.2015    | Wprowadzenie `async` i `await`, operator mnożenia macierzy |
+| 3.6     | 23.12.2016    | F-strings, zmiany w dicts, nowe funkcje async generators i comprehensions |
+| 3.7     | 27.06.2018    | Klasy danych, odroczona ewaluacja adnotacji typów, zmienne kontekstowe.|
+| 3.8     | 14.10.2019    | Assignment expressions (walrus operator :=), positional-only parameters |
+| 3.9     | 05.10.2020    | Nowe operatory dla słowników, funkcje stringów removeprefix() i removesuffix() |
+| 3.10    | 04.10.2021    | Pattern matching, lepsze wsparcie dla podpowiedzi typów, usprawnienia w zarządzaniu kontekstami |
+| 3.11    | 03.10.2022    | Wzrost wydajności, lepsze debugowanie, dynamiczne profile i bardziej szczegółowe wyjątki |
+| 3.12    | 02.10.2023    | Bardziej elastyczne parsowanie f-stringów, wsparcie dla protokołu buforowania, nowy API debugowania/profilowania, wsparcie dla izolowanych subinterpreterów z osobnymi Global Interpreter Locks, poprawa komunikatów błędów, wsparcie dla Linux perf profiler oraz liczne usprawnienia wydajnościowe |
+| 3.13    | Planowana: 2024 | Wprowadzenie kompilatora JIT, poprawa wydajności, wprowadzenie PEP 649 (opóźniona ocena adnotacji), większa elastyczność i optymalizacja kodu |
+
 ### Sprawdzanie Zainstalowanej Wersji Pythona
 
 Znajomość zainstalowanej wersji Pythona jest ważna, gdyż pozwala na odpowiednie dostosowanie środowiska pracy oraz rozwiązywanie problemów związanych z kompatybilnością. Sposób sprawdzenia zainstalowanej wersji różni się w zależności od systemu operacyjnego.
