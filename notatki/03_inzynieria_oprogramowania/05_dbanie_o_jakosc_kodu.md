@@ -10,10 +10,10 @@ Aby pomóc programistom w przestrzeganiu tych konwencji, stworzono narzędzia do
 
 #### Co robi Pylint?
 
-1. **Analiza kodu**: Pylint sprawdza błędy w kodzie Pythona, potencjalne błędy, zgodność ze stylem kodowania PEP8, PEP257 i wiele innych.
-2. **Generowanie raportów**: Dostarcza szczegółowe raporty o problemach w kodzie, w tym o problemach związanych ze stylami, błędami i ostrzeżeniami.
-3. **Refaktoryzacja**: Sugeruje zmiany, które mogą poprawić strukturę i czytelność kodu, a także wydajność.
-4. **Rozszerzalność**: Może być rozszerzony za pomocą wtyczek, które mogą dodać nowe funkcje lub dostosować istniejące funkcjonalności.
+1. Pylint sprawdza błędy w kodzie Pythona, potencjalne błędy, zgodność ze stylem kodowania PEP8, PEP257 i wiele innych.
+2. Dostarcza szczegółowe raporty o problemach w kodzie, w tym o problemach związanych ze stylami, błędami i ostrzeżeniami.
+3. Sugeruje zmiany, które mogą poprawić strukturę i czytelność kodu, a także wydajność.
+4. Może być rozszerzony za pomocą wtyczek, które mogą dodać nowe funkcje lub dostosować istniejące funkcjonalności.
 
 #### Jak działa Pylint?
 
@@ -79,9 +79,9 @@ load-plugins=pylint_django
 
 #### Co robi Black?
 
-1. **Automatyczne formatowanie**: Black automatycznie formatuje kod, przekształcając go w styl, który jest zgodny z PEP8 (z kilkoma wyjątkami). Celem jest, aby kod był nie tylko zgodny ze standardami, ale także czytelny i zrozumiały.
-2. **Zgodność z PEP8**: Chociaż Black robi pewne odstępstwa od standardowej specyfikacji PEP8 (np. dłuższe linie kodu), generalnie jego działanie jest w zgodzie z duchem tego przewodnika po stylu.
-3. **Determinizm**: Black jest deterministyczny, co oznacza, że wielokrotne uruchomienie Black na tym samym kodzie zawsze da ten sam wynik.
+1. Black automatycznie formatuje kod, przekształcając go w styl, który jest zgodny z PEP8 (z kilkoma wyjątkami). Celem jest, aby kod był nie tylko zgodny ze standardami, ale także czytelny i zrozumiały.
+2. Chociaż Black robi pewne odstępstwa od standardowej specyfikacji PEP8 (np. dłuższe linie kodu), generalnie jego działanie jest zgodne z duchem tego przewodnika po stylu.
+3. Black jest deterministyczny, co oznacza, że wielokrotne uruchomienie Black na tym samym kodzie zawsze da ten sam wynik.
 
 #### Instalacja Black
 
@@ -135,11 +135,13 @@ repos:
 ```
 
 #### Zalety
+
 - Eliminuje dyskusje o stylu kodowania w zespołach.
 - Oszczędza czas podczas code review, skupiając uwagę na logice zamiast na stylu.
 - Poprawia czytelność kodu dzięki spójnemu formatowaniu.
 
 #### Wady
+
 - Brak szerokich możliwości konfiguracyjnych może być ograniczający dla niektórych zespołów.
 - Deterministyczne podejście do formatowania może nie odpowiadać wszystkim programistom.
 
@@ -149,10 +151,10 @@ repos:
 
 #### Co robi Flake8?
 
-1. **Sprawdzanie stylu**: Flake8 analizuje kod pod kątem zgodności ze standardem PEP8, co obejmuje formatowanie, spację, nazewnictwo zmiennych, i inne.
-2. **Wykrywanie błędów**: Narzędzie to identyfikuje błędy składniowe oraz typowe błędy programistyczne, które mogą prowadzić do błędów w czasie wykonania.
-3. **Kontrola złożoności**: Flake8 może ocenić złożoność cyklomatyczną kodu, co jest miarą skomplikowania kodu na podstawie ilości ścieżek wykonania.
-4. **Rozszerzalność**: Może być rozszerzone o dodatkowe wtyczki, które dostarczają dodatkowej funkcjonalności analizy kodu.
+1. Flake8 analizuje kod pod kątem zgodności ze standardem PEP8, co obejmuje formatowanie, spację, nazewnictwo zmiennych, i inne.
+2. Narzędzie to identyfikuje błędy składniowe oraz typowe błędy programistyczne, które mogą prowadzić do błędów w czasie wykonania.
+3. Flake8 może ocenić złożoność cyklomatyczną kodu, co jest miarą skomplikowania kodu na podstawie ilości ścieżek wykonania.
+4. Może być rozszerzone o dodatkowe wtyczki, które dostarczają dodatkowej funkcjonalności analizy kodu.
 
 #### Instalacja Flake8
 
@@ -200,10 +202,12 @@ max-complexity = 10
 Flake8 można łatwo zintegrować z popularnymi środowiskami programistycznymi (IDE), takimi jak PyCharm, Visual Studio Code czy Sublime Text, co pozwala na bieżące analizowanie kodu podczas jego pisania.
 
 #### Zalety
+
 - Poprawia jakość kodu przez identyfikację i naprawę błędów stylu oraz programistycznych.
 - Zmniejsza prawdopodobieństwo subtelnych błędów i ułatwia utrzymanie spójnego stylu kodowania w zespole.
 
 #### Wady
+
 - Konfiguracja wymaga pewnej wiedzy i może być czasochłonna dla dużych projektów.
 - Niektóre wtyczki mogą spowalniać działanie narzędzia, zwłaszcza w dużych projektach.
 
