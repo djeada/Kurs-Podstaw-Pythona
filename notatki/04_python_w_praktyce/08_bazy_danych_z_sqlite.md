@@ -69,6 +69,7 @@ connection.commit()
 ```
 
 Powyższy kod tworzy tabelę `users` z trzema kolumnami:
+
 - `id`: Klucz główny tabeli, wartość unikalna dla każdego rekordu, automatycznie zwiększana.
 - `username`: Nazwa użytkownika, pole tekstowe, wartość nie może być pusta.
 - `password`: Hasło użytkownika, pole tekstowe, wartość nie może być pusta.
@@ -93,6 +94,7 @@ connection.commit()
 ```
 
 Powyższy kod tworzy tabelę `orders` z czterema kolumnami:
+
 - `id`: Klucz główny tabeli, wartość unikalna dla każdego rekordu, automatycznie zwiększana.
 - `user_id`: Id użytkownika, klucz obcy odnoszący się do `id` w tabeli `users`.
 - `amount`: Kwota zamówienia, pole numeryczne.
@@ -169,6 +171,12 @@ for user in users:
     print(user)
 ```
 
+Wyjaśnienie:
+
+- `SELECT * FROM users`: Pobiera wszystkie kolumny i wiersze z tabeli `users`.
+- `cursor.fetchall()`: Pobiera wszystkie wyniki zapytania i zwraca je jako listę krotek.
+- `for user in users`: Iteruje przez listę użytkowników i drukuje każdą krotkę.
+
 Wynik:
 
 ```
@@ -187,6 +195,12 @@ user = cursor.fetchone()
 if user:
     print(user)
 ```
+
+Wyjaśnienie:
+
+- `SELECT username FROM users WHERE id = ?`: Pobiera kolumnę `username` z tabeli `users`, gdzie `id` jest równe 1.
+- `cursor.fetchone()`: Pobiera pierwszy wynik zapytania.
+- `if user`: Sprawdza, czy wynik nie jest pusty i drukuje nazwę użytkownika.
 
 Wynik:
 
@@ -213,6 +227,11 @@ for row in results:
     print(row)
 ```
 
+Wyjaśnienie:
+
+- `INNER JOIN`: Łączy wiersze z dwóch tabel, gdzie istnieje dopasowanie w obu tabelach.
+- `ON users.id = orders.user_id`: Warunek łączenia, gdzie `id` z tabeli `users` musi być równe `user_id` z tabeli `orders`.
+
 Wynik:
 
 ```
@@ -237,6 +256,10 @@ results = cursor.fetchall()
 for row in results:
     print(row)
 ```
+
+Wyjaśnienie:
+
+- `LEFT JOIN`: Łączy wszystkie wiersze z tabeli `users` i dopasowane wiersze z tabeli `orders`. Jeśli nie ma dopasowania, wynikiem są wartości NULL w kolumnach tabeli `orders`.
 
 Wynik:
 
@@ -266,6 +289,11 @@ for row in results:
     print(row)
 ```
 
+Wyjaśnienie:
+
+- `GROUP BY users.username`: Grupuje wyniki według nazwy użytkownika.
+- `SUM(orders.amount) as total_amount`: Oblicza sumę zamówień dla każdego użytkownika.
+
 Wynik:
 
 ```
@@ -293,18 +321,16 @@ for row in results:
     print(row)
 ```
 
+Wyjaśnienie:
+
+- `ORDER BY orders.order_date DESC`: Sortuje wyniki według daty zamówienia w kolejności malejącej.
+
 Wynik:
 
 ```
 ('user2', 450.0, '2023-01-03')
 ('user1', 300.75, '2023-01-02')
 ('user1', 250.5, '2023-01-01')
-```
-
-### Zamykanie połączenia z bazą danych
-
-```python
-connection.close()
 ```
 
 ### Zamykanie połączenia
