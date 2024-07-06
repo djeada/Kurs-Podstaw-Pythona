@@ -46,7 +46,7 @@ connection = sqlite3.connect("baza_danych.db")
 
 Aby zdefiniować strukturę bazy, można utworzyć odpowiednie tabele za pomocą języka SQL. Tworzenie tabeli polega na zdefiniowaniu jej nazwy oraz kolumn, które będą się w niej znajdować, wraz z odpowiednimi typami danych i opcjonalnymi ograniczeniami.
 
-#### Przykład tworzenia tabeli `users`
+### Tworzenie tabeli `users`
 
 ```python
 import sqlite3
@@ -65,6 +65,7 @@ CREATE TABLE users (
 
 # Wykonanie polecenia SQL
 connection.execute(sql_create_table)
+connection.commit()
 ```
 
 Powyższy kod tworzy tabelę `users` z trzema kolumnami:
@@ -72,16 +73,34 @@ Powyższy kod tworzy tabelę `users` z trzema kolumnami:
 - `username`: Nazwa użytkownika, pole tekstowe, wartość nie może być pusta.
 - `password`: Hasło użytkownika, pole tekstowe, wartość nie może być pusta.
 
-### Dodawanie rekordów
-
-Wprowadzanie danych do tabeli realizowane jest przez polecenie `INSERT INTO`. Możemy wprowadzać pojedyncze rekordy lub wiele rekordów naraz.
-
-#### Przykład dodawania rekordów do tabeli `users`
+### Tworzenie tabeli `orders`
 
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
+# Definicja polecenia SQL do utworzenia tabeli
+sql_create_orders_table = """
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    amount REAL,
+    order_date TEXT,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+)
+"""
 
+# Wykonanie polecenia SQL
+connection.execute(sql_create_orders_table)
+connection.commit()
+```
+
+Powyższy kod tworzy tabelę `orders` z czterema kolumnami:
+- `id`: Klucz główny tabeli, wartość unikalna dla każdego rekordu, automatycznie zwiększana.
+- `user_id`: Id użytkownika, klucz obcy odnoszący się do `id` w tabeli `users`.
+- `amount`: Kwota zamówienia, pole numeryczne.
+- `order_date`: Data zamówienia, pole tekstowe.
+
+### Dodawanie rekordów do tabeli `users`
+
+```python
 # Dane do wprowadzenia
 data_users = [
     ("user1", "pass1"),
@@ -94,20 +113,53 @@ for user in data_users:
 
 # Zatwierdzenie zmian
 connection.commit()
+
+# Sprawdzenie wyników
+cursor = connection.execute("SELECT * FROM users")
+print(cursor.fetchall())
 ```
 
 Powyższy kod dodaje dwa rekordy do tabeli `users`. Wartości dla `username` i `password` są pobierane z listy `data_users`, a następnie wstawiane do tabeli za pomocą zapytania `INSERT INTO`.
 
-### Pobieranie danych
+Wynik:
 
-Do zapytań o dane z tabeli wykorzystuje się polecenie `SELECT`. Możemy pobierać wszystkie kolumny, wybrane kolumny lub filtrować dane za pomocą klauzuli `WHERE`.
+```
+[(1, 'user1', 'pass1'), (2, 'user2', 'pass2')]
+```
 
-#### Przykład pobierania wszystkich rekordów z tabeli `users`
+### Dodawanie rekordów do tabeli `orders`
 
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
+# Dane do wprowadzenia
+data_orders = [
+    (1, 250.5, '2023-01-01'),
+    (1, 300.75, '2023-01-02'),
+    (2, 450.0, '2023-01-03')
+]
 
+# Wprowadzanie danych
+for order in data_orders:
+    connection.execute("INSERT INTO orders (user_id, amount, order_date) VALUES (?, ?, ?)", order)
+
+# Zatwierdzenie zmian
+connection.commit()
+
+# Sprawdzenie wyników
+cursor = connection.execute("SELECT * FROM orders")
+print(cursor.fetchall())
+```
+
+Powyższy kod dodaje trzy rekordy do tabeli `orders`. Wartości dla `user_id`, `amount` i `order_date` są pobierane z listy `data_orders`, a następnie wstawiane do tabeli za pomocą zapytania `INSERT INTO`.
+
+Wynik:
+
+```
+[(1, 1, 250.5, '2023-01-01'), (2, 1, 300.75, '2023-01-02'), (3, 2, 450.0, '2023-01-03')]
+```
+
+### Pobieranie wszystkich rekordów z tabeli `users`
+
+```python
 # Wykonanie zapytania SELECT
 cursor = connection.execute("SELECT * FROM users")
 users = cursor.fetchall()
@@ -117,14 +169,16 @@ for user in users:
     print(user)
 ```
 
-Powyższy kod pobiera wszystkie rekordy z tabeli `users` i wyświetla je. Funkcja `fetchall()` zwraca wszystkie wyniki zapytania jako listę krotek, gdzie każda krotka reprezentuje jeden rekord z bazy danych.
+Wynik:
 
-#### Przykład pobierania wybranych kolumn i filtrowania danych
+```
+(1, 'user1', 'pass1')
+(2, 'user2', 'pass2')
+```
+
+### Pobieranie wybranych kolumn i filtrowanie danych
 
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
-
 # Wykonanie zapytania SELECT z filtrowaniem
 cursor = connection.execute("SELECT username FROM users WHERE id = ?", (1,))
 user = cursor.fetchone()
@@ -134,20 +188,17 @@ if user:
     print(user)
 ```
 
-Powyższy kod pobiera nazwę użytkownika dla rekordu, który ma `id` równe 1. Funkcja `fetchone()` zwraca pierwszy wynik zapytania jako krotkę. Jeśli wyników brak, zwraca `None`.
+Wynik:
+
+```
+('user1',)
+```
 
 ### Łączenie tabel (JOIN)
 
-Do łączenia danych z różnych tabel wykorzystujemy polecenie `JOIN`.
-
 #### Przykład: Inner Join
 
-Aby pobrać dane użytkowników wraz z ich zamówieniami, możemy użyć INNER JOIN:
-
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
-
 # Wykonanie zapytania INNER JOIN
 sql = """
 SELECT users.username, orders.amount, orders.order_date
@@ -172,12 +223,7 @@ Wynik:
 
 #### Przykład: Left Join
 
-Aby pobrać wszystkie dane użytkowników, niezależnie od tego, czy mają zamówienia, możemy użyć LEFT JOIN:
-
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
-
 # Wykonanie zapytania LEFT JOIN
 sql = """
 SELECT users.username, orders.amount, orders.order_date
@@ -202,14 +248,9 @@ Wynik:
 
 ### Grupowanie danych (GROUP BY)
 
-Grupowanie danych pozwala na agregowanie wyników według określonego kryterium.
-
 #### Przykład: Grupowanie według użytkownika i sumowanie zamówień
 
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
-
 # Wykonanie zapytania GROUP BY
 sql = """
 SELECT users.username, SUM(orders.amount) as total_amount
@@ -234,14 +275,9 @@ Wynik:
 
 ### Sortowanie danych (ORDER BY)
 
-Sortowanie wyników zapytań SQL realizowane jest przez polecenie `ORDER BY`.
-
 #### Przykład: Sortowanie wyników według daty zamówienia
 
 ```python
-# Połączenie z bazą danych
-connection = sqlite3.connect('example.db')
-
 # Wykonanie zapytania ORDER BY
 sql = """
 SELECT users.username, orders.amount, orders.order_date
@@ -263,6 +299,12 @@ Wynik:
 ('user2', 450.0, '2023-01-03')
 ('user1', 300.75, '2023-01-02')
 ('user1', 250.5, '2023-01-01')
+```
+
+### Zamykanie połączenia z bazą danych
+
+```python
+connection.close()
 ```
 
 ### Zamykanie połączenia
