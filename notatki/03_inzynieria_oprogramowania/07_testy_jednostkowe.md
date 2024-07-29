@@ -199,9 +199,7 @@ Odkrycie błędu w twoim kodzie to dopiero początek drogi. Oto kroki, które wa
 W procesie tworzenia oprogramowania wykorzystuje się różne rodzaje testów, aby upewnić się, że system działa prawidłowo na różnych poziomach. Oto trzy główne typy testów:
 
 * **Testy jednostkowe**: Są to testy, które skupiają się na pojedynczych, izolowanych jednostkach kodu, takich jak funkcje czy metody. Mają na celu upewnienie się, że dany fragment kodu działa poprawnie w izolacji.
-
 * **Testy integracyjne**: Te testy koncentrują się na interakcjach między różnymi częściami systemu, takimi jak moduły, komponenty czy serwisy. Ich celem jest sprawdzenie, czy różne elementy aplikacji poprawnie ze sobą współpracują.
-
 * **Testy całego systemu (end-to-end)**: Jak sama nazwa wskazuje, te testy sprawdzają system jako całość, od wejścia do wyjścia. Celem jest upewnienie się, że cały system działa prawidłowo, uwzględniając wszystkie jego składniki.
 
 Optymalne testowanie oprogramowania wymaga odpowiedniego balansu między tymi typami testów. Zbyt mało testów jednostkowych może prowadzić do konieczności intensywniejszego testowania na wyższych poziomach. Według rekomendacji zawartych w książce ["Software Engineering at Google"](https://www.oreilly.com/library/view/software-engineering-at/9781492082781/), proporcje podziału testów powinny być następujące:

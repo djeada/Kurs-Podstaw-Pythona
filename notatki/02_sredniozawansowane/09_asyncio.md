@@ -8,86 +8,319 @@ Programowanie asynchroniczne to styl programowania, który pozwala na wykonywani
 
 ### Podstawy `asyncio`
 
-Aby użyć `asyncio`, kluczowym elementem jest deklaracja funkcji jako `async`:
+Aby funkcja mogła stać się korutyną, należy zadeklarować ją przy użyciu słowa kluczowego `async`. Oto przykład:
 
 ```python
 async def moja_korutyna():
-    print("Początek")
-    await asyncio.sleep(1)
-    print("Koniec po 1 sekundzie")
+    print("Witaj!")
 ```
 
-W powyższym kodzie używamy `await`, której można używać tylko wewnątrz funkcji zadeklarowanej jako `async`. `await` wskazuje, że w tym miejscu funkcja może zostać "zawieszona", co pozwala na wykonanie innej aktywnej korutyny.
+Co zmienia się, gdy używamy `async def` zamiast tradycyjnego `def`? Zmian jest wiele.
 
-### Przykład użycia `asyncio`
+Funkcja zdefiniowana jako `async def` jest funkcją asynchroniczną, zwaną korutyną. Korutyny różnią się od zwykłych funkcji tym, że mogą zostać zawieszone w trakcie swojego działania, co pozwala na wykonywanie innych korutyn w międzyczasie. Dzięki temu możemy efektywnie zarządzać zadaniami, które mogą być czasochłonne, bez blokowania głównego wątku programu. W korutynach wykorzystujemy słowo kluczowe `await` do wskazania miejsc, w których funkcja może zostać zawieszona i wznowiona później. Więcej na ten temat powiemy za chwilę.
+
+Jak można wywołać taką funkcję? Istnieje kilka opcji:
+
+### I. Wywoływanie za pomocą `await` z innych funkcji async
+
+Korutyny można wywoływać bezpośrednio za pomocą `await` z innych funkcji asynchronicznych. `await` służy do wstrzymania wykonania bieżącej korutyny, aż do zakończenia korutyny, na którą czekamy.
+
+Przykład:
 
 ```python
 import asyncio
 
 async def moja_korutyna():
     print("Początek korutyny")
-    await asyncio.sleep(1)
+    await asyncio.sleep(1)  # Korutyna zawiesza swoje działanie na 1 sekundę
     print("Koniec korutyny po 1 sekundzie")
 
 async def main():
     print("Rozpoczynam")
-    await moja_korutyna()
+    await moja_korutyna()  # Czekamy na zakończenie korutyny
     print("Zakończono")
 
 asyncio.run(main())
 ```
 
-W tym przykładzie funkcja `main` uruchamia `moja_korutyna`, używając `await`, aby poczekać na jej zakończenie bez blokowania głównego wątku.
+Wyjaśnienie:
 
-### Wykonywanie wielu korutyn równocześnie
+1. `async def moja_korutyna()`: Definiujemy korutynę, która wykorzystuje `asyncio.sleep(1)`, aby wstrzymać swoje działanie na 1 sekundę.
+2. `await moja_korutyna()`: W funkcji `main` używamy `await`, aby wstrzymać wykonanie `main` do momentu zakończenia `moja_korutyna`.
+3. `asyncio.run(main())`: Uruchamiamy funkcję `main` jako główną pętlę asynchroniczną.
 
-`asyncio` umożliwia uruchamianie wielu korutyn równocześnie, co jest szczególnie przydatne przy operacjach I/O-bound. Można to osiągnąć za pomocą funkcji `asyncio.gather`:
+#### Analogiczny kod synchroniczny:
+
+```python
+import time
+
+def moja_funkcja():
+    print("Początek funkcji")
+    time.sleep(1)  # Funkcja zawiesza swoje działanie na 1 sekundę
+    print("Koniec funkcji po 1 sekundzie")
+
+def main():
+    print("Rozpoczynam")
+    moja_funkcja()  # Czekamy na zakończenie funkcji
+    print("Zakończono")
+
+if __name__ == "__main__":
+    main()
+```
+
+**UWAGA**: W tym prostym przypadku, użycie korutyn nie przynosi bezpośrednich korzyści w porównaniu z kodem synchronicznym. Główna różnica polega na tym, że korutyny pozwalają na równoczesne wykonywanie innych zadań w trakcie oczekiwania.
+
+### II. Wywoływanie funkcji asynchronicznej z innych funkcji async
+
+Funkcję asynchroniczną można wywoływać z innych funkcji async przy użyciu metod takich jak `asyncio.create_task()` lub `asyncio.run()`.
+
+#### Przykład:
 
 ```python
 import asyncio
 
-async def korutyna1():
-    print("Start korutyna1")
-    await asyncio.sleep(1)
-    print("Koniec korutyna1")
-
-async def korutyna2():
-    print("Start korutyna2")
-    await asyncio.sleep(2)
-    print("Koniec korutyna2")
+async def moja_korutyna():
+    print("Początek korutyny")
+    await asyncio.sleep(1)  # Korutyna zawiesza swoje działanie na 1 sekundę
+    print("Koniec korutyny po 1 sekundzie")
 
 async def main():
-    await asyncio.gather(
-        korutyna1(),
-        korutyna2()
-    )
+    print("Rozpoczynam")
+    task = asyncio.create_task(moja_korutyna())  # Tworzymy zadanie asynchroniczne
+    print("Inne działania w main()")
+    await task  # Czekamy na zakończenie zadania
+    print("Zakończono")
 
 asyncio.run(main())
-
-# Wynik:
-# Start korutyna1
-# Start korutyna2
-# Koniec korutyna1
-# Koniec korutyna2
 ```
 
-W tym przykładzie `korutyna1` i `korutyna2` są uruchamiane równocześnie, co pozwala na wykonanie dwóch operacji w tym samym czasie.
+Wyjaśnienie:
 
-## Jak `asyncio` zwiększa wydajność
+1. `asyncio.create_task(moja_korutyna())`: Tworzymy zadanie asynchroniczne, które będzie wykonywane równolegle z innymi zadaniami.
+2. `await task`: Czekamy na zakończenie tego zadania.
+3. `asyncio.run(main())`: Uruchamiamy funkcję `main` jako główną pętlę asynchroniczną.
 
-Załóżmy, że masz do zrobienia wiele żądań sieciowych do różnych serwisów API. W podejściu synchronicznym żądanie za żądaniem zostanie obsłużone pojedynczo, a każde kolejne żądanie będzie czekać, aż poprzednie się zakończy.
+W powyższym przykładzie, `asyncio.create_task()` pozwala na wykonywanie innych operacji w `main()` w czasie, gdy `moja_korutyna` jest zawieszona.
 
-W podejściu asynchronicznym, podczas gdy jedno żądanie czeka na odpowiedź, inne żądania mogą być inicjowane. Gdy żądanie kończy oczekiwanie i otrzymuje odpowiedź, kod kontynuuje działanie z punktu, w którym został zawieszony. Dzięki temu wiele operacji I/O może "czekać" jednocześnie, bez blokowania całego programu.
+### III. Wywoływanie za pomocą pętli zdarzeń `loop` ze zwykłej funkcji
+
+Korutyny mogą być również wywoływane ze zwykłych funkcji, przy użyciu pętli zdarzeń `loop`.
+
+#### Przykład:
+
+```python
+import asyncio
+
+async def moja_korutyna():
+    print("Początek korutyny")
+    await asyncio.sleep(1)  # Korutyna zawiesza swoje działanie na 1 sekundę
+    print("Koniec korutyny po 1 sekundzie")
+
+def main():
+    loop = asyncio.get_event_loop()  # Uzyskujemy pętlę zdarzeń
+    loop.run_until_complete(moja_korutyna())  # Uruchamiamy korutynę i czekamy na jej zakończenie
+
+main()
+```
+
+Wyjaśnienie:
+
+1. `asyncio.get_event_loop()`: Pobieramy bieżącą pętlę zdarzeń.
+2. `loop.run_until_complete(moja_korutyna())`: Uruchamiamy korutynę i czekamy, aż zakończy swoje działanie.
+
+Ten sposób jest użyteczny, gdy chcemy uruchomić korutynę z kodu, który nie jest asynchroniczny, np. w zwykłej funkcji.
+
+### Co zmienia `async`? Wykonywanie synchroniczne vs asynchroniczne
+
+Aby lepiej zrozumieć różnice między kodem synchronicznym a asynchronicznym, przyjrzyjmy się dwóm przykładom.
+
+#### Kod synchroniczny:
+
+```python
+import time
+
+def proste_zadanie():
+    print("Pracownik przetwarza zadania...")
+    time.sleep(3)  # Symulujemy czasochłonne zadanie
+    print("Pracownik skończył zadanie.")
+    return 42
+
+def main():
+    print("Rozpoczynamy główne zadanie.")
+    wynik = proste_zadanie()  # Czekamy, aż zadanie się zakończy
+    print("Menadżer musiał czekać!")
+    print(f"Pracownik odpowiedział, że ukończył {wynik} zadań.")
+
+if __name__ == "__main__":
+    main()
+```
+
+Wynik:
+
+```
+Rozpoczynamy główne zadanie.
+Pracownik przetwarza zadania...
+Pracownik skończył zadanie.
+Menadżer musiał czekać!
+Pracownik odpowiedział, że ukończył 42 zadań.
+```
+
+Wyjaśnienie:
+
+W powyższym przykładzie, funkcja `main` wywołuje `proste_zadanie`, które symuluje czasochłonne zadanie za pomocą `time.sleep(3)`. W trakcie wykonywania `time.sleep`, cały program jest zablokowany, co oznacza, że nie może wykonywać żadnych innych operacji. Dopiero po zakończeniu zadania, `main` kontynuuje swoje działanie, co sprawia, że menadżer musi czekać na pracownika, zanim będzie mógł zająć się czymś innym.
+
+#### Kod asynchroniczny:
+
+```python
+import asyncio
+
+async def proste_zadanie():
+    print("Pracownik przetwarza zadania...")
+    await asyncio.sleep(3)  # Symulujemy czasochłonne zadanie w sposób asynchroniczny
+    print("Pracownik skończył zadanie.")
+    return 42
+
+async def main():
+    print("Menadżer pyta Pracownika, ile zadań zostało przetworzonych.")
+    task = asyncio.create_task(proste_zadanie())  # Tworzymy zadanie asynchroniczne
+    print("Menadżer może robić inne rzeczy, czekając na wynik...")
+    wynik = await task  # Czekamy na zakończenie zadania, ale nie blokujemy pętli
+    print(f"Pracownik odpowiedział, że ukończył {wynik} zadań.")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Wynik:
+
+```
+Menadżer pyta Pracownika, ile zadań zostało przetworzonych.
+Menadżer może robić inne rzeczy, czekając na wynik...
+Pracownik przetwarza zadania...
+Pracownik skończył zadanie.
+Pracownik odpowiedział, że ukończył 42 zadań.
+```
+
+Wyjaśnienie:
+
+W wersji asynchronicznej, funkcje `proste_zadanie` i `main` są zdefiniowane jako asynchroniczne za pomocą `async def`. Kiedy `main` tworzy zadanie asynchroniczne `task` za pomocą `asyncio.create_task(proste_zadanie())`, `proste_zadanie` zaczyna działać w tle. W tym czasie `main` może wykonywać inne operacje. Dopiero gdy użyjemy `await task`, `main` czeka na zakończenie `proste_zadanie`, ale nie blokuje całego programu, co pozwala na wykonywanie innych zadań w międzyczasie.
+
+Asynchroniczność poprawia efektywność programu poprzez umożliwienie wykonywania innych operacji podczas oczekiwania na zakończenie czasochłonnych zadań. W praktyce oznacza to, że menadżer (główny wątek) nie musi czekać bezczynnie na zakończenie pracy pracownika (korutyny), lecz może zająć się innymi obowiązkami, co zwiększa ogólną produktywność.
+
+### Wykonywanie wielu korutyn równocześnie
+
+Asynchroniczność w Pythonie pozwala na wykonywanie wielu korutyn równocześnie, co znacząco zwiększa efektywność przetwarzania zadań. Możemy to osiągnąć za pomocą funkcji takich jak `asyncio.gather` lub `asyncio.create_task`.
+
+#### Przykład z `asyncio.gather`:
+
+```python
+import asyncio
+
+async def zadanie(numer, czas):
+    print(f"Zadanie {numer} rozpoczęte...")
+    await asyncio.sleep(czas)
+    print(f"Zadanie {numer} zakończone po {czas} sekundach.")
+    return numer
+
+async def main():
+    print("Rozpoczynamy wykonywanie wielu zadań równocześnie.")
+    wynik1, wynik2, wynik3 = await asyncio.gather(
+        zadanie(1, 2),
+        zadanie(2, 3),
+        zadanie(3, 1)
+    )
+    print(f"Wyniki zadań: {wynik1}, {wynik2}, {wynik3}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Wynik:
+
+```
+Rozpoczynamy wykonywanie wielu zadań równocześnie.
+Zadanie 1 rozpoczęte...
+Zadanie 2 rozpoczęte...
+Zadanie 3 rozpoczęte...
+Zadanie 3 zakończone po 1 sekundach.
+Zadanie 1 zakończone po 2 sekundach.
+Zadanie 2 zakończone po 3 sekundach.
+Wyniki zadań: 1, 2, 3
+```
+
+Wyjaśnienie:
+
+1. `asyncio.gather(zadanie(1, 2), zadanie(2, 3), zadanie(3, 1))`: `asyncio.gather` uruchamia wszystkie zadania równocześnie i czeka na ich zakończenie.
+2. `await asyncio.sleep(czas)`: Każde zadanie wstrzymuje swoje wykonanie na określony czas, symulując czasochłonne operacje.
+3. `print(f"Wyniki zadań: {wynik1}, {wynik2}, {wynik3}")`: Po zakończeniu wszystkich zadań, wyniki są wyświetlane.
+
+#### Przykład z `asyncio.create_task`:
+
+```python
+import asyncio
+
+async def zadanie(numer, czas):
+    print(f"Zadanie {numer} rozpoczęte...")
+    await asyncio.sleep(czas)
+    print(f"Zadanie {numer} zakończone po {czas} sekundach.")
+    return numer
+
+async def main():
+    print("Rozpoczynamy wykonywanie wielu zadań równocześnie.")
+    task1 = asyncio.create_task(zadanie(1, 2))
+    task2 = asyncio.create_task(zadanie(2, 3))
+    task3 = asyncio.create_task(zadanie(3, 1))
+    
+    wynik1 = await task1
+    wynik2 = await task2
+    wynik3 = await task3
+    
+    print(f"Wyniki zadań: {wynik1}, {wynik2}, {wynik3}")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+Wynik:
+
+```
+Rozpoczynamy wykonywanie wielu zadań równocześnie.
+Zadanie 1 rozpoczęte...
+Zadanie 2 rozpoczęte...
+Zadanie 3 rozpoczęte...
+Zadanie 3 zakończone po 1 sekundach.
+Zadanie 1 zakończone po 2 sekundach.
+Zadanie 2 zakończone po 3 sekundach.
+Wyniki zadań: 1, 2, 3
+```
+
+Wyjaśnienie:
+
+1. `asyncio.create_task(zadanie(1, 2))`: `asyncio.create_task` tworzy zadanie asynchroniczne, które jest uruchamiane równolegle z innymi zadaniami.
+2. `wynik1 = await task1`: Każde zadanie jest wykonywane równocześnie, a `await` wstrzymuje wykonanie `main` do momentu zakończenia danego zadania.
+
+#### Różnice między `asyncio.gather` a `asyncio.create_task`
+
+- `asyncio.gather`: Umożliwia uruchomienie i czekanie na zakończenie wielu zadań równocześnie w jednej operacji. Jest użyteczne, gdy chcemy uruchomić wiele zadań i zbiorczo oczekiwać na ich zakończenie.
+- `asyncio.create_task`: Tworzy oddzielne zadania, które mogą być kontrolowane i oczekiwane indywidualnie. Jest bardziej elastyczne, gdy chcemy mieć większą kontrolę nad poszczególnymi zadaniami.
+
+### Jak `asyncio` zwiększa wydajność
+
+Załóżmy, że masz do wysłania wiele żądań sieciowych do różnych serwisów API. W podejściu synchronicznym każde żądanie jest obsługiwane pojedynczo, a każde kolejne żądanie czeka, aż poprzednie się zakończy.
+
+W podejściu asynchronicznym, gdy jedno żądanie czeka na odpowiedź, inne żądania mogą być inicjowane. Gdy żądanie otrzyma odpowiedź, kod kontynuuje działanie od miejsca, w którym został zawieszony. Dzięki temu wiele operacji I/O może "czekać" jednocześnie, bez blokowania całego programu.
 
 Przyjrzyjmy się prostemu porównaniu wydajności między podejściem synchronicznym a asynchronicznym przy użyciu żądań HTTP.
 
-### Synchroniczne podejście
+Dla celów tego przykładu, użyjemy publicznego API `https://jsonplaceholder.typicode.com/posts/1` jako celu naszych żądań HTTP.
+
+#### Synchroniczne podejście
 
 ```python
 import requests
 import time
 
-adresy_url = ["http://example.com" for _ in range(10)]
+adresy_url = ["https://jsonplaceholder.typicode.com/posts/1" for _ in range(10)]
 
 czas_startu = time.time()
 
@@ -99,14 +332,30 @@ czas_konca = time.time()
 print(f"Synchronicznie: {czas_konca - czas_startu} sekund")
 ```
 
-### Asynchroniczne podejście
+Przykładowy wynik:
+
+```
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+Synchronicznie: 5.4 sekund
+```
+
+#### Asynchroniczne podejście
 
 ```python
 import aiohttp
 import asyncio
 import time
 
-adresy_url = ["http://example.com" for _ in range(10)]
+adresy_url = ["https://jsonplaceholder.typicode.com/posts/1" for _ in range(10)]
 
 async def pobierz(adres, sesja):
     async with sesja.get(adres) as odpowiedz:
@@ -115,7 +364,7 @@ async def pobierz(adres, sesja):
 
 async def main():
     async with aiohttp.ClientSession() as sesja:
-        zadania = [pobierz(adres, sesja) for adres w adresy_url]
+        zadania = [pobierz(adres, sesja) for adres in adresy_url]
         await asyncio.gather(*zadania)
 
 czas_startu = time.time()
@@ -125,138 +374,35 @@ czas_konca = time.time()
 print(f"Asynchronicznie: {czas_konca - czas_startu} sekund")
 ```
 
-### Analiza wyników
+Przykładowy wynik:
 
-Dla wielu żądań różnica w czasie wykonywania między tymi dwoma podejściami będzie znacząca. Wersja asynchroniczna zwykle będzie znacznie szybsza, ponieważ może jednocześnie inicjować wiele żądań, zamiast czekać na zakończenie każdego z nich osobno.
+```
+200
+200
+200
+200
+200
+200
+200
+200
+200
+200
+Asynchronicznie: 1.2 sekund
+```
+
+Porównanie
+
+- W podejściu **synchronicznym** każde żądanie jest obsługiwane jedno po drugim, co prowadzi do dłuższego czasu wykonania całego procesu. Wykonywanie żądań HTTP w sposób synchroniczny może powodować, że program czeka na zakończenie jednego żądania, zanim rozpocznie kolejne, co jest nieefektywne, gdy mamy do czynienia z wieloma operacjami I/O.
+- W podejściu **asynchronicznym** wiele żądań jest obsługiwanych równocześnie, co znacząco skraca czas oczekiwania na odpowiedzi. Asynchroniczność pozwala na wykonywanie innych zadań podczas oczekiwania na odpowiedzi z serwera, dzięki czemu zasoby są wykorzystywane bardziej efektywnie.
 
 ### Dlaczego `asyncio` jest szybsze?
 
-1. **Równoczesność**: `asyncio` pozwala na wykonywanie wielu operacji równocześnie. Kiedy jedno żądanie czeka na odpowiedź, inne mogą być realizowane.
-2. **Efektywne zarządzanie zasobami**: Asynchroniczność pozwala na lepsze wykorzystanie zasobów systemowych, unikając niepotrzebnego blokowania.
-3. **Mniejsze obciążenie**: W przeciwieństwie do tworzenia wielu wątków czy procesów, które są bardziej zasobożerne, asynchroniczne podejście korzysta z jednego wątku, co zmniejsza narzut związany z przełączaniem kontekstu.
+- `asyncio` pozwala na wykonywanie wielu operacji równocześnie. Kiedy jedno żądanie czeka na odpowiedź, inne mogą być realizowane.
+- Asynchroniczność pozwala na lepsze wykorzystanie zasobów systemowych, unikając niepotrzebnego blokowania.
+- W przeciwieństwie do tworzenia wielu wątków czy procesów, które są bardziej zasobożerne, asynchroniczne podejście korzysta z jednego wątku, co zmniejsza narzut związany z przełączaniem kontekstu.
 
 ### Kiedy używać `asyncio`?
 
-- **Operacje I/O-bound**: Kiedy aplikacja wykonuje wiele operacji I/O, takich jak żądania HTTP, operacje na plikach czy bazach danych.
-- **Serwery sieciowe**: Serwery HTTP, WebSocket czy inne serwery sieciowe mogą obsługiwać wiele połączeń jednocześnie bez blokowania.
-- **Aplikacje czasu rzeczywistego**: Gdzie ważne jest szybkie reagowanie na zdarzenia i interakcje.
-
-### Wyzwania 
-
-Używanie `asyncio` w Pythonie, chociaż potężne, może przynieść pewne wyzwania. Aby lepiej zilustrować te trudności, przyjrzyjmy się kilku konkretnym przykładom:
-
-#### Integracja z kodem synchronicznym
-
-**Problem:** Załóżmy, że używasz asynchronicznej korutyny do obsługi operacji sieciowej, ale potrzebujesz skorzystać z biblioteki, która działa synchronicznie.
-
-```python
-import asyncio
-import requests
-
-async def pobierz_dane():
-    odpowiedz = requests.get("http://example.com")  # synchroniczna operacja
-    return odpowiedz.text
-
-asyncio.run(pobierz_dane())
-```
-
-**Trudność:** Wywołanie synchronicznej funkcji `requests.get` w korutynie blokuje cały loop zdarzeń, co uniemożliwia równoczesne wykonywanie innych korutyn.
-
-**Rozwiązanie:** Można użyć `loop.run_in_executor`, aby uruchomić blokujący kod w osobnym wątku.
-
-```python
-import asyncio
-import requests
-
-async def pobierz_dane():
-    loop = asyncio.get_event_loop()
-    odpowiedz = await loop.run_in_executor(None, requests.get, "http://example.com")
-    return odpowiedz.text
-
-asyncio.run(pobierz_dane())
-```
-
-#### Debugowanie
-
-**Problem:** Podczas debugowania możesz napotkać błąd w jednej z wielu korutyn, które są jednocześnie uruchomione.
-
-```python
-import asyncio
-
-async def zepsuta_korutyna():
-    await asyncio.sleep(1)
-    raise ValueError("Ups!")
-
-async def inna_korutyna():
-    await asyncio.sleep(2)
-    print("Inna korutyna zakończona")
-
-async def main():
-    zadanie1 = asyncio.create_task(zepsuta_korutyna())
-    zadanie2 = asyncio.create_task(inna_korutyna())
-    await zadanie1
-    await zadanie2
-
-asyncio.run(main())
-```
-
-**Trudność:** Zdiagnozowanie, która korutyna jest problematyczna i dlaczego, może być trudniejsze ze względu na asynchroniczne zachowanie i brak tradycyjnego stosu wywołań.
-
-**Rozwiązanie:** Używanie bardziej rozbudowanych narzędzi do debugowania, takich jak `asyncio.Task.all_tasks()`, lub logowanie, aby śledzić przepływ wykonania.
-
-#### Poprawne zarządzanie zasobami
-
-**Problem:** Upewnienie się, że wszystkie zasoby, takie jak pliki czy połączenia sieciowe, są poprawnie zamykane.
-
-```python
-import asyncio
-import aiohttp
-
-async def pobierz_dane(url):
-    async with aiohttp.ClientSession() as sesja:
-        async with sesja.get(url) as odpowiedz:
-            return await odpowiedz.text()
-
-async def main():
-    urls = ["http://example.com" for _ in range(10)]
-    zadania = [pobierz_dane(url) for url in urls]
-    await asyncio.gather(*zadania)
-
-asyncio.run(main())
-```
-
-**Trudność:** Używanie kontekstu `async with` jest konieczne, aby zapewnić poprawne zamknięcie zasobów.
-
-#### Asynchroniczne operacje ograniczone przez CPU
-
-**Problem:** Używanie asynchroniczności do operacji ograniczonych przez CPU.
-
-```python
-import asyncio
-
-async def zadanie_obciazajace_cpu(dane):
-    wynik = sum([x*x for x in dane])
-    return wynik
-
-asyncio.run(zadanie_obciazajace_cpu(range(1000000)))
-```
-
-**Trudność:** Choć asyncio jest doskonałe do operacji ograniczonych przez I/O, nie przyspiesza to operacji ograniczonych przez CPU i może wprowadzać niepotrzebny narzut.
-
-**Rozwiązanie:** Używanie `concurrent.futures` lub `multiprocessing` do wykonywania operacji CPU-bound w osobnych wątkach lub procesach.
-
-```python
-import asyncio
-from concurrent.futures import ProcessPoolExecutor
-
-def zadanie_obciazajace_cpu(dane):
-    return sum([x*x for x in dane])
-
-async def main():
-    loop = asyncio.get_event_loop()
-    with ProcessPoolExecutor() as executor:
-        wynik = await loop.run_in_executor(executor, zadanie_obciazajace_cpu, range(1000000))
-        print(wynik)
-
-asyncio.run(main())
-```
+- Kiedy aplikacja wykonuje wiele operacji I/O, takich jak żądania HTTP, operacje na plikach czy bazach danych.
+- Serwery HTTP, WebSocket czy inne serwery sieciowe mogą obsługiwać wiele połączeń jednocześnie bez blokowania.
+- W aplikacjach czasu rzeczywistego, gdzie ważne jest szybkie reagowanie na zdarzenia i interakcje.
