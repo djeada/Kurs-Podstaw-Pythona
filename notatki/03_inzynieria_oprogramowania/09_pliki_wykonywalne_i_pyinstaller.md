@@ -64,11 +64,9 @@ Aby je dołączyć, użyj:
 pyinstaller --add-data 'resources/images;resources/images' --add-data 'resources/config;resources/config' main.py
 ```
 
-W aplikacji spakowanej pliki będą dostępne pod tymi samymi ścieżkami.
-
 #### Uwaga: Dostęp do zasobów
 
-Po spakowaniu, ścieżki dostępu do zasobów mogą się zmienić. Użyj funkcji `resource_path` w PyInstaller, aby uzyskać poprawną ścieżkę:
+Aby prawidłowo odnaleźć zasoby po spakowaniu aplikacji, można użyć funkcji `resource_path`. Funkcja ta sprawdza, czy aplikacja jest uruchamiana z katalogu tymczasowego (kiedy atrybut `sys._MEIPASS` jest dostępny). Jeśli tak, ścieżka do zasobów jest tworzona w odniesieniu do tego katalogu. W przeciwnym razie zwraca bezpośrednią ścieżkę do zasobu.
 
 ```python
 import sys
@@ -85,18 +83,15 @@ def resource_path(relative_path):
 image_path = resource_path('resources/images/logo.png')
 ```
 
+W przykładzie ścieżka do obrazka `logo.png` w katalogu `resources/images` jest uzyskiwana przy użyciu funkcji `resource_path`. Dzięki temu kod będzie działał poprawnie zarówno w środowisku deweloperskim, jak i po spakowaniu aplikacji do jednego pliku wykonywalnego.
+
 ### Zaawansowane Ustawienia
 
-- **Tryb GUI vs Tryb Konsoli**: Domyślnie PyInstaller tworzy plik z oknem konsoli. Aby stworzyć aplikację GUI bez konsoli, użyj `--noconsole`.
-
-- **Ikona Aplikacji**: Możesz zmienić ikonę pliku wykonywalnego, używając `--icon=ścieżka_do_ikony.ico`.
-
-- **Wykluczanie Modułów**: Możesz wykluczyć określone moduły Python, które nie są potrzebne, używając `--exclude=moduł`.
-
-- **Optymalizacja**: Redukuj rozmiar i przyspieszaj start aplikacji za pomocą `--optimize=1` lub `--optimize=2`.
-
-- **Specyfikacja Pakowania**: Zaawansowane konfiguracje można osiągnąć tworząc i modyfikując plik specyfikacji (`.spec`). Pozwala to na szczegółowe określenie, jakie pliki mają być dołączone, jakie moduły wykluczone, strukturę katalogów itd.
-
-- **Jeden Plik vs Katalog**: Oprócz trybu `--onefile`, istnieje również domyślny tryb, gdzie PyInstaller tworzy katalog z plikiem wykonywalnym i wszystkimi zależnościami oddzielnie. Opcja ta jest przydatna, gdy rozmiar końcowego pliku jest krytyczny.
+- PyInstaller domyślnie tworzy plik wykonywalny, który otwiera **okno konsoli**. Aby stworzyć aplikację GUI bez okna konsoli, należy użyć opcji `--noconsole`.
+- **Ikonę** pliku wykonywalnego można zmienić, używając opcji `--icon=ścieżka_do_ikony.ico`.
+- Określone **moduły** Pythona, które nie są potrzebne, można wykluczyć przy użyciu opcji `--exclude=moduł`.
+- Rozmiar aplikacji można zredukować, a jej **start** przyspieszyć za pomocą opcji `--optimize=1` lub `--optimize=2`.
+- Zaawansowane **konfiguracje** pakowania można osiągnąć, tworząc i modyfikując plik specyfikacji (`.spec`). Plik ten pozwala na szczegółowe określenie, jakie pliki mają być dołączone, jakie moduły wykluczone oraz strukturę katalogów.
+- Oprócz trybu `--onefile`, w którym PyInstaller tworzy jeden plik wykonywalny, istnieje domyślny tryb, gdzie PyInstaller tworzy **katalog** z plikiem wykonywalnym i wszystkimi zależnościami oddzielnie. Opcja ta jest szczególnie przydatna, gdy rozmiar końcowego pliku ma kluczowe znaczenie.
 
 Dla pełnego zrozumienia możliwości PyInstaller, zalecam zapoznanie się z [dokumentacją PyInstaller](https://pyinstaller.readthedocs.io/en/stable/index.html). Jest to niezbędne, aby w pełni wykorzystać potencjał narzędzia, szczególnie w przypadku bardziej złożonych aplikacji.
