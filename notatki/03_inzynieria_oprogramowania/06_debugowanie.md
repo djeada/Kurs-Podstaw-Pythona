@@ -1,84 +1,231 @@
-## Debugowanie
+## **Debugowanie**
 
-Debugger to narzędzie używane przez programistów do testowania i usuwania błędów z kodu programu. Umożliwia ono wykonywanie programu krok po kroku, co pozwala na dokładne obserwowanie działania programu i jego stanu w różnych momentach wykonania. Debugger pomaga zidentyfikować i naprawić błędy w kodzie, takie jak nieprawidłowe działanie, błędy logiczne, czy problemy z zarządzaniem pamięcią.
+*Debugowanie* to fundamentalny proces w tworzeniu oprogramowania, polegający na identyfikowaniu, analizowaniu i usuwaniu błędów (bugów) w kodzie źródłowym programu. Błędy te mogą prowadzić do nieprawidłowego działania aplikacji, awarii systemu lub nieoczekiwanych rezultatów. Debugowanie umożliwia programistom dokładne prześledzenie działania programu, co pozwala na zrozumienie, dlaczego program nie działa zgodnie z oczekiwaniami.
 
-### Główne funkcje debuggera
+Proces ten jest niezbędny na każdym etapie cyklu życia oprogramowania, od fazy rozwoju po utrzymanie i aktualizacje. Dzięki debugowaniu programiści mogą:
 
-Debugger oferuje wiele funkcji, które ułatwiają identyfikację i rozwiązywanie problemów w kodzie:
+- **Zidentyfikować błędy logiczne**, takie jak nieprawidłowe warunki w instrukcjach sterujących czy błędne algorytmy.
+- **Usunąć błędy runtime'owe**, takie jak dzielenie przez zero, odwołania do niezainicjalizowanych zmiennych czy przekroczenia zakresu tablic.
+- **Poprawić wydajność** identyfikując i optymalizując fragmenty kodu, które spowalniają działanie aplikacji.
+- **Zrozumieć przepływ sterowania**, szczególnie w złożonych systemach z wieloma modułami i zależnościami.
 
-- Przerwanie wykonania programu, czyli **breakpoints**, pozwala zatrzymać program w wybranych punktach, aby sprawdzić stan zmiennych, warunki wykonania i inne aspekty.
-- **Kroki** umożliwiają wykonanie programu krok po kroku, co pozwala na obserwację zmian w stanach zmiennych i logice działania programu.
-- **Inspekcja stanu** pozwala na oglądanie wartości zmiennych, stanu stosu wywołań i innych danych wewnętrznych programu.
-- **Modyfikacja stanu** umożliwia zmianę wartości zmiennych podczas wykonywania programu, aby zobaczyć, jak te zmiany wpłyną na działanie programu.
+### **Główne funkcje debuggera**
 
-### Zalety korzystania z debuggera
+Debugger to narzędzie oferujące zaawansowane funkcje ułatwiające analizę i naprawę kodu. Oto szczegółowy opis jego głównych funkcji:
 
-- Pozwala na zatrzymanie programu w dowolnym miejscu, obserwację wartości zmiennych i prześledzenie krok po kroku działania kodu.
-- Ułatwia identyfikację miejsc, w których pojawiają się błędy oraz ich przyczyn.
-- Pomaga nowym programistom w zrozumieniu działania nieznanego kodu poprzez interaktywną analizę.
+**Punkty przerwania (breakpoints):** 
 
-### Debugger w środowiskach programistycznych (IDE)
+- Punkty w kodzie, w których wykonanie programu zostanie zatrzymane.
+- Pozwalają na zatrzymanie programu przed wykonaniem podejrzanego fragmentu kodu lub po nim, aby sprawdzić stan programu.
+- Można ustawić warunek, który musi być spełniony, aby program się zatrzymał, np. `if (count == 10)`.
 
-Większość zintegrowanych środowisk programistycznych (IDE) zapewnia wbudowane narzędzia debugowania, które oferują zaawansowane funkcje, takie jak:
+**Krokowanie (stepping):**
 
-- Ustawianie punktów zatrzymania (breakpoints), pozwala na definiowanie miejsc, gdzie wykonanie kodu zostanie zatrzymane.
-- Podgląd wartości zmiennych w czasie rzeczywistym, umożliwia oglądanie wartości zmiennych w czasie, gdy program jest zatrzymany na punkcie przerwania.
+- *Step Into*, wchodzi w wywołania funkcji, umożliwiając analizę ich wnętrza.
+- *Step Over*, wykonuje funkcję jako całość, nie wchodząc w jej szczegóły.
+- *Step Out*, kontynuuje wykonanie do momentu wyjścia z bieżącej funkcji.
 
-Dzięki integracji z IDE, debugowanie staje się bardziej intuicyjne i efektywne, co znacząco przyspiesza proces rozwoju oprogramowania oraz identyfikację i rozwiązywanie błędów.
+**Inspekcja stanu:** 
 
-### Debugger wbudowany w Pythonie - `pdb`:
+- Możliwość *sprawdzenia wartości zmiennych* lokalnych i globalnych.
+- *Stos wywołań (call stack)* wyświetla sekwencję wywołań funkcji prowadzącą do bieżącego punktu, co pomaga zrozumieć przepływ sterowania.
+- *Śledzenie wskaźników i referencji*, szczególnie ważne w językach takich jak C++ czy Java, gdzie zarządzanie pamięcią jest kluczowe.
 
-`pdb` (Python Debugger) to wbudowane w Pythonie narzędzie do debugowania, które działa w linii poleceń. Jest doskonałym wyborem dla programistów, którzy nie korzystają z IDE z zintegrowanym debuggerem lub tych, którzy szukają minimalistycznego i natywnego dla Pythona narzędzia do debugowania. `pdb` oferuje pełną kontrolę nad wykonaniem programu, umożliwiając precyzyjne śledzenie i analizę kodu.
+**Modyfikacja stanu:**
 
-#### Uruchomienie debuggera w kodzie
+- *Zmiana wartości zmiennych*, pozwala na eksperymentowanie z różnymi scenariuszami bez modyfikacji kodu źródłowego.
+- Niektóre debugery umożliwiają *modyfikację kodu* w czasie rzeczywistym (tzw. hot swapping).
 
-Aby zainicjować `pdb` w określonym miejscu w kodzie, wystarczy zaimportować moduł i umieścić wywołanie funkcji `set_trace()` w miejscu, w którym chcemy zatrzymać działanie programu:
+### **Zalety korzystania z debuggera**
+
+Korzystanie z debuggera przynosi wiele korzyści, zarówno dla początkujących, jak i doświadczonych programistów:
+
+- Możliwość zatrzymania programu w dokładnym miejscu wystąpienia błędu ułatwia jego identyfikację i naprawę.
+- Zamiast dodawać tymczasowe instrukcje wyświetlające stan programu (np. `print`), debugger pozwala na bezpośredni podgląd i interakcję.
+- Unika się ryzyka wprowadzenia nowych błędów podczas dodawania tymczasowych instrukcji do kodu.
+- Szczególnie w przypadku pracy z kodem napisanym przez innych lub z zewnętrznymi bibliotekami.
+- Debugger umożliwia wspólną analizę problemów podczas sesji pair programming lub code review.
+
+### **Debugger w środowiskach programistycznych (IDE)**
+
+Zintegrowane środowiska programistyczne (IDE) oferują zaawansowane narzędzia debugowania, które są nieodłączną częścią nowoczesnego procesu tworzenia oprogramowania. Oto niektóre z ich funkcji:
+
+- Kliknięcie na marginesie edytora kodu pozwala szybko dodać lub usunąć breakpoint.
+- Możliwość ustawienia breakpointów warunkowych bezpośrednio w interfejsie.
+- Wartości zmiennych są wyświetlane podczas najechania kursorem na ich nazwy.
+- Okna Watch i Variables umożliwiają śledzenie wybranych zmiennych i wyrażeń.
+- Wizualizacja stosu wywołań, wątków czy nawet struktur danych (np. drzewa, listy).
+- Interaktywne diagramy pomagające zrozumieć zależności między obiektami.
+- Połączenie z systemami kontroli wersji, testowania czy profilowania.
+- Możliwość debugowania aplikacji zdalnych, np. na serwerach czy urządzeniach mobilnych.
+- Ustawienia dostosowane do konkretnego języka programowania czy frameworka.
+- Makra i skrypty automatyzujące rutynowe czynności.
+
+### **Debugger wbudowany w Pythonie - `pdb`**
+
+`pdb` jest wbudowanym debuggerem Pythona, który, mimo swojej prostoty, oferuje ma wiele do zaoferowania:
+
+- Nie wymaga instalacji dodatkowego oprogramowania.
+- Dostępny na wszystkich platformach obsługujących Pythona.
+- Może być używany zarówno w skryptach uruchamianych lokalnie, jak i na zdalnych serwerach przez SSH.
+- Integruje się z innymi narzędziami i bibliotekami Pythona.
+
+#### **Uruchomienie debuggera w kodzie**
+
+Istnieje kilka sposobów na rozpoczęcie sesji debugowania z użyciem `pdb`:
+
+**Bezpośrednie wywołanie z linii poleceń:**
+
+```bash
+python -m pdb script.py
+```
+
+**Wstawienie punktu przerwania w kodzie:**
+
+Od Pythona 3.7 można użyć wbudowanej funkcji:
+
+```python
+breakpoint()  # Automatycznie uruchamia domyślny debugger
+```
+
+Lub tradycyjnie:
 
 ```python
 import pdb
 pdb.set_trace()
 ```
 
-Po dodaniu tej linii, każde wykonanie programu dojść do tego punktu zostanie zatrzymane, a kontrola zostanie przekazana do interaktywnego promptu `pdb`.
+**Debugowanie wyjątków:**
 
-### Kontrolowanie wykonania programu
-
-Po uruchomieniu komendy `set_trace()`, program zatrzyma swoje działanie, a konsola przejdzie w tryb debugowania. W tym trybie masz dostęp do różnych poleceń, które umożliwiają kontrolowanie przebiegu programu. Oto kilka podstawowych poleceń, które możesz użyć w trybie `pdb`:
-
-- `n` (next): Przejście do następnej linii kodu bez zagłębiania się w funkcje. To polecenie pozwala kontynuować wykonanie programu, przechodząc do kolejnych instrukcji.
-- `s` (step): Wejście do wnętrza funkcji lub metody. Użyj tego polecenia, aby przeanalizować szczegółowo, co dzieje się wewnątrz danej funkcji.
-- `c` (continue): Kontynuowanie wykonania programu aż do napotkania kolejnego punktu przerwania (breakpoint) lub zakończenia programu. To polecenie pozwala pominąć szczegółowe śledzenie kodu aż do momentu, który Cię interesuje.
-- `l` (list): Wyświetlenie fragmentu kodu wokół aktualnej linii wykonania. Dzięki temu możesz zobaczyć kontekst, w którym aktualnie znajduje się program.
-- `q` (quit): Zakończenie sesji debugowania i wyjście z programu. Użyj tego polecenia, aby przerwać debugowanie i zakończyć działanie programu.
-
-### Podgląd i edycja zmiennych
-
-Podczas sesji debugowania możesz łatwo sprawdzać wartości zmiennych, wpisując ich nazwy bezpośrednio w konsoli debugera. Na przykład, wpisanie nazwy zmiennej `count` wyświetli jej bieżącą wartość. Jeśli chcesz zmienić wartość zmiennej, możesz to zrobić, używając standardowej składni przypisania:
+Aby debugger uruchamiał się automatycznie przy nieobsłużonych wyjątkach:
 
 ```python
-count = 10  # Przypisanie nowej wartości do zmiennej 'count'
+import sys
+import pdb
+
+def excepthook(type, value, traceback):
+    pdb.post_mortem(traceback)
+
+sys.excepthook = excepthook
 ```
 
-### Ustawianie dodatkowych punktów zatrzymania
+### **Kontrolowanie wykonania programu w `pdb`**
 
-W trakcie sesji debugowania możesz dynamicznie ustawiać dodatkowe punkty zatrzymania (breakpoints), używając polecenia `break`:
+Podczas sesji z `pdb` masz dostęp do szeregu poleceń:
+
+**Nawigacja:**
+
+- `n` / `next`: Przejście do następnej linii w bieżącej funkcji.
+- `s` / `step`: Wejście do funkcji wywoływanej w bieżącej linii.
+- `r` / `return`: Kontynuacja wykonania do momentu powrotu z bieżącej funkcji.
+- `c` / `continue`: Kontynuacja wykonania do następnego breakpointa.
+
+**Informacje o stanie:**
+
+- `l` / `list`: Wyświetla kod źródłowy wokół bieżącej linii.
+- `w` / `where`: Wyświetla stos wywołań (call stack).
+- `p` / `print`: Wyświetla wartość wyrażenia.
+- `pp` / `pprint`: Wyświetla wartość wyrażenia w sposób sformatowany.
+
+**Zarządzanie breakpointami:**
+
+- `b` / `break`: Ustawia breakpoint.
+- `cl` / `clear`: Usuwa breakpoint.
+- `disable` / `enable`: Dezaktywuje/aktywuje breakpoint.
+
+**Pomoc i wyjście:**
+
+- `h` / `help`: Wyświetla pomoc dla poleceń.
+- `q` / `quit`: Kończy sesję debugowania.
+
+### **Podgląd i edycja zmiennych w `pdb`**
+
+`pdb` pozwala na interaktywną pracę z kodem:
+
+**Wyświetlanie wartości:**
 
 ```python
-b 120  # Ustawienie breakpointa na linii 120
+p variable_name  # Wyświetla wartość zmiennej
 ```
 
-Aby usunąć istniejący punkt zatrzymania, użyj polecenia `cl` (clear) z numerem punktu, który chcesz usunąć:
+**Zmiana wartości:**
 
 ```python
-cl 1  # Usunięcie pierwszego breakpointa
+variable_name = new_value  # Ustawia nową wartość zmiennej
 ```
+
+**Wykonywanie wyrażeń:**
+
+Możesz wykonywać dowolne wyrażenia Pythona:
+
+```python
+p len(my_list)  # Wyświetla długość listy
+```
+
+**Wywoływanie funkcji:**
+
+Uważaj jednak na skutki uboczne wywoływanych funkcji:
+
+```python
+p my_function()  # Wywołuje funkcję i wyświetla jej wynik
+```
+
+### **Ustawianie dodatkowych punktów zatrzymania**
+
+Podczas debugowania możesz potrzebować zatrzymać program w nowych miejscach:
+
+**Ustawianie breakpointów:**
+
+```python
+b 25  # Ustawia breakpoint na linii 25 bieżącego pliku
+b my_module.py:10  # Ustawia breakpoint w pliku 'my_module.py' na linii 10
+b my_function  # Ustawia breakpoint na początku funkcji 'my_function'
+```
+
+**Warunkowe breakpointy:**
+
+```python
+b 30, x > 5  # Zatrzyma program na linii 30, gdy 'x' jest większe od 5
+```
+
+**Wyświetlanie breakpointów:**
+
+```python
+b  # Wyświetla listę wszystkich breakpointów
+```
+
+**Usuwanie breakpointów:**
+
+```python
+cl  # Usuwa wszystkie breakpointy
+cl 2  # Usuwa breakpoint numer 2
+```
+
 
 ### Warunkowe zatrzymywanie
 
-`pdb` pozwala także na ustawianie warunkowych punktów zatrzymania, które aktywują się tylko wtedy, gdy spełniony jest określony warunek. Na przykład:
+Warunkowe breakpointy są niezwykle przydatne w sytuacjach, gdy błąd występuje tylko przy określonych wartościach zmiennych lub w specyficznych warunkach.
+
+**Przykład zastosowania:**
+
+Jeśli pętla iteruje 1000 razy, ale błąd występuje tylko dla `i == 500`, ustawienie breakpointa warunkowego pozwala na zatrzymanie programu dokładnie w tym momencie:
 
 ```python
-b 150, count > 5  # Breakpoint na linii 150, który aktywuje się tylko gdy wartość 'count' jest większa niż 5
+b loop.py:45, i == 500
 ```
 
-To polecenie ustawia punkt zatrzymania na linii 150, ale program zatrzyma się tam tylko wtedy, gdy wartość zmiennej `count` będzie większa niż 5. Dzięki temu możesz bardziej precyzyjnie kontrolować przebieg debugowania, koncentrując się na istotnych warunkach i sytuacjach w kodzie.
+**Debugowanie złożonych warunków:**
+
+Możesz używać złożonych wyrażeń logicznych:
+
+```python
+b process_data, len(data) > 100 and error_flag
+```
+
+### Praktyczne wskazówki
+
+- Jeśli używasz `pdb.set_trace()` w kodzie, warto dodawać komentarze, aby nie pozostawić ich przypadkowo w wersji produkcyjnej.
+- Możesz tworzyć skrypty inicjalizacyjne dla `pdb`, aby automatyzować powtarzające się czynności.
+- `pdb` można integrować z narzędziami takimi jak `pytest` czy `unittest`, aby debugować testy jednostkowe.
+- Istnieją rozszerzone wersje `pdb`, takie jak `ipdb` czy `pudb`, oferujące dodatkowe funkcje i interfejsy.
+
