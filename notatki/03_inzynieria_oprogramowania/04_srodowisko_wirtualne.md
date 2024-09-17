@@ -4,19 +4,13 @@
 
 ### Zalety używania środowisk wirtualnych
 
-1. **Izolacja zależności:** Każde środowisko wirtualne ma własne niezależne biblioteki i wersje Pythona, co oznacza, że aktualizacje lub zmiany w jednym projekcie nie wpłyną na inny. To szczególnie przydatne w dużych zespołach, gdzie różne projekty mogą wymagać różnych wersji tej samej biblioteki.
-
-2. **Uproszczenie zarządzania zależnościami:** Zarządzanie zależnościami staje się łatwiejsze, ponieważ wszystkie biblioteki wymagane przez projekt są instalowane w izolacji od globalnego środowiska. To ułatwia także wdrożenia, ponieważ lista zależności jest jasno zdefiniowana i łatwa do zreplikowania w innym środowisku.
-
-3. **Konsystencja środowiska:** Środowiska wirtualne gwarantują, że aplikacje będą działać tak samo na różnych maszynach deweloperskich, jak i serwerach produkcyjnych, co minimalizuje "działa u mnie" syndrom błędów.
-
-4. **Łatwość w konfiguracji:** Ustawienie nowego środowiska wirtualnego jest proste i może być szybko skonfigurowane z minimalnym nakładem pracy, co jest idealne dla nowych członków zespołu lub podczas rozpoczynania nowych projektów.
-
-5. **Bezpieczeństwo:** Izolacja zależności minimalizuje ryzyko związane z nieautoryzowanym dostępem do systemów przez zależności, ponieważ każdy projekt może ograniczać się do minimalnie wymaganych uprawnień.
-
-6. **Eksperymentowanie i testowanie:** Środowiska wirtualne umożliwiają bezpieczne eksperymentowanie z nowymi pakietami i wersjami bez ryzyka zakłócenia działania stabilnych aplikacji. Dzięki temu można testować nowe wersje bibliotek bez wpływu na istniejące projekty.
-
-7. **Zarządzanie wersją Pythona:** Wiele projektów może wymagać różnych wersji Pythona. Środowiska wirtualne pozwalają na łatwe przełączanie między wersjami Pythona, co jest niezbędne w środowiskach, gdzie trwająca konserwacja kodu wymaga pracy na wielu wersjach języka.
+1. Każde środowisko wirtualne ma własne niezależne biblioteki i wersje Pythona, co oznacza, że aktualizacje lub zmiany w jednym projekcie nie wpłyną na inny. To szczególnie przydatne w dużych zespołach, gdzie różne projekty mogą wymagać różnych wersji tej samej biblioteki.
+2. Zarządzanie zależnościami staje się łatwiejsze, ponieważ wszystkie biblioteki wymagane przez projekt są instalowane w izolacji od globalnego środowiska. To ułatwia także wdrożenia, ponieważ lista zależności jest jasno zdefiniowana i łatwa do zreplikowania w innym środowisku.
+3. Środowiska wirtualne gwarantują, że aplikacje będą działać tak samo na różnych maszynach deweloperskich, jak i serwerach produkcyjnych, co minimalizuje "działa u mnie" syndrom błędów.
+4. Ustawienie nowego środowiska wirtualnego jest proste i może być szybko skonfigurowane z minimalnym nakładem pracy, co jest idealne dla nowych członków zespołu lub podczas rozpoczynania nowych projektów.
+5. Izolacja zależności minimalizuje ryzyko związane z nieautoryzowanym dostępem do systemów przez zależności, ponieważ każdy projekt może ograniczać się do minimalnie wymaganych uprawnień.
+6. Środowiska wirtualne umożliwiają bezpieczne eksperymentowanie z nowymi pakietami i wersjami bez ryzyka zakłócenia działania stabilnych aplikacji. Dzięki temu można testować nowe wersje bibliotek bez wpływu na istniejące projekty.
+7. Wiele projektów może wymagać różnych wersji Pythona. Środowiska wirtualne pozwalają na łatwe przełączanie między wersjami Pythona, co jest niezbędne w środowiskach, gdzie trwająca konserwacja kodu wymaga pracy na wielu wersjach języka.
 
 ### Popularne narzędzia do zarządzania środowiskami wirtualnymi
 
