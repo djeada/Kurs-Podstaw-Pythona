@@ -84,8 +84,6 @@ Wynik dezasemblacji:
               6 RETURN_VALUE
 ```
 
-#### Wyjaśnienie instrukcji:
-
 - **LOAD_FAST 0 (a)** ładuje wartość argumentu `a` na stos operandów.
 - **LOAD_FAST 1 (b)** ładuje wartość argumentu `b` na stos.
 - **BINARY_ADD** pobiera dwie wartości ze szczytu stosu, dodaje je i wynik umieszcza na stosie.
