@@ -171,8 +171,6 @@ for user in users:
     print(user)
 ```
 
-Wyjaśnienie:
-
 - `SELECT * FROM users`: Pobiera wszystkie kolumny i wiersze z tabeli `users`.
 - `cursor.fetchall()`: Pobiera wszystkie wyniki zapytania i zwraca je jako listę krotek.
 - `for user in users`: Iteruje przez listę użytkowników i drukuje każdą krotkę.
@@ -195,8 +193,6 @@ user = cursor.fetchone()
 if user:
     print(user)
 ```
-
-Wyjaśnienie:
 
 - `SELECT username FROM users WHERE id = ?`: Pobiera kolumnę `username` z tabeli `users`, gdzie `id` jest równe 1.
 - `cursor.fetchone()`: Pobiera pierwszy wynik zapytania.
@@ -227,8 +223,6 @@ for row in results:
     print(row)
 ```
 
-Wyjaśnienie:
-
 - `INNER JOIN`: Łączy wiersze z dwóch tabel, gdzie istnieje dopasowanie w obu tabelach.
 - `ON users.id = orders.user_id`: Warunek łączenia, gdzie `id` z tabeli `users` musi być równe `user_id` z tabeli `orders`.
 
@@ -257,9 +251,7 @@ for row in results:
     print(row)
 ```
 
-Wyjaśnienie:
-
-- `LEFT JOIN`: Łączy wszystkie wiersze z tabeli `users` i dopasowane wiersze z tabeli `orders`. Jeśli nie ma dopasowania, wynikiem są wartości NULL w kolumnach tabeli `orders`.
+`LEFT JOIN`: Łączy wszystkie wiersze z tabeli `users` i dopasowane wiersze z tabeli `orders`. Jeśli nie ma dopasowania, wynikiem są wartości NULL w kolumnach tabeli `orders`.
 
 Wynik:
 
@@ -288,8 +280,6 @@ results = cursor.fetchall()
 for row in results:
     print(row)
 ```
-
-Wyjaśnienie:
 
 - `GROUP BY users.username`: Grupuje wyniki według nazwy użytkownika.
 - `SUM(orders.amount) as total_amount`: Oblicza sumę zamówień dla każdego użytkownika.
@@ -321,9 +311,7 @@ for row in results:
     print(row)
 ```
 
-Wyjaśnienie:
-
-- `ORDER BY orders.order_date DESC`: Sortuje wyniki według daty zamówienia w kolejności malejącej.
+`ORDER BY orders.order_date DESC`: Sortuje wyniki według daty zamówienia w kolejności malejącej.
 
 Wynik:
 
