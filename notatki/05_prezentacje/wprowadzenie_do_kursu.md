@@ -81,23 +81,11 @@ Uczenie się w izolacji może być trudne. W ramach kursu masz dostęp do społe
 
 Nauka programowania to podróż, podczas której zdobywamy nie tylko umiejętności techniczne, ale także rozwijamy myślenie analityczne i rozwiązujemy problemy. Oto kilka wskazówek i zaleceń, które pomogą Ci w efektywnej nauce programowania:
 
-1. **Zrozum, zamiast zapamiętywać**
-Wielu ludzi kończy szkoły z dobrymi ocenami, ale bez głębszego zrozumienia tego, czego się uczyli. Programowanie nie polega na bezmyślnym zapamiętywaniu składni czy instrukcji, ale na zrozumieniu, jak i dlaczego pewne fragmenty kodu działają w określony sposób.
+1. Wielu ludzi kończy szkoły z dobrymi ocenami, ale bez głębokiego zrozumienia tego, czego się uczyli. Programowanie nie opiera się na mechanicznym zapamiętywaniu składni czy instrukcji, lecz na zrozumieniu, jak i dlaczego poszczególne fragmenty kodu działają w określony sposób.
+2. Podobnie jak w nauce języków czy grze na instrumencie, kluczem do sukcesu w programowaniu jest regularna praktyka. Zacznij od prostych projektów i stopniowo podnoś poziom trudności, aby rozwijać swoje umiejętności.
+3. Tłumaczenie czegoś innym to doskonała metoda na głębsze zrozumienie tematu. Dołącz do społeczności programistycznej, uczestnicz w spotkaniach, prowadź bloga lub udostępniaj swoje projekty na platformach takich jak GitHub.
+4. Błędy są nieodłącznym elementem procesu nauki. Każdy błąd to szansa na lepsze zrozumienie problemu i zdobycie nowej wiedzy.
+5. Technologia i programowanie to dziedziny, które nieustannie się rozwijają. Regularnie poszerzaj swoją wiedzę, ucz się nowych technologii i bądź na bieżąco z najnowszymi trendami.
+6. Zamiast od razu rzucać się na najnowsze frameworki i języki, skup się najpierw na solidnych podstawach. Zrozumienie fundamentalnych koncepcji sprawi, że przyswajanie bardziej zaawansowanych zagadnień będzie łatwiejsze.
+7. Czytaj historie innych programistów, słuchaj branżowych podcastów i oglądaj prezentacje z konferencji. Obserwowanie, co osiągnęli inni, pomoże Ci utrzymać motywację do dalszej nauki.
 
-2. **Praktyka, praktyka, praktyka**
-Podobnie jak w nauce języków czy graniu na instrumencie, kluczem do sukcesu w programowaniu jest regularna praktyka. Zacznij od prostych projektów i stopniowo zwiększaj ich poziom trudności.
-
-3. **Dziel się swoją wiedzą**
-Wyjaśnienie czegoś innemu to doskonały sposób na zrozumienie tematu. Dołącz do społeczności programistycznej, uczestnicz w spotkaniach, pisz bloga czy udostępniaj swoje projekty na platformach typu GitHub.
-
-4. **Nie bój się popełniać błędów**
-Błędy są nieodłączną częścią procesu nauki. Każdy błąd to okazja do zrozumienia problemu i nauczenia się czegoś nowego.
-
-5. **Kontynuuj naukę**
-Technologia i programowanie są dziedzinami, które dynamicznie się rozwijają. Regularnie aktualizuj swoją wiedzę, ucz się nowych technologii i śledź trendy.
-
-6. **Zacznij od podstaw**
-Zamiast od razu rzucać się na najnowsze frameworki czy języki, zacznij od solidnych podstaw. Zrozumienie fundamentalnych koncepcji sprawi, że łatwiej będzie Ci przyswajać bardziej zaawansowane zagadnienia.
-
-7. **Poszukuj inspiracji i motywacji**
-Czytaj historie innych programistów, słuchaj podcastów branżowych czy oglądaj prezentacje z konferencji. Widząc, co osiągnęli inni, łatwiej będzie Ci utrzymać motywację do nauki.
