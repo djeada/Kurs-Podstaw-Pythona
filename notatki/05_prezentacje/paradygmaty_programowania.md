@@ -109,9 +109,9 @@ Python to język, który z powodzeniem łączy cechy programowania obiektowego o
 
 #### Elementy charakterystyczne dla programowania obiektowego
 
-* **Klasy**: Służą do definiowania nowych typów danych i zawierają zarówno atrybuty (reprezentujące stan obiektu), jak i metody (operujące na tym stanie).
-* **Dziedziczenie**: Umożliwia tworzenie klas pochodnych, które dziedziczą atrybuty i metody po klasie bazowej, pozwalając jednocześnie na ich rozszerzanie lub modyfikację.
-* **Enkapsulacja**: Ukrywa wewnętrzne szczegóły klasy, dzięki czemu można je modyfikować bez wpływu na kod korzystający z tej klasy.
+- **Klasy** umożliwiają definiowanie nowych typów danych, które zawierają zarówno atrybuty, reprezentujące stan obiektu, jak i metody, które operują na tym stanie.
+- Dzięki **dziedziczeniu** możliwe jest tworzenie klas pochodnych, które przejmują atrybuty i metody od klasy bazowej, a także umożliwiają ich rozszerzanie lub modyfikację.
+- **Enkapsulacja** pozwala na ukrycie wewnętrznych szczegółów klasy, co umożliwia ich modyfikację bez wpływu na kod, który korzysta z tej klasy.
 
 Przykład enkapsulacji i dziedziczenia w Pythonie:
 
@@ -139,9 +139,9 @@ my_car.display_info()
 
 #### Elementy charakterystyczne dla programowania funkcyjnego
 
-* **First-class functions**: W Pythonie funkcje są obiektami pierwszej klasy, co oznacza, że można je przekazywać jako argumenty, zwracać z innych funkcji czy przypisywać do zmiennych.
-* **Higher-order functions**: Są to funkcje, które przyjmują inne funkcje jako argumenty lub zwracają je. Przykładem może być funkcja `map` lub `filter`.
-* **Funkcje lambda**: Umożliwiają szybkie tworzenie anonimowych funkcji na potrzeby jednorazowego użycia.
+- W Pythonie **funkcje pierwszej klasy** są traktowane jako obiekty, co oznacza, że można je przekazywać jako argumenty, zwracać z innych funkcji oraz przypisywać do zmiennych.
+- **Funkcje wyższego rzędu** to takie, które mogą przyjmować inne funkcje jako argumenty lub zwracać funkcje. Przykładami są funkcje takie jak `map` czy `filter`.
+- **Funkcje lambda** pozwalają na szybkie tworzenie anonimowych funkcji, które są często używane jednorazowo, np. w miejscach, gdzie potrzebna jest prosta funkcja.
 
 Przykład użycia funkcji pierwszej klasy, funkcji wyższego rzędu i funkcji lambda w Pythonie:
 
@@ -171,11 +171,9 @@ Programowanie obiektowe (OOP) stało się dominującym paradygmatem w ciągu ost
 
 #### Enkapsulacja, Abstrakcja, i Polimorfizm
 
-* **Enkapsulacja**: Enkapsulacja odnosi się do praktyki ograniczania dostępu do pewnych składników obiektu i łączenia danych z zachowaniami. Chroni to integralność danych i ułatwia zarządzanie złożonością systemów. Przykładem enkapsulacji jest ukrywanie szczegółów implementacji klasy, co pozwala na modyfikację kodu bez wpływu na resztę programu.
-
-* **Abstrakcja**: Abstrakcja pozwala na reprezentację złożonych systemów w bardziej ogólnej formie, ukrywając szczegóły. Dzięki abstrakcji, programiści mogą skupić się na wysokopoziomowych aspektach projektu, zamiast na szczegółach implementacyjnych. Na przykład, interfejsy i klasy abstrakcyjne w Java umożliwiają definiowanie ogólnych zachowań, które mogą być konkretyzowane przez klasy pochodne.
-
-* **Polimorfizm**: Polimorfizm daje możliwość definiowania wielu form dla funkcji lub metod, dzięki czemu można je używać w różnorodny sposób. Umożliwia to tworzenie bardziej elastycznego i rozszerzalnego kodu. Przykładami polimorfizmu są metody przeciążone oraz interfejsy umożliwiające różne implementacje tej samej funkcji.
+- **Enkapsulacja** odnosi się do praktyki ograniczania dostępu do pewnych składników obiektu oraz łączenia danych z odpowiadającymi im zachowaniami. Pomaga to chronić integralność danych i ułatwia zarządzanie złożonością systemów. Przykładem enkapsulacji jest ukrywanie szczegółów implementacji klasy, co umożliwia modyfikacje bez wpływu na pozostałą część programu.
+- **Abstrakcja** pozwala na reprezentowanie złożonych systemów w uproszczonej formie, ukrywając zbędne szczegóły. Dzięki abstrakcji programiści mogą skupić się na kluczowych aspektach projektu, ignorując detale implementacyjne. Przykładem abstrakcji są interfejsy oraz klasy abstrakcyjne, które definiują ogólne zachowania i są konkretyzowane przez klasy dziedziczące.
+- **Polimorfizm** umożliwia definiowanie wielu form dla tej samej funkcji lub metody, co pozwala na ich elastyczne użycie w różnych kontekstach. Dzięki temu kod staje się bardziej rozszerzalny i elastyczny. Przykłady polimorfizmu obejmują przeciążanie metod oraz implementowanie różnych wersji tej samej funkcji poprzez interfejsy.
 
 #### Klasy i Złożoność
 
