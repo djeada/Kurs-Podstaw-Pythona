@@ -7,19 +7,23 @@ Testy w kontekście inżynierii oprogramowania odnoszą się do procesu weryfika
 W zależności od zakresu i celu testowania można wyróżnić różne rodzaje testów:
 
 #### Testy jednostkowe (Unit Tests)
+
 - Skupiają się na pojedynczym fragmencie kodu, np. funkcji lub metodzie.
 - Służą do sprawdzenia poprawności działania poszczególnych elementów kodu w izolacji.
 - Są zazwyczaj pisane przez deweloperów.
 
 #### Testy integracyjne (Integration Tests)
+
 - Testują interakcje pomiędzy różnymi fragmentami oprogramowania.
 - Mogą sprawdzać, jak różne moduły lub usługi współpracują ze sobą.
 
 #### Testy systemowe (System Tests)
+
 - Testują kompletny, zintegrowany system, aby ocenić czy spełnia on określone wymagania.
 - Sprawdzają działanie systemu jako całości, w tym interakcje z zewnętrznymi systemami.
 
 #### Testy akceptacyjne (Acceptance Tests)
+
 - Mają na celu potwierdzenie, czy system spełnia oczekiwania użytkowników końcowych i biznesowych.
 - Mogą być prowadzone przez zespoły QA, klienta lub użytkowników.
 
@@ -27,9 +31,8 @@ W zależności od zakresu i celu testowania można wyróżnić różne rodzaje t
 
 Błędy w oprogramowaniu mogą prowadzić do poważnych konsekwencji, zwłaszcza gdy dotyczą krytycznych systemów, takich jak lotnictwo czy obrona.
 
-* **Rakieta Ariane 5 ECA (2002)**: Rakieta uległa samozniszczeniu kilka sekund po starcie z powodu błędu w systemie sterującym chłodzeniem.
-  
-* **Wojna w Zatoce Perskiej (1991)**: Błąd w systemie obrony przeciwrakietowej Patriot spowodował niedokładność przy zaokrąglaniu, co doprowadziło do niezidentyfikowania nadchodzącej rakiety Scud. Ostatecznie atak rakietowy spowodował śmierć 28 amerykańskich żołnierzy. [Więcej informacji](https://www-users.cse.umn.edu/~arnold/455.f96/disasters.html).
+- **Rakieta Ariane 5 ECA (2002)** uległa samozniszczeniu kilka sekund po starcie z powodu błędu w systemie sterującym chłodzeniem, co doprowadziło do katastrofy.
+- W czasie **Wojny w Zatoce Perskiej (1991)** błąd w systemie obrony przeciwrakietowej Patriot, wynikający z niedokładności przy zaokrąglaniu, uniemożliwił zidentyfikowanie nadlatującej rakiety Scud. W efekcie atak rakietowy zakończył się śmiercią 28 amerykańskich żołnierzy. [Więcej informacji](https://www-users.cse.umn.edu/~arnold/455.f96/disasters.html).
 
 Ostatecznie testy mają kluczowe znaczenie dla jakości i bezpieczeństwa oprogramowania. Dlatego inwestowanie w solidne praktyki testowania jest niezbędne dla każdej firmy zajmującej się tworzeniem oprogramowania.
 
@@ -37,24 +40,29 @@ Ostatecznie testy mają kluczowe znaczenie dla jakości i bezpieczeństwa oprogr
 
 Testowanie jest kluczowym etapem w cyklu życia oprogramowania. Oto podstawowe kroki procesu testowania:
 
-1. **Zdefiniuj cel testu**:
-    - Określ, jakie zachowanie lub funkcjonalność chcesz przetestować.
-    - Ustal spodziewane wyniki.
+I. **Zdefiniuj cel testu**:
+   
+- Określ, jakie zachowanie lub funkcjonalność chcesz przetestować.
+- Ustal spodziewane wyniki.
 
-2. **Przygotuj dane**:
-    - Wybierz odpowiednie dane wejściowe i/lub konfigurację programu.
-    - W niektórych przypadkach może to obejmować przygotowanie środowiska testowego lub mockowania zewnętrznych zasobów.
+II. **Przygotuj dane**:
 
-3. **Wykonaj test**:
-    - Uruchom testowany fragment kodu z przygotowanymi danymi wejściowymi.
+- Wybierz odpowiednie dane wejściowe i/lub konfigurację programu.
+- W niektórych przypadkach może to obejmować przygotowanie środowiska testowego lub mockowania zewnętrznych zasobów.
 
-4. **Walidacja**:
-    - Porównaj faktyczny wynik z oczekiwanym wynikiem.
-    - Ustal, czy test przeszedł pomyślnie czy zakończył się niepowodzeniem.
+III. **Wykonaj test**:
 
-5. **Raportowanie**:
-    - Zapisz wynik testu, w tym wszelkie znalezione błędy lub nieprawidłowości.
-    - Ustal dalsze kroki, takie jak naprawa błędów lub przeprowadzenie dalszych testów.
+- Uruchom testowany fragment kodu z przygotowanymi danymi wejściowymi.
+
+IV. **Walidacja**:
+
+- Porównaj faktyczny wynik z oczekiwanym wynikiem.
+- Ustal, czy test przeszedł pomyślnie czy zakończył się niepowodzeniem.
+
+V. **Raportowanie**:
+
+- Zapisz wynik testu, w tym wszelkie znalezione błędy lub nieprawidłowości.
+- Ustal dalsze kroki, takie jak naprawa błędów lub przeprowadzenie dalszych testów.
 
 ### Testy jednostkowe
 
@@ -112,21 +120,21 @@ Test Driven Development (TDD) to metoda tworzenia oprogramowania, w której prog
 
 Proces TDD:
 
-1. **Napisz test**: Zanim napiszesz jakikolwiek kod produkcyjny, stworz test jednostkowy dla nowej funkcji lub poprawki.
-2. **Uruchom testy**: Wszystkie nowo dodane testy powinny zakończyć się niepowodzeniem, ponieważ jeszcze nie ma dla nich implementacji.
-3. **Napisz kod**: Twórz minimalną ilość kodu, która pozwoli testom przejść.
-4. **Uruchom wszystkie testy**: Upewnij się, że wszystkie testy, zarówno stare, jak i nowe, przechodzą pomyślnie.
-5. **Refaktoryzacja**: Dąż do poprawy i uproszczenia kodu, dbając o jego jakość i zachowując zielony stan testów.
+- Na początku należy **napisać test**, zanim stworzy się jakikolwiek kod produkcyjny, opracowując test jednostkowy dla nowej funkcji lub poprawki.
+- Kolejnym krokiem jest **uruchomienie testów**, przy czym nowo dodane testy powinny początkowo zakończyć się niepowodzeniem, ponieważ nie ma jeszcze dla nich odpowiedniej implementacji.
+- Następnie należy **napisać kod**, tworząc minimalną ilość kodu wymaganą do przejścia testów.
+- Po napisaniu kodu trzeba **uruchomić wszystkie testy**, aby upewnić się, że zarówno nowe, jak i stare testy przechodzą pomyślnie.
+- Ostatnim krokiem jest **refaktoryzacja**, czyli poprawa i uproszczenie kodu bez wpływu na działanie testów, dbając o jego jakość.
 
 Korzyści z TDD:
 
-- **Zwiększona jakość kodu**: Testy tworzone przed implementacją zmuszają do dokładnego przemyślenia rozwiązania.
-- **Wczesne wykrywanie błędów**: Błędy są identyfikowane i korygowane natychmiast po ich wprowadzeniu.
-- **Samodzielna dokumentacja**: Testy pokazują, jak dana funkcja powinna działać i co robi.
-- **Ułatwia refaktoryzację**: Możliwość modyfikacji kodu z pewnością, że nie wprowadzi to nowych błędów.
+- **Zwiększona jakość kodu** wynika z tego, że testy tworzone przed implementacją zmuszają programistę do dokładnego przemyślenia rozwiązania.
+- Dzięki TDD możliwe jest **wczesne wykrywanie błędów**, ponieważ są one identyfikowane i naprawiane natychmiast po ich wprowadzeniu.
+- **Samodzielna dokumentacja** to dodatkowa korzyść, ponieważ testy pokazują, jak dana funkcja powinna działać i jakie jest jej przeznaczenie.
+- TDD **ułatwia refaktoryzację**, ponieważ umożliwia modyfikację kodu z pewnością, że zmiany nie wprowadzą nowych błędów.
 
 Potencjalne wyzwania:
 
-- **Krzywa uczenia**: TDD może być trudne do opanowania, zwłaszcza dla początkujących programistów.
-- **Większy początkowy nakład czasowy**: Tworzenie testów przed implementacją może wydłużyć czas tworzenia funkcji, jednak zwykle skraca czas potrzebny na późniejsze debugowanie.
-- **Nie dla wszystkiego**: W pewnych sytuacjach, jak np. prototypowanie, TDD może nie być optymalnym rozwiązaniem.
+- **Krzywa uczenia** w TDD może być stroma, zwłaszcza dla początkujących programistów, którzy mogą mieć trudności z opanowaniem tej techniki.
+- **Większy początkowy nakład czasowy** jest często potrzebny na tworzenie testów przed implementacją, choć to może skrócić czas potrzebny na późniejsze debugowanie.
+- TDD **nie jest optymalne dla wszystkiego**, zwłaszcza w sytuacjach takich jak prototypowanie, gdzie szybka iteracja ma pierwszeństwo przed testowaniem.
