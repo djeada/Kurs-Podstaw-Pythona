@@ -96,12 +96,12 @@ Pokrycie kodu to wskaźnik ilustrujący, jaki procent kodu źródłowego został
 Przykład:
 
 ```python
-#1# def fun(a, b):
-#2#   a += 1
-#3#   b += 2
-#4#   if a + b > 22:
-#5#     a += 1
-#6#   return a + b
+# 1. def fun(a, b):
+# 2.   a += 1
+# 3.   b += 2
+# 4.   if a + b > 22:
+# 5.     a += 1
+# 6.   return a + b
 ```
 
 Przeprowadzając testy fun(a,b), jeżeli pominiemy dane powodujące spełnienie warunku w linii #4#, nie osiągniemy 100% pokrycia. Dodając odpowiednie przypadki testowe, zbliżymy się do pełnego pokrycia.
