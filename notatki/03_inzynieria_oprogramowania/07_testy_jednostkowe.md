@@ -2,13 +2,15 @@
 
 Testy jednostkowe stanowią kluczowy element w procesie wytwarzania oprogramowania, mając na celu weryfikację indywidualnych fragmentów kodu (zazwyczaj funkcji lub metod). Pozwalają programiście mieć pewność, że napisane przez niego komponenty działają zgodnie z oczekiwaniami oraz pomagają w identyfikacji i naprawie błędów na wczesnym etapie. 
 
-#### Czerwone testy  
+### Czerwone vs zielone testy
+
+**Czerwone testy**:
 
 - Oznaczają testy, które zakończyły się niepowodzeniem. Jeśli test, który wcześniej przechodził pomyślnie, nagle staje się czerwony, wskazuje to na potencjalny problem w kodzie.
 - Czerwone testy sygnalizują, że coś jest nie tak. Może to wynikać z wprowadzenia zmiany, która zakłóciła wcześniejsze działanie kodu.
 - W przypadku czerwonych testów należy dokładnie przeanalizować zmiany w kodzie, zidentyfikować przyczynę problemu i naprawić błąd.
 
-#### Zielone testy
+**Zielone testy**:
 
 - To testy, które zakończyły się pomyślnie.
 - Choć zielone testy są wskaźnikiem poprawności danego fragmentu kodu, nie gwarantują, że cała aplikacja jest wolna od błędów. Dlatego ważne jest, aby testować różne aspekty kodu i uwzględniać różne scenariusze.
@@ -66,7 +68,7 @@ W Pythonie istnieją dwie główne biblioteki do pisania i uruchamiania testów 
 
 Ostateczny wybór pomiędzy `unittest` a `pytest` zależy od potrzeb projektu i preferencji zespołu. Niezależnie od wyboru, regularne pisanie i uruchamianie testów jednostkowych jest kluczem do tworzenia niezawodnego oprogramowania.
 
-### Przykład testu unittest
+#### Przykład testu unittest
 
 `unittest` to standardowa biblioteka w Pythonie przeznaczona do tworzenia testów jednostkowych. Podąża ona za paradygmatem programowania obiektowego, co oznacza, że testy są organizowane w postaci klas, a mechanizmy takie jak dziedziczenie mogą być wykorzystywane do tworzenia hierarchii testów czy rozszerzania funkcjonalności.
 
@@ -76,7 +78,7 @@ Kluczowe cechy `unittest`:
 - Bogaty zestaw funkcji `assert` do weryfikacji warunków (np. `assertEqual`, `assertTrue`).
 - Możliwość definiowania metod `setUp` i `tearDown` do przygotowywania i sprzątania po teście.
 
-Przykład kodu z użyciem `unittest`:
+Przykład kodu:
 
 ```python
 import unittest
@@ -127,7 +129,7 @@ python -m unittest nazwa_pliku_testowego.py
 
 Pamiętaj, by nazwy plików z testami zaczynały się od słowa "test", ponieważ unittest szuka takich plików podczas skanowania katalogów.
 
-### Przykład testu pytest
+#### Przykład testu pytest
 
 `pytest` to popularna i wszechstronna biblioteka do tworzenia testów w Pythonie. W porównaniu z `unittest`, `pytest` oferuje bardziej skondensowany i czytelny sposób definiowania testów, eliminując potrzebę tworzenia klas i korzystania z funkcji `assert`. Dodatkowo, `pytest` jest znany ze swojego rozbudowanego wyjścia i możliwości diagnozy, które pomagają w identyfikowaniu i rozwiązywaniu problemów w testach.
 
@@ -137,7 +139,7 @@ Kluczowe cechy `pytest`:
 - Intuicyjne funkcje asercji - nie trzeba korzystać z metody `assertEqual` ani innych metod specyficznych dla `unittest`. Wystarczy użyć standardowego Pythonowego `assert`.
 - Bogaty zestaw wtyczek i integracja z wieloma narzędziami i bibliotekami trzecich stron.
   
-Przykład kodu z użyciem `pytest`:
+Przykład kodu z użyciem:
 
 ```python
 def int_to_roman(num):
