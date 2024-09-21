@@ -4,25 +4,25 @@ Mamy do dyspozycji kilka różnych sposobów przechowywania danych, które nazyw
 
 Oto najpopularniejsze struktury danych:
 
-I. **Listy**: Są najbardziej uniwersalne i mogą być używane wszędzie tam, gdzie potrzebujemy dynamicznej, modyfikowalnej kolekcji elementów. Doskonale nadają się do przechowywania sekwencyjnych danych, które mogą się zmieniać. Przykładowe zastosowania to:
+I. **Listy** są najbardziej uniwersalne i mogą być używane wszędzie tam, gdzie potrzebujemy dynamicznej, modyfikowalnej kolekcji elementów. Doskonale nadają się do przechowywania sekwencyjnych danych, które mogą się zmieniać. Przykładowe zastosowania to:
 
 - Przechowywanie listy zakupów.
 - Gromadzenie wyników pomiarów w eksperymencie.
 - Przechowywanie obiektów w grze komputerowej.
 
-II. **Krotki**: Idealne do przechowywania zestawów danych, które nie powinny się zmieniać po ich utworzeniu. Często używane jako klucze w słownikach lub jako elementy zwracane przez funkcje, które zwracają wiele wartości. Przykłady zastosowań to:
+II. **Krotki** są idealne do przechowywania zestawów danych, które nie powinny się zmieniać po ich utworzeniu. Często używane jako klucze w słownikach lub jako elementy zwracane przez funkcje, które zwracają wiele wartości. Przykłady zastosowań to:
 
 - Przechowywanie współrzędnych punktu (x, y).
 - Zwracanie wielu wartości z funkcji (np. status i wynik operacji).
 - Przechowywanie danych konfiguracyjnych, które nie powinny być modyfikowane.
 
-III. **Zbiory**: Używane tam, gdzie potrzebujemy unikalnych elementów i nie zależy nam na ich kolejności. Przydatne w operacjach matematycznych takich jak sumy, przecięcia i różnice zbiorów. Przykłady zastosowań to:
+III. **Zbiory** są używane tam, gdzie potrzebujemy unikalnych elementów i nie zależy nam na ich kolejności. Przydatne w operacjach matematycznych takich jak sumy, przecięcia i różnice zbiorów. Przykłady zastosowań to:
 
 - Przechowywanie unikalnych identyfikatorów.
 - Realizacja operacji zbiorowych, takich jak unia czy przecięcie.
 - Filtrowanie duplikatów z listy.
 
-IV. **Słowniki**: Najlepsze do przechowywania danych w formie klucz-wartość, co pozwala na szybki dostęp do wartości na podstawie klucza. Idealne do przechowywania ustrukturyzowanych danych, takich jak rekordy bazy danych czy konfiguracje. Przykłady zastosowań to:
+IV. **Słowniki** są najlepsze do przechowywania danych w formie klucz-wartość, co pozwala na szybki dostęp do wartości na podstawie klucza. Idealne do przechowywania ustrukturyzowanych danych, takich jak rekordy bazy danych czy konfiguracje. Przykłady zastosowań to:
 
 - Przechowywanie konfiguracji aplikacji.
 - Indeksowanie danych na podstawie unikalnych kluczy (np. numerów identyfikacyjnych).
