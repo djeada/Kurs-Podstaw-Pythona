@@ -2,14 +2,14 @@
 
 Programowanie obiektowe (ang. Object-Oriented Programming, OOP) to paradygmat programowania, który opiera się na koncepcji "obiektów". Obiekty są instancjami klas, które łączą dane (atrybuty) i funkcje (metody) w jedną jednostkę. Klasy i obiekty są podstawowymi elementami tego paradygmatu i przynoszą wiele korzyści w tworzeniu skalowalnego, zrozumiałego i łatwego do utrzymania kodu.
 
-- **Klasa**: Szablon lub projekt definiujący strukturę i zachowanie obiektów. Określa, jakie atrybuty i metody będą miały obiekty tej klasy.
-- **Obiekt**: Konkretna instancja klasy, która posiada rzeczywiste wartości atrybutów zdefiniowanych przez klasę.
+- **Klasa** to nic innego jak szablon lub projekt, który definiuje strukturę i zachowanie obiektów, określając, jakie atrybuty i metody będą dostępne dla obiektów tej klasy.
+- Kiedy tworzony jest **obiekt**, czyli konkretna instancja klasy, otrzymuje on rzeczywiste wartości atrybutów zdefiniowanych w tej klasie.
 
 ### Struktura klasy
 
-1. **Konstruktor (`__init__`)**: Specjalna metoda wywoływana, kiedy tworzony jest nowy obiekt klasy. Służy do inicjowania atrybutów obiektu.
-2. **Atrybuty**: To zmienne związane z klasą. Przechowują informacje o stanie obiektu.
-3. **Metody**: To funkcje związane z klasą, które mogą operować na atrybutach lub wykonywać inne operacje powiązane z obiektem.
+1. Jeśli chodzi o strukturę klasy, to **konstruktor (`__init__`)** jest specjalną metodą wywoływaną w momencie tworzenia nowego obiektu. Jej główną funkcją jest inicjowanie atrybutów obiektu, co pozwala nadać mu konkretne cechy.
+2. **Atrybuty** to zmienne, które są powiązane z klasą i które przechowują informacje o stanie konkretnego obiektu.
+3. Z kolei **metody** to funkcje związane z klasą, które operują na atrybutach lub wykonują inne operacje, zależne od tego, co dany obiekt powinien robić.
 
 ### Przykład użycia
 
@@ -34,6 +34,7 @@ osoba2.przedstaw_sie()
 ```
 
 W powyższym kodzie:
+
 - Zdefiniowaliśmy klasę `Osoba` z dwoma atrybutami (`imie` i `nazwisko`) oraz jedną metodą (`przedstaw_sie`).
 - Używając klasy, stworzyliśmy dwa obiekty: `osoba1` i `osoba2`.
 - Dla każdego obiektu wywołaliśmy metodę `przedstaw_sie`.
