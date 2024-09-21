@@ -112,11 +112,11 @@ def wyslij_zapytanie(url, dane):
 
 #### Korzyści stosowania czystych funkcji
 
-1. **Testowalność**: Łatwość w testowaniu wynika z braku zewnętrznych zależności czy stanów.
-2. **Czytelność**: Skoro nie ma skutków ubocznych, możemy być pewni, że funkcja robi dokładnie to, co jest opisane w jej definicji.
-3. **Przewidywalność**: Zawsze zwraca taki sam wynik dla tych samych danych wejściowych.
-4. **Łatwiejsze równoczesne wykonanie**: Brak skutków ubocznych ułatwia równoległe wykonywanie kodu.
-5. **Możliwość ponownego użycia**: Brak zewnętrznych zależności sprawia, że łatwo jest używać funkcji w różnych miejscach.
+1. Jednym z głównych atutów jest **testowalność**, ponieważ funkcje, które nie mają zewnętrznych zależności ani stanów, są znacznie łatwiejsze do przetestowania.
+2. Dzięki temu, że funkcje nie mają skutków ubocznych, możemy być pewni, że robią dokładnie to, co jest określone w ich definicji, co poprawia **czytelność**.
+3. Funkcje te charakteryzują się również dużą **przewidywalnością**, ponieważ zawsze zwracają ten sam wynik dla tych samych danych wejściowych.
+4. **Łatwiejsze równoczesne wykonanie** to kolejna zaleta, ponieważ brak skutków ubocznych umożliwia bezproblemowe uruchamianie kodu równolegle.
+5. Dodatkowo, funkcje bez zewnętrznych zależności są bardziej uniwersalne i można je łatwo ponownie używać w różnych miejscach, co zwiększa **możliwość ponownego użycia**.
 
 Chociaż czyste funkcje mogą korzystać z obiektów mutowalnych jako swoich argumentów, nie modyfikują one tych obiektów. Zamiast tego, jeśli jest potrzeba "zmiany" obiektu, czysta funkcja zwróci nowy obiekt z pożądanymi zmianami.
 
@@ -178,10 +178,10 @@ krotka = (1, 2, 3)
 
 #### Korzyści z używania niemutowalnych obiektów
 
-1. **Bezpieczeństwo wątkowe**: Ponieważ stan niemutowalnych obiektów nie może się zmieniać po ich utworzeniu, są one bezpieczne do użycia w środowiskach wielowątkowych.
-2. **Łatwiejsze debugowanie**: Niemutowalne obiekty mają przewidywalne stany, co ułatwia śledzenie błędów i debugowanie.
-3. **Większa czytelność kodu**: Kod z niemutowalnymi obiektami jest często łatwiejszy do zrozumienia, ponieważ nie trzeba śledzić zmian stanu obiektu w różnych miejscach programu.
-4. **Optymalizacja pamięci**: Niemutowalne obiekty mogą być współdzielone w różnych miejscach programu bez ryzyka ich modyfikacji.
+1. Stan **niemutowalnych obiektów** nie może się zmieniać po ich utworzeniu, co sprawia, że są one **bezpieczne w środowiskach wielowątkowych**, ponieważ brak zmian eliminuje ryzyko konfliktów między wątkami.
+2. Dzięki przewidywalnemu stanowi niemutowalnych obiektów, **debugowanie** staje się prostsze, gdyż łatwiej jest śledzić potencjalne błędy.
+3. **Większa czytelność kodu** wynika z faktu, że niemutowalne obiekty nie zmieniają swojego stanu w różnych częściach programu, co ułatwia zrozumienie logiki działania kodu.
+4. Dodatkowo, **optymalizacja pamięci** jest możliwa, ponieważ niemutowalne obiekty mogą być współdzielone w wielu miejscach programu bez obawy o ich modyfikację.
 
 #### Podsumowanie
 
