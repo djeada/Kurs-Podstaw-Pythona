@@ -7,16 +7,20 @@ Dziedziczenie i kompozycja to dwa fundamentalne koncepty programowania obiektowe
 Dziedziczenie to mechanizm, który pozwala jednej klasie (klasie potomnej) przejąć właściwości i zachowania innej klasy (klasy bazowej). Dzięki dziedziczeniu, programiści mogą tworzyć nowe klasy na podstawie istniejących, co pozwala na ponowne wykorzystanie kodu i redukcję jego złożoności.
 
 ### Zalety dziedziczenia
-- **Ponowne wykorzystanie kodu**: Klasy potomne dziedziczą metody i atrybuty klas bazowych, co redukuje potrzebę pisania powtarzalnego kodu.
-- **Łatwe rozszerzanie funkcjonalności**: Można łatwo rozszerzać istniejące klasy bez potrzeby modyfikacji oryginalnego kodu.
+
+- Dziedziczenie umożliwia **ponowne wykorzystanie kodu**, ponieważ klasy potomne dziedziczą metody i atrybuty klas bazowych, co zmniejsza potrzebę pisania powtarzających się fragmentów kodu.
+- Dodatkowo, **łatwe rozszerzanie funkcjonalności** jest możliwe, ponieważ istniejące klasy można rozszerzać bez konieczności modyfikowania oryginalnego kodu, co pozwala na większą elastyczność.
 
 ### Wady dziedziczenia
-- **Zwiększona złożoność**: Zbyt głęboka hierarchia dziedziczenia może prowadzić do trudnego do zrozumienia i utrzymania kodu.
-- **Ścisłe powiązanie**: Klasy potomne są ściśle związane z klasami bazowymi, co może utrudniać modyfikacje.
+
+- **Zwiększona złożoność** może pojawić się, gdy hierarchia dziedziczenia staje się zbyt głęboka, co utrudnia zrozumienie i utrzymanie kodu.
+- Kolejną wadą jest **ścisłe powiązanie** klas potomnych z klasami bazowymi, co może skomplikować wprowadzanie modyfikacji, ponieważ zmiany w klasie bazowej mogą wpływać na wiele klas potomnych.
 
 ### Gdzie używane jest dziedziczenie?
-- **Systemy zarządzania treścią (CMS)**: Klasy reprezentujące różne typy treści mogą dziedziczyć z klasy bazowej `Content`.
-- **Aplikacje GUI**: Klasy reprezentujące różne typy widżetów (np. przyciski, etykiety) mogą dziedziczyć z klasy bazowej `Widget`.
+
+- Dziedziczenie jest szeroko wykorzystywane w różnych kontekstach.
+- W **systemach zarządzania treścią (CMS)**, klasy reprezentujące różne typy treści mogą dziedziczyć z klasy bazowej `Content`, co pozwala na wspólne traktowanie różnych typów treści.
+- W **aplikacjach GUI**, klasy odpowiedzialne za różne typy widżetów, takie jak przyciski czy etykiety, mogą dziedziczyć z klasy bazowej `Widget`, co umożliwia spójne zarządzanie interfejsem użytkownika.
 
 ### Przykład w Pythonie
 
@@ -71,16 +75,21 @@ W powyższym przykładzie klasa `StudentSportowiec` dziedziczy zarówno po `Stud
 Kompozycja to technika, w której klasy są tworzone z instancji innych klas, co pozwala na budowanie złożonych obiektów poprzez łączenie mniejszych, bardziej wyspecjalizowanych obiektów. Kompozycja promuje luźne powiązanie i lepszą modularność kodu.
 
 ### Zalety kompozycji
-- **Elastyczność**: Łatwo można zmieniać zachowanie klasy poprzez wymianę jej komponentów.
-- **Ponowne wykorzystanie kodu**: Komponenty mogą być wielokrotnie używane w różnych kontekstach.
-- **Luźne powiązanie**: Kompozycja pozwala na luźniejsze powiązanie między obiektami, co ułatwia modyfikacje i utrzymanie kodu.
+
+- Kompozycja oferuje dużą **elastyczność**, ponieważ można łatwo zmieniać zachowanie klasy poprzez wymianę jej komponentów, co pozwala na dostosowanie funkcjonalności bez potrzeby modyfikowania struktury całej klasy.
+- Ponadto, **ponowne wykorzystanie kodu** jest znaczące, ponieważ komponenty używane w jednej klasie mogą być wielokrotnie wykorzystywane w innych kontekstach.
+- Dzięki **luźnemu powiązaniu** między obiektami, kompozycja ułatwia modyfikacje oraz utrzymanie kodu, co zwiększa jego stabilność i czytelność.
 
 ### Wady kompozycji
-- **Złożoność konstrukcji obiektów**: Tworzenie i zarządzanie złożonymi obiektami może być trudniejsze i wymagać więcej kodu niż w przypadku dziedziczenia.
+
+- Jednak kompozycja może mieć swoje wady, a jedną z nich jest **złożoność konstrukcji obiektów**, ponieważ tworzenie i zarządzanie bardziej skomplikowanymi obiektami wymaga większej ilości kodu oraz może być trudniejsze niż w przypadku dziedziczenia.
+- Inną wadą kompozycji jest **trudność w zrozumieniu zależności**, ponieważ w bardziej złożonych systemach, gdzie obiekty składają się z wielu komponentów, może być trudniej śledzić interakcje między nimi. To prowadzi do większego wysiłku przy analizowaniu, jak poszczególne elementy współpracują ze sobą, co może utrudnić debugowanie i zrozumienie struktury aplikacji.
 
 ### Gdzie używana jest kompozycja?
-- **Systemy zarządzania projektami**: Projekty mogą składać się z wielu zadań, gdzie każde zadanie jest oddzielnym obiektem.
-- **Aplikacje multimedialne**: Obiekty reprezentujące media mogą składać się z komponentów takich jak dźwięk, obraz, napisy.
+
+- Kompozycja znajduje zastosowanie w wielu dziedzinach.
+- W **systemach zarządzania projektami**, projekty mogą być złożone z wielu zadań, gdzie każde zadanie jest oddzielnym, autonomicznym obiektem.
+- Z kolei w **aplikacjach multimedialnych**, obiekty reprezentujące różne media mogą składać się z różnych komponentów, takich jak dźwięk, obraz i napisy, co pozwala na większą elastyczność w ich konstrukcji i manipulacji.
 
 ### Przykład kompozycji w Pythonie
 
@@ -138,7 +147,6 @@ print(osoba)  # Jan Kowalski, Adres: ul. Kwiatowa 15, Warszawa, 00-001
 ```
 
 W tym przykładzie `Osoba` ma obiekt `Adres` jako jeden ze swoich atrybutów. Umożliwia to bardziej elastyczne i modularne projektowanie kodu, ponieważ możemy łatwo zmieniać adresy, nie zmieniając samej klasy `Osoba`.
-
 
 ### Porównanie
 
