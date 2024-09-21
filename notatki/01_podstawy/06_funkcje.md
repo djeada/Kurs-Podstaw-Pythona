@@ -12,10 +12,10 @@ Tutaj funkcja `f` przyjmuje argument `x`, wykonuje operację \( x^2 + 1 \) i zwr
 
 Główne powody używania funkcji w programowaniu to:
 
-1. **Modularność**: Funkcje dzielą kod na mniejsze, bardziej zarządzalne kawałki.
-2. **Reużywalność**: Kod wewnątrz funkcji można wywoływać wielokrotnie w różnych miejscach programu.
-3. **Czytelność**: Funkcje pomagają organizować kod, co ułatwia jego zrozumienie i utrzymanie.
-4. **Abstrakcja**: Funkcje umożliwiają ukrywanie szczegółów implementacji, eksponując tylko to, co jest istotne dla użytkownika funkcji.
+1. Funkcje pozwalają na podział kodu na mniejsze fragmenty, co znacząco wspiera **modularność** programu, ułatwiając zarządzanie poszczególnymi jego elementami.
+2. Dzięki zastosowaniu funkcji, możliwe jest wielokrotne wykorzystanie tych samych fragmentów kodu w różnych częściach programu, co znacznie poprawia **reużywalność**.
+3. Ponadto, funkcje pomagają uporządkować kod w taki sposób, że staje się on bardziej zrozumiały, co przekłada się na lepszą **czytelność** oraz łatwiejsze jego utrzymanie.
+4. Poprzez stosowanie funkcji można również ukryć szczegóły implementacji, co pozwala użytkownikowi skupić się tylko na kluczowych aspektach działania, wspierając tym samym **abstrakcję** kodu.
 
 ### Definicja funkcji
 
@@ -141,9 +141,9 @@ print(adres3)  # wyświetli: Kwiatowa 15, Polska
 W powyższym przykładzie, funkcja zbuduj_adres przyjmuje dowolną liczbę argumentów nazwanych. Argumenty te są następnie używane do zbudowania pełnego adresu, ale tylko te, które zostały przekazane do funkcji. Dzięki `**kwargs`, funkcja jest bardzo elastyczna i może być używana z różnymi zestawami argumentów bez konieczności ich wcześniejszego definiowania.
 Zalety używania `**kwargs`
 
-- **Elastyczność**: Funkcje mogą przyjmować dowolną liczbę argumentów, co jest przydatne, gdy liczba i nazwy argumentów mogą się zmieniać.
-- **Łatwość rozszerzania**: Dodawanie nowych argumentów do funkcji nie wymaga zmiany jej definicji, co ułatwia jej rozszerzanie i modyfikowanie w przyszłości.
-- **Unikanie błędów**: Korzystanie z **kwargs zmniejsza ryzyko pomyłki w liczbie i kolejności argumentów, ponieważ wszystkie są przekazywane jako nazwy.
+- Funkcje oferują dużą **elastyczność**, ponieważ mogą przyjmować dowolną liczbę argumentów, co jest szczególnie przydatne w sytuacjach, gdy liczba lub nazwy argumentów mogą się zmieniać w trakcie działania programu.
+- Rozbudowa funkcji o nowe argumenty jest bardzo prosta, a jej struktura nie wymaga większych modyfikacji, co zdecydowanie wspiera **łatwość rozszerzania** i ułatwia przyszłe zmiany.
+- Zastosowanie mechanizmu **kwargs** pozwala na przekazywanie argumentów jako nazwanych par, co pomaga **unikać błędów** związanych z nieprawidłową liczbą lub kolejnością argumentów, zwiększając niezawodność kodu.
 
 ### Dokumentowanie funkcji
 
