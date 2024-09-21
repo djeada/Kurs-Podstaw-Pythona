@@ -6,10 +6,10 @@ Główną zaletą używania `Enum` jest czytelność i bezpieczeństwo kodu. Dzi
 
 ### Korzyści z używania Enum
 
-1. **Czytelność**: Nazwy członków `Enum` są bardziej opisowe niż "magiczne" liczby lub ciągi znaków.
-2. **Bezpieczeństwo typów**: Enumy zapewniają, że tylko określone wartości mogą być używane.
-3. **Niemodyfikowalność**: Wartości `Enum` są stałe, co oznacza, że nie mogą być zmieniane po ich zdefiniowaniu.
-4. **Organizacja kodu**: Ułatwiają grupowanie powiązanych wartości w jedno logiczne miejsce.
+1. Nazwy członków w `Enum` są bardziej zrozumiałe i opisowe, co zdecydowanie zwiększa **czytelność** kodu w porównaniu do używania "magicznych" liczb lub ciągów znaków.
+2. Zastosowanie `Enum` zapewnia **bezpieczeństwo typów**, ponieważ pozwala na użycie tylko wcześniej określonych wartości, co zmniejsza ryzyko błędów.
+3. Wartości w `Enum` są **niemodyfikowalne**, co oznacza, że po ich zdefiniowaniu nie można ich zmienić, co dodatkowo zwiększa stabilność kodu.
+4. Dzięki `Enum` powiązane wartości mogą być łatwo zorganizowane w jednym miejscu, co wpływa na lepszą **organizację kodu**.
 
 ### Tworzenie Enum
 
