@@ -8,6 +8,10 @@ Programowanie asynchroniczne to paradygmat, który umożliwia wykonywanie operac
 - Umożliwia obsługę większej liczby jednoczesnych połączeń czy zadań bez konieczności tworzenia wielu wątków lub procesów.
 - Pomaga uniknąć sytuacji, w których program jest zablokowany i nie może kontynuować pracy z powodu oczekiwania na zakończenie czasochłonnej operacji.
 
+#### Problem z GIL w Pythonie
+
+Python posiada mechanizm zwany Global Interpreter Lock (GIL), który uniemożliwia jednoczesne wykonywanie kodu Pythona w wielu wątkach. Oznacza to, że nawet jeśli stworzymy wiele wątków, tylko jeden z nich może wykonywać kod Pythona w danym momencie. `asyncio` pozwala obejść ten problem, umożliwiając asynchroniczne wykonywanie operacji w jednym wątku, co eliminuje potrzebę zarządzania wieloma wątkami i synchronizacją między nimi.
+
 ### Wprowadzenie do `asyncio`
 
 `asyncio` to biblioteka standardowa w Pythonie (od wersji 3.4), która wprowadza wsparcie dla programowania asynchronicznego za pomocą korutyn, pętli zdarzeń, zadań i przyszłości (ang. *futures*). Pozwala ona na pisanie jednowątkowego kodu asynchronicznego, który jest zarówno czytelny, jak i wydajny.
@@ -22,11 +26,7 @@ Programowanie asynchroniczne to paradygmat, który umożliwia wykonywanie operac
 - Umożliwia pisanie asynchronicznego kodu w sposób zbliżony do kodu synchronicznego.
 - Łatwo integruje się z innymi bibliotekami i frameworkami asynchronicznymi.
 
-### Problem z GIL w Pythonie
-
-Python posiada mechanizm zwany Global Interpreter Lock (GIL), który uniemożliwia jednoczesne wykonywanie kodu Pythona w wielu wątkach. Oznacza to, że nawet jeśli stworzymy wiele wątków, tylko jeden z nich może wykonywać kod Pythona w danym momencie. `asyncio` pozwala obejść ten problem, umożliwiając asynchroniczne wykonywanie operacji w jednym wątku, co eliminuje potrzebę zarządzania wieloma wątkami i synchronizacją między nimi.
-
-## Podstawy `asyncio`
+#### Podstawy `asyncio`
 
 Aby funkcja mogła stać się korutyną, należy zadeklarować ją przy użyciu słowa kluczowego `async def`. Taka funkcja zwraca obiekt korutyny, który reprezentuje jej przyszłe wykonanie.
 
@@ -47,11 +47,11 @@ async def moja_korutyna():
 
 Pętla zdarzeń jest centralnym mechanizmem w `asyncio`, odpowiedzialnym za planowanie i wykonywanie korutyn. Monitoruje ona stan wszystkich zadań i decyduje, które z nich mogą być wykonane w danym momencie. Dzięki temu możliwe jest równoczesne zarządzanie wieloma operacjami asynchronicznymi w jednym wątku.
 
-## Wywoływanie korutyn
+#### Wywoływanie korutyn
 
 Istnieje kilka sposobów na uruchomienie i zarządzanie korutynami. Omówimy trzy główne metody:
 
-### I. Wywoływanie za pomocą `await` z innych funkcji asynchronicznych
+##### I. Wywoływanie za pomocą `await` z innych funkcji asynchronicznych
 
 Najprostszym sposobem uruchomienia korutyny jest użycie `await` wewnątrz innej korutyny. Pozwala to na sekwencyjne wykonywanie operacji asynchronicznych.
 
@@ -77,11 +77,11 @@ asyncio.run(main())
 2. Główna funkcja asynchroniczna, która wywołuje `moja_korutyna` za pomocą `await`.
 3. `asyncio.run(main())` inicjuje pętlę zdarzeń i uruchamia korutynę `main`.
 
-#### Dlaczego używamy `await`?
+**Dlaczego używamy `await`?**
 
 Słowo kluczowe `await` powoduje, że korutyna zostaje zawieszona do momentu zakończenia oczekiwanej operacji. W tym czasie pętla zdarzeń może przydzielić zasoby innym korutynom, co zwiększa efektywność programu.
 
-#### Porównanie z kodem synchronicznym:
+**Porównanie z kodem synchronicznym:**
 
 ```python
 import time
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
 W wersji synchronicznej, podczas wykonywania `time.sleep(1)`, program jest zablokowany i nie może wykonywać innych operacji. W wersji asynchronicznej, pętla zdarzeń może przełączać się między różnymi korutynami.
 
-### II. Uruchamianie korutyn równolegle za pomocą `asyncio.create_task()`
+##### II. Uruchamianie korutyn równolegle za pomocą `asyncio.create_task()`
 
 Aby wykonywać korutyny równocześnie (w sensie asynchronicznym), możemy użyć `asyncio.create_task()`, który tworzy zadanie zarządzane przez pętlę zdarzeń.
 
@@ -130,12 +130,12 @@ asyncio.run(main())
 - Po utworzeniu zadania, korutyna `main` kontynuuje wykonywanie bez oczekiwania na zakończenie `moja_korutyna`.
 - `await task` powoduje, że `main` zawiesza się do momentu zakończenia `moja_korutyna`.
 
-#### Korzyści z użycia `asyncio.create_task()`:
+**Korzyści z użycia `asyncio.create_task()`:**
 
 - Pozwala na uruchomienie wielu korutyn jednocześnie, co zwiększa efektywność programu.
 - Możemy zarządzać zadaniami, np. anulować je, jeśli nie są już potrzebne.
 
-#### Przykład z wieloma zadaniami:
+**Przykład z wieloma zadaniami:**
 
 ```python
 import asyncio
@@ -170,7 +170,7 @@ Zadanie 2 zakończone po 3 sekundach
 
 W tym przykładzie wszystkie zadania są uruchamiane niemal jednocześnie, a ich zakończenie zależy od czasu trwania poszczególnych zadań.
 
-### III. Uruchamianie korutyn ze zwykłych funkcji za pomocą pętli zdarzeń
+##### III. Uruchamianie korutyn ze zwykłych funkcji za pomocą pętli zdarzeń
 
 Jeśli chcemy uruchomić korutynę z funkcji synchronicznej (zwykłej funkcji), możemy bezpośrednio użyć pętli zdarzeń.
 
@@ -199,11 +199,11 @@ Uwaga:
 - Od Pythona 3.7 zaleca się używanie `asyncio.run()` zamiast bezpośredniego manipulowania pętlą zdarzeń, chyba że istnieje konkretny powód.
 - Bezpośrednie użycie pętli zdarzeń jest przydatne w bardziej złożonych scenariuszach, np. w aplikacjach GUI czy serwerach, gdzie pętla zdarzeń jest zarządzana ręcznie.
 
-## Co zmienia `async`? Wykonywanie synchroniczne vs asynchroniczne
+#### Co zmienia `async`? Wykonywanie synchroniczne vs asynchroniczne
 
 Aby zrozumieć różnice między kodem synchronicznym a asynchronicznym, przeanalizujmy dwa przykłady ilustrujące ich działanie.
 
-### Kod synchroniczny
+##### Kod synchroniczny
 
 ```python
 import time
@@ -237,7 +237,7 @@ Pracownik odpowiedział, że ukończył 42 zadań.
 - Podczas wykonywania `time.sleep(3)`, program jest zablokowany i nie może wykonywać innych operacji.
 - Menadżer musi czekać, aż pracownik skończy zadanie, zanim może kontynuować.
 
-### Kod asynchroniczny
+##### Kod asynchroniczny
 
 ```python
 import asyncio
@@ -271,13 +271,13 @@ Pracownik odpowiedział, że ukończył 42 zadań.
 - Menadżer nie jest zablokowany podczas wykonywania `proste_zadanie` i może wykonywać inne operacje.
 - Asynchroniczność pozwala na efektywne wykorzystanie czasu oczekiwania.
 
-### Różnice między kodem synchronicznym a asynchronicznym
+##### Różnice między kodem synchronicznym a asynchronicznym
 
 - W kodzie synchronicznym `time.sleep(3)` blokuje cały wątek. W kodzie asynchronicznym `await asyncio.sleep(3)` zawiesza tylko korutynę, pozwalając pętli zdarzeń na wykonywanie innych zadań.
 - Asynchroniczność pozwala na lepsze wykorzystanie czasu procesora przez przełączanie między zadaniami podczas oczekiwania na operacje I/O.
 - Kod asynchroniczny jest bardziej skalowalny w kontekście obsługi wielu jednoczesnych zadań.
 
-### Przykład z wieloma pracownikami
+##### Przykład z wieloma pracownikami
 
 Rozszerzmy przykład, aby pokazać, jak asynchroniczność pozwala na równoczesne wykonywanie wielu zadań.
 
@@ -318,15 +318,15 @@ Pracownik 2 skończył zadanie po 3 sekundach.
 Pracownicy ukończyli zadania z wynikami: [10, 20, 30]
 ```
 
-### Wykonywanie wielu korutyn równocześnie
+#### Wykonywanie wielu korutyn równocześnie
 
 Asynchroniczność w Pythonie, za pomocą biblioteki `asyncio`, pozwala na równoczesne wykonywanie wielu korutyn. Jest to szczególnie przydatne, gdy mamy wiele niezależnych zadań, które mogą być wykonywane jednocześnie, takich jak żądania sieciowe, operacje na plikach czy interakcje z bazami danych. Dzięki temu możemy znacząco zwiększyć efektywność i wydajność naszej aplikacji.
 
-#### Uruchamianie wielu korutyn za pomocą `asyncio.gather`
+##### Uruchamianie wielu korutyn za pomocą `asyncio.gather`
 
 Funkcja `asyncio.gather` umożliwia jednoczesne uruchomienie wielu korutyn i oczekiwanie na ich zakończenie. Przyjrzyjmy się temu na konkretnym przykładzie.
 
-##### Przykład:
+**Przykład:**
 
 ```python
 import asyncio
@@ -389,11 +389,11 @@ Wynik zadania 2
 Wynik zadania 3
 ```
 
-#### Uruchamianie wielu korutyn za pomocą `asyncio.create_task`
+##### Uruchamianie wielu korutyn za pomocą `asyncio.create_task`
 
 Alternatywnym sposobem jest użycie funkcji `asyncio.create_task`, która tworzy zadania asynchroniczne z korutyn. Pozwala to na większą kontrolę nad poszczególnymi zadaniami, np. możliwość ich anulowania czy monitorowania stanu.
 
-##### Przykład:
+**Przykład:**
 
 ```python
 import asyncio
@@ -437,34 +437,28 @@ if __name__ == "__main__":
 - Zadania można anulować za pomocą metody `cancel()`.
 - Możemy sprawdzać stan zadania (np. czy jest w trakcie wykonywania, zakończone czy anulowane).
 
-#### Różnice między `asyncio.gather` a `asyncio.create_task`
+**Różnice między `asyncio.gather` a `asyncio.create_task`**
 
-`asyncio.gather`:
+| Cechy                        | `asyncio.gather`                                                                                   | `asyncio.create_task`                                                                   |
+|------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| Sposób Uruchamiania Korutyn   | Uruchamia wszystkie korutyny równocześnie i czeka na ich zakończenie.                             | Tworzy zadanie (`Task`) do wykonania w pętli zdarzeń.                                   |
+| Kolejność Wyników             | Zwraca listę wyników w tej samej kolejności, w jakiej korutyny zostały przekazane.                | Brak gwarantowanej kolejności wyników, zadania są wykonywane niezależnie.               |
+| Obsługa Wyjątków              | Przerywa działanie i propaguje wyjątek, chyba że użyto `return_exceptions=True`, wtedy zwraca wyjątki jako wyniki. | Wyjątki w korutynach muszą być obsługiwane ręcznie, nie przerywa to działania innych zadań. |
+| Kontrola Zadania              | Brak bezpośredniej kontroli nad zadaniami, oczekuje na zakończenie wszystkich korutyn.            | Pozwala na anulowanie, sprawdzanie stanu zadania i dodawanie callbacków.                |
 
-- Uruchamia wszystkie korutyny równocześnie i czeka na ich zakończenie.
-- Zwraca listę wyników w tej samej kolejności, w jakiej korutyny zostały przekazane.
-- W przypadku wystąpienia wyjątku w którejkolwiek korutynie, `asyncio.gather` przerywa działanie i propaguje wyjątek.
-- Opcjonalnie możemy użyć argumentu `return_exceptions=True`, aby zamiast przerywać działanie, zwrócić wyjątki jako wyniki.
-
-`asyncio.create_task`:
-
-- Tworzy obiekt zadania (`Task`), który jest planowany do wykonania w pętli zdarzeń.
-- Daje większą kontrolę nad zadaniami: możemy je anulować, sprawdzać ich stan, dodawać callbacki.
-- Nie czeka na zakończenie zadania; musimy użyć `await` lub innych mechanizmów synchronizacji, aby oczekiwać na wynik.
-
-#### Praktyczne zastosowania
+**Praktyczne zastosowania**
 
 - Gdy potrzebujemy **prostego sposobu na równoczesne uruchomienie wielu korutyn i zebranie wyników** używamy `asyncio.gather`.
 - Gdy potrzebujemy **większej kontroli nad zadaniami** używamy `asyncio.create_task`.
 - Np. gdy chcemy anulować zadanie po określonym czasie lub gdy chcemy reagować na jego zakończenie za pomocą callbacków.
 
-### Jak `asyncio` zwiększa wydajność
+#### Jak `asyncio` zwiększa wydajność
 
 Wykorzystanie asynchroniczności pozwala na efektywniejsze zarządzanie czasem procesora i operacjami I/O. W tradycyjnym podejściu synchronicznym, gdy program napotka operację I/O, taką jak żądanie sieciowe czy odczyt pliku, musi czekać na jej zakończenie, zanim przejdzie do kolejnej instrukcji. Oznacza to, że czas procesora jest marnowany na bezczynne oczekiwanie.
 
 W asynchroniczności, podczas gdy jedno zadanie czeka na operację I/O, pętla zdarzeń `asyncio` może przełączać się na wykonywanie innych korutyn, które są gotowe do działania. Dzięki temu maksymalizujemy wykorzystanie dostępnego czasu procesora i skracamy ogólny czas wykonywania programu.
 
-#### Przykład: Porównanie wydajności żądań HTTP
+##### Przykład: Porównanie wydajności żądań HTTP
 
 Załóżmy, że chcemy wysłać 10 żądań HTTP do tego samego adresu URL.
 
@@ -526,13 +520,13 @@ print(f"Asynchronicznie: {end - start:.2f} sekund")
 - Program nie marnuje czasu na bezczynne oczekiwanie, lecz wykorzystuje go na wykonywanie innych zadań.
 - Asynchroniczne programy mogą obsługiwać więcej zadań bez proporcjonalnego zwiększania zapotrzebowania na zasoby.
 
-#### Dlaczego `asyncio` jest szybsze?
+##### Dlaczego `asyncio` jest szybsze?
 
 - Podczas gdy jedno zadanie czeka na operację I/O, inne mogą być wykonywane.
 - Asynchroniczność nie wymaga tworzenia nowych wątków czy procesów, co zmniejsza narzut związany z przełączaniem kontekstu i zużyciem pamięci.
 - `asyncio` zarządza kolejnością wykonywania zadań, optymalizując wykorzystanie czasu procesora.
 
-### Kiedy używać `asyncio`?
+##### Kiedy używać `asyncio`?
 
 - Gdy aplikacja wysyła wiele żądań sieciowych lub obsługuje wiele połączeń (np. serwery HTTP, klienty API).
 - Gdy potrzebujemy równocześnie czytać lub zapisywać wiele plików.
