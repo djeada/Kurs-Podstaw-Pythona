@@ -18,9 +18,13 @@ Serializacja to proces przekształcania obiektu lub struktury danych w format, k
 
 ### Zastosowania serializacji
 
-- **Przechowywanie danych**: Zserializowane dane mogą być zapisane w plikach lub bazach danych, co pozwala na ich późniejsze odczytanie i przywrócenie do stanu pierwotnego.
-- **Przesyłanie danych**: Serializacja umożliwia przesyłanie obiektów przez sieć, np. między różnymi komponentami aplikacji rozproszonych lub w komunikacji klient-serwer.
-- **Klonowanie obiektów**: Proces serializacji i deserializacji może być użyty do głębokiego kopiowania obiektów, czyli tworzenia kopii obiektu wraz z wszystkimi zagnieżdżonymi obiektami.
+- Zserializowane dane mogą być **zapisane w plikach** (np. w formatach takich jak JSON, XML, czy binarnych) lub w bazach danych. Umożliwia to ich późniejsze odczytanie i przywrócenie do stanu pierwotnego, co jest przydatne np. w aplikacjach wymagających przechowywania stanu obiektów pomiędzy uruchomieniami (tzw. *persistence*).
+- Serializacja umożliwia bezpieczne i efektywne **przesyłanie obiektów przez sieć**, np. w aplikacjach rozproszonych, systemach mikroserwisów lub podczas komunikacji między klientem a serwerem. Dzięki temu różne komponenty systemu mogą wymieniać się złożonymi strukturami danych niezależnie od lokalizacji geograficznej.
+- Proces serializacji i deserializacji może być wykorzystany do tworzenia **głębokich kopii obiektów**. W ten sposób powstaje nowa instancja obiektu wraz ze wszystkimi zagnieżdżonymi w nim obiektami, co pozwala uniknąć niepożądanej współdzielonej referencji w pamięci.
+- Serializacja jest często stosowana w procesach **migracji danych** pomiędzy różnymi wersjami aplikacji lub systemami. Umożliwia to przeniesienie złożonych struktur danych do nowych środowisk, zachowując integralność danych i ich strukturę.
+- Serializacja w formie binarnej może być użyta do **zmniejszenia rozmiaru** danych przed ich zapisaniem lub przesłaniem. Dzięki temu, mimo bogactwa struktury danych, możliwe jest efektywne zarządzanie ich wielkością, co jest szczególnie istotne w systemach o ograniczonych zasobach (np. urządzenia IoT).
+- Serializacja może być zastosowana jako część **mechanizmów bezpieczeństwa**, umożliwiając np. szyfrowanie zserializowanych danych przed ich przesłaniem lub zapisaniem, a także kontrolę dostępu do deserializowanych obiektów. 
+- Serializacja wspomaga **komunikację między systemami napisanymi w różnych językach programowania**. Na przykład, obiekty stworzone w Pythonie mogą być zserializowane do formatu JSON i odczytane w aplikacji napisanej w Javie, co wspiera interoperacyjność między technologiami.
 
 ### Przykład użycia `pickle`
 
