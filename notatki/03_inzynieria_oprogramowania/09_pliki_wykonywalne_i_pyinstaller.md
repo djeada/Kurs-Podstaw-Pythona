@@ -2,7 +2,9 @@
 
 Tworzenie plików wykonywalnych z kodu Python to efektywny sposób na dystrybucję aplikacji do użytkowników, którzy nie mają zainstalowanego Pythona na swoim komputerze. Jest to szczególnie istotne w środowiskach korporacyjnych lub dla użytkowników niebędących programistami, gdzie instalacja interpretera Python może być problematyczna lub niemożliwa. **PyInstaller** odgrywa kluczową rolę w tym procesie, umożliwiając konwersję skryptów Python na samodzielne pliki wykonywalne dla różnych systemów operacyjnych, takich jak Windows (`.exe`), macOS (`.app`) czy Linux (`.bin`). Dzięki temu aplikacja może być uruchomiona na docelowym systemie bez konieczności instalacji dodatkowego oprogramowania czy bibliotek.
 
-**Dlaczego PyInstaller?** Istnieją inne narzędzia do tworzenia plików wykonywalnych z kodu Python, takie jak `cx_Freeze`, `py2exe` czy `Nuitka`. Jednak PyInstaller wyróżnia się prostotą użycia, szerokim wsparciem dla różnych systemów operacyjnych oraz zdolnością do obsługi złożonych aplikacji z wieloma zależnościami. Ponadto, PyInstaller automatycznie analizuje zależności skryptu i dołącza niezbędne biblioteki, co ułatwia proces pakowania aplikacji.
+**Dlaczego PyInstaller?** 
+
+Istnieją inne narzędzia do tworzenia plików wykonywalnych z kodu Python, takie jak `cx_Freeze`, `py2exe` czy `Nuitka`. Jednak PyInstaller wyróżnia się prostotą użycia, szerokim wsparciem dla różnych systemów operacyjnych oraz zdolnością do obsługi złożonych aplikacji z wieloma zależnościami. Ponadto, PyInstaller automatycznie analizuje zależności skryptu i dołącza niezbędne biblioteki, co ułatwia proces pakowania aplikacji.
 
 ### Instalacja PyInstaller
 
@@ -336,34 +338,104 @@ pyinstaller --onefile --log-level=DEBUG nazwa_skryptu.py
 
 **Poziomy logowania:** `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `CRITICAL`.
 
+Rozumiem, że potrzebujesz bardziej szczegółowego i rozbudowanego przykładu dotyczącego tworzenia hooków oraz obsługi niestandardowych modułów w PyInstallerze. Poniżej przedstawiam bardziej szczegółowy opis, który zawiera dokładne kroki i instrukcje.
+
 #### Hooki i obsługa niestandardowych modułów
 
-Jeśli korzystasz z modułów, które wymagają specjalnego traktowania, możesz użyć hooków PyInstaller. Hooki to skrypty Pythona, które informują PyInstaller, jak obsłużyć określone moduły.
+Hooki w PyInstallerze to specjalne skrypty Pythona, które pozwalają na obsługę modułów wymagających niestandardowej konfiguracji lub specjalnego traktowania podczas procesu budowania. Mogą być one potrzebne, gdy moduły dynamicznie importują inne moduły, używają zasobów zewnętrznych lub mają inne zależności, których PyInstaller nie jest w stanie wykryć automatycznie.
 
-**Przykład tworzenia hooka:**
+##### Kiedy potrzebujesz hooków?
+Zwykle PyInstaller samodzielnie rozpoznaje zależności i moduły potrzebne do działania aplikacji. Jednak niektóre moduły korzystają z dynamicznego importowania, co może powodować, że PyInstaller nie wykryje ich poprawnie. Przykłady takich modułów to np. `numpy`, `tensorflow`, `scipy` czy własne niestandardowe moduły.
 
-I. Utwórz plik `hook-moj_modul.py` w katalogu `hooks/`.
+##### Tworzenie hooka: krok po kroku
 
-II. Dodaj w nim potrzebne instrukcje, np.:
+**I. Utworzenie katalogu `hooks`**
+
+Zanim stworzymy hooka, musimy przygotować odpowiednią strukturę katalogów. W tym celu utwórz katalog o nazwie `hooks` w głównym folderze projektu. W tym katalogu umieścisz wszystkie niestandardowe hooki, które będą obsługiwać dodatkowe moduły.
+
+```bash
+mkdir hooks
+```
+
+**II. Stworzenie pliku hooka**
+
+Każdy hook to osobny plik o nazwie `hook-<nazwa_modulu>.py`, gdzie `<nazwa_modulu>` to nazwa modułu, który wymaga specjalnej obsługi. Załóżmy, że chcesz spakować aplikację korzystającą z modułu o nazwie `moj_modul`, który dynamicznie ładuje inne podmoduły.
+
+W tym przypadku utwórz plik `hook-moj_modul.py` w katalogu `hooks/`:
+
+```bash
+touch hooks/hook-moj_modul.py
+```
+
+**III. Konfiguracja hooka**
+
+W pliku `hook-moj_modul.py` musisz zdefiniować, jak PyInstaller powinien traktować `moj_modul`. W najprostszej formie możesz użyć funkcji `collect_submodules` z pakietu `PyInstaller.utils.hooks`, aby zebrać wszystkie podmoduły, które mogą być dynamicznie importowane. Przykład takiej konfiguracji:
 
 ```python
+# hooks/hook-moj_modul.py
 from PyInstaller.utils.hooks import collect_submodules
 
+# Zbierz wszystkie podmoduły
 hiddenimports = collect_submodules('moj_modul')
 ```
 
-III. Użyj opcji `--additional-hooks-dir`:
+W tym przykładzie `hiddenimports` to lista podmodułów, które są dynamicznie ładowane przez `moj_modul`, a które muszą być explicite uwzględnione w pakiecie generowanym przez PyInstaller.
+
+**IV. Zdefiniowanie dodatkowych zależności**
+
+Oprócz `hiddenimports`, możesz także zdefiniować inne typy zasobów, takie jak dane, które muszą być dodane do pakietu. Na przykład, jeśli `moj_modul` korzysta z plików konfiguracyjnych, grafik, czy innych zasobów, można je uwzględnić, definiując dodatkową zmienną `datas`:
+
+```python
+# hooks/hook-moj_modul.py
+from PyInstaller.utils.hooks import collect_submodules, collect_data_files
+
+# Zbierz wszystkie podmoduły
+hiddenimports = collect_submodules('moj_modul')
+
+# Zbierz dane (np. pliki konfiguracyjne)
+datas = collect_data_files('moj_modul')
+```
+
+**V. Użycie hooków podczas budowania aplikacji**
+
+Aby PyInstaller uwzględnił nowo utworzone hooki, musisz przekazać ścieżkę do katalogu `hooks` za pomocą opcji `--additional-hooks-dir`. Przykład komendy budowania:
 
 ```bash
 pyinstaller --onefile --additional-hooks-dir=hooks nazwa_skryptu.py
 ```
 
-#### Przekazywanie argumentów do aplikacji
+W tym przykładzie:
 
-Jeśli twoja aplikacja korzysta z argumentów wiersza poleceń, będzie je nadal otrzymywać po spakowaniu:
+- `--onefile` tworzy jednoplikową binarkę.
+- `--additional-hooks-dir=hooks` mówi PyInstallerowi, aby uwzględnił hooki z katalogu `hooks`.
+- `nazwa_skryptu.py` to Twój główny skrypt Pythona.
 
-```bash
-./nazwa_aplikacji --opcje
+**VI. Weryfikacja poprawności hooka**
+
+Aby upewnić się, że hook działa prawidłowo, uruchom spakowaną aplikację i sprawdź, czy wszystkie moduły działają bez problemów. Możesz to zrobić, analizując plik `.spec`, który PyInstaller generuje podczas kompilacji, lub ręcznie testując aplikację po spakowaniu.
+
+##### Przekazywanie argumentów do aplikacji
+
+Jeśli Twoja aplikacja korzysta z argumentów wiersza poleceń, PyInstaller zachowa tę funkcjonalność po spakowaniu. Musisz jedynie upewnić się, że obsługa argumentów jest prawidłowo zaimplementowana w skrypcie, np. za pomocą modułów takich jak `argparse` lub `sys.argv`.
+
+Przykład prostego skryptu obsługującego argumenty wiersza poleceń:
+
+```python
+import argparse
+
+def main():
+    parser = argparse.ArgumentParser(description="Opis aplikacji")
+    parser.add_argument('--opcje', type=str, help="Przykładowa opcja")
+    args = parser.parse_args()
+    
+    print(f"Otrzymano opcje: {args.opcje}")
+
+if __name__ == '__main__':
+    main()
 ```
 
-Upewnij się, że obsługujesz argumenty za pomocą modułów takich jak `argparse` czy `sys.argv`.
+Po spakowaniu aplikacji możesz ją uruchomić z argumentami wiersza poleceń:
+
+```bash
+./nazwa_aplikacji --opcje "wartość"
+```
