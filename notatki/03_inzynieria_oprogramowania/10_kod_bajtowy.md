@@ -237,9 +237,3 @@ print(inspect.getsource(len))
 ```
 
 Otrzymamy błąd `OSError`, ponieważ funkcja `len` jest zaimplementowana w C i nie ma dostępnego kodu źródłowego w Pythonie.
-
-### Sposoby obejścia ograniczeń
-
-- W przypadku braku kodu źródłowego, warto odwołać się do oficjalnej dokumentacji biblioteki.
-- Jeśli kod źródłowy nie jest dostępny, można spróbować użyć modułu `dis` do analizy kodu bajtowego, chociaż w przypadku funkcji wbudowanych może to być ograniczone.
-- Jeśli to możliwe, korzystaj z bibliotek o otwartym kodzie źródłowym, co ułatwia analizę i zrozumienie działania.
