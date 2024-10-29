@@ -20,7 +20,7 @@ make html
 
 Po wykonaniu tej komendy, jeśli wszystko przebiegnie poprawnie, SPHINX wyświetli informację o sukcesie. W przeciwnym razie, w przypadku jakichkolwiek problemów, pojawią się komunikaty o błędach, które poinformują cię, co poszło nie tak.
 
-## reStructuredText i jego zastosowanie w Sphinx
+### reStructuredText i jego zastosowanie w Sphinx
 
 **reStructuredText** (rST) to elastyczny i rozbudowany język znaczników przeznaczony do tworzenia dokumentacji i prostych stron internetowych. W porównaniu z popularnym językiem markdown, rST oferuje znacznie bogatszy zestaw funkcji, co czyni go idealnym narzędziem do tworzenia rozbudowanej dokumentacji.
 
@@ -31,8 +31,6 @@ Kilka uwag o reStructuredText:
 3. reStructuredText jest podstawowym formatem wykorzystywanym przez Sphinx – popularne narzędzie do tworzenia dokumentacji. Plik `index.rst` pełni kluczową rolę, ponieważ zawiera główną strukturę oraz linki do pozostałych części dokumentacji.
 4. Linkowanie do innych plików i sekcji w reStructuredText jest bardziej intuicyjne i przejrzyste, co ułatwia utrzymanie spójności w dużych dokumentacjach.
 5. Korzystając z plików reStructuredText, Sphinx umożliwia generowanie dokumentacji w różnych formatach, w tym w HTML. Aby przekształcić pliki reStructuredText w elegancką stronę internetową, wystarczy użyć komendy `make html`.
-
-### Podstawowe formatowanie w reStructuredText
 
 #### Nagłówki
 
