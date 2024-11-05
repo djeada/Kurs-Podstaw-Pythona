@@ -34,7 +34,7 @@ Python przeszedł długą drogę od swojego powstania, a każda kolejna wersja w
 | **3.1**     | 27.06.2009    | - Poprawa wydajności.<br>- Nowa biblioteka wejścia/wyjścia.<br>- Wprowadzenie **`OrderedDict`** w module `collections`. |
 | **3.2**     | 20.02.2011    | - Wsparcie dla modułu **`concurrent.futures`** do programowania równoległego.<br>- Nowy moduł **`argparse`** do analizy argumentów wiersza poleceń.<br>- Lepsza reprezentacja liczb zmiennoprzecinkowych. |
 | **3.3**     | 29.09.2012    | - Wprowadzenie **`yield from`** dla generatorów.<br>- Nowe moduły takie jak **`faulthandler`**.<br>- Ulepszenia w funkcjach systemowych i plikowych. |
-| **3.4**     | 16.03.2014    | - Wprowadzenie modułu **`asyncio`** do programowania asynchronicznego.<br>- **Enzymy** (enums) w module `enum`.<br>- Nowa biblioteka **`pathlib`** do obsługi ścieżek plików. |
+| **3.4**     | 16.03.2014    | - Wprowadzenie modułu **`asyncio`** do programowania asynchronicznego.<br>- **Typy wyliczeniowe** (enums) w module `enum`.<br>- Nowa biblioteka **`pathlib`** do obsługi ścieżek plików. |
 | **3.5**     | 13.09.2015    | - Wprowadzenie słów kluczowych **`async`** i **`await`**.<br>- Operator **mnożenia macierzy** `@`. |
 | **3.6**     | 23.12.2016    | - **Napisy formatowane (f-strings)**, ułatwiające wstawianie zmiennych do ciągów znaków.<br>- Poprawa wydajności słowników.<br>- Ulepszenia w asynchroniczności. |
 | **3.7**     | 27.06.2018    | - **Dataclasses**, czyli prosty sposób na tworzenie klas danych.<br>- Odroczona ewaluacja adnotacji typów.<br>- **Context Variables** dla lepszego zarządzania stanem w programowaniu asynchronicznym. |
