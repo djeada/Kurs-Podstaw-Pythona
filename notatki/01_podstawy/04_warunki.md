@@ -13,7 +13,7 @@ czy_pelnoletni = wiek >= 18
 
 W powyższym przykładzie, zmienna `czy_pelnoletni` będzie miała wartość `True`, ponieważ 18 jest równe 18.
 
-### Porównania w Pythonie
+### Porównania
 
 Python oferuje różne operatory porównania, które mogą być używane do tworzenia warunków:
 
@@ -99,7 +99,7 @@ if not a > 10:
 
 W powyższym przykładzie, komunikat zostanie wydrukowany, ponieważ `a > 10` jest fałszywe, a `not` zmienia to na `True`.
 
-### Przykład zastosowania operatorów logicznych:
+### Przykład zastosowania operatorów logicznych
 
 ```python
 a = 5
@@ -122,7 +122,7 @@ W tym przykładzie:
 - Druga instrukcja `if` sprawdza, czy `a` jest równe 5 lub `b` jest równe 5. Jeśli przynajmniej jeden z tych warunków jest prawdziwy, drukuje komunikat.
 - Trzecia instrukcja `if` używa operatora `not` do sprawdzenia, czy `a` nie jest równe 10. Jeśli warunek jest fałszywy, drukuje komunikat.
 
-### Zastosowanie operatora `or` w kontekście:
+### Zastosowanie operatora `or`
 
 W kontekście operatora `or`, dodatkowe wyjaśnienie działania wyrażenia:
 
