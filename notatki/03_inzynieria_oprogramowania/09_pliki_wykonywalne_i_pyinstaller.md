@@ -116,19 +116,13 @@ Alternatywnie, możesz edytować plik specyfikacji `.spec` i dodać brakujące m
 
 ### Dołączanie zasobów: Grafika, Dźwięk i Inne
 
-W aplikacjach Python często korzysta się z zewnętrznych zasobów takich jak grafiki, dźwięki, pliki konfiguracyjne czy bazy danych. Aby aplikacja działała poprawnie po spakowaniu, te zasoby muszą być dołączone do pliku wykonywalnego lub dystrybuowane wraz z nim.
+W aplikacjach napisanych w Pythonie często korzysta się z zewnętrznych zasobów takich jak obrazy, pliki dźwiękowe, pliki konfiguracyjne czy bazy danych. Dla przykładu, jeśli tworzysz grę, możesz potrzebować dołączyć pliki graficzne dla postaci i tła oraz pliki dźwiękowe dla efektów. Gdy aplikacja jest gotowa do spakowania i dystrybucji, ważne jest, aby te zasoby były poprawnie dołączone, ponieważ aplikacja nie będzie w stanie znaleźć plików zewnętrznych, jeśli nie zostały one uwzględnione.
 
-#### Jak to zrobić?
+#### Używanie opcji `--add-data`
 
-PyInstaller umożliwia dołączanie dodatkowych plików za pomocą opcji `--add-data`. Składnia tej opcji różni się w zależności od systemu operacyjnego:
+PyInstaller, narzędzie do pakowania aplikacji Python, oferuje opcję `--add-data`, która umożliwia dołączenie dodatkowych plików do skompilowanej aplikacji. Użycie tej opcji może różnić się w zależności od systemu operacyjnego.
 
-Na Windows:
-
-```bash
-pyinstaller --add-data "ścieżka_do_zasobu;ścieżka_w_aplikacji" nazwa_skryptu.py
-```
-
-Na macOS/Linux:
+Ogólna składnia tej opcji jest następująca:
 
 ```bash
 pyinstaller --add-data "ścieżka_do_zasobu:ścieżka_w_aplikacji" nazwa_skryptu.py
@@ -136,44 +130,44 @@ pyinstaller --add-data "ścieżka_do_zasobu:ścieżka_w_aplikacji" nazwa_skryptu
 
 **Parametry:**
 
-- `ścieżka_do_zasobu` to ścieżka do pliku lub katalogu na twoim komputerze.
-- `ścieżka_w_aplikacji` to ścieżka, pod którą zasób będzie dostępny w aplikacji.
+- `ścieżka_do_zasobu` to ścieżka do pliku lub katalogu, który chcesz dołączyć. Musisz wskazać dokładną lokalizację zasobu na swoim komputerze.
+- `ścieżka_w_aplikacji` to ścieżka, pod którą zasób będzie dostępny wewnątrz aplikacji. PyInstaller umieści plik w strukturze odpowiadającej tej ścieżce w momencie uruchomienia aplikacji.
 
-**Przykład:**
-
-Dołączenie pliku `config.json` znajdującego się w katalogu `settings`:
-
-Windows:
+Załóżmy, że chcesz dołączyć plik konfiguracyjny `config.json`, który znajduje się w katalogu `settings`. Możesz to zrobić następująco:
 
 ```bash
-pyinstaller --add-data "settings\config.json;settings" nazwa_skryptu.py
+pyinstaller --add-data "settings/config.json:settings" main.py
 ```
 
-macOS/Linux:
-
-```bash
-pyinstaller --add-data "settings/config.json:settings" nazwa_skryptu.py
-```
+Po spakowaniu plik `config.json` będzie dostępny w folderze `settings` wewnątrz spakowanego pliku wykonywalnego.
 
 #### Dołączanie wielu zasobów
 
-Możesz dołączyć wiele zasobów, powtarzając opcję `--add-data` dla każdego z nich:
+Jeśli masz kilka zasobów do dołączenia, możesz użyć opcji `--add-data` wielokrotnie, podając każdy zasób oddzielnie.
 
-Windows:
+Przykłady dla różnych systemów operacyjnych:
 
-```bash
-pyinstaller --add-data "images\logo.png;images" --add-data "sounds\alert.wav;sounds" nazwa_skryptu.py
-```
+**Windows:**
 
-macOS/Linux:
+Na Windowsie używamy średnika (`;`) jako separatora ścieżek:
 
 ```bash
-pyinstaller --add-data "images/logo.png:images" --add-data "sounds/alert.wav:sounds" nazwa_skryptu.py
+pyinstaller --add-data "images\logo.png;images" --add-data "sounds\alert.wav;sounds" main.py
 ```
 
-#### Przykład
+**macOS/Linux:**
 
-Masz aplikację z następującą strukturą:
+Na macOS oraz Linuxie używamy dwukropka (`:`) jako separatora ścieżek:
+
+```bash
+pyinstaller --add-data "images/logo.png:images" --add-data "sounds/alert.wav:sounds" main.py
+```
+
+W ten sposób plik `logo.png` znajdzie się w katalogu `images`, a plik `alert.wav` w katalogu `sounds` wewnątrz aplikacji.
+
+#### Przykład struktury projektu
+
+Załóżmy, że Twój projekt ma następującą strukturę katalogów:
 
 ```
 projekt/
@@ -189,25 +183,21 @@ projekt/
             data.json
 ```
 
-Aby dołączyć cały katalog `resources`, użyj:
-
-Windows:
-
-```bash
-pyinstaller --onefile --add-data "resources;resources" main.py
-```
-
-macOS/Linux:
+Aby dołączyć cały katalog `resources`, możesz użyć poniższej komendy:
 
 ```bash
 pyinstaller --onefile --add-data "resources:resources" main.py
 ```
 
-#### Uwaga: Dostęp do zasobów
+Dzięki temu cały katalog `resources` będzie dostępny po uruchomieniu aplikacji.
 
-Aby poprawnie odnaleźć zasoby w kodzie po spakowaniu aplikacji, musisz uwzględnić fakt, że ścieżki do plików zmieniają się w zależności od tego, czy aplikacja jest uruchamiana jako skrypt, czy jako spakowany plik wykonywalny.
+### Dostęp do zasobów po spakowaniu
 
-**Funkcja `resource_path`:**
+Podczas pracy nad projektem bez spakowania, odwołujemy się do zasobów za pomocą lokalnych ścieżek, np. `resources/images/logo.png`. Po spakowaniu przez PyInstaller ścieżki te się zmieniają. PyInstaller pakuje zasoby do tymczasowego folderu, który jest dostępny jedynie podczas działania aplikacji.
+
+Aby poprawnie uzyskać dostęp do zasobów zarówno w wersji deweloperskiej, jak i spakowanej, można skorzystać z funkcji `resource_path`. Funkcja ta automatycznie dopasowuje ścieżki, obsługując różnice między środowiskiem lokalnym a środowiskiem spakowanym.
+
+#### Funkcja `resource_path`
 
 ```python
 import sys
@@ -224,17 +214,23 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 ```
 
-- `sys._MEIPASS` to atrybut dodawany przez PyInstaller wskazujący na tymczasowy katalog, w którym przechowywane są zasoby.
-- Jeśli aplikacja jest uruchamiana jako skrypt, `sys._MEIPASS` nie istnieje, więc używamy bieżącego katalogu.
+W powyższym kodzie:
 
-**Przykład użycia:**
+- `sys._MEIPASS` to specjalna zmienna, którą PyInstaller tworzy w spakowanej aplikacji, wskazująca na tymczasowy folder, gdzie przechowywane są zasoby.
+- Jeśli aplikacja działa jako skrypt (np. w środowisku lokalnym), `sys._MEIPASS` nie istnieje. W takim przypadku funkcja `resource_path` zwraca lokalną ścieżkę do zasobu.
+
+#### Przykład użycia w kodzie:
+
+Poniżej przykład, który pokazuje, jak załadować obrazek z katalogu `resources/images` zarówno w środowisku lokalnym, jak i po spakowaniu:
 
 ```python
+from PIL import Image
+
 image_path = resource_path('resources/images/logo.png')
 image = Image.open(image_path)
 ```
 
-Dzięki temu kod będzie działał poprawnie zarówno w środowisku deweloperskim, jak i po spakowaniu aplikacji.
+Dzięki zastosowaniu `resource_path`, kod ten zadziała poprawnie zarówno podczas testów lokalnych, jak i po spakowaniu aplikacji.
 
 ### Zaawansowane Ustawienia
 
