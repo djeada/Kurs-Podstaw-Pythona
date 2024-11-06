@@ -27,14 +27,13 @@ Czyste funkcje, inaczej nazywane funkcjami czysto matematycznymi, są pozbawione
 
 #### Przykłady czystych funkcji
 
-1. **Funkcja obliczająca pole trójkąta** na podstawie jego boków. Niezależnie od kontekstu zawsze da taki sam wynik dla tych samych argumentów.
+I. Funkcja obliczająca pole trójkąta na podstawie jego boków. Niezależnie od kontekstu zawsze da taki sam wynik dla tych samych argumentów.
 
 ```python
 def pole_trojkata(podstawa, wysokosc):
     return 0.5 * podstawa * wysokosc
 ```
-
-2. **Funkcja zwracająca iloczyn elementów listy**. Jej wynik zależy wyłącznie od zawartości listy.
+II. Funkcja zwracająca iloczyn elementów listy. Jej wynik zależy wyłącznie od zawartości listy.
 
 ```python
 def iloczyn_listy(lista):
@@ -44,28 +43,28 @@ def iloczyn_listy(lista):
     return wynik
 ```
 
-3. **Funkcja znajdująca największy element w liście**. Działa na podstawie dostarczonych danych.
+III. Funkcja znajdująca największy element w liście. Działa na podstawie dostarczonych danych.
 
 ```python
 def max_element(lista):
     return max(lista)
 ```
 
-4. **Funkcja generująca nową listę** zawierającą tylko liczby parzyste z danej listy.
+IV. Funkcja generująca nową listę zawierającą tylko liczby parzyste z danej listy.
 
 ```python
 def filtruj_parzyste(lista):
     return [element for element w lista jeśli element % 2 == 0]
 ```
 
-5. **Funkcja tworząca nowy słownik** z wybranymi kluczami z oryginalnego słownika.
+V. Funkcja tworząca nowy słownik z wybranymi kluczami z oryginalnego słownika.
 
 ```python
 def filtruj_slownik(slownik, klucze):
     return {klucz: slownik[klucz] for klucz w klucze jeśli klucz w slownik}
 ```
 
-6. **Funkcja konwertująca ciąg znaków na wielkie litery**.
+VI. Funkcja konwertująca ciąg znaków na wielkie litery.
 
 ```python
 def na_wielkie_litery(napis):
@@ -74,7 +73,7 @@ def na_wielkie_litery(napis):
 
 #### Przykłady nieczystych funkcji
 
-1. **Funkcja zapisująca dane do pliku**. Może powodować skutki uboczne w postaci zmian na dysku.
+I. Funkcja zapisująca dane do pliku. Może powodować skutki uboczne w postaci zmian na dysku.
 
 ```python
 def zapisz_do_pliku(nazwa_pliku, dane):
@@ -82,7 +81,7 @@ def zapisz_do_pliku(nazwa_pliku, dane):
         plik.write(dane)
 ```
 
-2. **Funkcja generująca losowe liczby**. Wynik zależy od stanu generatora liczb losowych.
+II. Funkcja generująca losowe liczby. Wynik zależy od stanu generatora liczb losowych.
 
 ```python
 import random
@@ -90,7 +89,7 @@ def losowa_liczba():
     return random.randint(1, 100)
 ```
 
-3. **Funkcja modyfikująca globalną zmienną**. Wpływa na stan programu poza lokalnym zakresem funkcji.
+III. Funkcja modyfikująca globalną zmienną. Wpływa na stan programu poza lokalnym zakresem funkcji.
 
 ```python
 globalna_zmienna = 0
@@ -100,7 +99,7 @@ def modyfikuj_globalna():
     globalna_zmienna += 1
 ```
 
-4. **Funkcja wysyłająca dane przez sieć**. Może wpływać na zewnętrzne systemy i jest zależna od stanu sieci.
+IV. Funkcja wysyłająca dane przez sieć. Może wpływać na zewnętrzne systemy i jest zależna od stanu sieci.
 
 ```python
 import requests
