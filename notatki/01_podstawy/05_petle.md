@@ -15,9 +15,11 @@ for element in kolekcja:
 
 Funkcja `range()` jest często używana w pętlach for, gdy chcemy wykonać blok kodu określoną liczbę razy. Może przyjmować różną liczbę argumentów:
 
-- `range(n)` - generuje sekwencję od 0 do n-1.
-- `range(start, stop)` - generuje sekwencję od start do stop-1.
-- `range(start, stop, krok)` - generuje sekwencję zaczynając od start, kończąc na stop-1, zwiększając wartość o krok przy każdej iteracji.
+| Sposób użycia           | Opis                                                                                     |
+|-------------------------|------------------------------------------------------------------------------------------|
+| `range(n)`              | Generuje sekwencję liczb od 0 do n-1.                                                    |
+| `range(start, stop)`    | Generuje sekwencję liczb od `start` do `stop - 1`.                                       |
+| `range(start, stop, krok)` | Generuje sekwencję liczb zaczynając od `start`, kończąc na `stop - 1`, zwiększając wartość o `krok` przy każdej iteracji. | 
 
 Przykłady:
 
@@ -130,7 +132,7 @@ for y in range(3):  # wiersze
 
 W tym przykładzie, dla każdej iteracji pętli zewnętrznej, pętla wewnętrzna zostanie wykonana w całości. Wydrukowany zostanie układ współrzędnych dla prostokąta o wymiarach 3x4.
 
-Aby lepiej zrozumieć działanie pętli zagnieżdżonych, przyjrzyjmy się w jaki sposób można je wykorzystać do generowania prostych wzorów graficznych:
+Aby lepiej zrozumieć działanie pętli zagnieżdżonych, przyjrzyjmy się, w jaki sposób można je wykorzystać do generowania prostych wzorów graficznych:
 
 #### Prostokąt
 
@@ -151,6 +153,8 @@ Wynik:
 *****
 ```
 
+W tym przykładzie mamy dwie pętle `for`. Zewnętrzna pętla (`for i in range(5)`) odpowiada za liczbę wierszy, które zostaną wydrukowane. Dla każdego przebiegu tej pętli wewnętrzna pętla (`for j in range(5)`) drukuje pięć gwiazdek w jednym wierszu, nie przechodząc do nowej linii dzięki `end=""`. Po zakończeniu wewnętrznej pętli następuje `print()`, który przeskakuje do nowej linii, co tworzy kwadratowy kształt z gwiazdek.
+
 #### Trójkąt prostokątny
 
 ```python
@@ -170,6 +174,8 @@ Wynik:
 *****
 ```
 
+Tutaj zewnętrzna pętla kontroluje liczbę wierszy, a każda kolejna iteracja dodaje jedną gwiazdkę więcej niż poprzednia. Wewnętrzna pętla (`for j in range(i + 1)`) drukuje gwiazdki, zaczynając od jednej gwiazdki i zwiększając ich liczbę w kolejnych wierszach. Takie działanie tworzy trójkątny wzór.
+
 #### Choinka
 
 ```python
@@ -184,13 +190,14 @@ for i in range(5):
 Wynik:
 
 ```
-
     *
    ***
   *****
  *******
 *********
 ```
+
+Aby utworzyć kształt przypominający choinkę, używamy dwóch pętli zagnieżdżonych dla każdego wiersza. Pierwsza pętla (`for j in range(5 - i - 1)`) generuje odpowiednią liczbę spacji, aby wyrównać wzór pośrodku. Druga pętla (`for k in range(2 * i + 1)`) tworzy gwiazdki, które tworzą kształt choinki, zwiększając ich liczbę w każdym kolejnym wierszu.
 
 ### Zaawansowane zastosowanie pętli zagnieżdżonych
 
@@ -219,6 +226,8 @@ Wynik:
 7 8 9
 ```
 
+W tym przykładzie zagnieżdżone pętle są używane do przejścia przez dwuwymiarową listę, czyli macierz. Zewnętrzna pętla przechodzi przez każdy wiersz w macierzy, a wewnętrzna pętla wypisuje każdy element w wierszu. Dzięki `print(element, end=" ")` elementy są wypisywane w jednym wierszu, a `print()` po zakończeniu każdego wiersza tworzy nową linię.
+
 #### Tabliczka mnożenia
 
 ```python
@@ -231,7 +240,6 @@ for i in range(1, 11):
 Wynik:
 
 ```
-
    1   2   3   4   5   6   7   8   9  10
    2   4   6   8  10  12  14  16  18  20
    3   6   9  12  15  18  21  24  27  30
@@ -243,6 +251,8 @@ Wynik:
    9  18  27  36  45  54  63  72  81  90
   10  20  30  40  50  60  70  80  90 100
 ```
+
+Powyższy kod generuje tabliczkę mnożenia za pomocą zagnieżdżonych pętli. Zewnętrzna pętla `for i in range(1, 11)` odpowiada za wiersze, a wewnętrzna pętla `for j in range(1, 11)` generuje wartości dla poszczególnych kolumn, mnożąc `i * j`. Dzięki `f"{i * j:4}"` każda liczba jest odpowiednio formatowana, aby zachować równy odstęp między kolumnami.
 
 #### Przeszukiwanie dwuwymiarowej listy
 
@@ -270,4 +280,6 @@ else:
     print(f"Nie znaleziono wartości {szukana_wartosc} w macierzy.")
 ```
 
-Pętle zagnieżdżone pozwalają na realizację wielu złożonych operacji i są kluczem do tworzenia bardziej zaawansowanych programów. Poprzez łączenie prostych pętli w złożone struktury, możemy przetwarzać dane w sposób efektywny i elastyczny.
+W tym przykładzie, zagnieżdżone pętle są używane do przeszukiwania dwuwymiarowej listy (`macierz`). Zewnętrzna pętla przechodzi przez każdy wiersz, a wewnętrzna pętla sprawdza każdy element w wierszu, porównując go z `szukana_wartosc`. Jeśli element jest równy szukanej wartości, ustawiamy `znaleziono = True` i przerywamy dalsze przeszukiwanie. Na końcu program informuje, czy wartość została znaleziona w macierzy.
+
+Pętle zagnieżdżone pozwalają na realizację wielu złożonych operacji i są ważne do tworzenia bardziej zaawansowanych programów. Poprzez łączenie prostych pętli w złożone struktury, możemy przetwarzać dane w efektywny i elastyczny sposób.
