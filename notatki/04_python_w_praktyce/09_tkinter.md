@@ -6,8 +6,6 @@ Tkinter jest standardowym modułem Pythona służącym do tworzenia interfejsów
 
 Pierwszym krokiem w tworzeniu aplikacji graficznej w Pythonie z użyciem Tkinter jest zaimportowanie modułu i zainicjalizowanie głównego okna aplikacji.
 
-#### Kod inicjalizacyjny
-
 ```python
 import tkinter as tk
 
@@ -31,7 +29,7 @@ Wyjaśnienie krok po kroku:
 
 Po utworzeniu głównego okna możemy dołączać do niego różne elementy interfejsu, zwane widżetami. Tkinter oferuje bogaty zestaw widżetów, takich jak przyciski, etykiety, pola tekstowe itp.
 
-#### Przykład - Dodanie przycisku
+**Przykład - Dodanie przycisku**
 
 Przyciski umożliwiają użytkownikowi interakcję z aplikacją, wywołując określone funkcje po kliknięciu.
 
@@ -51,7 +49,7 @@ Wyjaśnienie:
 - `tk.Button()` tworzy przycisk. Parametr `text` ustawia tekst na przycisku, a `command` przypisuje funkcję obsługującą zdarzenie kliknięcia.
 - Metoda `pack()` dodaje przycisk do okna i umieszcza go w jego środku. Parametr `pady` dodaje pionowe odstępy nad i pod przyciskiem.
 
-#### Przykład - Dodanie etykiety
+**Przykład - Dodanie etykiety**
 
 Etykiety służą do wyświetlania tekstu lub obrazów.
 
@@ -96,7 +94,7 @@ Każda z metod ma swoje specyficzne zastosowanie. `pack()` jest prosty i szybki,
 
 Ramki (`Frame`) są kontenerami, które grupują widżety i pomagają organizować bardziej złożone układy.
 
-#### Przykład użycia ramek
+**Przykład użycia ramek**
 
 ```python
 import tkinter as tk
@@ -142,7 +140,7 @@ Wskazówki:
 
 Interaktywność aplikacji zależy od jej zdolności do reagowania na zdarzenia, takie jak kliknięcia myszy czy naciśnięcia klawiszy. Tkinter pozwala nam obsługiwać te zdarzenia za pomocą metody `bind()`.
 
-#### Typowe zdarzenia
+**Popularne Zdarzenia**
 
 Poniżej kilka popularnych zdarzeń w Tkinter i ich opisy:
 
@@ -170,11 +168,11 @@ Klawiatura:
 | `<Return>`  | Naciśnięcie klawisza Enter.      |
 | `<Escape>`  | Naciśnięcie klawisza Esc.        |
 
-### Metoda `bind()`
+**Metoda `bind()`**
 
 Aby powiązać zdarzenie z konkretną funkcją obsługującą, używamy metody `bind()`. Funkcje te przyjmują argument `event`, który zawiera szczegóły zdarzenia (takie jak pozycja kursora czy informacje o klawiszach modyfikujących).
 
-#### Przykład obsługi zdarzeń myszy
+**Przykład obsługi zdarzeń myszy**
 
 Poniższy kod reaguje na to, czy kursor znajduje się nad przyciskiem, wypisując odpowiednie komunikaty.
 
@@ -206,7 +204,7 @@ Wyjaśnienie:
 
 Możemy reagować na naciśnięcie klawiszy, np. wyświetlając komunikat, gdy użytkownik naciśnie konkretny klawisz.
 
-#### Przykład obsługi klawisza
+**Przykład obsługi klawisza**
 
 ```python
 def on_key_press(event):
@@ -226,7 +224,7 @@ Wyjaśnienie:
 
 Tkinter pozwala przypisać wiele różnych zdarzeń do tego samego widżetu lub jedną funkcję do obsługi zdarzeń na wielu widżetach.
 
-#### Przykład — Łączenie zdarzeń na przycisku
+**Przykład — Łączenie zdarzeń na przycisku**
 
 Poniższy przykład przedstawia reakcję na różne kliknięcia przycisków myszy.
 
@@ -247,7 +245,7 @@ button.pack()
 
 Domyślnie Tkinter nie obsługuje dekoratorów dla zdarzeń, ale można napisać własny dekorator `event_handler`, który uprości wiązanie zdarzeń.
 
-#### Przykład własnego dekoratora `event_handler`
+**Przykład własnego dekoratora `event_handler`**
 
 ```python
 def event_handler(event_name):
@@ -291,7 +289,7 @@ Wyjaśnienie:
 
 Zamknięcie aplikacji można obsłużyć za pomocą przycisku wywołującego metodę `root.destroy()` lub na przykład na zdarzenie klawiaturowe.
 
-#### Przykład — Dodanie przycisku zamykającego aplikację
+**Przykład — Dodanie przycisku zamykającego aplikację**
 
 ```python
 import tkinter as tk
@@ -312,7 +310,7 @@ Wyjaśnienie:
 -  Funkcja `close_app()` wywołuje `root.destroy()`, co zamyka aplikację.
 - `command=close_app` przypisuje funkcję zamykającą do przycisku.
 
-#### Alternatywne zamknięcie aplikacji
+**Alternatywne zamknięcie aplikacji**
 
 Możemy także przypisać zamknięcie aplikacji do klawisza, na przykład `Escape`.
 
