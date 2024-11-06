@@ -334,8 +334,6 @@ pyinstaller --onefile --log-level=DEBUG nazwa_skryptu.py
 
 **Poziomy logowania:** `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `CRITICAL`.
 
-Rozumiem, że potrzebujesz bardziej szczegółowego i rozbudowanego przykładu dotyczącego tworzenia hooków oraz obsługi niestandardowych modułów w PyInstallerze. Poniżej przedstawiam bardziej szczegółowy opis, który zawiera dokładne kroki i instrukcje.
-
 #### Hooki i obsługa niestandardowych modułów
 
 Hooki w PyInstallerze to specjalne skrypty Pythona, które pozwalają na obsługę modułów wymagających niestandardowej konfiguracji lub specjalnego traktowania podczas procesu budowania. Mogą być one potrzebne, gdy moduły dynamicznie importują inne moduły, używają zasobów zewnętrznych lub mają inne zależności, których PyInstaller nie jest w stanie wykryć automatycznie.
