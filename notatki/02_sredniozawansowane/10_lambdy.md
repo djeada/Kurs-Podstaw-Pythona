@@ -1,4 +1,4 @@
-## Funkcje Lambda: Anonimowe Funkcje i Ich Zastosowanie
+## Funkcje Lambda
 
 Funkcje **lambda**, zwane również funkcjami anonimowymi, są narzędziem szeroko stosowanym w programowaniu funkcyjnym. Są to krótkie, jedno-wierszowe funkcje, które nie posiadają przypisanej nazwy i są używane tam, gdzie zdefiniowanie pełnoprawnej funkcji byłoby nadmiarowe lub zbędne. W Pythonie i wielu innych językach programowania funkcje lambda odgrywają istotną rolę, zwłaszcza przy manipulacji danymi i implementacji algorytmów funkcyjnych.
 
