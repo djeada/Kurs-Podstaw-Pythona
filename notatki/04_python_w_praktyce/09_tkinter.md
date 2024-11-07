@@ -65,30 +65,216 @@ Wyjaśnienie:
 - `tk.Label()` tworzy etykietę z wybranym tekstem. Parametr `font` pozwala ustawić krój i rozmiar czcionki.
 - `pack()` umieszcza etykietę w oknie z odstępem (`pady`), co poprawia czytelność.
 
-### Układanie i kompozycja widżetów
+### Układanie i kompozycja widżetów w Tkinter
 
-Aby interfejs był czytelny i estetyczny, Tkinter oferuje kilka metod układania widżetów w oknie. Każda z nich ma inne zastosowanie.
+Tworzenie przejrzystego i estetycznego interfejsu w Tkinter opiera się na odpowiednim układaniu widżetów. Tkinter oferuje trzy główne metody rozmieszczania elementów w oknie: `pack()`, `grid()` oraz `place()`. Każda z tych metod służy innym celom i posiada unikalne parametry umożliwiające elastyczną kontrolę nad układem widżetów.
 
-I. `pack()` — Układa widżety jeden za drugim w zadanym kierunku, domyślnie pionowo.
+#### I. Metoda `pack()`
+
+Metoda `pack()` automatycznie rozmieszcza widżety w interfejsie, układając je jeden za drugim zgodnie z ustaloną orientacją. Domyślnie widżety są rozmieszczane w pionie. Chociaż metoda ta jest łatwa w użyciu, oferuje ograniczoną kontrolę nad dokładnym pozycjonowaniem widżetów, co może być mniej wygodne w bardziej złożonych interfejsach.
+
+Poniższy przykład pokazuje podstawowe użycie `pack()` do ułożenia dwóch przycisków po lewej i prawej stronie okna:
 
 ```python
-button.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+import tkinter as tk
+
+root = tk.Tk()
+button1 = tk.Button(root, text="Button 1")
+button2 = tk.Button(root, text="Button 2")
+
+button1.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+button2.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+
+root.mainloop()
 ```
 
-II. `grid()` — Układa widżety w formie siatki, co umożliwia bardziej precyzyjne rozmieszczenie elementów poprzez przypisywanie ich do określonych wierszy i kolumn.
+![Układ przycisków po lewej i prawej stronie](https://github.com/user-attachments/assets/129d9ad4-9bf0-41b6-978f-6f7b145939d6)
+
+W tym przykładzie oba przyciski są umieszczone po przeciwnych stronach (`LEFT` i `RIGHT`) oraz wypełniają całą przestrzeń pionową i poziomą dzięki parametrom `fill=tk.BOTH` oraz `expand=True`.
+
+Parametry metody `pack()`:
+
+| Parametr  | Opis                                                                                      | Przykład                                |
+|-----------|-------------------------------------------------------------------------------------------|-----------------------------------------|
+| `side`    | Określa, z której strony widżet będzie pakowany. Możliwe wartości to: `tk.TOP`, `tk.BOTTOM`, `tk.LEFT`, `tk.RIGHT`.  | `side=tk.LEFT`                          |
+| `fill`    | Określa, czy widżet ma wypełnić przestrzeń w kierunku poziomym (`tk.X`), pionowym (`tk.Y`) lub obu (`tk.BOTH`). | `fill=tk.BOTH`                          |
+| `expand`  | Jeśli ustawione na `True`, widżet rozszerzy się, aby wypełnić dostępną przestrzeń w ramach swojego kontenera.     | `expand=True`                           |
+| `padx`    | Dodaje poziomy odstęp (padding) po obu stronach widżetu.                                    | `padx=10`                               |
+| `pady`    | Dodaje pionowy odstęp (padding) nad i pod widżetem.                                        | `pady=5`                                |
+
+**Przykład 1: Tworzenie listy przycisków w pionie z odstępami**
+
+W tym przykładzie umieszczamy pięć przycisków jeden pod drugim, każdy z niewielkim odstępem (`pady=5`), aby wyglądały bardziej estetycznie.
 
 ```python
-label.grid(row=0, column=0)
-entry.grid(row=0, column=1)
+import tkinter as tk
+
+root = tk.Tk()
+for i in range(5):
+    button = tk.Button(root, text=f"Button {i+1}")
+    button.pack(fill=tk.X, pady=5)  # Pionowy odstęp między przyciskami
+
+root.mainloop()
 ```
 
-III. `place()` — Umożliwia dokładne pozycjonowanie widżetów za pomocą współrzędnych `x` i `y`, co daje pełną kontrolę nad ich położeniem.
+![Przyciski ułożone pionowo z odstępami](https://github.com/user-attachments/assets/05c35c58-5d55-4eab-a1f3-607d845196f1)
+
+Dzięki ustawieniu `fill=tk.X`, przyciski wypełniają całą dostępną szerokość okna, co pozwala uzyskać bardziej zorganizowany wygląd.
+
+**Przykład 2: Tworzenie prostego menu poziomego**
+
+W tym przykładzie tworzymy prosty pasek menu umieszczony u góry okna. Każdy przycisk w menu jest ustawiony w jednej linii dzięki `side=tk.LEFT` oraz dodaniu poziomego odstępu (`padx=5`), aby oddzielić przyciski.
 
 ```python
+import tkinter as tk
+
+root = tk.Tk()
+menu_bar = tk.Frame(root)
+menu_bar.pack(side=tk.TOP, fill=tk.X)
+
+btn1 = tk.Button(menu_bar, text="Home")
+btn1.pack(side=tk.LEFT, padx=5)
+
+btn2 = tk.Button(menu_bar, text="Settings")
+btn2.pack(side=tk.LEFT, padx=5)
+
+root.mainloop()
+```
+
+![Proste menu poziome](https://github.com/user-attachments/assets/a0d34ea7-f0d3-40fb-bfc9-268fbc3c4e1f)
+
+W tym przypadku `fill=tk.X` w `menu_bar` sprawia, że pasek menu rozciąga się na całą szerokość okna, podczas gdy poszczególne przyciski `Home` i `Settings` są ułożone poziomo z niewielkim odstępem.
+
+#### II. Metoda `grid()`
+
+Metoda `grid()` umożliwia organizację widżetów w siatce, przypisując je do określonych wierszy (`row`) i kolumn (`column`). Dzięki temu jest idealna do tworzenia bardziej precyzyjnych układów, takich jak formularze, tabele, czy skomplikowane interfejsy, które wymagają dokładnego rozmieszczenia elementów.
+
+Poniższy przykład pokazuje podstawowe użycie `grid()` do stworzenia prostego formularza z polami dla nazwy użytkownika i hasła:
+
+```python
+import tkinter as tk
+
+root = tk.Tk()
+label1 = tk.Label(root, text="Username")
+entry1 = tk.Entry(root)
+label2 = tk.Label(root, text="Password")
+entry2 = tk.Entry(root)
+
+label1.grid(row=0, column=0, sticky="w")
+entry1.grid(row=0, column=1)
+label2.grid(row=1, column=0, sticky="w")
+entry2.grid(row=1, column=1)
+
+root.mainloop()
+```
+
+![Formularz logowania w siatce](https://github.com/user-attachments/assets/d3a8a977-df65-4418-b66c-f30f2bfc5ebd)
+
+W tym przykładzie etykiety są umieszczone w lewej kolumnie (`column=0`), a pola wejściowe w prawej (`column=1`). `sticky="w"` powoduje, że etykiety są wyrównane do lewej strony komórki.
+
+Parametry metody `grid()`:
+
+| Parametr     | Opis                                                                                               | Przykład                               |
+|--------------|----------------------------------------------------------------------------------------------------|----------------------------------------|
+| `row`        | Określa numer wiersza, w którym ma się znaleźć widżet.                                             | `row=0`                                |
+| `column`     | Określa numer kolumny, w której ma się znaleźć widżet.                                             | `column=1`                             |
+| `sticky`     | Ustawia, do której krawędzi komórki ma przylegać widżet (`n`, `s`, `e`, `w` lub ich kombinacja).   | `sticky="w"`                           |
+| `padx`       | Dodaje poziomy odstęp (padding) po obu stronach widżetu w komórce.                                 | `padx=5`                               |
+| `pady`       | Dodaje pionowy odstęp (padding) nad i pod widżetem w komórce.                                      | `pady=5`                               |
+| `columnspan` | Określa liczbę kolumn, które widżet ma zajmować (przydatne dla elementów zajmujących więcej przestrzeni). | `columnspan=2`                        |
+| `rowspan`    | Określa liczbę wierszy, które widżet ma zajmować.                                                 | `rowspan=2`                            |
+
+**Przykład 1: Tworzenie prostego formularza**
+
+Poniżej przedstawiono przykład tworzenia bardziej rozbudowanego formularza, gdzie etykiety i pola tekstowe są rozmieszczone w układzie tabelarycznym.
+
+```python
+labels = ["Name", "Email", "Age"]
+for i, text in enumerate(labels):
+    label = tk.Label(root, text=text)
+    label.grid(row=i, column=0, sticky="w")
+    entry = tk.Entry(root)
+    entry.grid(row=i, column=1)
+```
+
+![Prosty formularz z polami dla imienia, emaila i wieku](https://github.com/user-attachments/assets/2b09ac65-d5f2-4d61-9a2f-5683bea71686)
+
+Tutaj etykiety są wyrównane do lewej (`sticky="w"`), a każde pole tekstowe jest przypisane do kolumny po prawej stronie, co tworzy przejrzysty i uporządkowany wygląd formularza.
+
+**Przykład 2: Rozciąganie elementu na dwie kolumny**
+
+W przypadku, gdy widżet, taki jak etykieta statusu, ma zajmować więcej miejsca (np. całą szerokość okna), można użyć parametru `columnspan`, aby rozciągnąć go na kilka kolumn.
+
+```python
+status_label = tk.Label(root, text="Status: Ready", bg="lightgrey")
+status_label.grid(row=3, column=0, columnspan=2, sticky="we")  # Rozciągnięcie na 2 kolumny
+```
+
+![Etykieta statusu rozciągnięta na dwie kolumny](https://github.com/user-attachments/assets/db27e15f-3533-451e-aef8-6d2a71cf1c9d)
+
+Dzięki `columnspan=2`, etykieta statusu zajmuje obie kolumny, co pozwala jej się rozciągnąć na całą szerokość. `sticky="we"` sprawia, że widżet przylega do lewej i prawej strony, co dodatkowo poprawia estetykę.
+
+#### III. Metoda `place()`
+
+Metoda `place()` umożliwia precyzyjne pozycjonowanie widżetów za pomocą współrzędnych `x` i `y`, co pozwala na pełną kontrolę nad ich umiejscowieniem w oknie. Jest to przydatne, gdy chcemy rozmieścić widżety w dokładnie określonych miejscach lub tworzyć bardziej nietypowe układy. Wadą tej metody jest konieczność znajomości wymiarów okna oraz widżetów, co sprawia, że metoda `place()` jest mniej elastyczna od `pack()` czy `grid()`.
+
+Poniższy przykład pokazuje, jak umieścić przycisk w określonej pozycji za pomocą `x=50` oraz `y=100`.
+
+```python
+import tkinter as tk
+
+root = tk.Tk()
+button = tk.Button(root, text="Click me")
 button.place(x=50, y=100)
+
+root.mainloop()
 ```
 
-Każda z metod ma swoje specyficzne zastosowanie. `pack()` jest prosty i szybki, `grid()` pozwala na bardziej elastyczne pozycjonowanie, a `place()` daje pełną kontrolę nad położeniem elementów.
+![Pozycjonowanie przycisku w oknie za pomocą współrzędnych](https://github.com/user-attachments/assets/ba99c93c-34be-447b-8e03-6b1dfacbbe53)
+
+W tym przykładzie przycisk jest umieszczony w pozycji (50, 100) względem lewego górnego rogu okna.
+
+Parametry metody `place()`:
+
+| Parametr  | Opis                                                                                               | Przykład                   |
+|-----------|----------------------------------------------------------------------------------------------------|----------------------------|
+| `x`       | Pozycja widżetu na osi X w pikselach (od lewej krawędzi okna).                                     | `x=100`                    |
+| `y`       | Pozycja widżetu na osi Y w pikselach (od górnej krawędzi okna).                                    | `y=50`                     |
+| `relx`    | Pozycja widżetu na osi X jako część całkowitej szerokości (np. `relx=0.5` umieszcza na środku).   | `relx=0.5`                 |
+| `rely`    | Pozycja widżetu na osi Y jako część całkowitej wysokości (np. `rely=0.5` umieszcza na środku).     | `rely=0.5`                 |
+| `anchor`  | Punkt odniesienia, względem którego widżet jest pozycjonowany. Możliwe wartości: `n`, `s`, `e`, `w`, `center` itd. | `anchor="center"`         |
+| `width`   | Szerokość widżetu w pikselach.                                                                     | `width=200`                |
+| `height`  | Wysokość widżetu w pikselach.                                                                      | `height=50`                |
+
+**Przykład 1: Pozycjonowanie elementu na środku okna**
+
+Poniżej znajduje się przykład ustawienia przycisku w samym środku okna. Parametry `relx=0.5` i `rely=0.5` umieszczają przycisk na 50% szerokości i 50% wysokości okna, a `anchor="center"` sprawia, że środek przycisku jest odniesieniem tej pozycji.
+
+```python
+button = tk.Button(root, text="Center")
+button.place(relx=0.5, rely=0.5, anchor="center")
+```
+
+![Pozycjonowanie przycisku na środku okna](https://github.com/user-attachments/assets/433cd17b-2078-4e20-9397-0712533fbdc2)
+
+**Przykład 2: Tworzenie layoutu na podstawie współrzędnych**
+
+W tym przykładzie rozmieszczamy kilka etykiet w oknie, każdą w różnych pozycjach zdefiniowanych przez `x` i `y`, co tworzy bardziej nieregularny układ.
+
+```python
+label1 = tk.Label(root, text="Label 1")
+label1.place(x=10, y=10)
+
+label2 = tk.Label(root, text="Label 2")
+label2.place(x=10, y=50)
+
+label3 = tk.Label(root, text="Label 3")
+label3.place(x=100, y=100)
+```
+
+![Układ etykiet na różnych współrzędnych](https://github.com/user-attachments/assets/8beb3511-2678-403f-b870-5ac35d39c10c)
+
+Dzięki zastosowaniu `x` i `y`, każda etykieta jest umieszczona w precyzyjnie określonej pozycji, tworząc unikalny układ na potrzeby bardziej skomplikowanych projektów interfejsu.
 
 ### Organizacja widżetów za pomocą ramek
 
