@@ -35,7 +35,7 @@ Różnice między kopiowaniem płytkim a głębokim:
 1. **Kopiowanie płytkie** tworzy nową kolekcję (np. listę), ale wewnętrzne elementy tej kolekcji pozostają referencjami do oryginalnych obiektów.
 2. **Kopiowanie głębokie** rekurencyjnie kopiuje wszystkie elementy obiektu, tworząc zupełnie nowe, niezależne kopie.
 
-### Kopiowanie płytkie (Shallow Copy) – szczegóły
+### Kopiowanie płytkie (Shallow Copy)
 
 Kopiowanie płytkie jest szybkie i stosunkowo oszczędne pamięciowo, ale należy być ostrożnym w przypadku struktur wielopoziomowych, takich jak listy zawierające inne listy. Elementy na głębszych poziomach pozostają wspólne dla oryginału i kopii.
 
@@ -53,7 +53,7 @@ print(lista)  # pokaże częściowo zmienioną listę
 
 W tym przykładzie zauważamy, że chociaż dodanie nowego elementu do `kopia_plytka` nie wpływa na `lista`, to modyfikacje wewnętrznych list (`kopia_plytka[0]`) są widoczne w obu miejscach.
 
-### Kopiowanie głębokie (Deep Copy) – szczegóły
+### Kopiowanie głębokie (Deep Copy)
 
 Kopiowanie głębokie jest bardziej zasobożerne, ponieważ wymaga stworzenia nowych instancji wszystkich elementów obiektu, ale zapewnia całkowitą niezależność między oryginałem a kopią.
 
