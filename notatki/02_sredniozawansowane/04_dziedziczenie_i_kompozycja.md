@@ -1,4 +1,4 @@
-### Dziedziczenie i kompozycja
+# Dziedziczenie i kompozycja
 
 Dziedziczenie i kompozycja to dwa fundamentalne koncepty programowania obiektowego (OOP), które odgrywają kluczową rolę w tworzeniu elastycznego, modularnego i łatwego do utrzymania kodu. Oba podejścia mają swoje zalety i wady, a wybór między nimi zależy od konkretnego kontekstu i wymagań projektu.
 
@@ -175,7 +175,7 @@ print(osoba)  # Jan Kowalski, Adres: ul. Kwiatowa 15, Warszawa, 00-001
 
 W tym przykładzie `Osoba` ma obiekt `Adres` jako jeden ze swoich atrybutów. Umożliwia to bardziej elastyczne i modularne projektowanie kodu, ponieważ możemy łatwo zmieniać adresy, nie zmieniając samej klasy `Osoba`.
 
-### Porównanie
+## Porównanie
 
 | Cecha                   | Dziedziczenie                                        | Kompozycja                                          |
 |-------------------------|------------------------------------------------------|-----------------------------------------------------|
