@@ -35,7 +35,9 @@ Dziedziczenie znajduje zastosowanie w wielu dziedzinach programowania obiektoweg
 6. W aplikacjach opartych o **REST API**, klasy obsługujące różne zasoby mogą dziedziczyć wspólną logikę w klasach bazowych. Na przykład, klasa `Resource` może implementować wspólne metody dla operacji HTTP (GET, POST, PUT, DELETE), a poszczególne zasoby, takie jak `UzytkownikResource`, `ProduktResource` i `ZamowienieResource`, mogą dziedziczyć tę funkcjonalność, dostosowując ją do konkretnych zasobów.
 7. W **systemach e-commerce** produkty mogą dziedziczyć po klasie `Produkt`. Na przykład, `Ksiazka`, `Odziez`, i `Elektronika` mogą dziedziczyć podstawowe atrybuty, takie jak `nazwa`, `cena`, i `opis`, ale dodawać specyficzne pola, np. `autor` dla książki lub `rozmiar` dla odzieży.
 
-### Przykład w Pythonie
+### Prosty przykład dziedziczenia
+
+W podstawowym przypadku dziedziczenie pozwala klasie podrzędnej (ang. subclass) na przejęcie atrybutów i metod klasy bazowej (ang. superclass). W poniższym przykładzie klasa `Student` dziedziczy po klasie `Czlowiek`, co pozwala na użycie wszystkich atrybutów i metod klasy bazowej, a jednocześnie umożliwia dodanie własnych, specyficznych dla klasy `Student`.
 
 ```python
 class Czlowiek:
@@ -58,11 +60,11 @@ class Student(Czlowiek):
         return f"{super().__str__()}, Numer albumu: {self.numer_albumu}, Kierunek: {self.kierunek_studiow}"
 ```
 
-W tym przykładzie, klasa `Student` dziedziczy po klasie `Czlowiek`. Dzięki temu `Student` dziedziczy wszystkie atrybuty i metody klasy `Czlowiek` i może je rozszerzyć lub modyfikować.
+W tym przykładzie klasa `Student` dziedziczy konstruktor i metodę `__str__` z klasy `Czlowiek`. Za pomocą `super()` odwołujemy się do klasy bazowej, by zainicjalizować jej atrybuty, a następnie dodajemy dodatkowe atrybuty specyficzne dla klasy `Student`. Dzięki temu, obiekt `Student` posiada pełną funkcjonalność klasy `Czlowiek`, jednocześnie rozszerzoną o własne cechy.
 
 ### Przykład wielokrotnego dziedziczenia
 
-Python umożliwia również wielokrotne dziedziczenie, gdzie klasa podrzędna może dziedziczyć po więcej niż jednej klasie bazowej.
+W Pythonie możemy tworzyć klasy, które dziedziczą po więcej niż jednej klasie bazowej. Taka elastyczność pozwala na łączenie różnych funkcjonalności w jednej klasie podrzędnej. Poniżej przedstawiamy przykład wielokrotnego dziedziczenia:
 
 ```python
 class Sportowiec:
@@ -81,7 +83,7 @@ class StudentSportowiec(Student, Sportowiec):
         return f"{Student.__str__(self)}, {Sportowiec.__str__(self)}"
 ```
 
-W powyższym przykładzie klasa `StudentSportowiec` dziedziczy zarówno po `Student`, jak i po `Sportowiec`, łącząc funkcjonalności obu klas.
+W tym przypadku klasa `StudentSportowiec` dziedziczy po dwóch klasach bazowych: `Student` i `Sportowiec`. W konstruktorze klasy podrzędnej wywołujemy osobno konstruktory obu klas bazowych, by zainicjalizować ich atrybuty. Dzięki temu, obiekt `StudentSportowiec` łączy cechy zarówno studenta, jak i sportowca.
 
 ## Kompozycja
 
