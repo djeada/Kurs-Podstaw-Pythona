@@ -6,6 +6,24 @@ Dziedziczenie i kompozycja to dwa fundamentalne koncepty programowania obiektowe
 
 Dziedziczenie to mechanizm, który pozwala jednej klasie (klasie potomnej) przejąć właściwości i zachowania innej klasy (klasy bazowej). Dzięki dziedziczeniu, programiści mogą tworzyć nowe klasy na podstawie istniejących, co pozwala na ponowne wykorzystanie kodu i redukcję jego złożoności.
 
+Przepraszam za wcześniejsze niejasności. Oto poprawione diagramy, które lepiej ilustrują różnice między dziedziczeniem a kompozycją, używając różnych sposobów przedstawienia.
+
+**Dziedziczenie (relacja "jest")**
+
+Przedstawione jako drzewo hierarchii:
+
+```
+        [Pojazd]
+           |
+    ----------------
+    |              |
+[Samochód]     [Motocykl]
+    |
+[Samochód Sportowy]
+```
+
+W tym diagramie `Samochód` i `Motocykl` dziedziczą po `Pojazd`, a `Samochód Sportowy` dziedziczy po `Samochód`. Każda strzałka reprezentuje relację dziedziczenia, gdzie klasa pochodna **jest** rodzajem klasy bazowej.
+
 ### Zalety dziedziczenia
 
 - Dziedziczenie umożliwia **ponowne wykorzystanie kodu**, ponieważ klasy potomne dziedziczą metody i atrybuty klas bazowych, co zmniejsza potrzebę pisania powtarzających się fragmentów kodu.
@@ -88,6 +106,23 @@ W tym przypadku klasa `StudentSportowiec` dziedziczy po dwóch klasach bazowych:
 ## Kompozycja
 
 Kompozycja to technika, w której klasy są tworzone z instancji innych klas, co pozwala na budowanie złożonych obiektów poprzez łączenie mniejszych, bardziej wyspecjalizowanych obiektów. Kompozycja promuje luźne powiązanie i lepszą modularność kodu.
+
+**Kompozycja (relacja "ma")**
+
+Przedstawione jako klasa z elementami składowymi w środku:
+
+```
++-----------------+
+|    Samochód     |
+|-----------------|
+| - Silnik        |
+| - Koła          |
+| - Nadwozie      |
+| - Wnętrze       |
++-----------------+
+```
+
+Tutaj `Samochód` **ma** różne komponenty, takie jak `Silnik`, `Koła`, `Nadwozie` i `Wnętrze`. Elementy te są zawarte **wewnątrz** klasy `Samochód`, co ilustruje relację kompozycji.
 
 ### Zalety kompozycji
 
