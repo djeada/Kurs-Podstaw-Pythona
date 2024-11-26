@@ -1,34 +1,36 @@
 ## Serializacja
 
-Serializacja to proces przekształcania obiektu lub struktury danych w format, który można łatwo przechowywać lub przesyłać. Zserializowane dane można następnie przywrócić do ich oryginalnej postaci za pomocą procesu deserializacji. Serializacja jest szeroko stosowana w programowaniu do przesyłania danych między różnymi systemami, przechowywania ich w plikach, bazach danych, lub w celu tymczasowego przechowywania obiektów w pamięci.
+Serializacja to proces przekształcania obiektów lub struktur danych w format, który można łatwo przechowywać, przesyłać i odtwarzać. Dzięki serializacji możemy zapisać stan obiektu w pliku, przesłać go przez sieć lub przechowywać w bazie danych, a następnie w dowolnym momencie przywrócić go do pierwotnej postaci poprzez deserializację. Jest to kluczowy mechanizm w programowaniu, który umożliwia efektywną wymianę danych między różnymi systemami i komponentami.
 
 ```
-+------------------+      Serializacja      +----------------+
-| Obiekt Pythona   | ---------------------> | Bajty          |
-+------------------+                        +----------------+
-        Ʌ                                         |
-        |                                         |
-        | Deserializacja                          | Deserializacja
-        |                                         |
-        |                                         V
-+------------------+      Serializacja      +-----------------+
-| Bajty            | <--------------------- | Obiekt Pythona  |
-+------------------+                        +-----------------+
++--------------------+       Serializacja        +-----------------+
+|    Obiekt Pythona  | ------------------------> |     Bajty        |
++--------------------+                           +-----------------+
+        ^                                                  |
+        |                                                  |
+        |                 Deserializacja                   |
+        |                                                  |
+        |                                                  v
++--------------------+       Deserializacja       +-----------------+
+|       Bajty        | <------------------------  |   Obiekt Pythona |
++--------------------+                           +-----------------+
 ```
 
 ### Zastosowania serializacji
 
-- Zserializowane dane mogą być **zapisane w plikach** (np. w formatach takich jak JSON, XML, czy binarnych) lub w bazach danych. Umożliwia to ich późniejsze odczytanie i przywrócenie do stanu pierwotnego, co jest przydatne np. w aplikacjach wymagających przechowywania stanu obiektów pomiędzy uruchomieniami (tzw. *persistence*).
-- Serializacja umożliwia bezpieczne i efektywne **przesyłanie obiektów przez sieć**, np. w aplikacjach rozproszonych, systemach mikroserwisów lub podczas komunikacji między klientem a serwerem. Dzięki temu różne komponenty systemu mogą wymieniać się złożonymi strukturami danych niezależnie od lokalizacji geograficznej.
-- Proces serializacji i deserializacji może być wykorzystany do tworzenia **głębokich kopii obiektów**. W ten sposób powstaje nowa instancja obiektu wraz ze wszystkimi zagnieżdżonymi w nim obiektami, co pozwala uniknąć niepożądanej współdzielonej referencji w pamięci.
-- Serializacja jest często stosowana w procesach **migracji danych** pomiędzy różnymi wersjami aplikacji lub systemami. Umożliwia to przeniesienie złożonych struktur danych do nowych środowisk, zachowując integralność danych i ich strukturę.
-- Serializacja w formie binarnej może być użyta do **zmniejszenia rozmiaru** danych przed ich zapisaniem lub przesłaniem. Dzięki temu, mimo bogactwa struktury danych, możliwe jest efektywne zarządzanie ich wielkością, co jest szczególnie istotne w systemach o ograniczonych zasobach (np. urządzenia IoT).
-- Serializacja może być zastosowana jako część **mechanizmów bezpieczeństwa**, umożliwiając np. szyfrowanie zserializowanych danych przed ich przesłaniem lub zapisaniem, a także kontrolę dostępu do deserializowanych obiektów. 
-- Serializacja wspomaga **komunikację między systemami napisanymi w różnych językach programowania**. Na przykład, obiekty stworzone w Pythonie mogą być zserializowane do formatu JSON i odczytane w aplikacji napisanej w Javie, co wspiera interoperacyjność między technologiami.
+Serializacja znajduje zastosowanie w wielu obszarach programowania:
 
-### Przykład użycia `pickle`
+- **Przechowywanie stanu obiektów**: Umożliwia zapisanie aktualnego stanu obiektów do pliku lub bazy danych, co pozwala na późniejsze odtworzenie ich w identycznym stanie. Jest to szczególnie przydatne w aplikacjach wymagających zachowania sesji użytkownika czy danych pomiędzy uruchomieniami programu.
+- **Przesyłanie danych między systemami**: Dzięki serializacji możemy przesyłać złożone struktury danych przez sieć, np. między klientem a serwerem, nawet jeśli są napisane w różnych językach programowania.
+- **Głębokie kopiowanie obiektów**: Proces serializacji i deserializacji pozwala na utworzenie głębokiej kopii obiektu, w którym wszystkie zagnieżdżone obiekty są również kopiowane.
+- **Zachowanie kompatybilności danych**: Podczas migracji danych między różnymi wersjami aplikacji czy systemów, serializacja umożliwia zachowanie integralności i struktury danych.
+- **Optymalizacja przechowywania**: Serializacja binarna może zmniejszyć rozmiar danych, co jest istotne w systemach o ograniczonej przestrzeni dyskowej lub przepustowości sieci.
+- **Bezpieczeństwo danych**: Umożliwia szyfrowanie zserializowanych danych przed ich przesłaniem lub zapisaniem, co zwiększa poziom bezpieczeństwa aplikacji.
+- **Interoperacyjność między językami**: Pozwala na wymianę danych między aplikacjami napisanymi w różnych językach programowania poprzez użycie uniwersalnych formatów, takich jak JSON czy XML.
 
-W Pythonie istnieje wiele narzędzi do serializacji, ale jednym z najbardziej podstawowych jest moduł `pickle`. Moduł ten umożliwia konwersję dowolnego obiektu Pythona na strumień bajtów i odwrotnie. Poniżej znajduje się przykład, jak można serializować i deserializować obiekt klasy `Czlowiek`:
+### Serializacja z użyciem modułu `pickle`
+
+W Pythonie jednym z podstawowych narzędzi do serializacji jest moduł `pickle`. Pozwala on na konwersję niemal dowolnych obiektów Pythona do ciągu bajtów i odwrotnie. Poniżej przedstawiono przykład, jak można zserializować i deserializować obiekt klasy `Czlowiek`:
 
 ```python
 import pickle
@@ -39,45 +41,35 @@ class Czlowiek:
         self.numer = numer
 
     def __repr__(self):
-        return f'Imie: {self.imie}, Numer: {self.numer}'
+        return f'Imię: {self.imie}, Numer: {self.numer}'
 
+# Ścieżka do pliku, w którym zapiszemy dane
 sciezka = 'przyklad.pickle'
 
-# Serializacja
+# Serializacja obiektu
 with open(sciezka, 'wb') as plik:
-    pickle.dump(Czlowiek('James', 10), plik)
+    obiekt = Czlowiek('James', 10)
+    pickle.dump(obiekt, plik)
 
-# Deserializacja
+# Deserializacja obiektu
 with open(sciezka, 'rb') as plik:
-    czlowiek = pickle.load(plik)
-    print(czlowiek)  # Wyjście: Imie: James, Numer: 10
+    obiekt = pickle.load(plik)
+    print(obiekt)
+```
+
+Po uruchomieniu tego kodu, otrzymamy wynik:
+
+```
+Imię: James, Numer: 10
 ```
 
 #### Ostrzeżenie dotyczące bezpieczeństwa
 
-Chociaż `pickle` jest bardzo potężnym narzędziem, może być niebezpieczny. Nigdy nie należy deserializować danych otrzymanych od nieznanych lub niezaufanych źródeł, ponieważ może to prowadzić do wykonywania złośliwego kodu. W takich przypadkach lepiej korzystać z formatów danych takich jak JSON lub XML, które są bardziej ograniczone pod względem funkcjonalności, ale są bezpieczne.
+Korzystając z modułu `pickle`, należy zachować ostrożność. Deserializacja danych z niezaufanych źródeł może być niebezpieczna, ponieważ może prowadzić do wykonania złośliwego kodu. Dlatego zaleca się używanie `pickle` tylko z danymi pochodzącymi z zaufanych źródeł. W sytuacjach wymagających większego bezpieczeństwa warto rozważyć użycie innych formatów, takich jak JSON czy XML.
 
-Wyobraźmy sobie, że ktoś przesyła nam zserializowane dane, a my deserializujemy je za pomocą `pickle`:
+### Serializacja z użyciem modułu `json`
 
-```python
-import pickle
-
-# Otrzymane dane (mogą pochodzić z niezaufanego źródła)
-data = b"cos zlośliwego"
-
-# Deserializacja danych
-obj = pickle.loads(data)
-```
-
-Jeśli dane zawierają złośliwy kod, jego wykonanie może prowadzić do poważnych konsekwencji, takich jak kradzież danych, uszkodzenie systemu, czy instalacja malware.
-
-### Alternatywne narzędzia do serializacji
-
-Choć `pickle` jest często używany, istnieją też inne popularne narzędzia do serializacji w Pythonie, takie jak `json` (dla formatu JSON) czy `xml.etree.ElementTree` (dla formatu XML). Wybór narzędzia zależy od potrzeb projektu i wymagań bezpieczeństwa.
-
-#### Serializacja z użyciem `json`
-
-Format JSON jest jednym z najpopularniejszych formatów do serializacji danych, szczególnie w kontekście komunikacji między aplikacjami webowymi.
+Format JSON (JavaScript Object Notation) jest jednym z najpopularniejszych formatów do wymiany danych między aplikacjami, zwłaszcza w kontekście aplikacji webowych. Python oferuje moduł `json`, który pozwala na serializację i deserializację obiektów do formatu JSON.
 
 ```python
 import json
@@ -88,25 +80,42 @@ class Czlowiek:
         self.numer = numer
 
     def to_dict(self):
-        return {"imie": self.imie, "numer": self.numer}
+        return {'imie': self.imie, 'numer': self.numer}
 
     @classmethod
-    def from_dict(cls, data):
-        return cls(data['imie'], data['numer'])
+    def from_dict(cls, dane):
+        return cls(dane['imie'], dane['numer'])
 
-# Serializacja
-czlowiek = Czlowiek('James', 10)
-json_str = json.dumps(czlowiek.to_dict())
-
-# Deserializacja
-data = json.loads(json_str)
-czlowiek = Czlowiek.from_dict(data)
-print(czlowiek)  # Wyjście: Imie: James, Numer: 10
+# Serializacja obiektu do JSON
+obiekt = Czlowiek('James', 10)
+json_str = json.dumps(obiekt.to_dict())
+print(json_str)
 ```
 
-#### Serializacja z użyciem `xml.etree.ElementTree`
+Wynik:
 
-XML jest innym popularnym formatem do serializacji danych, często używanym w kontekście wymiany danych między różnymi systemami.
+```
+{"imie": "James", "numer": 10}
+```
+
+Aby zdeserializować dane z formatu JSON:
+
+```python
+# Deserializacja obiektu z JSON
+dane = json.loads(json_str)
+obiekt = Czlowiek.from_dict(dane)
+print(obiekt)
+```
+
+Wynik:
+
+```
+Imię: James, Numer: 10
+```
+
+### Serializacja z użyciem modułu `xml.etree.ElementTree`
+
+Format XML (eXtensible Markup Language) jest kolejnym popularnym formatem do przechowywania i wymiany danych. W Pythonie możemy użyć modułu `xml.etree.ElementTree` do pracy z danymi XML.
 
 ```python
 import xml.etree.ElementTree as ET
@@ -117,25 +126,122 @@ class Czlowiek:
         self.numer = numer
 
     def to_xml(self):
-        czlowiek = ET.Element("Czlowiek")
-        imie = ET.SubElement(czlowiek, "Imie")
-        imie.text = self.imie
-        numer = ET.SubElement(czlowiek, "Numer")
-        numer.text = str(self.numer)
+        czlowiek = ET.Element('Czlowiek')
+        imie_elem = ET.SubElement(czlowiek, 'Imie')
+        imie_elem.text = self.imie
+        numer_elem = ET.SubElement(czlowiek, 'Numer')
+        numer_elem.text = str(self.numer)
         return ET.tostring(czlowiek, encoding='unicode')
 
     @classmethod
-    def from_xml(cls, data):
-        element = ET.fromstring(data)
-        imie = element.find("Imie").text
-        numer = int(element.find("Numer").text)
+    def from_xml(cls, xml_data):
+        root = ET.fromstring(xml_data)
+        imie = root.find('Imie').text
+        numer = int(root.find('Numer').text)
         return cls(imie, numer)
 
-# Serializacja
-czlowiek = Czlowiek('James', 10)
-xml_str = czlowiek.to_xml()
-
-# Deserializacja
-czlowiek = Czlowiek.from_xml(xml_str)
-print(czlowiek)  # Wyjście: Imie: James, Numer: 10
+# Serializacja obiektu do XML
+obiekt = Czlowiek('James', 10)
+xml_str = obiekt.to_xml()
+print(xml_str)
 ```
+
+Wynik:
+
+```xml
+<Czlowiek><Imie>James</Imie><Numer>10</Numer></Czlowiek>
+```
+
+Deserializacja z XML:
+
+```python
+# Deserializacja obiektu z XML
+obiekt = Czlowiek.from_xml(xml_str)
+print(obiekt)
+```
+
+Wynik:
+
+```
+Imię: James, Numer: 10
+```
+
+### Diagram ilustrujący proces serializacji
+
+Aby lepiej zrozumieć proces serializacji i deserializacji, spójrzmy na poniższy diagram:
+
+```
++-----------------------+
+|     Obiekt Pythona    |
++-----------+-----------+
+            |
+            |  Serializacja
+            v
++-----------------------+
+|     Format danych     |
+|   (JSON, XML, bajty)  |
++-----------+-----------+
+            |
+            |  Deserializacja
+            v
++-----------------------+
+|     Obiekt Pythona    |
++-----------------------+
+```
+
+Proces ten polega na przekształceniu obiektu Pythona w format danych, który można łatwo przechowywać lub przesyłać, a następnie przywróceniu go do pierwotnej postaci.
+
+### Praktyczne zastosowanie serializacji
+
+Wyobraźmy sobie aplikację, w której użytkownik tworzy złożone obiekty, takie jak profile użytkowników, konfiguracje czy stany gry. Chcemy umożliwić zapisanie tych obiektów do pliku, aby można było je później wczytać lub przesłać innym użytkownikom.
+
+#### Zapis stanu gry do pliku JSON
+
+```python
+import json
+
+class Postac:
+    def __init__(self, imie, poziom, ekwipunek):
+        self.imie = imie
+        self.poziom = poziom
+        self.ekwipunek = ekwipunek
+
+    def to_dict(self):
+        return {
+            'imie': self.imie,
+            'poziom': self.poziom,
+            'ekwipunek': self.ekwipunek
+        }
+
+    @classmethod
+    def from_dict(cls, dane):
+        return cls(dane['imie'], dane['poziom'], dane['ekwipunek'])
+
+# Tworzenie obiektu postaci
+postac = Postac('Aragorn', 20, ['Miecz', 'Tarcza', 'Pierścień'])
+
+# Serializacja do JSON i zapis do pliku
+with open('postac.json', 'w') as plik:
+    json.dump(postac.to_dict(), plik)
+
+# Deserializacja z pliku JSON
+with open('postac.json', 'r') as plik:
+    dane = json.load(plik)
+    postac_wczytana = Postac.from_dict(dane)
+
+print(f"Imię: {postac_wczytana.imie}, Poziom: {postac_wczytana.poziom}, Ekwipunek: {postac_wczytana.ekwipunek}")
+```
+
+Wynik:
+
+```
+Imię: Aragorn, Poziom: 20, Ekwipunek: ['Miecz', 'Tarcza', 'Pierścień']
+```
+
+#### Przesyłanie danych między aplikacjami
+
+Jeśli chcemy przesłać dane między różnymi aplikacjami lub usługami sieciowymi, możemy użyć formatu JSON lub XML, który jest uniwersalny i obsługiwany przez wiele języków programowania.
+
+### Uwagi dotyczące bezpieczeństwa
+
+Podczas korzystania z serializacji, szczególnie z modułem `pickle`, należy być świadomym potencjalnych zagrożeń. Deserializacja danych z nieznanych źródeł może prowadzić do wykonania złośliwego kodu. Zawsze upewnij się, że dane pochodzą z zaufanego źródła lub używaj bezpieczniejszych metod serializacji, takich jak JSON, które nie wykonują kodu podczas deserializacji.
