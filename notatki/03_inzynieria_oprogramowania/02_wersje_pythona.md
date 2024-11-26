@@ -141,7 +141,7 @@ II. Dodaj do zmiennej PATH:
 - `%USERPROFILE%\.pyenv\pyenv-win\bin`
 - `%USERPROFILE%\.pyenv\pyenv-win\shims`
 
-III. **Instalacja nowej wersji Pythona:
+III. Instalacja nowej wersji Pythona:
 
 ```cmd
 pyenv install 3.x.x
