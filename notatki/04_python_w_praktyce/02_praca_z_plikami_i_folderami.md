@@ -1,110 +1,338 @@
 ## Praca z plikami i folderami
 
-Biblioteka standardowa Pythona oferuje szereg funkcji i narzędzi do efektywnej pracy z plikami i folderami. Dzięki tym narzędziom, skrypty Pythona mogą być używane do automatyzacji różnych zadań, od prostych czynności biurowych po bardziej zaawansowane operacje na danych.
+Praca z plikami i folderami jest nieodłączną częścią wielu aplikacji i skryptów w Pythonie. Dzięki bogatej bibliotece standardowej, Python oferuje szereg narzędzi, które umożliwiają efektywną manipulację danymi na dysku. Niezależnie od tego, czy chcesz odczytać dane z pliku tekstowego, zapisać wyniki obliczeń, czy też zautomatyzować porządkowanie folderów, Python ma narzędzia, które Ci w tym pomogą.
 
-### Otwarcie i zamknięcie pliku 
+### Otwarcie i zamknięcie pliku
 
-Aby otworzyć plik w Pythonie, używamy funkcji `open()`. Główne argumenty tej funkcji to ścieżka do pliku oraz tryb otwarcia. Ważne jest, aby po pracy z plikiem odpowiednio go zamknąć, co można zrealizować za pomocą metody `close()`. Zalecane jest korzystanie z konstrukcji `with`, która automatycznie dba o poprawne zamknięcie pliku.
+Aby rozpocząć pracę z plikami, musimy je najpierw otworzyć. W Pythonie służy do tego funkcja `open()`. Przyjmuje ona jako argumenty ścieżkę do pliku oraz tryb otwarcia, który określa, w jaki sposób chcemy z tym plikiem pracować (np. odczyt, zapis, dopisywanie).
+
+Przykładowo:
 
 ```python
 # Otwarcie pliku w trybie odczytu
-plik = open("sciezka/do/pliku.txt", "r")
-# ... operacje na pliku ...
+plik = open("przykladowy_plik.txt", "r")
+# ... tutaj możemy wykonywać operacje na pliku ...
 plik.close()
+```
 
-# Alternatywna metoda z użyciem `with`
-with open("sciezka/do/pliku.txt", "r") as plik:
+Ważne jest, aby po zakończeniu pracy z plikiem go zamknąć, korzystając z metody `close()`. Dzięki temu upewniamy się, że wszystkie zasoby są zwolnione, a dane zapisane poprawnie.
+
+Jednak Python oferuje wygodniejszy sposób zarządzania plikami przy użyciu konstrukcji `with`. Używając jej, nie musimy martwić się o zamykanie pliku – Python zrobi to za nas automatycznie.
+
+```python
+# Otwarcie pliku z użyciem 'with'
+with open("przykladowy_plik.txt", "r") as plik:
     # ... operacje na pliku ...
 ```
 
-Do dyspozycji mamy różne tryby otwarcia pliku:
+#### Tryby otwarcia pliku
 
-- `r` - odczyt pliku.
-- `r+` - odczyt i modyfikacja pliku.
-- `w` - zapis do pliku (usunięcie istniejącej treści i zapis nowej).
-- `a` - dopisanie do pliku (bez usuwania istniejącej treści).
+Przy otwieraniu pliku możemy określić różne tryby pracy, w zależności od naszych potrzeb. Oto najczęściej używane:
+
+| Tryb  | Opis                                                                                          |
+|-------|-----------------------------------------------------------------------------------------------|
+| `'r'` | Odczyt z pliku (domyślny tryb). Plik musi istnieć.                                            |
+| `'w'` | Zapis do pliku. Jeśli plik istnieje, jego zawartość zostanie nadpisana. Jeśli nie istnieje, zostanie utworzony nowy. |
+| `'a'` | Dopisywanie do pliku. Dane zostaną dodane na końcu pliku. Jeśli plik nie istnieje, zostanie utworzony. |
+| `'r+'`| Odczyt i zapis. Plik musi istnieć.                                                            |
+| `'w+'`| Odczyt i zapis. Jeśli plik istnieje, jego zawartość zostanie nadpisana. Jeśli nie istnieje, zostanie utworzony nowy. |
+
+#### Przykład otwarcia pliku w trybie zapisu:
+
+```python
+with open("nowy_plik.txt", "w") as plik:
+    plik.write("To jest nowy plik.\n")
+    plik.write("Druga linia tekstu.\n")
+```
+
+Po uruchomieniu tego kodu, w bieżącym katalogu zostanie utworzony plik `nowy_plik.txt` z następującą zawartością:
+
+```
+To jest nowy plik.
+Druga linia tekstu.
+```
 
 ### Odczytywanie i zapisywanie danych z/do pliku
 
-Odczytanie całego pliku można zrealizować za pomocą metody readlines(), która zwróci listę linii z pliku. Każdy element tej listy to napis reprezentujący kolejny wiersz. Zapis danych do pliku odbywa się przy użyciu metody write().
+Praca z plikami polega głównie na odczytywaniu danych oraz ich zapisywaniu. Python oferuje proste metody do tych operacji.
+
+#### Odczytywanie danych z pliku
+
+Aby odczytać zawartość pliku, możemy użyć metody `read()`, która zwraca cały tekst z pliku jako jeden łańcuch znaków. Alternatywnie, metoda `readlines()` zwraca listę, gdzie każdy element to kolejna linia z pliku.
 
 ```python
-with open("sciezka/do/pliku.txt", "r") as plik:
-    # Odczytanie zawartości pliku
-    wiersze = plik.readlines()
-    for wiersz in wiersze:
-        print(wiersz.strip())  # `strip()` usuwa znaki końca linii
-
-# Zapis nowych danych do pliku
-with open("sciezka/do/pliku.txt", "w") as plik:
-    plik.write("nowy tekst\nwiersz nr. 2\n")
+with open("przykladowy_plik.txt", "r") as plik:
+    zawartosc = plik.read()
+    print("Cała zawartość pliku:")
+    print(zawartosc)
 ```
 
-Pamiętajmy, aby wybierać odpowiedni tryb otwarcia pliku zależnie od planowanych operacji!
+Jeśli plik `przykladowy_plik.txt` zawiera:
+
+```
+Pierwsza linia.
+Druga linia.
+Trzecia linia.
+```
+
+To wynik programu będzie:
+
+```
+Cała zawartość pliku:
+Pierwsza linia.
+Druga linia.
+Trzecia linia.
+```
+
+Jeśli chcemy przetwarzać plik linia po linii, możemy użyć pętli:
+
+```python
+with open("przykladowy_plik.txt", "r") as plik:
+    for numer, linia in enumerate(plik, start=1):
+        print(f"Linia {numer}: {linia.strip()}")
+```
+
+Wynik:
+
+```
+Linia 1: Pierwsza linia.
+Linia 2: Druga linia.
+Linia 3: Trzecia linia.
+```
+
+#### Zapis danych do pliku
+
+Do zapisu danych służy metoda `write()`. Możemy jej używać w trybie zapisu `'w'` lub dopisywania `'a'`.
+
+```python
+with open("przykladowy_plik.txt", "a") as plik:
+    plik.write("Czwarta linia.\n")
+```
+
+Po wykonaniu powyższego kodu, do pliku `przykladowy_plik.txt` zostanie dodana nowa linia na końcu:
+
+```
+Pierwsza linia.
+Druga linia.
+Trzecia linia.
+Czwarta linia.
+```
+
+#### Przykład: Kopiowanie zawartości jednego pliku do drugiego
+
+```python
+with open("plik_wejsciowy.txt", "r") as plik_we:
+    dane = plik_we.read()
+
+with open("plik_wyjsciowy.txt", "w") as plik_wy:
+    plik_wy.write(dane)
+```
+
+Jeśli `plik_wejsciowy.txt` zawiera:
+
+```
+To jest plik wejściowy.
+Zawiera ważne dane.
+```
+
+Po uruchomieniu skryptu, `plik_wyjsciowy.txt` będzie miał identyczną zawartość.
 
 ### Moduł `pathlib`
 
-Współczesna praca z plikami i folderami w Pythonie stała się znacznie bardziej intuicyjna i wydajna dzięki wprowadzeniu modułu `pathlib` w wersji 3.4. Zamiast manipulowania ścieżkami jako zwykłymi łańcuchami znaków, `pathlib` pozwala na reprezentowanie ścieżek jako obiektów z wieloma użytecznymi metodami.
+Praca z plikami i ścieżkami może być jeszcze bardziej intuicyjna dzięki modułowi `pathlib`, wprowadzonego w Pythonie 3.4. Zamiast traktować ścieżki jako zwykłe łańcuchy znaków, `pathlib` pozwala na operowanie nimi jako obiektami, co ułatwia wiele zadań.
 
-Oto kilka podstawowych metod dostępnych w klasie `Path`:
-
-* `.exists()` - sprawdza, czy dana ścieżka istnieje.
-* `.is_file()` - sprawdza, czy ścieżka wskazuje na plik.
-* `.is_dir()` - sprawdza, czy ścieżka wskazuje na folder.
-* `.read_text()` - odczytuje zawartość pliku jako tekst.
-* `.write_text()` - zapisuje tekst do pliku.
-* `.open()` - otwiera plik w określonym trybie (domyślnie w trybie odczytu 'r').
-
-Poniżej przedstawiam, jak używać wymienionych metod:
+#### Tworzenie obiektu ścieżki
 
 ```python
 from pathlib import Path
 
-sciezka = Path("/sciezka/do/pliku.txt")
+sciezka_pliku = Path("przykladowy_plik.txt")
+```
 
-if sciezka.exists():
+#### Sprawdzanie istnienia pliku lub folderu
+
+```python
+if sciezka_pliku.exists():
     print("Plik istnieje.")
 else:
     print("Plik nie istnieje.")
+```
 
-zawartosc = sciezka.read_text()
+Jeśli plik `przykladowy_plik.txt` istnieje, wynik będzie:
+
+```
+Plik istnieje.
+```
+
+#### Odczyt i zapis z użyciem `pathlib`
+
+```python
+# Odczyt zawartości pliku
+zawartosc = sciezka_pliku.read_text()
+print("Zawartość pliku:")
 print(zawartosc)
-
-sciezka.write_text("Nowy tekst w pliku.")
 ```
 
-Reprezentowanie folderu jest równie proste:
+Wynik będzie taki sam jak wcześniej przy użyciu `open()`, ale kod jest bardziej zwięzły.
 
 ```python
-folder = Path("/sciezka/do/folderu")
+# Zapis tekstu do pliku
+sciezka_pliku.write_text("Nowa zawartość pliku.")
+```
 
+Po tym zapisie, zawartość pliku `przykladowy_plik.txt` będzie:
+
+```
+Nowa zawartość pliku.
+```
+
+#### Praca z folderami
+
+Możemy również łatwo operować na folderach:
+
+```python
+folder = Path("nowy_folder")
+
+# Tworzenie folderu
+folder.mkdir(parents=True, exist_ok=True)
+print(f"Folder '{folder}' został utworzony.")
+```
+
+Wynik:
+
+```
+Folder 'nowy_folder' został utworzony.
+```
+
+#### Wyświetlanie zawartości folderu
+
+Jeśli w folderze `nowy_folder` znajdują się pliki:
+
+- `plik1.txt`
+- `plik2.txt`
+- `skrypt.py`
+
+Możemy je wyświetlić:
+
+```python
+print("Zawartość folderu:")
 for element in folder.iterdir():
-    print(element)
+    print(element.name)
 ```
 
-Dzięki obiektowemu podejściu pathlib, możemy łatwo sprawdzić, czy dany obiekt to plik czy folder:
+Wynik:
+
+```
+Zawartość folderu:
+plik1.txt
+plik2.txt
+skrypt.py
+```
+
+#### Sprawdzanie, czy ścieżka to plik czy folder
 
 ```python
-if element.is_file():
-    print("To jest plik.")
-elif element.is_dir():
-    print("To jest folder.")
+for element in folder.iterdir():
+    if element.is_file():
+        print(f"{element.name} jest plikiem.")
+    elif element.is_dir():
+        print(f"{element.name} jest folderem.")
 ```
 
-`pathlib` oferuje również wiele innych przydatnych metod, takich jak:
+Wynik:
 
-- `.mkdir()` - tworzy nowy folder.
-- `.rename()` - zmienia nazwę pliku lub folderu.
-- `.glob()` - wyszukuje pliki i foldery według podanego wzorca.
+```
+plik1.txt jest plikiem.
+plik2.txt jest plikiem.
+skrypt.py jest plikiem.
+```
 
-Przykład użycia `.mkdir()` i sprawdzenia istnienia folderu:
+#### Wyszukiwanie plików z użyciem wzorców
+
+Jeśli chcemy znaleźć wszystkie pliki o określonym rozszerzeniu, możemy użyć metody `glob()`:
 
 ```python
-if not folder.exists():
-    folder.mkdir(parents=True, exist_ok=True)
+# Znajdź wszystkie pliki .txt w folderze
+for plik_txt in folder.glob("*.txt"):
+    print(f"Znaleziono plik tekstowy: {plik_txt.name}")
 ```
 
-Parametr `parents=True` sprawia, że zostaną utworzone wszystkie nieistniejące foldery nadrzędne, a `exist_ok=True` zapobiega błędom, jeśli folder już istnieje.
+Wynik:
+
+```
+Znaleziono plik tekstowy: plik1.txt
+Znaleziono plik tekstowy: plik2.txt
+```
+
+#### Diagram przedstawiający strukturę folderów (ASCII)
+
+Wyobraźmy sobie, że mamy następującą strukturę folderów:
+
+```
+projekt/
+├── dane/
+│   ├── dane1.csv
+│   └── dane2.csv
+├── skrypty/
+│   ├── main.py
+│   └── pomocniczy.py
+└── README.md
+```
+
+Możemy użyć `pathlib`, aby przeszukać całą strukturę i wykonać operacje na plikach.
+
+#### Przykład: Rekurencyjne przeszukiwanie folderów
+
+```python
+# Przeszukanie całego drzewa katalogów w poszukiwaniu plików .py
+for plik_py in Path("projekt").rglob("*.py"):
+    print(f"Znaleziono skrypt Pythona: {plik_py}")
+```
+
+Wynik:
+
+```
+Znaleziono skrypt Pythona: projekt/skrypty/main.py
+Znaleziono skrypt Pythona: projekt/skrypty/pomocniczy.py
+```
+
+#### Zmiana nazwy pliku lub folderu
+
+```python
+# Zmiana nazwy pliku
+stara_nazwa = Path("stary_plik.txt")
+nowa_nazwa = Path("nowy_plik.txt")
+
+if stara_nazwa.exists():
+    stara_nazwa.rename(nowa_nazwa)
+    print(f"Plik został przemianowany na {nowa_nazwa.name}")
+else:
+    print("Plik do zmiany nazwy nie istnieje.")
+```
+
+Jeśli `stary_plik.txt` istnieje, wynik będzie:
+
+```
+Plik został przemianowany na nowy_plik.txt
+```
+
+#### Usuwanie pliku
+
+```python
+plik_do_usuniecia = Path("niepotrzebny_plik.txt")
+
+if plik_do_usuniecia.exists():
+    plik_do_usuniecia.unlink()
+    print("Plik został usunięty.")
+else:
+    print("Plik nie istnieje.")
+```
+
+Jeśli plik istniał, otrzymamy:
+
+```
+Plik został usunięty.
+```
 
 ### Porównanie modułów `pathlib` i `os`
 
