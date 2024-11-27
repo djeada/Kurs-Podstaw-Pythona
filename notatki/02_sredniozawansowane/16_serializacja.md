@@ -20,13 +20,13 @@ Serializacja to proces przekształcania obiektów lub struktur danych w format, 
 
 Serializacja znajduje zastosowanie w wielu obszarach programowania:
 
-- **Przechowywanie stanu obiektów**: Umożliwia zapisanie aktualnego stanu obiektów do pliku lub bazy danych, co pozwala na późniejsze odtworzenie ich w identycznym stanie. Jest to szczególnie przydatne w aplikacjach wymagających zachowania sesji użytkownika czy danych pomiędzy uruchomieniami programu.
-- **Przesyłanie danych między systemami**: Dzięki serializacji możemy przesyłać złożone struktury danych przez sieć, np. między klientem a serwerem, nawet jeśli są napisane w różnych językach programowania.
-- **Głębokie kopiowanie obiektów**: Proces serializacji i deserializacji pozwala na utworzenie głębokiej kopii obiektu, w którym wszystkie zagnieżdżone obiekty są również kopiowane.
-- **Zachowanie kompatybilności danych**: Podczas migracji danych między różnymi wersjami aplikacji czy systemów, serializacja umożliwia zachowanie integralności i struktury danych.
-- **Optymalizacja przechowywania**: Serializacja binarna może zmniejszyć rozmiar danych, co jest istotne w systemach o ograniczonej przestrzeni dyskowej lub przepustowości sieci.
-- **Bezpieczeństwo danych**: Umożliwia szyfrowanie zserializowanych danych przed ich przesłaniem lub zapisaniem, co zwiększa poziom bezpieczeństwa aplikacji.
-- **Interoperacyjność między językami**: Pozwala na wymianę danych między aplikacjami napisanymi w różnych językach programowania poprzez użycie uniwersalnych formatów, takich jak JSON czy XML.
+- Umożliwia zapisanie aktualnego stanu obiektów do pliku lub bazy danych, co pozwala na późniejsze odtworzenie ich w identycznym stanie. Jest to szczególnie przydatne w aplikacjach wymagających zachowania sesji użytkownika czy danych pomiędzy uruchomieniami programu.
+- Dzięki serializacji możemy przesyłać złożone struktury danych przez sieć, np. między klientem a serwerem, nawet jeśli są napisane w różnych językach programowania.
+- Proces serializacji i deserializacji pozwala na utworzenie głębokiej kopii obiektu, w którym wszystkie zagnieżdżone obiekty są również kopiowane.
+- Podczas migracji danych między różnymi wersjami aplikacji czy systemów, serializacja umożliwia zachowanie integralności i struktury danych.
+- Serializacja binarna może zmniejszyć rozmiar danych, co jest istotne w systemach o ograniczonej przestrzeni dyskowej lub przepustowości sieci.
+- Umożliwia szyfrowanie zserializowanych danych przed ich przesłaniem lub zapisaniem, co zwiększa poziom bezpieczeństwa aplikacji.
+- Pozwala na wymianę danych między aplikacjami napisanymi w różnych językach programowania poprzez użycie uniwersalnych formatów, takich jak JSON czy XML.
 
 ### Serializacja z użyciem modułu `pickle`
 
