@@ -230,7 +230,7 @@ button.place(x=50, y=100)
 root.mainloop()
 ```
 
-![Pozycjonowanie przycisku w oknie za pomocą współrzędnych](https://github.com/user-attachments/assets/ba99c93c-34be-447b-8e03-6b1dfacbbe53)
+![Pozycjonowanie przycisku w oknie za pomocą współrzędnych](https://github.com/user-attachments/assets/8783d4b2-e546-4631-a157-45af0a11b2c7)
 
 W tym przykładzie przycisk jest umieszczony w pozycji (50, 100) względem lewego górnego rogu okna.
 
