@@ -50,6 +50,26 @@ Prawidłowy wynik powinien wyglądać mniej więcej tak:
 Python 3.9.2
 ```
 
+#### Instalacja dodatkowych narzędzi
+
+Python jest często używany wraz z dodatkowymi narzędziami i bibliotekami. Najważniejszym narzędziem jest `pip`, menedżer pakietów dla Pythona, który jest zwykle instalowany automatycznie razem z Pythonem. Możesz sprawdzić jego wersję za pomocą polecenia:
+
+```shell
+pip --version
+```
+
+Po wykonaniu powyższego polecenia na systemie Windows, wyświetli się informacja o zainstalowanej wersji `pip` oraz ścieżka do jego lokalizacji. Przykładowy wynik może wyglądać następująco:
+
+```shell
+pip 23.0.1 from C:\Python310\lib\site-packages\pip (python 3.10)
+```
+
+Co to znaczy?
+
+- `pip 23.0.1` – Informuje o zainstalowanej wersji `pip`.
+- `from C:\Python310\lib\site-packages\pip` – Pokazuje ścieżkę, gdzie `pip` jest zainstalowany. Na Windowsie ścieżki są zazwyczaj w formacie `C:\ścieżka\do\python\lib\site-packages\pip`.
+- `(python 3.10)` – Określa wersję Pythona, z którą `pip` jest powiązany.
+
 #### Instalacja środowiska IDE
 
 Aby ułatwić sobie pracę z Pythonem, warto zainstalować środowisko programistyczne (IDE). Popularne IDE dla Pythona to:
