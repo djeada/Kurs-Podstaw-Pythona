@@ -31,15 +31,17 @@ print(platform.machine())   # Architektura sprzętowa
 
 Przykładowe wyniki mogą wyglądać następująco:
 
-- **Linux**:
-  - `platform.system()` zwróci `'Linux'`,
-  - `platform.release()` może zwrócić `'5.4.0-42-generic'`,
-  - `platform.machine()` zwróci `'x86_64'`.
+**Linux**:
 
-- **Windows**:
-  - `platform.system()` zwróci `'Windows'`,
-  - `platform.release()` może zwrócić `'10'`,
-  - `platform.machine()` zwróci `'AMD64'`.
+- `platform.system()` zwróci `'Linux'`,
+- `platform.release()` może zwrócić `'5.4.0-42-generic'`,
+- `platform.machine()` zwróci `'x86_64'`.
+
+**Windows**:
+
+- `platform.system()` zwróci `'Windows'`,
+- `platform.release()` może zwrócić `'10'`,
+- `platform.machine()` zwróci `'AMD64'`.
 
 Dzięki tym informacjom możemy precyzyjnie dostosować działanie naszego programu do środowiska użytkownika.
 
