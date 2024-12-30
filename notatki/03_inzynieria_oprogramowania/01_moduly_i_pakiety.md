@@ -1,10 +1,14 @@
 # Moduły i pakiety
 
-W Pythonie moduły i pakiety są elementami umożliwiającymi organizację i strukturyzację kodu. Dzięki nim programy stają się bardziej czytelne, łatwiejsze w utrzymaniu i skalowalne. Ułatwiają one zarządzanie dużymi projektami oraz współpracę z innymi programistami. Zrozumienie tych elementów jest niezbędne dla efektywnego programowania i utrzymania czystego, modularnego kodu.
+W Pythonie moduły i pakiety są elementami umożliwiającymi organizację i strukturyzację kodu. Dzięki nim programy stają się bardziej czytelne, łatwiejsze w utrzymaniu i skalowalne. Ułatwiają one zarządzanie dużymi projektami oraz współpracę z innymi programistami. Zrozumienie tych elementów jest niezbędne dla efektywnego programowania i utrzymania czystego, modularnego kodu. 
+
+**Dzięki modułom i pakietom możemy unikać chaosu w dużych aplikacjach.** Wyobraź sobie, że masz jeden bardzo długi plik z setkami funkcji i klas – odszukanie konkretnego fragmentu kodu czy naprawa błędu staje się wtedy dużo trudniejsze. Dzięki podziałowi na mniejsze pliki (moduły) i foldery (pakiety) szybko zidentyfikujesz, w którym miejscu należy wprowadzić zmiany, a cały projekt stanie się przejrzysty. Podzielenie aplikacji na logiczne sekcje (np. część odpowiedzialna za logikę biznesową, część obsługującą operacje na bazie danych itp.) sprawia również, że wielu programistów może jednocześnie pracować nad różnymi częściami aplikacji, zmniejszając ryzyko konfliktów i błędów w kodzie.
 
 ## Moduły
 
 Moduł to podstawowy sposób organizacji kodu. Jest to pojedynczy plik z rozszerzeniem `.py`, który może zawierać definicje funkcji, klas, zmiennych, a także kod wykonywalny. Moduły pozwalają na podzielenie kodu na mniejsze, logiczne części, co ułatwia zarządzanie i ponowne użycie kodu w innych projektach. Dzięki modułom możemy łatwo organizować nasz kod i unikać powielania funkcji, a także dzielić się nimi z innymi.
+
+**W praktyce oznacza to, że jeśli napiszemy kilka uniwersalnych funkcji matematycznych lub moduł obsługujący połączenie z bazą danych, możemy go wielokrotnie wykorzystywać w różnych projektach.** Oszczędzamy w ten sposób czas i wysiłek, a także redukujemy ryzyko pojawienia się błędów, które mogłyby wkraść się przy powielaniu kodu.
 
 ### **Przykład prostego modułu:**
 
@@ -30,9 +34,14 @@ W tym module:
 
 Moduł `matematyka.py` jest teraz samodzielnym plikiem, który możemy zaimportować do innych skryptów, aby wykorzystać jego funkcje i zmienne.
 
+**Warto pamiętać, że moduł może również zawierać kod wykonywalny, który zostanie uruchomiony w momencie importu.** Dlatego zwykle oddziela się część z definicjami funkcji czy klas od kodu, który faktycznie coś uruchamia, aby uniknąć niepożądanego działania przy imporcie.
+
+
 ### Importowanie modułów
 
 Aby skorzystać z funkcji i zmiennych z modułu `matematyka.py` w innym pliku, możemy go zaimportować za pomocą instrukcji `import`. Dzięki temu możemy używać wszystkich funkcji i zmiennych, które znajdują się w module, odwołując się do nich przez nazwę modułu.
+
+**Importowanie modułu stanowi pierwszy krok do wykorzystania napisanych przez nas lub innych programistów bibliotek.** Gdybyśmy mieli powtarzać definicje funkcji w każdym pliku, w którym chcemy ich używać, nasz kod szybko by się rozrósł. Dzięki prostemu `import matematyka` otrzymujemy dostęp do wszystkiego, co znajduje się w tym pliku, bez konieczności duplikowania kodu.
 
 ### **Przykład użycia modułu:**
 
@@ -52,10 +61,13 @@ W tym przykładzie:
 - `import matematyka` wczytuje cały moduł `matematyka`, co pozwala nam na korzystanie z jego funkcji i zmiennych.
 - Aby odwołać się do funkcji `dodaj` lub zmiennej `PI`, używamy prefiksu `matematyka.`.
 - Dzięki temu unikamy potencjalnych konfliktów nazw, ponieważ wszystkie elementy modułu są wywoływane przez prefiks `matematyka`.
+**Dobrą praktyką jest, by nazwa modułu była krótka, opisowa i używała tylko małych liter, co ułatwia korzystanie z niej w dłuższych projektach.** Sam import jest wykonywany tylko raz, przy pierwszym odwołaniu do modułu w danym pliku, a Python pamięta go w tzw. sys.modules, co zapobiega wielokrotnemu przeładowywaniu tego samego kodu.
 
 ### Importowanie konkretnych elementów
 
 Zamiast importować cały moduł, możemy importować tylko konkretne funkcje lub zmienne, co sprawia, że kod staje się bardziej zwięzły i czytelny. Dzięki temu nie musimy używać prefiksu modułu za każdym razem.
+
+**To rozwiązanie sprawdza się szczególnie dobrze, gdy chcemy użyć zaledwie jednej lub dwóch funkcji z dużego modułu.** Nie zawsze chcemy obciążać przestrzeni nazw całym zestawem elementów, zwłaszcza jeśli interesuje nas tylko niewielki wycinek funkcjonalności danego modułu.
 
 ### **Przykład:**
 
@@ -67,15 +79,17 @@ print(wynik)  # Output: 25
 
 print(PI)  # Output: 3.1415
 ```
-
 W tym przypadku:
 
 - `from matematyka import dodaj, PI` pozwala nam zaimportować tylko wybrane elementy z modułu `matematyka`.
 - Dzięki temu możemy bezpośrednio wywołać funkcję `dodaj` oraz uzyskać dostęp do zmiennej `PI`, bez konieczności używania prefiksu `matematyka.`.
+**Jednocześnie warto pamiętać, że taki sposób importowania może spowodować konflikt nazw, jeśli inny moduł lub zmienna w naszym projekcie noszą tę samą nazwę.** Wtedy Python nie będzie wiedział, do której definicji się odwołać. Z tego powodu trzeba świadomie zarządzać importami i ewentualnie używać aliasów.
 
 ### Aliasowanie modułów i funkcji
 
 Czasami nazwa modułu lub funkcji może być długa lub może powodować konflikt nazw z innymi elementami w kodzie. W takich przypadkach możemy nadać alias (inną nazwę) modułowi lub funkcji, co ułatwia ich używanie.
+
+**Alias pozwala nam skrócić i ujednolicić wywołania, zwłaszcza gdy nazwy modułów są długie bądź mało intuicyjne.** Często w bibliotekach naukowych (jak `numpy`) stosuje się alias `np`, a w pandas – `pd`. Dzięki temu kod jest czytelniejszy i zrozumiały dla większości programistów używających tych standardowych aliasów.
 
 ### **Przykład aliasowania modułu:**
 
@@ -99,45 +113,56 @@ from matematyka import dodaj as d
 wynik = d(3, 4)
 print(wynik)  # Output: 7
 ```
-
 W tym przypadku:
 
 - `from matematyka import dodaj as d` pozwala nam zaimportować funkcję `dodaj` i przypisać jej nazwę `d`.
 - Dzięki temu możemy wywołać funkcję jako `d(3, 4)`, co jest krótsze i może być bardziej czytelne w niektórych kontekstach.
+**Dzięki aliasowaniu możemy uniknąć niejednoznaczności i sprawić, że kod będzie bardziej zrozumiały dla innych osób, które również z niego korzystają.** Z drugiej strony, zbyt częste i nadmierne aliasowanie może utrudnić rozumienie, dlatego warto robić to rozważnie.
+
 
 ### Korzyści z używania modułów
 
 - Funkcje i klasy z modułu mogą być używane w wielu programach.
 - Podział kodu na moduły sprawia, że jest on bardziej czytelny i łatwiejszy w nawigacji.
 - Moduły mają własną przestrzeń nazw, co pomaga w uniknięciu konfliktów.
+**Dzięki modułom możemy również przyspieszyć proces testowania i rozwoju oprogramowania.** Zamiast przebudowywać całą aplikację, możemy skupić się na jednym pliku `.py` – module – a następnie przetestować tylko jego funkcjonalność, co jest szczególnie ważne w przypadku dużych projektów, w których oszczędność czasu odgrywa istotną rolę.
 
 ## Pakiety
 
 Pakiet to struktura, która umożliwia grupowanie powiązanych modułów w jednym katalogu. Dzięki pakietom możemy organizować kod na wyższym poziomie niż przy użyciu pojedynczych modułów, co jest szczególnie przydatne w większych projektach. Pakiet to po prostu folder, który zawiera moduły (pliki `.py`) oraz specjalny plik `__init__.py`. Obecność pliku `__init__.py` informuje Pythona, że dany folder powinien być traktowany jako pakiet, co pozwala na jego importowanie w innych częściach programu.
 
-### **Struktura pakietu:**
+**Innymi słowy, pakiet to „skrzynka” pełna modułów, pogrupowanych według jakiegoś klucza – na przykład tematycznego (moduły związane z operacjami na liczbach mogą się znaleźć w jednym pakiecie), dzięki czemu łatwiej jest utrzymać porządek w projekcie.**
 
+### **Struktura pakietu:**
 ```
 projekt/
+
 ├── kalkulator/
+
 │   ├── __init__.py
+
 │   ├── arytmetyka.py
+
 │   └── geometry.py
+
 └── main.py
 ```
-
 - `kalkulator/` - katalog, który pełni rolę pakietu. Zawiera moduły związane z obliczeniami matematycznymi.
 - `__init__.py` - plik specjalny, który sprawia, że Python rozpoznaje katalog `kalkulator` jako pakiet. Może być pusty, ale często zawiera kod inicjalizacyjny lub importy.
 - `arytmetyka.py` - moduł w pakiecie, który może zawierać funkcje do operacji arytmetycznych (np. dodawanie, odejmowanie).
 - `geometry.py` - moduł w pakiecie, który może zawierać funkcje związane z obliczeniami geometrycznymi (np. pole powierzchni, obwód).
+**Kluczową różnicą między pakietem a zwykłym katalogiem jest obecność pliku `__init__.py`.** Jego rola polega na zdefiniowaniu pewnych informacji na temat pakietu oraz (w razie potrzeby) na wykonaniu kodu inicjalizującego, gdy pakiet zostanie zaimportowany.
 
 ### Tworzenie pakietu
 
 Aby utworzyć pakiet, wykonaj następujące kroki:
 
-1. **Stwórz folder o nazwie pakietu** - np. `kalkulator`, który będzie zawierał wszystkie moduły powiązane z tym pakietem.
-2. **Utwórz plik `__init__.py` wewnątrz katalogu** - może być pusty lub zawierać kod, który będzie wykonywany podczas importowania pakietu.
-3. **Dodaj moduły (pliki `.py`) do katalogu pakietu** - umieść tam pliki, takie jak `arytmetyka.py` czy `geometry.py`.
+I. **Stwórz folder o nazwie pakietu** - np. `kalkulator`, który będzie zawierał wszystkie moduły powiązane z tym pakietem.
+II. **Utwórz plik `__init__.py` wewnątrz katalogu** - może być pusty lub zawierać kod, który będzie wykonywany podczas importowania pakietu.
+III. **Dodaj moduły (pliki `.py`) do katalogu pakietu** - umieść tam pliki, takie jak `arytmetyka.py` czy `geometry.py`.
+
+**Tak utworzony pakiet może być zaimportowany w naszym głównym pliku Pythona lub w innym module, co pozwala na wygodne korzystanie z jego zawartości.** W ten sposób struktura projektu pozostaje logicznie podzielona na mniejsze, wyspecjalizowane obszary.
+
 
 ### **Przykład modułu w pakiecie:**
 
@@ -159,6 +184,8 @@ W tym przykładzie:
 - Funkcja `odejmij(a, b)` zwraca różnicę między dwiema liczbami.
 - Moduł `arytmetyka.py` może być zaimportowany do innych części projektu, aby korzystać z tych funkcji.
 
+W ramach tego samego pakietu można utworzyć wiele modułów, z których każdy odpowiada za inny obszar funkcjonalny, np. `geometry.py` dla obliczeń geometrycznych czy `wyrazenia.py` dla obsługi bardziej skomplikowanych wyrażeń matematycznych.
+
 ### Importowanie modułów z pakietu
 
 Aby skorzystać z funkcji i klas zawartych w modułach pakietu, używamy notacji kropkowej (`.`). Możemy zaimportować cały moduł z pakietu, a następnie odwoływać się do jego zawartości za pomocą prefiksu modułu.
@@ -166,6 +193,7 @@ Aby skorzystać z funkcji i klas zawartych w modułach pakietu, używamy notacji
 ### **Przykład importowania modułu z pakietu:**
 
 ```python
+
 # main.py
 
 from kalkulator import arytmetyka
@@ -173,12 +201,12 @@ from kalkulator import arytmetyka
 wynik = arytmetyka.dodaj(2, 3)
 print(wynik)  # Output: 5
 ```
-
 W tym przykładzie:
 
 - `from kalkulator import arytmetyka` importuje moduł `arytmetyka` z pakietu `kalkulator`.
 - Następnie wywołujemy funkcję `dodaj` z modułu `arytmetyka` używając notacji `arytmetyka.dodaj`.
 - Dzięki temu możemy korzystać z funkcji modułu bez konieczności pisania całej ścieżki do pliku.
+**Dzięki temu rozwiązaniu możliwe jest budowanie rozbudowanych projektów, w których moduły są pogrupowane w pakiety, a pakiety mogą być nawet wielopoziomowe.** W praktyce oznacza to, że w katalogu `kalkulator` może znajdować się kolejny folder (kolejny pakiet) – i tak dalej.
 
 ### Importowanie konkretnych funkcji z modułu w pakiecie
 
@@ -198,6 +226,8 @@ W tym przypadku:
 - `from kalkulator.arytmetyka import odejmij` importuje tylko funkcję `odejmij` z modułu `arytmetyka` w pakiecie `kalkulator`.
 - Dzięki temu możemy bezpośrednio wywoływać funkcję `odejmij` bez potrzeby używania prefiksu `arytmetyka.`.
 
+Taka elastyczność w sposobie importowania ma szczególne znaczenie w dużych projektach, gdzie chcemy ograniczyć zasób ładowanych do pamięci elementów tylko do tych naprawdę potrzebnych. Pozwala to również uniknąć niepotrzebnych konfliktów nazw z elementami, które nas w danej chwili nie interesują.
+
 ### Używanie pliku `__init__.py`
 
 Plik `__init__.py` w pakiecie pełni kilka ważnych funkcji:
@@ -205,15 +235,16 @@ Plik `__init__.py` w pakiecie pełni kilka ważnych funkcji:
 - Możemy w nim umieścić kod, który powinien być wykonany podczas pierwszego importu pakietu.
 - Używając zmiennej `__all__`, możemy kontrolować, które moduły są importowane, gdy ktoś użyje `from pakiet import *`.
 - Możemy zdefiniować, które moduły mają być widoczne na zewnątrz pakietu, a które powinny pozostać ukryte.
+**Takie podejście pozwala programistom świadomie zarządzać dostępnością poszczególnych modułów i funkcji.** Jeśli chcemy, aby pewna część kodu pozostała w pakiecie jako wewnętrzna (ang. *internal*), to po prostu nie umieszczamy jej w `__all__`. Dzięki temu łatwiej kontrolować, co finalnie będzie dostępne dla użytkowników naszego kodu.
 
 ### **Przykład `__init__.py`:**
 
 ```python
+
 # __init__.py
 
 __all__ = ['arytmetyka', 'geometry']
 ```
-
 Dzięki powyższemu ustawieniu:
 
 - Jeśli ktoś użyje `from kalkulator import *`, zaimportowane zostaną tylko moduły `arytmetyka` i `geometry`.
@@ -234,6 +265,7 @@ W tym przypadku:
 
 - `from kalkulator import *` zaimportuje moduły `arytmetyka` i `geometry`, ponieważ są one wymienione w `__all__` pliku `__init__.py`.
 - Następnie możemy bezpośrednio używać funkcji z tych modułów.
+**Warto zaznaczyć, że `from pakiet import *` nie zawsze jest zalecany, zwłaszcza w większych projektach.** Może to skutkować niejasnościami co do tego, skąd pochodzi dana funkcja, i prowadzić do konfliktów nazw. Z drugiej strony, w małych projektach lub w środowiskach interaktywnych (`REPL`, Jupyter Notebook) takie podejście może być wygodne podczas szybkiego prototypowania.
 
 ## Importowanie modułów i pakietów
 
@@ -251,6 +283,8 @@ import os
 current_directory = os.getcwd()
 print(current_directory)
 ```
+**Jest to jedna z najczęstszych praktyk, gdyż pozwala na szybkie korzystanie z całego modułu, o ile nazwa modułu nie jest zbyt długa ani nieintuicyjna.** W Pythonie standardowym takie nazwy (np. `os`, `sys`) są krótkie i dobrze opisują swoje przeznaczenie.
+
 
 ### Zaimportowanie modułu z aliasem
 
@@ -265,6 +299,8 @@ array = np.array([1, 2, 3])
 print(array)
 ```
 
+**Tego typu aliasowanie jest często spotykane w społeczności naukowej, gdzie standardem są aliasy takie jak: `import numpy as np`, `import pandas as pd`, `import matplotlib.pyplot as plt`.** Dzięki temu kody są nie tylko krótsze, ale i bardziej spójne pomiędzy różnymi projektami.
+
 ### Zaimportowanie konkretnych funkcji z modułu
 
 Importuje tylko określone funkcje lub klasy.
@@ -277,6 +313,8 @@ from math import sqrt, pi
 print(sqrt(16))  # Output: 4.0
 print(pi)        # Output: 3.141592653589793
 ```
+**To podejście pomaga uniknąć „zaśmiecania” przestrzeni nazw niepotrzebnymi elementami i sprawia, że od razu widać, jakie konkretnie funkcje czy obiekty są nam potrzebne.** Jest to też często praktykowane w krótkich skryptach, w których wielokrotnie używamy tylko jednej czy dwóch funkcji z całego modułu.
+
 
 ### Zaimportowanie funkcji z aliasem
 
@@ -290,6 +328,8 @@ from math import factorial as fac
 print(fac(5))  # Output: 120
 ```
 
+**Aliasowanie funkcji może znacząco skrócić wywołania i poprawić czytelność kodu – zwłaszcza gdy pracujemy w zespołach, w których określone skróty są umowami między programistami.** Jest to też sposób na uniknięcie konfliktów nazw z innymi elementami w naszym programie.
+
 ### Zaimportowanie całej zawartości modułu
 
 Importuje wszystkie publiczne elementy modułu.
@@ -302,7 +342,8 @@ from random import *
 print(randint(1, 10))
 ```
 
-**Uwaga:** Ta metoda może prowadzić do konfliktów nazw i jest ogólnie odradzana.
+**Uwaga:** Ta metoda może prowadzić do konfliktów nazw i jest ogólnie odradzana.  
+**Chociaż jest ona kusząca, szczególnie w przypadku szybkich eksperymentów (np. w trybie interaktywnym), w dużych projektach może powodować wiele niejasności.** W takiej sytuacji nie wiadomo, czy dana funkcja `randint` pochodzi z modułu `random`, czy została zdefiniowana lokalnie w innym miejscu naszego kodu. Dlatego stosowanie `import *` powinno być rozważne i zwykle ograniczone do sytuacji prototypowania lub niewielkich projektów.
 
 ## Wykonywanie kodu podczas importowania
 
