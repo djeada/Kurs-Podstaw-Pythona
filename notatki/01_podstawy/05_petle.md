@@ -1,6 +1,6 @@
 ## Pętle
 
-Pętle w Pythonie stanowią jeden z fundamentalnych elementów każdego języka programowania, umożliwiając wielokrotne wykonywanie wybranych instrukcji. Dzięki nim możemy powtarzać określone operacje na danych, co pozwala na znaczne uproszczenie i skrócenie kodu. W praktyce, bez pętli musielibyśmy wielokrotnie powtarzać te same fragmenty kodu, co prowadziłoby do niepotrzebnej redundancji i zwiększało ryzyko popełnienia błędów. 
+Pętle stanowią jeden z fundamentalnych elementów każdego języka programowania, umożliwiając wielokrotne wykonywanie wybranych instrukcji. Dzięki nim możemy powtarzać określone operacje na danych, co pozwala na znaczne uproszczenie i skrócenie kodu. W praktyce, bez pętli musielibyśmy wielokrotnie powtarzać te same fragmenty kodu, co prowadziłoby do niepotrzebnej redundancji i zwiększało ryzyko popełnienia błędów. 
 
 Zasadniczo, pętle dzielimy na dwa główne rodzaje: pętle oparte na liczbie wykonywanych iteracji (np. `for`) oraz pętle, które działają tak długo, aż dany warunek przestanie być spełniony (np. `while`). Oba te podejścia mają swoje zastosowanie i pozwalają na pisanie bardziej elastycznego kodu, z łatwością dostosowującego się do różnych zadań, takich jak przeglądanie elementów listy, przetwarzanie plików, czy budowanie wielowymiarowych struktur danych.
 
