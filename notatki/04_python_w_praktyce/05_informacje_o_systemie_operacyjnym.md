@@ -13,11 +13,13 @@ import os
 
 print(os.name)
 ```
+
 Jeśli uruchomimy ten kod, otrzymamy jedno z następujących wyjść, w zależności od systemu:
 
 - **'posix'** na systemach Unix/Linux,
 - **'nt'** na Windows,
 - **'java'** na platformie Java.
+
 Otrzymana wartość daje ogólne pojęcie o rodzaju systemu, ale często potrzebujemy bardziej szczegółowych informacji. W tym celu możemy użyć modułu `platform`:
 
 ```python
@@ -36,6 +38,7 @@ Przykładowe wyniki mogą wyglądać następująco:
 - `platform.system()` zwróci `'Linux'`,
 - `platform.release()` może zwrócić `'5.4.0-42-generic'`,
 - `platform.machine()` zwróci `'x86_64'`.
+
 **Windows**:
 
 - `platform.system()` zwróci `'Windows'`,
@@ -62,16 +65,17 @@ print("Zawartość bieżącego katalogu:")
 for element in zawartosc:
     print(element)
 ```
-Jeśli w bieżącym katalogu znajdują się pliki `dokument.txt`, `skrypt.py` oraz folder `dane`, wynik będzie:
-```
 
+Jeśli w bieżącym katalogu znajdują się pliki `dokument.txt`, `skrypt.py` oraz folder `dane`, wynik będzie:
+
+```
 Zawartość bieżącego katalogu:
 dokument.txt
 skrypt.py
 dane
 ```
-W ten sposób szybko i prosto możemy zobaczyć, co znajduje się w danej lokalizacji. Metoda `listdir()` nie rozróżnia jednak plików od katalogów – zwraca wszystkie nazwy obiektów znajdujących się w katalogu.
 
+W ten sposób szybko i prosto możemy zobaczyć, co znajduje się w danej lokalizacji. Metoda `listdir()` nie rozróżnia jednak plików od katalogów – zwraca wszystkie nazwy obiektów znajdujących się w katalogu.
 
 #### Tworzenie nowego katalogu
 
@@ -98,6 +102,7 @@ import os
 os.remove('dokument.txt')
 print("Usunięto plik 'dokument.txt'.")
 ```
+
 Jeśli chcemy usunąć pusty katalog, używamy `os.rmdir()`:
 
 ```python
@@ -121,10 +126,10 @@ import os
 sciezka = os.path.join('katalog', 'podkatalog', 'plik.txt')
 print(f"Ścieżka do pliku: {sciezka}")
 ```
+
 Na systemie Windows wynik będzie wyglądał jak `katalog\podkatalog\plik.txt`, a na Unix/Linux `katalog/podkatalog/plik.txt`.
 
 **To rozwiązanie jest absolutnie kluczowe dla transportowalności kodu, ponieważ w przeciwnym wypadku musielibyśmy tworzyć warunkową logikę do obsługi różnych rodzajów separatorów.** Warto od samego początku przyzwyczaić się do używania `os.path.join()`, zwłaszcza w wieloosobowych projektach, aby uniknąć problemów z kompatybilnością.
-
 
 #### Sprawdzanie istnienia pliku lub katalogu
 
@@ -171,9 +176,10 @@ print(f"ID użytkownika: {user_info.pw_uid}")
 print(f"ID grupy: {user_info.pw_gid}")
 print(f"Katalog domowy: {user_info.pw_dir}")
 ```
-Przykładowe wyjście:
-```
 
+Przykładowe wyjście:
+
+```
 Nazwa użytkownika: jan
 
 ID użytkownika: 1000
@@ -182,8 +188,8 @@ ID grupy: 1000
 
 Katalog domowy: /home/jan
 ```
-**Dzięki takiej wiedzy skrypt może np. automatycznie zapisywać raporty w `/home/jan/raporty` albo sprawdzić, czy dany użytkownik ma uprawnienia do uruchomienia pewnych funkcji w systemie.**
 
+**Dzięki takiej wiedzy skrypt może np. automatycznie zapisywać raporty w `/home/jan/raporty` albo sprawdzić, czy dany użytkownik ma uprawnienia do uruchomienia pewnych funkcji w systemie.**
 
 #### Pobieranie informacji o grupie użytkownika
 
@@ -232,15 +238,16 @@ wolne_miejsce = rozmiar_bloku * wolne_bloki
 print(f"Całkowita pojemność dysku: {calkowita_pojemnosc / (1024**3):.2f} GB")
 print(f"Wolne miejsce na dysku: {wolne_miejsce / (1024**3):.2f} GB")
 ```
-Jeśli dysk ma 500 GB, a wolne jest 200 GB, wynik będzie:
-```
 
+Jeśli dysk ma 500 GB, a wolne jest 200 GB, wynik będzie:
+
+```
 Całkowita pojemność dysku: 500.00 GB
 
 Wolne miejsce na dysku: 200.00 GB
 ```
-**Tego rodzaju informacja pozwala nam elastycznie zarządzać danymi i reagować, gdy zasoby systemowe zaczynają się kończyć.** Zanim zostanie w pełni zapełniony, aplikacja może np. automatycznie przenieść nieużywane pliki w inne miejsce lub powiadomić administratora o potrzebie powiększenia przestrzeni.
 
+**Tego rodzaju informacja pozwala nam elastycznie zarządzać danymi i reagować, gdy zasoby systemowe zaczynają się kończyć.** Zanim zostanie w pełni zapełniony, aplikacja może np. automatycznie przenieść nieużywane pliki w inne miejsce lub powiadomić administratora o potrzebie powiększenia przestrzeni.
 
 ### Informacje o procesorze
 
@@ -277,22 +284,22 @@ cpu_freq = psutil.cpu_freq()
 print(f"Bieżąca częstotliwość procesora: {cpu_freq.current:.2f} MHz")
 print(f"Maksymalna częstotliwość procesora: {cpu_freq.max:.2f} MHz")
 ```
-Jeśli procesor działa z częstotliwością 2.20 GHz, a maksymalna częstotliwość to 3.50 GHz, wynik będzie:
-```
 
+Jeśli procesor działa z częstotliwością 2.20 GHz, a maksymalna częstotliwość to 3.50 GHz, wynik będzie:
+
+```
 Bieżąca częstotliwość procesora: 2200.00 MHz
 
 Maksymalna częstotliwość procesora: 3500.00 MHz
 ```
-**Takie dane bywają wykorzystywane np. w menedżerach zadań, narzędziach monitorujących czy w aplikacjach optymalizujących działanie systemu, które mogą np. zmniejszać obciążenie procesora przy braku potrzeby pracy na najwyższych częstotliwościach.**
 
+**Takie dane bywają wykorzystywane np. w menedżerach zadań, narzędziach monitorujących czy w aplikacjach optymalizujących działanie systemu, które mogą np. zmniejszać obciążenie procesora przy braku potrzeby pracy na najwyższych częstotliwościach.**
 
 ### Zmienne środowiskowe
 
 Zmienne środowiskowe są używane do przechowywania informacji konfiguracyjnych systemu operacyjnego i aplikacji. Mogą to być m.in. ścieżki do różnych katalogów systemowych, klucze dostępu do serwisów zewnętrznych lub adresy serwerów baz danych.
 
 **Dzięki możliwości definiowania zmiennych środowiskowych możemy łatwo parametryzować nasz program, bez konieczności zmiany kodu źródłowego.** Jest to szczególnie wygodne w środowiskach ciągłej integracji i konteneryzacji (np. Docker), gdzie w zależności od potrzeb podajemy różne wartości zmiennych środowiskowych.
-
 
 #### Odczytywanie zmiennych środowiskowych
 
@@ -323,15 +330,16 @@ import os
 os.environ['MOJA_ZMIENNA'] = 'wartość'
 print(f"MOJA_ZMIENNA: {os.environ.get('MOJA_ZMIENNA')}")
 ```
-Wynik:
-```
 
+Wynik:
+
+```
 MOJA_ZMIENNA: wartość
 ```
+
 Warto pamiętać, że zmiany wprowadzone w `os.environ` są widoczne tylko w bieżącym procesie i nie są zachowywane po zakończeniu programu.
 
 **Innymi słowy, jeśli po uruchomieniu skryptu wpiszemy w terminalu `echo $MOJA_ZMIENNA`, najprawdopodobniej nic nie zobaczymy.** Aby zmienna środowiskowa była widoczna globalnie, należałoby ją ustawić bezpośrednio w powłoce lub w pliku konfiguracyjnym systemu.
-
 
 #### Użycie zmiennych środowiskowych w aplikacji
 
