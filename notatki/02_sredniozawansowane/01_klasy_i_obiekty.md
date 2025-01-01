@@ -1,17 +1,34 @@
 ## Klasy i obiekty
 
-Programowanie obiektowe (ang. Object-Oriented Programming, OOP) to paradygmat programowania, który opiera się na koncepcji "obiektów". Obiekty są instancjami klas, które łączą dane (atrybuty) i funkcje (metody) w jedną jednostkę. Klasy i obiekty są podstawowymi elementami tego paradygmatu i przynoszą wiele korzyści w tworzeniu skalowalnego, zrozumiałego i łatwego do utrzymania kodu.
+Programowanie obiektowe (ang. Object-Oriented Programming, OOP) to jeden z najpopularniejszych i najbardziej przemyślanych sposobów tworzenia oprogramowania. Polega na organizowaniu kodu w logiczne jednostki (obiekty), które łączą dane (atrybuty) i funkcje (metody) w jedną spójną całość. Dzięki temu kod staje się łatwiejszy w utrzymaniu, rozbudowie i ponownym wykorzystaniu. Klasy i obiekty są kluczowymi elementami tego paradygmatu: klasa to pewien „przepis” (lub „szablon”), a obiektem nazywamy konkretny egzemplarz stworzony na podstawie takiego przepisu.
 
-- **Klasa** to nic innego jak szablon lub projekt, który definiuje strukturę i zachowanie obiektów, określając, jakie atrybuty i metody będą dostępne dla obiektów tej klasy.
-- Kiedy tworzony jest **obiekt**, czyli konkretna instancja klasy, otrzymuje on rzeczywiste wartości atrybutów zdefiniowanych w tej klasie.
+Paradygmat obiektowy jest bardzo intuicyjny, ponieważ często odwzorowuje realne sytuacje w kodzie. Można to porównać do planów architektonicznych (klasy), które opisują, jak ma wyglądać i działać budynek, podczas gdy obiekty są już fizycznymi budowlami wzniesionymi według tego planu. Właśnie to rozróżnienie pomiędzy projektem (klasą) a konkretną realizacją (obiektem) stanowi serce OOP.
+
+Klasy pozwalają definiować zarówno dane, które reprezentują stan obiektu (tzw. atrybuty), jak i metody, czyli czynności wykonywane na tych danych. Kiedy tworzony jest obiekt, staje się on instancją danej klasy i „dziedziczy” wszystkie właściwości oraz zachowania zdefiniowane w tej klasie.
+
+Korzyści płynące z tego podejścia to:
+
+1. **Modularność kodu**: możliwość grupowania logicznie powiązanych elementów w jednym miejscu, co sprawia, że kod staje się bardziej czytelny i prostszy w nawigacji.
+2. **Możliwość ponownego użycia**: klasy można tworzyć raz i używać w wielu miejscach kodu bez powielania logicznych fragmentów.
+3. **Enkapsulacja**: ukrywanie wewnętrznej struktury obiektu przed resztą programu, co pozwala na zmianę implementacji bez wpływu na kod korzystający z obiektów.
+4. **Dziedziczenie**: tworzenie nowych klas na bazie już istniejących, co umożliwia rozszerzanie funkcjonalności w sposób bezpieczny i niewymagający powielania kodu.
+5. **Polimorfizm**: zdolność do zdefiniowania wspólnego interfejsu (zestawu metod) dla klas o różnej implementacji.
+
+Poniżej przedstawione zostały szczegółowe wyjaśnienia związane z klasami, obiektami oraz pojęciami z nimi powiązanymi. Przedstawione przykłady kodu w Pythonie pozwolą łatwiej zrozumieć, jak w praktyce wykorzystuje się programowanie obiektowe.
 
 ### Struktura klasy
 
-1. Jeśli chodzi o strukturę klasy, to **konstruktor (`__init__`)** jest specjalną metodą wywoływaną w momencie tworzenia nowego obiektu. Jej główną funkcją jest inicjowanie atrybutów obiektu, co pozwala nadać mu konkretne cechy.
-2. **Atrybuty** to zmienne, które są powiązane z klasą i które przechowują informacje o stanie konkretnego obiektu.
-3. Z kolei **metody** to funkcje związane z klasą, które operują na atrybutach lub wykonują inne operacje, zależne od tego, co dany obiekt powinien robić.
+Kiedy tworzymy klasę w Pythonie, zazwyczaj definiujemy w niej:
+
+1. **Konstruktor (`__init__`)** – specjalną metodę, która wywoływana jest automatycznie przy tworzeniu nowego obiektu. Służy do inicjowania (nadawania pierwszych wartości) atrybutów.
+2. **Atrybuty** – zmienne przechowujące dane opisujące stan obiektu (np. imię, nazwisko, numer ISBN).
+3. **Metody** – funkcje zawarte w klasie, które mogą korzystać z atrybutów oraz wykonywać określone zadania związane z obiektem.
+
+Dzięki temu programista może zdefiniować, czym jest obiekt (jakie ma dane, co może robić), a także jakie operacje są na nim dozwolone czy typowe.
 
 ### Przykład użycia
+
+Poniżej znajduje się prosty przykład klasy `Osoba`, która przechowuje imię i nazwisko oraz może się przedstawić:
 
 ```python
 class Osoba:
@@ -33,21 +50,15 @@ osoba1.przedstaw_sie()
 osoba2.przedstaw_sie()
 ```
 
-W powyższym kodzie:
+W tym przykładzie:
 
 - Zdefiniowaliśmy klasę `Osoba` z dwoma atrybutami (`imie` i `nazwisko`) oraz jedną metodą (`przedstaw_sie`).
-- Używając klasy, stworzyliśmy dwa obiekty: `osoba1` i `osoba2`.
-- Dla każdego obiektu wywołaliśmy metodę `przedstaw_sie`.
+- Stworzyliśmy dwa różne obiekty: `osoba1` i `osoba2`. Każdy z nich ma swój własny stan (różne imię i nazwisko).
+- Za pomocą metody `przedstaw_sie` każdy obiekt może wyświetlić swoją unikalną charakterystykę.
 
 ### Dostęp i modyfikacja atrybutów w obiektach
 
-W programowaniu obiektowym atrybuty (zmienne) są przechowywane w obiektach. Aby uzyskać dostęp do tych atrybutów, korzysta się z notacji kropkowej:
-
-```python
-nazwa_obiektu.atrybut
-```
-
-Atrybuty mogą być modyfikowane podobnie jak zwykłe zmienne:
+Atrybuty w obiektach odczytujemy i modyfikujemy za pomocą notacji kropkowej. Oznacza to, że do atrybutu docieramy przez `nazwa_obiektu.atrybut`. Możemy je także zmieniać, przypisując do nich nową wartość:
 
 ```python
 osoba = Osoba("Jan", "Kowalski")
@@ -56,9 +67,11 @@ osoba.imie = "Adam"
 print(osoba.imie)  # Wyświetli: Adam
 ```
 
+W powyższym przykładzie tworzymy obiekt `osoba`, a następnie uzyskujemy do niego dostęp przez pole `imie`. Zmieniamy jego wartość na `"Adam"` i ponownie wyświetlamy, co dowodzi, że atrybut został zaktualizowany. W praktyce jest to niezwykle wygodne, jednak nie zawsze chcemy, aby atrybuty były modyfikowane dowolnie z zewnątrz. Dlatego w Pythonie istnieją mechanizmy takie jak dekoratory `@property` oraz `@setter`, które umożliwiają kontrolę nad tym, w jaki sposób atrybut może być zmieniany (lub odczytywany).
+
 ### Dekoratory @property i @nazwa_atrybutu.setter
 
-Aby wprowadzić kontrolę nad dostępem do atrybutów oraz modyfikacją ich wartości, w Pythonie można używać dekoratorów `@property` oraz `@nazwa_atrybutu.setter`. Te dekoratory pozwalają na tworzenie funkcji, które są wywoływane podczas odczytu i modyfikacji atrybutu.
+W przypadku, gdy chcemy mieć większą kontrolę nad dostępem do atrybutów, możemy skorzystać z tzw. „właściwości” (properties). Dzięki dekoratorom `@property` oraz `@nazwa_atrybutu.setter` tworzymy specjalne metody wywoływane przy odczycie i zapisie atrybutu. Jest to elegancki i zalecany sposób, by uniknąć bezpośredniego modyfikowania atrybutów obiektu.
 
 ```python
 class Osoba:
@@ -75,23 +88,24 @@ class Osoba:
     def imie(self, nowa_wartosc):
         print('Ktoś modyfikuje imię')
         self._imie = nowa_wartosc
-```
 
-W klasie `Osoba`, atrybuty `_imie` i `_nazwisko` są oznaczone jednym podkreślnikiem, co jest konwencją wskazującą, że atrybuty te są "chronione" i nie powinny być modyfikowane bezpośrednio z zewnątrz klasy. Dekoratory `@property` i `@imie.setter` umożliwiają odpowiednio odczyt i modyfikację wartości atrybutu `_imie`.
-
-```python
 osoba = Osoba("Jan", "Kowalski")
 print(osoba.imie)  # Ktoś próbuje odczytać imię, wyświetli: Jan
 osoba.imie = "Adam"  # Ktoś modyfikuje imię
 print(osoba.imie)  # Ktoś próbuje odczytać imię, wyświetli: Adam
 ```
 
+Dzięki temu mechanizmowi możemy również dodać logikę walidującą czy kontrolną w setterze (np. sprawdzanie, czy nowe imię jest ciągiem znaków i spełnia konkretne warunki). W praktyce pozwala to zabezpieczyć dane obiektu przed niepożądanymi wartościami.
+
 ### Potrzeba używania klas i obiektów
 
-#### **Modularność i organizacja kodu**:
+Klasy i obiekty nie służą wyłącznie do porządkowania kodu. Zastosowanie programowania obiektowego niesie ze sobą szereg zalet w kontekście rozwijania większych projektów, pracy zespołowej czy ponownego wykorzystania już istniejących rozwiązań w przyszłości.
 
-- Klasy pozwalają na grupowanie powiązanych danych i funkcji, co pomaga w organizacji kodu. Kod staje się bardziej modularny, co ułatwia jego zrozumienie i utrzymanie.
-- Przykład: W aplikacji do zarządzania biblioteką możemy mieć klasę `Ksiazka`, która łączy atrybuty (tytuł, autor, ISBN) z metodami (wypożycz, zwróć).
+#### Modularność i organizacja kodu
+
+Klasy umożliwiają sensowne grupowanie atrybutów i metod w jednym miejscu, co sprzyja organizacji kodu i ułatwia odnalezienie potrzebnych fragmentów. Dzięki temu, gdy chcemy np. dodać nowe funkcjonalności lub naprawić błąd, szybko zlokalizujemy odpowiednią sekcję kodu.
+
+Przykład: W aplikacji do zarządzania biblioteką możemy mieć klasę `Ksiazka`, która łączy atrybuty (tytuł, autor, ISBN) z metodami (wypożycz, zwróć). Dzięki temu dokładnie wiadomo, gdzie szukać logiki związanej z obsługą książek.
 
 ```python
 class Ksiazka:
@@ -107,10 +121,9 @@ class Ksiazka:
         print(f'Książka "{self.tytul}" została zwrócona.')
 ```
 
-#### **Możliwość ponownego użycia kodu**:
+#### Możliwość ponownego użycia kodu
 
-- Klasy umożliwiają tworzenie obiektów o podobnej strukturze i zachowaniu, co zapobiega duplikacji kodu.
-- Przykład: Możemy utworzyć wiele obiektów klasy `Ksiazka` bez konieczności wielokrotnego definiowania tych samych atrybutów i metod.
+Klasy można traktować jak uniwersalne „matryce”. Raz zdefiniowaną klasę da się wykorzystać wielokrotnie, tworząc dowolną liczbę obiektów o podobnym wzorcu, ale różniących się konkretnymi wartościami atrybutów. Minimalizuje to duplikację kodu i ułatwia jego konserwację.
 
 ```python
 ksiazka1 = Ksiazka("Pan Tadeusz", "Adam Mickiewicz", "1234567890")
@@ -119,10 +132,9 @@ ksiazka1.wypozycz()
 ksiazka2.zwroc()
 ```
 
-#### **Enkapsulacja (ukrywanie szczegółów implementacji)**:
+#### Enkapsulacja (ukrywanie szczegółów implementacji)
 
-- Klasy umożliwiają ukrywanie wewnętrznych szczegółów implementacji przed użytkownikami obiektów. Dzięki temu użytkownicy mogą korzystać z obiektów bez znajomości ich wewnętrznej struktury.
-- Przykład: W klasie `Ksiazka` możemy ukryć wewnętrzne szczegóły dotyczące statusu wypożyczenia książki.
+Klasy dają możliwość ukrywania wewnętrznych szczegółów implementacji, tzn. to, jak dokładnie coś jest zrobione w środku, może być niedostępne lub niewidoczne dla zewnętrznego kodu. Dzięki temu możemy modyfikować wnętrze klasy, nie narażając istniejącego kodu na błędy z powodu zmian. Użytkownicy klasy nadal będą się nią posługiwać w taki sam sposób (ten sam interfejs).
 
 ```python
 class Ksiazka:
@@ -147,10 +159,11 @@ class Ksiazka:
             print(f'Książka "{self.tytul}" nie była wypożyczona.')
 ```
 
-#### **Dziedziczenie**:
+W tym kodzie klasa sama decyduje, jaką logikę zastosować przy wypożyczeniu lub zwróceniu książki. Zewnętrzny kod jedynie wywołuje odpowiednie metody, nie martwiąc się o status wewnętrznych pól obiektu.
 
-- Dziedziczenie pozwala na tworzenie nowych klas na podstawie istniejących klas, co umożliwia ponowne użycie kodu i rozszerzanie jego funkcjonalności.
-- Przykład: Możemy stworzyć klasę `Ebook`, która dziedziczy po klasie `Ksiazka` i dodaje nowe atrybuty oraz metody specyficzne dla e-booków.
+#### Dziedziczenie
+
+Dziedziczenie pozwala tworzyć nowe klasy na podstawie już istniejących. Nowa klasa (klasa pochodna) „dziedziczy” atrybuty i metody po klasie bazowej, co pozwala uniknąć dublowania kodu. Można wtedy dodawać nowe funkcjonalności lub nadpisywać już istniejące.
 
 ```python
 class Ebook(Ksiazka):
@@ -162,10 +175,11 @@ class Ebook(Ksiazka):
         print(f'Pobieranie e-booka "{self.tytul}". Rozmiar pliku: {self.rozmiar_pliku}MB')
 ```
 
-#### **Polimorfizm**:
+Dzięki temu klasa `Ebook` przejmuje już istniejącą logikę z klasy `Ksiazka` (jak np. metody `wypozycz` czy `zwroc`), a oprócz tego wprowadza nowe metody i atrybuty specyficzne dla e-booków (np. rozmiar pliku, metoda pobierania).
 
-- Polimorfizm pozwala na traktowanie obiektów różnych klas w ten sam sposób, pod warunkiem że klasy te dzielą wspólny interfejs (np. dziedziczą po tej samej klasie bazowej).
-- Przykład: Możemy używać tej samej metody `wypozycz` dla obiektów klasy `Ksiazka` i `Ebook`.
+#### Polimorfizm
+
+Polimorfizm oznacza, że różne obiekty mogą udostępniać wspólny interfejs, ale realizować go na swój własny sposób. Możemy wyobrazić sobie dwie klasy: `Ksiazka` i `Ebook`. Obie mogą mieć metodę `wypozycz`, która zachowuje się podobnie z punktu widzenia wywołującego kod, ale w praktyce może wykonywać nieco inne operacje (np. weryfikować dostępność egzemplarza fizycznego lub cyfrowego pliku).
 
 ```python
 ksiazka = Ksiazka("Pan Tadeusz", "Adam Mickiewicz", "1234567890")
@@ -175,15 +189,19 @@ ebook.wypozycz()
 ebook.pobierz()
 ```
 
+W przykładzie widać, że z punktu widzenia zewnętrznego kodu obiekty `ksiazka` i `ebook` zachowują się w podobny sposób przy wypożyczaniu, choć wewnętrznie mogą funkcjonować inaczej.
+
 ### Pola i metody statyczne oraz klasowe
 
-W programowaniu obiektowym często korzysta się z pól i metod statycznych oraz klasowych. Różnią się one od standardowych pól i metod instancji, gdyż są powiązane bezpośrednio z klasą, a nie z jej instancjami.
+W programowaniu obiektowym, oprócz typowych metod instancyjnych, mamy też metody i pola statyczne oraz klasowe. Podstawowa różnica polega na tym, że:
+
+- **Metody/pola instancyjne** są przypisane do konkretnego obiektu i mogą odnosić się do jego stanu.
+- **Metody/pola klasowe** przynależą do samej klasy i współdzielą dane pomiędzy wszystkie instancje (lub nie potrzebują odwoływać się do żadnej konkretnej instancji).
+- **Metody statyczne** nie odwołują się ani do stanu instancji, ani do stanu klasy – są w pewnym sensie „zwykłymi funkcjami” zdefiniowanymi w obrębie klasy.
 
 #### Pola i metody statyczne
 
-Pola i metody statyczne są związane z klasą, a nie z konkretnymi obiektami tej klasy. W Pythonie metody statyczne są tworzone przy użyciu dekoratora `@staticmethod`. Dostęp do nich jest możliwy zarówno poprzez nazwę klasy, jak i przez obiekt tej klasy. Metody statyczne nie mają dostępu do atrybutów instancji ani do atrybutów klasy, ponieważ nie przyjmują jako pierwszego argumentu `self` ani `cls`.
-
-Przykład:
+W Pythonie metody statyczne oznaczamy dekoratorem `@staticmethod`. Takie metody nie przyjmują jako pierwszego parametru `self` ani `cls`. Mogą być wywoływane zarówno poprzez nazwę klasy, jak i poprzez instancję:
 
 ```python
 class Czlowiek:
@@ -199,13 +217,14 @@ przykladowy_czlowiek = Czlowiek()
 przykladowy_czlowiek.wyswietl_glowy()  # Liczba głów: 1
 ```
 
-W powyższym przykładzie, metoda `wyswietl_glowy` jest metodą statyczną. Można ją wywołać zarówno poprzez klasę `Czlowiek`, jak i przez jej instancję `przykladowy_czlowiek`.
+W tym przykładzie:
+
+- `liczba_glow` jest polem klasowym (jest przypisane do klasy `Czlowiek`, a nie do konkretnego obiektu).
+- `wyswietl_glowy` jest metodą statyczną, która bezpośrednio sięga do `Czlowiek.liczba_glow`.
 
 #### Metody klasowe
 
-Metody klasowe stanowią rozszerzenie metod statycznych. Są one tworzone przy użyciu dekoratora `@classmethod` i ich pierwszym parametrem jest `cls`, który reprezentuje samą klasę (podobnie jak `self` reprezentuje instancję). Metody klasowe mogą dostępować do pól klasowych oraz do innych metod klasowych.
-
-Przykład:
+Metody klasowe wykorzystują dekorator `@classmethod` i otrzymują jako pierwszy argument `cls`, czyli referencję do samej klasy (odpowiednik `self` dla instancji). Metody klasowe mogą zatem modyfikować pola klasowe i wywoływać inne metody klasowe:
 
 ```python
 class Czlowiek:
@@ -213,27 +232,26 @@ class Czlowiek:
 
     @classmethod
     def wyswietl_glowy(cls):
-        print(f'Liczba głów: {cls.liczba_glow}')  # Uwaga: używamy `cls`, a nie nazwy klasy!
+        print(f'Liczba głów: {cls.liczba_glow}')  # Używamy `cls`, zamiast nazwy klasy
 
     def zwykla_funkcja(self):
         self.wyswietl_glowy()
 
-Czlowiek.wyswietl_glowy()  # Liczba głów: 1
-
+Czlowiek.wyswietl_glowy()             # Liczba głów: 1
 przykladowy_czlowiek = Czlowiek()
-przykladowy_czlowiek.wyswietl_glowy()  # Liczba głów: 1
-przykladowy_czlowiek.zwykla_funkcja()  # Liczba głów: 1
+przykladowy_czlowiek.wyswietl_glowy() # Liczba głów: 1
+przykladowy_czlowiek.zwykla_funkcja() # Liczba głów: 1
 ```
 
-W klasie `Czlowiek` mamy pole klasowe `liczba_glow`, metodę klasową `wyswietl_glowy()`, która korzysta z tego pola, oraz metodę instancyjną `zwykla_funkcja()`. W przykładzie pokazano różne sposoby wywoływania metody klasowej, zarówno bezpośrednio z poziomu klasy, jak i z poziomu instancji. Kluczową różnicą jest to, że w metodach klasowych używa się `cls` do odwoływania się do klasowych atrybutów i metod, podczas gdy w metodach instancyjnych używa się `self`.
+Jak widać, metoda klasowa może być wywoływana zarówno poprzez klasę, jak i przez obiekt. W praktyce najczęściej używa się jej bezpośrednio z poziomu klasy.
 
 ### Różnice między metodami instancyjnymi, klasowymi i statycznymi
 
-#### **Metody instancyjne**:
+#### Metody instancyjne
 
-- Są powiązane z instancją klasy.
-- Mają dostęp do atrybutów instancji przez `self`.
-- Mają dostęp do atrybutów klasy przez `self.__class__` lub bezpośrednio przez nazwę klasy.
+- Powiązane z daną instancją klasy.
+- Mają dostęp do jej atrybutów za pomocą `self`.
+- Mogą korzystać z atrybutów klasowych, np. przez `self.__class__`.
 
 Przykład:
 
@@ -250,11 +268,11 @@ auto = Samochod("Toyota", "Corolla")
 auto.przedstaw_sie()  # Samochód: Toyota Corolla
 ```
 
-#### **Metody klasowe**:
+#### Metody klasowe
 
-- Są powiązane z klasą, nie z instancją.
-- Mają dostęp do atrybutów klasy przez `cls`.
-- Nie mają dostępu do atrybutów instancji bezpośrednio.
+- Związane z klasą, a nie z konkretną instancją.
+- Pierwszy argument to `cls`, będący referencją do klasy.
+- Mogą odwoływać się do pól i metod klasowych.
 
 Przykład:
 
@@ -269,11 +287,11 @@ class Samochod:
 Samochod.wyswietl_liczbe_kol()  # Samochody mają 4 koła
 ```
 
-#### **Metody statyczne**:
+#### Metody statyczne
 
-- Nie są powiązane ani z instancją, ani z klasą.
-- Nie mają dostępu do atrybutów instancji ani klasy.
-- Są używane do wykonywania zadań, które są związane z klasą, ale nie wymagają dostępu do jej stanu.
+- Umiejscowione wewnątrz klasy, ale nie posiadają dostępu do `self` czy `cls`.
+- Są wywoływane jak zwykłe funkcje (ale w obrębie klasy).
+- Przydają się np. do grupowania funkcji logicznie powiązanych z daną klasą, ale nieoperujących bezpośrednio na stanie klasy lub obiektów.
 
 Przykład:
 
@@ -288,9 +306,15 @@ Samochod.informacje_o_samochodach()  # Samochody to pojazdy mechaniczne służą
 
 ### Zastosowanie w praktyce
 
-Pola i metody statyczne oraz klasowe są szczególnie przydatne w sytuacjach, gdzie operacje dotyczą samej klasy, a nie konkretnej instancji. Na przykład, mogą być używane do zliczania liczby instancji klasy, zarządzania wspólnymi zasobami czy implementowania wzorców projektowych takich jak Singleton.
+Wykorzystanie pól i metod statycznych/klasowych jest szczególnie przydatne, gdy chcemy:
 
-I. **Zliczanie liczby instancji klasy**:
+- Utrzymywać pewne globalne informacje w obrębie klasy (np. licznik tworzonych obiektów).
+- Zapewnić wspólny dostęp do pewnych zasobów dla wszystkich instancji (np. do jednego połączenia z bazą danych).
+- Implementować wzorce projektowe, w których logika inicjalizacji obiektu (lub jego brak) leży po stronie klasy.
+
+#### Zliczanie liczby instancji
+
+Poniższy przykład pokazuje, jak używając metody klasowej, można zliczać liczbę utworzonych instancji:
 
 ```python
 class Osoba:
@@ -310,7 +334,11 @@ osoba2 = Osoba("Anna")
 print(Osoba.ile_instancji())  # 2
 ```
 
-II. **Zarządzanie wspólnymi zasobami**:
+Tutaj każdorazowe stworzenie nowej osoby zwiększa licznik instancji. Metoda `ile_instancji` jest metodą klasową i pozwala w prosty sposób odczytać, ile obiektów powstało.
+
+#### Zarządzanie wspólnymi zasobami
+
+Przykładem może być klasa zarządzająca dostępem do bazy danych. Zamiast za każdym razem tworzyć nowe połączenie, klasa może mieć jedną statyczną lub klasową zmienną, z której będą korzystać wszystkie instancje. Dzięki temu unika się wielokrotnych, kosztownych operacji na zasobach.
 
 ```python
 class BazaDanych:
@@ -329,7 +357,11 @@ print(polaczenie1)  # Połączenie do bazy danych
 print(polaczenie1 is polaczenie2)  # True
 ```
 
-III. **Wzorce projektowe**:
+W tym kodzie metoda klasowa `polacz` sprawdza, czy połączenie już istnieje. Jeśli nie, tworzy je. W przeciwnym wypadku zwraca istniejące połączenie. Dzięki temu zaoszczędzamy zasoby i zapobiegamy niekontrolowanemu namnażaniu połączeń.
+
+#### Wzorce projektowe
+
+Wzorce projektowe, takie jak Singleton, często korzystają z cech języka obiektowego (w tym pól lub metod statycznych i klasowych), by kontrolować powstawanie nowych instancji klas. Poniższy przykład pokazuje klasyczną implementację wzorca Singleton w Pythonie:
 
 ```python
 class Singleton:
@@ -345,3 +377,5 @@ s2 = Singleton()
 
 print(s1 is s2)  # True
 ```
+
+W momencie tworzenia nowego obiektu `Singleton` sprawdza, czy `_instancja` już istnieje. Jeśli nie, tworzy ją, a jeśli tak, zwraca referencję do istniejącego obiektu. W efekcie w całym programie istnieje tylko jeden obiekt tej klasy.
