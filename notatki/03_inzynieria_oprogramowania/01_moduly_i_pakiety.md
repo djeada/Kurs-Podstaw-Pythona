@@ -79,6 +79,7 @@ print(wynik)  # Output: 25
 
 print(PI)  # Output: 3.1415
 ```
+
 W tym przypadku:
 
 - `from matematyka import dodaj, PI` pozwala nam zaimportować tylko wybrane elementy z modułu `matematyka`.
@@ -113,6 +114,7 @@ from matematyka import dodaj as d
 wynik = d(3, 4)
 print(wynik)  # Output: 7
 ```
+
 W tym przypadku:
 
 - `from matematyka import dodaj as d` pozwala nam zaimportować funkcję `dodaj` i przypisać jej nazwę `d`.
@@ -133,7 +135,8 @@ Pakiet to struktura, która umożliwia grupowanie powiązanych modułów w jedny
 
 **Innymi słowy, pakiet to „skrzynka” pełna modułów, pogrupowanych według jakiegoś klucza – na przykład tematycznego (moduły związane z operacjami na liczbach mogą się znaleźć w jednym pakiecie), dzięki czemu łatwiej jest utrzymać porządek w projekcie.**
 
-### **Struktura pakietu:**
+**Struktura pakietu:**
+
 ```
 projekt/
 
@@ -147,10 +150,12 @@ projekt/
 
 └── main.py
 ```
+
 - `kalkulator/` - katalog, który pełni rolę pakietu. Zawiera moduły związane z obliczeniami matematycznymi.
 - `__init__.py` - plik specjalny, który sprawia, że Python rozpoznaje katalog `kalkulator` jako pakiet. Może być pusty, ale często zawiera kod inicjalizacyjny lub importy.
 - `arytmetyka.py` - moduł w pakiecie, który może zawierać funkcje do operacji arytmetycznych (np. dodawanie, odejmowanie).
 - `geometry.py` - moduł w pakiecie, który może zawierać funkcje związane z obliczeniami geometrycznymi (np. pole powierzchni, obwód).
+
 **Kluczową różnicą między pakietem a zwykłym katalogiem jest obecność pliku `__init__.py`.** Jego rola polega na zdefiniowaniu pewnych informacji na temat pakietu oraz (w razie potrzeby) na wykonaniu kodu inicjalizującego, gdy pakiet zostanie zaimportowany.
 
 ### Tworzenie pakietu
@@ -201,11 +206,13 @@ from kalkulator import arytmetyka
 wynik = arytmetyka.dodaj(2, 3)
 print(wynik)  # Output: 5
 ```
+
 W tym przykładzie:
 
 - `from kalkulator import arytmetyka` importuje moduł `arytmetyka` z pakietu `kalkulator`.
 - Następnie wywołujemy funkcję `dodaj` z modułu `arytmetyka` używając notacji `arytmetyka.dodaj`.
 - Dzięki temu możemy korzystać z funkcji modułu bez konieczności pisania całej ścieżki do pliku.
+
 **Dzięki temu rozwiązaniu możliwe jest budowanie rozbudowanych projektów, w których moduły są pogrupowane w pakiety, a pakiety mogą być nawet wielopoziomowe.** W praktyce oznacza to, że w katalogu `kalkulator` może znajdować się kolejny folder (kolejny pakiet) – i tak dalej.
 
 ### Importowanie konkretnych funkcji z modułu w pakiecie
@@ -245,6 +252,7 @@ Plik `__init__.py` w pakiecie pełni kilka ważnych funkcji:
 
 __all__ = ['arytmetyka', 'geometry']
 ```
+
 Dzięki powyższemu ustawieniu:
 
 - Jeśli ktoś użyje `from kalkulator import *`, zaimportowane zostaną tylko moduły `arytmetyka` i `geometry`.
@@ -283,6 +291,7 @@ import os
 current_directory = os.getcwd()
 print(current_directory)
 ```
+
 **Jest to jedna z najczęstszych praktyk, gdyż pozwala na szybkie korzystanie z całego modułu, o ile nazwa modułu nie jest zbyt długa ani nieintuicyjna.** W Pythonie standardowym takie nazwy (np. `os`, `sys`) są krótkie i dobrze opisują swoje przeznaczenie.
 
 
@@ -313,6 +322,7 @@ from math import sqrt, pi
 print(sqrt(16))  # Output: 4.0
 print(pi)        # Output: 3.141592653589793
 ```
+
 **To podejście pomaga uniknąć „zaśmiecania” przestrzeni nazw niepotrzebnymi elementami i sprawia, że od razu widać, jakie konkretnie funkcje czy obiekty są nam potrzebne.** Jest to też często praktykowane w krótkich skryptach, w których wielokrotnie używamy tylko jednej czy dwóch funkcji z całego modułu.
 
 
@@ -484,6 +494,7 @@ from kalkulator.arytmetyka import dodaj
 ```
 
 W tym przykładzie:
+
 - `from kalkulator.arytmetyka import dodaj` wskazuje, że funkcja `dodaj` powinna zostać zaimportowana z modułu `arytmetyka`, który znajduje się w pakiecie `kalkulator`.
 - Ścieżka do modułu `arytmetyka` jest podana w sposób pełny, poczynając od katalogu `kalkulator`.
 
@@ -503,6 +514,7 @@ from .arytmetyka import dodaj  # Importuje funkcję dodaj z modułu arytmetyka w
 ```
 
 W tym przykładzie:
+
 - `from .arytmetyka import dodaj` wskazuje, że funkcja `dodaj` jest importowana z modułu `arytmetyka`, który znajduje się w tym samym pakiecie co bieżący plik.
 - Użycie jednej kropki (`.`) sprawia, że odwołujemy się do modułu `arytmetyka` w ramach tego samego pakietu.
 
