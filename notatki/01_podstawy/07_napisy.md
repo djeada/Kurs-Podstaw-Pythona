@@ -15,6 +15,7 @@ wieloliniowy_napis = '''To jest
 wieloliniowy
 napis.'''
 ```
+
 W powyższych przykładach `napis1` i `napis2` zostały zdefiniowane jako proste łańcuchy znaków, natomiast `wieloliniowy_napis` może zawierać tekst rozłożony na wiele linii. W praktyce oznacza to, że jeśli potrzebujemy przechowywać większe bloki tekstu lub wklejać fragmenty dokumentacji do zmiennej, potrójne cudzysłowy okażą się bardzo wygodne.
 
 Warto pamiętać, że niezależnie od tego, czy użyjemy pojedynczych apostrofów (`'`) czy podwójnych cudzysłowów (`"`), Python nie robi między nimi rozróżnienia na poziomie semantyki. Wybór sposobu deklarowania napisów bywa najczęściej kwestią preferencji lub konwencji w danym projekcie.
@@ -124,6 +125,7 @@ tekst = "Lubię programować w Javie."
 nowy_tekst = tekst.replace("Javie", "Pythonie")
 print(nowy_tekst)  # Lubię programować w Pythonie.
 ```
+
 Warto zauważyć, że `replace()` nie modyfikuje oryginalnego napisu (pamiętamy, że jest on niemutowalny), tylko zwraca nowy napis. W efekcie należy go przypisać do zmiennej (tak jak w przykładzie) albo od razu wykorzystać w dalszych obliczeniach lub wyświetleniu.
 
 #### Podział napisu
