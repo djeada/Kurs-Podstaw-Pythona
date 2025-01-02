@@ -33,6 +33,7 @@ I. Funkcja obliczająca pole trójkąta na podstawie jego boków. Niezależnie o
 def pole_trojkata(podstawa, wysokosc):
     return 0.5 * podstawa * wysokosc
 ```
+
 II. Funkcja zwracająca iloczyn elementów listy. Jej wynik zależy wyłącznie od zawartości listy.
 
 ```python
