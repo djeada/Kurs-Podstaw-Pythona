@@ -292,7 +292,7 @@ Przykładowy wynik:
   3.10.0
 ```
 
-#### V. Sprawdzanie bieżącej wersji Pythona
+#### Sprawdzanie bieżącej wersji Pythona
 
 Aby sprawdzić, która wersja Pythona jest aktualnie aktywna:
 
