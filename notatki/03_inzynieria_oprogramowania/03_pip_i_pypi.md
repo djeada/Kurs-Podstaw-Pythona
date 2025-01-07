@@ -117,16 +117,18 @@ pip install --upgrade pip
 
 Plik `setup.py` jest kluczowym elementem w pakowaniu i dystrybucji bibliotek Pythona. Plik ten powinien zawierać metadane dotyczące pakietu, informacje o zależnościach oraz konfigurację niezbędną do poprawnego zainstalowania pakietu. Oto główne elementy, które powinien zawierać plik `setup.py`:
 
-- **name:** Nazwa pakietu.
-- **version:** Wersja pakietu.
-- **description:** Krótki opis pakietu.
-- **long_description:** Dłuższy opis pakietu, często w formacie Markdown lub reStructuredText.
-- **author:** Autor pakietu.
-- **author_email:** Adres email autora.
-- **url:** Adres URL projektu (np. repozytorium GitHub).
-- **packages:** Lista pakietów do załączenia w dystrybucji.
-- **install_requires:** Lista zależności wymaganych do działania pakietu.
-- **license:** Licencja, na której udostępniany jest pakiet.
+| **Pole**            | **Opis**                                                                       |
+|----------------------|--------------------------------------------------------------------------------|
+| **name**            | Nazwa pakietu.                                                                 |
+| **version**         | Wersja pakietu.                                                                |
+| **description**     | Krótki opis pakietu.                                                           |
+| **long_description**| Dłuższy opis pakietu, często w formacie Markdown lub reStructuredText.         |
+| **author**          | Autor pakietu.                                                                 |
+| **author_email**    | Adres email autora.                                                            |
+| **url**             | Adres URL projektu (np. repozytorium GitHub).                                  |
+| **packages**        | Lista pakietów do załączenia w dystrybucji.                                    |
+| **install_requires**| Lista zależności wymaganych do działania pakietu.                              |
+| **license**         | Licencja, na której udostępniany jest pakiet.                                  |
 
 #### Teoretyczna struktura repozytorium
 
