@@ -158,8 +158,6 @@ pyenv global 3.x.x
 
 `Pyenv` manipuluje zmienną środowiskową `PATH`, aby przełączać między różnymi wersjami Pythona. Dodaje do niej ścieżkę do specjalnego katalogu **shims**, który zawiera "cienie" poleceń Pythona. Gdy uruchamiasz polecenie `python`, system najpierw sprawdza shims, które następnie kierują do odpowiedniej wersji Pythona, zgodnie z konfiguracją `Pyenv`.
 
-#### Mechanizm działania
-
 I. **Shims (cienie)**
 
 Shims są małymi skryptami przechwytującymi wywołania do poleceń Pythona. Gdy użytkownik uruchamia polecenie, które odnosi się do Pythona (np. `python`, `pip`), pyenv najpierw przechwytuje to wywołanie i przekierowuje je do odpowiedniej wersji Pythona. Shims umożliwiają dynamiczne zarządzanie wersjami Pythona, pozwalając na przełączanie między nimi bez potrzeby bezpośredniej modyfikacji ścieżek w systemie operacyjnym. Działa to w tle i pozwala użytkownikowi korzystać z wybranej wersji Pythona zgodnie z kontekstem (globalnym, lokalnym lub środowiskowym).
