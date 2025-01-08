@@ -64,7 +64,7 @@ python2 --version
 python3 --version
 ```
 
-Jeśli polecenie `python` odnosi się do Pythona 2, a chcesz użyć Pythona 3 jako domyślnego, możesz utworzyć alias:
+Jeśli polecenie `python` w Twoim systemie odnosi się do Pythona 2, a chciałbyś, aby domyślnie wskazywało na Pythona 3, możesz skonfigurować alias:
 
 ```bash
 alias python=python3
