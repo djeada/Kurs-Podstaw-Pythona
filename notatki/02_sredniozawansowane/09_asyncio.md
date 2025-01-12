@@ -20,6 +20,74 @@ Python posiada mechanizm zwany Global Interpreter Lock (GIL), który uniemożliw
 - **Pętla zdarzeń** to mechanizm zarządzający wykonywaniem korutyn i obsługą zdarzeń asynchronicznych.
 - **Zadania (Tasks)** są abstrakcją reprezentującą wykonywanie korutyn, która może być zarządzana przez pętlę zdarzeń.
 
+```
+--------------------------------------------------------------------------------
+|                      Synchroniczne (Blokujące) Wywołanie Funkcji             |
+--------------------------------------------------------------------------------
+
+  Oś czasu (od góry do dołu)
+
+   Wywołujący (np. program główny)                      Funkcja Foo (synch)
+
+         |  (1) Wywołujący rozpoczyna
+         |
+         |  (2) Wywołujący wywołuje Foo()  +--------------------------------+
+         |-------------------------------> | Foo() zaczyna wykonywać swoje  |
+         |                                 | zadania                        |
+         |                                 |    - Możliwe operacje We/Wy    |
+         |                                 |    - Lub obliczenia            |
+         |                                 +--------------+-----------------+
+         |                                                |
+         |  (3) Wywołujący jest zablokowany               |
+         |      aż Foo() zakończy swoje zadania           |
+         |                                                |
+         |                                 +--------------v--------------------+
+         |                                 | Foo() kończy zadania, zwraca dane |
+         |<--------------------------------+ np. wynik lub kod statusu         |
+         |                                 +--------------+--------------------+
+         |
+         |  (4) Wywołujący otrzymuje wynik
+         |      i kontynuuje
+         |
+         V
+
+
+--------------------------------------------------------------------------------
+|                   Asynchroniczne (Niezablokujące) Wywołanie Funkcji          |
+--------------------------------------------------------------------------------
+
+  Oś czasu (od góry do dołu)
+
+   Wywołujący (np. program główny)                     Funkcja Bar (async)
+
+         |  (1) Wywołujący rozpoczyna
+         |
+         |  (2) Wywołujący wywołuje BarAsync()
+         |------------------------------------------> +-----------------------------------+
+         |                                            | BarAsync() inicjuje swoje zadania |
+         |  (3) BarAsync()                            +-----------------------------------+
+         |      natychmiast zwraca kontrolę           
+         |                                          
+         |  (4) Wywołujący NIE jest zablokowany;   
+         |      może kontynuować inne zadania
+         | 
+         | <---- Możliwe wykonywanie dalszej logiki, obsługa interfejsu użytkownika, itp. --+
+         |
+         |  (5) W międzyczasie, BarAsync() kończy swoje zadanie w tle
+         |      (odpowiedź sieciowa, odczyt pliku, itp.)
+         |            
+         |                           +-----------------------------------------------+
+         |<------------------------> | BarAsync() wywołuje zwrotnie Wywołującego     |
+         |                           | (np. funkcja zwrotna lub rozwiązanie promise) |
+         |                           +-----------------------------------------------+
+         |
+         |  (6) Wywołujący obsługuje otrzymany wynik
+         |      który właśnie nadeszedł
+         |
+         V
+```
+
+
 #### Zalety `asyncio`:
 
 - Pozwala na obsługę tysięcy jednoczesnych połączeń bez znaczącego obciążenia systemu.
