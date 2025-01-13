@@ -471,9 +471,9 @@ Wyjaśnienie:
 
 **Uwaga**: To rozwiązanie wymaga dobrej znajomości Pythona i stosowane jest w bardziej złożonych aplikacjach.
 
-### Zamykanie aplikacji na zdarzenie
+### Zamykanie aplikacji w odpowiedzi na zdarzenie
 
-Zamknięcie aplikacji można obsłużyć za pomocą przycisku wywołującego metodę `root.destroy()` lub na przykład na zdarzenie klawiaturowe.
+Zamknięcie aplikacji można zrealizować poprzez obsługę zdarzeń, takich jak kliknięcie przycisku, który wywołuje metodę `root.destroy()`, lub poprzez reakcję na zdarzenia klawiaturowe, takie jak wciśnięcie określonej kombinacji klawiszy.
 
 **Przykład — Dodanie przycisku zamykającego aplikację**
 
