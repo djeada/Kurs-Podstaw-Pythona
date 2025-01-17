@@ -12,7 +12,11 @@ pip install fastapi uvicorn
 
 ### Tworzenie prostego API
 
-Rozpocznij od utworzenia instancji FastAPI i zdefiniowania kilku ścieżek:
+Tworzenie API (Application Programming Interface) pozwala na komunikację między różnymi aplikacjami. W tym przykładzie wykorzystamy **FastAPI**, nowoczesny, szybki framework webowy dla Pythona, który ułatwia tworzenie API.
+
+#### Tworzenie instancji FastAPI i definiowanie ścieżek
+
+Rozpocznij od utworzenia instancji FastAPI i zdefiniowania kilku ścieżek (endpointów), które będą obsługiwać różne żądania HTTP.
 
 ```python
 from fastapi import FastAPI
@@ -22,15 +26,108 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: str = None):
+    return {"item_id": item_id, "q": q}
 ```
 
-Aby uruchomić powyższe API, zapisz kod do pliku, np. main.py, a następnie uruchom serwer za pomocą uvicorn:
+**Wyjaśnienie:**
+
+- `app = FastAPI()` – tworzy instancję aplikacji FastAPI.
+- `@app.get("/")` – dekorator definiujący ścieżkę dla żądania GET na endpoint `/`.
+- `read_root()` – funkcja obsługująca żądanie GET na `/`, zwracająca prosty słownik.
+- `@app.get("/items/{item_id}")` – dynamiczny endpoint, który przyjmuje parametr `item_id`.
+- `read_item(item_id: int, q: str = None)` – funkcja obsługująca żądanie, gdzie `item_id` jest wymaganym parametrem, a `q` jest opcjonalnym zapytaniem.
+
+#### Krok 3: Uruchamianie serwera
+
+Aby uruchomić powyższe API, zapisz kod do pliku, np. `main.py`. Następnie masz kilka opcji uruchomienia serwera:
+
+##### Opcja 1: Uruchomienie za pomocą Uvicorn z linii komend
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Po uruchomieniu przejdź do przeglądarki i otwórz adres `http://localhost:8000` - zobaczysz odpowiedź z powitaniem.
+**Wyjaśnienie:**
+
+- `main:app` – odnosi się do obiektu `app` w pliku `main.py`.
+- `--reload` – automatycznie restartuje serwer przy zmianach w kodzie (przydatne w trakcie developmentu).
+
+##### Opcja 2: Uruchomienie za pomocą skryptu Pythona
+
+Możesz również uruchomić Uvicorn bezpośrednio z kodu Pythona:
+
+```python
+import uvicorn
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+```
+
+**Wyjaśnienie:**
+
+- Importujesz `uvicorn` i wywołujesz `uvicorn.run()` z odpowiednimi parametrami.
+- Umożliwia to uruchomienie serwera bezpośrednio z pliku Python, co może być przydatne w niektórych środowiskach lub integracjach.
+
+#### Co to jest Uvicorn?
+
+**Uvicorn** to szybki, asynchroniczny serwer ASGI napisany w Pythonie, używany do uruchamiania aplikacji webowych opartych na ASGI, takich jak FastAPI. Umożliwia obsługę wielu żądań jednocześnie dzięki asynchronicznej naturze.
+
+**Alternatywy dla Uvicorn:**
+
+1. **Hypercorn** – inny serwer ASGI wspierający różne protokoły, takie jak HTTP/1, HTTP/2 i WebSocket.
+2. **Daphne** – serwer ASGI rozwijany jako część projektu Django Channels.
+3. **Gunicorn** z workerami ASGI (np. `uvicorn.workers.UvicornWorker`) – popularny serwer WSGI, który można skonfigurować do obsługi ASGI.
+
+#### Różnice między uruchamianiem na Windows a Linux
+
+Jeśli planujesz uruchomić serwer z linii komend (cmd), warto zwrócić uwagę na kilka różnic między systemami operacyjnymi:
+
+**Instalacja pakietów:**
+
+- Na Windowsie używasz zazwyczaj `pip` bez dodatkowych modyfikacji.
+- Na Linux może być konieczne użycie `sudo` dla instalacji globalnych lub korzystanie z wirtualnych środowisk.
+
+**Ścieżki plików:**
+
+- Windows używa backslash (`\`), podczas gdy Linux używa slash (`/`).
+- W kodzie Python, aby zachować kompatybilność, warto używać modułu `os.path` lub `pathlib`.
+
+**Uruchamianie skryptów:**
+
+- Na Windowsie możesz uruchomić skrypt bezpośrednio z `cmd` lub PowerShell.
+- Na Linux możesz użyć terminala oraz skryptów bash.
+
+**Zarządzanie procesami:**
+
+- Linux oferuje narzędzia takie jak `systemd` do zarządzania usługami.
+- Windows posiada własne mechanizmy zarządzania usługami, ale często używa się dodatkowych narzędzi.
+
+**Co sprawdzić przed uruchomieniem:**
+
+1. Upewnij się, że Python jest zainstalowany i dostępny w zmiennej środowiskowej PATH.
+2. Zaleca się używanie wirtualnych środowisk (`venv` lub `virtualenv`) dla izolacji zależności.
+3. Upewnij się, że wybrany port (domyślnie 8000) jest dostępny i nie jest blokowany przez zaporę sieciową.
+4. Na Linuxie, uruchamianie na portach poniżej 1024 może wymagać uprawnień administratora.
+
+#### Uruchamianie serwera
+
+Po uruchomieniu serwera możesz przejść do przeglądarki i otworzyć adres `http://localhost:8000`. Zobaczysz odpowiedź z powitaniem:
+
+```json
+{
+  "Hello": "World"
+}
+```
+
+Dodatkowo, FastAPI automatycznie generuje interaktywną dokumentację API dostępną pod adresami:
+
+- **Swagger UI:** `http://localhost:8000/docs`
+- **ReDoc:** `http://localhost:8000/redoc`
+
+Możesz tam przetestować swoje endpointy bezpośrednio z przeglądarki.
 
 ### Przykładowe API
 
