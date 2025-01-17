@@ -10,7 +10,7 @@ Programowanie asynchroniczne to paradygmat, który umożliwia wykonywanie operac
 
 #### Problem z GIL w Pythonie
 
-Python posiada mechanizm zwany Global Interpreter Lock (GIL), który uniemożliwia jednoczesne wykonywanie kodu Pythona w wielu wątkach. Oznacza to, że nawet jeśli stworzymy wiele wątków, tylko jeden z nich może wykonywać kod Pythona w danym momencie. `asyncio` pozwala obejść ten problem, umożliwiając asynchroniczne wykonywanie operacji w jednym wątku, co eliminuje potrzebę zarządzania wieloma wątkami i synchronizacją między nimi.
+Python posiada mechanizm zwany **Global Interpreter Lock (GIL)**, który ogranicza wykonywanie kodu Pythona do jednego aktywnego wątku w danym momencie, niezależnie od liczby uruchomionych wątków w programie. Oznacza to, że nawet jeśli stworzymy wiele wątków, tylko jeden z nich może jednocześnie wykonywać instrukcje Pythona, co może znacząco ograniczać wydajność aplikacji wielowątkowych, szczególnie tych intensywnie korzystających z procesora. Aby obejść to ograniczenie, programiści mogą skorzystać z biblioteki `asyncio`, która umożliwia asynchroniczne wykonywanie operacji w ramach jednego wątku. Dzięki `asyncio` możliwe jest efektywne zarządzanie wieloma operacjami wejścia/wyjścia bez konieczności tworzenia i synchronizacji wielu wątków, co upraszcza kod, redukuje narzut związany z zarządzaniem wątkami oraz zwiększa wydajność aplikacji w kontekście operacji I/O. W praktyce, wykorzystując `asyncio`, można realizować wiele zadań jednocześnie w jednym wątku, co eliminuje problemy związane z GIL i pozwala na tworzenie bardziej skalowalnych oraz responsywnych programów.
 
 ### Wprowadzenie do `asyncio`
 
