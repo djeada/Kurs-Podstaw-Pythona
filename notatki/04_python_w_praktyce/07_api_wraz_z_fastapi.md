@@ -287,17 +287,21 @@ Swagger UI jest automatycznie generowanym interfejsem użytkownika dla dokumenta
 
 ### Korzystanie z API przy użyciu requests
 
-Aby komunikować się z API w Pythonie, potrzebujemy biblioteki `requests`, którą możemy zainstalować za pomocą poniższej komendy:
+Aby komunikować się z API w Pythonie, potrzebujemy biblioteki `requests`, która upraszcza proces wysyłania żądań HTTP i obsługi odpowiedzi. Bibliotekę tę możemy zainstalować za pomocą poniższej komendy:
 
 ```bash
 pip install requests
 ```
 
-Poniżej znajdują się przykłady jak używać tej biblioteki do tworzenia, pobierania i usuwania przedmiotów za pomocą API.
+Biblioteka `requests` jest niezwykle popularna ze względu na swoją prostotę i elastyczność. Umożliwia łatwe wysyłanie różnych typów żądań HTTP (GET, POST, PUT, DELETE itp.), zarządzanie nagłówkami, obsługę parametrów zapytań oraz przetwarzanie odpowiedzi w formatach takich jak JSON.
+
+Poniżej znajdują się przykłady, jak używać tej biblioteki do tworzenia, pobierania i usuwania przedmiotów za pomocą API.
 
 #### Tworzenie przedmiotu (POST)
 
-Używając metody `requests.post`, możemy wysłać dane w formacie JSON do endpointu `/items/`, aby utworzyć nowy przedmiot. Poniżej znajduje się przykład kodu:
+Metoda `requests.post` pozwala na wysłanie danych w formacie JSON do określonego endpointu API, co zazwyczaj służy do tworzenia nowych zasobów na serwerze. W tym przypadku tworzymy nowy przedmiot w systemie.
+
+**Przykład kodu:**
 
 ```python
 import requests
@@ -318,12 +322,22 @@ response = requests.post(url, json=item_data)
 
 # Wyświetlenie odpowiedzi
 print(response.status_code)  # Sprawdzenie statusu odpowiedzi
-print(response.json())  # Wyświetlenie odpowiedzi w formacie JSON
+print(response.json())       # Wyświetlenie odpowiedzi w formacie JSON
 ```
+
+**Szczegółowe wyjaśnienie:**
+
+1. Najpierw importujemy bibliotekę `requests`, która umożliwia nam interakcję z API.
+2. `url` wskazuje na endpoint API, do którego wysyłamy żądanie. W tym przypadku jest to lokalny serwer działający na porcie 8000.
+3. `item_data` to słownik zawierający dane nowego przedmiotu, które chcemy utworzyć. Dane te zostaną automatycznie przekształcone do formatu JSON przez parametr `json` w metodzie `post`.
+4. Metoda `requests.post` wysyła żądanie POST do określonego URL z przekazanymi danymi.
+5. `response.status_code` pozwala na sprawdzenie, czy żądanie zakończyło się sukcesem (np. status 201 Created), a `response.json()` zwraca odpowiedź serwera w formacie JSON, co może zawierać szczegóły utworzonego przedmiotu.
 
 #### Pobieranie przedmiotu (GET)
 
-Aby pobrać dane konkretnego przedmiotu, możemy użyć metody `requests.get` z odpowiednim `item_id`. Poniżej znajduje się przykład kodu:
+Aby pobrać dane konkretnego przedmiotu, używamy metody `requests.get` z odpowiednim `item_id`. Żądanie GET służy do odczytywania danych z serwera bez ich modyfikacji.
+
+**Przykład kodu:**
 
 ```python
 import requests
@@ -341,9 +355,38 @@ else:
     print("Item not found")  # Wyświetlenie informacji, jeśli przedmiot nie został znaleziony
 ```
 
+**Szczegółowe wyjaśnienie:**
+
+1. Podobnie jak wcześniej, importujemy `requests`.
+2. `url` zawiera endpoint API wraz z identyfikatorem przedmiotu, który chcemy pobrać (w tym przypadku `1`).
+3. Metoda `requests.get` wysyła żądanie GET do określonego URL.
+4. Sprawdzamy status odpowiedzi. Jeśli status to `200 OK`, oznacza to, że przedmiot został znaleziony i możemy wyświetlić jego dane. W przeciwnym razie informujemy użytkownika, że przedmiot nie został znaleziony.
+
+**Dodatkowe informacje:**
+
+I. Parametry zapytania: 
+
+Jeśli API obsługuje filtrowanie lub paginację, możemy przekazać dodatkowe parametry za pomocą argumentu `params`. Przykład:
+
+```python
+params = {'category': 'electronics', 'limit': 10}
+response = requests.get(url, params=params)
+```
+
+II. Nagłówki: 
+
+Możemy również dodać nagłówki do żądania, takie jak autoryzacja czy specyficzne formaty odpowiedzi.
+
+```python
+headers = {'Authorization': 'Bearer YOUR_TOKEN'}
+response = requests.get(url, headers=headers)
+```
+
 #### Usuwanie przedmiotu (DELETE)
 
-Aby usunąć przedmiot na podstawie `item_id`, możemy użyć metody `requests.delete`. Poniżej znajduje się przykład kodu:
+Aby usunąć przedmiot na podstawie `item_id`, używamy metody `requests.delete`. Żądanie DELETE służy do usuwania zasobów z serwera.
+
+**Przykład kodu:**
 
 ```python
 import requests
@@ -359,4 +402,96 @@ if response.status_code == 200:
     print(response.json())  # Wyświetlenie statusu usunięcia
 else:
     print("Item not found")  # Wyświetlenie informacji, jeśli przedmiot nie został znaleziony
+```
+
+**Szczegółowe wyjaśnienie:**
+
+1. Importujemy `requests`.
+2. `url` zawiera endpoint API wraz z identyfikatorem przedmiotu do usunięcia.
+3. Metoda `requests.delete` wysyła żądanie DELETE do określonego URL.
+4. Jeśli status odpowiedzi to `200 OK`, oznacza to, że przedmiot został pomyślnie usunięty, a serwer może zwrócić potwierdzenie w formacie JSON. Jeśli przedmiot nie został znaleziony, informujemy o tym użytkownika.
+
+**Dodatkowe informacje:**
+
+- Usuwanie zasobów jest operacją potencjalnie niebezpieczną. Upewnij się, że masz odpowiednie uprawnienia oraz że operacja jest chroniona przed nieautoryzowanym dostępem.
+- Metoda DELETE jest **idempotentna**, co oznacza, że wielokrotne wykonanie tego samego żądania DELETE nie zmieni stanu serwera po pierwszym usunięciu zasobu.
+
+#### Dodatkowe wskazówki dotyczące korzystania z biblioteki requests
+
+I. Obsługa błędów:
+
+Biblioteka `requests` pozwala na łatwą obsługę błędów poprzez sprawdzanie statusów odpowiedzi. Możemy również użyć wyjątków do zarządzania nieoczekiwanymi sytuacjami.
+
+```python
+try:
+   response = requests.get(url)
+   response.raise_for_status()  # Podniesie wyjątek dla statusów błędu
+   data = response.json()
+except requests.exceptions.HTTPError as err:
+   print(f"HTTP error occurred: {err}")
+except requests.exceptions.RequestException as err:
+   print(f"Other error occurred: {err}")
+
+```
+
+II. Autoryzacja:
+
+Jeśli API wymaga uwierzytelnienia, możemy dodać odpowiednie nagłówki lub użyć mechanizmów takich jak tokeny Bearer.
+
+```python
+headers = {
+   'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+   'Content-Type': 'application/json'
+}
+response = requests.get(url, headers=headers)
+```
+
+III. Wysyłanie danych w innych formatach:
+
+Chociaż JSON jest najczęściej używanym formatem, `requests` umożliwia wysyłanie danych w innych formatach, takich jak formy HTML czy pliki.
+
+```python
+# Wysyłanie danych jako formularz
+
+form_data = {'field1': 'value1', 'field2': 'value2'}
+response = requests.post(url, data=form_data)
+
+# Wysyłanie pliku
+
+files = {'file': open('report.xls', 'rb')}
+response = requests.post(url, files=files)
+
+```
+
+IV. Parametryzacja URL:
+
+Dla bardziej dynamicznych URL-ów możemy użyć funkcji formatowania stringów lub modułu `urllib.parse`.
+
+```python
+item_id = 1
+url = f"http://127.0.0.1:8000/items/{item_id}"
+# lub
+from urllib.parse import urljoin
+base_url = "http://127.0.0.1:8000/items/"
+url = urljoin(base_url, str(item_id))
+```
+
+V. Timeouts:
+
+Aby zapobiec zawieszaniu się programu w przypadku braku odpowiedzi z serwera, warto ustawić limit czasu dla żądań.
+
+```python
+response = requests.get(url, timeout=5)  # Timeout po 5 sekundach
+```
+
+VI. Sesje:
+
+Używanie obiektów sesji (`requests.Session`) pozwala na utrzymanie pewnych parametrów między żądaniami, takich jak nagłówki czy ciasteczka.
+
+```python
+session = requests.Session()
+session.headers.update({'Authorization': 'Bearer YOUR_ACCESS_TOKEN'})
+
+response = session.get(url)
+response = session.post(url, json=item_data)
 ```
