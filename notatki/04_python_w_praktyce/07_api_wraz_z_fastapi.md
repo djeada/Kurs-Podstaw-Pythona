@@ -40,7 +40,7 @@ def read_item(item_id: int, q: str = None):
 - `@app.get("/items/{item_id}")` – dynamiczny endpoint, który przyjmuje parametr `item_id`.
 - `read_item(item_id: int, q: str = None)` – funkcja obsługująca żądanie, gdzie `item_id` jest wymaganym parametrem, a `q` jest opcjonalnym zapytaniem.
 
-#### Krok 3: Uruchamianie serwera
+#### Uruchamianie serwera
 
 Aby uruchomić powyższe API, zapisz kod do pliku, np. `main.py`. Następnie masz kilka opcji uruchomienia serwera:
 
