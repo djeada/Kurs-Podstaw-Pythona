@@ -1,6 +1,6 @@
 # Dziedziczenie i kompozycja
 
-Dziedziczenie i kompozycja to dwa fundamentalne koncepty programowania obiektowego (OOP), które odgrywają kluczową rolę w tworzeniu elastycznego, modularnego i łatwego do utrzymania kodu. Oba podejścia mają swoje zalety i wady, a wybór między nimi zależy od konkretnego kontekstu i wymagań projektu.
+Dziedziczenie oraz kompozycja to dwa filary programowania obiektowego, dzięki którym możemy pisać elastyczny, modułowy i łatwy w utrzymaniu kod. Każde z tych rozwiązań niesie ze sobą unikalne zalety i wiąże się z określonymi ograniczeniami, dlatego decyzja o ich zastosowaniu powinna wynikać z charakteru projektu i stawianych przed nim wymagań.
 
 ## Dziedziczenie
 
