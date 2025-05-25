@@ -138,7 +138,7 @@ Chociaż kompozycja ma wiele zalet, istnieją pewne wyzwania, które mogą się 
 4. Kompozycja, w odróżnieniu od dziedziczenia, **nie wspiera polimorfizmu** w naturalny sposób. Aby uzyskać polimorfizm (możliwość traktowania różnych obiektów w ten sam sposób), konieczne jest napisanie dodatkowego kodu, np. implementacja wspólnych interfejsów lub metod delegujących. To może skomplikować projektowanie systemu, szczególnie w bardziej złożonych przypadkach.
 5. W niektórych przypadkach, gdy kompozycja jest stosowana na dużą skalę, może to prowadzić do **nadmiaru kodu**, zwłaszcza przy tworzeniu wielu obiektów składających się z różnych komponentów. Każdy z tych komponentów wymaga dokładnego zaprojektowania, a następnie właściwej obsługi, co może zwiększyć ilość kodu w porównaniu do prostszych hierarchii dziedziczenia.
 
-### Gdzie używana jest kompozycja?
+### Gdzie jest używana kompozycja?
 
 Kompozycja jest szeroko stosowana w różnych obszarach programowania, szczególnie tam, gdzie elastyczność, modularność i ponowne użycie komponentów są kluczowe. Oto przykłady zastosowań kompozycji:
 
