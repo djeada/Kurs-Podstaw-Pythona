@@ -6,8 +6,6 @@ Dziedziczenie oraz kompozycja to dwa filary programowania obiektowego, dzięki k
 
 Dziedziczenie to mechanizm, który pozwala jednej klasie (klasie potomnej) przejąć właściwości i zachowania innej klasy (klasy bazowej). Dzięki dziedziczeniu, programiści mogą tworzyć nowe klasy na podstawie istniejących, co pozwala na ponowne wykorzystanie kodu i redukcję jego złożoności.
 
-Przepraszam za wcześniejsze niejasności. Oto poprawione diagramy, które lepiej ilustrują różnice między dziedziczeniem a kompozycją, używając różnych sposobów przedstawienia.
-
 **Dziedziczenie (relacja "jest")**
 
 Przedstawione jako drzewo hierarchii:
