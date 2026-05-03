@@ -166,3 +166,110 @@ def oblicz_pole_prostokata(dlugosc, szerokosc):
 pole = oblicz_pole_prostokata(5.0, 3.5)
 print(pole)  # wyświetli: 17.5
 ```
+
+### Zasięg zmiennych (scope)
+
+Zasięg zmiennej określa, gdzie w kodzie dana zmienna jest widoczna i dostępna. Python stosuje reguły zasięgu opisywane skrótem **LEGB** (Local → Enclosing → Global → Built-in):
+
+1. **Local** — zmienne zdefiniowane wewnątrz bieżącej funkcji.
+2. **Enclosing** — zmienne zdefiniowane w funkcji zewnętrznej (dla funkcji zagnieżdżonych).
+3. **Global** — zmienne zdefiniowane na poziomie modułu.
+4. **Built-in** — nazwy wbudowane w Pythona (np. `len`, `print`, `range`).
+
+Python przeszukuje te poziomy dokładnie w tej kolejności.
+
+#### Zmienne lokalne
+
+Zmienne utworzone wewnątrz funkcji są **lokalne** — widoczne tylko w tej funkcji i niszczone po jej zakończeniu:
+
+```python
+def powitaj():
+    wiadomosc = "Cześć!"  # zmienna lokalna
+    print(wiadomosc)
+
+powitaj()           # Cześć!
+# print(wiadomosc)  # NameError — zmienna nie istnieje poza funkcją
+```
+
+#### Zmienne globalne
+
+Zmienne zdefiniowane na poziomie modułu są **globalne** — widoczne wewnątrz funkcji, ale domyślnie tylko do odczytu:
+
+```python
+licznik = 0  # zmienna globalna
+
+def pokaz_licznik():
+    print(licznik)  # można czytać
+
+pokaz_licznik()  # 0
+```
+
+Aby **modyfikować** zmienną globalną wewnątrz funkcji, należy użyć słowa kluczowego `global`:
+
+```python
+licznik = 0
+
+def zwieksz():
+    global licznik
+    licznik += 1
+
+zwieksz()
+zwieksz()
+print(licznik)  # 2
+```
+
+> Nadużywanie zmiennych globalnych utrudnia zrozumienie i testowanie kodu. Preferuj przekazywanie wartości przez argumenty i zwracanie przez `return`.
+
+#### Funkcje zagnieżdżone i zasięg enclosing
+
+Funkcja zdefiniowana wewnątrz innej funkcji ma dostęp do zmiennych funkcji zewnętrznej (zasięg *enclosing*):
+
+```python
+def zewnetrzna():
+    x = 10  # zasięg enclosing dla wewnetrzna()
+
+    def wewnetrzna():
+        print(x)  # dostęp do x z funkcji zewnętrznej
+
+    wewnetrzna()
+
+zewnetrzna()  # 10
+```
+
+Aby **modyfikować** zmienną z zasięgu *enclosing*, używamy słowa kluczowego `nonlocal`:
+
+```python
+def licznik():
+    wartosc = 0
+
+    def zwieksz():
+        nonlocal wartosc
+        wartosc += 1
+        return wartosc
+
+    return zwieksz
+
+krok = licznik()
+print(krok())  # 1
+print(krok())  # 2
+print(krok())  # 3
+```
+
+#### Domknięcia (closures)
+
+Domknięcie (ang. *closure*) to funkcja wewnętrzna, która "zapamiętuje" zmienne z zasięgu funkcji zewnętrznej nawet po jej zakończeniu. Powyższy przykład z `licznik()` jest właśnie domknięciem — `zwieksz` nadal ma dostęp do `wartosc`, mimo że `licznik()` już zakończyła działanie.
+
+Domknięcia są przydatne do tworzenia fabryk funkcji:
+
+```python
+def mnoznik(n):
+    def pomnoz(x):
+        return x * n  # n pochodzi z zasięgu enclosing
+    return pomnoz
+
+podwoj = mnoznik(2)
+potroil = mnoznik(3)
+
+print(podwoj(5))   # 10
+print(potroil(5))  # 15
+```
