@@ -185,6 +185,122 @@ pytest nazwa_pliku_testowego.py
 
 Pamiętaj, by nazwy plików z testami oraz same funkcje testowe zaczynały się od słowa "test", ponieważ pytest szuka takich funkcji/plików podczas skanowania katalogów.
 
+#### Metody setUp i tearDown w unittest
+
+Metody `setUp` i `tearDown` pozwalają na przygotowanie środowiska przed każdym testem i sprzątanie po nim:
+
+```python
+import unittest
+import tempfile
+import os
+
+class TestPlikow(unittest.TestCase):
+
+    def setUp(self):
+        """Wykonywane PRZED każdym testem."""
+        self.temp_plik = tempfile.NamedTemporaryFile(delete=False, suffix=".txt")
+        self.temp_plik.write(b"dane testowe")
+        self.temp_plik.close()
+
+    def tearDown(self):
+        """Wykonywane PO każdym teście."""
+        os.unlink(self.temp_plik.name)   # Usuń plik tymczasowy
+
+    def test_odczyt(self):
+        with open(self.temp_plik.name) as f:
+            self.assertEqual(f.read(), "dane testowe")
+
+    def test_rozmiar(self):
+        rozmiar = os.path.getsize(self.temp_plik.name)
+        self.assertGreater(rozmiar, 0)
+```
+
+#### Parametryzacja testów w pytest
+
+`pytest` pozwala uruchamiać ten sam test z różnymi zestawami danych:
+
+```python
+import pytest
+
+def dodaj(a, b):
+    return a + b
+
+@pytest.mark.parametrize("a, b, oczekiwany", [
+    (1, 2, 3),
+    (0, 0, 0),
+    (-1, 1, 0),
+    (100, 200, 300),
+])
+def test_dodaj(a, b, oczekiwany):
+    assert dodaj(a, b) == oczekiwany
+
+# Parametryzacja z oczekiwanym wyjątkiem
+@pytest.mark.parametrize("wartosc", [None, "abc", [], {}])
+def test_dodaj_blad(wartosc):
+    with pytest.raises(TypeError):
+        dodaj(wartosc, 1)
+```
+
+#### Mockowanie w `unittest.mock`
+
+Mockowanie pozwala zastąpić zależności zewnętrzne (np. bazy danych, HTTP) kontrolowanymi obiektami:
+
+```python
+from unittest.mock import MagicMock, patch
+
+# Mockowanie metody obiektu
+class PobieranikDanych:
+    def pobierz(self, url):
+        import requests
+        return requests.get(url).json()
+
+pobieracz = PobieranikDanych()
+pobieracz.pobierz = MagicMock(return_value={"id": 1, "name": "test"})
+wynik = pobieracz.pobierz("https://example.com")
+print(wynik)   # {"id": 1, "name": "test"}
+pobieracz.pobierz.assert_called_once_with("https://example.com")
+
+# Mockowanie z patch — zastąpienie modułu w kontekście testu
+with patch("requests.get") as mock_get:
+    mock_get.return_value.json.return_value = {"id": 42}
+    import requests
+    result = requests.get("https://example.com").json()
+    print(result)   # {"id": 42}
+    mock_get.assert_called_once()
+```
+
+#### Fixtures w pytest
+
+`Fixtures` to reużywalne konfiguracje środowiska testowego w pytest:
+
+```python
+import pytest
+import os
+import tempfile
+
+@pytest.fixture
+def temp_katalog():
+    """Tworzy tymczasowy katalog i usuwa go po teście."""
+    katalog = tempfile.mkdtemp()
+    yield katalog   # Przekazuje wartość do testu; kod po yield to teardown
+    import shutil
+    shutil.rmtree(katalog)
+
+@pytest.fixture
+def przykladowe_dane():
+    return {"imie": "Jan", "wiek": 25}
+
+def test_plik_w_katalogu(temp_katalog):
+    sciezka = os.path.join(temp_katalog, "test.txt")
+    with open(sciezka, "w") as f:
+        f.write("test")
+    assert os.path.exists(sciezka)
+
+def test_dane_uzytkownika(przykladowe_dane):
+    assert przykladowe_dane["imie"] == "Jan"
+    assert przykladowe_dane["wiek"] >= 18
+```
+
 ### Od znalezienia buga do poprawnie działającego kodu
 
 Odkrycie błędu w twoim kodzie to dopiero początek drogi. Oto kroki, które warto podjąć, aby odnaleźć i skutecznie naprawić problem:

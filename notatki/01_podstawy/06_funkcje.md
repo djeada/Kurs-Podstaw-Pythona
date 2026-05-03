@@ -273,3 +273,171 @@ potroil = mnoznik(3)
 print(podwoj(5))   # 10
 print(potroil(5))  # 15
 ```
+
+### Adnotacje typów (type hints)
+
+Python jest dynamicznie typowany, ale od wersji 3.5 wspiera opcjonalne **adnotacje typów**, które zwiększają czytelność kodu i pozwalają narzędziom (np. `mypy`, `pyright`) wykrywać błędy:
+
+```python
+def dodaj(a: int, b: int) -> int:
+    return a + b
+
+def powiedz_czesc(imie: str, razy: int = 1) -> None:
+    for _ in range(razy):
+        print(f"Cześć, {imie}!")
+
+def przetworz(dane: list[int]) -> dict[str, int]:
+    return {"suma": sum(dane), "max": max(dane), "min": min(dane)}
+```
+
+Adnotacje nie są egzekwowane w czasie wykonania — są jedynie wskazówką dla programisty i narzędzi. Dostęp do nich można uzyskać przez `__annotations__`:
+
+```python
+print(dodaj.__annotations__)
+# {'a': <class 'int'>, 'b': <class 'int'>, 'return': <class 'int'>}
+```
+
+Moduł `typing` dostarcza dodatkowych typów:
+
+```python
+from typing import Optional, Union, Callable, Tuple
+
+def znajdz(lista: list[int], wartosc: int) -> Optional[int]:
+    """Zwraca indeks lub None."""
+    try:
+        return lista.index(wartosc)
+    except ValueError:
+        return None
+
+def zastosuj(f: Callable[[int], int], x: int) -> int:
+    return f(x)
+
+# Python 3.10+ — skrócona składnia Union za pomocą |
+def parsuj(wartosc: str | int) -> int:
+    return int(wartosc)
+```
+
+### Argumenty wyłącznie pozycyjne (`/`) i wyłącznie nazwane (`*`)
+
+Python 3.8+ pozwala precyzyjnie kontrolować, jak argumenty muszą być przekazywane:
+
+```python
+# Argumenty PRZED / → wyłącznie pozycyjne (nie można podać nazwy)
+# Argumenty PO * → wyłącznie nazwane (muszą być podane z nazwą)
+def funkcja(poz1, poz2, /, normalny, *, kw1, kw2):
+    pass
+
+# Poprawne wywołania:
+funkcja(1, 2, 3, kw1=4, kw2=5)
+funkcja(1, 2, normalny=3, kw1=4, kw2=5)
+
+# Niepoprawne — błąd:
+# funkcja(poz1=1, poz2=2, normalny=3, kw1=4, kw2=5)  # poz1/poz2 muszą być pozycyjne
+# funkcja(1, 2, 3, 4, 5)  # kw1/kw2 muszą być nazwane
+```
+
+Praktyczny przykład:
+
+```python
+def oblicz_sile(masa: float, przyspieszenie: float, /) -> float:
+    """F = ma. Argumenty wyłącznie pozycyjne — kolejność ma znaczenie."""
+    return masa * przyspieszenie
+
+def nasluchuj(host: str, *, port: int, timeout: float = 30.0) -> None:
+    """port jest wyłącznie nazwany — musi być podany explicite."""
+    print(f"Słucham na {host}:{port} (timeout={timeout}s)")
+
+nasluchuj("localhost", port=8080)
+nasluchuj("0.0.0.0", port=443, timeout=60.0)
+```
+
+### Dekoratory
+
+Dekorator (ang. *decorator*) to funkcja, która opakowuje inną funkcję, dodając do niej dodatkowe zachowanie. Używamy składni `@`:
+
+```python
+def loguj(funkcja):
+    """Dekorator logujący wywołania funkcji."""
+    def owijka(*args, **kwargs):
+        print(f"Wywołuję {funkcja.__name__} z args={args}, kwargs={kwargs}")
+        wynik = funkcja(*args, **kwargs)
+        print(f"Wynik: {wynik}")
+        return wynik
+    return owijka
+
+@loguj
+def dodaj(a, b):
+    return a + b
+
+dodaj(3, 4)
+# Wywołuję dodaj z args=(3, 4), kwargs={}
+# Wynik: 7
+```
+
+Dekoratory z `functools.wraps` zachowują metadane oryginalnej funkcji:
+
+```python
+import functools
+
+def czasomierz(funkcja):
+    """Mierzy czas wykonania funkcji."""
+    import time
+    @functools.wraps(funkcja)   # Zachowuje __name__, __doc__ itp.
+    def owijka(*args, **kwargs):
+        start = time.perf_counter()
+        wynik = funkcja(*args, **kwargs)
+        elapsed = time.perf_counter() - start
+        print(f"{funkcja.__name__} zajął {elapsed:.6f}s")
+        return wynik
+    return owijka
+
+@czasomierz
+def sortuj(lista):
+    """Sortuje listę."""
+    return sorted(lista)
+
+print(sortuj.__name__)   # sortuj (nie "owijka")
+print(sortuj.__doc__)    # Sortuje listę.
+
+import random
+duza_lista = random.sample(range(10000), 10000)
+posortowana = sortuj(duza_lista)
+```
+
+#### Kilka dekoratorów naraz
+
+Dekoratory można nakładać — są stosowane od dołu do góry:
+
+```python
+@loguj
+@czasomierz
+def pomnoz(a, b):
+    return a * b
+
+# Odpowiednik: loguj(czasomierz(pomnoz))
+pomnoz(3, 4)
+```
+
+#### Dekoratory z argumentami
+
+```python
+def powtorz(n):
+    """Dekorator powtarzający wywołanie n razy."""
+    def dekorator(funkcja):
+        @functools.wraps(funkcja)
+        def owijka(*args, **kwargs):
+            for _ in range(n):
+                wynik = funkcja(*args, **kwargs)
+            return wynik
+        return owijka
+    return dekorator
+
+@powtorz(3)
+def powiedz(wiadomosc):
+    print(wiadomosc)
+
+powiedz("Hello!")
+# Hello!
+# Hello!
+# Hello!
+```

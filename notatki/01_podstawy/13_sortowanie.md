@@ -213,3 +213,142 @@ indeks = bisect.bisect_left(lista, 7)
 print(indeks)          # 3
 print(lista[indeks])   # 7
 ```
+
+### Moduł `bisect` — wyszukiwanie i wstawianie do posortowanej listy
+
+Moduł `bisect` zapewnia wydajne operacje na posortowanych listach bez potrzeby ponownego sortowania:
+
+```python
+import bisect
+
+posortowana = [1, 3, 5, 7, 9]
+
+# bisect_left — indeks, gdzie wstawić nowy element (przed duplikatem)
+print(bisect.bisect_left(posortowana, 5))    # 2
+
+# bisect_right — indeks, gdzie wstawić (po duplikacie)
+print(bisect.bisect_right(posortowana, 5))   # 3
+
+# insort_left — wstawienie elementu w posortowane miejsce
+bisect.insort_left(posortowana, 4)
+print(posortowana)   # [1, 3, 4, 5, 7, 9]
+
+# insort — wstawienie (domyślnie jak insort_right)
+bisect.insort(posortowana, 6)
+print(posortowana)   # [1, 3, 4, 5, 6, 7, 9]
+```
+
+`bisect` jest szczególnie przydatny przy utrzymywaniu posortowanych list z dynamicznie dodawanymi elementami.
+
+### Sortowanie przez scalanie (Merge Sort)
+
+**Idea** (podejście "dziel i zwyciężaj"):
+1. Podziel listę na dwie równe połowy.
+2. Rekurencyjnie posortuj każdą z nich.
+3. Scalaj posortowane połowy w jedną posortowaną listę.
+
+**Złożoność**: O(n log n) — zawsze, w każdym przypadku. Stabilny algorytm.
+
+```python
+def sortowanie_przez_scalanie(lista):
+    if len(lista) <= 1:
+        return lista
+
+    srodek = len(lista) // 2
+    lewa = sortowanie_przez_scalanie(lista[:srodek])
+    prawa = sortowanie_przez_scalanie(lista[srodek:])
+
+    return scal(lewa, prawa)
+
+def scal(lewa, prawa):
+    wynik = []
+    i = j = 0
+    while i < len(lewa) and j < len(prawa):
+        if lewa[i] <= prawa[j]:
+            wynik.append(lewa[i])
+            i += 1
+        else:
+            wynik.append(prawa[j])
+            j += 1
+    wynik.extend(lewa[i:])
+    wynik.extend(prawa[j:])
+    return wynik
+
+print(sortowanie_przez_scalanie([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
+```
+
+### Sortowanie za pomocą kopca (`heapq`)
+
+Moduł `heapq` implementuje kopiec min (ang. *min-heap*) — strukturę danych, w której najmniejszy element jest zawsze na szczycie:
+
+```python
+import heapq
+
+# heapify — zamień listę na kopiec (in-place)
+lista = [5, 3, 8, 1, 9, 2]
+heapq.heapify(lista)
+print(lista)   # [1, 3, 2, 5, 9, 8] — struktura kopca
+
+# heappush — wstaw element
+heapq.heappush(lista, 4)
+
+# heappop — usuń i zwróć najmniejszy element
+print(heapq.heappop(lista))  # 1
+print(heapq.heappop(lista))  # 2
+
+# nsmallest / nlargest — n najmniejszych/największych elementów
+dane = [5, 3, 8, 1, 9, 2, 7]
+print(heapq.nsmallest(3, dane))  # [1, 2, 3]
+print(heapq.nlargest(3, dane))   # [9, 8, 7]
+```
+
+### Zaawansowane sortowanie z kluczem
+
+```python
+from operator import attrgetter, itemgetter
+
+# Sortowanie list słowników
+pracownicy = [
+    {"imie": "Jan", "wiek": 35, "pensja": 6000},
+    {"imie": "Anna", "wiek": 28, "pensja": 7500},
+    {"imie": "Piotr", "wiek": 42, "pensja": 5800},
+]
+
+# Po jednym kluczu
+posortowani = sorted(pracownicy, key=itemgetter("wiek"))
+
+# Po wielu kluczach — krotka
+posortowani2 = sorted(pracownicy, key=itemgetter("pensja", "wiek"), reverse=True)
+
+# Sortowanie obiektów po atrybucie
+from dataclasses import dataclass
+
+@dataclass
+class Student:
+    imie: str
+    ocena: float
+
+studenci = [Student("Jan", 4.5), Student("Anna", 5.0), Student("Piotr", 3.5)]
+posortowani3 = sorted(studenci, key=attrgetter("ocena"), reverse=True)
+for s in posortowani3:
+    print(f"{s.imie}: {s.ocena}")
+# Anna: 5.0
+# Jan: 4.5
+# Piotr: 3.5
+
+# Sortowanie ze złożoną logiką — sort stabilny (Timsort)
+# Najpierw po ocenie malejąco, przy remisie po imieniu rosnąco
+posortowani4 = sorted(studenci, key=lambda s: (-s.ocena, s.imie))
+```
+
+### Rozbudowane porównanie algorytmów
+
+| Algorytm                   | Złożoność (średnia) | Złożoność (najgorszy) | Stabilny | Uwagi                              |
+|----------------------------|---------------------|-----------------------|----------|------------------------------------|
+| Bąbelkowe                  | O(n²)               | O(n²)                 | Tak      | Prosty, ale wolny dla dużych danych|
+| Przez wybieranie           | O(n²)               | O(n²)                 | Nie      | Mało zamian; wolny dla dużych danych|
+| Szybkie (Quicksort)        | O(n log n)          | O(n²)                 | Nie      | Bardzo szybkie w praktyce          |
+| Przez scalanie (Mergesort) | O(n log n)          | O(n log n)            | Tak      | Zawsze O(n log n); dodatkowa pamięć|
+| Wbudowane (`sorted`)       | O(n log n)          | O(n log n)            | Tak      | Timsort — hybrydowy, zoptymalizowany|
+
+> **Zalecenie praktyczne**: W codziennym kodzie Python zawsze używaj wbudowanego `sorted()` lub `.sort()`. Własne implementacje algorytmów sortowania są wartościowe edukacyjnie — pomagają zrozumieć złożoność obliczeniową — ale w produkcji wbudowane funkcje są szybsze i dokładniej zoptymalizowane.
