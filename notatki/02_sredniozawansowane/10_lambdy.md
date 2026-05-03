@@ -176,3 +176,113 @@ Wynik:
 1  2  20  22
 2  3  30  33
 ```
+
+### Moduł `operator` jako alternatywa dla prostych lambd
+
+Dla podstawowych operacji arytmetycznych i logicznych moduł `operator` dostarcza gotowych funkcji, które są czytelniejsze i szybsze niż lambdy:
+
+```python
+from operator import add, mul, itemgetter, attrgetter
+
+# Zamiast: lambda a, b: a + b
+print(add(3, 4))   # 7
+
+# Zamiast: lambda a, b: a * b
+print(mul(3, 4))   # 12
+
+# Sortowanie list słowników
+studenci = [
+    {"imie": "Jan", "wiek": 23},
+    {"imie": "Anna", "wiek": 21},
+    {"imie": "Piotr", "wiek": 25},
+]
+# Zamiast: sorted(studenci, key=lambda x: x["wiek"])
+posortowani = sorted(studenci, key=itemgetter("wiek"))
+print(posortowani)
+# [{'imie': 'Anna', 'wiek': 21}, {'imie': 'Jan', 'wiek': 23}, ...]
+
+# Sortowanie obiektów po atrybucie
+from collections import namedtuple
+Osoba = namedtuple("Osoba", ["imie", "wiek"])
+osoby = [Osoba("Jan", 23), Osoba("Anna", 21)]
+# Zamiast: sorted(osoby, key=lambda x: x.wiek)
+posortowani2 = sorted(osoby, key=attrgetter("wiek"))
+```
+
+### `functools.partial` — częściowe zastosowanie funkcji
+
+`functools.partial` pozwala "zamrozić" niektóre argumenty funkcji, tworząc nową funkcję z mniejszą liczbą parametrów. Jest to elegancka alternatywa dla lambdy, gdy chcemy utrwalić jeden z argumentów:
+
+```python
+from functools import partial
+
+def potega(podstawa, wykladnik):
+    return podstawa ** wykladnik
+
+# Zamiast: lambda x: potega(x, 2)
+kwadrat = partial(potega, wykladnik=2)
+szescian = partial(potega, wykladnik=3)
+
+print(kwadrat(5))   # 25
+print(szescian(3))  # 27
+
+# Przykład z print
+print_sep = partial(print, sep=" | ")
+print_sep("A", "B", "C")  # A | B | C
+
+# Przykład z mnożeniem
+from operator import mul
+podwoj = partial(mul, 2)
+print(list(map(podwoj, range(5))))  # [0, 2, 4, 6, 8]
+```
+
+### Lambda vs. `def` — kiedy co stosować?
+
+| Sytuacja                                         | Zalecane podejście |
+|--------------------------------------------------|--------------------|
+| Prosta jednorazowa funkcja jako argument         | `lambda`           |
+| Funkcja wielokrotnego użytku                     | `def`              |
+| Funkcja z wieloma operacjami / warunkami         | `def`              |
+| Potrzebne docstringi lub adnotacje typów         | `def`              |
+| Sortowanie po prostym kluczu                     | `lambda` lub `operator` |
+| Przekazanie do `map()`, `filter()`               | `lambda` lub wyrażenie listowe |
+
+```python
+# Kiedy lambda jest czytelna
+liczby = [1, -3, 5, -2, 4]
+posortowane = sorted(liczby, key=lambda x: abs(x))
+print(posortowane)  # [1, -2, -3, 4, 5]
+
+# Kiedy def jest czytelniejsze
+def kryterium_sortowania(x):
+    """Sortuje po wartości bezwzględnej, a przy remisie — malejąco."""
+    return (abs(x), -x)
+
+posortowane2 = sorted(liczby, key=kryterium_sortowania)
+```
+
+### Lambdy jako fabryki funkcji
+
+Lambda może być zwracana z funkcji, tworząc tzw. **fabrykę funkcji**:
+
+```python
+def mnoznik(n):
+    return lambda x: x * n
+
+podwoj = mnoznik(2)
+potroil = mnoznik(3)
+
+print(list(map(podwoj, [1, 2, 3, 4])))   # [2, 4, 6, 8]
+print(list(map(potroil, [1, 2, 3, 4])))  # [3, 6, 9, 12]
+
+# Fabryka walidatorów
+def zakres(minimum, maksimum):
+    return lambda x: minimum <= x <= maksimum
+
+czy_dorosly = zakres(18, 120)
+czy_dziecko = zakres(0, 17)
+
+print(czy_dorosly(25))   # True
+print(czy_dziecko(10))   # True
+print(czy_dorosly(15))   # False
+```

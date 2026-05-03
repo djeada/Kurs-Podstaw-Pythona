@@ -163,3 +163,147 @@ Powyżej opisano jedynie niewielki wycinek możliwości, jakie daje Python w zak
 - **`isalnum()`, `isalpha()`, `isdigit()`, `isspace()`** – pozwalają sprawdzić, czy napis składa się odpowiednio z liter i cyfr, tylko liter, tylko cyfr lub tylko ze znaków białych (spacje, tabulatory, itp.).
 
 Dzięki temu rozbudowanemu zestawowi metod Python pozwala łatwo rozwiązywać problemy związane z przetwarzaniem danych tekstowych, począwszy od szybkich zmian formatowania aż po wyrafinowane wyszukiwanie i zamianę konkretnych fragmentów.
+
+### Tabela metod napisów
+
+Poniżej zestawiono najważniejsze metody klasy `str` z krótkimi przykładami:
+
+| Metoda                     | Opis                                          | Przykład                                      |
+|----------------------------|-----------------------------------------------|-----------------------------------------------|
+| `upper()`                  | Wielkie litery                                | `"abc".upper()` → `"ABC"`                    |
+| `lower()`                  | Małe litery                                   | `"ABC".lower()` → `"abc"`                    |
+| `title()`                  | Pierwsza litera każdego słowa wielka          | `"python jest".title()` → `"Python Jest"`    |
+| `capitalize()`             | Pierwsza litera wielka                        | `"hello".capitalize()` → `"Hello"`           |
+| `strip()`                  | Usuń białe znaki z obu końców                 | `"  abc  ".strip()` → `"abc"`                |
+| `lstrip()` / `rstrip()`    | Usuń białe znaki z lewej/prawej               | `"  abc".lstrip()` → `"abc"`                 |
+| `replace(old, new)`        | Zamień fragment                               | `"abc".replace("b", "X")` → `"aXc"`         |
+| `split(sep)`               | Podziel na listę                              | `"a,b,c".split(",")` → `["a","b","c"]`      |
+| `join(iterable)`           | Połącz listę napisów                          | `",".join(["a","b"])` → `"a,b"`             |
+| `find(sub)`                | Znajdź indeks (lub -1)                        | `"abc".find("b")` → `1`                     |
+| `index(sub)`               | Znajdź indeks (lub błąd)                      | `"abc".index("b")` → `1`                    |
+| `count(sub)`               | Policz wystąpienia                            | `"abcabc".count("a")` → `2`                 |
+| `startswith(prefix)`       | Czy zaczyna się od…?                          | `"Python".startswith("Py")` → `True`         |
+| `endswith(suffix)`         | Czy kończy się na…?                           | `"Python".endswith("on")` → `True`           |
+| `isalpha()`                | Tylko litery?                                 | `"abc".isalpha()` → `True`                  |
+| `isdigit()`                | Tylko cyfry?                                  | `"123".isdigit()` → `True`                  |
+| `isalnum()`                | Tylko litery i cyfry?                         | `"abc1".isalnum()` → `True`                 |
+| `isspace()`                | Tylko białe znaki?                            | `"   ".isspace()` → `True`                  |
+| `zfill(width)`             | Dopełnij zerami z lewej                       | `"42".zfill(5)` → `"00042"`                 |
+| `center(width, fillchar)`  | Wyśrodkuj                                     | `"hi".center(6, "-")` → `"--hi--"`          |
+| `ljust(width)` / `rjust(width)` | Wyrównaj do lewej/prawej              | `"hi".ljust(5)` → `"hi   "`                 |
+
+### Znaki ucieczki (escape sequences)
+
+Niektóre znaki specjalne są reprezentowane w napisach za pomocą sekwencji ucieczki (ang. *escape sequences*) — backslash `\` poprzedzający literę:
+
+| Sekwencja | Znaczenie                    | Przykład                          |
+|-----------|------------------------------|-----------------------------------|
+| `\n`      | Nowa linia                   | `"linia1\nlinia2"`               |
+| `\t`      | Tabulator poziomy            | `"kolumna1\tkolumna2"`           |
+| `\\`      | Dosłowny backslash           | `"C:\\Users\\Jan"`               |
+| `\'`      | Apostrof (w napisie z `'`)   | `'To\'jest apostrof'`            |
+| `\"`      | Cudzysłów (w napisie z `"`)  | `"To \"jest\" cudzysłów"`       |
+| `\r`      | Powrót karetki               | `"tekst\r"` (używane w Windows)  |
+| `\0`      | Znak null                    | `"\0"` (bajt o wartości 0)       |
+| `\uXXXX` | Znak Unicode (4 cyfry hex)   | `"\u0041"` → `"A"`               |
+
+```python
+print("Pierwsza linia\nDruga linia")
+print("Imię:\tJan")
+print("Ścieżka: C:\\Windows\\System32")
+print("\u03B1 \u03B2 \u03B3")   # α β γ
+```
+
+### Napisy surowe (raw strings)
+
+Jeśli w napisie chcemy umieścić backslash bez interpretowania go jako znaku ucieczki, używamy prefiksu `r` lub `R` (tzw. *raw string*):
+
+```python
+# Normalny napis — \n to nowa linia
+print("C:\nowy_folder")    # C: + nowa linia + "owy_folder"
+
+# Raw string — \n to dosłownie backslash i n
+print(r"C:\nowy_folder")   # C:\nowy_folder
+
+# Szczególnie przydatne przy wyrażeniach regularnych
+import re
+wzorzec = re.compile(r"\d{3}-\d{3}-\d{3}")   # zamiast "\\d{3}-\\d{3}-\\d{3}"
+```
+
+### Kodowanie i dekodowanie (encode/decode)
+
+Napisy w Pythonie 3 są sekwencjami znaków Unicode (`str`). Kiedy zapisujemy dane do pliku lub przesyłamy przez sieć, musimy je zakodować do bajtów (`bytes`) i z powrotem:
+
+```python
+napis = "Zażółć gęślą jaźń"
+
+# Kodowanie str → bytes
+bajty_utf8  = napis.encode("utf-8")
+bajty_latin = napis.encode("latin-2")
+
+print(type(bajty_utf8))   # <class 'bytes'>
+print(bajty_utf8[:10])    # b'Za\xc5\xbc\xc3\xb3\xc5\x82\xc4\x87'
+
+# Dekodowanie bytes → str
+print(bajty_utf8.decode("utf-8"))    # Zażółć gęślą jaźń
+print(bajty_latin.decode("latin-2")) # Zażółć gęślą jaźń
+```
+
+Najczęściej używane kodowania:
+
+| Kodowanie  | Opis                                                      |
+|------------|-----------------------------------------------------------|
+| `utf-8`    | Domyślne, obsługuje wszystkie znaki Unicode, zalecane     |
+| `ascii`    | Tylko 128 znaków ASCII (bez polskich liter)               |
+| `latin-1`  | ISO 8859-1, zachodnioeuropejskie znaki                    |
+| `latin-2`  | ISO 8859-2, środkowoeuropejskie znaki (z polskimi)        |
+| `utf-16`   | Unicode 2 bajty na znak (lub 4 dla rzadkich znaków)       |
+
+### Porównywanie napisów
+
+Napisy można porównywać operatorami `==`, `!=`, `<`, `>` itd. — Python porównuje je leksykograficznie (znak po znaku według kodów Unicode):
+
+```python
+print("abc" == "abc")   # True
+print("abc" < "abd")    # True  — 'c' < 'd'
+print("Z" < "a")        # True  — kody: Z=90, a=97
+print("10" < "9")       # True  — porównanie jak napisy, nie liczby!
+```
+
+Aby porównać napisy bez rozróżniania wielkości liter:
+
+```python
+a = "Python"
+b = "python"
+print(a.lower() == b.lower())   # True
+print(a.casefold() == b.casefold())  # True  — casefold() bardziej agresywne (np. ß → ss)
+```
+
+### Wieloliniowe napisy i docstringi
+
+Potrójne cudzysłowy pozwalają tworzyć napisy rozciągające się na wiele linii:
+
+```python
+tekst = """
+To jest
+wieloliniowy
+napis.
+"""
+print(tekst)
+
+# Docstring — dokumentacja funkcji/klasy
+def dodaj(a, b):
+    """
+    Dodaje dwie liczby i zwraca wynik.
+
+    Args:
+        a: Pierwsza liczba.
+        b: Druga liczba.
+
+    Returns:
+        Suma a i b.
+    """
+    return a + b
+
+print(dodaj.__doc__)
+```

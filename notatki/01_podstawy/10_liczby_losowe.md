@@ -155,3 +155,131 @@ population = list(range(100))
 sample = random.sample(population, 10)
 print(sample)  # Np. [82, 3, 72, 54, ...]
 ```
+
+#### `random.choices(population, weights=None, k=1)`
+
+Zwraca listę `k` elementów wylosowanych **ze zwracaniem** (element może się powtarzać). Opcjonalnie można podać wagi dla każdego elementu:
+
+```python
+import random
+
+# Bez wag — równe prawdopodobieństwo
+print(random.choices(["reszka", "orzeł"], k=5))
+# Np. ['orzeł', 'reszka', 'orzeł', 'orzeł', 'reszka']
+
+# Z wagami — orzeł 3x częściej niż reszka
+print(random.choices(["orzeł", "reszka"], weights=[3, 1], k=10))
+```
+
+### Praktyczne przykłady zastosowań
+
+#### Symulacja rzutu kością
+
+```python
+import random
+
+def rzut_koscia(sciany=6):
+    return random.randint(1, sciany)
+
+def rzuc_wielokrotnie(ile, sciany=6):
+    return [rzut_koscia(sciany) for _ in range(ile)]
+
+print(rzuc_wielokrotnie(5))           # Np. [3, 1, 6, 2, 5]
+print(rzuc_wielokrotnie(3, sciany=20)) # Rzut k20
+```
+
+#### Tasowanie talii kart
+
+```python
+import random
+
+kolory = ["♠", "♥", "♦", "♣"]
+wartosci = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+talia = [f"{w}{k}" for k in kolory for w in wartosci]
+
+random.shuffle(talia)
+print("Pierwszych 5 kart:", talia[:5])
+reka = random.sample(talia, 5)
+print("Losowa ręka:", reka)
+```
+
+#### Generator haseł
+
+```python
+import random
+import string
+
+def generuj_haslo(dlugosc=12, cyfry=True, znaki_specjalne=True):
+    znaki = string.ascii_letters
+    if cyfry:
+        znaki += string.digits
+    if znaki_specjalne:
+        znaki += "!@#$%^&*"
+    return "".join(random.choices(znaki, k=dlugosc))
+
+print(generuj_haslo())          # Np. 'aB3!kL9#mNzQ'
+print(generuj_haslo(8, False, False))  # Tylko litery, 8 znaków
+```
+
+#### Symulacja loteryjki
+
+```python
+import random
+
+def losowanie_lotto(ile=6, zakres=49):
+    return sorted(random.sample(range(1, zakres + 1), ile))
+
+print(losowanie_lotto())          # Np. [3, 12, 25, 33, 41, 47]
+print(losowanie_lotto(5, 90))     # 5 z 90
+```
+
+### Moduł `secrets` — kryptograficznie bezpieczne losowanie
+
+Moduł `random` **nie jest bezpieczny kryptograficznie** — generowane przez niego sekwencje można przewidzieć. Do zadań bezpieczeństwa (np. tokeny sesji, kody weryfikacyjne) należy używać modułu `secrets`:
+
+```python
+import secrets
+
+# Bezpieczny token szesnastkowy
+token = secrets.token_hex(32)    # 64 znaki hex
+print(token)  # Np. 'a3f9...c7e2'
+
+# Token URL-safe (base64)
+url_token = secrets.token_urlsafe(16)  # ~22 znaki
+print(url_token)  # Np. 'X9kJ7mQzP...'
+
+# Bezpieczna losowa liczba całkowita
+print(secrets.randbelow(100))    # losowa z [0, 99]
+
+# Bezpieczny wybór z kolekcji
+print(secrets.choice(["tak", "nie", "może"]))
+
+# Bezpieczny PIN 6-cyfrowy
+import string
+pin = "".join(secrets.choice(string.digits) for _ in range(6))
+print(pin)  # Np. '847302'
+```
+
+| Cecha                | `random`                       | `secrets`                         |
+|----------------------|--------------------------------|-----------------------------------|
+| Cel                  | Symulacje, gry, testy          | Kryptografia, bezpieczeństwo      |
+| Przewidywalność      | Tak (deterministyczny z seedem) | Nie                              |
+| Szybkość             | Szybszy                        | Wolniejszy                        |
+| Seed                 | Tak (`random.seed()`)          | Nie                               |
+| Zalecany do haseł    | **Nie**                        | **Tak**                           |
+
+### Reprodukowalność — `random.seed()`
+
+W testach i symulacjach naukowych często potrzebujemy tej samej sekwencji losowej przy każdym uruchomieniu. Służy do tego `seed`:
+
+```python
+import random
+
+random.seed(42)
+print([random.randint(1, 10) for _ in range(5)])  # [1, 10, 2, 5, 10]
+
+random.seed(42)  # reset z tym samym seedem
+print([random.randint(1, 10) for _ in range(5)])  # [1, 10, 2, 5, 10]  — identyczne!
+```
+
+Bez ustawienia seedu Python automatycznie używa aktualnego czasu systemowego, co daje różne wyniki przy każdym uruchomieniu.
