@@ -240,6 +240,76 @@ pip install nazwa_twojego_pakietu
 
 Pamiętaj, że utrzymanie pakietu to również aktualizowanie go o nowe funkcje, poprawki błędów oraz aktualizacje zależności, co jest ważne dla utrzymania dobrych praktyk bezpieczeństwa i kompatybilności.
 
+### Nowoczesne narzędzia do zarządzania pakietami
+
+#### `pipx` — instalacja narzędzi CLI w izolacji
+
+`pipx` instaluje aplikacje Pythona (narzędzia CLI) w izolowanych środowiskach, unikając zanieczyszczania systemowego Pythona:
+
+```bash
+pip install pipx
+
+# Instalacja narzędzi CLI
+pipx install black
+pipx install mypy
+pipx install cookiecutter
+
+# Uruchamianie bez instalacji
+pipx run cowsay "Hello!"
+
+# Lista zainstalowanych narzędzi
+pipx list
+```
+
+#### `pip-audit` — skanowanie zależności pod kątem luk bezpieczeństwa
+
+```bash
+pip install pip-audit
+pip-audit   # Skanuje zainstalowane pakiety
+pip-audit -r requirements.txt   # Skanuje plik requirements.txt
+```
+
+#### `uv` — szybki menedżer pakietów i środowisk
+
+`uv` to nowoczesna, bardzo szybka alternatywa dla `pip` i `venv` (napisana w Rust):
+
+```bash
+pip install uv
+
+# Tworzenie środowiska wirtualnego
+uv venv
+
+# Instalacja pakietów (szybciej niż pip)
+uv pip install requests numpy pandas
+
+# Generowanie pliku lock
+uv pip freeze > requirements.txt
+```
+
+#### `requirements.txt` — dobre praktyki
+
+```bash
+# Generowanie z dokładnymi wersjami (reprodukowalność)
+pip freeze > requirements.txt
+
+# Instalacja z pliku
+pip install -r requirements.txt
+
+# Grupowanie zależności (requirements-dev.txt)
+pip install -r requirements-dev.txt   # dodatkowe narzędzia deweloperskie
+```
+
+Przykładowy `requirements.txt`:
+
+```
+# Zależności produkcyjne
+requests==2.31.0
+fastapi==0.111.0
+sqlalchemy>=2.0,<3.0
+
+# -r requirements-dev.txt  # opcjonalne — dodaj gdy rozwijasz
+```
+
 ### Linki
 
 - [Oficjalna strona PyPI (Python Package Index)](https://pypi.org/) — repozytorium z pakietami dla Pythona.
