@@ -196,3 +196,93 @@ W Pythonie typy danych można podzielić na dwie główne kategorie: mutowalne i
 | Wydajność               | Zwykle wolniejsze z powodu potencjalnej potrzeby zmiany rozmiaru i ponownego przydziału pamięci. | Szybsze, ponieważ rozmiar jest stały i nie ma potrzeby ponownego przydziału pamięci. |
 | Przypadki użycia        | Odpowiednie dla zbiorów danych, które muszą być często zmieniane. | Odpowiednie dla wartości, które powinny pozostać niezmienne przez cały program. |
 | Przykłady użycia        | `list1 = [1, 2, 3]`<br>`list1.append(4)` | `tuple1 = (1, 2, 3)`<br>`tuple2 = tuple1 + (4,)` |
+
+### Identyczność a równość obiektów
+
+W Pythonie warto rozróżniać dwa typy porównań:
+
+- `==` sprawdza, czy wartości są **równe**
+- `is` sprawdza, czy obiekty mają **ten sam adres w pamięci** (są tym samym obiektem)
+
+```python
+a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(a == b)   # True  — mają tę samą wartość
+print(a is b)   # False — to dwa różne obiekty w pamięci
+print(a is c)   # True  — c i a wskazują na ten sam obiekt
+
+# Interning (buforowanie) małych liczb i napisów
+x = 256
+y = 256
+print(x is y)   # True  — Python buforuje małe int
+x = 1000
+y = 1000
+print(x is y)   # Może być False — poza zakresem buforowania
+
+# Zawsze używaj == dla porównania wartości, is tylko dla None/True/False
+print(None is None)    # True — poprawny idiom
+```
+
+### Skutki uboczne a testowalność
+
+Czyste funkcje znacznie ułatwiają pisanie testów — nie potrzebują mockowania ani konfiguracji zewnętrznych zależności:
+
+```python
+import unittest
+
+# Czysta funkcja — łatwa do testowania
+def oblicz_podatek(kwota: float, stawka: float) -> float:
+    if kwota < 0:
+        raise ValueError("Kwota nie może być ujemna")
+    return round(kwota * stawka, 2)
+
+class TestObliczPodatek(unittest.TestCase):
+    def test_podstawowy(self):
+        self.assertEqual(oblicz_podatek(100.0, 0.23), 23.0)
+
+    def test_zero(self):
+        self.assertEqual(oblicz_podatek(0.0, 0.23), 0.0)
+
+    def test_ujemna_kwota(self):
+        with self.assertRaises(ValueError):
+            oblicz_podatek(-100.0, 0.23)
+
+# Nieczysta funkcja — wymaga mockowania
+import datetime
+
+def pobierz_rok_urodzenia(wiek: int) -> int:
+    return datetime.date.today().year - wiek   # Zależy od aktualnej daty!
+# Trudna do testowania — wynik zmienia się każdego roku
+```
+
+### Wzorzec "Odizoluj efekty uboczne"
+
+Dobra praktyka: izoluj efekty uboczne od logiki obliczeniowej:
+
+```python
+# Źle — logika wymieszana z I/O
+def przetworz_plik(sciezka):
+    with open(sciezka) as f:
+        dane = f.read().split()
+    suma = sum(int(x) for x in dane)   # logika
+    print(f"Suma: {suma}")              # efekt uboczny
+    return suma
+
+# Dobrze — separacja odpowiedzialności
+def oblicz_sume(liczby: list) -> int:
+    return sum(liczby)   # czysta funkcja, łatwa do testowania
+
+def wczytaj_liczby(sciezka: str) -> list:
+    with open(sciezka) as f:
+        return [int(x) for x in f.read().split()]   # I/O odizolowane
+
+def wyswietl_wynik(suma: int) -> None:
+    print(f"Suma: {suma}")   # I/O odizolowane
+
+# Użycie:
+# liczby = wczytaj_liczby("dane.txt")
+# suma = oblicz_sume(liczby)   # Ta funkcja jest testowalna bez pliku!
+# wyswietl_wynik(suma)
+```
