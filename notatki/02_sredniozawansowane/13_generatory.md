@@ -158,7 +158,7 @@ Generator to nie tylko prosta sekwencja — to pełnoprawny współprogramu (ang
 def akumulator():
     suma = 0
     while True:
-        wartosc = yield suma   # yield zwraca sumaę, przyjmuje nową wartość
+        wartosc = yield suma   # yield zwraca sumę, przyjmuje nową wartość
         if wartosc is None:
             break
         suma += wartosc

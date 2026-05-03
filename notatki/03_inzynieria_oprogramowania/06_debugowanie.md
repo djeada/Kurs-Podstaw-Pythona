@@ -267,7 +267,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format="%(levelname)s:%(funcName)s:%(lineno)d: %(message)s")
 
 def oblicz(a, b):
-    logging.debug(f"oblicz wywoła z a={a}, b={b}")
+    logging.debug(f"oblicz wywołana z a={a}, b={b}")
     wynik = a / b
     logging.debug(f"wynik: {wynik}")
     return wynik
