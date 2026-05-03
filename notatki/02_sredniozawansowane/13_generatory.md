@@ -121,7 +121,7 @@ def chain_generators(*iterables):
         yield from iterable
 
 gen1 = range(3)
-gen2 = simple_generator()
+gen2 = foo()
 
 for val in chain_generators(gen1, gen2):
     print(val)

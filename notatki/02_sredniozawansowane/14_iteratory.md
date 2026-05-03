@@ -126,9 +126,7 @@ Generatory można również łączyć, tworząc bardziej złożone strumienie da
 
 ```python
 def podwoj_wartosci(generator):
-    for
-
- wartosc in generator:
+    for wartosc in generator:
         yield wartosc * 2
 
 generator_liczb = (i for i in range(5))

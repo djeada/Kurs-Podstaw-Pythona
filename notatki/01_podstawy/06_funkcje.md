@@ -78,7 +78,7 @@ print(suma_b)  # wyświetli 12
 
 ### Funkcje z domyślnymi argumentami
 
-Możemy również zdefiniować funkcję z domyślnymi argumentami, które zostaną użyte, jeśli nie zostaną przekazane żadne inne. Domyślne argumenty muszą być umieszczone po argumentach obowiązkowych, a ich ilość nie może przekroczyć ilości argumentów obowiązkowych. Przykład:
+Możemy również zdefiniować funkcję z domyślnymi argumentami, które zostaną użyte, jeśli nie zostaną przekazane żadne inne. Domyślne argumenty muszą być umieszczone po argumentach obowiązkowych. Przykład:
 
 ```python
 def suma_trzech(a, b, c=0):

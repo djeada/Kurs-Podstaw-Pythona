@@ -1,6 +1,6 @@
 ## Wyjątki
 
-Wyjątki w programowaniu to mechanizm pozwalający na obsługę nieoczekiwanych sytuacji, które mogą wystąpić podczas działania programu. W Pythonie są one kluczowe dla tworzenia niezawodnych aplikacji, które potrafią radzić sobie z błędami w sposób elegancki i kontrolowany. Dzięki wyjątkowym możemy nie tylko wykrywać błędy, ale także reagować na nie w sposób, który nie zakłóci działania całego programu.
+Wyjątki w programowaniu to mechanizm pozwalający na obsługę nieoczekiwanych sytuacji, które mogą wystąpić podczas działania programu. W Pythonie są one kluczowe dla tworzenia niezawodnych aplikacji, które potrafią radzić sobie z błędami w sposób elegancki i kontrolowany. Dzięki wyjątkom możemy nie tylko wykrywać błędy, ale także reagować na nie w sposób, który nie zakłóci działania całego programu.
 
 ### Czym są wyjątki w Pythonie?
 
@@ -20,7 +20,7 @@ ZeroDivisionError: division by zero
 
 ### Dlaczego wyjątki są ważne?
 
-Bez mechanizmu obsługi wyjątków, programy byłyby narażone na niespodziewane zakończenie w momencie wystąpienia błędu. Dzięki wyjątkowym możemy przechwytywać te błędy i reagować na nie w kontrolowany sposób, na przykład informując użytkownika o problemie lub podejmując próby jego naprawy.
+Bez mechanizmu obsługi wyjątków, programy byłyby narażone na niespodziewane zakończenie w momencie wystąpienia błędu. Dzięki wyjątkom możemy przechwytywać te błędy i reagować na nie w kontrolowany sposób, na przykład informując użytkownika o problemie lub podejmując próby jego naprawy.
 
 ### Generowanie własnych wyjątków
 

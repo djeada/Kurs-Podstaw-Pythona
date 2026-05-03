@@ -4,7 +4,7 @@ Napisy, często nazywane łańcuchami znaków, to jeden z najpopularniejszych i 
 
 Poniżej znajduje się przegląd podstawowych zagadnień związanych z napisami w Pythonie – od sposobów ich tworzenia, poprzez indeksowanie i modyfikację, aż po przydatne funkcje i metody formatowania.
 
-#### Podstawy napisów
+### Podstawy napisów
 
 Napisy można deklarować na kilka sposobów, używając pojedynczych apostrofów, podwójnych cudzysłowów bądź potrójnych cudzysłowów (te ostatnie są szczególnie przydatne przy tworzeniu wieloliniowych łańcuchów znaków). Oto przykładowe deklaracje:
 
@@ -20,7 +20,7 @@ W powyższych przykładach `napis1` i `napis2` zostały zdefiniowane jako proste
 
 Warto pamiętać, że niezależnie od tego, czy użyjemy pojedynczych apostrofów (`'`) czy podwójnych cudzysłowów (`"`), Python nie robi między nimi rozróżnienia na poziomie semantyki. Wybór sposobu deklarowania napisów bywa najczęściej kwestią preferencji lub konwencji w danym projekcie.
 
-#### Indeksowanie
+### Indeksowanie
 
 Napisy w Pythonie są sekwencjami znaków, które można indeksować. Każdemu znakowi w napisie odpowiada konkretny indeks, przy czym indeksy w Pythonie rozpoczynają się od zera. Oznacza to, że `napis[0]` zwróci pierwszy znak łańcucha, `napis[1]` – drugi, i tak dalej. Dodatkowo, Python obsługuje także indeksy ujemne, które liczone są od końca napisu: `napis[-1]` oznacza ostatni znak, `napis[-2]` – przedostatni itd.
 
@@ -32,7 +32,7 @@ print(napis[-1])  # n
 
 Indeksowanie znaków w ten sposób bywa przydatne chociażby przy wyodrębnianiu pierwszego bądź ostatniego znaku, czy sprawdzaniu konkretnych fragmentów napisu. 
 
-#### Wycinki (ang. slicing)
+### Wycinki (ang. slicing)
 
 Operacje na napisach w Pythonie nie ograniczają się do odczytu pojedynczych znaków. Bardzo często potrzebujemy uzyskać dostęp do fragmentu (podciągu) napisu. W tym celu używamy składni wycinka (ang. slice). Możemy w niej określić początkowy i końcowy indeks oraz krok (opcjonalnie), za pomocą którego chcemy przechodzić przez łańcuch.
 

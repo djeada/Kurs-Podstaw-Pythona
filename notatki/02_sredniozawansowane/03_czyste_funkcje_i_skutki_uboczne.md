@@ -39,7 +39,7 @@ II. Funkcja zwracająca iloczyn elementów listy. Jej wynik zależy wyłącznie 
 ```python
 def iloczyn_listy(lista):
     wynik = 1
-    for element w lista:
+    for element in lista:
         wynik *= element
     return wynik
 ```
@@ -55,14 +55,14 @@ IV. Funkcja generująca nową listę zawierającą tylko liczby parzyste z danej
 
 ```python
 def filtruj_parzyste(lista):
-    return [element for element w lista jeśli element % 2 == 0]
+    return [element for element in lista if element % 2 == 0]
 ```
 
 V. Funkcja tworząca nowy słownik z wybranymi kluczami z oryginalnego słownika.
 
 ```python
 def filtruj_slownik(slownik, klucze):
-    return {klucz: slownik[klucz] for klucz w klucze jeśli klucz w slownik}
+    return {klucz: slownik[klucz] for klucz in klucze if klucz in slownik}
 ```
 
 VI. Funkcja konwertująca ciąg znaków na wielkie litery.
