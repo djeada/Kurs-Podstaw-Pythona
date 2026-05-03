@@ -114,3 +114,88 @@ print(type(name))  # Wynik: <class 'str'>
 is_active = True
 print(type(is_active))  # Wynik: <class 'bool'>
 ```
+
+Możemy również sprawdzić, czy zmienna jest określonego typu, korzystając z funkcji `isinstance()`:
+
+```python
+x = 10
+print(isinstance(x, int))    # True
+print(isinstance(x, float))  # False
+print(isinstance(x, (int, float)))  # True — sprawdzamy jeden z kilku typów
+```
+
+### Konwersja typów (rzutowanie)
+
+Czasami musimy jawnie przekonwertować wartość z jednego typu na inny. Python udostępnia w tym celu wbudowane funkcje konwersji:
+
+| Funkcja    | Opis                                      | Przykład                       |
+|------------|-------------------------------------------|--------------------------------|
+| `int(x)`   | Konwertuje `x` na liczbę całkowitą        | `int("42")` → `42`             |
+| `float(x)` | Konwertuje `x` na liczbę zmiennoprzecinkową | `float("3.14")` → `3.14`     |
+| `str(x)`   | Konwertuje `x` na napis                   | `str(100)` → `"100"`           |
+| `bool(x)`  | Konwertuje `x` na wartość logiczną        | `bool(0)` → `False`            |
+
+#### Konwersja na `int`
+
+```python
+print(int(3.99))    # 3  — część dziesiętna jest odcinana (nie zaokrąglana)
+print(int("42"))    # 42
+print(int(True))    # 1
+print(int(False))   # 0
+```
+
+#### Konwersja na `float`
+
+```python
+print(float(7))      # 7.0
+print(float("3.14")) # 3.14
+print(float(True))   # 1.0
+```
+
+#### Konwersja na `str`
+
+```python
+print(str(100))    # "100"
+print(str(3.14))   # "3.14"
+print(str(True))   # "True"
+```
+
+#### Konwersja na `bool`
+
+W Pythonie każda wartość może zostać oceniona jako `True` lub `False`. Za `False` uważane są:
+
+- liczba `0` (i `0.0`)
+- pusty napis `""`
+- pusta lista `[]`, pusty słownik `{}`, pusty zbiór `set()`
+- wartość `None`
+
+Wszystkie pozostałe wartości są traktowane jako `True`:
+
+```python
+print(bool(0))     # False
+print(bool(1))     # True
+print(bool(-5))    # True
+print(bool(""))    # False
+print(bool("Hi"))  # True
+print(bool([]))    # False
+print(bool([0]))   # True
+```
+
+#### Błędy konwersji
+
+Nieprawidłowa konwersja powoduje wyjątek `ValueError`:
+
+```python
+int("sto")     # ValueError: invalid literal for int() with base 10: 'sto'
+float("abc")   # ValueError: could not convert string to float: 'abc'
+```
+
+Można zabezpieczyć się przed błędem używając bloku `try/except`:
+
+```python
+tekst = "abc"
+try:
+    liczba = int(tekst)
+except ValueError:
+    print(f"Nie można przekonwertować '{tekst}' na int")
+```

@@ -121,7 +121,7 @@ def chain_generators(*iterables):
         yield from iterable
 
 gen1 = range(3)
-gen2 = simple_generator()
+gen2 = foo()
 
 for val in chain_generators(gen1, gen2):
     print(val)
@@ -145,3 +145,170 @@ Wynik:
 - Można łatwo tworzyć potoki przetwarzania danych, łącząc kilka generatorów razem.
 
 W praktyce, generatory są niezbędnym narzędziem dla programistów Pythona, umożliwiając tworzenie kodu bardziej wydajnego i zwięzłego.
+
+### Metody `send()`, `throw()` i `close()`
+
+Generator to nie tylko prosta sekwencja — to pełnoprawny współprogramu (ang. *coroutine*). Poniżej opisano trzy metody sterowania generatorem:
+
+#### `send(value)` — wysłanie wartości do generatora
+
+`send()` wznawia generator i przekazuje do niego wartość jako wynik wyrażenia `yield`:
+
+```python
+def akumulator():
+    suma = 0
+    while True:
+        wartosc = yield suma   # yield zwraca sumę, przyjmuje nową wartość
+        if wartosc is None:
+            break
+        suma += wartosc
+
+gen = akumulator()
+next(gen)          # Uruchomienie generatora (do pierwszego yield)
+print(gen.send(10))  # 10
+print(gen.send(5))   # 15
+print(gen.send(20))  # 35
+gen.close()
+```
+
+#### `throw(type)` — wysłanie wyjątku do generatora
+
+```python
+def generator_z_obsluga():
+    try:
+        while True:
+            yield "pracuję"
+    except ValueError as e:
+        print(f"Generator otrzymał wyjątek: {e}")
+        yield "zakończono bezpiecznie"
+
+gen = generator_z_obsluga()
+print(next(gen))                    # pracuję
+print(next(gen))                    # pracuję
+print(gen.throw(ValueError, "stop")) # Generator otrzymał wyjątek: stop
+                                     # zakończono bezpiecznie
+```
+
+#### `close()` — zamknięcie generatora
+
+`close()` wysyła do generatora wyjątek `GeneratorExit`, co pozwala na sprzątanie zasobów:
+
+```python
+def generator_z_zamknieciem():
+    try:
+        while True:
+            yield "dane"
+    except GeneratorExit:
+        print("Generator zamknięty — sprzątam zasoby")
+
+gen = generator_z_zamknieciem()
+next(gen)
+gen.close()   # Generator zamknięty — sprzątam zasoby
+```
+
+### Nieskończone generatory
+
+Generatory mogą produkować nieskończone sekwencje — istotne jest tylko, żeby pobierać z nich elementy za pomocą `next()` lub ograniczać iterację:
+
+```python
+def liczby_naturalne():
+    n = 1
+    while True:
+        yield n
+        n += 1
+
+gen = liczby_naturalne()
+print([next(gen) for _ in range(5)])  # [1, 2, 3, 4, 5]
+
+# Bezpieczne pobranie pierwszych 10
+import itertools
+print(list(itertools.islice(liczby_naturalne(), 10)))  # [1, 2, ..., 10]
+```
+
+### Moduł `itertools` — gotowe generatory
+
+Moduł `itertools` dostarcza wysoko wydajnych generatorów do typowych zadań:
+
+#### Nieskończone iteratory
+
+```python
+import itertools
+
+# count(start, step) — nieograniczona sekwencja liczb
+for i in itertools.islice(itertools.count(5, 2), 5):
+    print(i)   # 5, 7, 9, 11, 13
+
+# cycle(iterable) — nieskończone powtarzanie sekwencji
+kolory = itertools.cycle(["czerwony", "zielony", "niebieski"])
+for _, kolor in zip(range(7), kolory):
+    print(kolor)   # czerwony, zielony, niebieski, czerwony, ...
+
+# repeat(value, n) — powtórz wartość n razy (lub nieskończenie)
+print(list(itertools.repeat("echo", 3)))   # ['echo', 'echo', 'echo']
+```
+
+#### Kończące iteratory
+
+```python
+import itertools
+
+# chain — łączenie kilku iterowalnych w jeden strumień
+print(list(itertools.chain([1, 2], [3, 4], [5])))  # [1, 2, 3, 4, 5]
+
+# islice — wycinek iteratora
+print(list(itertools.islice(range(100), 2, 10, 2)))  # [2, 4, 6, 8]
+
+# takewhile / dropwhile — pobieraj/pomijaj dopóki warunek prawdziwy
+dane = [1, 3, 5, 2, 7, 4]
+print(list(itertools.takewhile(lambda x: x < 4, dane)))   # [1, 3]
+print(list(itertools.dropwhile(lambda x: x < 4, dane)))   # [2, 7, 4]
+
+# compress — filtrowanie elementów przez maskę
+print(list(itertools.compress("ABCDE", [1, 0, 1, 0, 1])))  # ['A', 'C', 'E']
+```
+
+#### Kombinatoryczne iteratory
+
+```python
+import itertools
+
+# product — iloczyn kartezjański
+print(list(itertools.product("AB", [1, 2])))
+# [('A', 1), ('A', 2), ('B', 1), ('B', 2)]
+
+# permutations — permutacje bez powtórzeń
+print(list(itertools.permutations([1, 2, 3], 2)))
+# [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]
+
+# combinations — kombinacje bez powtórzeń
+print(list(itertools.combinations([1, 2, 3, 4], 2)))
+# [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
+```
+
+### Potok generatorów (pipeline)
+
+Generatory można łączyć w łańcuchy — każdy generator przetwarza dane wyjściowe poprzedniego, tworząc wydajny potok:
+
+```python
+def czytaj_linie(plik):
+    with open(plik) as f:
+        yield from f
+
+def filtruj_puste(linie):
+    for linia in linie:
+        if linia.strip():
+            yield linia
+
+def zamien_na_wielkie(linie):
+    for linia in linie:
+        yield linia.upper()
+
+# Budowanie potoku (lazy — żadne dane nie są ładowane do pamięci)
+# linie = czytaj_linie("plik.txt")
+# niepuste = filtruj_puste(linie)
+# wielkie = zamien_na_wielkie(niepuste)
+# for linia in wielkie:
+#     print(linia)
+```
+
+Potok generatorów jest szczególnie wydajny przy przetwarzaniu dużych plików, bo każda linia jest przetwarzana jeden raz, bez wczytywania całego pliku do pamięci.

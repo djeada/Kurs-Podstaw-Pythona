@@ -391,3 +391,97 @@ for wartosc in slownik.values():
 |                  | `clear()`               | Usuwa wszystkie elementy ze słownika.                                             | `slownik.clear()`                                      |
 |                  | `update()`              | Aktualizuje słownik o podane pary klucz-wartość.                                  | `slownik.update({'klucz2': 'wartosc2'})`              |
 |                  | `setdefault()`          | Zwraca wartość dla określonego klucza, jeśli klucz nie istnieje dodaje go z wartością domyślną. | `slownik.setdefault('klucz', 'domyslna_wartosc')`     |
+
+### Listy dwuwymiarowe (macierze)
+
+Lista dwuwymiarowa to lista, której każdy element jest kolejną listą. Jest to najprostszy sposób reprezentowania macierzy (tablicy dwuwymiarowej) w Pythonie.
+
+#### Tworzenie macierzy
+
+```python
+# Macierz 3x3
+macierz = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print(macierz[0][0])  # 1  — wiersz 0, kolumna 0
+print(macierz[1][2])  # 6  — wiersz 1, kolumna 2
+```
+
+Tworzenie macierzy wypełnionej zerami za pomocą wyrażenia listowego:
+
+```python
+wiersze, kolumny = 3, 4
+macierz = [[0] * kolumny for _ in range(wiersze)]
+print(macierz)
+# [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+```
+
+> **Uwaga**: Nie należy tworzyć macierzy przez `[[0] * kolumny] * wiersze`, ponieważ powstałe wiersze będą tylko referencjami do tej samej listy — modyfikacja jednego wiersza zmieni wszystkie!
+
+#### Modyfikacja elementu i dodawanie wierszy/kolumn
+
+```python
+macierz = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+# Modyfikacja elementu
+macierz[0][0] = 10
+print(macierz[0])  # [10, 2, 3]
+
+# Dodanie nowego wiersza
+macierz.append([10, 11, 12])
+print(len(macierz))  # 4
+
+# Dodanie nowej kolumny
+nowa_kolumna = [13, 14, 15, 16]
+for i in range(len(macierz)):
+    macierz[i].append(nowa_kolumna[i])
+```
+
+#### Iterowanie po macierzy
+
+```python
+macierz = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for wiersz in macierz:
+    for element in wiersz:
+        print(element, end=" ")
+    print()
+```
+
+Wynik:
+
+```
+1 2 3
+4 5 6
+7 8 9
+```
+
+#### Dodawanie macierzy
+
+```python
+macierz_a = [[1, 2, 3], [4, 5, 6]]
+macierz_b = [[7, 8, 9], [10, 11, 12]]
+
+wynik = [[macierz_a[i][j] + macierz_b[i][j]
+          for j in range(len(macierz_a[0]))]
+         for i in range(len(macierz_a))]
+
+print(wynik)  # [[8, 10, 12], [14, 16, 18]]
+```
+
+#### Transponowanie macierzy
+
+Transpozycja zamienia wiersze i kolumny:
+
+```python
+macierz = [[1, 2, 3], [4, 5, 6]]
+
+transponowana = [[macierz[j][i]
+                  for j in range(len(macierz))]
+                 for i in range(len(macierz[0]))]
+
+print(transponowana)  # [[1, 4], [2, 5], [3, 6]]
+```

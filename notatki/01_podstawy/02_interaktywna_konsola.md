@@ -85,3 +85,104 @@ Aby zakończyć sesję w interaktywnej konsoli Pythona, wystarczy wpisać komend
 ```
 exit()
 ```
+
+## Wejście i wyjście danych
+
+Programy często muszą komunikować się z użytkownikiem: wyświetlać wyniki i pobierać dane. Python udostępnia dwa wbudowane narzędzia: `print()` do wypisywania danych i `input()` do ich pobierania.
+
+### Funkcja `print()`
+
+`print()` wypisuje wartości na standardowe wyjście (konsolę). Można jej przekazać dowolną liczbę argumentów:
+
+```python
+print("Cześć!")                     # Cześć!
+print("Wynik:", 42)                 # Wynik: 42
+print(1, 2, 3)                      # 1 2 3
+print(1, 2, 3, sep=", ")            # 1, 2, 3
+print("Linia 1", end=" | ")
+print("Linia 2")                    # Linia 1 | Linia 2
+```
+
+Parametry funkcji `print()`:
+
+| Parametr | Domyślnie | Opis |
+|----------|-----------|------|
+| `sep`    | `" "`     | Separator między argumentami |
+| `end`    | `"\n"`    | Znak kończący (domyślnie nowa linia) |
+| `file`   | `sys.stdout` | Plik wyjściowy |
+
+#### Formatowanie napisów
+
+Python oferuje kilka sposobów formatowania napisów:
+
+```python
+imie = "Jan"
+wiek = 30
+
+# f-stringi (zalecane, Python 3.6+)
+print(f"Witaj, {imie}! Masz {wiek} lat.")
+
+# Metoda .format()
+print("Witaj, {}! Masz {} lat.".format(imie, wiek))
+
+# Operator % (starszy styl)
+print("Witaj, %s! Masz %d lat." % (imie, wiek))
+```
+
+Formatowanie liczb:
+
+```python
+pi = 3.14159265
+
+print(f"{pi:.2f}")     # '3.14'    — dwa miejsca po przecinku
+print(f"{pi:8.3f}")    # '   3.142' — szerokość pola 8 (z wiodącymi spacjami), 3 miejsca po przecinku
+print(f"{1000000:,}")  # 1,000,000 — separator tysięcy
+print(f"{255:#x}")     # 0xff — liczba szesnastkowa
+```
+
+### Funkcja `input()`
+
+`input()` wczytuje tekst wpisany przez użytkownika z klawiatury. Funkcja zawsze zwraca wartość jako napis (`str`), nawet jeśli użytkownik wpisał liczbę:
+
+```python
+napis = input("Podaj swoje imię: ")
+print(f"Witaj, {napis}!")
+```
+
+#### Konwersja wejścia
+
+Aby pracować z liczbami, należy jawnie przekonwertować wynik:
+
+```python
+liczba = int(input("Podaj liczbę całkowitą: "))
+print(f"Podwojena wartość: {liczba * 2}")
+
+zmiennoprzec = float(input("Podaj liczbę zmiennoprzecinkową: "))
+print(f"Kwadrat: {zmiennoprzec ** 2:.2f}")
+```
+
+#### Pobieranie wielu wartości
+
+```python
+# Podział wejścia na elementy (domyślnie według spacji)
+a, b = input("Podaj dwie liczby: ").split()
+a, b = int(a), int(b)
+print(f"Suma: {a + b}")
+
+# Skrócony zapis
+liczby = list(map(int, input("Podaj kilka liczb: ").split()))
+print(f"Suma: {sum(liczby)}")
+```
+
+#### Zabezpieczenie przed błędnym wejściem
+
+```python
+while True:
+    try:
+        n = int(input("Podaj liczbę całkowitą: "))
+        break
+    except ValueError:
+        print("To nie jest liczba całkowita. Spróbuj ponownie.")
+
+print(f"Wpisałeś: {n}")
+```

@@ -120,3 +120,119 @@ Mimo że serwer dostarczany przez moduł `http.server` jest wygodny, jego ograni
 - Serwer ten nie obsługuje HTTPS, co czyni go nieodpowiednim dla aplikacji wymagających bezpiecznego połączenia.
 - Prosty serwer nie radzi sobie z większą liczbą jednoczesnych połączeń.
 - Domyślnie serwer działa w trybie jednoprocesowym, co oznacza, że każde żądanie jest obsługiwane sekwencyjnie.
+
+### Zaawansowane użycie modułu `requests`
+
+#### POST, PUT, DELETE i obsługa danych JSON
+
+```python
+import requests
+
+base_url = "https://jsonplaceholder.typicode.com"
+
+# POST — tworzenie nowego zasobu
+nowy_post = {
+    "title": "Nowy post",
+    "body": "Treść posta",
+    "userId": 1
+}
+odpowiedz = requests.post(f"{base_url}/posts", json=nowy_post)
+print(odpowiedz.status_code)   # 201 Created
+print(odpowiedz.json())
+
+# PUT — aktualizacja zasobu
+aktualizacja = {"title": "Zmieniony tytuł", "body": "Nowa treść", "userId": 1}
+odpowiedz = requests.put(f"{base_url}/posts/1", json=aktualizacja)
+print(odpowiedz.status_code)   # 200 OK
+
+# DELETE — usunięcie zasobu
+odpowiedz = requests.delete(f"{base_url}/posts/1")
+print(odpowiedz.status_code)   # 200 OK
+```
+
+#### Obsługa błędów i timeouty
+
+```python
+import requests
+from requests.exceptions import Timeout, ConnectionError, HTTPError
+
+try:
+    odpowiedz = requests.get("https://example.com/api/data", timeout=5)
+    odpowiedz.raise_for_status()   # Rzuca HTTPError dla 4xx i 5xx
+    print(odpowiedz.json())
+except Timeout:
+    print("Żądanie przekroczyło limit czasu")
+except ConnectionError:
+    print("Błąd połączenia — brak internetu lub błędny host")
+except HTTPError as e:
+    print(f"Błąd HTTP: {e.response.status_code}")
+```
+
+#### Sesje — wielokrotne żądania z tymi samymi parametrami
+
+Sesja (`Session`) zachowuje cookies i nagłówki między żądaniami:
+
+```python
+import requests
+
+with requests.Session() as sesja:
+    # Ustawienie wspólnych nagłówków dla wszystkich żądań w sesji
+    sesja.headers.update({
+        "Authorization": "Bearer moj-token",
+        "Accept": "application/json"
+    })
+
+    # Pierwsze żądanie — logowanie
+    odpowiedz = sesja.post("https://api.example.com/login",
+                           json={"user": "jan", "password": "tajne"})
+
+    # Kolejne żądania używają tych samych cookies i nagłówków
+    profil = sesja.get("https://api.example.com/profile")
+    print(profil.json())
+```
+
+### Moduł `urllib` — standardowa biblioteka
+
+Dla prostych przypadków nie potrzebujemy `requests` — wystarczy wbudowany `urllib.request`:
+
+```python
+import urllib.request
+import urllib.parse
+import json
+
+# GET
+with urllib.request.urlopen("https://jsonplaceholder.typicode.com/posts/1") as resp:
+    dane = json.loads(resp.read().decode())
+    print(dane["title"])
+
+# POST
+dane_post = json.dumps({"title": "test", "body": "treść", "userId": 1}).encode()
+req = urllib.request.Request(
+    "https://jsonplaceholder.typicode.com/posts",
+    data=dane_post,
+    headers={"Content-Type": "application/json"},
+    method="POST"
+)
+with urllib.request.urlopen(req) as resp:
+    print(resp.status)   # 201
+```
+
+### Nagłówki i uwierzytelnianie
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth, HTTPDigestAuth
+
+# Basic Auth
+odpowiedz = requests.get("https://httpbin.org/basic-auth/user/pass",
+                         auth=HTTPBasicAuth("user", "pass"))
+print(odpowiedz.status_code)   # 200
+
+# Token Bearer (JWT)
+headers = {"Authorization": "Bearer eyJhbGci..."}
+odpowiedz = requests.get("https://api.example.com/secure", headers=headers)
+
+# API Key w parametrach zapytania
+odpowiedz = requests.get("https://api.example.com/data",
+                         params={"api_key": "moj-klucz-api"})
+```

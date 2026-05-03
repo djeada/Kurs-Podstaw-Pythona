@@ -208,6 +208,197 @@ print(osoba)  # Jan Kowalski, Adres: ul. Kwiatowa 15, Warszawa, 00-001
 
 W tym przykładzie `Osoba` ma obiekt `Adres` jako jeden ze swoich atrybutów. Umożliwia to bardziej elastyczne i modularne projektowanie kodu, ponieważ możemy łatwo zmieniać adresy, nie zmieniając samej klasy `Osoba`.
 
+## Polimorfizm
+
+Polimorfizm (z gr. *wiele form*) to zdolność różnych obiektów do reagowania na to samo wywołanie metody w sposób właściwy dla ich klasy. Dzięki polimorfizmowi możemy pisać kod, który operuje na obiektach różnych typów przez jednolity interfejs, nie wiedząc z góry, z jakiego konkretnego typu pochodzi dany obiekt.
+
+### Polimorfizm przez dziedziczenie
+
+Najczęstszą formą polimorfizmu w Pythonie jest nadpisywanie metod klasy bazowej w klasach pochodnych:
+
+```python
+from abc import ABC, abstractmethod
+
+class Ksztalt(ABC):
+    @abstractmethod
+    def pole(self):
+        pass
+
+    @abstractmethod
+    def obwod(self):
+        pass
+
+class Kolo(Ksztalt):
+    def __init__(self, promien: float):
+        self.promien = promien
+
+    def pole(self):
+        return 3.14159 * self.promien ** 2
+
+    def obwod(self):
+        return 2 * 3.14159 * self.promien
+
+    def __str__(self):
+        return f"Koło o promieniu {self.promien}"
+
+class Kwadrat(Ksztalt):
+    def __init__(self, bok: float):
+        self.bok = bok
+
+    def pole(self):
+        return self.bok ** 2
+
+    def obwod(self):
+        return 4 * self.bok
+
+    def __str__(self):
+        return f"Kwadrat o boku {self.bok}"
+
+ksztalty = [Kolo(5), Kwadrat(4), Kolo(3)]
+
+for ksztalt in ksztalty:
+    print(ksztalt)
+    print(f"  Pole:   {ksztalt.pole():.2f}")
+    print(f"  Obwód:  {ksztalt.obwod():.2f}")
+```
+
+Wynik:
+
+```
+Koło o promieniu 5
+  Pole:   78.54
+  Obwód:  31.42
+Kwadrat o boku 4
+  Pole:   16.00
+  Obwód:  16.00
+Koło o promieniu 3
+  Pole:   28.27
+  Obwód:  18.85
+```
+
+Pętla iteruje po liście kształtów. Każdy obiekt reaguje na `pole()` i `obwod()` według własnej implementacji — to właśnie polimorfizm w działaniu.
+
+### Polimorfizm wbudowany w Pythonie
+
+Python sam korzysta z polimorfizmu. Operator `+` zachowuje się inaczej dla liczb i napisów:
+
+```python
+print(2 + 3)         # 5     — dodawanie liczb
+print("Py" + "thon") # Python — konkatenacja napisów
+print([1, 2] + [3])  # [1, 2, 3] — łączenie list
+```
+
+Funkcja `len()` działa na napisach, listach, słownikach i zbiorach:
+
+```python
+print(len("Python"))       # 6
+print(len([1, 2, 3]))      # 3
+print(len({'a': 1, 'b': 2}))  # 2
+```
+
+### Klasy abstrakcyjne a polimorfizm
+
+Klasy abstrakcyjne (moduł `abc`) pozwalają zdefiniować kontrakt, który klasy pochodne muszą wypełnić. Próba pominięcia implementacji metody abstrakcyjnej kończy się błędem:
+
+```python
+from abc import ABC, abstractmethod
+
+class Pojazd(ABC):
+    @abstractmethod
+    def jedz(self):
+        pass
+
+class Samochod(Pojazd):
+    def jedz(self):
+        print("Samochód jedzie po drodze")
+
+class Lodz(Pojazd):
+    def jedz(self):
+        print("Łódź płynie po wodzie")
+
+pojazdy = [Samochod(), Lodz()]
+for pojazd in pojazdy:
+    pojazd.jedz()
+```
+
+## Duck typing
+
+Duck typing (od angielskiego powiedzenia: *"If it walks like a duck and quacks like a duck, then it must be a duck"*) to koncepcja, w której typ obiektu jest określany nie przez jego klasę, lecz przez to, jakie metody i atrybuty posiada. Innymi słowy: Python nie sprawdza, czy obiekt jest instancją konkretnej klasy — sprawdza jedynie, czy obiekt potrafi wykonać daną operację.
+
+### Przykład podstawowy
+
+```python
+class Kaczka:
+    def kwacz(self):
+        print("Kwa kwa!")
+
+class Ornitolog:
+    def kwacz(self):
+        print("Kwaaaa... (naśladownictwo)")
+
+class Robot:
+    def kwacz(self):
+        print("KWAK KWAK — wersja syntetyczna")
+
+def niech_kwacze(obiekt):
+    obiekt.kwacz()  # nie sprawdzamy, czy to Kaczka — tylko czy ma metodę kwacz()
+
+for stwor in [Kaczka(), Ornitolog(), Robot()]:
+    niech_kwacze(stwor)
+```
+
+Wynik:
+
+```
+Kwa kwa!
+Kwaaaa... (naśladownictwo)
+KWAK KWAK — wersja syntetyczna
+```
+
+Żadna z klas nie dziedziczy po wspólnej bazie ani nie implementuje interfejsu — a mimo to działają jednolicie, bo wszystkie mają metodę `kwacz()`.
+
+### Duck typing a wbudowane protokoły Pythona
+
+Duck typing jest szeroko stosowany w samym Pythonie. Na przykład, pętla `for` działa z każdym obiektem, który implementuje metodę `__iter__` (tzw. protokół iterowalności):
+
+```python
+class LiczbyCiagu:
+    def __init__(self, stop):
+        self.stop = stop
+        self.aktualna = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.aktualna >= self.stop:
+            raise StopIteration
+        self.aktualna += 1
+        return self.aktualna
+
+for liczba in LiczbyCiagu(5):
+    print(liczba)
+# 1 2 3 4 5
+```
+
+Python nie wymaga dziedziczenia po żadnej klasie bazowej — wystarczy zaimplementować odpowiednie metody (tzw. *dunder methods*).
+
+### Kiedy duck typing jest przydatny?
+
+Duck typing jest szczególnie wartościowy, gdy:
+
+- Chcemy pisać **elastyczne funkcje**, które działają z różnymi typami, o ile mają określone metody.
+- Integrujemy kod z zewnętrznymi bibliotekami, gdzie hierarchia klas nie jest pod naszą kontrolą.
+- Chcemy unikać zbędnych hierarchii dziedziczenia dla prostych zachowań.
+
+### Duck typing vs. sprawdzanie typów
+
+| Podejście            | Duck typing                               | Sprawdzanie typu (`isinstance`)           |
+|----------------------|-------------------------------------------|-------------------------------------------|
+| Elastyczność         | Wysoka — działa z każdą klasą mającą metodę | Niska — wymaga konkretnego typu lub jego podklasy |
+| Bezpieczeństwo       | Błąd pojawi się dopiero w czasie wykonania | Błąd wykrywany wcześniej                  |
+| Typowe zastosowanie  | Kod ogólnego przeznaczenia, biblioteki     | Walidacja danych wejściowych              |
+
 ## Porównanie
 
 | Cecha                   | Dziedziczenie                                        | Kompozycja                                          |

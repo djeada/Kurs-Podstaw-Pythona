@@ -126,9 +126,7 @@ Generatory można również łączyć, tworząc bardziej złożone strumienie da
 
 ```python
 def podwoj_wartosci(generator):
-    for
-
- wartosc in generator:
+    for wartosc in generator:
         yield wartosc * 2
 
 generator_liczb = (i for i in range(5))
@@ -139,3 +137,149 @@ for wartosc in podwojony_generator:
 ```
 
 Powyższy przykład pokazuje, jak można tworzyć złożone przepływy danych, gdzie generatory są używane do transformacji danych w sposób płynny i leniwy.
+
+### Wbudowane funkcje iteratorowe
+
+Python dostarcza kilku wbudowanych funkcji, które zwracają iteratory i znacznie ułatwiają pracę z kolekcjami.
+
+#### `enumerate(iterable, start=0)`
+
+Tworzy iterator par `(indeks, element)`. Przydatny gdy potrzebujemy indeksu elementu w pętli:
+
+```python
+owoce = ["jabłko", "banan", "gruszka"]
+
+# Bez enumerate — ręczne zarządzanie indeksem
+indeks = 0
+for owoc in owoce:
+    print(f"{indeks}: {owoc}")
+    indeks += 1
+
+# Z enumerate — czytelniej
+for indeks, owoc in enumerate(owoce):
+    print(f"{indeks}: {owoc}")
+
+# Numerowanie od 1
+for nr, owoc in enumerate(owoce, start=1):
+    print(f"{nr}. {owoc}")
+```
+
+#### `zip(*iterables)`
+
+Łączy elementy z kilku kolekcji w pary (krotki). Zatrzymuje się, gdy krótsza kolekcja zostanie wyczerpana:
+
+```python
+imiona = ["Jan", "Anna", "Piotr"]
+oceny = [5, 4, 3]
+
+for imie, ocena in zip(imiona, oceny):
+    print(f"{imie}: {ocena}")
+
+# Tworzenie słownika ze zip
+slownik = dict(zip(imiona, oceny))
+print(slownik)  # {'Jan': 5, 'Anna': 4, 'Piotr': 3}
+
+# Rozpakowywanie zip (transpozycja)
+pary = [(1, 'a'), (2, 'b'), (3, 'c')]
+liczby, litery = zip(*pary)
+print(list(liczby))   # [1, 2, 3]
+print(list(litery))   # ['a', 'b', 'c']
+```
+
+Python 3.10 dodał `zip(..., strict=True)`, które zgłasza błąd jeśli kolekcje mają różne długości.
+
+#### `reversed(sequence)`
+
+Zwraca iterator przechodzący przez sekwencję od końca:
+
+```python
+lista = [1, 2, 3, 4, 5]
+for el in reversed(lista):
+    print(el)  # 5, 4, 3, 2, 1
+
+print(list(reversed("Python")))  # ['n', 'o', 'h', 't', 'y', 'P']
+```
+
+#### `map(function, iterable)`
+
+Stosuje funkcję do każdego elementu iterowalnego i zwraca iterator:
+
+```python
+liczby = [1, 2, 3, 4, 5]
+kwadraty = map(lambda x: x**2, liczby)
+print(list(kwadraty))   # [1, 4, 9, 16, 25]
+
+# Z wieloma kolekcjami
+a = [1, 2, 3]
+b = [10, 20, 30]
+print(list(map(lambda x, y: x + y, a, b)))  # [11, 22, 33]
+```
+
+#### `filter(function, iterable)`
+
+Filtruje elementy iterowalnego — zachowuje tylko te, dla których funkcja zwraca `True`:
+
+```python
+liczby = range(-5, 6)
+dodatnie = filter(lambda x: x > 0, liczby)
+print(list(dodatnie))   # [1, 2, 3, 4, 5]
+
+# Usuwanie wartości falsy
+lista = [0, 1, "", "tekst", None, [], [1]]
+print(list(filter(None, lista)))  # [1, 'tekst', [1]]
+```
+
+### Moduł `itertools` — zaawansowane iteratory
+
+Moduł `itertools` dostarcza wydajnych narzędzi do tworzenia złożonych iteratorów:
+
+```python
+import itertools
+
+# chain — łączenie kilku iterowalnych
+print(list(itertools.chain([1, 2], [3, 4], [5])))
+# [1, 2, 3, 4, 5]
+
+# islice — wycinek z iteratora (jak slice dla list)
+print(list(itertools.islice(range(100), 5, 15, 2)))
+# [5, 7, 9, 11, 13]
+
+# groupby — grupowanie sąsiednich elementów według klucza
+dane = [("A", 1), ("A", 2), ("B", 3), ("B", 4), ("A", 5)]
+for klucz, grupa in itertools.groupby(dane, key=lambda x: x[0]):
+    print(klucz, list(grupa))
+# A [('A', 1), ('A', 2)]
+# B [('B', 3), ('B', 4)]
+# A [('A', 5)]
+
+# accumulate — narastające sumy/iloczyny
+print(list(itertools.accumulate([1, 2, 3, 4, 5])))
+# [1, 3, 6, 10, 15]
+
+import operator
+print(list(itertools.accumulate([1, 2, 3, 4, 5], operator.mul)))
+# [1, 2, 6, 24, 120]  — silnia!
+```
+
+### Nieskończony iterator
+
+Możemy napisać własny iterator generujący nieskończoną sekwencję:
+
+```python
+class FibonacciIter:
+    """Iterator generujący nieskończony ciąg Fibonacciego."""
+    def __init__(self):
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        wynik = self.a
+        self.a, self.b = self.b, self.a + self.b
+        return wynik
+
+fib = FibonacciIter()
+pierwsze_10 = [next(fib) for _ in range(10)]
+print(pierwsze_10)  # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+```

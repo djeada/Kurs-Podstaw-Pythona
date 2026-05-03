@@ -224,6 +224,103 @@ Flake8 można łatwo zintegrować z popularnymi środowiskami programistycznymi 
 | Integracja z IDE                | Tak   | Tak    | Tak     |
 | Sprawdzanie typów (Type hints)  | Nie   | Tak    | Nie     |
 
+### Sprawdzanie typów — `mypy` i `pyright`
+
+Statyczna analiza typów wychwytuje błędy typów bez uruchamiania kodu:
+
+```bash
+pip install mypy
+mypy skrypt.py
+```
+
+```python
+# skrypt.py
+def oblicz_vat(kwota: float, stawka: float = 0.23) -> float:
+    return kwota * stawka
+
+wynik = oblicz_vat("100")   # mypy: error: Argument 1 to "oblicz_vat" has incompatible type "str"; expected "float"
+```
+
+`pyright` (od Microsoftu, używany w VS Code) oferuje jeszcze szybszą i bardziej precyzyjną analizę:
+
+```bash
+pip install pyright
+pyright skrypt.py
+```
+
+### Pre-commit hooks
+
+`pre-commit` pozwala automatycznie uruchamiać narzędzia jakości kodu przed każdym commitem:
+
+```bash
+pip install pre-commit
+```
+
+Przykładowy plik `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.0
+    hooks:
+      - id: flake8
+        args: ["--max-line-length=88"]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ["--profile=black"]
+```
+
+```bash
+pre-commit install      # Instalacja hooków
+pre-commit run --all-files  # Uruchomienie na wszystkich plikach
+```
+
+### Konwencja nazewnictwa w Pythonie (PEP 8)
+
+| Typ               | Konwencja         | Przykład                        |
+|-------------------|-------------------|---------------------------------|
+| Zmienna           | `snake_case`      | `moja_zmienna`, `liczba_wierszy`|
+| Funkcja           | `snake_case`      | `oblicz_vat()`, `wczytaj_dane()`|
+| Klasa             | `PascalCase`      | `NazwaKlasy`, `KlientHTTP`      |
+| Stała             | `UPPER_SNAKE_CASE`| `MAX_ROZMIAR`, `DOMYSLNY_PORT`  |
+| Prywatny atrybut  | `_snake_case`     | `_wartosc`, `_indeks`           |
+| "Dunder" metoda   | `__snake_case__`  | `__init__`, `__str__`           |
+| Moduł / pakiet    | `snake_case`      | `utils.py`, `moj_pakiet/`       |
+
+### Wskazówki dotyczące importów (`isort`)
+
+`isort` automatycznie sortuje importy zgodnie ze standardem PEP 8:
+
+```bash
+pip install isort
+isort skrypt.py
+```
+
+Prawidłowa kolejność importów:
+
+```python
+# 1. Importy standardowej biblioteki
+import os
+import sys
+from pathlib import Path
+
+# 2. Importy zewnętrznych bibliotek
+import requests
+import numpy as np
+
+# 3. Importy własnych modułów
+from moj_pakiet import utils
+from moj_pakiet.models import Uzytkownik
+```
+
 ### Linki
 
 - [PEP 8 - Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)

@@ -168,3 +168,167 @@ Działanie rotacyjnego handlera:
 1. **maxBytes** to maksymalny rozmiar pojedynczego pliku logu w bajtach (tutaj 1024 bajty).
 2. **backupCount** to liczba zapasowych plików, które zostaną zachowane (tutaj 3 pliki).
 3. Po przekroczeniu rozmiaru pliku nowy log jest zapisywany w nowym pliku, a najstarszy plik jest usuwany.
+
+#### `TimedRotatingFileHandler` — rotacja czasowa
+
+Gdy chcemy tworzyć nowe pliki logów w regularnych odstępach czasu (np. co dzień), używamy `TimedRotatingFileHandler`:
+
+```python
+import logging
+from logging.handlers import TimedRotatingFileHandler
+
+logger = logging.getLogger("czasowy_logger")
+logger.setLevel(logging.INFO)
+
+handler = TimedRotatingFileHandler(
+    "aplikacja.log",
+    when="midnight",   # Rotacja o północy
+    interval=1,        # Co 1 dzień
+    backupCount=7      # Zachowaj 7 dni historii
+)
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+logger.info("Aplikacja uruchomiona")
+```
+
+Dostępne opcje `when`: `"S"` (sekundy), `"M"` (minuty), `"H"` (godziny), `"D"` (dni), `"midnight"`, `"W0"–"W6"` (dni tygodnia).
+
+### Konfiguracja przez słownik (`dictConfig`)
+
+Zamiast konfigurować logger w kodzie, można przekazać konfigurację jako słownik. To podejście jest wygodniejsze w większych aplikacjach, bo konfigurację można też wczytać z pliku YAML lub JSON:
+
+```python
+import logging
+import logging.config
+
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standardowy": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+        },
+        "szczegolowy": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s:%(lineno)d: %(message)s"
+        }
+    },
+    "handlers": {
+        "konsola": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "standardowy",
+            "stream": "ext://sys.stdout"
+        },
+        "plik": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "ERROR",
+            "formatter": "szczegolowy",
+            "filename": "bledy.log",
+            "maxBytes": 10485760,   # 10 MB
+            "backupCount": 5
+        }
+    },
+    "loggers": {
+        "modul_api": {
+            "level": "DEBUG",
+            "handlers": ["konsola", "plik"],
+            "propagate": False
+        }
+    },
+    "root": {
+        "level": "WARNING",
+        "handlers": ["konsola"]
+    }
+}
+
+logging.config.dictConfig(LOGGING_CONFIG)
+
+logger = logging.getLogger("modul_api")
+logger.debug("Żądanie do API")
+logger.error("Błąd połączenia z bazą danych")
+```
+
+### Dodawanie kontekstu do logów (`extra` i `LoggerAdapter`)
+
+Często chcemy dodać do każdego logu dodatkowy kontekst, np. ID użytkownika lub ID żądania:
+
+```python
+import logging
+
+# Sposób 1 — extra dict
+logger = logging.getLogger("aplikacja")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(user_id)s] %(levelname)s: %(message)s"
+)
+
+logger.info("Zalogowano", extra={"user_id": "USR-42"})
+
+# Sposób 2 — LoggerAdapter (wygodniejszy)
+class KontekstowyLogger(logging.LoggerAdapter):
+    def process(self, msg, kwargs):
+        return f"[{self.extra['request_id']}] {msg}", kwargs
+
+logger_bazowy = logging.getLogger("api")
+logger = KontekstowyLogger(logger_bazowy, {"request_id": "REQ-001"})
+logger.info("Przetwarzanie żądania")
+# INFO: [REQ-001] Przetwarzanie żądania
+```
+
+### Propagacja logów i hierarchia loggerów
+
+Loggery w Pythonie są zorganizowane w hierarchii według nazw rozdzielonych kropkami:
+
+```
+root
+ ├── modul_a
+ │    └── modul_a.podmodul
+ └── modul_b
+```
+
+Domyślnie logi propagują się w górę hierarchii (`propagate=True`):
+
+```python
+import logging
+
+# Logger nadrzędny
+logger_glowny = logging.getLogger("app")
+logger_glowny.setLevel(logging.DEBUG)
+handler = logging.StreamHandler()
+logger_glowny.addHandler(handler)
+
+# Logger podrzędny — logi propagują się do logger_glowny
+logger_db = logging.getLogger("app.database")
+logger_db.info("Połączono z bazą")   # Obsłuży to logger_glowny
+
+# Wyłączenie propagacji
+logger_noise = logging.getLogger("app.verbose")
+logger_noise.propagate = False   # Logi NIE dotrą do logger_glowny
+```
+
+### Dobre praktyki logowania
+
+1. **Używaj `__name__` jako nazwy loggera** — to automatycznie tworzy hierarchię zgodną z modułami:
+
+```python
+logger = logging.getLogger(__name__)   # np. "modul.podmodul"
+```
+
+2. **Nie używaj `f-stringów` w logach** — formatowanie wykonuje się tylko gdy log jest naprawdę zapisywany:
+
+```python
+# Źle — formatowanie zawsze się wykonuje
+logger.debug(f"Dane: {oblicz_duze_dane()}")
+
+# Dobrze — formatowanie tylko gdy poziom DEBUG jest aktywny
+logger.debug("Dane: %s", oblicz_duze_dane())
+```
+
+3. **Loguj na odpowiednim poziomie:**
+   - `DEBUG` — szczegóły deweloperskie (pętle, wartości zmiennych)
+   - `INFO` — kluczowe zdarzenia biznesowe (uruchomienie, zamknięcie, ważne operacje)
+   - `WARNING` — sytuacje nieoczekiwane, ale program nadal działa
+   - `ERROR` — błędy wymagające uwagi
+   - `CRITICAL` — błędy krytyczne zagrażające działaniu aplikacji

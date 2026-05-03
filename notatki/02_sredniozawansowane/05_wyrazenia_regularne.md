@@ -178,3 +178,175 @@ print(numery)  # ['123-456-7890', '(123) 456-7890']
 - `\d{4}` - cztery cyfry.
 
 Zawsze testuj dokładnie wyrażenia regularne przed wdrożeniem w produkcyjnym kodzie, aby upewnić się, że działają zgodnie z oczekiwaniami i są wydajne.
+
+### Funkcje modułu `re`
+
+Moduł `re` udostępnia kilka kluczowych funkcji:
+
+| Funkcja                  | Opis                                                                |
+|--------------------------|---------------------------------------------------------------------|
+| `re.match(p, s)`         | Dopasowanie tylko na początku napisu                                |
+| `re.search(p, s)`        | Dopasowanie pierwszego wystąpienia w dowolnym miejscu               |
+| `re.findall(p, s)`       | Lista wszystkich dopasowań (jako napisy)                            |
+| `re.finditer(p, s)`      | Iterator obiektów `Match` dla wszystkich dopasowań                  |
+| `re.sub(p, r, s)`        | Zamiana dopasowań na `r`                                            |
+| `re.split(p, s)`         | Podział napisu w miejscach dopasowań                                |
+| `re.compile(p)`          | Kompilacja wzorca do wielokrotnego użycia (szybsze)                 |
+| `re.fullmatch(p, s)`     | Dopasowanie całego napisu do wzorca                                 |
+
+```python
+import re
+
+tekst = "Cena: 12.50 zł, rabat: 2.00 zł"
+
+# findall — lista dopasowań
+ceny = re.findall(r'\d+\.\d+', tekst)
+print(ceny)  # ['12.50', '2.00']
+
+# finditer — iterator z pozycjami
+for dopasowanie in re.finditer(r'\d+\.\d+', tekst):
+    print(f"Znaleziono: {dopasowanie.group()} na pozycji {dopasowanie.start()}")
+# Znaleziono: 12.50 na pozycji 6
+# Znaleziono: 2.00 na pozycji 25
+
+# split — podział wg wzorca
+zdanie = "jabłko,  banan;gruszka  śliwka"
+owoce = re.split(r'[,;\s]+', zdanie)
+print(owoce)  # ['jabłko', 'banan', 'gruszka', 'śliwka']
+```
+
+### Kompilacja wzorców
+
+Jeśli ten sam wzorzec jest używany wielokrotnie, warto go skompilować za pomocą `re.compile()`. Skompilowany wzorzec jest szybszy przy wielu dopasowaniach:
+
+```python
+import re
+
+# Kompilacja wzorca raz
+wzorzec = re.compile(r'\b[A-Z][a-z]+\b')   # Słowo zaczynające się wielką literą
+
+teksty = [
+    "Python jest świetny",
+    "Jan i Anna programują",
+    "Warszawa to piękne miasto",
+]
+
+for tekst in teksty:
+    dopasowania = wzorzec.findall(tekst)
+    print(dopasowania)
+
+# ['Python']
+# ['Jan', 'Anna']
+# ['Warszawa']
+```
+
+Flagi kompilacji:
+
+```python
+# re.IGNORECASE — ignorowanie wielkości liter
+wzorzec = re.compile(r'python', re.IGNORECASE)
+print(wzorzec.findall("Python PYTHON python"))   # ['Python', 'PYTHON', 'python']
+
+# re.MULTILINE — ^ i $ dopasowują też do początku/końca każdej linii
+tekst = "linia1\nlinia2\nlinia3"
+wzorzec = re.compile(r'^\w+', re.MULTILINE)
+print(wzorzec.findall(tekst))   # ['linia1', 'linia2', 'linia3']
+
+# re.DOTALL — . dopasowuje też nową linię
+wzorzec = re.compile(r'<.+>', re.DOTALL)
+html = "<div>\nzawartość\n</div>"
+print(wzorzec.findall(html))   # ['<div>\nzawartość\n</div>']
+```
+
+### Grupy nazwane
+
+Zwykłe grupy `()` numeruje się od 1. Grupy nazwane (`(?P<nazwa>...)`) pozwalają odwoływać się do nich po nazwie:
+
+```python
+import re
+
+# Parsowanie daty
+wzorzec = re.compile(r'(?P<rok>\d{4})-(?P<miesiac>\d{2})-(?P<dzien>\d{2})')
+m = wzorzec.match("2024-03-15")
+
+if m:
+    print(m.group("rok"))      # 2024
+    print(m.group("miesiac"))  # 03
+    print(m.group("dzien"))    # 15
+    print(m.groupdict())       # {'rok': '2024', 'miesiac': '03', 'dzien': '15'}
+
+# Zamiana z odwołaniem do grupy nazwanej
+tekst = "2024-03-15"
+nowy = re.sub(r'(?P<rok>\d{4})-(?P<miesiac>\d{2})-(?P<dzien>\d{2})',
+              r'\g<dzien>.\g<miesiac>.\g<rok>', tekst)
+print(nowy)  # 15.03.2024
+```
+
+### Lookahead i lookbehind (asercje)
+
+Asercje pozwalają sprawdzać kontekst wokół dopasowania, **nie konsumując** znaków:
+
+| Składnia       | Nazwa               | Znaczenie                                                  |
+|----------------|---------------------|------------------------------------------------------------|
+| `(?=...)`      | Lookahead pozytywny | Co dalej musi pasować, ale nie jest przechwytywane         |
+| `(?!...)`      | Lookahead negatywny | Co dalej NIE może pasować                                  |
+| `(?<=...)`     | Lookbehind pozytywny| Co przed musi pasować, ale nie jest przechwytywane         |
+| `(?<!...)`     | Lookbehind negatywny| Co przed NIE może pasować                                  |
+
+```python
+import re
+
+# Lookahead pozytywny — ceny w złotych (tylko liczby przed "zł")
+tekst = "5 USD, 10 zł, 15 EUR, 20 zł"
+ceny_pln = re.findall(r'\d+(?=\s*zł)', tekst)
+print(ceny_pln)   # ['10', '20']
+
+# Lookahead negatywny — liczby które nie są przed "zł"
+pozostale = re.findall(r'\d+(?!\s*zł)', tekst)
+print(pozostale)  # ['5', '15']
+
+# Lookbehind pozytywny — wartości po "cena: "
+tekst2 = "cena: 99.99, masa: 50kg"
+wartosci = re.findall(r'(?<=cena: )\d+\.\d+', tekst2)
+print(wartosci)   # ['99.99']
+```
+
+### Zamiana z funkcją (`re.sub` + callable)
+
+`re.sub()` może przyjąć funkcję zamiast napisu zastępczego:
+
+```python
+import re
+
+def zamien_na_wielkie(m):
+    return m.group(0).upper()
+
+tekst = "hello world foo bar"
+wynik = re.sub(r'\b\w{4}\b', zamien_na_wielkie, tekst)
+print(wynik)   # "hello WORLD foo BAR" — zamieniono 4-literowe słowa
+
+# Zamiana liczb na ich kwadraty
+def kwadrat(m):
+    n = int(m.group(0))
+    return str(n ** 2)
+
+tekst = "2 razy 3 to 6"
+print(re.sub(r'\d+', kwadrat, tekst))  # "4 razy 9 to 36"
+```
+
+### Tabela najczęstszych wzorców
+
+| Cel                     | Wzorzec                                         |
+|-------------------------|-------------------------------------------------|
+| Adres e-mail            | `r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'` |
+| URL                     | `r'https?://[^\s]+'`                            |
+| Liczba całkowita        | `r'-?\d+'`                                      |
+| Liczba zmiennoprzecinkowa | `r'-?\d+\.\d+'`                               |
+| Polski numer telefonu   | `r'(\+48)?[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{3}'` |
+| Data YYYY-MM-DD         | `r'\d{4}-\d{2}-\d{2}'`                         |
+| Czas HH:MM              | `r'\d{2}:\d{2}'`                               |
+| Kod pocztowy (PL)       | `r'\d{2}-\d{3}'`                               |
+| Tag HTML                | `r'<[^>]+>'`                                    |
+| Słowo                   | `r'\b\w+\b'`                                    |
+| Puste linie             | `r'^\s*$'`                                      |
+| IPv4                    | `r'\b\d{1,3}(\.\d{1,3}){3}\b'`                 |

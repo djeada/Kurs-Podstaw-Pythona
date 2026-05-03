@@ -298,3 +298,135 @@ else:
 ```
 
 W tym przykładzie, zagnieżdżone pętle są używane do przeszukiwania dwuwymiarowej listy (`macierz`). Zewnętrzna pętla przechodzi przez każdy wiersz, a wewnętrzna pętla sprawdza każdy element w wierszu, porównując go z `szukana_wartosc`. Jeśli element jest równy szukanej wartości, ustawiamy `znaleziono = True` i przerywamy dalsze przeszukiwanie. Na końcu program informuje, czy wartość została znaleziona w macierzy.
+
+### Klauzula `else` w pętlach
+
+W Pythonie zarówno pętla `for`, jak i `while` mogą mieć opcjonalny blok `else`. Blok ten jest wykonywany **gdy pętla zakończyła się normalnie** (bez wywołania `break`). Jest szczególnie przydatny przy wyszukiwaniu:
+
+#### `for...else`
+
+```python
+# Szukamy liczby pierwszej w liście
+liczby = [2, 3, 5, 7, 11, 13]
+szukana = 8
+
+for liczba in liczby:
+    if liczba == szukana:
+        print(f"Znaleziono: {szukana}")
+        break
+else:
+    # Wykonuje się tylko gdy pętla nie została przerwana przez break
+    print(f"Nie znaleziono: {szukana}")
+
+# Nie znaleziono: 8
+```
+
+Praktyczny przykład — sprawdzanie, czy liczba jest pierwsza:
+
+```python
+def czy_pierwsza(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False  # Znaleziono dzielnik — break zastąpiony przez return
+    return True   # else: — pętla zakończyła się bez break
+
+print(czy_pierwsza(17))   # True
+print(czy_pierwsza(15))   # False
+```
+
+#### `while...else`
+
+```python
+# Próby logowania — 3 szanse
+haslo = "tajne123"
+proba = 0
+
+while proba < 3:
+    wpisane = input("Podaj hasło: ")
+    if wpisane == haslo:
+        print("Zalogowano!")
+        break
+    proba += 1
+    print(f"Błędne hasło. Pozostało: {3 - proba} prób.")
+else:
+    # Wykonuje się gdy limit prób wyczerpany (bez break)
+    print("Konto zablokowane!")
+```
+
+### Operator morsa (`:=`) — Python 3.8+
+
+Operator przypisania wyrażenia (ang. *walrus operator*) `:=` pozwala przypisywać wartość zmiennej wewnątrz wyrażenia. Eliminuje konieczność obliczania wartości dwukrotnie:
+
+```python
+# Bez operatora morsa — dwukrotne wyliczenie
+import re
+tekst = "Cena: 99.99 zł"
+if re.search(r'\d+\.\d+', tekst):
+    dopasowanie = re.search(r'\d+\.\d+', tekst)
+    print(dopasowanie.group())
+
+# Z operatorem morsa — wyliczenie raz
+if dopasowanie := re.search(r'\d+\.\d+', tekst):
+    print(dopasowanie.group())   # 99.99
+
+# W pętli while — czytanie linii
+# while linia := plik.readline():
+#     przetworz(linia)
+
+# W pętli for z filtrem
+liczby = [1, 8, 3, 15, 2, 12, 7]
+wyniki = [y for x in liczby if (y := x * 2) > 10]
+print(wyniki)   # [16, 30, 24]
+```
+
+### Wzorzec `while True` z `break`
+
+Klasyczny wzorzec nieskończonej pętli z wyjściem w środku jest często bardziej czytelny niż skomplikowany warunek `while`:
+
+```python
+# Pętla z warunkiem wyjścia w środku
+import random
+
+kroki = 0
+pozycja = 0
+while True:
+    ruch = random.choice([-1, 1])
+    pozycja += ruch
+    kroki += 1
+    if abs(pozycja) >= 10:
+        break
+
+print(f"Dotarto do {pozycja} po {kroki} krokach")
+
+# Wczytywanie danych od użytkownika do momentu poprawnego wejścia
+def wczytaj_liczbe():
+    while True:
+        tekst = input("Podaj liczbę całkowitą: ")
+        try:
+            return int(tekst)
+        except ValueError:
+            print("Nieprawidłowe dane. Spróbuj ponownie.")
+```
+
+### Iteracja z `enumerate` i `zip`
+
+```python
+# enumerate — iteracja z indeksem
+owoce = ["jabłko", "banan", "gruszka", "śliwka"]
+for indeks, owoc in enumerate(owoce, start=1):
+    print(f"{indeks:2}. {owoc}")
+
+# zip — równoległa iteracja po wielu kolekcjach
+imiona = ["Jan", "Anna", "Piotr"]
+oceny  = [5, 4, 3]
+przedmioty = ["Matematyka", "Python", "Fizyka"]
+
+for imie, ocena, przedmiot in zip(imiona, oceny, przedmioty):
+    print(f"{imie} — {przedmiot}: {ocena}")
+
+# Iteracja wsteczna
+for i, owoc in enumerate(reversed(owoce)):
+    print(f"{i}: {owoc}")
+```

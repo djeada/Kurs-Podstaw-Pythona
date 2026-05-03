@@ -229,3 +229,105 @@ b process_data, len(data) > 100 and error_flag
 - `pdb` można integrować z narzędziami takimi jak `pytest` czy `unittest`, aby debugować testy jednostkowe.
 - Istnieją rozszerzone wersje `pdb`, takie jak `ipdb` czy `pudb`, oferujące dodatkowe funkcje i interfejsy.
 
+### Techniki debugowania bez debuggera
+
+Często najszybsze debugowanie odbywa się bez uruchamiania debuggera. Oto sprawdzone techniki:
+
+#### `print()` i `pprint()`
+
+Najbardziej podstawowa technika — wypisanie stanu zmiennych:
+
+```python
+from pprint import pprint
+
+# Zwykłe print z etykietą
+print(f"[DEBUG] lista={lista}, suma={suma}")
+
+# pprint — czytelne wydrukowanie złożonych struktur
+pprint({"klucz": [1, 2, 3], "zagniezdzone": {"a": 1}})
+
+# Inspekcja obiektu
+class Konfiguracja:
+    host = "localhost"
+    port = 8080
+
+cfg = Konfiguracja()
+print(vars(cfg))       # {'host': 'localhost', 'port': 8080}
+print(dir(cfg))        # lista wszystkich atrybutów i metod
+```
+
+#### Moduł `logging` zamiast `print()`
+
+W produkcyjnym kodzie zamiast `print()` używamy `logging`:
+
+```python
+import logging
+
+logging.basicConfig(level=logging.DEBUG,
+                    format="%(levelname)s:%(funcName)s:%(lineno)d: %(message)s")
+
+def oblicz(a, b):
+    logging.debug(f"oblicz wywołana z a={a}, b={b}")
+    wynik = a / b
+    logging.debug(f"wynik: {wynik}")
+    return wynik
+```
+
+#### `assert` — szybkie weryfikowanie założeń
+
+```python
+def sortuj_posortowane(lista):
+    assert isinstance(lista, list), f"Oczekiwano listy, otrzymano {type(lista)}"
+    assert len(lista) > 0, "Lista nie może być pusta"
+    wynik = sorted(lista)
+    assert wynik[0] <= wynik[-1], "Błąd sortowania!"
+    return wynik
+```
+
+> **Uwaga**: `assert` jest wyłączane gdy Python jest uruchamiany z flagą `-O` (optymalizacja). Nie używaj do sprawdzania warunków krytycznych dla bezpieczeństwa — używaj `if ... raise`.
+
+#### `traceback` — szczegółowe ślady błędów
+
+```python
+import traceback
+
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    traceback.print_exc()   # Wydrukuj pełny traceback
+    # lub
+    tb_str = traceback.format_exc()   # Pobierz jako string do logu
+    logging.error("Błąd: %s", tb_str)
+```
+
+### Profilowanie kodu (`cProfile`, `timeit`)
+
+Profilowanie pozwala znaleźć **wolne miejsca** w kodzie:
+
+```python
+import cProfile
+import pstats
+
+# Profilowanie funkcji
+def wolna_funkcja():
+    return sum(i**2 for i in range(100000))
+
+# Profilowanie z zapisem do pliku
+cProfile.run("wolna_funkcja()", "profil.stats")
+
+# Analiza wyników
+stats = pstats.Stats("profil.stats")
+stats.sort_stats("cumulative")
+stats.print_stats(10)   # Pokaż 10 najwolniejszych funkcji
+```
+
+Szybkie porównanie czasu wykonania:
+
+```python
+from timeit import timeit
+
+# Porównanie dwóch podejść
+czas_lista = timeit("[i**2 for i in range(1000)]", number=10000)
+czas_gen   = timeit("sum(i**2 for i in range(1000))", number=10000)
+print(f"Lista: {czas_lista:.3f}s, Generator: {czas_gen:.3f}s")
+

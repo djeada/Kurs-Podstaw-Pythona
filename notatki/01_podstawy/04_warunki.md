@@ -158,3 +158,177 @@ print(odpowiedz == "tak" or odpowiedz == "TAK")
 W ten sposób oba warunki są poprawnie sprawdzane, a wynik jest `True` tylko wtedy, gdy `odpowiedz` jest równa `"tak"` lub `"TAK"`. Taka konstrukcja zapobiega nieporozumieniom i pozwala w czytelny sposób wyrazić, że akceptujemy obie wersje odpowiedzi.
 
 Warto pamiętać, że operator `or` nie tylko przerywa sprawdzanie, gdy pierwszy warunek da wynik `True` (tzw. krótkie spięcie), ale także zwraca wartość, która faktycznie zadecydowała o ocenie wyrażenia logicznego. Stąd wynika istotna różnica między porównaniem (zwracającym `True`/`False`) a po prostu wstawieniem niepustego obiektu (również ocenianego w kontekście logicznym, lecz nie będącego stricte wartością `True` lub `False`).
+
+### Wartości prawdziwe i fałszywe (truthy/falsy)
+
+Python ocenia każdą wartość w kontekście logicznym. Poniższa tabela zbiera wartości, które w Pythonie są fałszywe (`False`) — wszystko inne jest prawdziwe (`True`):
+
+| Wartość         | Typ         | Opis                                |
+|-----------------|-------------|-------------------------------------|
+| `False`         | `bool`      | Dosłowna wartość fałszu             |
+| `0`             | `int`       | Zero całkowite                      |
+| `0.0`           | `float`     | Zero zmiennoprzecinkowe             |
+| `0j`            | `complex`   | Zero zespolone                      |
+| `""`            | `str`       | Pusty napis                         |
+| `[]`            | `list`      | Pusta lista                         |
+| `()`            | `tuple`     | Pusta krotka                        |
+| `{}`            | `dict`      | Pusty słownik                       |
+| `set()`         | `set`       | Pusty zbiór                         |
+| `None`          | `NoneType`  | Brak wartości                       |
+
+```python
+wartosci = [False, 0, 0.0, "", [], {}, None, True, 1, "tekst", [0]]
+for w in wartosci:
+    print(f"{repr(w):12} → {bool(w)}")
+```
+
+Wynik:
+
+```
+False        → False
+0            → False
+0.0          → False
+''           → False
+[]           → False
+{}           → False
+None         → False
+True         → True
+1            → True
+'tekst'      → True
+[0]          → True
+```
+
+### Wyrażenie warunkowe (operator trójargumentowy)
+
+Python oferuje zwięzłą postać instrukcji `if-else` w formie **wyrażenia warunkowego** (ang. *ternary operator*), które można umieścić w jednej linii:
+
+```python
+wynik = wartość_gdy_prawda if warunek else wartość_gdy_fałsz
+```
+
+Przykłady:
+
+```python
+wiek = 20
+status = "dorosły" if wiek >= 18 else "niepełnoletni"
+print(status)  # dorosły
+
+# Znajdowanie maksimum
+a, b = 5, 10
+maksimum = a if a > b else b
+print(maksimum)  # 10
+
+# Użycie w f-stringu
+ocena = 85
+print(f"Wynik: {'zaliczone' if ocena >= 50 else 'niezaliczone'}")
+```
+
+### Łańcuchowe porównania
+
+W Pythonie można zapisywać porównania łańcuchowo, co jest bardziej czytelne niż łączenie z `and`:
+
+```python
+x = 5
+
+# Zapis z and
+if x > 0 and x < 10:
+    print("x jest między 0 a 10")
+
+# Równoważny łańcuchowy zapis
+if 0 < x < 10:
+    print("x jest między 0 a 10")
+
+# Sprawdzenie czy wartość mieści się w przedziale
+temperatura = 22.5
+if 18.0 <= temperatura <= 26.0:
+    print("Komfortowa temperatura")
+```
+
+Łańcuchowe porównania działają dla dowolnej liczby operatorów:
+
+```python
+a, b, c = 1, 2, 3
+print(a < b < c)    # True
+print(a < b > c)    # False
+print(a == 1 != c)  # True
+```
+
+### Operator `in` i `not in`
+
+Operator `in` sprawdza, czy element należy do kolekcji (listy, napisu, słownika, zbioru):
+
+```python
+owoce = ["jabłko", "banan", "gruszka"]
+print("banan" in owoce)        # True
+print("śliwka" not in owoce)   # True
+
+napis = "Python"
+print("Py" in napis)           # True
+print("py" in napis)           # False — wielkość liter ma znaczenie
+
+# W słowniku `in` sprawdza klucze
+oceny = {"Jan": 5, "Anna": 4}
+print("Jan" in oceny)           # True
+print(5 in oceny)               # False — 5 jest wartością, nie kluczem
+print(5 in oceny.values())      # True
+```
+
+### Instrukcja `match` (Python 3.10+)
+
+Python 3.10 wprowadził instrukcję `match`, która jest zaawansowaną formą dopasowywania wzorców (ang. *structural pattern matching*). Jest podobna do `switch` z innych języków, ale znacznie potężniejsza.
+
+#### Dopasowanie prostej wartości
+
+```python
+def opisz_kod_http(kod):
+    match kod:
+        case 200:
+            return "OK"
+        case 404:
+            return "Nie znaleziono"
+        case 500:
+            return "Błąd serwera"
+        case _:
+            return f"Nieznany kod: {kod}"
+
+print(opisz_kod_http(200))   # OK
+print(opisz_kod_http(404))   # Nie znaleziono
+print(opisz_kod_http(999))   # Nieznany kod: 999
+```
+
+#### Dopasowanie z kilkoma wartościami (`|`)
+
+```python
+def dzien_tygodnia(dzien):
+    match dzien:
+        case "sobota" | "niedziela":
+            return "weekend"
+        case "poniedziałek" | "wtorek" | "środa" | "czwartek" | "piątek":
+            return "dzień roboczy"
+        case _:
+            return "nieznany dzień"
+
+print(dzien_tygodnia("sobota"))     # weekend
+print(dzien_tygodnia("poniedziałek"))  # dzień roboczy
+```
+
+#### Dopasowanie sekwencji i słowników
+
+```python
+def przetworz_komende(komenda):
+    match komenda.split():
+        case ["quit"]:
+            return "Kończę działanie"
+        case ["go", kierunek]:
+            return f"Idę na {kierunek}"
+        case ["go", kierunek, ile]:
+            return f"Idę na {kierunek} o {ile} kroków"
+        case _:
+            return "Nieznana komenda"
+
+print(przetworz_komende("quit"))         # Kończę działanie
+print(przetworz_komende("go północ"))    # Idę na północ
+print(przetworz_komende("go wschód 5"))  # Idę na wschód o 5 kroków
+```
+
+Instrukcja `match` jest szczególnie przydatna przy parsowaniu komend, obsłudze protokołów lub pracy z różnymi typami danych, gdzie klasyczne `if-elif-else` byłoby mało czytelne.

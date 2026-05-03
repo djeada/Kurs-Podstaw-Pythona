@@ -1,6 +1,6 @@
 ## Wyjątki
 
-Wyjątki w programowaniu to mechanizm pozwalający na obsługę nieoczekiwanych sytuacji, które mogą wystąpić podczas działania programu. W Pythonie są one kluczowe dla tworzenia niezawodnych aplikacji, które potrafią radzić sobie z błędami w sposób elegancki i kontrolowany. Dzięki wyjątkowym możemy nie tylko wykrywać błędy, ale także reagować na nie w sposób, który nie zakłóci działania całego programu.
+Wyjątki w programowaniu to mechanizm pozwalający na obsługę nieoczekiwanych sytuacji, które mogą wystąpić podczas działania programu. W Pythonie są one kluczowe dla tworzenia niezawodnych aplikacji, które potrafią radzić sobie z błędami w sposób elegancki i kontrolowany. Dzięki wyjątkom możemy nie tylko wykrywać błędy, ale także reagować na nie w sposób, który nie zakłóci działania całego programu.
 
 ### Czym są wyjątki w Pythonie?
 
@@ -20,7 +20,7 @@ ZeroDivisionError: division by zero
 
 ### Dlaczego wyjątki są ważne?
 
-Bez mechanizmu obsługi wyjątków, programy byłyby narażone na niespodziewane zakończenie w momencie wystąpienia błędu. Dzięki wyjątkowym możemy przechwytywać te błędy i reagować na nie w kontrolowany sposób, na przykład informując użytkownika o problemie lub podejmując próby jego naprawy.
+Bez mechanizmu obsługi wyjątków, programy byłyby narażone na niespodziewane zakończenie w momencie wystąpienia błędu. Dzięki wyjątkom możemy przechwytywać te błędy i reagować na nie w kontrolowany sposób, na przykład informując użytkownika o problemie lub podejmując próby jego naprawy.
 
 ### Generowanie własnych wyjątków
 
@@ -177,3 +177,172 @@ W tym przypadku, jeśli napis nie zawiera żadnej litery, zgłosimy wyjątek `Va
 - **Używaj specyficznych wyjątków.** Przechwytuj konkretne typy wyjątków, aby lepiej kontrolować reakcję programu na różne sytuacje.
 - **Zadbaj o czytelność kodu.** Wyjątki powinny ułatwiać zrozumienie przepływu programu, a nie go komplikować.
 - **Unikaj nadużywania wyjątków do sterowania logiką programu.** Choć mogą być pomocne, nadużywanie ich może prowadzić do mniej czytelnego kodu.
+
+### Łańcuchowanie wyjątków (exception chaining)
+
+Gdy obsługujemy wyjątek i chcemy zgłosić inny (wyżej poziomowy), możemy zachować oryginalny wyjątek w łańcuchu za pomocą `raise ... from ...`:
+
+```python
+class BladBazyDanych(Exception):
+    pass
+
+def pobierz_uzytkownika(user_id):
+    try:
+        # symulacja błędu połączenia
+        raise ConnectionError("Serwer bazy danych niedostępny")
+    except ConnectionError as e:
+        raise BladBazyDanych(f"Nie można pobrać użytkownika {user_id}") from e
+
+try:
+    pobierz_uzytkownika(42)
+except BladBazyDanych as e:
+    print(f"Błąd: {e}")
+    print(f"Przyczyna: {e.__cause__}")
+```
+
+Wynik:
+
+```
+Błąd: Nie można pobrać użytkownika 42
+Przyczyna: Serwer bazy danych niedostępny
+```
+
+Aby celowo ukryć oryginalny wyjątek, używamy `raise ... from None`:
+
+```python
+try:
+    int("abc")
+except ValueError:
+    raise RuntimeError("Błąd parsowania") from None
+```
+
+### Menedżer kontekstu i wyjątki (`with`)
+
+Instrukcja `with` gwarantuje wykonanie kodu sprzątającego (np. zamknięcia pliku) nawet przy wystąpieniu wyjątku:
+
+```python
+# Zamiast jawnego try/finally:
+try:
+    plik = open("dane.txt")
+    zawartosc = plik.read()
+finally:
+    plik.close()
+
+# Zalecane — z użyciem with:
+with open("dane.txt") as plik:
+    zawartosc = plik.read()
+# plik zostaje zamknięty automatycznie, nawet jeśli wystąpi wyjątek
+```
+
+Można otworzyć wiele kontekstów naraz:
+
+```python
+with open("wejscie.txt") as wejscie, open("wyjscie.txt", "w") as wyjscie:
+    for linia in wejscie:
+        wyjscie.write(linia.upper())
+```
+
+### Hierarchia wbudowanych wyjątków
+
+Python posiada bogatą hierarchię wbudowanych klas wyjątków. Znajomość tej hierarchii pozwala przechwytywać całe grupy wyjątków:
+
+```
+BaseException
+ ├── SystemExit
+ ├── KeyboardInterrupt
+ ├── GeneratorExit
+ └── Exception
+      ├── StopIteration
+      ├── ArithmeticError
+      │    ├── ZeroDivisionError
+      │    ├── OverflowError
+      │    └── FloatingPointError
+      ├── LookupError
+      │    ├── IndexError
+      │    └── KeyError
+      ├── TypeError
+      ├── ValueError
+      │    └── UnicodeError
+      ├── OSError (IOError, EnvironmentError)
+      │    ├── FileNotFoundError
+      │    ├── PermissionError
+      │    └── TimeoutError
+      ├── RuntimeError
+      │    └── RecursionError
+      ├── NameError
+      │    └── UnboundLocalError
+      ├── AttributeError
+      ├── ImportError
+      │    └── ModuleNotFoundError
+      └── NotImplementedError
+```
+
+Przykład przechwytywania grupy:
+
+```python
+try:
+    lista = [1, 2, 3]
+    print(lista[10])
+except LookupError as e:
+    print(f"Błąd wyszukiwania: {type(e).__name__}: {e}")
+# Przechwytuje zarówno IndexError jak i KeyError
+```
+
+### Moduł `warnings` — ostrzeżenia
+
+Oprócz wyjątków, Python udostępnia moduł `warnings` do sygnalizowania potencjalnych problemów, które nie przerywają działania programu:
+
+```python
+import warnings
+
+def przestarzala_funkcja():
+    warnings.warn(
+        "Funkcja jest przestarzała. Użyj nowej_funkcji() zamiast niej.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+    return 42
+
+wynik = przestarzala_funkcja()
+# UserWarning: Funkcja jest przestarzała...
+```
+
+Zarządzanie ostrzeżeniami:
+
+```python
+import warnings
+
+# Ignorowanie konkretnego ostrzeżenia
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# Zamiana ostrzeżenia na błąd
+warnings.filterwarnings("error", category=UserWarning)
+
+# Pokazanie wszystkich ostrzeżeń (resetowanie filtrów)
+warnings.resetwarnings()
+```
+
+### Sprawdzanie kontekstu wyjątku
+
+Obiekt wyjątku zawiera dodatkowe informacje:
+
+```python
+try:
+    1 / 0
+except ZeroDivisionError as e:
+    print(type(e))       # <class 'ZeroDivisionError'>
+    print(e.args)        # ('division by zero',)
+    print(str(e))        # division by zero
+    import traceback
+    traceback.print_exc()  # pełny traceback
+```
+
+Aby ponownie zgłosić przechwycony wyjątek bez modyfikacji:
+
+```python
+try:
+    ryzykowna_operacja()
+except ValueError:
+    print("Logowanie błędu...")
+    raise   # ponownie zgłasza ValueError bez zmian
+```
