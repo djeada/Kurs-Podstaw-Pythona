@@ -98,3 +98,73 @@ Klasy danych w Pythonie oferują różnorodne, wbudowane funkcje, które czynią
 | Użycie jako klucz w słowniku | `slownik = {kolor : "żółty"}`                                                           |
 | Konwersja do słownika   | `from dataclasses import asdict; asdict(RGB(255, 255, 0))`                                   |
 | Pomiar wielkości w pamięci | `import sys; sys.getsizeof(RGB(255, 255, 0))`                                              |
+
+### Wartości domyślne i pola z wartościami fabrycznymi
+
+Atrybuty klasy danych mogą mieć wartości domyślne. Dla mutowalnych typów (np. list) używamy `field(default_factory=...)`, aby uniknąć współdzielenia jednego obiektu między instancjami:
+
+```python
+from dataclasses import dataclass, field
+
+@dataclass
+class Osoba:
+    imie: str
+    wiek: int = 0
+    hobby: list = field(default_factory=list)  # każda instancja dostaje własną listę
+
+p1 = Osoba("Jan")
+p2 = Osoba("Anna", wiek=25)
+p1.hobby.append("programowanie")
+
+print(p1)  # Osoba(imie='Jan', wiek=0, hobby=['programowanie'])
+print(p2)  # Osoba(imie='Anna', wiek=25, hobby=[])  — lista p2 jest niezależna
+```
+
+### Konwersja do/ze słownika i krotki
+
+Moduł `dataclasses` dostarcza funkcji pomocniczych:
+
+```python
+from dataclasses import dataclass, asdict, astuple
+
+@dataclass
+class Punkt:
+    x: float
+    y: float
+
+p = Punkt(1.5, 2.5)
+
+print(asdict(p))    # {'x': 1.5, 'y': 2.5}
+print(astuple(p))   # (1.5, 2.5)
+
+# Tworzenie obiektu ze słownika
+slownik = {"x": 3.0, "y": 4.0}
+p2 = Punkt(**slownik)
+print(p2)           # Punkt(x=3.0, y=4.0)
+```
+
+### Porównanie: zwykła klasa vs. klasa danych vs. NamedTuple
+
+| Cecha                   | Zwykła klasa           | `@dataclass`             | `NamedTuple`              |
+|-------------------------|------------------------|--------------------------|---------------------------|
+| Automatyczny `__init__` | ✗ (pisany ręcznie)     | ✓                        | ✓                         |
+| Automatyczny `__repr__` | ✗                      | ✓                        | ✓                         |
+| Automatyczny `__eq__`   | ✗                      | ✓                        | ✓ (porównanie po wartości)|
+| Mutowalność             | Tak (domyślnie)        | Tak (domyślnie)          | Nie (jak krotka)          |
+| Możliwość dziedziczenia | Tak                    | Tak                      | Ograniczona               |
+| `frozen=True`           | —                      | Tak                      | Zawsze niemutowalna       |
+| Konwersja do słownika   | Ręcznie                | `asdict()`               | `_asdict()`               |
+| Dostęp przez indeks     | Nie                    | Nie                      | Tak (`p[0]`)              |
+
+```python
+from typing import NamedTuple
+
+class PunktNT(NamedTuple):
+    x: float
+    y: float
+
+p = PunktNT(1.0, 2.0)
+print(p.x)   # 1.0
+print(p[0])  # 1.0 — dostęp jak do krotki
+# p.x = 3.0  # AttributeError — niemutowalna
+```

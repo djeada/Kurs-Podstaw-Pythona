@@ -122,6 +122,20 @@ def fib(n):
 print(fib(10))  # Wyjście: 55
 ```
 
+Python udostępnia gotowy dekorator `@functools.lru_cache`, który realizuje to samo bez pisania własnego kodu:
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+print(fib(50))  # 12586269025
+```
+
 #### Logowanie
 
 Dekorator może dodać logowanie do funkcji, pomagając śledzić wywołania funkcji i ich parametry.
@@ -143,6 +157,109 @@ def dodaj(a, b):
     return a + b
 
 dodaj(3, 5)  # Wyjście: Wywoływanie dodaj z argumentami: (3, 5), {} \n dodaj zwrócił: 8
+```
+
+#### Mierzenie czasu wykonania
+
+```python
+import functools
+import time
+
+def mierz_czas(funkcja):
+    @functools.wraps(funkcja)
+    def funkcja_wew(*args, **kwargs):
+        start = time.perf_counter()
+        wynik = funkcja(*args, **kwargs)
+        koniec = time.perf_counter()
+        print(f'{funkcja.__name__} wykonała się w {koniec - start:.4f}s')
+        return wynik
+    return funkcja_wew
+
+@mierz_czas
+def oblicz(n):
+    return sum(range(n))
+
+oblicz(1_000_000)  # oblicz wykonała się w 0.0231s
+```
+
+#### Walidacja argumentów
+
+```python
+import functools
+
+def wymaga_dodatnich(funkcja):
+    @functools.wraps(funkcja)
+    def funkcja_wew(*args, **kwargs):
+        for arg in args:
+            if isinstance(arg, (int, float)) and arg < 0:
+                raise ValueError(f"Argument {arg} musi być nieujemny")
+        return funkcja(*args, **kwargs)
+    return funkcja_wew
+
+@wymaga_dodatnich
+def pierwiastek(x):
+    return x ** 0.5
+
+print(pierwiastek(9))   # 3.0
+pierwiastek(-4)         # ValueError: Argument -4 musi być nieujemny
+```
+
+#### Ponowienie próby (retry)
+
+```python
+import functools
+import time
+
+def ponow(ilosc_prob=3, opoznienie=1.0):
+    def dekorator(funkcja):
+        @functools.wraps(funkcja)
+        def funkcja_wew(*args, **kwargs):
+            for proba in range(1, ilosc_prob + 1):
+                try:
+                    return funkcja(*args, **kwargs)
+                except Exception as e:
+                    if proba == ilosc_prob:
+                        raise
+                    print(f'Próba {proba} nieudana: {e}. Ponawiam za {opoznienie}s...')
+                    time.sleep(opoznienie)
+        return funkcja_wew
+    return dekorator
+
+@ponow(ilosc_prob=3, opoznienie=0.5)
+def pobierz_dane(url):
+    # symulacja błędu sieciowego
+    raise ConnectionError("Błąd połączenia")
+
+# pobierz_dane("http://example.com")
+# Próba 1 nieudana: Błąd połączenia. Ponawiam za 0.5s...
+# Próba 2 nieudana: Błąd połączenia. Ponawiam za 0.5s...
+# ConnectionError: Błąd połączenia
+```
+
+### Dekoratory klas
+
+Dekoratory można stosować nie tylko do funkcji, ale też do klas:
+
+```python
+import functools
+
+def singleton(klasa):
+    instancje = {}
+    @functools.wraps(klasa)
+    def pobierz_instancje(*args, **kwargs):
+        if klasa not in instancje:
+            instancje[klasa] = klasa(*args, **kwargs)
+        return instancje[klasa]
+    return pobierz_instancje
+
+@singleton
+class Konfiguracja:
+    def __init__(self):
+        self.ustawienia = {}
+
+k1 = Konfiguracja()
+k2 = Konfiguracja()
+print(k1 is k2)  # True — obie zmienne wskazują na ten sam obiekt
 ```
 
 Dekoratory to funkcjonalność, która sprawia, że Python jest językiem wyjątkowo elastycznym i ekspresyjnym, umożliwiającym tworzenie zaawansowanych wzorców projektowych w prosty i zwięzły sposób.
