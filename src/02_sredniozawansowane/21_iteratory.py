@@ -62,7 +62,7 @@ class IteratorZdania:
 # =============================================================================
 
 class Zakres:
-    """Wlasna implementacja range z obsluaga iteratora."""
+    """Wlasna implementacja range z obsluga iteratora."""
 
     def __init__(self, start, stop=None, krok=1):
         if stop is None:
