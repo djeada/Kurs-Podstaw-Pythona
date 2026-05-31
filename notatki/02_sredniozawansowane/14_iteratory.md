@@ -283,3 +283,84 @@ fib = FibonacciIter()
 pierwsze_10 = [next(fib) for _ in range(10)]
 print(pierwsze_10)  # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
+
+### Porównanie: iterator vs generator vs lista
+
+| Cecha                  | Klasa iteratora            | Funkcja generatora        | Lista                  |
+|------------------------|----------------------------|---------------------------|------------------------|
+| Definicja              | Klasa z `__iter__`/`__next__` | Funkcja z `yield`      | `[...]` lub `list()`  |
+| Stan wewnętrzny       | Explicite (atrybuty)       | Implicite (frame)         | Brak — cała w pamięci  |
+| Wielokrotna iteracja  | Jeśli `__iter__` resetuje  | Nie (jednorazowy)         | Tak                    |
+| Leniwa ewaluacja      | Tak                        | Tak                       | Nie                    |
+| Złożoność kodu        | Duża                       | Mała                      | Minimalna              |
+| Nieskończone sekwencje| Tak                        | Tak                       | Nie                    |
+| Kiedy używać          | Potrzeba złożonej logiki stanu | Większość przypadków  | Małe, skończone dane   |
+
+### Protokół iteratora — podsumowanie
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Obiekt iterowalny (Iterable)                  │
+│                                                                 │
+│    Implementuje:  __iter__()  → zwraca Iterator                 │
+│    Przykłady:     list, tuple, dict, set, str, range, file      │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │ iter(obiekt)
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        Iterator                                  │
+│                                                                 │
+│    Implementuje:  __iter__()  → zwraca self                     │
+│                   __next__()  → zwraca kolejny element           │
+│                               → rzuca StopIteration na końcu    │
+│    Przykłady:     obiekt generatora, map(), filter(), zip()     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Tworzenie iterowalnych klas z oddzielnym iteratorem
+
+Dobra praktyka polega na oddzieleniu obiektu iterowalnego od iteratora — pozwala to na wielokrotną iterację:
+
+```python
+class Zakres:
+    """Klasa iterowalna — pozwala na wielokrotną iterację."""
+    def __init__(self, start, stop):
+        self.start = start
+        self.stop = stop
+
+    def __iter__(self):
+        # Za każdym razem tworzy NOWY iterator
+        return ZakresIterator(self.start, self.stop)
+
+class ZakresIterator:
+    """Iterator — jednorazowy przebieg."""
+    def __init__(self, biezacy, stop):
+        self.biezacy = biezacy
+        self.stop = stop
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.biezacy >= self.stop:
+            raise StopIteration
+        wartosc = self.biezacy
+        self.biezacy += 1
+        return wartosc
+
+# Wielokrotna iteracja działa poprawnie
+z = Zakres(1, 4)
+print(list(z))  # [1, 2, 3]
+print(list(z))  # [1, 2, 3]  ← działa ponownie
+```
+
+### Przydatne wzorce z iteratorami
+
+| Wzorzec                          | Kod                                             | Zastosowanie                      |
+|----------------------------------|------------------------------------------------|-----------------------------------|
+| Pobranie n pierwszych            | `list(itertools.islice(it, n))`                | Ograniczenie nieskończonych       |
+| Łączenie iteratorów             | `itertools.chain(it1, it2)`                    | Sekwencyjne przetwarzanie         |
+| Równoległy przebieg             | `zip(it1, it2)`                                | Pary z dwóch kolekcji            |
+| Grupowanie sąsiadów             | `itertools.groupby(it, key)`                   | Agregacja danych                  |
+| Buforowanie podglądu            | `itertools.tee(it, n)`                         | Wielokrotne odczytanie strumienia |
+| Filtrowanie z predykatem        | `filter(pred, it)` / `itertools.filterfalse`   | Selekcja elementów                |

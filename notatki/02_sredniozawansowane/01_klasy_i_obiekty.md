@@ -379,3 +379,72 @@ print(s1 is s2)  # True
 ```
 
 W momencie tworzenia nowego obiektu `Singleton` sprawdza, czy `_instancja` już istnieje. Jeśli nie, tworzy ją, a jeśli tak, zwraca referencję do istniejącego obiektu. W efekcie w całym programie istnieje tylko jeden obiekt tej klasy.
+
+### Podsumowanie — metody specjalne (dunder methods)
+
+Python oferuje wiele metod specjalnych (zaczynających się i kończących się podwójnym podkreśleniem), które pozwalają na customizację zachowania obiektów:
+
+| Metoda                 | Zastosowanie                                        | Przykład użycia              |
+|------------------------|-----------------------------------------------------|------------------------------|
+| `__init__(self, ...)`  | Konstruktor — inicjalizacja obiektu                 | `Osoba("Jan", 30)`          |
+| `__repr__(self)`       | Reprezentacja "programistyczna" (jednoznaczna)       | `repr(obj)`                  |
+| `__str__(self)`        | Reprezentacja "użytkownikowa" (czytelna)             | `str(obj)`, `print(obj)`    |
+| `__eq__(self, other)`  | Porównanie `==`                                     | `obj1 == obj2`              |
+| `__lt__(self, other)`  | Porównanie `<`                                      | `obj1 < obj2`, `sorted()`   |
+| `__hash__(self)`       | Wartość hash (dla `set`, `dict`)                    | `hash(obj)`                  |
+| `__len__(self)`        | Długość obiektu                                     | `len(obj)`                   |
+| `__getitem__(self, k)` | Dostęp przez indeks/klucz                           | `obj[k]`                     |
+| `__setitem__(self, k, v)` | Przypisanie przez indeks/klucz                  | `obj[k] = v`                |
+| `__contains__(self, x)`| Operator `in`                                      | `x in obj`                   |
+| `__iter__(self)`       | Iteracja                                            | `for x in obj`               |
+| `__call__(self, ...)`  | Wywołanie obiektu jak funkcji                       | `obj()`                      |
+| `__enter__`/`__exit__` | Kontekst `with`                                    | `with obj as x:`             |
+| `__add__(self, other)` | Operator `+`                                        | `obj1 + obj2`               |
+| `__del__(self)`        | Destruktor (unikaj — używaj context managerów)      | Automatycznie przy GC        |
+
+### Porównanie: klasa vs namedtuple vs dataclass vs słownik
+
+| Cecha                    | `class`           | `namedtuple`     | `@dataclass`     | `dict`           |
+|--------------------------|-------------------|------------------|------------------|------------------|
+| Mutowalna?               | Tak (domyślnie)   | Nie              | Tak (domyślnie)  | Tak              |
+| Metody własne?           | Tak               | Ograniczone      | Tak              | Nie              |
+| `__init__` automatycznie?| Nie               | Tak              | Tak              | N/A              |
+| `__repr__` automatycznie?| Nie               | Tak              | Tak              | Tak              |
+| `__eq__` automatycznie?  | Nie (porównuje id) | Tak (wartości)  | Tak (wartości)   | Tak (klucze+wartości) |
+| Dostęp przez `.atrybut`  | Tak               | Tak              | Tak              | Nie (`["klucz"]`) |
+| Type hints?              | Opcjonalnie       | Nie              | Tak              | Nie              |
+| Dziedziczenie?           | Tak               | Ograniczone      | Tak              | Nie              |
+| Kiedy używać?            | Złożona logika    | Proste rekordy   | Rekordy z logiką | Dynamiczne dane   |
+
+### Diagram cyklu życia obiektu
+
+```
+┌──────────────────┐
+│   Klasa (typ)    │
+└────────┬─────────┘
+         │ MojaKlasa()
+         ▼
+┌──────────────────┐
+│  __new__(cls)    │  ← alokacja pamięci, tworzenie obiektu
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│  __init__(self)  │  ← inicjalizacja atrybutów
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│  Obiekt aktywny  │  ← używanie: metody, atrybuty, operatory
+└────────┬─────────┘
+         │ brak referencji
+         ▼
+┌──────────────────┐
+│  __del__(self)   │  ← finalizacja (garbage collector)
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────┐
+│  Pamięć zwolniona│
+└──────────────────┘
+```

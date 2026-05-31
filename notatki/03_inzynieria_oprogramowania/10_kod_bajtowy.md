@@ -237,3 +237,123 @@ print(inspect.getsource(len))
 ```
 
 Otrzymamy błąd `OSError`, ponieważ funkcja `len` jest zaimplementowana w C i nie ma dostępnego kodu źródłowego w Pythonie.
+
+## Tabela najczęstszych instrukcji kodu bajtowego
+
+| Instrukcja           | Kategoria     | Opis                                                       |
+|---------------------|---------------|------------------------------------------------------------|
+| `LOAD_CONST`        | Ładowanie     | Ładuje stałą na stos                                       |
+| `LOAD_FAST`         | Ładowanie     | Ładuje zmienną lokalną na stos                             |
+| `LOAD_GLOBAL`       | Ładowanie     | Ładuje zmienną globalną na stos                            |
+| `LOAD_NAME`         | Ładowanie     | Ładuje nazwę ze scope'u                                    |
+| `STORE_FAST`        | Przechowywanie| Zapisuje wartość ze stosu do zmiennej lokalnej              |
+| `STORE_NAME`        | Przechowywanie| Zapisuje wartość ze stosu pod nazwą                         |
+| `STORE_GLOBAL`      | Przechowywanie| Zapisuje wartość ze stosu do zmiennej globalnej             |
+| `BINARY_ADD`        | Arytmetyka    | Dodaje dwie wartości ze szczytu stosu                       |
+| `BINARY_MULTIPLY`   | Arytmetyka    | Mnoży dwie wartości ze szczytu stosu                        |
+| `BINARY_SUBSCR`     | Operacje      | Dostęp do elementu: `a[b]`                                 |
+| `COMPARE_OP`        | Porównanie    | Porównuje dwie wartości (`==`, `<`, `>`, itd.)             |
+| `POP_JUMP_IF_FALSE` | Skok          | Skacze jeśli wartość na stosie jest False                   |
+| `POP_JUMP_IF_TRUE`  | Skok          | Skacze jeśli wartość na stosie jest True                    |
+| `JUMP_ABSOLUTE`     | Skok          | Bezwarunkowy skok do danego offsetu                        |
+| `FOR_ITER`          | Pętla         | Pobiera następny element z iteratora                       |
+| `CALL_FUNCTION`     | Wywołanie     | Wywołuje funkcję z argumentami ze stosu                    |
+| `RETURN_VALUE`      | Powrót        | Zwraca wartość ze szczytu stosu                            |
+| `BUILD_LIST`        | Budowanie     | Tworzy listę z n elementów ze stosu                        |
+| `BUILD_TUPLE`       | Budowanie     | Tworzy krotkę z n elementów ze stosu                       |
+| `BUILD_MAP`         | Budowanie     | Tworzy słownik z par klucz-wartość                         |
+| `UNPACK_SEQUENCE`   | Rozpakowywanie| Rozpakowuje sekwencję na poszczególne elementy             |
+
+## Optymalizacja na podstawie analizy kodu bajtowego
+
+Analiza kodu bajtowego może pomóc zrozumieć, dlaczego pewne konstrukcje są szybsze od innych.
+
+### Przykład: dostęp do atrybutów vs zmienne lokalne
+
+```python
+from dis import dis
+
+def wolniejsza(lista):
+    wynik = []
+    for x in lista:
+        wynik.append(x * 2)  # LOAD_ATTR (append) w każdej iteracji
+    return wynik
+
+def szybsza(lista):
+    wynik = []
+    dodaj = wynik.append  # Jedna operacja LOAD_ATTR
+    for x in lista:
+        dodaj(x * 2)       # LOAD_FAST w każdej iteracji
+    return wynik
+
+def najszybsza(lista):
+    return [x * 2 for x in lista]  # Zoptymalizowane wewnętrznie
+
+# Porównanie kodu bajtowego
+print("=== wolniejsza ===")
+dis(wolniejsza)
+print("\n=== szybsza ===")
+dis(szybsza)
+```
+
+### Porównanie wydajności konstrukcji
+
+| Konstrukcja                           | Względna szybkość | Uwagi                                   |
+|---------------------------------------|-------------------|------------------------------------------|
+| List comprehension                    | Najszybsza        | Zoptymalizowana wewnętrznie              |
+| Pętla z lokalnym `append`            | Szybka            | Unika powtórnego `LOAD_ATTR`             |
+| Pętla z `lista.append()`            | Wolniejsza        | `LOAD_ATTR` w każdej iteracji            |
+| `map()` z lambdą                     | Średnia           | Koszt wywołania lambdy                   |
+| `map()` z wbudowaną funkcją         | Szybka            | Bez kosztu Pythonowego wywołania         |
+
+### Obiekt kodu — `__code__`
+
+Każda funkcja ma atrybut `__code__`, który przechowuje skompilowany kod bajtowy oraz metadane:
+
+```python
+def przyklad(a, b, c=10):
+    x = a + b
+    y = x * c
+    return y
+
+code = przyklad.__code__
+
+print(f"Nazwa:            {code.co_name}")
+print(f"Plik:             {code.co_filename}")
+print(f"Liczba argumentów: {code.co_argcount}")
+print(f"Zmienne lokalne:  {code.co_varnames}")
+print(f"Stałe:            {code.co_consts}")
+print(f"Nazwy globalne:   {code.co_names}")
+print(f"Rozmiar stosu:    {code.co_stacksize}")
+print(f"Bajty kodu:       {code.co_code.hex()}")
+```
+
+| Atrybut         | Opis                                                    |
+|-----------------|----------------------------------------------------------|
+| `co_name`       | Nazwa funkcji                                            |
+| `co_argcount`   | Liczba argumentów pozycyjnych                            |
+| `co_varnames`   | Krotka nazw zmiennych lokalnych                          |
+| `co_consts`     | Krotka stałych używanych w funkcji                       |
+| `co_names`      | Krotka nazw globalnych/atrybutów                         |
+| `co_code`       | Surowy kod bajtowy (bytes)                               |
+| `co_stacksize`  | Maksymalny rozmiar stosu operandów                       |
+| `co_flags`      | Flagi (np. czy używa *args, **kwargs, generatory)        |
+
+### Pliki `.pyc` i katalog `__pycache__`
+
+Python automatycznie kompiluje moduły do kodu bajtowego i zapisuje je w katalogu `__pycache__`:
+
+```
+__pycache__/
+├── modul.cpython-312.pyc    # Python 3.12
+├── modul.cpython-311.pyc    # Python 3.11
+└── utils.cpython-312.pyc
+```
+
+Kluczowe fakty:
+
+- Pliki `.pyc` zawierają **magic number** (wersja Pythona), **timestamp** i **kod bajtowy**.
+- Są automatycznie regenerowane gdy źródło jest nowsze niż `.pyc`.
+- Można wymusić rekompilację: `python -m compileall .`
+- Można uruchomić z wyłączoną kompilacją: `python -B skrypt.py`
+- Katalog `__pycache__` należy dodać do `.gitignore`.

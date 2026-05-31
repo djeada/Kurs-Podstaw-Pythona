@@ -181,3 +181,95 @@ print(f"Generator:         {t2:.3f}s")
 | Generatorowe          | `(wyrażenie for x in it)`               | `generator`       |
 
 Wyrażenia listowe są idiomatycznym, czytelnym i wydajnym narzędziem Pythona, które warto stosować wszędzie tam, gdzie budujemy nową kolekcję na podstawie istniejących danych.
+
+### Najczęstsze wzorce i idiomy
+
+| Wzorzec                        | Wyrażenie listowe                                     | Opis                              |
+|--------------------------------|------------------------------------------------------|-----------------------------------|
+| Filtrowanie                    | `[x for x in dane if warunek(x)]`                   | Zachowanie wybranych elementów    |
+| Transformacja                  | `[f(x) for x in dane]`                              | Przekształcenie każdego elementu  |
+| Filtrowanie + transformacja   | `[f(x) for x in dane if warunek(x)]`                | Oba na raz                        |
+| Spłaszczanie                   | `[x for sub in dane for x in sub]`                  | Lista list → płaska lista         |
+| Iloczyn kartezjański          | `[(x, y) for x in A for y in B]`                    | Wszystkie pary                    |
+| Zamiana wartości               | `[x if x > 0 else 0 for x in dane]`                | Warunkowe podstawienie            |
+| Indeksowanie                   | `[(i, x) for i, x in enumerate(dane)]`              | Pary (indeks, wartość)            |
+
+### Typowe pułapki i dobre praktyki
+
+#### Kiedy NIE stosować wyrażeń listowych
+
+```python
+# ❌ Zbyt skomplikowane — trudne do zrozumienia
+wynik = [f(x) for x in dane if g(x) > 0 for y in h(x) if y != 0]
+
+# ✓ Lepiej użyć zwykłej pętli
+wynik = []
+for x in dane:
+    if g(x) > 0:
+        for y in h(x):
+            if y != 0:
+                wynik.append(f(x))
+```
+
+#### Pułapka z mutowalnymi obiektami
+
+```python
+# ❌ Wszystkie wiersze to ta sama lista!
+macierz = [[0] * 3] * 3
+macierz[0][0] = 1
+print(macierz)  # [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+
+# ✓ Poprawnie — każdy wiersz to nowa lista
+macierz = [[0] * 3 for _ in range(3)]
+macierz[0][0] = 1
+print(macierz)  # [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+```
+
+#### Efekt uboczny — wyrażenia listowe nie powinny modyfikować stanu
+
+```python
+# ❌ Nie używaj wyrażeń listowych dla efektów ubocznych
+[print(x) for x in range(5)]  # Tworzy niepotrzebną listę [None, None, ...]
+
+# ✓ Użyj pętli for
+for x in range(5):
+    print(x)
+```
+
+### Zaawansowane przykłady praktyczne
+
+#### Transpozycja macierzy
+
+```python
+macierz = [[1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]]
+
+transponowana = [[wiersz[i] for wiersz in macierz] for i in range(len(macierz[0]))]
+print(transponowana)  # [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+```
+
+#### Grupowanie elementów w paczki (chunking)
+
+```python
+dane = list(range(10))
+n = 3
+paczki = [dane[i:i+n] for i in range(0, len(dane), n)]
+print(paczki)  # [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
+```
+
+#### Słownik częstości wystąpień
+
+```python
+tekst = "abrakadabra"
+czestosci = {znak: tekst.count(znak) for znak in set(tekst)}
+print(czestosci)  # {'a': 5, 'b': 2, 'r': 2, 'k': 1, 'd': 1}
+```
+
+#### Filtrowanie słownika
+
+```python
+oceny = {"Anna": 5, "Jan": 3, "Kasia": 4, "Tomek": 2, "Ewa": 5}
+najlepsi = {k: v for k, v in oceny.items() if v >= 4}
+print(najlepsi)  # {'Anna': 5, 'Kasia': 4, 'Ewa': 5}
+```

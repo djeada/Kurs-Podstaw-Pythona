@@ -346,3 +346,82 @@ except ValueError:
     print("Logowanie błędu...")
     raise   # ponownie zgłasza ValueError bez zmian
 ```
+
+### Dobre praktyki obsługi wyjątków
+
+1. **Łap konkretne wyjątki** — unikaj pustego `except:` lub `except Exception:`, które mogą ukryć nieoczekiwane błędy.
+
+```python
+# ❌ Źle: łapie zbyt wiele
+try:
+    wynik = operacja()
+except:
+    pass
+
+# ✅ Dobrze: łapie konkretny wyjątek
+try:
+    wynik = int(tekst)
+except ValueError:
+    wynik = 0
+```
+
+2. **Używaj `else` do kodu zależnego od sukcesu** — kod w `else` wykona się tylko jeśli `try` zakończyło się bez wyjątku.
+
+```python
+try:
+    plik = open("dane.txt")
+except FileNotFoundError:
+    print("Plik nie istnieje")
+else:
+    dane = plik.read()
+    plik.close()
+```
+
+3. **Używaj `finally` do sprzątania** — lub lepiej: menedżerów kontekstu (`with`).
+
+```python
+# Zamiast try/finally:
+with open("dane.txt") as f:
+    dane = f.read()
+# Plik zostanie zamknięty automatycznie
+```
+
+4. **Twórz własne wyjątki** gdy wbudowane nie opisują wystarczająco dobrze błędu w kontekście Twojej aplikacji.
+
+```python
+class BladAutoryzacji(Exception):
+    """Użytkownik nie ma uprawnień do wykonania operacji."""
+    def __init__(self, uzytkownik, operacja):
+        self.uzytkownik = uzytkownik
+        self.operacja = operacja
+        super().__init__(f"Użytkownik '{uzytkownik}' nie może wykonać: {operacja}")
+```
+
+5. **Loguj wyjątki** zamiast je ignorować — ciche błędy utrudniają debugowanie.
+
+### Hierarchia wyjątków wbudowanych (wybrane)
+
+```
+BaseException
+├── SystemExit
+├── KeyboardInterrupt
+├── GeneratorExit
+└── Exception
+    ├── ArithmeticError
+    │   ├── ZeroDivisionError
+    │   └── OverflowError
+    ├── LookupError
+    │   ├── IndexError
+    │   └── KeyError
+    ├── OSError
+    │   ├── FileNotFoundError
+    │   ├── PermissionError
+    │   └── ConnectionError
+    ├── ValueError
+    ├── TypeError
+    ├── AttributeError
+    ├── ImportError
+    ├── RuntimeError
+    │   └── RecursionError
+    └── StopIteration
+```

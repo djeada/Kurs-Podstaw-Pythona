@@ -330,4 +330,34 @@ from timeit import timeit
 czas_lista = timeit("[i**2 for i in range(1000)]", number=10000)
 czas_gen   = timeit("sum(i**2 for i in range(1000))", number=10000)
 print(f"Lista: {czas_lista:.3f}s, Generator: {czas_gen:.3f}s")
+```
 
+### Podsumowanie narzędzi debugowania
+
+| Narzędzie              | Zastosowanie                                      | Kiedy używać                              |
+|------------------------|--------------------------------------------------|-------------------------------------------|
+| `print()`              | Szybkie sprawdzenie wartości                     | Proste skrypty, jednorazowe debugowanie   |
+| `logging`              | Trwałe śledzenie działania aplikacji             | Produkcja, złożone aplikacje              |
+| `pdb` / `breakpoint()` | Interaktywne debugowanie krok po kroku          | Złożone błędy logiczne                    |
+| `traceback`            | Pełny ślad stosu przy wyjątkach                  | Debugowanie w obsłudze wyjątków           |
+| `cProfile`             | Profilowanie wydajności (czas w funkcjach)       | Optymalizacja wolnego kodu                |
+| `timeit`               | Precyzyjny pomiar czasu fragmentów kodu          | Porównywanie wydajności wariantów         |
+| `memory_profiler`      | Profilowanie zużycia pamięci                     | Wycieki pamięci, duże dane                |
+| IDE debugger           | Graficzne debugowanie z breakpointami            | Codzienne programowanie                   |
+| `icecream` (`ic()`)    | Czytelniejszy zamiennik `print()` do debugowania | Szybkie debugowanie bez setupu            |
+
+### Skrócona ściąga komend `pdb`
+
+| Komenda       | Skrót | Opis                                         |
+|---------------|-------|----------------------------------------------|
+| `next`        | `n`   | Wykonaj następną linię (nie wchodząc w funkcje) |
+| `step`        | `s`   | Wejdź do wnętrza wywoływanej funkcji        |
+| `continue`    | `c`   | Kontynuuj do następnego breakpointa          |
+| `break N`     | `b N` | Ustaw breakpoint na linii N                  |
+| `print expr`  | `p`   | Wyświetl wartość wyrażenia                   |
+| `pp expr`     | `pp`  | Pretty-print wartości wyrażenia              |
+| `list`        | `l`   | Pokaż kod wokół bieżącej linii              |
+| `where`       | `w`   | Pokaż stos wywołań                          |
+| `up` / `down` | `u`/`d` | Poruszanie się po stosie wywołań          |
+| `quit`        | `q`   | Zakończ debugger                             |
+| `!stmt`       | —     | Wykonaj dowolną instrukcję Pythona           |

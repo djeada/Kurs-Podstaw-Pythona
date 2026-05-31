@@ -2,6 +2,19 @@
 
 Wątki to jednostki wykonawcze procesu, które umożliwiają równoległe wykonanie różnych fragmentów kodu w obrębie jednego programu. Zastosowanie wątków może znacząco przyspieszyć działanie aplikacji, zwłaszcza gdy mamy do czynienia z operacjami blokującymi, takimi jak łączenie się z zewnętrznymi serwerami, wczytywanie dużych plików czy obliczenia numeryczne.
 
+### Porównanie: wątki vs procesy vs asyncio
+
+| Cecha                    | Wątki (`threading`)    | Procesy (`multiprocessing`) | Asyncio                     |
+|--------------------------|------------------------|-----------------------------|-----------------------------|
+| Równoległość CPU         | Nie (GIL)              | Tak                         | Nie                         |
+| Współbieżność I/O       | Tak                    | Tak                         | Tak                         |
+| Wspólna pamięć           | Tak                    | Nie (wymaga IPC)            | Tak (single-thread)         |
+| Koszt tworzenia          | Niski                  | Wysoki (fork/spawn)         | Bardzo niski                |
+| Synchronizacja           | Lock, Semaphore, Event | Lock, Queue, Pipe           | Nie wymaga (kooperatywny)   |
+| Najlepsze dla            | I/O-bound              | CPU-bound                   | Wiele połączeń sieciowych   |
+| Ryzyko deadlocka         | Tak                    | Tak                         | Minimalne                   |
+| Debugowanie              | Trudne                 | Średnie                     | Łatwiejsze                  |
+
 ### Jak działają wątki?
 
 Wątki działają jako lekkie podprocesy wewnątrz głównego procesu programu. Każdy wątek może wykonywać niezależnie fragmenty kodu, współdzieląc zasoby (np. pamięć) z innymi wątkami tego samego procesu. W Pythonie, do zarządzania wątkami używamy modułu `threading`.
@@ -288,3 +301,104 @@ for proces in procesy:
 3. **Użycie Cython:** Cython pozwala na kompilację kodu Pythona do kodu C, co może znacznie przyspieszyć wykonywanie obliczeń intensywnych pod względem CPU i umożliwić lepsze wykorzystanie wielordzeniowości.
 
 Ostateczna uwaga: Gdy chcemy przyspieszyć operacje w Pythonie, warto również rozważyć zastosowanie odpowiednich algorytmów i struktur danych, które mogą wpłynąć na wydajność kodu niezależnie od użycia wątków czy procesów.
+
+### ThreadPoolExecutor — nowoczesne API
+
+Od Pythona 3.2 dostępny jest moduł `concurrent.futures`, który oferuje wysokopoziomowy interfejs do pracy z wątkami (i procesami). `ThreadPoolExecutor` zarządza pulą wątków automatycznie:
+
+```python
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
+
+def pobierz_dane(url):
+    """Symulacja pobierania danych."""
+    time.sleep(1)
+    return f"Dane z {url}"
+
+adresy = [f"http://example.com/page/{i}" for i in range(5)]
+
+# Użycie ThreadPoolExecutor
+with ThreadPoolExecutor(max_workers=3) as executor:
+    # submit — uruchomienie zadań
+    futures = {executor.submit(pobierz_dane, url): url for url in adresy}
+    
+    # as_completed — iteracja po wynikach w kolejności kończenia
+    for future in as_completed(futures):
+        url = futures[future]
+        wynik = future.result()
+        print(f"{url} → {wynik}")
+```
+
+#### `map()` — prostsza składnia dla jednorodnych zadań
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+def przetworz(n):
+    return n ** 2
+
+with ThreadPoolExecutor(max_workers=4) as executor:
+    wyniki = list(executor.map(przetworz, range(10)))
+
+print(wyniki)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+### Dobre praktyki i typowe pułapki
+
+| Pułapka                              | Problem                                      | Rozwiązanie                                         |
+|--------------------------------------|----------------------------------------------|-----------------------------------------------------|
+| Brak synchronizacji                  | Wyścig danych (race condition)               | Użyj `Lock` lub `Queue`                            |
+| Deadlock                             | Dwa wątki czekają na siebie nawzajem         | Zawsze pobieraj blokady w tej samej kolejności      |
+| Użycie wątków dla CPU-bound          | GIL blokuje równoległość                     | Użyj `multiprocessing` lub `ProcessPoolExecutor`   |
+| Mutowalny argument domyślny          | Współdzielony stan między wywołaniami        | Używaj niemutowalnych wartości domyślnych           |
+| Brak `join()`                        | Program kończy się przed wątkami             | Zawsze czekaj na zakończenie wątków                |
+| Print w wielu wątkach                | Wymieszane linie w konsoli                   | Użyj `logging` lub `Lock` na `print`              |
+
+### Queue — bezpieczna komunikacja między wątkami
+
+`queue.Queue` to struktura FIFO bezpieczna wątkowo (thread-safe), idealna do wzorca producent-konsument:
+
+```python
+import threading
+import queue
+import time
+
+def producent(q, n):
+    for i in range(n):
+        item = f"element-{i}"
+        q.put(item)
+        print(f"Producent dodał: {item}")
+        time.sleep(0.1)
+    q.put(None)  # sygnał zakończenia
+
+def konsument(q):
+    while True:
+        item = q.get()
+        if item is None:
+            break
+        print(f"Konsument przetworzył: {item}")
+        q.task_done()
+
+kolejka = queue.Queue(maxsize=5)
+
+p = threading.Thread(target=producent, args=(kolejka, 5))
+k = threading.Thread(target=konsument, args=(kolejka,))
+
+p.start()
+k.start()
+p.join()
+k.join()
+```
+
+### Timer — opóźnione wykonanie
+
+```python
+import threading
+
+def przypomnienie():
+    print("Minęło 5 sekund!")
+
+timer = threading.Timer(5.0, przypomnienie)
+timer.start()
+# Można anulować: timer.cancel()
+```

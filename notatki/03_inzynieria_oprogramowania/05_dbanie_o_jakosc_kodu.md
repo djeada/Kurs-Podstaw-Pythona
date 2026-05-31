@@ -329,3 +329,74 @@ from moj_pakiet.models import Uzytkownik
 - [Pylint - A Python source code analyzer](https://github.com/PyCQA/pylint)
 - [Flake8 - A tool for checking Python code](https://github.com/PyCQA/flake8)
 - [autoflake - Removes unused imports and unused variables](https://github.com/myint/autoflake)
+
+### Porównanie narzędzi do jakości kodu
+
+| Narzędzie    | Kategoria        | Automatyczna naprawa? | Konfiguracja         | Szybkość   | Główne zastosowanie                |
+|-------------|------------------|----------------------|----------------------|------------|-------------------------------------|
+| `black`     | Formatter        | Tak                  | Minimalna (opinionated) | Szybki   | Jednolity styl formatowania         |
+| `ruff`      | Linter+Formatter | Tak (częściowo)      | `pyproject.toml`     | Najszybszy | Zamiennik flake8+isort+pyupgrade    |
+| `flake8`    | Linter           | Nie                  | `.flake8`, `setup.cfg` | Szybki  | Sprawdzanie stylu i błędów          |
+| `pylint`    | Linter           | Nie                  | `.pylintrc`          | Wolny      | Głęboka analiza kodu                |
+| `mypy`      | Type checker     | Nie                  | `mypy.ini`           | Średni     | Statyczna analiza typów             |
+| `pyright`   | Type checker     | Nie                  | `pyrightconfig.json` | Szybki     | Statyczna analiza typów (VSCode)    |
+| `isort`     | Import sorter    | Tak                  | `pyproject.toml`     | Szybki     | Sortowanie importów                 |
+| `autoflake` | Cleaner          | Tak                  | Minimalna            | Szybki     | Usuwanie nieużywanych importów      |
+| `bandit`    | Security         | Nie                  | `.bandit`            | Szybki     | Wykrywanie problemów bezpieczeństwa |
+
+### Konfiguracja w `pyproject.toml` — współczesny standard
+
+Nowoczesne projekty Python centralizują konfigurację narzędzi w `pyproject.toml`:
+
+```toml
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.isort]
+known-first-party = ["moj_pakiet"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+```
+
+### Pre-commit hooks — automatyczne sprawdzanie przed commitem
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.9.0
+    hooks:
+      - id: mypy
+```
+
+Instalacja i użycie:
+
+```bash
+pip install pre-commit
+pre-commit install          # zainstaluj hooki
+pre-commit run --all-files  # uruchom ręcznie na wszystkich plikach
+```

@@ -236,3 +236,53 @@ odpowiedz = requests.get("https://api.example.com/secure", headers=headers)
 odpowiedz = requests.get("https://api.example.com/data",
                          params={"api_key": "moj-klucz-api"})
 ```
+
+### Kody statusu HTTP — najważniejsze grupy
+
+| Zakres  | Kategoria          | Najczęstsze kody                                      |
+|---------|-------------------|-------------------------------------------------------|
+| 1xx     | Informacyjne      | 100 Continue, 101 Switching Protocols                 |
+| 2xx     | Sukces            | 200 OK, 201 Created, 204 No Content                  |
+| 3xx     | Przekierowanie    | 301 Moved Permanently, 302 Found, 304 Not Modified   |
+| 4xx     | Błąd klienta     | 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found |
+| 5xx     | Błąd serwera     | 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable |
+
+### Obsługa błędów i retry
+
+```python
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Konfiguracja automatycznego ponowienia prób
+session = requests.Session()
+retry = Retry(
+    total=3,              # maksymalnie 3 próby
+    backoff_factor=0.5,   # opóźnienie: 0.5s, 1s, 2s
+    status_forcelist=[500, 502, 503, 504]  # ponawiaj dla tych kodów
+)
+adapter = HTTPAdapter(max_retries=retry)
+session.mount("http://", adapter)
+session.mount("https://", adapter)
+
+# Użycie sesji z retry
+try:
+    odpowiedz = session.get("https://api.example.com/data", timeout=10)
+    odpowiedz.raise_for_status()   # Rzuci wyjątek dla kodów 4xx/5xx
+    dane = odpowiedz.json()
+except requests.exceptions.Timeout:
+    print("Przekroczono limit czasu!")
+except requests.exceptions.HTTPError as e:
+    print(f"Błąd HTTP: {e.response.status_code}")
+except requests.exceptions.ConnectionError:
+    print("Brak połączenia z serwerem!")
+```
+
+### Porównanie: requests vs httpx vs urllib vs aiohttp
+
+| Biblioteka      | Synchroniczna | Asynchroniczna | HTTP/2 | Wbudowana? | Kiedy używać                      |
+|-----------------|---------------|----------------|--------|------------|-----------------------------------|
+| `urllib`        | Tak           | Nie            | Nie    | Tak        | Proste skrypty bez zależności      |
+| `requests`      | Tak           | Nie            | Nie    | Nie        | Większość aplikacji (standard)    |
+| `httpx`         | Tak           | Tak            | Tak    | Nie        | Nowoczesne API, async+sync        |
+| `aiohttp`       | Nie           | Tak            | Nie    | Nie        | Wysokowydajne async aplikacje     |

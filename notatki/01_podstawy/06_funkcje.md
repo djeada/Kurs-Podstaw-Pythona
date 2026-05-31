@@ -145,6 +145,18 @@ Zalety używania `**kwargs`
 - Rozbudowa funkcji o nowe argumenty jest bardzo prosta, a jej struktura nie wymaga większych modyfikacji, co zdecydowanie wspiera **łatwość rozszerzania** i ułatwia przyszłe zmiany.
 - Zastosowanie mechanizmu **kwargs** pozwala na przekazywanie argumentów jako nazwanych par, co pomaga **unikać błędów** związanych z nieprawidłową liczbą lub kolejnością argumentów, zwiększając niezawodność kodu.
 
+### Podsumowanie typów argumentów
+
+| Typ argumentu                | Składnia                | Przykład wywołania                   | Opis                                           |
+|------------------------------|-------------------------|--------------------------------------|------------------------------------------------|
+| Pozycyjny obowiązkowy        | `def f(a, b)`           | `f(1, 2)`                            | Musi być podany w odpowiedniej kolejności      |
+| Domyślny (opcjonalny)       | `def f(a, b=10)`        | `f(1)` lub `f(1, 20)`               | Użyje wartości domyślnej jeśli nie podano      |
+| `*args` (pozycyjne zbiorcze)| `def f(*args)`          | `f(1, 2, 3)`                         | Krotka dowolnej liczby argumentów pozycyjnych  |
+| `**kwargs` (nazwane zbiorcze)| `def f(**kwargs)`      | `f(x=1, y=2)`                        | Słownik dowolnej liczby argumentów nazwanych   |
+| Wyłącznie pozycyjne (`/`)   | `def f(a, b, /)`        | `f(1, 2)`                            | Nie można podać nazwy argumentu                |
+| Wyłącznie nazwane (`*`)     | `def f(*, a, b)`        | `f(a=1, b=2)`                        | Muszą być przekazane z nazwą                   |
+| Mieszane                     | `def f(a, /, b, *, c)` | `f(1, 2, c=3)` lub `f(1, b=2, c=3)` | Łączenie różnych typów                         |
+
 ### Dokumentowanie funkcji
 
 Dokumentowanie funkcji jest kluczowe dla utrzymania przejrzystości i zrozumienia kodu. Python pozwala na dodawanie docstringów, które są specjalnymi komentarzami umieszczonymi bezpośrednio pod definicją funkcji. Przykład:
