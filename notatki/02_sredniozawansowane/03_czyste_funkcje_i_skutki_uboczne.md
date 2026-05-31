@@ -286,3 +286,55 @@ def wyswietl_wynik(suma: int) -> None:
 # suma = oblicz_sume(liczby)   # Ta funkcja jest testowalna bez pliku!
 # wyswietl_wynik(suma)
 ```
+
+### Podsumowanie — czysta funkcja vs funkcja z efektami ubocznymi
+
+| Cecha                     | Czysta funkcja                          | Funkcja z efektami ubocznymi            |
+|---------------------------|-----------------------------------------|-----------------------------------------|
+| Wynik zależy od           | Tylko od argumentów wejściowych         | Argumentów + stanu zewnętrznego         |
+| Modyfikuje stan zewnętrzny| Nie                                     | Tak (pliki, zmienne globalne, I/O)      |
+| Deterministyczna          | Tak — ten sam wynik dla tych samych argumentów | Nie koniecznie                    |
+| Testowalność              | Łatwa — wystarczy sprawdzić wynik       | Trudna — wymaga mocków i setupu         |
+| Cacheowalność (memoizacja)| Tak — bezpiecznie                      | Nie — wynik może być nieaktualny        |
+| Równoległość              | Bezpieczna — brak współdzielonego stanu | Wymaga synchronizacji                   |
+| Debugowanie               | Proste — wynik = f(wejście)            | Trudne — zależy od kolejności wywołań   |
+| Composability (łączenie)  | Wysoka — łatwo łączyć w pipeline       | Niska — zależności od stanu             |
+
+### Lista typowych efektów ubocznych
+
+| Efekt uboczny                  | Przykład                              | Jak zizolować?                          |
+|--------------------------------|---------------------------------------|-----------------------------------------|
+| Zapis do pliku / dysku         | `open("f.txt", "w").write(...)`       | Przekaż strumień jako argument          |
+| Wypisywanie na konsolę        | `print(...)`, `logging.info(...)`     | Zwróć wartość, niech caller wypisze     |
+| Modyfikacja zmiennej globalnej | `global x; x += 1`                   | Przekaż i zwróć nową wartość            |
+| Zapytanie sieciowe            | `requests.get(url)`                   | Injekcja zależności / adapter           |
+| Modyfikacja argumentu (mutacja)| `lista.append(x)`                   | Zwróć nową listę zamiast modyfikować    |
+| Odczyt aktualnego czasu        | `datetime.now()`                     | Przekaż czas jako parametr              |
+| Losowość                       | `random.randint(1, 10)`              | Przekaż generator jako parametr         |
+
+### Zasada: "Functional Core, Imperative Shell"
+
+Popularny wzorzec architektoniczny dzieli aplikację na:
+
+```
+┌─────────────────────────────────────────────────┐
+│            Imperative Shell                      │
+│  (obsługa I/O, parsowanie, wyświetlanie)        │
+│                                                 │
+│    ┌─────────────────────────────────────────┐  │
+│    │          Functional Core                │  │
+│    │  (czysta logika biznesowa)              │  │
+│    │  - obliczenia                           │  │
+│    │  - transformacje danych                 │  │
+│    │  - reguły biznesowe                     │  │
+│    │  - walidacja                            │  │
+│    └─────────────────────────────────────────┘  │
+│                                                 │
+│  wczytaj dane → [CORE] → wyświetl/zapisz       │
+└─────────────────────────────────────────────────┘
+```
+
+Zalety tego podejścia:
+- **Functional Core** jest łatwy do testowania (unit testy bez mocków).
+- **Imperative Shell** jest cienki i zawiera jedynie "klej" łączący I/O z logiką.
+- Łatwiejsze refaktoryzowanie, bo logika nie jest związana z infrastrukturą.
