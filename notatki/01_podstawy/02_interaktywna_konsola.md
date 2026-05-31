@@ -186,3 +186,53 @@ while True:
 
 print(f"Wpisałeś: {n}")
 ```
+
+### Rozszerzone konsole: IPython i Jupyter
+
+Standardowa konsola `>>>` jest funkcjonalna, ale istnieją rozszerzone alternatywy, które oferują więcej możliwości:
+
+#### IPython
+
+IPython to zaawansowana konsola interaktywna z kolorowaniem składni, autouzupełnianiem i „magicznymi" poleceniami:
+
+```
+$ pip install ipython
+$ ipython
+
+In [1]: import math
+In [2]: math.sqrt(144)
+Out[2]: 12.0
+In [3]: %timeit sum(range(1000))
+         4.5 µs ± 30.3 ns per loop
+```
+
+Przydatne polecenia IPython:
+
+| Polecenie     | Opis                                       |
+|---------------|--------------------------------------------|
+| `?obiekt`     | Wyświetla dokumentację obiektu             |
+| `??obiekt`    | Wyświetla kod źródłowy obiektu             |
+| `%timeit`     | Mierzy czas wykonania wyrażenia            |
+| `%run plik.py`| Uruchamia skrypt Python                    |
+| `%history`    | Wyświetla historię poleceń                 |
+| `!ls`         | Wykonuje polecenie systemowe               |
+
+#### Jupyter Notebook
+
+Jupyter Notebook to interaktywne środowisko w przeglądarce, łączące kod, wyniki, wykresy i tekst w jednym dokumencie:
+
+```
+$ pip install jupyter
+$ jupyter notebook
+```
+
+Jupyter jest szczególnie popularny w nauce danych, wizualizacji i nauczaniu — pozwala na tworzenie dokumentów łączących kod z objaśnieniami.
+
+### Porównanie narzędzi
+
+| Narzędzie         | Zalety                                           | Zastosowanie                  |
+|-------------------|--------------------------------------------------|-------------------------------|
+| `python` (REPL)   | Wbudowany, zawsze dostępny, lekki                | Szybkie testy, nauka          |
+| IPython           | Kolorowanie, autouzupełnianie, magia             | Codzienna praca, debugowanie  |
+| Jupyter Notebook  | Mieszanie kodu i tekstu, wykresy                 | Analiza danych, prezentacje   |
+| IDE (PyCharm/VSC) | Pełne wsparcie projektowe, debugger, refaktoryzacja | Duże projekty              |

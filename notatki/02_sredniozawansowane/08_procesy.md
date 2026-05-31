@@ -229,3 +229,39 @@ if __name__ == "__main__":
 ```
 
 W powyższym przykładzie dynamicznie przypisujemy zadania procesom za pomocą kolejki. Jest to bardziej elastyczne podejście, które pozwala lepiej wykorzystać zasoby w przypadku, gdy liczba zadań jest zmienna lub gdy zadania mają różny czas wykonania.
+
+### Praktyczne wskazówki
+
+#### Kiedy używać procesów zamiast wątków?
+
+| Kryterium | Procesy (`multiprocessing`) | Wątki (`threading`) |
+|-----------|----------------------------|---------------------|
+| Obciążenie CPU (obliczenia) | ✅ Tak — omijają GIL | ❌ GIL blokuje prawdziwą równoległość |
+| Operacje I/O (sieć, pliki) | Możliwe, ale cięższe | ✅ Lekkie, wystarczające |
+| Współdzielenie pamięci | Trudniejsze (Queue, Value, Array) | Łatwe (wspólna przestrzeń adresowa) |
+| Izolacja błędów | ✅ Awaria procesu nie zabija reszty | ❌ Błąd w wątku może uszkodzić proces |
+| Narzut startowy | Wyższy (nowy proces) | Niższy (nowy wątek) |
+
+#### Dobre praktyki
+
+1. **Zawsze** umieszczaj kod tworzący procesy w bloku `if __name__ == "__main__":`.
+2. Używaj `ProcessPoolExecutor` z `concurrent.futures` dla prostszego API.
+3. Unikaj dzielenia mutowalnych obiektów między procesami — preferuj `Queue` lub `Pipe`.
+4. Uważaj na rozmiar danych przekazywanych do procesów (serializacja pickle dodaje narzut).
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import math
+
+def oblicz_silnie(n):
+    return math.factorial(n)
+
+if __name__ == "__main__":
+    liczby = [100, 200, 300, 400, 500]
+    
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        wyniki = list(executor.map(oblicz_silnie, liczby))
+    
+    for n, w in zip(liczby, wyniki):
+        print(f"{n}! ma {len(str(w))} cyfr")
+```
