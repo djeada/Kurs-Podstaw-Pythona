@@ -263,3 +263,105 @@ print(k1 is k2)  # True — obie zmienne wskazują na ten sam obiekt
 ```
 
 Dekoratory to funkcjonalność, która sprawia, że Python jest językiem wyjątkowo elastycznym i ekspresyjnym, umożliwiającym tworzenie zaawansowanych wzorców projektowych w prosty i zwięzły sposób.
+
+### Podsumowanie wzorców dekoratorów
+
+| Wzorzec                    | Zastosowanie                                | Przykład z biblioteki standardowej    |
+|----------------------------|---------------------------------------------|---------------------------------------|
+| Logowanie / śledzenie      | Rejestrowanie wywołań funkcji               | —                                     |
+| Memoizacja / cache         | Zapamiętywanie wyników kosztownych operacji | `@functools.lru_cache`                |
+| Walidacja argumentów       | Sprawdzanie typów / zakresów                | —                                     |
+| Retry (ponowienie)         | Ponawianie w razie błędu sieciowego         | `@tenacity.retry`                     |
+| Kontrola dostępu           | Autoryzacja użytkownika                     | `@login_required` (Django/Flask)      |
+| Singleton                  | Jedna instancja klasy                       | —                                     |
+| Pomiar czasu               | Benchmarking i profilowanie                 | —                                     |
+| Rejestracja (registry)     | Zbieranie funkcji do wspólnego rejestru     | `@app.route` (Flask)                  |
+| Deprecation                | Oznaczenie jako przestarzałe                | `@warnings.deprecated` (3.13+)        |
+
+### Schemat działania dekoratora
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                                                                  │
+│   @dekorator              │   dekorator = dekorator(funkcja)     │
+│   def funkcja():          │   Czyli: funkcja = dekorator(funkcja)│
+│       ...                 │                                      │
+│                                                                  │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   Wywołanie: funkcja()                                           │
+│                                                                  │
+│   ┌─────────────────┐    ┌─────────────────┐                    │
+│   │   owijka()      │    │                 │                    │
+│   │   ├─ KOD PRZED  │───▶│  funkcja()     │                    │
+│   │   ├─ wywołanie  │    │  (oryginalna)  │                    │
+│   │   ├─ KOD PO     │◀───│                 │                    │
+│   │   └─ return     │    └─────────────────┘                    │
+│   └─────────────────┘                                            │
+│                                                                  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### Łączenie wielu dekoratorów — kolejność stosowania
+
+```python
+@A
+@B
+@C
+def f():
+    pass
+
+# Jest równoważne:
+# f = A(B(C(f)))
+
+# Kolejność wykonania przy WYWOŁANIU f():
+# 1. Kod "przed" z A
+# 2. Kod "przed" z B
+# 3. Kod "przed" z C
+# 4. Ciało f()
+# 5. Kod "po" z C
+# 6. Kod "po" z B
+# 7. Kod "po" z A
+```
+
+### Dekorator jako klasa
+
+Dekoratory mogą być implementowane jako klasy z metodą `__call__`:
+
+```python
+import functools
+
+class LiczWywolania:
+    """Dekorator zliczający wywołania funkcji."""
+    def __init__(self, funkcja):
+        functools.update_wrapper(self, funkcja)
+        self.funkcja = funkcja
+        self.licznik = 0
+
+    def __call__(self, *args, **kwargs):
+        self.licznik += 1
+        print(f"{self.funkcja.__name__} wywołana {self.licznik} raz(y)")
+        return self.funkcja(*args, **kwargs)
+
+@LiczWywolania
+def pozdrow(imie):
+    return f"Cześć, {imie}!"
+
+pozdrow("Anna")   # pozdrow wywołana 1 raz(y)
+pozdrow("Jan")    # pozdrow wywołana 2 raz(y)
+print(pozdrow.licznik)  # 2
+```
+
+### Wbudowane dekoratory w Pythonie
+
+| Dekorator               | Moduł         | Zastosowanie                                         |
+|-------------------------|---------------|------------------------------------------------------|
+| `@staticmethod`         | wbudowany     | Metoda bez dostępu do `self` ani `cls`               |
+| `@classmethod`          | wbudowany     | Metoda z dostępem do klasy (`cls`) zamiast instancji |
+| `@property`             | wbudowany     | Atrybut obliczany (getter/setter/deleter)            |
+| `@abstractmethod`       | `abc`         | Metoda abstrakcyjna — wymusza implementację          |
+| `@functools.wraps`      | `functools`   | Zachowuje metadane dekorowanej funkcji               |
+| `@functools.lru_cache`  | `functools`   | Cache wyników (memoizacja)                           |
+| `@functools.cached_property` | `functools` | Property obliczane raz i zapamiętane              |
+| `@dataclasses.dataclass`| `dataclasses` | Automatyczne `__init__`, `__repr__`, `__eq__`        |
+| `@contextlib.contextmanager` | `contextlib` | Tworzenie context managerów z `yield`          |

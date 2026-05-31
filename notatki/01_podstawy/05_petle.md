@@ -430,3 +430,85 @@ for imie, ocena, przedmiot in zip(imiona, oceny, przedmioty):
 for i, owoc in enumerate(reversed(owoce)):
     print(f"{i}: {owoc}")
 ```
+
+### Diagramy przepływu sterowania
+
+#### Pętla `for`
+
+```
+         ┌──────────────────┐
+         │       START       │
+         └────────┬─────────┘
+                  │
+                  ▼
+         ┌──────────────────┐
+         │  iter(kolekcja)  │
+         └────────┬─────────┘
+                  │
+                  ▼
+    ┌────▶┌──────────────────┐
+    │     │  next(iterator)  │
+    │     └────────┬─────────┘
+    │              │
+    │     ┌────────┴─────────┐
+    │     │  StopIteration?  │──── Tak ──▶ KONIEC
+    │     └────────┬─────────┘
+    │              │ Nie
+    │              ▼
+    │     ┌──────────────────┐
+    │     │  ciało pętli     │
+    │     └────────┬─────────┘
+    │              │
+    │     ┌────────┴─────────┐
+    │     │    continue?     │── Tak ─┐
+    │     └────────┬─────────┘        │
+    │              │ Nie               │
+    │     ┌────────┴─────────┐        │
+    │     │     break?       │── Tak ──▶ KONIEC (bez else)
+    │     └────────┬─────────┘        │
+    │              │ Nie               │
+    └──────────────┴──────────────────┘
+```
+
+#### Pętla `while`
+
+```
+         ┌──────────────────┐
+         │       START       │
+         └────────┬─────────┘
+                  │
+                  ▼
+    ┌────▶┌──────────────────┐
+    │     │ warunek == True? │──── Nie ──▶ blok else ──▶ KONIEC
+    │     └────────┬─────────┘
+    │              │ Tak
+    │              ▼
+    │     ┌──────────────────┐
+    │     │  ciało pętli     │
+    │     └────────┬─────────┘
+    │              │
+    │     ┌────────┴─────────┐
+    │     │     break?       │── Tak ──▶ KONIEC (bez else)
+    │     └────────┬─────────┘
+    │              │ Nie
+    └──────────────┘
+```
+
+### Podsumowanie instrukcji sterujących
+
+| Instrukcja   | Kontekst    | Działanie                                                |
+|-------------|-------------|----------------------------------------------------------|
+| `break`     | for / while | Natychmiast przerywa pętlę (pomija `else`)               |
+| `continue`  | for / while | Przeskakuje do następnej iteracji                        |
+| `else`      | for / while | Wykonuje się gdy pętla zakończy się naturalnie (bez `break`) |
+| `pass`      | dowolny     | Instrukcja pusta — placeholder                           |
+
+### Wydajność pętli — porównanie
+
+| Metoda                                  | Względna szybkość | Czytelność |
+|-----------------------------------------|-------------------|------------|
+| List comprehension                      | ★★★★★            | ★★★★      |
+| `map()` + wbudowana funkcja            | ★★★★             | ★★★       |
+| Pętla `for` z `.append()`              | ★★★              | ★★★★★    |
+| Pętla `while` z ręcznym indeksem       | ★★               | ★★        |
+| Rekurencja                              | ★                | ★★★       |

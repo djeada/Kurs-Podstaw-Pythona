@@ -236,3 +236,110 @@ W przypadku kopiowania głębokiego, obiekt `deep_copied_obj` jest całkowicie n
 2. **Zwracaj uwagę na mutowalne atrybuty w klasach dziedziczących.** Mogą one powodować niespodziewane efekty, szczególnie w przypadku kopiowania płytkiego.
 3. **Testuj wpływ modyfikacji kopii na oryginalny obiekt.** Zrozumienie, jak zmiany wprowadzane w kopii wpływają na oryginał, pozwala na lepsze projektowanie kodu.
 4. **Używaj modułu `copy`, który dostarcza zarówno `copy()` (kopiowanie płytkie), jak i `deepcopy()` (kopiowanie głębokie), do obsługi kopiowania w Pythonie.**
+
+### Tabela porównawcza: przypisanie vs kopiowanie płytkie vs kopiowanie głębokie
+
+| Operacja               | Składnia                    | Nowy obiekt najwyższego poziomu? | Kopie zagnieżdżonych obiektów? | Niezależność od oryginału   |
+|------------------------|-----------------------------|----------------------------------|-------------------------------|------------------------------|
+| Przypisanie            | `b = a`                     | Nie (ta sama referencja)         | Nie                           | Brak — to ten sam obiekt     |
+| Kopiowanie płytkie     | `copy.copy(a)` / `a[:]` / `list(a)` | Tak                    | Nie (współdzielone)           | Częściowa — pierwszy poziom  |
+| Kopiowanie głębokie    | `copy.deepcopy(a)`          | Tak                              | Tak (rekurencyjne)            | Pełna niezależność           |
+
+### Wizualizacja działania w pamięci
+
+```
+PRZYPISANIE:  b = a
+┌────────┐       ┌──────────────────┐
+│ a ─────┼──────▶│  [1, [2, 3], 4]  │
+│ b ─────┼──────▶│                  │
+└────────┘       └──────────────────┘
+Jeden obiekt, dwie nazwy.
+
+KOPIOWANIE PŁYTKIE:  b = copy.copy(a)
+┌────────┐       ┌──────────────────┐
+│ a ─────┼──────▶│  [1, ───┐, 4]   │
+└────────┘       └─────────┼────────┘
+                           ▼
+┌────────┐       ┌─────────┼────────┐
+│ b ─────┼──────▶│  [1, ───┘, 4]   │  ← nowa lista, ale wewnętrzna [2,3]
+└────────┘       └──────────────────┘    jest współdzielona
+
+KOPIOWANIE GŁĘBOKIE:  b = copy.deepcopy(a)
+┌────────┐       ┌──────────────────┐
+│ a ─────┼──────▶│  [1, [2, 3], 4]  │  ← osobna kopia [2,3]
+└────────┘       └──────────────────┘
+┌────────┐       ┌──────────────────┐
+│ b ─────┼──────▶│  [1, [2, 3], 4]  │  ← osobna kopia [2,3]
+└────────┘       └──────────────────┘
+Dwa w pełni niezależne obiekty.
+```
+
+### Szybkie metody kopiowania płytkiego
+
+| Typ danych | Metody kopiowania płytkiego                    |
+|------------|------------------------------------------------|
+| Lista      | `lista[:]`, `list(lista)`, `lista.copy()`      |
+| Słownik    | `dict(slownik)`, `slownik.copy()`              |
+| Zbiór      | `set(zbior)`, `zbior.copy()`                   |
+| Dowolny    | `copy.copy(obiekt)`                            |
+
+### Identyczność vs równość
+
+Rozróżniaj operator `is` (identyczność — ten sam obiekt w pamięci) od `==` (równość wartości):
+
+```python
+import copy
+
+a = [1, 2, [3, 4]]
+b = a
+c = copy.copy(a)
+d = copy.deepcopy(a)
+
+print(a == b == c == d)   # True — te same wartości
+print(a is b)             # True — ta sama referencja
+print(a is c)             # False — różne obiekty
+print(a[2] is c[2])       # True — shallow copy współdzieli wewnętrzne
+print(a[2] is d[2])       # False — deepcopy tworzy nowe kopie
+```
+
+Funkcja `id()` zwraca unikalny identyfikator obiektu (adres w pamięci CPython):
+
+```python
+print(id(a) == id(b))     # True
+print(id(a) == id(c))     # False
+```
+
+### Typowe pułapki z referencjami
+
+#### Mutowalny argument domyślny
+
+```python
+# ❌ BŁĄD: lista jest współdzielona między wywołaniami!
+def dodaj_element(element, lista=[]):
+    lista.append(element)
+    return lista
+
+print(dodaj_element(1))  # [1]
+print(dodaj_element(2))  # [1, 2] — niespodziewane!
+
+# ✓ POPRAWNIE: użyj None jako wartości domyślnej
+def dodaj_element(element, lista=None):
+    if lista is None:
+        lista = []
+    lista.append(element)
+    return lista
+```
+
+#### Mnożenie list z mutowalnymi elementami
+
+```python
+# ❌ Wszystkie wiersze to ta sama lista!
+macierz = [[0] * 3] * 3
+macierz[0][0] = 1
+print(macierz)  # [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+
+# ✓ Każdy wiersz to nowy obiekt
+macierz = [[0] * 3 for _ in range(3)]
+macierz[0][0] = 1
+print(macierz)  # [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+```

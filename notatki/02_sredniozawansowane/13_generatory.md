@@ -312,3 +312,66 @@ def zamien_na_wielkie(linie):
 ```
 
 Potok generatorów jest szczególnie wydajny przy przetwarzaniu dużych plików, bo każda linia jest przetwarzana jeden raz, bez wczytywania całego pliku do pamięci.
+
+### Porównanie: lista vs generator
+
+| Cecha                     | Lista                         | Generator                        |
+|---------------------------|-------------------------------|----------------------------------|
+| Składnia                  | `[x for x in it]`            | `(x for x in it)`               |
+| Przechowywanie           | Cała kolekcja w pamięci       | Jeden element naraz              |
+| Wielokrotna iteracja     | Tak                           | Nie (jednorazowy)                |
+| Długość (`len()`)         | Tak                           | Nie                              |
+| Indeksowanie (`[i]`)     | Tak                           | Nie                              |
+| Pamięć dla 10⁶ elementów | ~8 MB (int)                   | ~120 bajtów (stały)             |
+| Szybkość tworzenia       | Cała lista od razu            | Brak kosztu tworzenia            |
+| Najlepsze dla            | Małe dane, wielokrotny dostęp | Duże dane, jednorazowe przetwarzanie |
+
+### Porównanie pamięci — praktyczny benchmark
+
+```python
+import sys
+
+# Lista 1 miliona elementów
+lista = [i ** 2 for i in range(1_000_000)]
+print(f"Lista: {sys.getsizeof(lista):,} bajtów")  # ~8,448,728 bajtów
+
+# Generator — stały rozmiar niezależnie od danych
+gen = (i ** 2 for i in range(1_000_000))
+print(f"Generator: {sys.getsizeof(gen)} bajtów")   # ~200 bajtów
+```
+
+### Kiedy używać generatorów?
+
+| Scenariusz                              | Użyj generatora? | Powód                                       |
+|-----------------------------------------|-------------------|---------------------------------------------|
+| Przetwarzanie dużego pliku linia po linii | Tak             | Plik nie mieści się w pamięci               |
+| Nieskończona sekwencja (np. Fibonacci)  | Tak               | Lista nie może być nieskończona             |
+| Potok transformacji danych              | Tak               | Leniwa ewaluacja — efektywna pamięciowo     |
+| Mały zbiór danych (< 1000 elementów)   | Nie (lista)       | Brak korzyści, lista jest wygodniejsza      |
+| Potrzeba wielokrotnej iteracji          | Nie (lista)       | Generator wyczerpuje się po jednym przejściu|
+| Potrzeba losowego dostępu `[i]`         | Nie (lista)       | Generator nie wspiera indeksowania          |
+
+### Typowe pułapki z generatorami
+
+#### Wyczerpany generator
+
+```python
+gen = (x for x in range(3))
+print(list(gen))  # [0, 1, 2]
+print(list(gen))  # [] — generator jest już wyczerpany!
+```
+
+#### Generator w warunku `if`
+
+```python
+gen = (x for x in range(0))  # pusty generator
+# ❌ Generator jest zawsze "truthy" nawet jeśli jest pusty!
+if gen:
+    print("To się zawsze wyświetli!")
+
+# ✓ Sprawdź pobierając element
+gen = (x for x in range(0))
+pierwszy = next(gen, None)
+if pierwszy is not None:
+    print(f"Pierwszy element: {pierwszy}")
+```

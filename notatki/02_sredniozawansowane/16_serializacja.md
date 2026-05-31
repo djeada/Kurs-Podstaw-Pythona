@@ -245,3 +245,145 @@ Jeśli chcemy przesłać dane między różnymi aplikacjami lub usługami siecio
 ### Uwagi dotyczące bezpieczeństwa
 
 Podczas korzystania z serializacji, szczególnie z modułem `pickle`, należy być świadomym potencjalnych zagrożeń. Deserializacja danych z nieznanych źródeł może prowadzić do wykonania złośliwego kodu. Zawsze upewnij się, że dane pochodzą z zaufanego źródła lub używaj bezpieczniejszych metod serializacji, takich jak JSON, które nie wykonują kodu podczas deserializacji.
+
+### Porównanie formatów serializacji
+
+| Format    | Moduł            | Czytelność | Szybkość    | Bezpieczeństwo | Interoperacyjność | Obsługuje obiekty Pythona |
+|-----------|------------------|------------|-------------|----------------|-------------------|---------------------------|
+| pickle    | `pickle`         | Nie        | Bardzo szybki | Niskie       | Tylko Python      | Tak (prawie wszystkie)    |
+| JSON      | `json`           | Tak        | Szybki      | Wysokie        | Uniwersalny       | Nie (wymaga konwersji)    |
+| XML       | `xml.etree`      | Tak        | Wolny       | Średnie        | Uniwersalny       | Nie (wymaga konwersji)    |
+| YAML      | `pyyaml`         | Tak        | Średni      | Średnie*       | Uniwersalny       | Częściowo                 |
+| MessagePack| `msgpack`       | Nie        | Bardzo szybki | Wysokie      | Uniwersalny       | Nie                       |
+| Protocol Buffers | `protobuf` | Nie     | Najszybszy  | Wysokie        | Uniwersalny       | Nie (wymaga schematu)     |
+
+\* YAML z `yaml.safe_load()` jest bezpieczny; `yaml.load()` bez Loadera — nie.
+
+### Kiedy używać którego formatu?
+
+| Scenariusz                                 | Rekomendowany format |
+|--------------------------------------------|----------------------|
+| API webowe (REST)                          | JSON                 |
+| Konfiguracja czytelna dla człowieka        | YAML lub JSON        |
+| Wymiana danych między mikroserwisami       | MessagePack / Protobuf |
+| Zapis stanu aplikacji Python (zaufane źródło) | pickle           |
+| Wymiana z systemami enterprise (SOAP, RSS) | XML                  |
+| Trwałe przechowywanie z wersjowaniem      | JSON + schemat       |
+| Maksymalna wydajność i minimalny rozmiar   | Protocol Buffers     |
+
+### Serializacja z użyciem YAML
+
+YAML (YAML Ain't Markup Language) jest popularnym formatem konfiguracyjnym dzięki swojej czytelności:
+
+```python
+# pip install pyyaml
+import yaml
+
+dane = {
+    'serwer': {
+        'host': 'localhost',
+        'port': 8080,
+        'debug': True
+    },
+    'baza_danych': {
+        'url': 'sqlite:///app.db',
+        'pool_size': 5
+    }
+}
+
+# Serializacja do YAML
+yaml_str = yaml.dump(dane, default_flow_style=False, allow_unicode=True)
+print(yaml_str)
+
+# Deserializacja z YAML (ZAWSZE używaj safe_load!)
+odczytane = yaml.safe_load(yaml_str)
+print(odczytane['serwer']['port'])  # 8080
+```
+
+### Zaawansowane techniki z JSON
+
+#### Obsługa niestandardowych typów z `JSONEncoder`
+
+```python
+import json
+from datetime import datetime, date
+from decimal import Decimal
+
+class RozszerzonyEncoder(json.JSONEncoder):
+    """Encoder obsługujący datetime, date i Decimal."""
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        if isinstance(obj, date):
+            return obj.isoformat()
+        if isinstance(obj, Decimal):
+            return float(obj)
+        return super().default(obj)
+
+dane = {
+    'utworzono': datetime.now(),
+    'data': date.today(),
+    'cena': Decimal('19.99')
+}
+
+json_str = json.dumps(dane, cls=RozszerzonyEncoder, indent=2, ensure_ascii=False)
+print(json_str)
+```
+
+#### Walidacja struktury z `jsonschema`
+
+```python
+# pip install jsonschema
+from jsonschema import validate, ValidationError
+
+schemat = {
+    "type": "object",
+    "properties": {
+        "imie": {"type": "string", "minLength": 1},
+        "wiek": {"type": "integer", "minimum": 0},
+        "email": {"type": "string", "format": "email"}
+    },
+    "required": ["imie", "wiek"]
+}
+
+# Poprawne dane
+validate({"imie": "Anna", "wiek": 30}, schemat)
+
+# Niepoprawne dane — rzuci ValidationError
+try:
+    validate({"imie": "", "wiek": -5}, schemat)
+except ValidationError as e:
+    print(f"Błąd walidacji: {e.message}")
+```
+
+### Wydajność — porównanie rozmiarów i szybkości
+
+```python
+import json
+import pickle
+import sys
+import time
+
+dane = [{"id": i, "wartość": i * 3.14, "nazwa": f"element_{i}"} for i in range(10000)]
+
+# Rozmiar serializowanych danych
+json_bytes = json.dumps(dane).encode()
+pickle_bytes = pickle.dumps(dane)
+
+print(f"JSON:   {len(json_bytes):>10,} bajtów")
+print(f"Pickle: {len(pickle_bytes):>10,} bajtów")
+
+# Szybkość serializacji
+start = time.perf_counter()
+for _ in range(100):
+    json.dumps(dane)
+t_json = time.perf_counter() - start
+
+start = time.perf_counter()
+for _ in range(100):
+    pickle.dumps(dane)
+t_pickle = time.perf_counter() - start
+
+print(f"JSON:   {t_json:.3f}s")
+print(f"Pickle: {t_pickle:.3f}s")
+```

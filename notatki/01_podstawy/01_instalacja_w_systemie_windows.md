@@ -80,3 +80,112 @@ Aby ułatwić sobie pracę z Pythonem, warto zainstalować środowisko programis
 - **[Atom](https://github.com/atom/atom)**: Edytor tekstu typu open source, stworzony przez GitHub. Uwaga: Atom został oficjalnie wycofany z użytku w grudniu 2022 roku. Zamiast niego zaleca się korzystanie z Visual Studio Code lub innego aktywnie wspieranego edytora.
 
 Każde z tych IDE oferuje różnorodne funkcje, takie jak podświetlanie składni, autouzupełnianie kodu, debugowanie i wiele innych, które mogą znacznie ułatwić programowanie w Pythonie. Wybór odpowiedniego narzędzia zależy od Twoich preferencji oraz specyficznych potrzeb projektów, nad którymi pracujesz.
+
+### Porównanie popularnych IDE i edytorów
+
+| Narzędzie          | Typ               | Autouzupełnianie | Debugger | Terminal | Darmowe?                |
+|--------------------|-------------------|------------------|----------|----------|-------------------------|
+| **PyCharm**        | Pełne IDE         | Zaawansowane     | Tak      | Tak      | Community (płatna Pro)  |
+| **VS Code**        | Edytor + wtyczki  | Dobre (Pylance)  | Tak      | Tak      | Tak                     |
+| **Sublime Text**   | Edytor + wtyczki  | Podstawowe       | Nie      | Tak      | Shareware               |
+| **Jupyter**        | Notebook          | Dobre            | Ograniczony | Nie  | Tak                     |
+| **Thonny**         | IDE dla początkujących | Podstawowe   | Tak      | Tak      | Tak                     |
+
+### Instalacja Pythona na innych systemach
+
+#### macOS
+
+Na macOS Python 3 można zainstalować na kilka sposobów:
+
+1. **Oficjalny instalator** ze strony python.org (plik `.pkg`).
+2. **Homebrew** — popularny menedżer pakietów:
+
+```shell
+brew install python
+```
+
+3. **pyenv** — narzędzie do zarządzania wieloma wersjami Pythona:
+
+```shell
+brew install pyenv
+pyenv install 3.12.0
+pyenv global 3.12.0
+```
+
+#### Linux (Ubuntu/Debian)
+
+Większość dystrybucji Linuksa posiada preinstalowanego Pythona. Aby zainstalować lub zaktualizować:
+
+```shell
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+Sprawdzenie wersji:
+
+```shell
+python3 --version
+pip3 --version
+```
+
+#### Porównanie metod instalacji
+
+| Metoda                  | System            | Zarządzanie wersjami | Izolacja środowisk | Łatwość         |
+|-------------------------|-------------------|----------------------|--------------------|-----------------|
+| Oficjalny instalator    | Windows/macOS     | Ręczne               | Wymaga venv        | Bardzo łatwa    |
+| Homebrew                | macOS             | Częściowe            | Wymaga venv        | Łatwa           |
+| apt/dnf                 | Linux             | Systemowa wersja     | Wymaga venv        | Łatwa           |
+| pyenv                   | macOS/Linux       | Pełne                | Wymaga venv        | Średnia         |
+| Anaconda/Miniconda      | Wszystkie         | Pełne                | Wbudowana (conda)  | Łatwa           |
+
+### Rozwiązywanie typowych problemów
+
+| Problem                                   | Możliwa przyczyna                              | Rozwiązanie                                            |
+|-------------------------------------------|------------------------------------------------|--------------------------------------------------------|
+| `python` nie jest rozpoznawane            | Python nie dodany do PATH                      | Reinstalacja z zaznaczeniem "Add to PATH"               |
+| `pip` nie działa                          | pip nie zainstalowany lub nie w PATH           | `python -m ensurepip --upgrade`                        |
+| Konflikty wersji Python 2 i 3            | Obie wersje zainstalowane                      | Używaj `python3` i `pip3` jawnie                       |
+| Brak uprawnień przy instalacji pakietów   | Instalacja w katalogu systemowym               | Użyj `--user` lub środowiska wirtualnego              |
+| Moduł nie znaleziony po instalacji        | Zainstalowany w innym środowisku               | Sprawdź `which python` / `where python`                |
+
+### Pierwsze kroki po instalacji
+
+Po pomyślnej instalacji Pythona warto wykonać kilka kroków przygotowawczych:
+
+1. **Utwórz środowisko wirtualne** dla swojego projektu:
+
+```shell
+python -m venv moje_srodowisko
+```
+
+2. **Aktywuj środowisko**:
+   - Windows: `moje_srodowisko\Scripts\activate`
+   - macOS/Linux: `source moje_srodowisko/bin/activate`
+
+3. **Zainstaluj przydatne pakiety**:
+
+```shell
+pip install ipython black pytest
+```
+
+4. **Sprawdź, czy wszystko działa**:
+
+```shell
+python -c "print('Hello, Python!')"
+```
+
+### Struktura typowego projektu Python
+
+```
+moj_projekt/
+├── moje_srodowisko/    # środowisko wirtualne (nie dodawaj do git)
+├── src/                # kod źródłowy
+│   ├── __init__.py
+│   └── main.py
+├── tests/              # testy
+│   └── test_main.py
+├── requirements.txt    # zależności
+└── README.md           # dokumentacja
+```
+
+Ta struktura jest punktem wyjścia dla większości projektów w Pythonie i ułatwia współpracę z innymi programistami.

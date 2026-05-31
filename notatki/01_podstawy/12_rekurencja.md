@@ -196,3 +196,124 @@ Natomiast w przypadkach, gdzie:
 | Wydajność              | Koszt wywołań funkcji; ryzyko przepełnienia stosu | Zazwyczaj szybsza, brak kosztu stosu |
 | Warunek stopu          | Warunek bazowy w funkcji                 | Warunek w pętli                 |
 | Zastosowanie           | Drzewa, "dziel i zwyciężaj", struktury rekurencyjne | Sekwencyjne przetwarzanie danych |
+
+### Wizualizacja stosu wywołań
+
+Poniższy diagram ilustruje, co dzieje się na stosie przy wywołaniu `silnia(4)`:
+
+```
+╔══════════════════════════════╗
+║     STOS WYWOŁAŃ             ║
+╠══════════════════════════════╣
+║                              ║
+║  silnia(0) → return 1        ║  ← warunek bazowy
+║  silnia(1) → 1 * silnia(0)   ║
+║  silnia(2) → 2 * silnia(1)   ║
+║  silnia(3) → 3 * silnia(2)   ║
+║  silnia(4) → 4 * silnia(3)   ║  ← pierwsze wywołanie
+║                              ║
+╠══════════════════════════════╣
+║  Kierunek wzrostu stosu ↑    ║
+╚══════════════════════════════╝
+```
+
+Fazy wykonania:
+
+```
+ROZWIJANIE (winding):          ZWIJANIE (unwinding):
+silnia(4)                      silnia(4) = 4 * 6 = 24
+  └── silnia(3)                  └── silnia(3) = 3 * 2 = 6
+        └── silnia(2)                  └── silnia(2) = 2 * 1 = 2
+              └── silnia(1)                  └── silnia(1) = 1 * 1 = 1
+                    └── silnia(0) = 1               └── silnia(0) = 1
+```
+
+### Dodatkowe algorytmy rekurencyjne
+
+#### Wieże Hanoi
+
+Klasyczny problem rekurencyjny — przenieś n krążków z pręta A na pręt C, używając pręta B jako pomocniczego:
+
+```python
+def hanoi(n, zrodlo='A', cel='C', pomocniczy='B'):
+    """Rozwiązuje problem wież Hanoi."""
+    if n == 1:
+        print(f"Przenieś krążek 1 z {zrodlo} na {cel}")
+        return
+    hanoi(n - 1, zrodlo, pomocniczy, cel)
+    print(f"Przenieś krążek {n} z {zrodlo} na {cel}")
+    hanoi(n - 1, pomocniczy, cel, zrodlo)
+
+hanoi(3)
+# Przenieś krążek 1 z A na C
+# Przenieś krążek 2 z A na B
+# Przenieś krążek 1 z C na B
+# Przenieś krążek 3 z A na C
+# Przenieś krążek 1 z B na A
+# Przenieś krążek 2 z B na C
+# Przenieś krążek 1 z A na C
+```
+
+Liczba ruchów: $2^n - 1$ (dla 3 krążków: 7 ruchów).
+
+#### Przeszukiwanie binarne (binary search)
+
+```python
+def szukaj_binarnie(lista, cel, lewy=0, prawy=None):
+    """Rekurencyjne przeszukiwanie binarne posortowanej listy."""
+    if prawy is None:
+        prawy = len(lista) - 1
+    if lewy > prawy:
+        return -1  # nie znaleziono
+    srodek = (lewy + prawy) // 2
+    if lista[srodek] == cel:
+        return srodek
+    elif lista[srodek] < cel:
+        return szukaj_binarnie(lista, cel, srodek + 1, prawy)
+    else:
+        return szukaj_binarnie(lista, cel, lewy, srodek - 1)
+
+dane = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]
+print(szukaj_binarnie(dane, 23))  # 5 (indeks)
+print(szukaj_binarnie(dane, 10))  # -1 (nie znaleziono)
+```
+
+#### NWD (algorytm Euklidesa)
+
+```python
+def nwd(a, b):
+    """Największy wspólny dzielnik — algorytm Euklidesa."""
+    if b == 0:
+        return a
+    return nwd(b, a % b)
+
+print(nwd(48, 18))  # 6
+print(nwd(100, 75))  # 25
+```
+
+#### Quicksort — rekurencyjny algorytm sortowania
+
+```python
+def quicksort(lista):
+    """Sortowanie szybkie (quicksort)."""
+    if len(lista) <= 1:
+        return lista
+    pivot = lista[len(lista) // 2]
+    mniejsze = [x for x in lista if x < pivot]
+    rowne = [x for x in lista if x == pivot]
+    wieksze = [x for x in lista if x > pivot]
+    return quicksort(mniejsze) + rowne + quicksort(wieksze)
+
+print(quicksort([3, 6, 8, 10, 1, 2, 1]))  # [1, 1, 2, 3, 6, 8, 10]
+```
+
+### Złożoność obliczeniowa algorytmów rekurencyjnych
+
+| Algorytm               | Złożoność czasowa        | Złożoność pamięciowa | Uwagi                          |
+|------------------------|--------------------------|----------------------|-------------------------------|
+| Silnia                 | O(n)                     | O(n) — stos         | Łatwa do ziterowania          |
+| Fibonacci (naiwna)     | O(2ⁿ)                   | O(n) — stos         | Zbyt wolna dla dużych n       |
+| Fibonacci (memoizacja) | O(n)                     | O(n) — cache        | Praktyczna wersja             |
+| Binary search          | O(log n)                 | O(log n) — stos     | Efektywna                     |
+| Quicksort              | O(n log n) średnio       | O(log n) — stos     | O(n²) w najgorszym przypadku  |
+| Wieże Hanoi            | O(2ⁿ)                   | O(n) — stos         | Wykładniczy — nie da się lepiej|
