@@ -241,23 +241,23 @@ II. **Enkapsulacja, Abstrakcja, i Polimorfizm**:
 
 III. **Kolekcje w OOP**:
 
-- [Data Structures in Object-Oriented Programming](https://www.javatpoint.com/data-structures-in-java) - Artykuł na JavaTpoint omawiający różne struktury danych używane w OOP.
+- [Java Collections Framework](https://dev.java/learn/api/collections-framework/) - Oficjalny przewodnik po kolekcjach i strukturach danych w Java.
 - [Using Collections in Java](https://www.geeksforgeeks.org/collections-in-java-2/) - Przewodnik po kolekcjach w Java na GeeksforGeeks.
 
 IV. **Wyzwania OOP**:
 
 - [Challenges of Object-Oriented Programming](https://www.codingninjas.com/codestudio/library/challenges-of-object-oriented-programming) - Artykuł omawiający wyzwania i trudności związane z OOP.
-- [Avoiding Common OOP Pitfalls](https://www.thoughtworks.com/insights/articles/avoiding-common-oop-pitfalls) - Przewodnik po unikaniu powszechnych pułapek w OOP na ThoughtWorks.
+- [Python: uwagi o dziedziczeniu](https://docs.python.org/3/tutorial/classes.html#inheritance) - Oficjalna dokumentacja wyjaśnia dziedziczenie, przesłanianie metod i dziedziczenie wielokrotne.
 
 V. **Funkcyjne podejście do OOP**:
 
-- [Functional Programming vs. Object-Oriented Programming](https://www.freecodecamp.org/news/object-oriented-programming-vs-functional-programming-2fa4a7602390/) - Artykuł na FreeCodeCamp porównujący OOP i programowanie funkcyjne.
-- [Using Functional Programming Techniques in OOP](https://www.smashingmagazine.com/2019/05/functional-programming-oop-javascript/) - Przewodnik po technikach funkcyjnych w OOP na Smashing Magazine.
+- [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html) - Oficjalne omówienie podejścia funkcyjnego, obiektowego i ich łączenia w Pythonie.
+- [Python: moduł functools](https://docs.python.org/3/library/functools.html) - Narzędzia do pracy z funkcjami wyższego rzędu i obiektami wywoływalnymi.
 
 VI. **OOP w Rust i Go**:
 
 - [Object-Oriented Programming in Rust](https://doc.rust-lang.org/book/ch17-00-oop.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony OOP.
-- [Object-Oriented Programming in Go](https://golangbot.com/oops-part1/) - Przewodnik po OOP w Go na GolangBot.
+- [Effective Go: interfejsy i metody](https://go.dev/doc/effective_go#interfaces) - Oficjalny przewodnik po kompozycji typów i interfejsach w Go.
 
 VII. **Struktury zamiast klas**:
 
@@ -266,5 +266,5 @@ VII. **Struktury zamiast klas**:
 
 VIII. **Modularność w Rust**:
 
-- [Modules in Rust](https://doc.rust-lang.org/book/ch07-00-modules.html) - Rozdział z oficjalnej dokumentacji Rust poświęcony modułom.
-- [Building Modular Applications in Rust](https://blog.logrocket.com/building-modular-applications-rust/) - Artykuł na LogRocket o tworzeniu modularnych aplikacji w Rust.
+- [Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) - Oficjalny rozdział o organizacji kodu Rust.
+- [Separating Modules into Different Files](https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html) - Oficjalny przykład podziału modułów Rust między pliki.

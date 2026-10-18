@@ -269,7 +269,7 @@ Gdzie `nazwa_pliku.py` to nazwa pliku, w którym umieściłeś powyższy kod.
 
 Swagger UI jest automatycznie generowanym interfejsem użytkownika dla dokumentacji API, dostępnym w FastAPI dzięki integracji z OpenAPI. Dostarcza on przeglądarkę dokumentacji, która pozwala na interaktywne eksplorowanie API, wykonywanie żądań i przeglądanie odpowiedzi bezpośrednio z przeglądarki internetowej.
 
-- Po uruchomieniu serwera (jak opisano wcześniej), Swagger UI jest dostępny pod adresem: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+- Po uruchomieniu serwera (jak opisano wcześniej), Swagger UI jest dostępny pod adresem: `http://127.0.0.1:8000/docs`.
 - Strona będzie zawierać interfejs z wszystkimi zdefiniowanymi endpointami, jak na poniższym zrzucie ekranu:
 
 ![Swagger UI Example](https://github.com/djeada/Kurs-Podstaw-Pythona/assets/37275728/c3b57b80-b724-4f3b-ad51-566d465eda62)

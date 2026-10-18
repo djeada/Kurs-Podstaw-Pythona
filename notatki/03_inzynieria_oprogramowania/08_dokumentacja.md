@@ -536,7 +536,7 @@ extensions = [
 * [ReadTheDocs Tutorial](https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html)
 * [Sphinx AutoAPI Extension](https://sphinx-autoapi.readthedocs.io/en/latest/)
 * [Sphinx Napoleon Extension](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html)
-* [Continuous Integration with Sphinx](https://docs.readthedocs.io/en/stable/ci/index.html)
+* [Continuous Integration with Sphinx](https://docs.readthedocs.com/platform/stable/continuous-deployment.html)
 * [Sphinx HTML Themes Gallery](https://sphinx-themes.org/)
 * [GitHub Actions for Sphinx](https://github.com/marketplace/actions/sphinx-build)
 * [Travis CI for Sphinx](https://travis-ci.org/)
