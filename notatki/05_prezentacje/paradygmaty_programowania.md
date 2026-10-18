@@ -236,7 +236,7 @@ I. **Podstawy i koncepcje OOP**:
 II. **Enkapsulacja, Abstrakcja, i Polimorfizm**:
 
 - [Understanding OOP Encapsulation](https://www.geeksforgeeks.org/encapsulation-in-java/) - Artykuł na GeeksforGeeks omawiający enkapsulację w Java.
-- [Abstraction in Object-Oriented Programming](https://www.baeldung.com/java-abstraction) - Przewodnik po abstrakcji w OOP na Baeldung.
+- [Abstraction in Object-Oriented Programming](https://www.baeldung.com/java-abstract-class) - Przewodnik po abstrakcji w OOP na Baeldung.
 - [Polymorphism in OOP](https://www.tutorialspoint.com/java/java_polymorphism.htm) - Artykuł na TutorialsPoint omawiający polimorfizm w Java.
 
 III. **Kolekcje w OOP**:
