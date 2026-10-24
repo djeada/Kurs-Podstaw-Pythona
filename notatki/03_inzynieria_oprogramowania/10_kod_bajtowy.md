@@ -75,18 +75,22 @@ def suma(a, b):
 dis(suma)
 ```
 
-Wynik dezasemblacji:
+Wynik dezasemblacji w Pythonie 3.12:
 
 ```
-  2           0 LOAD_FAST                0 (a)
-              2 LOAD_FAST                1 (b)
-              4 BINARY_ADD
-              6 RETURN_VALUE
+  2           0 RESUME                   0
+              2 LOAD_FAST                0 (a)
+              4 LOAD_FAST                1 (b)
+              6 BINARY_OP                0 (+)
+             10 RETURN_VALUE
 ```
 
+- **RESUME** oznacza początek wykonywania funkcji (pojawia się od Pythona 3.11).
 - **LOAD_FAST 0 (a)** ładuje wartość argumentu `a` na stos operandów.
 - **LOAD_FAST 1 (b)** ładuje wartość argumentu `b` na stos.
-- **BINARY_ADD** pobiera dwie wartości ze szczytu stosu, dodaje je i wynik umieszcza na stosie.
+- **BINARY_OP 0 (+)** pobiera dwie wartości ze szczytu stosu, dodaje je i wynik umieszcza na stosie. Do Pythona 3.10 tę rolę pełniła osobna instrukcja `BINARY_ADD`.
+
+Dokładna lista instrukcji zmienia się między wersjami Pythona, więc wynik `dis` warto zawsze odczytywać dla wersji, której używasz.
 - **RETURN_VALUE** pobiera wartość ze szczytu stosu i zwraca ją jako wynik funkcji.
 
 ### Analiza złożonej funkcji
@@ -236,7 +240,7 @@ import inspect
 print(inspect.getsource(len))
 ```
 
-Otrzymamy błąd `OSError`, ponieważ funkcja `len` jest zaimplementowana w C i nie ma dostępnego kodu źródłowego w Pythonie.
+Otrzymamy błąd `TypeError` (`module, class, method, function, traceback, frame, or code object was expected`), ponieważ `len` jest funkcją wbudowaną zaimplementowaną w C i nie ma kodu źródłowego w Pythonie.
 
 ## Tabela najczęstszych instrukcji kodu bajtowego
 

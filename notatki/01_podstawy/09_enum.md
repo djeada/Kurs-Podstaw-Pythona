@@ -60,15 +60,15 @@ print(status.value)  # 1
 
 ### Porównywanie pól Enum
 
-Pola `Enum` mogą być porównywane tylko z innymi członkami tego samego `Enum`. Porównywanie pól różnych `Enum` lub porównywanie pól z wartościami liczbowymi/textowymi spowoduje błąd.
+Pola `Enum` porównuje się z innymi członkami tego samego `Enum`. Porównanie `==` z liczbą, napisem albo członkiem innego `Enum` nie zgłasza błędu, tylko zawsze daje `False`. Błąd `TypeError` pojawia się dopiero przy porównaniach porządkowych, takich jak `<` czy `>`. Wyjątkiem jest `IntEnum`, którego członkowie zachowują się jak liczby całkowite.
 
 ```python
 if kolor_a == Kolor.ZIELONY:
     print("Kolor jest zielony!")
 
-# Poniższe porównanie spowoduje błąd:
-# if kolor_a == 1:
-#     print("Błąd!")
+# Porównanie z liczbą nie zgłasza błędu, ale zawsze daje False:
+print(kolor_a == 1)   # False
+# kolor_a < 1         # TypeError: '<' not supported
 ```
 
 ### Iteracja po członkach Enum

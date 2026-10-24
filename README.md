@@ -227,6 +227,18 @@ Dzięki tej sekcji zdobędziesz praktyczne umiejętności, które pozwolą Ci tw
 | Tkinter | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/09_tkinter.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 | Logi | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/notatki/04_python_w_praktyce/10_logi.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
 
+## Quizy
+
+Po przerobieniu każdej sekcji warto sprawdzić swoją wiedzę. Quizy składają się z pytań jednokrotnego wyboru, w tym pytań typu „Co wypisze ten program?”, a każda odpowiedź zawiera krótkie wyjaśnienie oraz odnośniki do odpowiednich notatek.
+
+| Temat | Quiz |
+| ------ | ----- | 
+| Podstawy | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/quizzes/01_podstawy.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Obiekty, wyjątki i serializacja | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/quizzes/02_obiekty_i_wyjatki.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Programowanie funkcyjne i współbieżność | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/quizzes/03_programowanie_funkcyjne_i_wspolbieznosc.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Inżynieria oprogramowania | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/quizzes/04_inzynieria_oprogramowania.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+| Python w praktyce | <a href="https://github.com/djeada/Kurs-Podstaw-Pythona/blob/master/quizzes/05_python_w_praktyce.md"><img src="https://img.icons8.com/color/344/markdown.png" height="50" /> </a> | 
+
 ## Dodatkowe materiały
 
 * https://docs.python.org/3/tutorial/
