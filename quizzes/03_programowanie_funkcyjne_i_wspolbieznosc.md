@@ -16,7 +16,7 @@ print(f(3), f(2, 3))
 * [ ] `9 9`
 * [ ] `8 9`
 
-> **Wyjaśnienie:** Lambda może mieć parametry z wartościami domyślnymi, tak jak zwykła funkcja. `f(3)` liczy 3², a `f(2, 3)` nadpisuje `y` i liczy 2³.
+> **Wyjaśnienie:** Lambda może mieć parametry z wartościami domyślnymi, tak jak zwykła funkcja. `f(3)` liczy $3^2$, a `f(2, 3)` nadpisuje `y` i liczy $2^3$.
 
 #### Q. Co wypisze ten program?
 
@@ -100,7 +100,7 @@ print(reduce(lambda a, b: a * 10 + b, [1, 2, 3]), reduce(lambda a, b: a + b, [],
 * [x] `123 0`
 * [ ] `321 0`
 
-> **Wyjaśnienie:** `reduce` przekazuje dotychczasowy wynik jako pierwszy argument: (1·10 + 2)·10 + 3 = 123. Dla pustej listy zwraca podaną wartość początkową; bez niej zgłosiłby `TypeError`.
+> **Wyjaśnienie:** `reduce` przekazuje dotychczasowy wynik jako pierwszy argument: $(1 \cdot 10 + 2) \cdot 10 + 3 = 123$. Dla pustej listy zwraca podaną wartość początkową; bez niej zgłosiłby `TypeError`.
 
 #### Q. Co wypisze ten program?
 

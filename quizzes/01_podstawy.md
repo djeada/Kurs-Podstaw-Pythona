@@ -511,7 +511,7 @@ odlicz(3)
 * [x] 31
 * [ ] 16
 
-> **Wyjaśnienie:** Liczba ruchów wynosi 2ⁿ − 1, bo dla n krążków przenosimy dwa razy wieżę n − 1 krążków i raz największy krążek. Dla 5 krążków daje to 2⁵ − 1 = 31.
+> **Wyjaśnienie:** Liczba ruchów wynosi $2^n - 1$, bo dla $n$ krążków przenosimy dwa razy wieżę $n - 1$ krążków i raz największy krążek. Dla 5 krążków daje to $2^5 - 1 = 31$.
 
 #### Q. Dlaczego `@lru_cache` tak bardzo przyspiesza naiwną rekurencyjną funkcję Fibonacciego?
 
@@ -553,12 +553,12 @@ print(sorted(slowa, key=len))
 
 #### Q. Jaka jest złożoność czasowa sortowania szybkiego (quicksort) w najgorszym przypadku?
 
-* [ ] O(n log n)
-* [ ] O(n)
-* [x] O(n²)
-* [ ] O(log n)
+* [ ] $O(n \log n)$
+* [ ] $O(n)$
+* [x] $O(n^2)$
+* [ ] $O(\log n)$
 
-> **Wyjaśnienie:** Średnio quicksort działa w czasie O(n log n), ale przy złym wyborze pivota (np. pierwszy element już posortowanej listy) każdy podział odcina tylko jeden element, co daje O(n²).
+> **Wyjaśnienie:** Średnio quicksort działa w czasie $O(n \log n)$, ale przy złym wyborze pivota (np. pierwszy element już posortowanej listy) każdy podział odcina tylko jeden element, co daje $O(n^2)$.
 
 #### Q. Co wypisze ten program?
 
