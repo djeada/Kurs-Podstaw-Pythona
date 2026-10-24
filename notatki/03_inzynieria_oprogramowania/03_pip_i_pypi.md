@@ -75,10 +75,10 @@ pip uninstall nazwa_pakietu
 
 - Wyszukiwanie pakietów:
 
-PIP umożliwia także wyszukiwanie pakietów dostępnych w PyPI:
+Polecenie `pip search` przestało działać, ponieważ PyPI wyłączyło obsługujące je API. Pakiety wyszukuje się na stronie [pypi.org](https://pypi.org/search/), a dostępne wersje konkretnego pakietu można sprawdzić poleceniem:
 
 ```bash
-pip search nazwa_pakietu
+pip index versions nazwa_pakietu
 ```
 
 ### Aktualizacja pakietów
